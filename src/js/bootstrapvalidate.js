@@ -105,6 +105,7 @@
                                       // see http://getbootstrap.com/javascript/#tooltips
                                       .attr('data-toggle', 'tooltip').attr('data-placement', 'right')
                                       .css('text-decoration', 'none')
+                                      .css('position', 'absolute')
                                       .insertAfter(fieldElement);
                     $('<i/>').addClass(this.options.iconClass.invalid).appendTo($a);
                     $fieldElement.data('bootstrapValidator.tooltip', $a);
@@ -115,14 +116,17 @@
                             var $parent   = $(this).parent(),
                                 $tip      = $(this).data('bs.tooltip').$tip,
                                 w         = $parent.width(),
+                                h         = $parent.height(),
                                 tipWidth  = parseInt($tip.width()),
-                                tipLeft   = parseInt($tip.css('left'));
+                                tipHeight = parseInt($tip.height()),
+                                tipLeft   = parseInt($tip.css('left')),
+                                tipTop    = parseInt($tip.css('top'));
                             $tip.css('left', tipLeft + w + 10)
-                                .css('top', -4)
+                                .css('top', tipTop - h + 5)
                                 .width(tipWidth);
                             $(this).css('position', 'absolute')
-                                   .css('left', tipLeft + w)
-                                   .css('top', 5);
+                                   .css('left', tipLeft - $(this).width() + w + 5)
+                                   .css('top', tipTop + tipHeight / 2 - parseInt($(this).height()) / 2 - h + 5);
                         }
                     });
                 }
