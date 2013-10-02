@@ -1,8 +1,8 @@
 (function($) {
     $.extend($.bootstrapValidator.validator, {
-        notEmpty: {
+        regexp: {
             /**
-             * Check an input value is empty or not
+             * Check the element value matches given regular expression
              *
              * @param {HTMLElement} element
              * @param {Object} options
@@ -10,7 +10,7 @@
              */
             validate: function(element, options) {
                 var value = $.trim($(element).val());
-                return (value != '');
+                return value.match(options.regexp);
             }
         }
     });

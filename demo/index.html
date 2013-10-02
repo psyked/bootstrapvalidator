@@ -14,6 +14,7 @@
     <script type="text/javascript" src="../src/js/bootstrapValidate.js"></script>
     <script type="text/javascript" src="../src/js/validator/notEmpty.js"></script>
     <script type="text/javascript" src="../src/js/validator/stringLength.js"></script>
+    <script type="text/javascript" src="../src/js/validator/regexp.js"></script>
 </head>
 <body>
     <div class="container">
@@ -61,7 +62,7 @@ $(document).ready(function() {
                         message: 'The username must be more than 6 and less than 30 characters long'
                     },
                     regexp: {
-                        reg: /^[a-zA-Z0-9_\.]+$/,
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
                         message: 'The username can only consist of alphabetical, number and underscore'
                     }
                 }
