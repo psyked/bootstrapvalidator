@@ -10,8 +10,11 @@
              * @returns {boolean}
              */
             validate: function(validateInstance, element, options) {
-                var value = $.trim($(element).val());
-                return (value != '');
+                var $element = $(element),
+                    type     = $element.attr('type');
+                return ('checkbox' == type || 'radio' == type)
+                            ? $element.is(':checked')
+                            : ($.trim($(element).val()) != '');
             }
         }
     });

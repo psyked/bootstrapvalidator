@@ -75,10 +75,13 @@
                     return;
                 }
 
-                var that = this, fieldElement = $(foundFields[0]);
+                var that         = this,
+                    fieldElement = $(foundFields[0]),
+                    type         = $(fieldElement).attr('type'),
+                    event        = ('checkbox' == type) ? 'change' : 'keyup';
 
                 $(fieldElement)
-                    .on('keyup', function() {
+                    .on(event, function() {
                         var validators = that.options.fields[field].validator;
                         for (var validatorName in validators) {
                             if (!$.bootstrapValidator.validator[validatorName]) {
