@@ -46,6 +46,14 @@
 
         prototype: {
             /**
+             * Retrieve the form element
+             * @returns {jQuery}
+             */
+            getForm: function() {
+                return this.$form;
+            },
+
+            /**
              * Validate form
              */
             validate: function() {
@@ -56,8 +64,6 @@
                     this.validateField(field);
                 }
             },
-
-            // PRIVATE METHODS
 
             validateField: function(field) {
                 if (this.options.fields[field] == null || this.options.fields[field].validator == null) {
@@ -79,7 +85,7 @@
                                 continue;
                             }
                             var options = validators[validatorName];
-                            if (!$.bootstrapValidator.validator[validatorName].validate(fieldElement, options)) {
+                            if (!$.bootstrapValidator.validator[validatorName].validate(that, fieldElement, options)) {
                                 that.showError(fieldElement, validatorName);
                                 break;
                             } else {
@@ -126,7 +132,7 @@
                                 .width(tipWidth);
                             $(this).css('position', 'absolute')
                                    .css('left', tipLeft - $(this).width() + w + 5)
-                                   .css('top', tipTop + tipHeight / 2 - parseInt($(this).height()) / 2 - h + 5);
+                                   .css('top', tipTop + tipHeight / 2 - $(this).height() / 2 - h + 5);
                         }
                     });
                 }
