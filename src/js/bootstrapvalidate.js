@@ -133,6 +133,7 @@
                 var $tip = $fieldElement.data('bootstrapValidator.tooltip');
                 $tip.find('i').attr('class', this.options.iconClass.invalid).end()
                     .attr('title', message)
+                    .attr('data-original-title', message)
                     .tooltip('show');
             },
 
