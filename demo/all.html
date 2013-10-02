@@ -12,6 +12,7 @@
     <script type="text/javascript" src="../vendor/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../src/js/bootstrapValidate.js"></script>
+    <script type="text/javascript" src="../src/js/validator/digits.js"></script>
     <script type="text/javascript" src="../src/js/validator/emailAddress.js"></script>
     <script type="text/javascript" src="../src/js/validator/identical.js"></script>
     <script type="text/javascript" src="../src/js/validator/notEmpty.js"></script>
@@ -30,7 +31,7 @@
                 <div class="col-lg-8 col-lg-offset-2">
                     <form id="defaultForm" method="post" class="form-horizontal">
                         <fieldset>
-                            <legend>notEmpty validator</legend>
+                            <legend>Not Empty validator</legend>
 
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">Username</label>
@@ -49,17 +50,25 @@
                         </fieldset>
 
                         <fieldset>
-                            <legend>emailAddress validator</legend>
+                            <legend>Regular expression based validators</legend>
+
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">Email</label>
+                                <label class="col-lg-3 control-label">Email address</label>
                                 <div class="col-lg-5">
                                     <input type="text" class="form-control" name="email" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Phone number</label>
+                                <div class="col-lg-5">
+                                    <input type="text" class="form-control" name="phoneNumber" />
                                 </div>
                             </div>
                         </fieldset>
 
                         <fieldset>
-                            <legend>identical validator</legend>
+                            <legend>Identical validator</legend>
 
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">Password</label>
@@ -123,6 +132,13 @@ $(document).ready(function() {
                     },
                     emailAddress: {
                         message: 'The input is not a valid email address'
+                    }
+                }
+            },
+            phoneNumber: {
+                validator: {
+                    digits: {
+                        message: 'The value can contain only digits'
                     }
                 }
             },
