@@ -1,6 +1,6 @@
 (function($) {
     $.extend($.bootstrapValidator.validator, {
-        url: {
+        uri: {
             /**
              * Return true if the input value is a valid URL
              *
