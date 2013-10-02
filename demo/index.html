@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bootstrap Validate demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome-ie7.min.css">
+    <![endif]-->
+    <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../src/js/bootstrapValidate.js"></script>
+    <script type="text/javascript" src="../src/js/validator/notEmpty.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- form: -->
+            <section>
+                <div class="page-header">
+                    <h2>Default Bootstrap form</h2>
+                </div>
+
+                <div class="col-lg-4 col-lg-offset-4">
+                    <form id="defaultForm" method="post">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="username" placeholder="Username" />
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="email" placeholder="Email" />
+                        </div>
+
+                        <div class="form-group">
+                            <input type="password" class="form-control" name="password" placeholder="Password" />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Sign up</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#defaultForm').bootstrapValidate({
+        fields: {
+            username: {
+                message: 'The username is not valid',
+                validator: {
+                    notEmpty: {
+                        message: 'The username is required and can\'t be empty'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        reg: /^[a-zA-Z0-9_\.]+$/,
+                        message: 'The username can only consist of alphabetical, number and underscore'
+                    }
+                }
+            },
+            email: {
+                validator: {
+                    emailAddress: {
+                        message: 'The value is not a valid email address'
+                    }
+                }
+            }
+        },
+        message: 'This value is not valid',
+        iconClass: {
+            valid: 'icon-ok',
+            invalid: 'icon-remove'
+        }
+    });
+});
+</script>
+</body>
+</html>
