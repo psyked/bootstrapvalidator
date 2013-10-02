@@ -12,7 +12,6 @@
              */
             validate: function(validateInstance, element, options) {
                 var value        = $(element).val(),
-                    $field       = $(element),
                     $compareWith = validateInstance.getForm().find('[name="' + options.field + '"]');
                 if (value == $compareWith.val()) {
                     validateInstance.removeError($compareWith);
