@@ -187,12 +187,12 @@ $(document).ready(function() {
                 validator: {
                     lessThan: {
                         value: 100,
-                        strict: true,
+                        inclusive: true,
                         message: 'The ages has to be less than 100'
                     },
                     greaterThan: {
                         value: 10,
-                        strict: false,
+                        inclusive: false,
                         message: 'The ages has to be greater than or equals to 10'
                     }
                 }
