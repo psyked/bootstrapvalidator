@@ -23,6 +23,8 @@
         this.$form   = $(form);
         this.options = $.extend({}, $.bootstrapValidator.DEFAULT_OPTIONS, options);
         this.validate();
+        this.xhrRequests = {};
+        this.numPendingRequests = 0;
     };
     $.extend($.bootstrapValidator, {
         /**
@@ -88,11 +90,11 @@
                             if (!$.bootstrapValidator.validator[validatorName]) {
                                 continue;
                             }
-                            var options = validators[validatorName];
-                            if (!$.bootstrapValidator.validator[validatorName].validate(that, fieldElement, options)) {
+                            var isValid = $.bootstrapValidator.validator[validatorName].validate(that, fieldElement, validators[validatorName]);
+                            if (isValid == false) {
                                 that.showError(fieldElement, validatorName);
                                 break;
-                            } else {
+                            } else if (isValid == true) {
                                 that.removeError(fieldElement);
                             }
                         }
@@ -167,6 +169,34 @@
                     $(tip).remove();
                     $fieldElement.removeData('bootstrapValidator.tooltip');
                 }
+            },
+
+            startRequest: function(fieldElement, validatorName, xhr) {
+                var field = $(fieldElement).attr('name');
+
+                this.completeRequest(fieldElement, validatorName);
+
+                if (this.numPendingRequests < 0) {
+                    this.numPendingRequests = 0;
+                }
+                this.numPendingRequests++;
+                if (!this.xhrRequests[field]) {
+                    this.xhrRequests[field] = {};
+                }
+                this.xhrRequests[field][validatorName] = xhr;
+            },
+
+            completeRequest: function(fieldElement, validatorName) {
+                var field = $(fieldElement).attr('name');
+                if (!this.xhrRequests[field] || !this.xhrRequests[field][validatorName]) {
+                    return;
+                }
+
+                var xhr = this.xhrRequests[field][validatorName];
+                this.numPendingRequests--;
+                console.log('---abort---');
+                xhr.abort();
+                delete this.xhrRequests[field][validatorName];
             }
         }
     });

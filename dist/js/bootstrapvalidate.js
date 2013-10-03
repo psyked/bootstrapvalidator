@@ -23,6 +23,8 @@
         this.$form   = $(form);
         this.options = $.extend({}, $.bootstrapValidator.DEFAULT_OPTIONS, options);
         this.validate();
+        this.xhrRequests = {};
+        this.numPendingRequests = 0;
     };
     $.extend($.bootstrapValidator, {
         /**
@@ -88,11 +90,11 @@
                             if (!$.bootstrapValidator.validator[validatorName]) {
                                 continue;
                             }
-                            var options = validators[validatorName];
-                            if (!$.bootstrapValidator.validator[validatorName].validate(that, fieldElement, options)) {
+                            var isValid = $.bootstrapValidator.validator[validatorName].validate(that, fieldElement, validators[validatorName]);
+                            if (isValid == false) {
                                 that.showError(fieldElement, validatorName);
                                 break;
-                            } else {
+                            } else if (isValid == true) {
                                 that.removeError(fieldElement);
                             }
                         }
@@ -167,6 +169,34 @@
                     $(tip).remove();
                     $fieldElement.removeData('bootstrapValidator.tooltip');
                 }
+            },
+
+            startRequest: function(fieldElement, validatorName, xhr) {
+                var field = $(fieldElement).attr('name');
+
+                this.completeRequest(fieldElement, validatorName);
+
+                if (this.numPendingRequests < 0) {
+                    this.numPendingRequests = 0;
+                }
+                this.numPendingRequests++;
+                if (!this.xhrRequests[field]) {
+                    this.xhrRequests[field] = {};
+                }
+                this.xhrRequests[field][validatorName] = xhr;
+            },
+
+            completeRequest: function(fieldElement, validatorName) {
+                var field = $(fieldElement).attr('name');
+                if (!this.xhrRequests[field] || !this.xhrRequests[field][validatorName]) {
+                    return;
+                }
+
+                var xhr = this.xhrRequests[field][validatorName];
+                this.numPendingRequests--;
+                console.log('---abort---');
+                xhr.abort();
+                delete this.xhrRequests[field][validatorName];
             }
         }
     });
@@ -355,6 +385,47 @@
             validate: function(validateInstance, element, options) {
                 var value = $.trim($(element).val());
                 return value.match(options.regexp);
+            }
+        }
+    });
+}(window.jQuery));
+;(function($) {
+    $.extend($.bootstrapValidator.validator, {
+        remote: {
+            /**
+             * Request a remote server to check the input value
+             *
+             * @param {bootstrapValidator} validateInstance Validate plugin instance
+             * @param {HTMLElement} element
+             * @param {Object} options Can consist of the following keys:
+             * - url
+             * - data [optional]: By default, it will take the value
+             *  {
+             *      <fieldName>: <fieldValue>
+             *  }
+             * - message: The invalid message
+             * @returns {string}
+             */
+            validate: function(validateInstance, element, options) {
+                var value = $(element).val(), name = $(element).attr('name');
+                if (!options.data) {
+                    options.data       = {};
+                    options.data[name] = value;
+                }
+                var xhr = $.ajax({
+                    type: 'POST',
+                    url: options.url,
+                    dataType: 'json',
+                    data: options.data
+                }).success(function(response) {
+                    validateInstance.completeRequest(element, 'remote');
+                    if (response.valid === true || response.valid === 'true') {
+                        validateInstance.showError(element, 'remote');
+                    }
+                });
+                validateInstance.startRequest(element, 'remote', xhr);
+
+                return 'pending';
             }
         }
     });
