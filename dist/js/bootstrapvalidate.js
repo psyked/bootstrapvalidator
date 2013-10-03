@@ -9,6 +9,7 @@
  */
 
 (function($) {
+    // Plugin definition
     $.fn.bootstrapValidate = function(options) {
         return this.each(function() {
             var $this = $(this), data = $this.data('bootstrapValidate');
@@ -210,6 +211,27 @@
 }(window.jQuery));
 ;(function($) {
     $.extend($.bootstrapValidator.validator, {
+        greaterThan: {
+            /**
+             * Return true if the input value is greater than or equals to given number
+             *
+             * @param {bootstrapValidator} validateInstance Validate plugin instance
+             * @param {HTMLElement} element
+             * @param {Object} options Can consist of the following keys:
+             * - value: The number used to compare to
+             * - strict [optional]: Can be true or false. Default is true
+             * - message: The invalid message
+             * @returns {boolean}
+             */
+            validate: function(validateInstance, element, options) {
+                var value = parseFloat($(element).val());
+                return (options.strict === true) ? (value > options.value) : (value >= options.value);
+            }
+        }
+    });
+}(window.jQuery));
+;(function($) {
+    $.extend($.bootstrapValidator.validator, {
         identical: {
             /**
              * Check if input value equals to value of particular one
@@ -229,6 +251,27 @@
                 } else {
                     return false;
                 }
+            }
+        }
+    });
+}(window.jQuery));
+;(function($) {
+    $.extend($.bootstrapValidator.validator, {
+        lessThan: {
+            /**
+             * Return true if the input value is less than or equal to given number
+             *
+             * @param {bootstrapValidator} validateInstance Validate plugin instance
+             * @param {HTMLElement} element
+             * @param {Object} options Can consist of the following keys:
+             * - value: The number used to compare to
+             * - strict [optional]: Can be true or false. Default is true
+             * - message: The invalid message
+             * @returns {boolean}
+             */
+            validate: function(validateInstance, element, options) {
+                var value = parseFloat($(element).val());
+                return (options.strict === true) ? (value < options.value) : (value <= options.value);
             }
         }
     });

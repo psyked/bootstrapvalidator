@@ -11,15 +11,7 @@
 
     <script type="text/javascript" src="../vendor/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../src/js/bootstrapValidate.js"></script>
-    <script type="text/javascript" src="../src/js/validator/digits.js"></script>
-    <script type="text/javascript" src="../src/js/validator/emailAddress.js"></script>
-    <script type="text/javascript" src="../src/js/validator/identical.js"></script>
-    <script type="text/javascript" src="../src/js/validator/lessThan.js"></script>
-    <script type="text/javascript" src="../src/js/validator/notEmpty.js"></script>
-    <script type="text/javascript" src="../src/js/validator/regexp.js"></script>
-    <script type="text/javascript" src="../src/js/validator/stringLength.js"></script>
-    <script type="text/javascript" src="../src/js/validator/uri.js"></script>
+    <script type="text/javascript" src="../dist/js/bootstrapvalidate.js"></script>
 </head>
 <body>
     <div class="container">
@@ -197,6 +189,11 @@ $(document).ready(function() {
                         value: 100,
                         strict: true,
                         message: 'The ages has to be less than 100'
+                    },
+                    greaterThan: {
+                        value: 10,
+                        strict: false,
+                        message: 'The ages has to be greater than or equals to 10'
                     }
                 }
             }

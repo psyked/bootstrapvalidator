@@ -9,6 +9,7 @@
  */
 
 (function($) {
+    // Plugin definition
     $.fn.bootstrapValidate = function(options) {
         return this.each(function() {
             var $this = $(this), data = $this.data('bootstrapValidate');
