@@ -2,6 +2,10 @@
 
 A jQuery plugin to validate form fields. Use with Bootstrap 3
 
+The plugin uses [Bootstrap Tooltip](http://getbootstrap.com/javascript/#tooltips) to show the error message as following screenshot:
+
+![Bootstrap Validate screenshot](img/screenshot.png)
+
 ## Required
 
 * [jQuery](http://jquery.com/)
@@ -24,6 +28,8 @@ Then, uses grunt to build:
 ```bash
 $ grunt
 ```
+
+The generated scripts (including source and compressed versions) are placed inside the ```dist``` directory.
 
 ## Author
 
