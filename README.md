@@ -8,19 +8,7 @@ The plugin uses [Bootstrap Tooltip](http://getbootstrap.com/javascript/#tooltips
 
 ## Features
 
-The plugin provides built-in validators which are listed below in alphabetical order:
-
-Validator name | Description
----------------|------------
-digits         | Return true if the value contains only digits
-emailAddress   | Validate an email address
-greaterThan    | Return true if the value is greater than or equals to given number
-identical      | Check if the value is the same as one of particular field
-lessThan       | Return true if the value is less than or equals to given number
-notEmpty       | Check if the value is empty
-regexp         | Check if the value matches given Javascript regular expression
-stringLength   | Validate the length of a string
-uri            | Validate an URL address
+* Many built-in [validators](#validators)
 
 ## Required
 
@@ -70,6 +58,25 @@ $(document).ready(function() {
     }
 });
 ```
+
+The ```<validatorName>``` can be the name of the built-in validator which are described in the [Validators](#validators) section
+
+## Validators
+
+Below is the list of built-in validators sorted in alphabetical order:
+
+Validator name                            | Description
+------------------------------------------|------------
+[between](docs/between/README.md)         | Checks if the input value is between (strictly or not) two given numbers
+digits                                    | Return true if the value contains only digits
+emailAddress                              | Validate an email address
+greaterThan                               | Return true if the value is greater than or equals to given number
+identical                                 | Check if the value is the same as one of particular field
+lessThan                                  | Return true if the value is less than or equals to given number
+notEmpty                                  | Check if the value is empty
+regexp                                    | Check if the value matches given Javascript regular expression
+stringLength                              | Validate the length of a string
+uri                                       | Validate an URL address
 
 ## Build
 

@@ -173,6 +173,30 @@
 }(window.jQuery));
 ;(function($) {
     $.extend($.bootstrapValidator.validator, {
+        between: {
+            /**
+             * Return true if the input value is between (strictly or not) two given numbers
+             *
+             * @param {bootstrapValidator} validateInstance Validate plugin instance
+             * @param {HTMLElement} element
+             * @param {Object} options Can consist of the following keys:
+             * - min
+             * - max
+             * - inclusive [optional]: Can be true or false. Default is true
+             * - message: The invalid message
+             * @returns {boolean}
+             */
+            validate: function(validateInstance, element, options) {
+                var value = parseFloat($(element).val());
+                return (options.inclusive === true)
+                            ? (value > options.min && value < options.max)
+                            : (value >= options.min && value <= options.max);
+            }
+        }
+    });
+}(window.jQuery));
+;(function($) {
+    $.extend($.bootstrapValidator.validator, {
         digits: {
             /**
              * Return true if the input value contains digits only
@@ -219,13 +243,13 @@
              * @param {HTMLElement} element
              * @param {Object} options Can consist of the following keys:
              * - value: The number used to compare to
-             * - strict [optional]: Can be true or false. Default is true
+             * - inclusive [optional]: Can be true or false. Default is true
              * - message: The invalid message
              * @returns {boolean}
              */
             validate: function(validateInstance, element, options) {
                 var value = parseFloat($(element).val());
-                return (options.strict === true) ? (value > options.value) : (value >= options.value);
+                return (options.inclusive === true) ? (value > options.value) : (value >= options.value);
             }
         }
     });
@@ -265,13 +289,13 @@
              * @param {HTMLElement} element
              * @param {Object} options Can consist of the following keys:
              * - value: The number used to compare to
-             * - strict [optional]: Can be true or false. Default is true
+             * - inclusive [optional]: Can be true or false. Default is true
              * - message: The invalid message
              * @returns {boolean}
              */
             validate: function(validateInstance, element, options) {
                 var value = parseFloat($(element).val());
-                return (options.strict === true) ? (value < options.value) : (value <= options.value);
+                return (options.inclusive === true) ? (value < options.value) : (value <= options.value);
             }
         }
     });
