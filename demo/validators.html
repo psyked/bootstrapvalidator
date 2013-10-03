@@ -66,15 +66,11 @@
                                     <input type="text" class="form-control" name="phoneNumber" />
                                 </div>
                             </div>
-                        </fieldset>
-
-                        <fieldset>
-                            <legend>Other validators</legend>
 
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">Ages</label>
+                                <label class="col-lg-3 control-label">Hex color</label>
                                 <div class="col-lg-3">
-                                    <input type="text" class="form-control" name="ages" />
+                                    <input type="text" class="form-control" name="color" />
                                 </div>
                             </div>
                         </fieldset>
@@ -93,6 +89,17 @@
                                 <label class="col-lg-3 control-label">Retype password</label>
                                 <div class="col-lg-5">
                                     <input type="password" class="form-control" name="confirmPassword" />
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Other validators</legend>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Ages</label>
+                                <div class="col-lg-3">
+                                    <input type="text" class="form-control" name="ages" />
                                 </div>
                             </div>
                         </fieldset>
@@ -158,6 +165,13 @@ $(document).ready(function() {
                 validator: {
                     digits: {
                         message: 'The value can contain only digits'
+                    }
+                }
+            },
+            color: {
+                validator: {
+                    hexColor: {
+                        message: 'The input is not a valid hex color'
                     }
                 }
             },

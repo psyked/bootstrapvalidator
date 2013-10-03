@@ -79,7 +79,7 @@
                 var that         = this,
                     fieldElement = $(foundFields[0]),
                     type         = $(fieldElement).attr('type'),
-                    event        = ('checkbox' == type) ? 'change' : 'keyup';
+                    event        = ('checkbox' == type || 'radio' == type) ? 'change' : 'keyup';
 
                 $(fieldElement)
                     .on(event, function() {
@@ -250,6 +250,25 @@
             validate: function(validateInstance, element, options) {
                 var value = parseFloat($(element).val());
                 return (options.inclusive === true) ? (value > options.value) : (value >= options.value);
+            }
+        }
+    });
+}(window.jQuery));
+;(function($) {
+    $.extend($.bootstrapValidator.validator, {
+        hexColor: {
+            /**
+             * Return true if the input value is a valid hex color
+             *
+             * @param {bootstrapValidator} validateInstance Validate plugin instance
+             * @param {HTMLElement} element
+             * @param {Object} options Can consist of the following keys:
+             * - message: The invalid message
+             * @returns {boolean}
+             */
+            validate: function(validateInstance, element, options) {
+                var value = $(element).val();
+                return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(value);
             }
         }
     });
