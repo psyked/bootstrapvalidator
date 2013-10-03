@@ -1,0 +1,14 @@
+{
+  "name": "bootstrapvalidate",
+  "author": {
+    "name": "Nguyen Huu Phuoc <phuoc@huuphuoc.me>",
+    "url": "https://twitter.com/nghuuphuoc"
+  },
+  "homepage": "http://github.com/nghuuphuoc/bootstrapvalidate",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-contrib-concat": "~0.3.0"
+  },
+  "version": "0.1.0"
+}
