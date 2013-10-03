@@ -15,6 +15,7 @@
     <script type="text/javascript" src="../src/js/validator/digits.js"></script>
     <script type="text/javascript" src="../src/js/validator/emailAddress.js"></script>
     <script type="text/javascript" src="../src/js/validator/identical.js"></script>
+    <script type="text/javascript" src="../src/js/validator/lessThan.js"></script>
     <script type="text/javascript" src="../src/js/validator/notEmpty.js"></script>
     <script type="text/javascript" src="../src/js/validator/regexp.js"></script>
     <script type="text/javascript" src="../src/js/validator/stringLength.js"></script>
@@ -71,6 +72,17 @@
                                 <label class="col-lg-3 control-label">Phone number</label>
                                 <div class="col-lg-5">
                                     <input type="text" class="form-control" name="phoneNumber" />
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Other validators</legend>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">Ages</label>
+                                <div class="col-lg-3">
+                                    <input type="text" class="form-control" name="ages" />
                                 </div>
                             </div>
                         </fieldset>
@@ -176,6 +188,15 @@ $(document).ready(function() {
                     identical: {
                         field: 'password',
                         message: 'The password and its confirm are not the same'
+                    }
+                }
+            },
+            ages: {
+                validator: {
+                    lessThan: {
+                        value: 100,
+                        strict: true,
+                        message: 'The ages has to be less than 100'
                     }
                 }
             }
