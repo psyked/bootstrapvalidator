@@ -6,10 +6,70 @@ The plugin uses [Bootstrap Tooltip](http://getbootstrap.com/javascript/#tooltips
 
 ![Bootstrap Validate screenshot](img/screenshot.png)
 
+## Features
+
+The plugin provides built-in validators which are listed below in alphabetical order:
+
+Validator name | Description
+---------------|------------
+digits         | Return true if the value contains only digits
+emailAddress   | Validate an email address
+greaterThan    | Return true if the value is greater than or equals to given number
+identical      | Check if the value is the same as one of particular field
+lessThan       | Return true if the value is less than or equals to given number
+notEmpty       | Check if the value is empty
+regexp         | Check if the value matches given Javascript regular expression
+stringLength   | Validate the length of a string
+uri            | Validate an URL address
+
 ## Required
 
 * [jQuery](http://jquery.com/)
 * [Bootstrap 3](http://getbootstrap.com/)
+
+## Demo
+
+You can see the live demo here:
+
+* [Sample demo](https://rawgithub.com/nghuuphuoc/bootstrapvalidate/master/demo/index.html)
+* [Validator examples](https://rawgithub.com/nghuuphuoc/bootstrapvalidate/master/demo/validators.html)
+
+## Usage
+
+Since the BootstrapValidate plugin requires jQuery and Bootstrap 3, you have to include the required CSS and JS files to your page:
+
+```html
+<link rel="stylesheet" href="/path/to/bootstrap/css/bootstrap.css"/>
+<script type="text/javascript" src="/path/to/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/path/to/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/path/to/js/bootstrapvalidate.min.js"></script>
+```
+
+Call the plugin to validate the form as following:
+
+```javascript
+$(document).ready(function() {
+    $(<form Selector>).bootstrapValidate({
+        message: <The default error message for all fields>,
+        iconClass: {
+            valid: <The icon class indicates a valid value>,
+            invalid: <The icon class indicates an invalid value>
+        },
+        fields: {
+            ...
+            <fieldName>: {
+                message: <The default error message for this field>,
+                validator: {
+                    ...
+                    <validatorName>: <validatorOptions>
+                    ...
+                }
+            }
+            ...
+        }
+    }
+});
+```
 
 ## Build
 
