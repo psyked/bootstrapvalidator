@@ -1,5 +1,5 @@
 /**
- * BootstrapValidate (https://github.com/nghuuphuoc/bootstrapvalidate)
+ * BootstrapValidate v0.1.0 (http://github.com/nghuuphuoc/bootstrapvalidate)
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *

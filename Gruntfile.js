@@ -18,7 +18,9 @@ module.exports = function(grunt) {
 
         concat: {
             options: {
-                separator: ';'
+                separator: ';',
+                stripBanners: true,
+                banner: '<%= banner %>'
             },
             dist: {
                 src: ['src/js/bootstrapvalidate.js', 'src/js/validator/*.js'],
