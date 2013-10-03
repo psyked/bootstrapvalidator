@@ -67,7 +67,7 @@ Below is the list of built-in validators sorted in alphabetical order:
 
 Validator name                            | Description
 ------------------------------------------|------------
-[between](docs/between/README.md)         | Checks if the input value is between (strictly or not) two given numbers
+[between](docs/between)                   | Checks if the input value is between (strictly or not) two given numbers
 digits                                    | Return true if the value contains only digits
 emailAddress                              | Validate an email address
 greaterThan                               | Return true if the value is greater than or equals to given number

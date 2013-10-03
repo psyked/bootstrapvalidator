@@ -79,7 +79,7 @@
                 var that         = this,
                     fieldElement = $(foundFields[0]),
                     type         = $(fieldElement).attr('type'),
-                    event        = ('checkbox' == type) ? 'change' : 'keyup';
+                    event        = ('checkbox' == type || 'radio' == type) ? 'change' : 'keyup';
 
                 $(fieldElement)
                     .on(event, function() {
