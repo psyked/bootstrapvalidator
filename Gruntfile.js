@@ -36,6 +36,16 @@ module.exports = function(grunt) {
                 src: ['<%= buildDir %>/js/bootstrapvalidate.js'],
                 dest: '<%= buildDir %>/js/bootstrapvalidate.min.js'
             }
+        },
+
+        watch: {
+            scripts: {
+                files: ['src/js/**'],
+                tasks: ['build'],
+                options: {
+                    spawn: false
+                }
+            }
         }
     });
 
@@ -44,4 +54,5 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 };

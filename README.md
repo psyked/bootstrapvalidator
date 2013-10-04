@@ -90,12 +90,19 @@ From the BootstrapValidate root directory, execute the following commands to ins
 $ npm install grunt --save-dev
 $ npm install grunt-contrib-concat --save-dev
 $ npm install grunt-contrib-uglify --save-dev
+$ npm install grunt-contrib-watch --save-dev
 ```
 
 Then, uses grunt to build:
 
 ```bash
 $ grunt
+```
+
+If you want grunt to generate scripts whenever the original scripts (located in ```src```) change, use the following command:
+
+```bash
+$ grunt watch
 ```
 
 The generated scripts (including source and compressed versions) are placed inside the ```dist``` directory.
