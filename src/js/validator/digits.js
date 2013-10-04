@@ -5,12 +5,12 @@
              * Return true if the input value contains digits only
              *
              * @param {bootstrapValidator} validateInstance Validate plugin instance
-             * @param {HTMLElement} element
+             * @param {jQuery} $field Field element
              * @param {Object} options
              * @returns {boolean}
              */
-            validate: function(validateInstance, element, options) {
-                return /^\d+$/.test($(element).val());
+            validate: function(validateInstance, $field, options) {
+                return /^\d+$/.test($field.val());
             }
         }
     });

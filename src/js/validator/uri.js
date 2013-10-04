@@ -5,11 +5,11 @@
              * Return true if the input value is a valid URL
              *
              * @param {bootstrapValidator} validateInstance Validate plugin instance
-             * @param {HTMLElement} element
+             * @param {jQuery} $field Field element
              * @param {Object} options
              * @returns {boolean}
              */
-            validate: function(validateInstance, element, options) {
+            validate: function(validateInstance, $field, options) {
                 // Credit to https://gist.github.com/dperini/729294
                 //
                 // Regular Expression for URL validation
@@ -83,7 +83,7 @@
                     "(?:/[^\\s]*)?" +
                     "$", "i"
                 );
-                return urlExp.test($(element).val());
+                return urlExp.test($field.val());
             }
         }
     });

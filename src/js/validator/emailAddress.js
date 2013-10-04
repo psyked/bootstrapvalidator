@@ -5,12 +5,12 @@
              * Return true if and only if the input value is a valid email address
              *
              * @param {bootstrapValidator} validateInstance Validate plugin instance
-             * @param {HTMLElement} element
+             * @param {jQuery} $field Field element
              * @param {Object} options
              * @returns {boolean}
              */
-            validate: function(validateInstance, element, options) {
-                var value       = $.trim($(element).val()),
+            validate: function(validateInstance, $field, options) {
+                var value       = $.trim($field.val()),
                     // Email address regular expression
                     // http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
                     emailRegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

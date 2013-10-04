@@ -78,39 +78,38 @@
                     return;
                 }
 
-                var that         = this,
-                    fieldElement = $(foundFields[0]),
-                    type         = $(fieldElement).attr('type'),
-                    event        = ('checkbox' == type || 'radio' == type) ? 'change' : 'keyup';
+                var that   = this,
+                    $field = $(foundFields[0]),
+                    type   = $field.attr('type'),
+                    event  = ('checkbox' == type || 'radio' == type) ? 'change' : 'keyup';
 
-                $(fieldElement)
+                $field
                     .on(event, function() {
                         var validators = that.options.fields[field].validator;
                         for (var validatorName in validators) {
                             if (!$.bootstrapValidator.validator[validatorName]) {
                                 continue;
                             }
-                            var isValid = $.bootstrapValidator.validator[validatorName].validate(that, fieldElement, validators[validatorName]);
-                            if (isValid == false) {
-                                that.showError(fieldElement, validatorName);
+                            var isValid = $.bootstrapValidator.validator[validatorName].validate(that, $field, validators[validatorName]);
+                            if (isValid === false) {
+                                that.showError($field, validatorName);
                                 break;
-                            } else if (isValid == true) {
-                                that.removeError(fieldElement);
+                            } else if (isValid === true) {
+                                that.removeError($field);
                             }
                         }
                     })
                     .blur(function() {
-                        that.hideError(fieldElement);
+                        that.hideError($field);
                     });
             },
 
-            showError: function(fieldElement, validatorName) {
-                var $fieldElement = $(fieldElement),
-                    field         = $fieldElement.attr('name'),
-                    validator     = this.options.fields[field].validator[validatorName],
-                    message       = validator.message || this.options.message;
+            showError: function($field, validatorName) {
+                var field     = $field.attr('name'),
+                    validator = this.options.fields[field].validator[validatorName],
+                    message   = validator.message || this.options.message;
 
-                if (!$fieldElement.data('bootstrapValidator.tooltip')) {
+                if (!$field.data('bootstrapValidator.tooltip')) {
                     var $a = $('<a/>').attr('href', '#')
                                       .attr('title', message)
                                       // Bootstrap tooltip options
@@ -118,9 +117,9 @@
                                       .attr('data-toggle', 'tooltip').attr('data-placement', 'right')
                                       .css('text-decoration', 'none')
                                       .css('position', 'absolute')
-                                      .insertAfter(fieldElement);
+                                      .insertAfter($field);
                     $('<i/>').addClass(this.options.iconClass.invalid).appendTo($a);
-                    $fieldElement.data('bootstrapValidator.tooltip', $a);
+                    $field.data('bootstrapValidator.tooltip', $a);
 
                     $a.on('shown.bs.tooltip', function() {
                         if (!$(this).data('bootstrapValidator.tooltip.calculated')) {
@@ -144,37 +143,38 @@
                 }
 
                 // Add has-error class to parent element
-                $fieldElement.parents('.form-group').removeClass('has-success').addClass('has-error');
+                $field.parents('.form-group').removeClass('has-success').addClass('has-error');
 
-                var $tip = $fieldElement.data('bootstrapValidator.tooltip');
-                $tip.find('i').attr('class', this.options.iconClass.invalid).end()
-                    .attr('title', message)
-                    .attr('data-original-title', message)
-                    .tooltip('show');
+                $field
+                    .data('bootstrapValidator.tooltip')
+                        .find('i').attr('class', this.options.iconClass.invalid).end()
+                        .attr('title', message)
+                        .attr('data-original-title', message)
+                        .tooltip('show');
             },
 
-            hideError: function(fieldElement) {
-                if (tip = $(fieldElement).data('bootstrapValidator.tooltip')) {
-                    $(tip).tooltip('hide');
+            hideError: function($field) {
+                var $tip = $field.data('bootstrapValidator.tooltip');
+                if ($tip) {
+                    $tip.tooltip('hide');
                 }
             },
 
-            removeError: function(fieldElement) {
-                var $fieldElement = $(fieldElement);
-                $fieldElement.parents('.form-group').removeClass('has-error').addClass('has-success');
-                if (tip = $fieldElement.data('bootstrapValidator.tooltip')) {
-                    $(tip).find('i').attr('class', this.options.iconClass.valid);
-                    $(tip).tooltip('destroy');
-
-                    $(tip).remove();
-                    $fieldElement.removeData('bootstrapValidator.tooltip');
+            removeError: function($field) {
+                $field.parents('.form-group').removeClass('has-error').addClass('has-success');
+                var $tip = $field.data('bootstrapValidator.tooltip');
+                if ($tip) {
+                    $tip.find('i').attr('class', this.options.iconClass.valid).end()
+                        .tooltip('destroy')
+                        .remove();
+                    $field.removeData('bootstrapValidator.tooltip');
                 }
             },
 
-            startRequest: function(fieldElement, validatorName, xhr) {
-                var field = $(fieldElement).attr('name');
+            startRequest: function($field, validatorName, xhr) {
+                var field = $field.attr('name');
 
-                this.completeRequest(fieldElement, validatorName);
+                this.completeRequest($field, validatorName);
 
                 if (this.numPendingRequests < 0) {
                     this.numPendingRequests = 0;
@@ -186,15 +186,14 @@
                 this.xhrRequests[field][validatorName] = xhr;
             },
 
-            completeRequest: function(fieldElement, validatorName) {
-                var field = $(fieldElement).attr('name');
+            completeRequest: function($field, validatorName) {
+                var field = $field.attr('name');
                 if (!this.xhrRequests[field] || !this.xhrRequests[field][validatorName]) {
                     return;
                 }
 
                 var xhr = this.xhrRequests[field][validatorName];
                 this.numPendingRequests--;
-                console.log('---abort---');
                 xhr.abort();
                 delete this.xhrRequests[field][validatorName];
             }
@@ -208,7 +207,7 @@
              * Return true if the input value is between (strictly or not) two given numbers
              *
              * @param {bootstrapValidator} validateInstance Validate plugin instance
-             * @param {HTMLElement} element
+             * @param {jQuery} $field Field element
              * @param {Object} options Can consist of the following keys:
              * - min
              * - max
@@ -216,8 +215,8 @@
              * - message: The invalid message
              * @returns {boolean}
              */
-            validate: function(validateInstance, element, options) {
-                var value = parseFloat($(element).val());
+            validate: function(validateInstance, $field, options) {
+                var value = parseFloat($field.val());
                 return (options.inclusive === true)
                             ? (value > options.min && value < options.max)
                             : (value >= options.min && value <= options.max);
@@ -232,12 +231,12 @@
              * Return true if the input value contains digits only
              *
              * @param {bootstrapValidator} validateInstance Validate plugin instance
-             * @param {HTMLElement} element
+             * @param {jQuery} $field Field element
              * @param {Object} options
              * @returns {boolean}
              */
-            validate: function(validateInstance, element, options) {
-                return /^\d+$/.test($(element).val());
+            validate: function(validateInstance, $field, options) {
+                return /^\d+$/.test($field.val());
             }
         }
     });
@@ -249,12 +248,12 @@
              * Return true if and only if the input value is a valid email address
              *
              * @param {bootstrapValidator} validateInstance Validate plugin instance
-             * @param {HTMLElement} element
+             * @param {jQuery} $field Field element
              * @param {Object} options
              * @returns {boolean}
              */
-            validate: function(validateInstance, element, options) {
-                var value       = $.trim($(element).val()),
+            validate: function(validateInstance, $field, options) {
+                var value       = $.trim($field.val()),
                     // Email address regular expression
                     // http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
                     emailRegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -270,15 +269,15 @@
              * Return true if the input value is greater than or equals to given number
              *
              * @param {bootstrapValidator} validateInstance Validate plugin instance
-             * @param {HTMLElement} element
+             * @param {jQuery} $field Field element
              * @param {Object} options Can consist of the following keys:
              * - value: The number used to compare to
              * - inclusive [optional]: Can be true or false. Default is true
              * - message: The invalid message
              * @returns {boolean}
              */
-            validate: function(validateInstance, element, options) {
-                var value = parseFloat($(element).val());
+            validate: function(validateInstance, $field, options) {
+                var value = parseFloat($field.val());
                 return (options.inclusive === true) ? (value > options.value) : (value >= options.value);
             }
         }
@@ -291,13 +290,13 @@
              * Return true if the input value is a valid hex color
              *
              * @param {bootstrapValidator} validateInstance Validate plugin instance
-             * @param {HTMLElement} element
+             * @param {jQuery} $field Field element
              * @param {Object} options Can consist of the following keys:
              * - message: The invalid message
              * @returns {boolean}
              */
-            validate: function(validateInstance, element, options) {
-                var value = $(element).val();
+            validate: function(validateInstance, $field, options) {
+                var value = $field.val();
                 return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(value);
             }
         }
@@ -310,13 +309,13 @@
              * Check if input value equals to value of particular one
              *
              * @param {bootstrapValidator} validateInstance Validate plugin instance
-             * @param {HTMLElement} element
+             * @param {jQuery} $field Field element
              * @param {Object} options Consists of the following key:
              * - field: The name of field that will be used to compare with current one
              * @returns {boolean}
              */
-            validate: function(validateInstance, element, options) {
-                var value        = $(element).val(),
+            validate: function(validateInstance, $field, options) {
+                var value        = $field.val(),
                     $compareWith = validateInstance.getForm().find('[name="' + options.field + '"]');
                 if (value == $compareWith.val()) {
                     validateInstance.removeError($compareWith);
@@ -335,15 +334,15 @@
              * Return true if the input value is less than or equal to given number
              *
              * @param {bootstrapValidator} validateInstance Validate plugin instance
-             * @param {HTMLElement} element
+             * @param {jQuery} $field Field element
              * @param {Object} options Can consist of the following keys:
              * - value: The number used to compare to
              * - inclusive [optional]: Can be true or false. Default is true
              * - message: The invalid message
              * @returns {boolean}
              */
-            validate: function(validateInstance, element, options) {
-                var value = parseFloat($(element).val());
+            validate: function(validateInstance, $field, options) {
+                var value = parseFloat($field.val());
                 return (options.inclusive === true) ? (value < options.value) : (value <= options.value);
             }
         }
@@ -356,16 +355,13 @@
              * Check if input value is empty or not
              *
              * @param {bootstrapValidator} validateInstance Validate plugin instance
-             * @param {HTMLElement} element
+             * @param {jQuery} $field Field element
              * @param {Object} options
              * @returns {boolean}
              */
-            validate: function(validateInstance, element, options) {
-                var $element = $(element),
-                    type     = $element.attr('type');
-                return ('checkbox' == type || 'radio' == type)
-                            ? $element.is(':checked')
-                            : ($.trim($(element).val()) != '');
+            validate: function(validateInstance, $field, options) {
+                var type = $field.attr('type');
+                return ('checkbox' == type || 'radio' == type) ? $field.is(':checked') : ($.trim($field.val()) != '');
             }
         }
     });
@@ -377,13 +373,13 @@
              * Check if the element value matches given regular expression
              *
              * @param {bootstrapValidator} validateInstance Validate plugin instance
-             * @param {HTMLElement} element
+             * @param {jQuery} $field Field element
              * @param {Object} options Consists of the following key:
              * - regexp: The regular expression you need to check
              * @returns {boolean}
              */
-            validate: function(validateInstance, element, options) {
-                var value = $.trim($(element).val());
+            validate: function(validateInstance, $field, options) {
+                var value = $.trim($field.val());
                 return value.match(options.regexp);
             }
         }
@@ -396,7 +392,7 @@
              * Request a remote server to check the input value
              *
              * @param {bootstrapValidator} validateInstance Validate plugin instance
-             * @param {HTMLElement} element
+             * @param {jQuery} $field Field element
              * @param {Object} options Can consist of the following keys:
              * - url
              * - data [optional]: By default, it will take the value
@@ -406,24 +402,25 @@
              * - message: The invalid message
              * @returns {string}
              */
-            validate: function(validateInstance, element, options) {
-                var value = $(element).val(), name = $(element).attr('name');
-                if (!options.data) {
-                    options.data       = {};
-                    options.data[name] = value;
+            validate: function(validateInstance, $field, options) {
+                var value = $field.val(), name = $field.attr('name');
+                var data = options.data;
+                if (data == null) {
+                    data       = {};
+                    data[name] = value;
                 }
                 var xhr = $.ajax({
                     type: 'POST',
                     url: options.url,
                     dataType: 'json',
-                    data: options.data
+                    data: data
                 }).success(function(response) {
-                    validateInstance.completeRequest(element, 'remote');
-                    if (response.valid === true || response.valid === 'true') {
-                        validateInstance.showError(element, 'remote');
+                    validateInstance.completeRequest($field, 'remote');
+                    if (response.valid === false || response.valid === 'false') {
+                        validateInstance.showError($field, 'remote');
                     }
                 });
-                validateInstance.startRequest(element, 'remote', xhr);
+                validateInstance.startRequest($field, 'remote', xhr);
 
                 return 'pending';
             }
@@ -437,15 +434,15 @@
              * Check if the length of element value is less or more than given number
              *
              * @param {bootstrapValidator} validateInstance Validate plugin instance
-             * @param {HTMLElement} element
+             * @param {jQuery} $field Field element
              * @param {Object} options Consists of following keys:
              * - min
              * - max
              * At least one of two keys is required
              * @returns {boolean}
              */
-            validate: function(validateInstance, element, options) {
-                var value = $.trim($(element).val()), length = value.length;
+            validate: function(validateInstance, $field, options) {
+                var value = $.trim($field.val()), length = value.length;
                 if ((options.min && length < options.min) || (options.max && length > options.max)) {
                     return false;
                 }
@@ -462,11 +459,11 @@
              * Return true if the input value is a valid URL
              *
              * @param {bootstrapValidator} validateInstance Validate plugin instance
-             * @param {HTMLElement} element
+             * @param {jQuery} $field Field element
              * @param {Object} options
              * @returns {boolean}
              */
-            validate: function(validateInstance, element, options) {
+            validate: function(validateInstance, $field, options) {
                 // Credit to https://gist.github.com/dperini/729294
                 //
                 // Regular Expression for URL validation
@@ -540,7 +537,7 @@
                     "(?:/[^\\s]*)?" +
                     "$", "i"
                 );
-                return urlExp.test($(element).val());
+                return urlExp.test($field.val());
             }
         }
     });
@@ -552,12 +549,12 @@
              * Return true if and only if the input value is a valid US zip code
              *
              * @param {bootstrapValidator} validateInstance Validate plugin instance
-             * @param {HTMLElement} element
+             * @param {jQuery} $field Field element
              * @param {Object} options
              * @returns {boolean}
              */
-            validate: function(validateInstance, element, options) {
-                var value = $(element).val();
+            validate: function(validateInstance, $field, options) {
+                var value = $field.val();
                 return /^\d{5}([\-]\d{4})?$/.test(value);
             }
         }

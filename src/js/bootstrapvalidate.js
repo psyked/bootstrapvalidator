@@ -78,39 +78,38 @@
                     return;
                 }
 
-                var that         = this,
-                    fieldElement = $(foundFields[0]),
-                    type         = $(fieldElement).attr('type'),
-                    event        = ('checkbox' == type || 'radio' == type) ? 'change' : 'keyup';
+                var that   = this,
+                    $field = $(foundFields[0]),
+                    type   = $field.attr('type'),
+                    event  = ('checkbox' == type || 'radio' == type) ? 'change' : 'keyup';
 
-                $(fieldElement)
+                $field
                     .on(event, function() {
                         var validators = that.options.fields[field].validator;
                         for (var validatorName in validators) {
                             if (!$.bootstrapValidator.validator[validatorName]) {
                                 continue;
                             }
-                            var isValid = $.bootstrapValidator.validator[validatorName].validate(that, fieldElement, validators[validatorName]);
-                            if (isValid == false) {
-                                that.showError(fieldElement, validatorName);
+                            var isValid = $.bootstrapValidator.validator[validatorName].validate(that, $field, validators[validatorName]);
+                            if (isValid === false) {
+                                that.showError($field, validatorName);
                                 break;
-                            } else if (isValid == true) {
-                                that.removeError(fieldElement);
+                            } else if (isValid === true) {
+                                that.removeError($field);
                             }
                         }
                     })
                     .blur(function() {
-                        that.hideError(fieldElement);
+                        that.hideError($field);
                     });
             },
 
-            showError: function(fieldElement, validatorName) {
-                var $fieldElement = $(fieldElement),
-                    field         = $fieldElement.attr('name'),
-                    validator     = this.options.fields[field].validator[validatorName],
-                    message       = validator.message || this.options.message;
+            showError: function($field, validatorName) {
+                var field     = $field.attr('name'),
+                    validator = this.options.fields[field].validator[validatorName],
+                    message   = validator.message || this.options.message;
 
-                if (!$fieldElement.data('bootstrapValidator.tooltip')) {
+                if (!$field.data('bootstrapValidator.tooltip')) {
                     var $a = $('<a/>').attr('href', '#')
                                       .attr('title', message)
                                       // Bootstrap tooltip options
@@ -118,9 +117,9 @@
                                       .attr('data-toggle', 'tooltip').attr('data-placement', 'right')
                                       .css('text-decoration', 'none')
                                       .css('position', 'absolute')
-                                      .insertAfter(fieldElement);
+                                      .insertAfter($field);
                     $('<i/>').addClass(this.options.iconClass.invalid).appendTo($a);
-                    $fieldElement.data('bootstrapValidator.tooltip', $a);
+                    $field.data('bootstrapValidator.tooltip', $a);
 
                     $a.on('shown.bs.tooltip', function() {
                         if (!$(this).data('bootstrapValidator.tooltip.calculated')) {
@@ -144,37 +143,38 @@
                 }
 
                 // Add has-error class to parent element
-                $fieldElement.parents('.form-group').removeClass('has-success').addClass('has-error');
+                $field.parents('.form-group').removeClass('has-success').addClass('has-error');
 
-                var $tip = $fieldElement.data('bootstrapValidator.tooltip');
-                $tip.find('i').attr('class', this.options.iconClass.invalid).end()
-                    .attr('title', message)
-                    .attr('data-original-title', message)
-                    .tooltip('show');
+                $field
+                    .data('bootstrapValidator.tooltip')
+                        .find('i').attr('class', this.options.iconClass.invalid).end()
+                        .attr('title', message)
+                        .attr('data-original-title', message)
+                        .tooltip('show');
             },
 
-            hideError: function(fieldElement) {
-                if (tip = $(fieldElement).data('bootstrapValidator.tooltip')) {
-                    $(tip).tooltip('hide');
+            hideError: function($field) {
+                var $tip = $field.data('bootstrapValidator.tooltip');
+                if ($tip) {
+                    $tip.tooltip('hide');
                 }
             },
 
-            removeError: function(fieldElement) {
-                var $fieldElement = $(fieldElement);
-                $fieldElement.parents('.form-group').removeClass('has-error').addClass('has-success');
-                if (tip = $fieldElement.data('bootstrapValidator.tooltip')) {
-                    $(tip).find('i').attr('class', this.options.iconClass.valid);
-                    $(tip).tooltip('destroy');
-
-                    $(tip).remove();
-                    $fieldElement.removeData('bootstrapValidator.tooltip');
+            removeError: function($field) {
+                $field.parents('.form-group').removeClass('has-error').addClass('has-success');
+                var $tip = $field.data('bootstrapValidator.tooltip');
+                if ($tip) {
+                    $tip.find('i').attr('class', this.options.iconClass.valid).end()
+                        .tooltip('destroy')
+                        .remove();
+                    $field.removeData('bootstrapValidator.tooltip');
                 }
             },
 
-            startRequest: function(fieldElement, validatorName, xhr) {
-                var field = $(fieldElement).attr('name');
+            startRequest: function($field, validatorName, xhr) {
+                var field = $field.attr('name');
 
-                this.completeRequest(fieldElement, validatorName);
+                this.completeRequest($field, validatorName);
 
                 if (this.numPendingRequests < 0) {
                     this.numPendingRequests = 0;
@@ -186,15 +186,14 @@
                 this.xhrRequests[field][validatorName] = xhr;
             },
 
-            completeRequest: function(fieldElement, validatorName) {
-                var field = $(fieldElement).attr('name');
+            completeRequest: function($field, validatorName) {
+                var field = $field.attr('name');
                 if (!this.xhrRequests[field] || !this.xhrRequests[field][validatorName]) {
                     return;
                 }
 
                 var xhr = this.xhrRequests[field][validatorName];
                 this.numPendingRequests--;
-                console.log('---abort---');
                 xhr.abort();
                 delete this.xhrRequests[field][validatorName];
             }

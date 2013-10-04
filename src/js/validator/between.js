@@ -5,7 +5,7 @@
              * Return true if the input value is between (strictly or not) two given numbers
              *
              * @param {bootstrapValidator} validateInstance Validate plugin instance
-             * @param {HTMLElement} element
+             * @param {jQuery} $field Field element
              * @param {Object} options Can consist of the following keys:
              * - min
              * - max
@@ -13,8 +13,8 @@
              * - message: The invalid message
              * @returns {boolean}
              */
-            validate: function(validateInstance, element, options) {
-                var value = parseFloat($(element).val());
+            validate: function(validateInstance, $field, options) {
+                var value = parseFloat($field.val());
                 return (options.inclusive === true)
                             ? (value > options.min && value < options.max)
                             : (value >= options.min && value <= options.max);
