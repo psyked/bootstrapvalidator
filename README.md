@@ -59,21 +59,21 @@ The ```<validatorName>``` can be the name of the built-in validator which are de
 
 Below is the list of built-in validators sorted in alphabetical order:
 
-Validator name                | Description
-------------------------------|------------
-[between](#between-validator) | Check if the input value is between (strictly or not) two given numbers
-digits                        | Return true if the value contains only digits
-emailAddress                  | Validate an email address
-greaterThan                   | Return true if the value is greater than or equals to given number
-hexColor                      | Validate a hex color
-identical                     | Check if the value is the same as one of particular field
-lessThan                      | Return true if the value is less than or equals to given number
-notEmpty                      | Check if the value is empty
-regexp                        | Check if the value matches given Javascript regular expression
-remote                        | Perform remote checking via Ajax request
-stringLength                  | Validate the length of a string
-uri                           | Validate an URL address
-usZipCode                     | Validate a US zip code
+Validator name                          | Description
+----------------------------------------|------------
+[between](#between-validator)           | Check if the input value is between (strictly or not) two given numbers
+digits                                  | Return true if the value contains only digits
+emailAddress                            | Validate an email address
+[greaterThan](#greaterthan-validator)   | Return true if the value is greater than or equals to given number
+hexColor                                | Validate a hex color
+[identical](#identical-validator)       | Check if the value is the same as one of particular field
+[lessThan](#lessthan-validator)         | Return true if the value is less than or equals to given number
+notEmpty                                | Check if the value is empty
+[regexp](#regexp-validator)             | Check if the value matches given Javascript regular expression
+[remote](#remote-validator)             | Perform remote checking via Ajax request
+[stringLength](#stringlength-validator) | Validate the length of a string
+uri                                     | Validate an URL address
+usZipCode                               | Validate a US zip code
 
 ### Between Validator
 
@@ -88,6 +88,127 @@ $(document).ready(function() {
                         min: ...        // [required] The lower value in the range
                         max: ...,       // [required] The upper value in the range
                         inclusive: ...  // [optional] Can be true or false. If true, the input value must be in the range strictly
+                    }
+                }
+            }
+        }
+    }
+});
+```
+
+### GreaterThan Validator
+
+```javascript
+$(document).ready(function() {
+    $(<form Selector>).bootstrapValidate({
+        fields: {
+            <fieldName>: {
+                validator: {
+                    greaterThan: {
+                        message: ...,   // [required] The error message
+                        value: ...,     // [required] The number used to compare to
+                        inclusive: ...  // [optional] Can be true or false
+                                        // If true, the input value must be greater than the comparison one
+                                        // If false, the input value must be greater than or equal to the comparison one
+                    }
+                }
+            }
+        }
+    }
+});
+```
+
+### Identical Validator
+
+```javascript
+$(document).ready(function() {
+    $(<form Selector>).bootstrapValidate({
+        fields: {
+            <fieldName>: {
+                validator: {
+                    identical: {
+                        message: ...,   // [required] The error message
+                        field: ...      // [required] The name of field that will be used to compare with current one
+                    }
+                }
+            }
+        }
+    }
+});
+```
+
+### LessThan Validator
+
+```javascript
+$(document).ready(function() {
+    $(<form Selector>).bootstrapValidate({
+        fields: {
+            <fieldName>: {
+                validator: {
+                    lessThan: {
+                        message: ...,   // [required] The error message
+                        value: ...,     // [required] The number used to compare to
+                        inclusive: ...  // [optional] Can be true or false
+                    }
+                }
+            }
+        }
+    }
+});
+```
+
+### Regexp Validator
+
+```javascript
+$(document).ready(function() {
+    $(<form Selector>).bootstrapValidate({
+        fields: {
+            <fieldName>: {
+                validator: {
+                    regexp: {
+                        message: ...,   // [required] The error message
+                        regexp: ...     // [required] The regular expression
+                    }
+                }
+            }
+        }
+    }
+});
+```
+
+### Remote Validator
+
+```javascript
+$(document).ready(function() {
+    $(<form Selector>).bootstrapValidate({
+        fields: {
+            <fieldName>: {
+                validator: {
+                    remote: {
+                        message: ...,   // [required] The error message
+                        url: ...,       // [required] The remote URL
+                                        // The remote URL must response an encoded JSON of array containing the 'valid' key
+                    }
+                }
+            }
+        }
+    }
+});
+```
+
+### StringLength Validator
+
+```javascript
+$(document).ready(function() {
+    $(<form Selector>).bootstrapValidate({
+        fields: {
+            <fieldName>: {
+                validator: {
+                    stringLength: {
+                        message: ...,   // [required] The error message
+                        // One of two min/max options must be defined
+                        min: ...,       // The minimum length
+                        max: ...        // The maximum length
                     }
                 }
             }
@@ -124,6 +245,10 @@ $ grunt watch
 ```
 
 The generated scripts (including source and compressed versions) are placed inside the ```dist``` directory.
+
+## Release History
+
+Look at the [Change Log](CHANGELOG.md)
 
 ## Author
 
