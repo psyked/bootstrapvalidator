@@ -16,6 +16,26 @@ module.exports = function(grunt) {
             ' */\n\n'
         ].join('\n'),
 
+        copy: {
+            main: {
+                files: [
+                    { cwd: 'src/css', src: '**', dest: '<%= buildDir %>/css', expand: true, flatten: true, filter: 'isFile' }
+                ]
+            }
+        },
+
+        cssmin: {
+            minify: { expand: true, cwd: 'src/css/', src: ['*.css'], dest: '<%= buildDir %>/css/', ext: '.min.css' },
+            add_banner: {
+                options: {
+                    banner: '<%= banner %>'
+                },
+                files: {
+                    '<%= buildDir %>/css/bootstrapvalidate.min.css': ['src/css/bootstrapvalidate.css']
+                }
+            }
+        },
+
         concat: {
             options: {
                 separator: ';',
@@ -40,7 +60,7 @@ module.exports = function(grunt) {
 
         watch: {
             scripts: {
-                files: ['src/js/**'],
+                files: ['src/css/**', 'src/js/**'],
                 tasks: ['build'],
                 options: {
                     spawn: false
@@ -50,9 +70,11 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', 'build');
-    grunt.registerTask('build', ['concat', 'uglify']);
+    grunt.registerTask('build', ['copy', 'cssmin', 'concat', 'uglify']);
 
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
 };
