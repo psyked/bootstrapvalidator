@@ -9,6 +9,8 @@
     <![endif]-->
     <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css"/>
 
+    <link rel="stylesheet" href="/dist/css/bootstrapvalidate.css"/>
+
     <script type="text/javascript" src="/vendor/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/dist/js/bootstrapvalidate.js"></script>
@@ -23,7 +25,7 @@
                 </div>
 
                 <div class="col-lg-8 col-lg-offset-2">
-                    <form id="defaultForm" method="post" class="form-horizontal">
+                    <form id="defaultForm" method="post" action="remote.html" class="form-horizontal">
                         <fieldset>
                             <legend>Remote validator</legend>
 
@@ -57,6 +59,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('#defaultForm').bootstrapValidate({
+        message: 'This value is not valid',
         fields: {
             username: {
                 message: 'The username is not valid',
@@ -75,17 +78,15 @@ $(document).ready(function() {
                     notEmpty: {
                         message: 'The email address is required and can\'t be empty'
                     },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    },
                     remote: {
                         url: 'remote.php',
                         message: 'The email is not available'
                     }
                 }
             }
-        },
-        message: 'This value is not valid',
-        iconClass: {
-            valid: 'icon-ok',
-            invalid: 'icon-remove'
         }
     });
 });

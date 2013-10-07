@@ -67,6 +67,7 @@
 <script type="text/javascript">
 $(document).ready(function() {
     $('#defaultForm').bootstrapValidate({
+        message: 'This value is not valid',
         fields: {
             username: {
                 message: 'The username is not valid',
@@ -117,11 +118,6 @@ $(document).ready(function() {
                     }
                 }
             }
-        },
-        message: 'This value is not valid',
-        iconClass: {
-            valid: 'icon-ok',
-            invalid: 'icon-remove'
         }
     });
 });
