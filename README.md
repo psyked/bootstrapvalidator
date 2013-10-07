@@ -2,10 +2,6 @@
 
 A jQuery plugin to validate form fields. Use with Bootstrap 3
 
-The plugin uses [Bootstrap Tooltip](http://getbootstrap.com/javascript/#tooltips) to show the error message as following screenshot:
-
-![Bootstrap Validate screenshot](img/screenshot.png)
-
 ## Features
 
 * Many built-in [validators](#validators)
@@ -28,9 +24,11 @@ Since the BootstrapValidate plugin requires jQuery and Bootstrap 3, you have to 
 
 ```html
 <link rel="stylesheet" href="/path/to/bootstrap/css/bootstrap.css"/>
+<link rel="stylesheet" href="/path/to/bootstrapvalidate.min.css"/>
+
 <script type="text/javascript" src="/path/to/jquery/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="/path/to/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/path/to/js/bootstrapvalidate.min.js"></script>
+<script type="text/javascript" src="/path/to/bootstrapvalidate.min.js"></script>
 ```
 
 Call the plugin to validate the form as following:
@@ -65,20 +63,42 @@ The ```<validatorName>``` can be the name of the built-in validator which are de
 
 Below is the list of built-in validators sorted in alphabetical order:
 
-Validator name          | Description
-------------------------|------------
-[between](docs/between) | Checks if the input value is between (strictly or not) two given numbers
-digits                  | Return true if the value contains only digits
-emailAddress            | Validate an email address
-greaterThan             | Return true if the value is greater than or equals to given number
-hexColor                | Validate a hex color
-identical               | Check if the value is the same as one of particular field
-lessThan                | Return true if the value is less than or equals to given number
-notEmpty                | Check if the value is empty
-regexp                  | Check if the value matches given Javascript regular expression
-stringLength            | Validate the length of a string
-uri                     | Validate an URL address
-usZipCode               | Validate a US zip code
+Validator name                | Description
+------------------------------|------------
+[between](#between-validator) | Checks if the input value is between (strictly or not) two given numbers
+digits                        | Return true if the value contains only digits
+emailAddress                  | Validate an email address
+greaterThan                   | Return true if the value is greater than or equals to given number
+hexColor                      | Validate a hex color
+identical                     | Check if the value is the same as one of particular field
+lessThan                      | Return true if the value is less than or equals to given number
+notEmpty                      | Check if the value is empty
+regexp                        | Check if the value matches given Javascript regular expression
+remote                        | Perform remote checking via Ajax request
+stringLength                  | Validate the length of a string
+uri                           | Validate an URL address
+usZipCode                     | Validate a US zip code
+
+### Between Validator
+
+```javascript
+$(document).ready(function() {
+    $(<form Selector>).bootstrapValidate({
+        fields: {
+            <fieldName>: {
+                validator: {
+                    between: {
+                        message: ...,   // [required] The error message
+                        min: ...        // [required] The lower value in the range
+                        max: ...,       // [required] The upper value in the range
+                        inclusive: ...  // [optional] Can be true or false. If true, the input value must be in the range strictly
+                    }
+                }
+            }
+        }
+    }
+});
+```
 
 ## Build
 
@@ -89,6 +109,8 @@ From the BootstrapValidate root directory, execute the following commands to ins
 ```bash
 $ npm install grunt --save-dev
 $ npm install grunt-contrib-concat --save-dev
+$ npm install grunt-contrib-copy --save-dev
+$ npm install grunt-contrib-cssmin --save-dev
 $ npm install grunt-contrib-uglify --save-dev
 $ npm install grunt-contrib-watch --save-dev
 ```
