@@ -1,4 +1,4 @@
-# BootstrapValidate
+# bootstrapValidator
 
 A jQuery plugin to validate form fields. Use with Bootstrap 3
 
@@ -20,28 +20,28 @@ You can see the live demo here:
 
 ## Usage
 
-Since the BootstrapValidate plugin requires jQuery and Bootstrap 3, you have to include the required CSS and JS files to your page:
+Since the bootstrapValidator plugin requires jQuery and Bootstrap 3, you have to include the required CSS and JS files to your page:
 
 ```html
 <link rel="stylesheet" href="/path/to/bootstrap/css/bootstrap.css"/>
-<link rel="stylesheet" href="/path/to/bootstrapvalidate.min.css"/>
+<link rel="stylesheet" href="/path/to/bootstrapValidator.min.css"/>
 
 <script type="text/javascript" src="/path/to/jquery/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="/path/to/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/path/to/bootstrapvalidate.min.js"></script>
+<script type="text/javascript" src="/path/to/bootstrapValidator.min.js"></script>
 ```
 
 Call the plugin to validate the form as following:
 
 ```javascript
 $(document).ready(function() {
-    $(<form Selector>).bootstrapValidate({
+    $(<form Selector>).bootstrapValidator({
         message: <The default error message for all fields>,
         fields: {
             ...
             <fieldName>: {
                 message: <The default error message for this field>,
-                validator: {
+                validators: {
                     ...
                     <validatorName>: <validatorOptions>
                     ...
@@ -79,10 +79,10 @@ usZipCode                               | Validate a US zip code
 
 ```javascript
 $(document).ready(function() {
-    $(<form Selector>).bootstrapValidate({
+    $(<form Selector>).bootstrapValidator({
         fields: {
             <fieldName>: {
-                validator: {
+                validators: {
                     between: {
                         message: ...,   // [required] The error message
                         min: ...        // [required] The lower value in the range
@@ -100,10 +100,10 @@ $(document).ready(function() {
 
 ```javascript
 $(document).ready(function() {
-    $(<form Selector>).bootstrapValidate({
+    $(<form Selector>).bootstrapValidator({
         fields: {
             <fieldName>: {
-                validator: {
+                validators: {
                     greaterThan: {
                         message: ...,   // [required] The error message
                         value: ...,     // [required] The number used to compare to
@@ -122,10 +122,10 @@ $(document).ready(function() {
 
 ```javascript
 $(document).ready(function() {
-    $(<form Selector>).bootstrapValidate({
+    $(<form Selector>).bootstrapValidator({
         fields: {
             <fieldName>: {
-                validator: {
+                validators: {
                     identical: {
                         message: ...,   // [required] The error message
                         field: ...      // [required] The name of field that will be used to compare with current one
@@ -141,10 +141,10 @@ $(document).ready(function() {
 
 ```javascript
 $(document).ready(function() {
-    $(<form Selector>).bootstrapValidate({
+    $(<form Selector>).bootstrapValidator({
         fields: {
             <fieldName>: {
-                validator: {
+                validators: {
                     lessThan: {
                         message: ...,   // [required] The error message
                         value: ...,     // [required] The number used to compare to
@@ -161,10 +161,10 @@ $(document).ready(function() {
 
 ```javascript
 $(document).ready(function() {
-    $(<form Selector>).bootstrapValidate({
+    $(<form Selector>).bootstrapValidator({
         fields: {
             <fieldName>: {
-                validator: {
+                validators: {
                     regexp: {
                         message: ...,   // [required] The error message
                         regexp: ...     // [required] The regular expression
@@ -180,10 +180,10 @@ $(document).ready(function() {
 
 ```javascript
 $(document).ready(function() {
-    $(<form Selector>).bootstrapValidate({
+    $(<form Selector>).bootstrapValidator({
         fields: {
             <fieldName>: {
-                validator: {
+                validators: {
                     remote: {
                         message: ...,   // [required] The error message
                         url: ...,       // [required] The remote URL
@@ -200,10 +200,10 @@ $(document).ready(function() {
 
 ```javascript
 $(document).ready(function() {
-    $(<form Selector>).bootstrapValidate({
+    $(<form Selector>).bootstrapValidator({
         fields: {
             <fieldName>: {
-                validator: {
+                validators: {
                     stringLength: {
                         message: ...,   // [required] The error message
                         // One of two min/max options must be defined
@@ -219,9 +219,9 @@ $(document).ready(function() {
 
 ## Build
 
-BootstrapValidate uses [grunt](http://gruntjs.com) to simplify building process.
+BootstrapValidator uses [grunt](http://gruntjs.com) to simplify building process.
 
-From the BootstrapValidate root directory, execute the following commands to install the dependent packages (the administrator permission might be required):
+From the BootstrapValidator root directory, execute the following commands to install the dependent packages (the administrator permission might be required):
 
 ```bash
 $ npm install grunt --save-dev
@@ -258,4 +258,4 @@ Nguyen Huu Phuoc ([Email](mailto: phuoc@huuphuoc.me) / [Twitter](http://twitter.
 
 Copyright (c) 2013 Nguyen Huu Phuoc
 
-BootstrapValidate is licensed under the MIT license.
+bootstrapValidator is licensed under the MIT license.

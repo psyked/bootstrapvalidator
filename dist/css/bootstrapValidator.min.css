@@ -1,5 +1,5 @@
 /**
- * BootstrapValidate v0.1.0 (http://github.com/nghuuphuoc/bootstrapvalidate)
+ * BootstrapValidator v0.1.0 (http://github.com/nghuuphuoc/bootstrapvalidate)
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
@@ -9,4 +9,4 @@
  */
 
 
-.bootstrap-validate-form .help-block{margin-bottom:0}
+.bootstrap-validator-form .help-block{margin-bottom:0}

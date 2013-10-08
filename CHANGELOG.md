@@ -1,4 +1,4 @@
-# BootstrapValidate Change Log
+# Change Log
 
 v0.1.0
 

@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 
         banner: [
             '/**',
-            ' * BootstrapValidate v<%= pkg.version %> (<%= pkg.homepage %>)',
+            ' * BootstrapValidator v<%= pkg.version %> (<%= pkg.homepage %>)',
             ' *',
             ' * A jQuery plugin to validate form fields. Use with Bootstrap 3',
             ' *',
@@ -31,7 +31,7 @@ module.exports = function(grunt) {
                     banner: '<%= banner %>'
                 },
                 files: {
-                    '<%= buildDir %>/css/bootstrapvalidate.min.css': ['src/css/bootstrapvalidate.css']
+                    '<%= buildDir %>/css/bootstrapValidator.min.css': ['src/css/bootstrapValidator.css']
                 }
             }
         },
@@ -43,8 +43,8 @@ module.exports = function(grunt) {
                 banner: '<%= banner %>'
             },
             dist: {
-                src: ['src/js/bootstrapvalidate.js', 'src/js/validator/*.js'],
-                dest: '<%= buildDir %>/js/bootstrapvalidate.js'
+                src: ['src/js/bootstrapValidator.js', 'src/js/validator/*.js'],
+                dest: '<%= buildDir %>/js/bootstrapValidator.js'
             }
         },
 
@@ -53,8 +53,8 @@ module.exports = function(grunt) {
                 banner: '<%= banner %>'
             },
             build: {
-                src: ['<%= buildDir %>/js/bootstrapvalidate.js'],
-                dest: '<%= buildDir %>/js/bootstrapvalidate.min.js'
+                src: ['<%= buildDir %>/js/bootstrapValidator.js'],
+                dest: '<%= buildDir %>/js/bootstrapValidator.min.js'
             }
         },
 

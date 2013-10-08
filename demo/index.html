@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bootstrap Validate demo</title>
+    <title>BootstrapValidator demo</title>
 
     <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome-ie7.min.css">
-    <![endif]-->
-    <link rel="stylesheet" href="../vendor/font-awesome/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="../dist/css/bootstrapValidator.css"/>
 
     <script type="text/javascript" src="../vendor/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../dist/js/bootstrapvalidate.js"></script>
+    <script type="text/javascript" src="../dist/js/bootstrapValidator.js"></script>
 </head>
 <body>
     <div class="container">
@@ -66,12 +63,12 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#defaultForm').bootstrapValidate({
+    $('#defaultForm').bootstrapValidator({
         message: 'This value is not valid',
         fields: {
             username: {
                 message: 'The username is not valid',
-                validator: {
+                validators: {
                     notEmpty: {
                         message: 'The username is required and can\'t be empty'
                     },
@@ -87,7 +84,7 @@ $(document).ready(function() {
                 }
             },
             email: {
-                validator: {
+                validators: {
                     notEmpty: {
                         message: 'The email address is required and can\'t be empty'
                     },
@@ -97,7 +94,7 @@ $(document).ready(function() {
                 }
             },
             password: {
-                validator: {
+                validators: {
                     notEmpty: {
                         message: 'The password is required and can\'t be empty'
                     },
@@ -108,7 +105,7 @@ $(document).ready(function() {
                 }
             },
             confirmPassword: {
-                validator: {
+                validators: {
                     notEmpty: {
                         message: 'The confirm password is required and can\'t be empty'
                     },

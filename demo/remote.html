@@ -1,19 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Bootstrap Validate demo</title>
+    <title>BootstrapValidator demo</title>
 
     <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.css"/>
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome-ie7.min.css">
-    <![endif]-->
-    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css"/>
-
-    <link rel="stylesheet" href="/dist/css/bootstrapvalidate.css"/>
+    <link rel="stylesheet" href="/dist/css/bootstrapValidator.css"/>
 
     <script type="text/javascript" src="/vendor/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/dist/js/bootstrapvalidate.js"></script>
+    <script type="text/javascript" src="/dist/js/bootstrapValidator.js"></script>
 </head>
 <body>
     <div class="container">
@@ -21,28 +16,24 @@
             <!-- form: -->
             <section>
                 <div class="page-header">
-                    <h1>Bootstrap Validate plugin</h1>
+                    <h1>Sign up</h1>
                 </div>
 
                 <div class="col-lg-8 col-lg-offset-2">
                     <form id="defaultForm" method="post" action="remote.html" class="form-horizontal">
-                        <fieldset>
-                            <legend>Remote validator</legend>
-
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Username</label>
-                                <div class="col-lg-5">
-                                    <input type="text" class="form-control" name="username" />
-                                </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Username</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" name="username" autocomplete="off" />
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label class="col-lg-3 control-label">Email address</label>
-                                <div class="col-lg-5">
-                                    <input type="text" class="form-control" name="email" />
-                                </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Email address</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" name="email" autocomplete="off" />
                             </div>
-                        </fieldset>
+                        </div>
 
                         <div class="form-group">
                             <div class="col-lg-9 col-lg-offset-3">
@@ -58,12 +49,12 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#defaultForm').bootstrapValidate({
+    $('#defaultForm').bootstrapValidator({
         message: 'This value is not valid',
         fields: {
             username: {
                 message: 'The username is not valid',
-                validator: {
+                validators: {
                     notEmpty: {
                         message: 'The username is required and can\'t be empty'
                     },
@@ -74,7 +65,7 @@ $(document).ready(function() {
                 }
             },
             email: {
-                validator: {
+                validators: {
                     notEmpty: {
                         message: 'The email address is required and can\'t be empty'
                     },
