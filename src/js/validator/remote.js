@@ -28,10 +28,9 @@
                 data: data
             }).success(function(response) {
                 var isValid =  response.valid === true || response.valid === 'true';
-                if (!isValid) {
-                    validator.showError($field, 'remote');
-                }
                 validator.completeRequest($field, 'remote', isValid);
+            }).error(function(response) {
+                validator.completeRequest($field, 'remote', false);
             });
             validator.startRequest($field, 'remote', xhr);
 
