@@ -253,7 +253,7 @@ Look at the [Change Log](CHANGELOG.md)
 ## Author
 
 Nguyen Huu Phuoc ([Email](mailto: phuoc@huuphuoc.me) / [Twitter](http://twitter.com/nghuuphuoc) / [Github](http://github.com/nghuuphuoc))
-
+Vu Minh Khang ([Github](https://github.com/khangvm53))
 ## License
 
 Copyright (c) 2013 Nguyen Huu Phuoc
