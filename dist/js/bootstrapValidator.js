@@ -414,7 +414,6 @@
             }).success(function(response) {
                 var isValid =  response.valid === true || response.valid === 'true';
                 validator.completeRequest($field, 'remote', isValid);
-                console.log('success',validator.numPendingRequests);
             });
             validator.startRequest($field, 'remote', xhr);
 
