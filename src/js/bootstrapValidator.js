@@ -51,7 +51,7 @@
                                 that.validateField(field);
                             }
                         }
-                        if (!that.isValid()) {
+                        if (!that.isValid() || that.numPendingRequests == null) {
                             e.preventDefault();
                         }
                     }
@@ -181,6 +181,12 @@
         },
 
         completeRequest: function($field, validatorName, isValid) {
+            if (isValid === false ) {
+                this.showError($field, validatorName);
+            } else if (isValid === true ) {
+                this.removeError($field);
+            }
+
             var field = $field.attr('name');
 
             this.numPendingRequests--;
