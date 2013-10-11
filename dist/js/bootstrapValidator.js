@@ -47,7 +47,9 @@
                     that.formSubmited = true;
                     if (that.options.fields) {
                         for (var field in that.options.fields) {
-                            that.validateField(field);
+                            if(that.numPendingRequests > 0){
+                                that.validateField(field);
+                            }
                         }
                         if (!that.isValid()) {
                             e.preventDefault();
@@ -169,6 +171,7 @@
             }
 
             if (this.xhrRequests[field][validatorName]) {
+                this.numPendingRequests--;
                 this.xhrRequests[field][validatorName].abort();
             }
             this.xhrRequests[field][validatorName] = xhr;
@@ -396,6 +399,7 @@
          * @returns {string}
          */
         validate: function(validator, $field, options) {
+
             var value = $field.val(), name = $field.attr('name');
             var data = options.data;
             if (data == null) {
@@ -409,10 +413,8 @@
                 data: data
             }).success(function(response) {
                 var isValid =  response.valid === true || response.valid === 'true';
-                if (!isValid) {
-                    validator.showError($field, 'remote');
-                }
                 validator.completeRequest($field, 'remote', isValid);
+                console.log('success',validator.numPendingRequests);
             });
             validator.startRequest($field, 'remote', xhr);
 
