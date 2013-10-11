@@ -15,7 +15,7 @@
 
         this.invalidFields      = {};
         this.xhrRequests        = {};
-        this.numPendingRequests = 0;
+        this.numPendingRequests = null;
 
         this._init();
     };
@@ -47,7 +47,7 @@
                     that.formSubmited = true;
                     if (that.options.fields) {
                         for (var field in that.options.fields) {
-                            if(that.numPendingRequests > 0){
+                            if(that.numPendingRequests > 0 || that.numPendingRequests == null ){
                                 that.validateField(field);
                             }
                         }
@@ -164,6 +164,9 @@
 
         startRequest: function($field, validatorName, xhr) {
             var field = $field.attr('name');
+            if(this.numPendingRequests == null){
+                this.numPendingRequests = 0;
+            }
             this.numPendingRequests++;
             // Abort the previous request
             if (!this.xhrRequests[field]) {
