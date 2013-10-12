@@ -36,6 +36,34 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="col-lg-3 control-label">Password</label>
+                            <div class="col-lg-5">
+                                <input type="password" class="form-control" name="password" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Retype password</label>
+                            <div class="col-lg-5">
+                                <input type="password" class="form-control" name="confirmPassword" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Website</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" name="website" placeholder="http://" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Phone number</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" name="phoneNumber" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-lg-9 col-lg-offset-3">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
@@ -75,6 +103,42 @@ $(document).ready(function() {
                     remote: {
                         url: 'remote.php',
                         message: 'The email is not available'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required and can\'t be empty'
+                    },
+                    identical: {
+                        field: 'confirmPassword',
+                        message: 'The password and its confirm are not the same'
+                    }
+                }
+            },
+            confirmPassword: {
+                validators: {
+                    notEmpty: {
+                        message: 'The confirm password is required and can\'t be empty'
+                    },
+                    identical: {
+                        field: 'password',
+                        message: 'The password and its confirm are not the same'
+                    }
+                }
+            },
+            website: {
+                validators: {
+                    uri: {
+                        message: 'The input is not a valid URL'
+                    }
+                }
+            },
+            phoneNumber: {
+                validators: {
+                    digits: {
+                        message: 'The value can contain only digits'
                     }
                 }
             }
