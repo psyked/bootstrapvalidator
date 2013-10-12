@@ -50,8 +50,7 @@
                             if(that.numPendingRequests > 0 || that.numPendingRequests == null ){
                                 // Check that field is validated?
                                 var $field = that.getFieldElement(field);
-                                if( $field.attr('fieldIsValid') == 1 || $field.attr('fieldIsValid') == '1' ){
-                                }else{
+                                if( $field.attr('fieldIsValid') != 1 || $field.attr('fieldIsValid') != '1' ){
                                     that.validateField(field);
                                 }
                             }
