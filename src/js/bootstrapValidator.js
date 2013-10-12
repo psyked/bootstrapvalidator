@@ -48,10 +48,15 @@
                     if (that.options.fields) {
                         for (var field in that.options.fields) {
                             if(that.numPendingRequests > 0 || that.numPendingRequests == null ){
-                                that.validateField(field);
+                                // Check that field is validated?
+                                var $field = that.getFieldElement(field);
+                                if( $field.attr('fieldIsValid') == 1 || $field.attr('fieldIsValid') == '1' ){
+                                }else{
+                                    that.validateField(field);
+                                }
                             }
                         }
-                        if (!that.isValid() || that.numPendingRequests == null) {
+                        if (!that.isValid()) {
                             e.preventDefault();
                         }
                     }
@@ -164,6 +169,9 @@
 
         startRequest: function($field, validatorName, xhr) {
             var field = $field.attr('name');
+
+            //when request start, I assigned arbitrary attribute fieldIsValid = 0
+            $field.attr('fieldIsValid',0);
             if(this.numPendingRequests == null){
                 this.numPendingRequests = 0;
             }
@@ -185,19 +193,26 @@
                 this.showError($field, validatorName);
             } else if (isValid === true ) {
                 this.removeError($field);
+
+                /* When request complete and that field is validated,
+                  I assigned arbitrary attribute fieldIsValid = 1
+                */
+                $field.attr('fieldIsValid', 1);
             }
 
             var field = $field.attr('name');
 
-            this.numPendingRequests--;
-            if (this.numPendingRequests < 0) {
-                this.numPendingRequests = 0;
-            }
             delete this.xhrRequests[field][validatorName];
+
+            this.numPendingRequests--;
+            if (this.numPendingRequests <= 0) {
+                this.numPendingRequests = 0;
+                this.$form.submit();
+            }
         },
 
         isValid: function() {
-            if (this.numPendingRequests > 0) {
+            if (this.numPendingRequests > 0 || this.numPendingRequests == null ) {
                 return false;
             }
             for (var field in this.invalidFields) {
