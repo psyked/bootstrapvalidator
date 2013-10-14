@@ -1,5 +1,5 @@
 /**
- * BootstrapValidator v0.1.0 (http://github.com/nghuuphuoc/bootstrapvalidator)
+ * BootstrapValidator v0.1.1-dev (http://github.com/nghuuphuoc/bootstrapvalidator)
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
@@ -119,7 +119,9 @@
                         }
                     }
                 }
-                $small.addClass('col-lg-offset-' + offset).addClass('col-lg-' + parseInt(12 - offset));
+                if (offset) {
+                    $small.addClass('col-lg-offset-' + offset).addClass('col-lg-' + parseInt(12 - offset));
+                }
             } else {
                 $field.data('bootstrapValidator.error', helpBlock.eq(0));
             }

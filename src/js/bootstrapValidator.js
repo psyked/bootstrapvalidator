@@ -119,7 +119,9 @@
                         }
                     }
                 }
-                $small.addClass('col-lg-offset-' + offset).addClass('col-lg-' + parseInt(12 - offset));
+                if (offset) {
+                    $small.addClass('col-lg-offset-' + offset).addClass('col-lg-' + parseInt(12 - offset));
+                }
             } else {
                 $field.data('bootstrapValidator.error', helpBlock.eq(0));
             }
