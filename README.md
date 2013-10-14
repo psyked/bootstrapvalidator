@@ -36,11 +36,14 @@ Call the plugin to validate the form as following:
 ```javascript
 $(document).ready(function() {
     $(<form Selector>).bootstrapValidator({
-        message: <The default error message for all fields>,
-        fields: {
+        message: ..             // The default error message for all fields
+                                // You can specify the error message for any fields
+        submitButtons: ...      // The submit buttons selector
+                                // These buttons will be disabled when the form input are invalid
+        fields: {               // The fields which need to be validated
             ...
-            <fieldName>: {
-                message: <The default error message for this field>,
+            <fieldName>: {      // The field name
+                message: ...    // The default error message for this field,
                 validators: {
                     ...
                     <validatorName>: <validatorOptions>
@@ -75,147 +78,67 @@ notEmpty                                | Check if the value is empty
 uri                                     | Validate an URL address
 usZipCode                               | Validate a US zip code
 
+The validator options are described in the following section:
+
 ### Between Validator
 
-```javascript
-$(document).ready(function() {
-    $(<form Selector>).bootstrapValidator({
-        fields: {
-            <fieldName>: {
-                validators: {
-                    between: {
-                        message: ...,   // [required] The error message
-                        min: ...        // [required] The lower value in the range
-                        max: ...,       // [required] The upper value in the range
-                        inclusive: ...  // [optional] Can be true or false. If true, the input value must be in the range strictly
-                    }
-                }
-            }
-        }
-    }
-});
-```
+Option name | Default | Description
+------------|---------|------------
+message     | n/a     | The error message
+min         | n/a     | The lower value in the range. This option is required
+max         | n/a     | The upper value in the range. This option is required
+inclusive   | true    | Can be true or false. If true, the input value must be in the range strictly
 
 ### GreaterThan Validator
 
-```javascript
-$(document).ready(function() {
-    $(<form Selector>).bootstrapValidator({
-        fields: {
-            <fieldName>: {
-                validators: {
-                    greaterThan: {
-                        message: ...,   // [required] The error message
-                        value: ...,     // [required] The number used to compare to
-                        inclusive: ...  // [optional] Can be true or false
-                                        // If true, the input value must be greater than the comparison one
-                                        // If false, the input value must be greater than or equal to the comparison one
-                    }
-                }
-            }
-        }
-    }
-});
-```
+Option name | Default | Description
+------------|---------|------------
+message     | n/a     | The error message
+value       | n/a     | The number to make a comparison to. This option is required
+inclusive   | n/a     | Can be true or false
+            |         | If true, the input value must be greater than the comparison one
+            |         | If false, the input value must be greater than or equal to the comparison one
 
 ### Identical Validator
 
-```javascript
-$(document).ready(function() {
-    $(<form Selector>).bootstrapValidator({
-        fields: {
-            <fieldName>: {
-                validators: {
-                    identical: {
-                        message: ...,   // [required] The error message
-                        field: ...      // [required] The name of field that will be used to compare with current one
-                    }
-                }
-            }
-        }
-    }
-});
-```
+Option name | Default | Description
+------------|---------|------------
+message     | n/a     | The error message
+field       | n/a     | The name of field that will be used to compare with current one. This option is required
 
 ### LessThan Validator
 
-```javascript
-$(document).ready(function() {
-    $(<form Selector>).bootstrapValidator({
-        fields: {
-            <fieldName>: {
-                validators: {
-                    lessThan: {
-                        message: ...,   // [required] The error message
-                        value: ...,     // [required] The number used to compare to
-                        inclusive: ...  // [optional] Can be true or false
-                    }
-                }
-            }
-        }
-    }
-});
-```
+Option name | Default | Description
+------------|---------|------------
+message     | n/a     | The error message
+value       | n/a     | The number to make a comparison to. This option is required
+inclusive   | n/a     | Can be true or false
+            |         | If true, the input value must be less than the comparison one
+            |         | If false, the input value must be less than or equal to the comparison one
 
 ### Regexp Validator
 
-```javascript
-$(document).ready(function() {
-    $(<form Selector>).bootstrapValidator({
-        fields: {
-            <fieldName>: {
-                validators: {
-                    regexp: {
-                        message: ...,   // [required] The error message
-                        regexp: ...     // [required] The regular expression
-                    }
-                }
-            }
-        }
-    }
-});
-```
+Option name | Default | Description
+------------|---------|------------
+message     | n/a     | The error message
+regexp      | n/a     | The Javascript regular expression. This option is required
 
 ### Remote Validator
 
-```javascript
-$(document).ready(function() {
-    $(<form Selector>).bootstrapValidator({
-        fields: {
-            <fieldName>: {
-                validators: {
-                    remote: {
-                        message: ...,   // [required] The error message
-                        url: ...,       // [required] The remote URL
-                                        // The remote URL must response an encoded JSON of array containing the 'valid' key
-                    }
-                }
-            }
-        }
-    }
-});
-```
+Option name | Default | Description
+------------|---------|------------
+message     | n/a     | The error message
+url         | n/a     | The remote URL.
+            |         | The remote URL must response an encoded JSON of array containing the 'valid' key
+            |         | This option is required
 
 ### StringLength Validator
 
-```javascript
-$(document).ready(function() {
-    $(<form Selector>).bootstrapValidator({
-        fields: {
-            <fieldName>: {
-                validators: {
-                    stringLength: {
-                        message: ...,   // [required] The error message
-                        // One of two min/max options must be defined
-                        min: ...,       // The minimum length
-                        max: ...        // The maximum length
-                    }
-                }
-            }
-        }
-    }
-});
-```
+Option name | Default | Description
+------------|---------|------------
+message     | n/a     | The error message
+min         | n/a     | The minimum length
+max         | n/a     | The maximum length. One of 'min', 'max' options is required
 
 ## Build
 
@@ -254,7 +177,7 @@ Look at the [Change Log](CHANGELOG.md)
 
 Nguyen Huu Phuoc ([Email](mailto: phuoc@huuphuoc.me) / [Twitter](http://twitter.com/nghuuphuoc) / [Github](http://github.com/nghuuphuoc))
 
-Vu Minh Khang ([Github](https://github.com/khangvm53))
+Vu Minh Khang ([Email](mailto: khangvm530@gmail.com) / [Github](https://github.com/khangvm53))
 
 ## License
 
