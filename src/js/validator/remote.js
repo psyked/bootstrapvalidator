@@ -15,9 +15,7 @@
          * @returns {string}
          */
         validate: function(validator, $field, options) {
-
-            var value = $field.val(), name = $field.attr('name');
-            var data = options.data;
+            var value = $field.val(), name = $field.attr('name'), data = options.data;
             if (data == null) {
                 data       = {};
                 data[name] = value;
@@ -29,10 +27,8 @@
                 data: data
             }).success(function(response) {
                 var isValid =  response.valid === true || response.valid === 'true';
-
                 validator.completeRequest($field, 'remote', isValid);
             });
-
             validator.startRequest($field, 'remote', xhr);
 
             return 'pending';

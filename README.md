@@ -1,9 +1,10 @@
-# bootstrapValidator
+# BootstrapValidator
 
 A jQuery plugin to validate form fields. Use with Bootstrap 3
 
 ## Features
 
+* Built from scratch
 * Many built-in [validators](#validators)
 
 ## Required
@@ -42,7 +43,6 @@ $(document).ready(function() {
 
         // The submit buttons selector
         // These buttons will be disabled when the form input are invalid
-
         submitButtons: ...,
 
         // The fields which need to be validated
@@ -187,10 +187,12 @@ Look at the [Change Log](CHANGELOG.md)
 
 Nguyen Huu Phuoc ([Email](mailto: phuoc@huuphuoc.me) / [Twitter](http://twitter.com/nghuuphuoc) / [Github](http://github.com/nghuuphuoc))
 
-Vu Minh Khang ([Email](mailto: khangvm530@gmail.com) / [Github](https://github.com/khangvm53))
+Big thanks to the contributors:
+
+* Vu Minh Khang ([Email](mailto: khangvm530@gmail.com) / [Github](https://github.com/khangvm53))
 
 ## License
 
 Copyright (c) 2013 Nguyen Huu Phuoc
 
-bootstrapValidator is licensed under the MIT license.
+BootstrapValidator is licensed under the MIT license.
