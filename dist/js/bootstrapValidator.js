@@ -50,6 +50,8 @@
 
             var that = this;
             this.$form
+                // Disable client side validation in HTML 5
+                .attr('novalidate', 'novalidate')
                 .addClass(this.options.elementClass)
                 .on('submit', function(e) {
                     that.formSubmited = true;
