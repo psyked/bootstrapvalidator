@@ -36,14 +36,24 @@ Call the plugin to validate the form as following:
 ```javascript
 $(document).ready(function() {
     $(<form Selector>).bootstrapValidator({
-        message: ..             // The default error message for all fields
-                                // You can specify the error message for any fields
-        submitButtons: ...      // The submit buttons selector
-                                // These buttons will be disabled when the form input are invalid
-        fields: {               // The fields which need to be validated
+        // The default error message for all fields
+        // You can specify the error message for any fields
+        message: ...,
+
+        // The submit buttons selector
+        // These buttons will be disabled when the form input are invalid
+
+        submitButtons: ...,
+
+        // The fields which need to be validated
+        fields: {
             ...
-            <fieldName>: {      // The field name
-                message: ...    // The default error message for this field,
+            // The field name
+            <fieldName>: {
+                // The default error message for this field
+                message: ...,
+
+                // Array of validators
                 validators: {
                     ...
                     <validatorName>: <validatorOptions>
@@ -91,13 +101,13 @@ inclusive   | true    | Can be true or false. If true, the input value must be i
 
 ### GreaterThan Validator
 
-Option name | Default | Description
-------------|---------|------------
-message     | n/a     | The error message
-value       | n/a     | The number to make a comparison to. This option is required
-inclusive   | n/a     | Can be true or false
-            |         | If true, the input value must be greater than the comparison one
-            |         | If false, the input value must be greater than or equal to the comparison one
+| Option name | Default | Description
+|-------------|---------|------------
+| message     | n/a     | The error message
+| value       | n/a     | The number to make a comparison to. This option is required
+| inclusive   | n/a     | Can be true or false
+|             |         | If true, the input value must be greater than the comparison one
+|             |         | If false, the input value must be greater than or equal to the comparison one
 
 ### Identical Validator
 
@@ -108,13 +118,13 @@ field       | n/a     | The name of field that will be used to compare with curr
 
 ### LessThan Validator
 
-Option name | Default | Description
-------------|---------|------------
-message     | n/a     | The error message
-value       | n/a     | The number to make a comparison to. This option is required
-inclusive   | n/a     | Can be true or false
-            |         | If true, the input value must be less than the comparison one
-            |         | If false, the input value must be less than or equal to the comparison one
+| Option name | Default | Description
+| ------------|---------|------------
+| message     | n/a     | The error message
+| value       | n/a     | The number to make a comparison to. This option is required
+| inclusive   | n/a     | Can be true or false
+|             |         | If true, the input value must be less than the comparison one
+|             |         | If false, the input value must be less than or equal to the comparison one
 
 ### Regexp Validator
 
@@ -125,12 +135,12 @@ regexp      | n/a     | The Javascript regular expression. This option is requir
 
 ### Remote Validator
 
-Option name | Default | Description
-------------|---------|------------
-message     | n/a     | The error message
-url         | n/a     | The remote URL.
-            |         | The remote URL must response an encoded JSON of array containing the 'valid' key
-            |         | This option is required
+| Option name | Default | Description
+| ------------|---------|------------
+| message     | n/a     | The error message
+| url         | n/a     | The remote URL.
+|             |         | The remote URL must response an encoded JSON of array containing the 'valid' key
+|             |         | This option is required
 
 ### StringLength Validator
 
