@@ -76,6 +76,7 @@ Below is the list of built-in validators sorted in alphabetical order:
 Validator name                          | Description
 ----------------------------------------|------------
 [between](#between-validator)           | Check if the input value is between (strictly or not) two given numbers
+[different](#different-validator)       | Return true if the input value is different with given field's value
 digits                                  | Return true if the value contains only digits
 emailAddress                            | Validate an email address
 [greaterThan](#greaterthan-validator)   | Return true if the value is greater than or equals to given number
@@ -91,6 +92,8 @@ usZipCode                               | Validate a US zip code
 
 The validator options are described in the following section:
 
+(*the option masked with (*) is required*)
+
 ### Between Validator
 
 Option name | Default | Description
@@ -99,6 +102,13 @@ message     | n/a     | The error message
 min         | n/a     | The lower value in the range. This option is required
 max         | n/a     | The upper value in the range. This option is required
 inclusive   | true    | Can be true or false. If true, the input value must be in the range strictly
+
+### Different Validator
+
+Option name | Default | Description
+------------|---------|------------
+message     | n/a     | The error message
+field (*)   | n/a     | The name of field that will be used to compare with current one
 
 ### GreaterThan Validator
 

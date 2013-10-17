@@ -2,6 +2,7 @@
 
 __v0.2.0__
 * Add custom submit handler (using ```submitHandler``` option)
+* Add ```different``` validator
 
 __v0.1.1 (2013-10-17)__
 * Add ```submitButtons``` option

@@ -80,6 +80,10 @@ $(document).ready(function() {
                     regexp: {
                         regexp: /^[a-zA-Z0-9_\.]+$/,
                         message: 'The username can only consist of alphabetical, number, dot and underscore'
+                    },
+                    different: {
+                        field: 'password',
+                        message: 'The username and password can\'t be the same as each other'
                     }
                 }
             },
@@ -101,6 +105,10 @@ $(document).ready(function() {
                     identical: {
                         field: 'confirmPassword',
                         message: 'The password and its confirm are not the same'
+                    },
+                    different: {
+                        field: 'username',
+                        message: 'The password can\'t be the same as username'
                     }
                 }
             },
@@ -112,6 +120,10 @@ $(document).ready(function() {
                     identical: {
                         field: 'password',
                         message: 'The password and its confirm are not the same'
+                    },
+                    different: {
+                        field: 'username',
+                        message: 'The password can\'t be the same as username'
                     }
                 }
             }
