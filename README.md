@@ -46,6 +46,14 @@ $(document).ready(function() {
         // These buttons will be disabled when the form input are invalid
         submitButtons: ...,
 
+        // Custom submit handler
+        // The handler has two arguments
+        // - The ```validator``` is the instance of ```BootstrapValidator```
+        // - The ```form``` is jQuery object representing the current form
+        // By default, ```submitHandler``` is ```null```
+        submitHandler: function(validator, form) {
+        },
+
         // The fields which need to be validated
         fields: {
             ...
@@ -92,15 +100,15 @@ usZipCode                               | Validate a US zip code
 
 The validator options are described in the following section:
 
-(*the option masked with (*) is required*)
+**the option masked with * is required**
 
 ### Between Validator
 
 Option name | Default | Description
 ------------|---------|------------
 message     | n/a     | The error message
-min         | n/a     | The lower value in the range. This option is required
-max         | n/a     | The upper value in the range. This option is required
+min (*)     | n/a     | The lower value in the range
+max (*)     | n/a     | The upper value in the range
 inclusive   | true    | Can be true or false. If true, the input value must be in the range strictly
 
 ### Different Validator
@@ -115,8 +123,8 @@ field (*)   | n/a     | The name of field that will be used to compare with curr
 | Option name | Default | Description
 |-------------|---------|------------
 | message     | n/a     | The error message
-| value       | n/a     | The number to make a comparison to. This option is required
-| inclusive   | n/a     | Can be true or false
+| value (*)   | n/a     | The number to make a comparison to
+| inclusive   | false   | Can be true or false
 |             |         | If true, the input value must be greater than the comparison one
 |             |         | If false, the input value must be greater than or equal to the comparison one
 
@@ -125,15 +133,15 @@ field (*)   | n/a     | The name of field that will be used to compare with curr
 Option name | Default | Description
 ------------|---------|------------
 message     | n/a     | The error message
-field       | n/a     | The name of field that will be used to compare with current one. This option is required
+field (*)   | n/a     | The name of field that will be used to compare with current one
 
 ### LessThan Validator
 
 | Option name | Default | Description
 | ------------|---------|------------
 | message     | n/a     | The error message
-| value       | n/a     | The number to make a comparison to. This option is required
-| inclusive   | n/a     | Can be true or false
+| value (*)   | n/a     | The number to make a comparison to
+| inclusive   | false   | Can be true or false
 |             |         | If true, the input value must be less than the comparison one
 |             |         | If false, the input value must be less than or equal to the comparison one
 
@@ -142,16 +150,14 @@ field       | n/a     | The name of field that will be used to compare with curr
 Option name | Default | Description
 ------------|---------|------------
 message     | n/a     | The error message
-regexp      | n/a     | The Javascript regular expression. This option is required
+regexp (*)  | n/a     | The Javascript regular expression
 
 ### Remote Validator
 
-| Option name | Default | Description
-| ------------|---------|------------
-| message     | n/a     | The error message
-| url         | n/a     | The remote URL.
-|             |         | The remote URL must response an encoded JSON of array containing the 'valid' key
-|             |         | This option is required
+Option name | Default | Description
+------------|---------|------------
+message     | n/a     | The error message
+url (*)     | n/a     | The remote URL that responses an encoded JSON of array containing the ```valid``` key
 
 ### StringLength Validator
 
@@ -159,7 +165,7 @@ Option name | Default | Description
 ------------|---------|------------
 message     | n/a     | The error message
 min         | n/a     | The minimum length
-max         | n/a     | The maximum length. One of 'min', 'max' options is required
+max         | n/a     | The maximum length. One of ```min```, ```max``` options is required
 
 ## Build
 
