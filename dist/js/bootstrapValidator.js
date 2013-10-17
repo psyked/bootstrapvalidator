@@ -14,7 +14,7 @@
         this.options = $.extend({}, BootstrapValidator.DEFAULT_OPTIONS, options);
 
         if ('disabled' == this.options.live) {
-            // The submit buttons have to enabled if the live validating is disabled
+            // Don't disable the submit buttons if the live validating is disabled
             this.options.submitButtons = null;
         }
 
