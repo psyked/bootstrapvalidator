@@ -1,6 +1,7 @@
 # Change Log
 
-v0.1.1
+v0.1.1 (2013-10-17)
+* Add submitButtons option
 * #16: Disable client side validation in HTML 5
 * #17: Support default Bootstrap form without labels
 * #19: Support select box validator
