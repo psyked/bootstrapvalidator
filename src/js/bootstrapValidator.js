@@ -129,7 +129,7 @@
             }
 
             var type  = $field.attr('type'),
-                event = ('checkbox' == type || 'radio' == type) ? 'change' : 'keyup';
+                event = ('checkbox' == type || 'radio' == type || 'SELECT' == $field.get(0).tagName) ? 'change' : 'keyup';
             $field.on(event, function() {
                 that.formSubmited = false;
                 that.validateField(field);
