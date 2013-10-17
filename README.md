@@ -16,9 +16,9 @@ A jQuery plugin to validate form fields. Use with Bootstrap 3
 
 You can see the live demo here:
 
-* [Sample demo](https://rawgithub.com/nghuuphuoc/bootstrapvalidate/master/demo/index.html)
-* [Validator examples](https://rawgithub.com/nghuuphuoc/bootstrapvalidate/master/demo/validators.html)
-* [Custom submit handler](https://rawgithub.com/nghuuphuoc/bootstrapvalidate/master/demo/submitHandler.html)
+* [Sample demo](https://rawgithub.com/nghuuphuoc/bootstrapvalidator/master/demo/index.html)
+* [Validator examples](https://rawgithub.com/nghuuphuoc/bootstrapvalidator/master/demo/validators.html)
+* [Custom submit handler](https://rawgithub.com/nghuuphuoc/bootstrapvalidator/master/demo/submitHandler.html)
 
 ## Usage
 
