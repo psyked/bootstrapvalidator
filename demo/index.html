@@ -50,6 +50,13 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="col-lg-3 control-label" id="captchaOperation"></label>
+                            <div class="col-lg-2">
+                                <input type="text" class="form-control" name="captcha" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-lg-9 col-lg-offset-3">
                                 <button type="submit" class="btn btn-primary">Sign up</button>
                             </div>
@@ -63,6 +70,12 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+    // Generate a simple captcha
+    function randomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+    $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
+
     $('#defaultForm').bootstrapValidator({
         message: 'This value is not valid',
         fields: {
@@ -124,6 +137,18 @@ $(document).ready(function() {
                     different: {
                         field: 'username',
                         message: 'The password can\'t be the same as username'
+                    }
+                }
+            },
+            captcha: {
+                validators: {
+                    callback: {
+                        message: 'Wrong answer',
+                        callback: function(value, validator) {
+                            var items = $('#captchaOperation').html().split(' '), sum = parseInt(items[0]) + parseInt(items[2]);
+                            console.log(sum);
+                            return value == sum;
+                        }
                     }
                 }
             }

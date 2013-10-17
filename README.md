@@ -84,6 +84,7 @@ Below is the list of built-in validators sorted in alphabetical order:
 Validator name                          | Description
 ----------------------------------------|------------
 [between](#between-validator)           | Check if the input value is between (strictly or not) two given numbers
+[callback](#callback-validator)         | Return the validity from a callback method
 creditCard                              | Validate a credit card number
 [different](#different-validator)       | Return true if the input value is different with given field's value
 digits                                  | Return true if the value contains only digits
@@ -111,6 +112,25 @@ message     | n/a     | The error message
 min (*)     | n/a     | The lower value in the range
 max (*)     | n/a     | The upper value in the range
 inclusive   | true    | Can be true or false. If true, the input value must be in the range strictly
+
+### Callback Validator
+
+Option name  | Default | Description
+-------------|---------|------------
+message      | n/a     | The error message
+callback (*) | n/a     | The callback method
+
+The callback method must follow the format below:
+
+```
+function(fieldValue, validator) {
+    // fieldValue is the value of field
+    // validator is instance of BootstrapValidator
+
+    // Check the field validity
+    // return true or false
+}
+```
 
 ### Different Validator
 

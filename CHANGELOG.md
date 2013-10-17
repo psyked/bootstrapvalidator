@@ -2,6 +2,8 @@
 
 __v0.2.0__
 * Add custom submit handler (using ```submitHandler``` option)
+* Add ```callback``` validator
+* Add ```creditCard``` validator
 * Add ```different``` validator
 
 __v0.1.1 (2013-10-17)__
