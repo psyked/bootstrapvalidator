@@ -1,5 +1,5 @@
 /**
- * BootstrapValidator v0.1.1 (http://github.com/nghuuphuoc/bootstrapvalidator)
+ * BootstrapValidator v0.2.0-dev (http://github.com/nghuuphuoc/bootstrapvalidator)
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
@@ -32,6 +32,15 @@
         // The submit buttons selector
         // These buttons will be disabled when the form input are invalid
         submitButtons: 'button[type="submit"]',
+
+        // The custom submit handler
+        // It will prevent the form from the default submitting
+        //
+        //  submitHandler: function(validator, form) {
+        //      - validator is the BootstrapValidator instance
+        //      - form is the jQuery object present the current form
+        //  }
+        submitHandler: null,
 
         // Map the field name with validator rules
         fields: null
@@ -68,6 +77,11 @@
                         if (!that.isValid()) {
                             that.$form.find(that.options.submitButtons).attr('disabled', 'disabled');
                             e.preventDefault();
+                        } else {
+                            if (that.options.submitHandler && 'function' == typeof that.options.submitHandler) {
+                                that.options.submitHandler.call(that, that, that.$form);
+                                return false;
+                            }
                         }
                     }
                 });
@@ -260,7 +274,11 @@
             if (this.numPendingRequests <= 0) {
                 this.numPendingRequests = 0;
                 if (this.formSubmited) {
-                    this.$form.submit();
+                    if (this.options.submitHandler && 'function' == typeof this.options.submitHandler) {
+                        this.options.submitHandler.call(this, this, this.$form);
+                    } else {
+                        this.$form.submit();
+                    }
                 }
             }
         },
