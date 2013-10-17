@@ -11,7 +11,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            return value.match(options.regexp);
+            return options.regexp.test(value);
         }
     };
 }(window.jQuery));

@@ -5,6 +5,7 @@ __v0.2.0__
 * Add ```callback``` validator
 * Add ```creditCard``` validator
 * Add ```different``` validator
+* #25: The ```regexp``` validator does not work
 
 __v0.1.1 (2013-10-17)__
 * Add ```submitButtons``` option
