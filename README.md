@@ -54,6 +54,12 @@ $(document).ready(function() {
         submitHandler: function(validator, form) {
         },
 
+        // Live validating. Can be one of 3 values:
+        // - enabled: The plugin validates fields as soon as they are changed
+        // - disabled: Disable the live validating. The error messages are only shown after the form is submitted
+        // - submitted: The live validating is enabled after the form is submitted
+        live: 'enabled',
+
         // The fields which need to be validated
         fields: {
             ...

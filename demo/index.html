@@ -78,6 +78,7 @@ $(document).ready(function() {
 
     $('#defaultForm').bootstrapValidator({
         message: 'This value is not valid',
+        live: 'disabled',
         fields: {
             username: {
                 message: 'The username is not valid',
@@ -146,7 +147,6 @@ $(document).ready(function() {
                         message: 'Wrong answer',
                         callback: function(value, validator) {
                             var items = $('#captchaOperation').html().split(' '), sum = parseInt(items[0]) + parseInt(items[2]);
-                            console.log(sum);
                             return value == sum;
                         }
                     }

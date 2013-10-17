@@ -13,6 +13,11 @@
         this.$form   = $(form);
         this.options = $.extend({}, BootstrapValidator.DEFAULT_OPTIONS, options);
 
+        if ('disabled' == this.options.live) {
+            // The submit buttons have to enabled if the live validating is disabled
+            this.options.submitButtons = null;
+        }
+
         this.invalidFields      = {};
         this.xhrRequests        = {};
         this.numPendingRequests = null;
@@ -41,6 +46,12 @@
         //      - form is the jQuery object present the current form
         //  }
         submitHandler: null,
+
+        // Live validating. Can be one of 3 values:
+        // - enabled: The plugin validates fields as soon as they are changed
+        // - disabled: Disable the live validating. The error messages are only shown after the form is submitted
+        // - submitted: The live validating is enabled after the form is submitted
+        live: 'enabled',
 
         // Map the field name with validator rules
         fields: null
@@ -76,6 +87,11 @@
                         }
                         if (!that.isValid()) {
                             that.$form.find(that.options.submitButtons).attr('disabled', 'disabled');
+                            if ('submitted' == that.options.live) {
+                                that.options.live = 'enabled';
+                                that._setLiveValidating();
+                            }
+
                             e.preventDefault();
                         } else {
                             if (that.options.submitHandler && 'function' == typeof that.options.submitHandler) {
@@ -88,6 +104,33 @@
 
             for (var field in this.options.fields) {
                 this._initField(field);
+            }
+
+            this._setLiveValidating();
+        },
+
+        /**
+         * Enable live validating
+         */
+        _setLiveValidating: function() {
+            if ('enabled' == this.options.live) {
+                var that = this;
+                // Since this should be called once, I have to disable the live validating mode
+                this.options.live = 'disabled';
+
+                for (var field in this.options.fields) {
+                    (function(field) {
+                        var $field = that.getFieldElement(field);
+                        if ($field) {
+                            var type  = $field.attr('type'),
+                                event = ('checkbox' == type || 'radio' == type || 'SELECT' == $field.get(0).tagName) ? 'change' : 'keyup';
+                            $field.on(event, function() {
+                                that.formSubmited = false;
+                                that.validateField(field);
+                            });
+                        }
+                    })(field);
+                }
             }
         },
 
@@ -141,13 +184,6 @@
             } else {
                 $field.data('bootstrapValidator.error', helpBlock.eq(0));
             }
-
-            var type  = $field.attr('type'),
-                event = ('checkbox' == type || 'radio' == type || 'SELECT' == $field.get(0).tagName) ? 'change' : 'keyup';
-            $field.on(event, function() {
-                that.formSubmited = false;
-                that.validateField(field);
-            });
         },
 
         /**
