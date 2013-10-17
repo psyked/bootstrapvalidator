@@ -48,9 +48,9 @@ $(document).ready(function() {
 
         // Custom submit handler
         // The handler has two arguments
-        // - The ```validator``` is the instance of ```BootstrapValidator```
-        // - The ```form``` is jQuery object representing the current form
-        // By default, ```submitHandler``` is ```null```
+        // - validator is the instance of BootstrapValidator
+        // - form is jQuery object representing the current form
+        // By default, submitHandler is null
         submitHandler: function(validator, form) {
         },
 
@@ -84,6 +84,7 @@ Below is the list of built-in validators sorted in alphabetical order:
 Validator name                          | Description
 ----------------------------------------|------------
 [between](#between-validator)           | Check if the input value is between (strictly or not) two given numbers
+creditCard                              | Validate a credit card number
 [different](#different-validator)       | Return true if the input value is different with given field's value
 digits                                  | Return true if the value contains only digits
 emailAddress                            | Validate an email address
@@ -100,7 +101,7 @@ usZipCode                               | Validate a US zip code
 
 The validator options are described in the following section:
 
-**the option masked with * is required**
+(**The options masked with * are required**)
 
 ### Between Validator
 
