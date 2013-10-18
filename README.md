@@ -128,7 +128,7 @@ callback (*) | n/a     | The callback method
 
 The callback method must follow the format below:
 
-```
+```javascript
 function(fieldValue, validator) {
     // fieldValue is the value of field
     // validator is instance of BootstrapValidator
