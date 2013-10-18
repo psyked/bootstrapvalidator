@@ -164,7 +164,7 @@
                 if (label = $parent.find('label').get(0)) {
                     cssClasses = $(label).attr('class').split(' ');
                     for (var i = 0; i < cssClasses.length; i++) {
-                        if (cssClasses[i].substr(0, 7) == 'col-lg-') {
+                        if (/^col-(sm|md|lg)-\d+$/.test(cssClasses[i])) {
                             offset = cssClasses[i].substr(7);
                             break;
                         }
@@ -172,7 +172,7 @@
                 } else {
                     cssClasses = $parent.children().eq(0).attr('class').split(' ');
                     for (var i = 0; i < cssClasses.length; i++) {
-                        if (cssClasses[i].substr(0, 14) == 'col-lg-offset-') {
+                        if (/^col-(sm|md|lg)-offset-\d+$/.test(cssClasses[i])) {
                             offset = cssClasses[i].substr(14);
                             break;
                         }
