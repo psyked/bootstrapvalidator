@@ -160,12 +160,13 @@
 
                 // Calculate the number of columns of the label/field element
                 // Then set offset to the help block element
-                var label, cssClasses, offset;
+                var label, cssClasses, offset, size;
                 if (label = $parent.find('label').get(0)) {
                     cssClasses = $(label).attr('class').split(' ');
                     for (var i = 0; i < cssClasses.length; i++) {
                         if (/^col-(xs|sm|md|lg)-\d+$/.test(cssClasses[i])) {
                             offset = cssClasses[i].substr(7);
+                            size   = cssClasses[i].substr(4, 2);
                             break;
                         }
                     }
@@ -174,12 +175,14 @@
                     for (var i = 0; i < cssClasses.length; i++) {
                         if (/^col-(xs|sm|md|lg)-offset-\d+$/.test(cssClasses[i])) {
                             offset = cssClasses[i].substr(14);
+                            size   = cssClasses[i].substr(4, 2);
                             break;
                         }
                     }
                 }
-                if (offset) {
-                    $small.addClass('col-lg-offset-' + offset).addClass('col-lg-' + parseInt(12 - offset));
+                if (size && offset) {
+                    $small.addClass(['col-', size, '-offset-', offset].join(''))
+                          .addClass(['col-', size, '-', 12 - offset].join(''));
                 }
             } else {
                 $field.data('bootstrapValidator.error', helpBlock.eq(0));
