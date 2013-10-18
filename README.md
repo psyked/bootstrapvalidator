@@ -194,6 +194,14 @@ message     | n/a     | The error message
 min         | n/a     | The minimum length
 max         | n/a     | The maximum length. One of ```min```, ```max``` options is required
 
+## Install
+
+You can use [bower](http://bower.io) to install BootstrapValidator:
+
+```bash
+$ bower install bootstrapValidator
+```
+
 ## Build
 
 BootstrapValidator uses [grunt](http://gruntjs.com) to simplify building process.
