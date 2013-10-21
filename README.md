@@ -207,7 +207,7 @@ $ bower install bootstrapValidator
 
 ## Write new validator
 
-A validator have to follow the syntax:
+A validator has to follow the syntax:
 
 ```javascript
 (function($) {
@@ -233,7 +233,7 @@ A validator have to follow the syntax:
 ```
 
 ```<validatorName>``` is the validator name.
-Since the validators are distinct by the names, ```<validatorName>``` has to be different with [built-in validators](#validators)
+Since the validators are distinct by the names, ```<validatorName>``` has to be different with [built-in validators](#validators).
 
 To apply the validator to particular field:
 
@@ -242,14 +242,15 @@ $(form).bootstrapValidator({
     fields: {
         <fieldName>: {
             // Replace <validatorName> with the name of validator
-            // <validatorOptions> will be passed as third parameter of the validate(validator, $field, options) method
+            // <validatorOptions> will be passed as third parameter of the
+            // validate(validator, $field, options) method
             <validatorName>: <validatorOptions>
         }
     }
 });
 ```
 
-You can look at the source of built-in validators in [```src/js/validator```](src/js/validator) directory.
+To see how built-in validators are developed, you can look at their sources located at the [```src/js/validator```](src/js/validator) directory.
 
 ## Build
 
