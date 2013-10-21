@@ -1,12 +1,12 @@
 # Change Log
 
-v0.2.0
-* Add custom submit handler (using ```submitHandler``` option)
-* Add ```live``` option
-* Add ```callback``` validator
-* Add ```creditCard``` validator
-* Add ```different``` validator
+v0.2.0 (2013-10-21)
+* #9: Add ```creditCard``` validator
+* #18: Add ```different``` validator
+* #20: Add custom submit handler (using ```submitHandler``` option)
+* #21: Add ```callback``` validator
 * #22: Support form that labels are placed in extra small (col-xs-), small (col-sm-), medium (col-md-) elements
+* #24: Add ```live``` option
 * #25: The ```regexp``` validator does not work
 
 v0.1.1 (2013-10-17)

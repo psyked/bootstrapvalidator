@@ -6,6 +6,7 @@ A jQuery plugin to validate form fields. Use with Bootstrap 3
 
 * Built from scratch
 * Many built-in [validators](#validators)
+* It is easy to [write new validator](#write-new-validator)
 
 ## Required
 
@@ -201,6 +202,52 @@ You can use [bower](http://bower.io) to install BootstrapValidator:
 ```bash
 $ bower install bootstrapValidator
 ```
+
+## Write new validator
+
+A validator have to follow the syntax:
+
+```javascript
+(function($) {
+    $.fn.bootstrapValidator.validators.<validatorName> = {
+        /**
+         * @param {BootstrapValidator} validator The validator plugin instance
+         * @param {jQuery} $field The jQuery object represents the field element
+         * @param {Object} options The validator options
+         * @returns {boolean}
+         */
+        validate: function(validator, $field, options) {
+            // You can get the field value
+            // var value = $field.val();
+            //
+            // Perform validating
+            // ...
+            //
+            // return true if the field value is valid
+            // otherwise return false
+        }
+    };
+}(window.jQuery));
+```
+
+```<validatorName>``` is the validator name.
+Since the validators are distinct by the names, ```<validatorName>``` has to be different with [built-in validators](#validators)
+
+To apply the validator to particular field:
+
+```javascript
+$(form).bootstrapValidator({
+    fields: {
+        <fieldName>: {
+            // Replace <validatorName> with the name of validator
+            // <validatorOptions> will be passed as third parameter of the validate(validator, $field, options) method
+            <validatorName>: <validatorOptions>
+        }
+    }
+});
+```
+
+You can look at the source of built-in validators in [```src/js/validator```](src/js/validator) directory.
 
 ## Build
 
