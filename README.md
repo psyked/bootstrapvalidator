@@ -57,7 +57,8 @@ $(document).ready(function() {
 
         // Live validating. Can be one of 3 values:
         // - enabled: The plugin validates fields as soon as they are changed
-        // - disabled: Disable the live validating. The error messages are only shown after the form is submitted
+        // - disabled: Disable the live validating.
+        // The error messages are only shown after the form is submitted
         // - submitted: The live validating is enabled after the form is submitted
         live: 'enabled',
 
@@ -65,6 +66,7 @@ $(document).ready(function() {
         fields: {
             ...
             // The field name
+            // It is value of the name attribute
             <fieldName>: {
                 // The default error message for this field
                 message: ...,
