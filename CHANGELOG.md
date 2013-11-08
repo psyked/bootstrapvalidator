@@ -1,6 +1,7 @@
 # Change Log
 
 v0.2.1
+* #29: Upgrade Bootstrap to v3.0.2
 * #30: Hide the error block containers before validating
 
 v0.2.0 (2013-10-21)
