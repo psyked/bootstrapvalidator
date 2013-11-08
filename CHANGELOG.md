@@ -1,5 +1,8 @@
 # Change Log
 
+v0.2.1
+* #30: Hide the error block containers before validating
+
 v0.2.0 (2013-10-21)
 * #9: Add ```creditCard``` validator
 * #18: Add ```different``` validator

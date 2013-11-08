@@ -1,5 +1,5 @@
 /**
- * BootstrapValidator v0.2.0 (http://github.com/nghuuphuoc/bootstrapvalidator)
+ * BootstrapValidator v0.2.1 (http://github.com/nghuuphuoc/bootstrapvalidator)
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
@@ -155,7 +155,7 @@
                 helpBlock = $parent.find('.help-block');
 
             if (helpBlock.length == 0) {
-                var $small = $('<small/>').addClass('help-block').appendTo($parent);
+                var $small = $('<small/>').addClass('help-block').css('display', 'none').appendTo($parent);
                 $field.data('bootstrapValidator.error', $small);
 
                 // Calculate the number of columns of the label/field element
