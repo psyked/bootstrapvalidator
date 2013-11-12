@@ -1,5 +1,8 @@
 # Change Log
 
+v0.2.2
+* #31: remote validator: Allow to set additional data to remote URL
+
 v0.2.1 (2013-11-08)
 * #29: Upgrade Bootstrap to v3.0.2
 * #30: Hide the error block containers before validating
