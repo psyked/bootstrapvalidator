@@ -323,7 +323,8 @@
             if (this.numPendingRequests <= 0) {
                 this.numPendingRequests = 0;
                 if (this.formSubmited) {
-                    if (this.options.submitHandler && 'function' == typeof this.options.submitHandler) {
+                    if (!this.submitHandlerCalled && this.options.submitHandler && 'function' == typeof this.options.submitHandler) {
+                        this.submitHandlerCalled = true;
                         this.options.submitHandler.call(this, this, this.$form);
                     } else {
                         this.$form.submit();
