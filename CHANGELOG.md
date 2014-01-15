@@ -18,7 +18,7 @@
 * Added #21: Add ```callback``` validator
 * Added #24: Add ```live``` option
 * Fixed #25: The ```regexp``` validator does not work
-* Improved #22: Support form that labels are placed in extra small (col-xs-), small (col-sm-), medium (col-md-) elements
+* Improved #22: Support form that labels are placed in extra small (```col-xs-```), small (```col-sm-```), medium (```col-md-```) elements
 
 ## v0.1.1 (2013-10-17)
 

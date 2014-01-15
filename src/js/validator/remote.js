@@ -12,7 +12,7 @@
          *      <fieldName>: <fieldValue>
          *  }
          * - message: The invalid message
-         * @returns {string}
+         * @returns {String}
          */
         validate: function(validator, $field, options) {
             var value = $field.val(), name = $field.attr('name'), data = options.data;

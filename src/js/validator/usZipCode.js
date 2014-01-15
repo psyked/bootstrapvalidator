@@ -6,7 +6,7 @@
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validateInstance, $field, options) {
             var value = $field.val();

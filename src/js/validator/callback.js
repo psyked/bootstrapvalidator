@@ -12,7 +12,7 @@
          *          // validator is instance of BootstrapValidator
          *      }
          * - message: The invalid message
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();

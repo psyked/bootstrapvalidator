@@ -9,7 +9,7 @@
          * - min
          * - max
          * At least one of two keys is required
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = $.trim($field.val()), length = value.length;

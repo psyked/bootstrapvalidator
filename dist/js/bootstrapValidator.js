@@ -205,13 +205,6 @@
         },
 
         /**
-         * Validate the form
-         */
-        validate: function() {
-
-        },
-
-        /**
          * Validate given field
          *
          * @param {String} field The field name
@@ -306,7 +299,7 @@
          *
          * @param {jQuery} $field The field element
          * @param {String} validatorName
-         * @param {boolean} isValid
+         * @param {Boolean} isValid
          */
         completeRequest: function($field, validatorName, isValid) {
             if (isValid === false) {
@@ -336,7 +329,7 @@
         /**
          * Check the form validity
          *
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         isValid: function() {
             if (this.numPendingRequests > 0) {
@@ -378,7 +371,7 @@
          * - max
          * - inclusive [optional]: Can be true or false. Default is true
          * - message: The invalid message
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = parseFloat($field.val());
@@ -402,7 +395,7 @@
          *          // validator is instance of BootstrapValidator
          *      }
          * - message: The invalid message
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -423,7 +416,7 @@
          * @param {jQuery} $field Field element
          * @param {Object} options Can consist of the following key:
          * - message: The invalid message
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -464,7 +457,7 @@
          * @param {jQuery} $field Field element
          * @param {Object} options Consists of the following key:
          * - field: The name of field that will be used to compare with current one
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value        = $field.val(),
@@ -486,7 +479,7 @@
          * @param {BootstrapValidator} validator Validate plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             return /^\d+$/.test($field.val());
@@ -501,7 +494,7 @@
          * @param {BootstrapValidator} validator Validate plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = $field.val(),
@@ -523,7 +516,7 @@
          * - value: The number used to compare to
          * - inclusive [optional]: Can be true or false. Default is true
          * - message: The invalid message
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = parseFloat($field.val());
@@ -540,7 +533,7 @@
          * @param {jQuery} $field Field element
          * @param {Object} options Can consist of the following keys:
          * - message: The invalid message
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -557,7 +550,7 @@
          * @param {jQuery} $field Field element
          * @param {Object} options Consists of the following key:
          * - field: The name of field that will be used to compare with current one
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value        = $field.val(),
@@ -582,7 +575,7 @@
          * - value: The number used to compare to
          * - inclusive [optional]: Can be true or false. Default is true
          * - message: The invalid message
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = parseFloat($field.val());
@@ -598,7 +591,7 @@
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var type = $field.attr('type');
@@ -615,7 +608,7 @@
          * @param {jQuery} $field Field element
          * @param {Object} options Consists of the following key:
          * - regexp: The regular expression you need to check
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -637,7 +630,7 @@
          *      <fieldName>: <fieldValue>
          *  }
          * - message: The invalid message
-         * @returns {string}
+         * @returns {String}
          */
         validate: function(validator, $field, options) {
             var value = $field.val(), name = $field.attr('name'), data = options.data;
@@ -671,7 +664,7 @@
          * - min
          * - max
          * At least one of two keys is required
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = $.trim($field.val()), length = value.length;
@@ -691,7 +684,7 @@
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             // Credit to https://gist.github.com/dperini/729294
@@ -779,7 +772,7 @@
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validateInstance, $field, options) {
             var value = $field.val();

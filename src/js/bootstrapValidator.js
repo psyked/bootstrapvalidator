@@ -3,8 +3,8 @@
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
- * @author      Nguyen Huu Phuoc <phuoc@huuphuoc.me>
- * @copyright   (c) 2013 Nguyen Huu Phuoc
+ * @author      http://twitter.com/nghuuphuoc
+ * @copyright   (c) 2014 Nguyen Huu Phuoc
  * @license     MIT
  */
 
@@ -205,13 +205,6 @@
         },
 
         /**
-         * Validate the form
-         */
-        validate: function() {
-
-        },
-
-        /**
          * Validate given field
          *
          * @param {String} field The field name
@@ -306,7 +299,7 @@
          *
          * @param {jQuery} $field The field element
          * @param {String} validatorName
-         * @param {boolean} isValid
+         * @param {Boolean} isValid
          */
         completeRequest: function($field, validatorName, isValid) {
             if (isValid === false) {
@@ -336,7 +329,7 @@
         /**
          * Check the form validity
          *
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         isValid: function() {
             if (this.numPendingRequests > 0) {

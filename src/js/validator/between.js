@@ -10,7 +10,7 @@
          * - max
          * - inclusive [optional]: Can be true or false. Default is true
          * - message: The invalid message
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = parseFloat($field.val());
