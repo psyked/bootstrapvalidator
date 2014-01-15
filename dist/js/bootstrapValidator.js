@@ -18,10 +18,11 @@
             this.options.submitButtons = null;
         }
 
-        this.invalidFields      = {};
-        this.xhrRequests        = {};
-        this.numPendingRequests = null;
-        this.formSubmited       = false;
+        this.invalidFields       = {};
+        this.xhrRequests         = {};
+        this.numPendingRequests  = null;
+        this.formSubmited        = false;
+        this.submitHandlerCalled = false;
 
         this._init();
     };
@@ -94,7 +95,10 @@
 
                             e.preventDefault();
                         } else {
-                            if (that.options.submitHandler && 'function' == typeof that.options.submitHandler) {
+                            if (!that.submitHandlerCalled && that.options.submitHandler && 'function' == typeof that.options.submitHandler) {
+                                // Avoid calling submitHandler recursively
+                                // in the case user call form.submit() right inside the submitHandler()
+                                that.submitHandlerCalled = true;
                                 that.options.submitHandler.call(that, that, that.$form);
                                 return false;
                             }
@@ -198,6 +202,13 @@
         getFieldElement: function(field) {
             var fields = this.$form.find('[name="' + field + '"]');
             return (fields.length == 0) ? null : $(fields[0]);
+        },
+
+        /**
+         * Validate the form
+         */
+        validate: function() {
+
         },
 
         /**

@@ -64,6 +64,7 @@
                 // validator is the BootstrapValidator instance
                 // form is the jQuery object present the current form
                 form.find('.alert').html('Thanks for signing up. Now you can sign in as ' + validator.getFieldElement('username').val()).show();
+                form.submit();
             },
             fields: {
                 username: {
