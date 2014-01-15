@@ -3,6 +3,7 @@
 ## v0.2.2
 
 * Fixed #34: Avoid from calling form submit recursively
+* Improved #15: Focus to the first invalid element
 * Improved #31: remote validator: Allow to set additional data to remote URL
 
 ##v0.2.1 (2013-11-08)

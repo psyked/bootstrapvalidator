@@ -93,6 +93,12 @@
                                 that._setLiveValidating();
                             }
 
+                            // Focus to the first invalid field
+                            for (var i in that.invalidFields) {
+                                that.getFieldElement(i).focus();
+                                break;
+                            }
+
                             e.preventDefault();
                         } else {
                             if (!that.submitHandlerCalled && that.options.submitHandler && 'function' == typeof that.options.submitHandler) {
