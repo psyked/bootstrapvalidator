@@ -199,7 +199,7 @@ max         | n/a     | The maximum length. One of ```min```, ```max``` options 
 
 ## Install
 
-You can use [bower](http://bower.io) to install BootstrapValidator:
+You can download the [latest version](https://github.com/nghuuphuoc/bootstrapvalidator/releases) or use [bower](http://bower.io) to install BootstrapValidator:
 
 ```bash
 $ bower install bootstrapValidator
