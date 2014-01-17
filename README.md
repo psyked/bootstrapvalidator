@@ -4,7 +4,7 @@ A jQuery plugin to validate form fields. Use with Bootstrap 3
 
 ## Features
 
-* Built from scratch
+* Built from scratch. The code is solid and clean
 * Many built-in [validators](#validators)
 * It is easy to [write new validator](#write-new-validator)
 
@@ -287,14 +287,36 @@ Look at the [Change Log](CHANGELOG.md)
 
 ## Author
 
-Nguyen Huu Phuoc ([Email](mailto: phuoc@huuphuoc.me) / [Twitter](http://twitter.com/nghuuphuoc) / [Github](http://github.com/nghuuphuoc))
+This software is written by Nguyen Huu Phuoc, aka @nghuuphuoc
 
-Big thanks to the contributors:
+* [http://twitter.com/nghuuphuoc](http://twitter.com/nghuuphuoc)
+* [http://github.com/nghuuphuoc](http://github.com/nghuuphuoc)
 
-* Vu Minh Khang ([Email](mailto: khangvm530@gmail.com) / [Github](https://github.com/khangvm53))
+Big thanks to the contributor:
+
+* Vu Minh Khang, aka [@khangvm53](https://github.com/khangvm53)
 
 ## License
 
-Copyright (c) 2013 Nguyen Huu Phuoc
+```
+The MIT License (MIT)
 
-BootstrapValidator is licensed under the MIT license.
+Copyright (c) 2013 - 2014 Nguyen Huu Phuoc
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
