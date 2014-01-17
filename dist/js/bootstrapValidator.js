@@ -1,5 +1,5 @@
 /**
- * BootstrapValidator v0.2.2 (http://github.com/nghuuphuoc/bootstrapvalidator)
+ * BootstrapValidator v0.2.2-dev (http://github.com/nghuuphuoc/bootstrapvalidator)
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
@@ -81,7 +81,7 @@
                             if (that.numPendingRequests > 0 || that.numPendingRequests == null) {
                                 // Check if the field is valid
                                 var $field = that.getFieldElement(field);
-                                if ($field.data('bootstrapValidator.isValid') !== true) {
+                                if ($field && $field.data('bootstrapValidator.isValid') !== true) {
                                     that.validateField(field);
                                 }
                             }
@@ -160,8 +160,7 @@
             }
 
             // Create a help block element for showing the error
-            var that      = this,
-                $parent   = $field.parents('.form-group'),
+            var $parent   = $field.parents('.form-group'),
                 helpBlock = $parent.find('.help-block');
 
             if (helpBlock.length == 0) {
