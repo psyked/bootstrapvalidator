@@ -171,16 +171,19 @@
                 // Then set offset to the help block element
                 var label, cssClasses, offset, size;
                 if (label = $parent.find('label').get(0)) {
-                    cssClasses = $(label).attr('class').split(' ');
-                    for (var i = 0; i < cssClasses.length; i++) {
-                        if (/^col-(xs|sm|md|lg)-\d+$/.test(cssClasses[i])) {
-                            offset = cssClasses[i].substr(7);
-                            size   = cssClasses[i].substr(4, 2);
-                            break;
+                    // The default Bootstrap form don't require class for label (http://getbootstrap.com/css/#forms)
+                    if (cssClasses = $(label).attr('class')) {
+                        cssClasses = cssClasses.split(' ');
+                        for (var i = 0; i < cssClasses.length; i++) {
+                            if (/^col-(xs|sm|md|lg)-\d+$/.test(cssClasses[i])) {
+                                offset = cssClasses[i].substr(7);
+                                size   = cssClasses[i].substr(4, 2);
+                                break;
+                            }
                         }
                     }
-                } else {
-                    cssClasses = $parent.children().eq(0).attr('class').split(' ');
+                } else if (cssClasses = $parent.children().eq(0).attr('class')) {
+                    cssClasses = cssClasses.split(' ');
                     for (var i = 0; i < cssClasses.length; i++) {
                         if (/^col-(xs|sm|md|lg)-offset-\d+$/.test(cssClasses[i])) {
                             offset = cssClasses[i].substr(14);

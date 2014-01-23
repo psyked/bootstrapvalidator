@@ -6,6 +6,7 @@
 * (#31) ```remote``` validator: Allow to set additional data to remote URL
 * (#34) Avoid from calling form submit recursively
 * (#39) Validate existing fields only
+* (#40) Fix the issue when the form label doesn't have class
 
 ##v0.2.1 (2013-11-08)
 
