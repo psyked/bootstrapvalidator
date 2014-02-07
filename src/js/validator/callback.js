@@ -16,6 +16,10 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
             if (options.callback && 'function' == typeof options.callback) {
                 return options.callback.call(this, value, this);
             }

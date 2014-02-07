@@ -12,10 +12,15 @@
          *      <fieldName>: <fieldValue>
          *  }
          * - message: The invalid message
-         * @returns {String}
+         * @returns {Boolean|String}
          */
         validate: function(validator, $field, options) {
-            var value = $field.val(), name = $field.attr('name'), data = options.data;
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            var name = $field.attr('name'), data = options.data;
             if (data == null) {
                 data = {};
             }

@@ -10,6 +10,9 @@
          */
         validate: function(validateInstance, $field, options) {
             var value = $field.val();
+            if (value == '') {
+                return true;
+            }
             return /^\d{5}([\-]\d{4})?$/.test(value);
         }
     };

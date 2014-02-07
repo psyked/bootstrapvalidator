@@ -10,8 +10,12 @@
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
-            var value        = $field.val(),
-                $compareWith = validator.getFieldElement(options.field);
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            var $compareWith = validator.getFieldElement(options.field);
             if ($compareWith && value != $compareWith.val()) {
                 validator.removeError($compareWith);
                 return true;

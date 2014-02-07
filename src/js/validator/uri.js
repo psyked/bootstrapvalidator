@@ -9,6 +9,11 @@
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
             // Credit to https://gist.github.com/dperini/729294
             //
             // Regular Expression for URL validation
@@ -82,7 +87,7 @@
                 "(?:/[^\\s]*)?" +
                 "$", "i"
             );
-            return urlExp.test($field.val());
+            return urlExp.test(value);
         }
     };
 }(window.jQuery));

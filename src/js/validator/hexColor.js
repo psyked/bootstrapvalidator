@@ -11,6 +11,9 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
+            if (value == '') {
+                return true;
+            }
             return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(value);
         }
     };

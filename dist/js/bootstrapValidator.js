@@ -383,7 +383,12 @@
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
-            var value = parseFloat($field.val());
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            value = parseFloat(value);
             return (options.inclusive === true)
                         ? (value > options.min && value < options.max)
                         : (value >= options.min && value <= options.max);
@@ -408,6 +413,10 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
             if (options.callback && 'function' == typeof options.callback) {
                 return options.callback.call(this, value, this);
             }
@@ -429,6 +438,9 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
+            if (value == '') {
+                return true;
+            }
 
             // Accept only digits, dashes or spaces
             if (/[^0-9-\s]+/.test(value)) {
@@ -469,8 +481,12 @@
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
-            var value        = $field.val(),
-                $compareWith = validator.getFieldElement(options.field);
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            var $compareWith = validator.getFieldElement(options.field);
             if ($compareWith && value != $compareWith.val()) {
                 validator.removeError($compareWith);
                 return true;
@@ -491,7 +507,12 @@
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
-            return /^\d+$/.test($field.val());
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            return /^\d+$/.test(value);
         }
     }
 }(window.jQuery));
@@ -506,10 +527,14 @@
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
-            var value = $field.val(),
-                // Email address regular expression
-                // http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
-                emailRegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            // Email address regular expression
+            // http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
+            var emailRegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return emailRegExp.test(value);
         }
     }
@@ -528,7 +553,11 @@
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
-            var value = parseFloat($field.val());
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+            value = parseFloat(value);
             return (options.inclusive === true) ? (value > options.value) : (value >= options.value);
         }
     }
@@ -546,6 +575,9 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
+            if (value == '') {
+                return true;
+            }
             return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(value);
         }
     };
@@ -562,8 +594,12 @@
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
-            var value        = $field.val(),
-                $compareWith = validator.getFieldElement(options.field);
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            var $compareWith = validator.getFieldElement(options.field);
             if ($compareWith && value == $compareWith.val()) {
                 validator.removeError($compareWith);
                 return true;
@@ -587,7 +623,11 @@
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
-            var value = parseFloat($field.val());
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+            value = parseFloat(value);
             return (options.inclusive === true) ? (value < options.value) : (value <= options.value);
         }
     };
@@ -621,6 +661,10 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
             return options.regexp.test(value);
         }
     };
@@ -639,10 +683,15 @@
          *      <fieldName>: <fieldValue>
          *  }
          * - message: The invalid message
-         * @returns {String}
+         * @returns {Boolean|String}
          */
         validate: function(validator, $field, options) {
-            var value = $field.val(), name = $field.attr('name'), data = options.data;
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            var name = $field.attr('name'), data = options.data;
             if (data == null) {
                 data = {};
             }
@@ -676,7 +725,12 @@
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
-            var value = $.trim($field.val()), length = value.length;
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            var length = $.trim(value).length;
             if ((options.min && length < options.min) || (options.max && length > options.max)) {
                 return false;
             }
@@ -696,6 +750,11 @@
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
             // Credit to https://gist.github.com/dperini/729294
             //
             // Regular Expression for URL validation
@@ -769,7 +828,7 @@
                 "(?:/[^\\s]*)?" +
                 "$", "i"
             );
-            return urlExp.test($field.val());
+            return urlExp.test(value);
         }
     };
 }(window.jQuery));
@@ -785,6 +844,9 @@
          */
         validate: function(validateInstance, $field, options) {
             var value = $field.val();
+            if (value == '') {
+                return true;
+            }
             return /^\d{5}([\-]\d{4})?$/.test(value);
         }
     };

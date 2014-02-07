@@ -13,7 +13,12 @@
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
-            var value = parseFloat($field.val());
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            value = parseFloat(value);
             return (options.inclusive === true)
                         ? (value > options.min && value < options.max)
                         : (value >= options.min && value <= options.max);

@@ -12,6 +12,9 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
+            if (value == '') {
+                return true;
+            }
 
             // Accept only digits, dashes or spaces
             if (/[^0-9-\s]+/.test(value)) {

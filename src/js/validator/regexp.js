@@ -11,6 +11,10 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
             return options.regexp.test(value);
         }
     };

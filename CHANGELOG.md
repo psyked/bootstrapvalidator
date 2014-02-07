@@ -7,6 +7,7 @@
 * [#34: Avoid from calling form submit recursively](https://github.com/nghuuphuoc/bootstrapvalidator/issues/34)
 * [#39: Validate existing fields only](https://github.com/nghuuphuoc/bootstrapvalidator/issues/39)
 * [#40: Fix the issue when the form label doesn't have class](https://github.com/nghuuphuoc/bootstrapvalidator/issues/40)
+* [#43: Only validate not empty field](https://github.com/nghuuphuoc/bootstrapvalidator/issues/43)
 
 ##v0.2.1 (2013-11-08)
 
