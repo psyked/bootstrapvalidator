@@ -1,6 +1,6 @@
 # Change Log
 
-## v0.2.2
+## v0.2.2 (2014-01-07)
 
 * [#15: Focus to the first invalid element](https://github.com/nghuuphuoc/bootstrapvalidator/issues/15)
 * [#31: ```remote``` validator: Allow to set additional data to remote URL](https://github.com/nghuuphuoc/bootstrapvalidator/issues/31)
@@ -9,7 +9,7 @@
 * [#40: Fix the issue when the form label doesn't have class](https://github.com/nghuuphuoc/bootstrapvalidator/issues/40)
 * [#43: Only validate not empty field](https://github.com/nghuuphuoc/bootstrapvalidator/issues/43)
 
-##v0.2.1 (2013-11-08)
+## v0.2.1 (2013-11-08)
 
 * [#29: Upgrade Bootstrap to v3.0.2](https://github.com/nghuuphuoc/bootstrapvalidator/issues/29)
 * [#30: Hide the error block containers before validating](https://github.com/nghuuphuoc/bootstrapvalidator/issues/30)
