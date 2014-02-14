@@ -13,5 +13,5 @@
     "grunt-contrib-cssmin": "~0.6.2",
     "grunt-contrib-copy": "~0.4.1"
   },
-  "version": "0.2.2"
+  "version": "0.2.3"
 }

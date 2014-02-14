@@ -1,5 +1,5 @@
 /**
- * BootstrapValidator v0.2.2 (http://github.com/nghuuphuoc/bootstrapvalidator)
+ * BootstrapValidator v0.2.3 (http://github.com/nghuuphuoc/bootstrapvalidator)
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
@@ -345,7 +345,7 @@
                 return false;
             }
             for (var field in this.invalidFields) {
-                if (this.invalidFields[field]) {
+                if (this.invalidFields[field] && !this.getFieldElement(field).is(':disabled')) {
                     return false;
                 }
             }
@@ -413,10 +413,6 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
-                return true;
-            }
-
             if (options.callback && 'function' == typeof options.callback) {
                 return options.callback.call(this, value, this);
             }
