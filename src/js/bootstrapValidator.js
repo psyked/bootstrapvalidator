@@ -345,6 +345,7 @@
                 return false;
             }
             for (var field in this.invalidFields) {
+                // Don't validate disabled element
                 if (this.invalidFields[field] && !this.getFieldElement(field).is(':disabled')) {
                     return false;
                 }

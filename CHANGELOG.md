@@ -2,6 +2,7 @@
 
 ## v0.2.3
 
+* [#50: Don't validate disabled element](https://github.com/nghuuphuoc/bootstrapvalidator/issues/50)
 * [#52: Callback validator does not process if the field is empty](https://github.com/nghuuphuoc/bootstrapvalidator/issues/52)
 
 ## v0.2.2 (2014-01-07)
