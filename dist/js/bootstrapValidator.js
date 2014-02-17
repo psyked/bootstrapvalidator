@@ -130,14 +130,26 @@
 
                 for (var field in this.options.fields) {
                     (function(field) {
-                        var $field = that.getFieldElement(field);
-                        if ($field) {
-                            var type  = $field.attr('type'),
-                                event = ('checkbox' == type || 'radio' == type || 'SELECT' == $field.get(0).tagName) ? 'change' : 'keyup';
-                            $field.on(event, function() {
-                                that.formSubmited = false;
-                                that.validateField(field);
-                            });
+                        var fields = that.getFieldElements(field);
+
+                        if (fields && fields.length > 0) {
+                            var $field = $(fields[0]);
+                            var type  = $field.attr('type');
+
+                            if ('radio' == type) {
+                                var event = 'change';
+                                fields.on(event, function() {
+                                    that.formSubmited = false;
+                                    that.validateField(field);
+                                });
+                            } else {
+                                var event = ('checkbox' == type || 'SELECT' == $field.get(0).tagName) ? 'change' : 'keyup';
+                                $field.on(event, function() {
+                                    that.formSubmited = false;
+                                    that.validateField(field);
+                                });
+                            }
+
                         }
                     })(field);
                 }
@@ -211,6 +223,19 @@
             var fields = this.$form.find('[name="' + field + '"]');
             return (fields.length == 0) ? null : $(fields[0]);
         },
+
+        /**
+         * Get field elements
+         * Used for radios
+         *
+         * @param {String} field The field name
+         * @returns {jQuery}
+         */
+        getFieldElements: function(field) {
+            var fields = this.$form.find('[name="' + field + '"]');
+            return (fields.length == 0) ? null : fields;
+        },
+
 
         /**
          * Validate given field
@@ -345,6 +370,7 @@
                 return false;
             }
             for (var field in this.invalidFields) {
+                // Don't validate disabled element
                 if (this.invalidFields[field] && !this.getFieldElement(field).is(':disabled')) {
                     return false;
                 }
@@ -639,8 +665,15 @@
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
+
+
             var type = $field.attr('type');
-            return ('checkbox' == type || 'radio' == type) ? $field.is(':checked') : ($.trim($field.val()) != '');
+            if('radio' == type) {
+                var radioSelector = "input[name=" + $field.attr('name') + "]:checked";
+                return ($(radioSelector).length > 0);
+            }
+
+            return ('checkbox' == type) ? $field.is(':checked') : ($.trim($field.val()) != '');
         }
     };
 }(window.jQuery));
