@@ -256,15 +256,10 @@ To see how built-in validators are developed, you can look at their sources loca
 
 BootstrapValidator uses [grunt](http://gruntjs.com) to simplify building process.
 
-From the BootstrapValidator root directory, execute the following commands to install the dependent packages (the administrator permission might be required):
+From the BootstrapValidator root directory, install dependencies:
 
 ```bash
-$ npm install grunt --save-dev
-$ npm install grunt-contrib-concat --save-dev
-$ npm install grunt-contrib-copy --save-dev
-$ npm install grunt-contrib-cssmin --save-dev
-$ npm install grunt-contrib-uglify --save-dev
-$ npm install grunt-contrib-watch --save-dev
+$ npm install
 ```
 
 Then, uses grunt to build:
