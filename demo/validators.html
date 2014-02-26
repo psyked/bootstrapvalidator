@@ -90,9 +90,17 @@
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">US zip code</label>
                                 <div class="col-lg-3">
-                                    <input type="text" class="form-control" name="zipCode" />
+                                    <input type="text" class="form-control" name="usZipCode" />
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">DK zip code</label>
+                                <div class="col-lg-3">
+                                    <input type="text" class="form-control" name="dkZipCode" />
+                                </div>
+                            </div>
+
                         </fieldset>
 
                         <fieldset>
@@ -203,10 +211,17 @@ $(document).ready(function() {
                     }
                 }
             },
-            zipCode: {
+            usZipCode: {
                 validators: {
                     usZipCode: {
                         message: 'The input is not a valid US zip code'
+                    }
+                }
+            },
+            dkZipCode: {
+                validators: {
+                    dkZipCode: {
+                        message: 'The input is not a valid DK zip code'
                     }
                 }
             },
