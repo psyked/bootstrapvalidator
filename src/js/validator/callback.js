@@ -18,7 +18,7 @@
             var value = $field.val();
             if (options.callback && 'function' == typeof options.callback) {
                 var dfd = new $.Deferred();
-                dfd.resolve(options.callback.call(this, value, this));
+                dfd.resolve(options.callback.call(this, value, validator));
                 return dfd;
             }
             return true;

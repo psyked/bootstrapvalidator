@@ -10,11 +10,11 @@
 
 (function($) {
     var BootstrapValidator = function(form, options) {
-        this.$form    = $(form);
-        this.options  = $.extend({}, BootstrapValidator.DEFAULT_OPTIONS, options);
+        this.$form   = $(form);
+        this.options = $.extend({}, BootstrapValidator.DEFAULT_OPTIONS, options);
 
         // Array of deferred
-        this._dfds    = {};
+        this._dfds          = {};
 
         // Invalid fields
         this._invalidFields = {};
