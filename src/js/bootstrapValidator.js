@@ -70,6 +70,8 @@
                 return;
             }
 
+            this._dfds[field] = {};
+
             var fields = this.$form.find('[name="' + field + '"]');
             if (fields.length == 0) {
                 // We don't need to validate non-existing fields next time
@@ -77,8 +79,6 @@
                 delete this._dfds[field];
                 return;
             }
-
-            this._dfds[field] = {};
 
             // Create a help block element for showing the error
             var $field    = $(fields[0]),
@@ -193,13 +193,15 @@
          * @returns {Boolean}
          */
         isValid: function() {
-            var field;
+            var field, validatorName;
             for (field in this._invalidFields) {
                 return false;
             }
             for (field in this._dfds) {
-                if ('pending' == this._dfds[field].state()) {
-                    return false;
+                for (validatorName in this._dfds[field]) {
+                    if ('pending' == this._dfds[field][validatorName].state()) {
+                        return false;
+                    }
                 }
             }
 
