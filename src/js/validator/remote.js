@@ -34,7 +34,7 @@
                 data: data
             });
             xhr.then(function(response) {
-                dfd.resolve(response.valid === true || response.valid === 'true');
+                dfd.resolve(response.valid === true || response.valid === 'true', 'remote');
             });
 
             dfd.fail(function() {

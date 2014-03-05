@@ -14,10 +14,13 @@
         this.options = $.extend({}, BootstrapValidator.DEFAULT_OPTIONS, options);
 
         // Array of deferred
-        this._dfds          = {};
+        this._dfds   = {};
 
-        // Invalid fields
-        this._invalidFields = {};
+        // First invalid field
+        this._firstInvalidField = null;
+
+        // Validating results
+        this._results = {};
 
         this._init();
     };
@@ -29,6 +32,15 @@
 
         // Default invalid message
         message: 'This value is not valid',
+
+        // The custom submit handler
+        // It will prevent the form from the default submission
+        //
+        //  submitHandler: function(validator, form) {
+        //      - validator is the BootstrapValidator instance
+        //      - form is the jQuery object present the current form
+        //  }
+        submitHandler: null,
 
         // Live validating option
         // Can be one of 3 values:
@@ -57,7 +69,8 @@
                 // Disable client side validation in HTML 5
                 .attr('novalidate', 'novalidate')
                 .addClass(this.options.elementClass)
-                .on('submit', function(e) {
+                // Disable the default submission first
+                .on('submit.bootstrapValidator', function(e) {
                     e.preventDefault();
                     that.validate();
                 });
@@ -79,7 +92,8 @@
                 return;
             }
 
-            this._dfds[field] = {};
+            this._dfds[field]    = {};
+            this._results[field] = {};
 
             var fields = this.$form.find('[name="' + field + '"]');
             if (fields.length == 0) {
@@ -121,6 +135,12 @@
 
             if (size && offset) {
                 for (var validatorName in this.options.fields[field].validators) {
+                    if (!$.fn.bootstrapValidator.validators[validatorName]) {
+                        delete this.options.fields[field].validators[validatorName];
+                        continue;
+                    }
+
+                    this._results[field][validatorName] = null;
                     $('<small/>')
                         .css('display', 'none')
                         .attr('data-bs-validator', validatorName)
@@ -157,6 +177,33 @@
             }
         },
 
+        /**
+         * Called when all validations are completed
+         */
+        _submit: function() {
+            if (!this.isValid()) {
+                if ('submitted' == this.options.live) {
+                    this.options.live = 'enabled';
+                    this._setLiveValidating();
+                }
+
+                // Focus to the first invalid field
+                if (this._firstInvalidField) {
+                    this.getFieldElements(this._firstInvalidField).focus();
+                }
+
+                return;
+            }
+
+            // Call the custom submission if enabled
+            if (this.options.submitHandler && 'function' == typeof this.options.submitHandler) {
+                this.options.submitHandler.call(this, this, this.$form);
+            } else {
+                // Submit form
+                //this.$form.off('submit.bootstrapValidator').submit();
+            }
+        },
+
         // --- Public methods ---
 
         /**
@@ -174,8 +221,6 @@
          * Validate the form
          */
         validate: function() {
-            // Reset invalid fields
-            this._invalidFields = {};
             if (!this.options.fields) {
                 return;
             }
@@ -183,12 +228,7 @@
                 this.validateField(field);
             }
 
-            if (!this.isValid()) {
-                if ('submitted' == this.options.live) {
-                    this.options.live = 'enabled';
-                    this._setLiveValidating();
-                }
-            }
+            this._submit();
         },
 
         /**
@@ -204,16 +244,6 @@
                 validatorName,
                 validateResult;
             for (validatorName in validators) {
-//                if (this._invalidFields[field]) {
-//                    break;
-//                }
-
-                // Continue if the validator with given name doesn't exist
-                if (!$.fn.bootstrapValidator.validators[validatorName]) {
-                    delete this.options.fields[field].validators[validatorName];
-                    continue;
-                }
-
                 if (this._dfds[field][validatorName]) {
                     this._dfds[field][validatorName].reject();
                 }
@@ -221,14 +251,21 @@
                 validateResult = $.fn.bootstrapValidator.validators[validatorName].validate(this, $field, validators[validatorName]);
                 if ('object' == typeof validateResult) {
                     this._dfds[field][validatorName] = validateResult;
+                    validateResult.done(function(isValid, v) {
+                        // v is validator name
+                        delete that._dfds[field][v];
+                        /*
+                        if (isValid) {
+                            that._submit();
+                        }*/
+                    });
                 }
 
                 $.when(validateResult).then(function(isValid) {
-                    delete that._dfds[field][validatorName];
+                    that._results[field][validatorName] = isValid;
                     if (isValid) {
                         that.removeError($field, validatorName);
                     } else {
-                        that._invalidFields[field] = true;
                         that.showError($field, validatorName);
                     }
                 });
@@ -242,12 +279,10 @@
          */
         isValid: function() {
             var field, validatorName;
-            for (field in this._invalidFields) {
-                return false;
-            }
-            for (field in this._dfds) {
-                for (validatorName in this._dfds[field]) {
-                    if ('pending' == this._dfds[field][validatorName].state()) {
+            for (field in this._results) {
+                for (validatorName in this._results[field]) {
+                    if (!this._results[field][validatorName]) {
+                        this._firstInvalidField = field;
                         return false;
                     }
                 }
@@ -354,7 +389,7 @@
             var value = $field.val();
             if (options.callback && 'function' == typeof options.callback) {
                 var dfd = new $.Deferred();
-                dfd.resolve(options.callback.call(this, value, validator));
+                dfd.resolve(options.callback.call(this, value, validator), 'callback');
                 return dfd;
             }
             return true;
@@ -657,7 +692,7 @@
                 data: data
             });
             xhr.then(function(response) {
-                dfd.resolve(response.valid === true || response.valid === 'true');
+                dfd.resolve(response.valid === true || response.valid === 'true', 'remote');
             });
 
             dfd.fail(function() {
