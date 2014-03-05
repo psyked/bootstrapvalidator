@@ -30,6 +30,13 @@
         // Default invalid message
         message: 'This value is not valid',
 
+        // Live validating option
+        // Can be one of 3 values:
+        // - enabled: The plugin validates fields as soon as they are changed
+        // - disabled: Disable the live validating. The error messages are only shown after the form is submitted
+        // - submitted: The live validating is enabled after the form is submitted
+        live: 'enabled',
+
         // Map the field name with validator rules
         fields: null
     };
@@ -58,6 +65,8 @@
             for (var field in this.options.fields) {
                 this._initField(field);
             }
+
+            this._setLiveValidating();
         },
 
         /**
@@ -81,12 +90,12 @@
             }
 
             // Create a help block element for showing the error
-            var $field    = $(fields[0]),
-                $parent   = $field.parents('.form-group');
+            var $field  = $(fields[0]),
+                $parent = $field.parents('.form-group'),
+                // Calculate the number of columns of the label/field element
+                // Then set offset to the help block element
+                label, cssClasses, offset, size;
 
-            // Calculate the number of columns of the label/field element
-            // Then set offset to the help block element
-            var label, cssClasses, offset, size;
             if (label = $parent.find('label').get(0)) {
                 // The default Bootstrap form don't require class for label (http://getbootstrap.com/css/#forms)
                 if (cssClasses = $(label).attr('class')) {
@@ -123,6 +132,31 @@
             }
         },
 
+        /**
+         * Enable live validating
+         */
+        _setLiveValidating: function() {
+            if ('enabled' == this.options.live) {
+                var that = this;
+                // Since this should be called once, I have to disable the live validating mode
+                this.options.live = 'disabled';
+
+                for (var field in this.options.fields) {
+                    (function(f) {
+                        var fields = that.getFieldElements(f);
+                        if (fields) {
+                            var type  = fields.attr('type'),
+                                event = ('radio' == type || 'checkbox' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup';
+
+                            fields.on(event, function() {
+                                that.validateField(f);
+                            });
+                        }
+                    })(field);
+                }
+            }
+        },
+
         // --- Public methods ---
 
         /**
@@ -148,6 +182,13 @@
             for (var field in this.options.fields) {
                 this.validateField(field);
             }
+
+            if (!this.isValid()) {
+                if ('submitted' == this.options.live) {
+                    this.options.live = 'enabled';
+                    this._setLiveValidating();
+                }
+            }
         },
 
         /**
@@ -163,9 +204,9 @@
                 validatorName,
                 validateResult;
             for (validatorName in validators) {
-                if (this._invalidFields[field]) {
-                    break;
-                }
+//                if (this._invalidFields[field]) {
+//                    break;
+//                }
 
                 // Continue if the validator with given name doesn't exist
                 if (!$.fn.bootstrapValidator.validators[validatorName]) {
