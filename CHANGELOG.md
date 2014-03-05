@@ -3,8 +3,10 @@
 ## v0.3.0
 
 * [#44: Rewrite entirely using Deferred](https://github.com/nghuuphuoc/bootstrapvalidator/issues/44)
+* [#71: Show all errors](https://github.com/nghuuphuoc/bootstrapvalidator/issues/71)
 * [#53: Fix notEmpty validator for radios and checkboxes](https://github.com/nghuuphuoc/bootstrapvalidator/issues/53)
 * [#62: The callback validator passes wrong parameter](https://github.com/nghuuphuoc/bootstrapvalidator/issues/62)
+* [#60: Update the installation guide](https://github.com/nghuuphuoc/bootstrapvalidator/pull/60)
 
 ## v0.2.2 (2014-01-07)
 

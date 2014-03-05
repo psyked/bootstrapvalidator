@@ -21,7 +21,7 @@
             }
 
             if (value != compareWith.val()) {
-                validator.removeError(compareWith);
+                validator.removeError(compareWith, 'different');
                 return true;
             } else {
                 return false;

@@ -82,48 +82,44 @@
 
             // Create a help block element for showing the error
             var $field    = $(fields[0]),
-                $parent   = $field.parents('.form-group'),
-                helpBlock = $parent.find('.help-block');
+                $parent   = $field.parents('.form-group');
 
-            if (helpBlock.length == 0) {
-                var $small = $('<small/>')
-                                .addClass('help-block')
-                                .css('display', 'none')
-                                .appendTo($parent);
-                $field.data('bootstrapValidator.error', $small);
-
-                // Calculate the number of columns of the label/field element
-                // Then set offset to the help block element
-                var label, cssClasses, offset, size;
-                if (label = $parent.find('label').get(0)) {
-                    // The default Bootstrap form don't require class for label (http://getbootstrap.com/css/#forms)
-                    if (cssClasses = $(label).attr('class')) {
-                        cssClasses = cssClasses.split(' ');
-                        for (var i = 0; i < cssClasses.length; i++) {
-                            if (/^col-(xs|sm|md|lg)-\d+$/.test(cssClasses[i])) {
-                                offset = cssClasses[i].substr(7);
-                                size   = cssClasses[i].substr(4, 2);
-                                break;
-                            }
-                        }
-                    }
-                } else if (cssClasses = $parent.children().eq(0).attr('class')) {
+            // Calculate the number of columns of the label/field element
+            // Then set offset to the help block element
+            var label, cssClasses, offset, size;
+            if (label = $parent.find('label').get(0)) {
+                // The default Bootstrap form don't require class for label (http://getbootstrap.com/css/#forms)
+                if (cssClasses = $(label).attr('class')) {
                     cssClasses = cssClasses.split(' ');
                     for (var i = 0; i < cssClasses.length; i++) {
-                        if (/^col-(xs|sm|md|lg)-offset-\d+$/.test(cssClasses[i])) {
-                            offset = cssClasses[i].substr(14);
+                        if (/^col-(xs|sm|md|lg)-\d+$/.test(cssClasses[i])) {
+                            offset = cssClasses[i].substr(7);
                             size   = cssClasses[i].substr(4, 2);
                             break;
                         }
                     }
                 }
-                if (size && offset) {
-                    $small
-                        .addClass(['col-', size, '-offset-', offset].join(''))
-                        .addClass(['col-', size, '-', 12 - offset].join(''));
+            } else if (cssClasses = $parent.children().eq(0).attr('class')) {
+                cssClasses = cssClasses.split(' ');
+                for (var i = 0; i < cssClasses.length; i++) {
+                    if (/^col-(xs|sm|md|lg)-offset-\d+$/.test(cssClasses[i])) {
+                        offset = cssClasses[i].substr(14);
+                        size   = cssClasses[i].substr(4, 2);
+                        break;
+                    }
                 }
-            } else {
-                $field.data('bootstrapValidator.error', helpBlock.eq(0));
+            }
+
+            if (size && offset) {
+                for (var validatorName in this.options.fields[field].validators) {
+                    $('<small/>')
+                        .css('display', 'none')
+                        .attr('data-bs-validator', validatorName)
+                        .addClass('help-block')
+                        .addClass(['col-', size, '-offset-', offset].join(''))
+                        .addClass(['col-', size, '-', 12 - offset].join(''))
+                        .appendTo($parent);
+                }
             }
         },
 
@@ -189,7 +185,7 @@
                 $.when(validateResult).then(function(isValid) {
                     delete that._dfds[field][validatorName];
                     if (isValid) {
-                        that.removeError($field);
+                        that.removeError($field, validatorName);
                     } else {
                         that._invalidFields[field] = true;
                         that.showError($field, validatorName);
@@ -235,10 +231,9 @@
                 .parents('.form-group')
                     .removeClass('has-success')
                     .addClass('has-error')
-                    .end()
-                .data('bootstrapValidator.error')
-                    .html(message)
-                    .show();
+                    .find('.help-block[data-bs-validator="' + validatorName + '"]')
+                        .html(message)
+                        .show();
         },
 
         /**
@@ -246,14 +241,13 @@
          *
          * @param {jQuery} $field The field element
          */
-        removeError: function($field) {
+        removeError: function($field, validatorName) {
             $field
                 .parents('.form-group')
                     .removeClass('has-error')
                     .addClass('has-success')
-                    .end()
-                .data('bootstrapValidator.error')
-                    .hide();
+                    .find('.help-block[data-bs-validator="' + validatorName + '"]')
+                        .hide();
         }
     };
 
@@ -394,7 +388,7 @@
             }
 
             if (value != compareWith.val()) {
-                validator.removeError(compareWith);
+                validator.removeError(compareWith, 'different');
                 return true;
             } else {
                 return false;
@@ -511,7 +505,7 @@
             }
 
             if (value == compareWith.val()) {
-                validator.removeError(compareWith);
+                validator.removeError(compareWith, 'identical');
                 return true;
             } else {
                 return false;
