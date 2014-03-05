@@ -4,25 +4,20 @@
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
  * @author      http://twitter.com/nghuuphuoc
- * @copyright   (c) 2014 Nguyen Huu Phuoc
+ * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
  */
 
 (function($) {
     var BootstrapValidator = function(form, options) {
-        this.$form   = $(form);
-        this.options = $.extend({}, BootstrapValidator.DEFAULT_OPTIONS, options);
+        this.$form    = $(form);
+        this.options  = $.extend({}, BootstrapValidator.DEFAULT_OPTIONS, options);
 
-        if ('disabled' == this.options.live) {
-            // Don't disable the submit buttons if the live validating is disabled
-            this.options.submitButtons = null;
-        }
+        // Array of deferred
+        this._dfds    = {};
 
-        this.invalidFields       = {};
-        this.xhrRequests         = {};
-        this.numPendingRequests  = null;
-        this.formSubmited        = false;
-        this.submitHandlerCalled = false;
+        // Invalid fields
+        this._invalidFields = {};
 
         this._init();
     };
@@ -34,25 +29,6 @@
 
         // Default invalid message
         message: 'This value is not valid',
-
-        // The submit buttons selector
-        // These buttons will be disabled when the form input are invalid
-        submitButtons: 'button[type="submit"]',
-
-        // The custom submit handler
-        // It will prevent the form from the default submitting
-        //
-        //  submitHandler: function(validator, form) {
-        //      - validator is the BootstrapValidator instance
-        //      - form is the jQuery object present the current form
-        //  }
-        submitHandler: null,
-
-        // Live validating. Can be one of 3 values:
-        // - enabled: The plugin validates fields as soon as they are changed
-        // - disabled: Disable the live validating. The error messages are only shown after the form is submitted
-        // - submitted: The live validating is enabled after the form is submitted
-        live: 'enabled',
 
         // Map the field name with validator rules
         fields: null
@@ -75,84 +51,12 @@
                 .attr('novalidate', 'novalidate')
                 .addClass(this.options.elementClass)
                 .on('submit', function(e) {
-                    that.formSubmited = true;
-                    if (that.options.fields) {
-                        for (var field in that.options.fields) {
-                            if (that.numPendingRequests > 0 || that.numPendingRequests == null) {
-                                // Check if the field is valid
-                                var $field = that.getFieldElement(field);
-                                if ($field && $field.data('bootstrapValidator.isValid') !== true) {
-                                    that.validateField(field);
-                                }
-                            }
-                        }
-                        if (!that.isValid()) {
-                            that.$form.find(that.options.submitButtons).attr('disabled', 'disabled');
-                            if ('submitted' == that.options.live) {
-                                that.options.live = 'enabled';
-                                that._setLiveValidating();
-                            }
-
-                            // Focus to the first invalid field
-                            for (var i in that.invalidFields) {
-                                that.getFieldElement(i).focus();
-                                break;
-                            }
-
-                            e.preventDefault();
-                        } else {
-                            if (!that.submitHandlerCalled && that.options.submitHandler && 'function' == typeof that.options.submitHandler) {
-                                // Avoid calling submitHandler recursively
-                                // in the case user call form.submit() right inside the submitHandler()
-                                that.submitHandlerCalled = true;
-                                that.options.submitHandler.call(that, that, that.$form);
-                                return false;
-                            }
-                        }
-                    }
+                    e.preventDefault();
+                    that.validate();
                 });
 
             for (var field in this.options.fields) {
                 this._initField(field);
-            }
-
-            this._setLiveValidating();
-        },
-
-        /**
-         * Enable live validating
-         */
-        _setLiveValidating: function() {
-            if ('enabled' == this.options.live) {
-                var that = this;
-                // Since this should be called once, I have to disable the live validating mode
-                this.options.live = 'disabled';
-
-                for (var field in this.options.fields) {
-                    (function(field) {
-                        var fields = that.getFieldElements(field);
-
-                        if (fields && fields.length > 0) {
-                            var $field = $(fields[0]);
-                            var type  = $field.attr('type');
-
-                            if ('radio' == type) {
-                                var event = 'change';
-                                fields.on(event, function() {
-                                    that.formSubmited = false;
-                                    that.validateField(field);
-                                });
-                            } else {
-                                var event = ('checkbox' == type || 'SELECT' == $field.get(0).tagName) ? 'change' : 'keyup';
-                                $field.on(event, function() {
-                                    that.formSubmited = false;
-                                    that.validateField(field);
-                                });
-                            }
-
-                        }
-                    })(field);
-                }
             }
         },
 
@@ -166,17 +70,26 @@
                 return;
             }
 
-            var $field = this.getFieldElement(field);
-            if (null == $field) {
+            var fields = this.$form.find('[name="' + field + '"]');
+            if (fields.length == 0) {
+                // We don't need to validate non-existing fields next time
+                delete this.options.fields[field];
+                delete this._dfds[field];
                 return;
             }
 
+            this._dfds[field] = {};
+
             // Create a help block element for showing the error
-            var $parent   = $field.parents('.form-group'),
+            var $field    = $(fields[0]),
+                $parent   = $field.parents('.form-group'),
                 helpBlock = $parent.find('.help-block');
 
             if (helpBlock.length == 0) {
-                var $small = $('<small/>').addClass('help-block').css('display', 'none').appendTo($parent);
+                var $small = $('<small/>')
+                                .addClass('help-block')
+                                .css('display', 'none')
+                                .appendTo($parent);
                 $field.data('bootstrapValidator.error', $small);
 
                 // Calculate the number of columns of the label/field element
@@ -205,37 +118,30 @@
                     }
                 }
                 if (size && offset) {
-                    $small.addClass(['col-', size, '-offset-', offset].join(''))
-                          .addClass(['col-', size, '-', 12 - offset].join(''));
+                    $small
+                        .addClass(['col-', size, '-offset-', offset].join(''))
+                        .addClass(['col-', size, '-', 12 - offset].join(''));
                 }
             } else {
                 $field.data('bootstrapValidator.error', helpBlock.eq(0));
             }
         },
 
-        /**
-         * Get field element
-         *
-         * @param {String} field The field name
-         * @returns {jQuery}
-         */
-        getFieldElement: function(field) {
-            var fields = this.$form.find('[name="' + field + '"]');
-            return (fields.length == 0) ? null : $(fields[0]);
-        },
+        // --- Public methods ---
 
         /**
-         * Get field elements
-         * Used for radios
-         *
-         * @param {String} field The field name
-         * @returns {jQuery}
+         * Validate the form
          */
-        getFieldElements: function(field) {
-            var fields = this.$form.find('[name="' + field + '"]');
-            return (fields.length == 0) ? null : fields;
+        validate: function() {
+            // Reset invalid fields
+            this._invalidFields = {};
+            if (!this.options.fields) {
+                return;
+            }
+            for (var field in this.options.fields) {
+                this.validateField(field);
+            }
         },
-
 
         /**
          * Validate given field
@@ -243,25 +149,61 @@
          * @param {String} field The field name
          */
         validateField: function(field) {
-            var $field = this.getFieldElement(field);
-            if (null == $field) {
-                // Return if cannot find the field with given name
-                return;
-            }
             var that       = this,
-                validators = that.options.fields[field].validators;
-            for (var validatorName in validators) {
+                fields     = this.$form.find('[name="' + field + '"]'),
+                $field     = $(fields[0]),
+                validators = this.options.fields[field].validators,
+                validatorName,
+                validateResult;
+            for (validatorName in validators) {
+                if (this._invalidFields[field]) {
+                    break;
+                }
+
+                // Continue if the validator with given name doesn't exist
                 if (!$.fn.bootstrapValidator.validators[validatorName]) {
+                    delete this.options.fields[field].validators[validatorName];
                     continue;
                 }
-                var isValid = $.fn.bootstrapValidator.validators[validatorName].validate(that, $field, validators[validatorName]);
-                if (isValid === false) {
-                    that.showError($field, validatorName);
-                    break;
-                } else if (isValid === true) {
-                    that.removeError($field);
+
+                if (this._dfds[field][validatorName]) {
+                    this._dfds[field][validatorName].reject();
+                }
+
+                validateResult = $.fn.bootstrapValidator.validators[validatorName].validate(this, $field, validators[validatorName]);
+                if ('object' == typeof validateResult) {
+                    this._dfds[field][validatorName] = validateResult;
+                }
+
+                $.when(validateResult).then(function(isValid) {
+                    delete that._dfds[field][validatorName];
+                    if (isValid) {
+                        that.removeError($field);
+                    } else {
+                        that._invalidFields[field] = true;
+                        that.showError($field, validatorName);
+                    }
+                });
+            }
+        },
+
+        /**
+         * Check the form validity
+         *
+         * @returns {Boolean}
+         */
+        isValid: function() {
+            var field;
+            for (field in this._invalidFields) {
+                return false;
+            }
+            for (field in this._dfds) {
+                if ('pending' == this._dfds[field].state()) {
+                    return false;
                 }
             }
+
+            return true;
         },
 
         /**
@@ -273,17 +215,17 @@
         showError: function($field, validatorName) {
             var field     = $field.attr('name'),
                 validator = this.options.fields[field].validators[validatorName],
-                message   = validator.message || this.options.message,
-                $parent   = $field.parents('.form-group');
-
-            this.invalidFields[field] = true;
+                message   = validator.message || this.options.message;
 
             // Add has-error class to parent element
-            $parent.removeClass('has-success').addClass('has-error');
-
-            $field.data('bootstrapValidator.error').html(message).show();
-
-            this.$form.find(this.options.submitButtons).attr('disabled', 'disabled');
+            $field
+                .parents('.form-group')
+                    .removeClass('has-success')
+                    .addClass('has-error')
+                    .end()
+                .data('bootstrapValidator.error')
+                    .html(message)
+                    .show();
         },
 
         /**
@@ -292,90 +234,13 @@
          * @param {jQuery} $field The field element
          */
         removeError: function($field) {
-            delete this.invalidFields[$field.attr('name')];
-            $field.parents('.form-group').removeClass('has-error').addClass('has-success');
-            $field.data('bootstrapValidator.error').hide();
-            this.$form.find(this.options.submitButtons).removeAttr('disabled');
-        },
-
-        /**
-         * Start remote checking
-         *
-         * @param {jQuery} $field The field element
-         * @param {String} validatorName
-         * @param {XMLHttpRequest} xhr
-         */
-        startRequest: function($field, validatorName, xhr) {
-            var field = $field.attr('name');
-
-            $field.data('bootstrapValidator.isValid', false);
-            this.$form.find(this.options.submitButtons).attr('disabled', 'disabled');
-
-            if(this.numPendingRequests == null){
-                this.numPendingRequests = 0;
-            }
-            this.numPendingRequests++;
-            // Abort the previous request
-            if (!this.xhrRequests[field]) {
-                this.xhrRequests[field] = {};
-            }
-
-            if (this.xhrRequests[field][validatorName]) {
-                this.numPendingRequests--;
-                this.xhrRequests[field][validatorName].abort();
-            }
-            this.xhrRequests[field][validatorName] = xhr;
-        },
-
-        /**
-         * Complete remote checking
-         *
-         * @param {jQuery} $field The field element
-         * @param {String} validatorName
-         * @param {Boolean} isValid
-         */
-        completeRequest: function($field, validatorName, isValid) {
-            if (isValid === false) {
-                this.showError($field, validatorName);
-            } else if (isValid === true) {
-                this.removeError($field);
-                $field.data('bootstrapValidator.isValid', true);
-            }
-
-            var field = $field.attr('name');
-
-            delete this.xhrRequests[field][validatorName];
-
-            this.numPendingRequests--;
-            if (this.numPendingRequests <= 0) {
-                this.numPendingRequests = 0;
-                if (this.formSubmited) {
-                    if (!this.submitHandlerCalled && this.options.submitHandler && 'function' == typeof this.options.submitHandler) {
-                        this.submitHandlerCalled = true;
-                        this.options.submitHandler.call(this, this, this.$form);
-                    } else {
-                        this.$form.submit();
-                    }
-                }
-            }
-        },
-
-        /**
-         * Check the form validity
-         *
-         * @returns {Boolean}
-         */
-        isValid: function() {
-            if (this.numPendingRequests > 0) {
-                return false;
-            }
-            for (var field in this.invalidFields) {
-                // Don't validate disabled element
-                if (this.invalidFields[field] && !this.getFieldElement(field).is(':disabled')) {
-                    return false;
-                }
-            }
-            return true;
+            $field
+                .parents('.form-group')
+                    .removeClass('has-error')
+                    .addClass('has-success')
+                    .end()
+                .data('bootstrapValidator.error')
+                    .hide();
         }
     };
 
@@ -384,7 +249,7 @@
         return this.each(function() {
             var $this = $(this), data = $this.data('bootstrapValidator');
             if (!data) {
-                $this.data('bootstrapValidator', (data = new BootstrapValidator(this, options)));
+                $this.data('bootstrapValidator', new BootstrapValidator(this, options));
             }
         });
     };
