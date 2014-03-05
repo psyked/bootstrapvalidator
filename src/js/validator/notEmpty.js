@@ -9,15 +9,15 @@
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
-
-
             var type = $field.attr('type');
-            if('radio' == type) {
-                var radioSelector = "input[name=" + $field.attr('name') + "]:checked";
-                return ($(radioSelector).length > 0);
+            if ('radio' == type || 'checkbox' == type) {
+                return validator
+                            .getFieldElements($field.attr('name'))
+                            .filter(':checked')
+                            .length > 0;
             }
 
-            return ('checkbox' == type) ? $field.is(':checked') : ($.trim($field.val()) != '');
+            return $.trim($field.val()) != '';
         }
     };
 }(window.jQuery));

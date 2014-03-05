@@ -12,6 +12,7 @@
          *          // validator is instance of BootstrapValidator
          *      }
          * - message: The invalid message
+         * @returns {Boolean|Deferred}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();

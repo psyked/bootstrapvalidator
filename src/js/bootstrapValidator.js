@@ -130,6 +130,17 @@
         // --- Public methods ---
 
         /**
+         * Retrieve the field elements by given name
+         *
+         * @param {String} field The field name
+         * @returns {null|jQuery[]}
+         */
+        getFieldElements: function(field) {
+            var fields = this.$form.find('[name="' + field + '"]');
+            return (fields.length == 0) ? null : fields;
+        },
+
+        /**
          * Validate the form
          */
         validate: function() {
