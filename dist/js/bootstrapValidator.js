@@ -35,6 +35,12 @@
         // Change it if you use custom grid with different number of columns
         columns: 12,
 
+        // Shows ok/error icons based on the field validity.
+        // This feature requires Bootstrap v3.1.0 or later (http://getbootstrap.com/css/#forms-control-validation).
+        // Since Bootstrap doesn't provide any methods to know its version, this option cannot be on/off automatically.
+        // In other word, to use this feature you have to upgrade your Bootstrap to v3.1.0 or later.
+        feedbackIcons: false,
+
         // The submit buttons selector
         // These buttons will be disabled when the form input are invalid
         submitButtons: 'button[type="submit"]',
@@ -168,11 +174,13 @@
 
             // Prepare the feedback icons
             // Available from Bootstrap 3.1 (http://getbootstrap.com/css/#forms-control-validation)
-            $parent.addClass('has-feedback');
-            $('<span/>')
-                .css('display', 'none')
-                .addClass('glyphicon form-control-feedback')
-                .insertAfter($(fields[fields.length - 1]));
+            if (this.options.feedbackIcons) {
+                $parent.addClass('has-feedback');
+                $('<span/>')
+                    .css('display', 'none')
+                    .addClass('glyphicon form-control-feedback')
+                    .insertAfter($(fields[fields.length - 1]));
+            }
         },
 
         /**
@@ -324,24 +332,26 @@
         showError: function($field, validatorName) {
             var field     = $field.attr('name'),
                 validator = this.options.fields[field].validators[validatorName],
-                message   = validator.message || this.options.message;
+                message   = validator.message || this.options.message,
+                $parent   = $field.parents('.form-group');
 
-            $field
-                .parents('.form-group')
-                    // Add has-error class to parent element
-                    .removeClass('has-success')
-                    .addClass('has-error')
-                    // Show error element
-                    .find('.help-block[data-bs-validator="' + validatorName + '"]')
-                        .html(message)
-                        .show()
-                        .end()
-                    // Show feedback icon
+            $parent
+                // Add has-error class to parent element
+                .removeClass('has-success')
+                .addClass('has-error')
+                // Show error element
+                .find('.help-block[data-bs-validator="' + validatorName + '"]')
+                    .html(message)
+                    .show();
+
+            if (this.options.feedbackIcons) {
+                // Show feedback icon
+                $parent
                     .find('.form-control-feedback')
                         .removeClass('glyphicon-ok')
                         .addClass('glyphicon-remove')
                         .show();
-
+            }
         },
 
         /**
@@ -358,15 +368,19 @@
                 .filter('[data-bs-validator="' + validatorName + '"]')
                     .hide();
 
-            // If the field is valid then show the "ok" icon
+            // If the field is valid
             if ($errors.filter(function() { return 'block' == $(this).css('display'); }).length == 0) {
                 $parent
                     .removeClass('has-error')
                     .addClass('has-success')
-                    .find('.form-control-feedback')
-                        .removeClass('glyphicon-remove')
-                        .addClass('glyphicon-ok')
-                        .show();
+                // Show the "ok" icon
+                if (this.options.feedbackIcons) {
+                    $parent
+                        .find('.form-control-feedback')
+                            .removeClass('glyphicon-remove')
+                            .addClass('glyphicon-ok')
+                            .show();
+                }
             }
         }
     };

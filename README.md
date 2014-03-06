@@ -71,6 +71,12 @@ $(document).ready(function() {
         // Change it if you use custom grid with different number of columns
         columns: 12,
 
+        // Shows ok/error icons based on the field validity.
+        // This feature requires Bootstrap v3.1.0 or later (http://getbootstrap.com/css/#forms-control-validation).
+        // Since Bootstrap doesn't provide any methods to know its version, this option cannot be on/off automatically.
+        // In other word, to use this feature you have to upgrade your Bootstrap to v3.1.0 or later.
+        feedbackIcons: false,
+
         // The submit buttons selector
         // These buttons will be disabled when the form input are invalid
         submitButtons: ...,
