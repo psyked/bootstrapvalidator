@@ -229,13 +229,14 @@
          */
         validate: function() {
             if (!this.options.fields) {
-                return;
+                return this;
             }
             for (var field in this.options.fields) {
                 this.validateField(field);
             }
 
             this._submit();
+            return this;
         },
 
         /**
@@ -339,7 +340,10 @@
         return this.each(function() {
             var $this = $(this), data = $this.data('bootstrapValidator');
             if (!data) {
-                $this.data('bootstrapValidator', new BootstrapValidator(this, options));
+                $this.data('bootstrapValidator', (data = new BootstrapValidator(this, options)));
+            }
+            if ('string' == typeof options) {
+                data[options]();
             }
         });
     };

@@ -157,6 +157,7 @@
                         <div class="form-group">
                             <div class="col-lg-9 col-lg-offset-3">
                                 <button type="submit" class="btn btn-primary">Sign up</button>
+                                <button type="button" class="btn btn-info" id="validateBtn">Manual validate</button>
                             </div>
                         </div>
                     </form>
@@ -275,6 +276,11 @@ $(document).ready(function() {
                 }
             }
         }
+    });
+
+    // Validate the form manually
+    $('#validateBtn').click(function() {
+        $('#defaultForm').bootstrapValidator('validate');
     });
 });
 </script>
