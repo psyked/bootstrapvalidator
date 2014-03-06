@@ -6,12 +6,13 @@ module.exports = function(grunt) {
 
         banner: [
             '/**',
-            ' * BootstrapValidator v<%= pkg.version %> (<%= pkg.homepage %>)',
+            ' * BootstrapValidator (<%= pkg.homepage %>)',
             ' *',
             ' * A jQuery plugin to validate form fields. Use with Bootstrap 3',
             ' *',
-            ' * @author      Nguyen Huu Phuoc <phuoc@huuphuoc.me>',
-            ' * @copyright   (c) 2013 Nguyen Huu Phuoc',
+            ' * @version     v<%= pkg.version %>',
+            ' * @author      <%= pkg.author.url %>',
+            ' * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc',
             ' * @license     MIT',
             ' */\n\n'
         ].join('\n'),

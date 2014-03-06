@@ -131,7 +131,7 @@ notEmpty                                | Check if the value is empty
 [remote](#remote-validator)             | Perform remote checking via Ajax request
 [stringLength](#stringlength-validator) | Validate the length of a string
 uri                                     | Validate an URL address
-usZipCode                               | Validate a US zip code
+[zipCode](#zipcode-validator)           | Validate a zip code
 
 The validator options are described in the following section:
 
@@ -220,6 +220,15 @@ Option name | Default | Description
 message     | n/a     | The error message
 min         | n/a     | The minimum length
 max         | n/a     | The maximum length. One of ```min```, ```max``` options is required
+
+### ZipCode Validator
+
+| Option name | Default | Description
+| ------------|---------|------------
+| message     | n/a     | The error message
+| country     | US      | A ISO 3166 country code. Currently it supports the following countries:
+|             |         | - US (United State)
+|             |         | - DK (Denmark)
 
 ## Write new validator
 
@@ -310,7 +319,7 @@ This software is written by Nguyen Huu Phuoc, aka @nghuuphuoc
 
 Big thanks to the contributor:
 
-* Vu Minh Khang, aka [@khangvm53](https://github.com/khangvm53)
+[@khangvm53](https://github.com/khangvm53)
 
 ## License
 

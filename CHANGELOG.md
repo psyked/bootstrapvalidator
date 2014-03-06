@@ -2,13 +2,20 @@
 
 ## v0.3.0
 
+__New features__:
+
 * [#44: Rewrite entirely using Deferred](https://github.com/nghuuphuoc/bootstrapvalidator/issues/44)
+* [#64: Support Danish zip code](https://github.com/nghuuphuoc/bootstrapvalidator/issues/64)
 * [#71: Show all errors](https://github.com/nghuuphuoc/bootstrapvalidator/issues/71)
+
+__Fixes__:
+
 * [#51: Submit after submit doesn't work](https://github.com/nghuuphuoc/bootstrapvalidator/issues/51)
 * [#53: Fix notEmpty validator for radios and checkboxes](https://github.com/nghuuphuoc/bootstrapvalidator/issues/53)
 * [#62: The callback validator passes wrong parameter](https://github.com/nghuuphuoc/bootstrapvalidator/issues/62)
 
-Document:
+__Document__:
+
 * [#60: Update the installation guide](https://github.com/nghuuphuoc/bootstrapvalidator/pull/60)
 * [#73: Describe which version should be included in the Usage section](https://github.com/nghuuphuoc/bootstrapvalidator/issues/73)
 

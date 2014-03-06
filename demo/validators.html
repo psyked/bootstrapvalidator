@@ -205,7 +205,8 @@ $(document).ready(function() {
             },
             zipCode: {
                 validators: {
-                    usZipCode: {
+                    zipCode: {
+                        country: 'US',
                         message: 'The input is not a valid US zip code'
                     }
                 }
