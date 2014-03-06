@@ -189,9 +189,6 @@
         _setLiveValidating: function() {
             if ('enabled' == this.options.live) {
                 var that = this;
-                // Since this should be called once, I have to disable the live validating mode
-                this.options.live = 'disabled';
-
                 for (var field in this.options.fields) {
                     (function(f) {
                         var fields = that.getFieldElements(f);
@@ -205,6 +202,20 @@
                         }
                     })(field);
                 }
+            }
+        },
+
+        /**
+         * Disable/Enable submit buttons
+         *
+         * @param {Boolean} disabled
+         */
+        _disableSubmitButtons: function(disabled) {
+            if (!disabled) {
+                this.$form.find(this.options.submitButtons).removeAttr('disabled');
+            } else if (this.options.live != 'disabled') {
+                // Don't disable if the live validating mode is disabled
+                this.$form.find(this.options.submitButtons).attr('disabled', 'disabled');
             }
         },
 
@@ -223,8 +234,11 @@
                     this.getFieldElements(this.invalidField).focus();
                 }
 
+                this._disableSubmitButtons(false);
                 return;
             }
+
+            this._disableSubmitButtons(true);
 
             // Call the custom submission if enabled
             if (this.options.submitHandler && 'function' == typeof this.options.submitHandler) {
@@ -255,6 +269,8 @@
             if (!this.options.fields) {
                 return this;
             }
+            this._disableSubmitButtons(true);
+
             for (var field in this.options.fields) {
                 this.validateField(field);
             }
@@ -294,7 +310,6 @@
                 }
 
                 $.when(validateResult).then(function(isValid) {
-                    that.results[field][validatorName] = isValid;
                     if (isValid) {
                         that.removeError($field, validatorName);
                     } else {
@@ -313,7 +328,7 @@
             var field, validatorName;
             for (field in this.results) {
                 for (validatorName in this.results[field]) {
-                    if (!this.results[field][validatorName]) {
+                    if (this.results[field][validatorName] !== true) {
                         this.invalidField = field;
                         return false;
                     }
@@ -335,6 +350,9 @@
                 message   = validator.message || this.options.message,
                 $parent   = $field.parents('.form-group');
 
+            this.results[field][validatorName] = false;
+            this._disableSubmitButtons(true);
+
             $parent
                 // Add has-error class to parent element
                 .removeClass('has-success')
@@ -345,7 +363,7 @@
                     .show();
 
             if (this.options.feedbackIcons) {
-                // Show feedback icon
+                // Show "error" icon
                 $parent
                     .find('.form-control-feedback')
                         .removeClass('glyphicon-ok')
@@ -363,6 +381,8 @@
             var $parent = $field.parents('.form-group'),
                 $errors = $parent.find('.help-block[data-bs-validator]'),
                 field   = $field.attr('name');
+
+            this.results[field][validatorName] = true;
 
             // Hide error element
             $errors
@@ -387,6 +407,10 @@
                             .addClass('glyphicon-ok')
                             .show();
                 }
+            }
+
+            if (this.isValid()) {
+                this._disableSubmitButtons(false);
             }
         }
     };
