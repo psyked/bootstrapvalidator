@@ -100,8 +100,11 @@
             this._results[field] = {};
 
             var fields = this.$form.find('[name="' + field + '"]');
-            if (fields.length == 0) {
-                // We don't need to validate non-existing fields next time
+
+            // We don't need to validate ...
+            if (fields.length == 0                                  // ... non-existing fields
+                || (fields.length == 1 && fields.is(':disabled')))  // ... disabled field
+            {
                 delete this.options.fields[field];
                 delete this._dfds[field];
                 return;
