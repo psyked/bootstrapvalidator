@@ -51,11 +51,11 @@ Since the bootstrapValidator plugin requires jQuery and Bootstrap 3, you have to
 <script type="text/javascript" src="/path/to/dist/js/bootstrapValidator.min.js"></script>
 
 // Or use the original one with all validators included
-// <script type="text/javascript" src="/path/to/dist/js/bootstrapValidator.js"></script>
+<script type="text/javascript" src="/path/to/dist/js/bootstrapValidator.js"></script>
 
 // Or use the plugin with required validators
-// <script type="text/javascript" src="/path/to/src/js/bootstrapValidator.js"></script>
-// <script type="text/javascript" src="/path/to/src/js/validator/...validator..."></script>
+<script type="text/javascript" src="/path/to/src/js/bootstrapValidator.js"></script>
+<script type="text/javascript" src="/path/to/src/js/validator/...validator..."></script>
 ```
 
 Call the plugin to validate the form as following:
@@ -227,9 +227,7 @@ max         | n/a     | The maximum length. One of ```min```, ```max``` options 
 | ------------|---------|------------
 | message     | n/a     | The error message
 | country     | US      | A ISO 3166 country code. Currently it supports the following countries:
-|             |         | - US (United State)
-|             |         | - DK (Denmark)
-|             |         | - SE (Sweden)
+|             |         | US (United State), DK (Denmark), SE (Sweden)
 
 ## Write new validator
 
@@ -325,7 +323,6 @@ Big thanks to the contributors:
 * [@kristian-puccio](https://github.com/kristian-puccio)
 * [@iplus](https://github.com/iplus)
 * [@vaz](https://github.com/vaz)
-*
 * ... might be you! Let's [fork](https://github.com/nghuuphuoc/bootstrapvalidator/fork) and make a pull request!
 
 ## License
