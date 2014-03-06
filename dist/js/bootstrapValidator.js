@@ -361,7 +361,8 @@
          */
         removeError: function($field, validatorName) {
             var $parent = $field.parents('.form-group'),
-                $errors = $parent.find('.help-block[data-bs-validator]');
+                $errors = $parent.find('.help-block[data-bs-validator]'),
+                field   = $field.attr('name');
 
             // Hide error element
             $errors
@@ -369,7 +370,12 @@
                     .hide();
 
             // If the field is valid
-            if ($errors.filter(function() { return 'block' == $(this).css('display'); }).length == 0) {
+            var that = this;
+            if ($errors.filter(function() {
+                    var display = $(this).css('display');
+                    return ('block' == display) || ('none' == display && that.results[field][validatorName] == null);
+                }).length == 0
+            ) {
                 $parent
                     .removeClass('has-error')
                     .addClass('has-success')
