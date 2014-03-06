@@ -67,6 +67,10 @@ $(document).ready(function() {
         // You can specify the error message for any fields
         message: ...,
 
+        // The number of grid columns
+        // Change it if you use custom grid with different number of columns
+        columns: 12,
+
         // The submit buttons selector
         // These buttons will be disabled when the form input are invalid
         submitButtons: ...,

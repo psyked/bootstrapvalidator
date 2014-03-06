@@ -33,6 +33,10 @@
         // Default invalid message
         message: 'This value is not valid',
 
+        // The number of grid columns
+        // Change it if you use custom grid with different number of columns
+        columns: 12,
+
         // The custom submit handler
         // It will prevent the form from the default submission
         //
@@ -146,7 +150,7 @@
                         .attr('data-bs-validator', validatorName)
                         .addClass('help-block')
                         .addClass(['col-', size, '-offset-', offset].join(''))
-                        .addClass(['col-', size, '-', 12 - offset].join(''))
+                        .addClass(['col-', size, '-', this.options.columns - offset].join(''))
                         .appendTo($parent);
                 }
             }

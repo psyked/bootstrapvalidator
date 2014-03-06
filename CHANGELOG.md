@@ -8,6 +8,7 @@ __New features__:
 * #26, #27, #67: Add choice validator
 * [#64: Support Danish zip code](https://github.com/nghuuphuoc/bootstrapvalidator/issues/64)
 * [#65: Support Sweden zip code](https://github.com/nghuuphuoc/bootstrapvalidator/issues/64)
+* [#70: Support custom grid columns](https://github.com/nghuuphuoc/bootstrapvalidator/issues/70)
 * [#71: Show all errors](https://github.com/nghuuphuoc/bootstrapvalidator/issues/71)
 
 __Fixes__:
