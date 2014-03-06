@@ -31,7 +31,7 @@
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Email address</label>
                             <div class="col-lg-5">
-                                <input type="text" class="form-control" name="email" />
+                                <input type="text" class="form-control" name="email" disabled />
                             </div>
                         </div>
 
@@ -102,6 +102,52 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="col-lg-3 control-label">Programming Languages</label>
+                            <div class="col-lg-9">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="programs[]" value="net" /> .Net
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="programs[]" value="java" /> Java
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="programs[]" value="c" /> C/C++
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="programs[]" value="php" /> PHP
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="programs[]" value="perl" /> Perl
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="programs[]" value="ruby" /> Ruby
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="programs[]" value="python" /> Python
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="programs[]" value="javascript" /> Javascript
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="col-lg-3 control-label" id="captchaOperation"></label>
                             <div class="col-lg-2">
                                 <input type="text" class="form-control" name="captcha" />
@@ -138,23 +184,23 @@ $(document).ready(function() {
                     notEmpty: {
                         message: 'The username is required and can\'t be empty'
                     },
-//                    stringLength: {
-//                        min: 6,
-//                        max: 30,
-//                        message: 'The username must be more than 6 and less than 30 characters long'
-//                    },
-//                    regexp: {
-//                        regexp: /^[a-zA-Z0-9_\.]+$/,
-//                        message: 'The username can only consist of alphabetical, number, dot and underscore'
-//                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+                    },
                     remote: {
                         url: 'remote.php',
                         message: 'The username is not available'
                     },
-//                    different: {
-//                        field: 'password',
-//                        message: 'The username and password can\'t be the same as each other'
-//                    }
+                    different: {
+                        field: 'password',
+                        message: 'The username and password can\'t be the same as each other'
+                    }
                 }
             },
             email: {
@@ -164,50 +210,59 @@ $(document).ready(function() {
                     }
                 }
             },
-//            password: {
-//                validators: {
-//                    notEmpty: {
-//                        message: 'The password is required and can\'t be empty'
-//                    },
-//                    identical: {
-//                        field: 'confirmPassword',
-//                        message: 'The password and its confirm are not the same'
-//                    },
-//                    different: {
-//                        field: 'username',
-//                        message: 'The password can\'t be the same as username'
-//                    }
-//                }
-//            },
-//            confirmPassword: {
-//                validators: {
-//                    notEmpty: {
-//                        message: 'The confirm password is required and can\'t be empty'
-//                    },
-//                    identical: {
-//                        field: 'password',
-//                        message: 'The password and its confirm are not the same'
-//                    },
-//                    different: {
-//                        field: 'username',
-//                        message: 'The password can\'t be the same as username'
-//                    }
-//                }
-//            },
-//            gender: {
-//                validators: {
-//                    notEmpty: {
-//                        message: 'The gender is required'
-//                    }
-//                }
-//            },
-//            'languages[]': {
-//                validators: {
-//                    notEmpty: {
-//                        message: 'Please specify at least one language you can speak'
-//                    }
-//                }
-//            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required and can\'t be empty'
+                    },
+                    identical: {
+                        field: 'confirmPassword',
+                        message: 'The password and its confirm are not the same'
+                    },
+                    different: {
+                        field: 'username',
+                        message: 'The password can\'t be the same as username'
+                    }
+                }
+            },
+            confirmPassword: {
+                validators: {
+                    notEmpty: {
+                        message: 'The confirm password is required and can\'t be empty'
+                    },
+                    identical: {
+                        field: 'password',
+                        message: 'The password and its confirm are not the same'
+                    },
+                    different: {
+                        field: 'username',
+                        message: 'The password can\'t be the same as username'
+                    }
+                }
+            },
+            gender: {
+                validators: {
+                    notEmpty: {
+                        message: 'The gender is required'
+                    }
+                }
+            },
+            'languages[]': {
+                validators: {
+                    notEmpty: {
+                        message: 'Please specify at least one language you can speak'
+                    }
+                }
+            },
+            'programs[]': {
+                validators: {
+                    choice: {
+                        min: 2,
+                        max: 4,
+                        message: 'Please choose 2 - 4 programming languages you are good at'
+                    }
+                }
+            },
             captcha: {
                 validators: {
                     callback: {
