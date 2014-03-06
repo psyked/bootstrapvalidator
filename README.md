@@ -229,6 +229,7 @@ max         | n/a     | The maximum length. One of ```min```, ```max``` options 
 | country     | US      | A ISO 3166 country code. Currently it supports the following countries:
 |             |         | - US (United State)
 |             |         | - DK (Denmark)
+|             |         | - SE (Sweden)
 
 ## Write new validator
 

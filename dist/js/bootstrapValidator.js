@@ -838,6 +838,7 @@
          * Currently it supports the following countries:
          * - US (United State)
          * - DK (Denmark)
+         * - SE (Sweden)
          *
          * @returns {Boolean}
          */
@@ -849,6 +850,8 @@
             switch (options.country.toUpperCase()) {
                 case 'DK':
                     return /^(DK(-|\s)?)?\d{4}$/i.test(value);
+                case 'SE':
+                    return /^(S-)?\d{3}\s?\d{2}$/i.test(value);
                 case 'US':
                 default:
                     return /^\d{5}([\-]\d{4})?$/.test(value);
