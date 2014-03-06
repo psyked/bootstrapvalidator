@@ -200,7 +200,7 @@
                 this.options.submitHandler.call(this, this, this.$form);
             } else {
                 // Submit form
-                //this.$form.off('submit.bootstrapValidator').submit();
+                this.$form.off('submit.bootstrapValidator').submit();
             }
         },
 

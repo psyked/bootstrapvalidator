@@ -4,6 +4,7 @@
 
 * [#44: Rewrite entirely using Deferred](https://github.com/nghuuphuoc/bootstrapvalidator/issues/44)
 * [#71: Show all errors](https://github.com/nghuuphuoc/bootstrapvalidator/issues/71)
+* [#51: Submit after submit doesn't work](https://github.com/nghuuphuoc/bootstrapvalidator/issues/51)
 * [#53: Fix notEmpty validator for radios and checkboxes](https://github.com/nghuuphuoc/bootstrapvalidator/issues/53)
 * [#62: The callback validator passes wrong parameter](https://github.com/nghuuphuoc/bootstrapvalidator/issues/62)
 * [#60: Update the installation guide](https://github.com/nghuuphuoc/bootstrapvalidator/pull/60)

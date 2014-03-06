@@ -50,6 +50,58 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="col-lg-3 control-label">Gender</label>
+                            <div class="col-lg-9">
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="gender" value="male" /> Male
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="gender" value="female" /> Female
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" name="gender" value="other" /> Other
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Languages</label>
+                            <div class="col-lg-9">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="languages[]" value="english" /> English
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="languages[]" value="french" /> French
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="languages[]" value="german" /> German
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="languages[]" value="russian" /> Russian
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="languages[]" value="other" /> Other
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="col-lg-3 control-label" id="captchaOperation"></label>
                             <div class="col-lg-2">
                                 <input type="text" class="form-control" name="captcha" />
@@ -77,6 +129,7 @@ $(document).ready(function() {
     $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
 
     $('#defaultForm').bootstrapValidator({
+//        live: 'submitted',
         message: 'This value is not valid',
         fields: {
             username: {
@@ -85,19 +138,23 @@ $(document).ready(function() {
                     notEmpty: {
                         message: 'The username is required and can\'t be empty'
                     },
-                    stringLength: {
-                        min: 6,
-                        max: 30,
-                        message: 'The username must be more than 6 and less than 30 characters long'
+//                    stringLength: {
+//                        min: 6,
+//                        max: 30,
+//                        message: 'The username must be more than 6 and less than 30 characters long'
+//                    },
+//                    regexp: {
+//                        regexp: /^[a-zA-Z0-9_\.]+$/,
+//                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+//                    },
+                    remote: {
+                        url: 'remote.php',
+                        message: 'The username is not available'
                     },
-                    regexp: {
-                        regexp: /^[a-zA-Z0-9_\.]+$/,
-                        message: 'The username can only consist of alphabetical, number, dot and underscore'
-                    },
-                    different: {
-                        field: 'password',
-                        message: 'The username and password can\'t be the same as each other'
-                    }
+//                    different: {
+//                        field: 'password',
+//                        message: 'The username and password can\'t be the same as each other'
+//                    }
                 }
             },
             email: {
@@ -107,36 +164,50 @@ $(document).ready(function() {
                     }
                 }
             },
-            password: {
-                validators: {
-                    notEmpty: {
-                        message: 'The password is required and can\'t be empty'
-                    },
-                    identical: {
-                        field: 'confirmPassword',
-                        message: 'The password and its confirm are not the same'
-                    },
-                    different: {
-                        field: 'username',
-                        message: 'The password can\'t be the same as username'
-                    }
-                }
-            },
-            confirmPassword: {
-                validators: {
-                    notEmpty: {
-                        message: 'The confirm password is required and can\'t be empty'
-                    },
-                    identical: {
-                        field: 'password',
-                        message: 'The password and its confirm are not the same'
-                    },
-                    different: {
-                        field: 'username',
-                        message: 'The password can\'t be the same as username'
-                    }
-                }
-            },
+//            password: {
+//                validators: {
+//                    notEmpty: {
+//                        message: 'The password is required and can\'t be empty'
+//                    },
+//                    identical: {
+//                        field: 'confirmPassword',
+//                        message: 'The password and its confirm are not the same'
+//                    },
+//                    different: {
+//                        field: 'username',
+//                        message: 'The password can\'t be the same as username'
+//                    }
+//                }
+//            },
+//            confirmPassword: {
+//                validators: {
+//                    notEmpty: {
+//                        message: 'The confirm password is required and can\'t be empty'
+//                    },
+//                    identical: {
+//                        field: 'password',
+//                        message: 'The password and its confirm are not the same'
+//                    },
+//                    different: {
+//                        field: 'username',
+//                        message: 'The password can\'t be the same as username'
+//                    }
+//                }
+//            },
+//            gender: {
+//                validators: {
+//                    notEmpty: {
+//                        message: 'The gender is required'
+//                    }
+//                }
+//            },
+//            'languages[]': {
+//                validators: {
+//                    notEmpty: {
+//                        message: 'Please specify at least one language you can speak'
+//                    }
+//                }
+//            },
             captcha: {
                 validators: {
                     callback: {
