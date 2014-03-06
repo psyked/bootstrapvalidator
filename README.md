@@ -318,9 +318,15 @@ This software is written by Nguyen Huu Phuoc, aka @nghuuphuoc
 * [http://twitter.com/nghuuphuoc](http://twitter.com/nghuuphuoc)
 * [http://github.com/nghuuphuoc](http://github.com/nghuuphuoc)
 
-Big thanks to the contributor:
+Big thanks to the contributors:
 
-[@khangvm53](https://github.com/khangvm53)
+* [@emilchristensen](https://github.com/emilchristensen)
+* [@khangvm53](https://github.com/khangvm53)
+* [@kristian-puccio](https://github.com/kristian-puccio)
+* [@iplus](https://github.com/iplus)
+* [@vaz](https://github.com/vaz)
+*
+* ... might be you! Let's [fork](https://github.com/nghuuphuoc/bootstrapvalidator/fork) and make a pull request!
 
 ## License
 
