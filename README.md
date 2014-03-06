@@ -79,8 +79,9 @@ $(document).ready(function() {
         // The handler has two arguments
         // - validator is the instance of BootstrapValidator
         // - form is jQuery object representing the current form
+        // - submitButton is jQuery object representing the submit button which is clicked
         // By default, submitHandler is null
-        submitHandler: function(validator, form) {
+        submitHandler: function(validator, form, submitButton) {
         },
 
         // Live validating. Can be one of 3 values:

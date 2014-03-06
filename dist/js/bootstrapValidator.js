@@ -14,14 +14,11 @@
         this.$form   = $(form);
         this.options = $.extend({}, BootstrapValidator.DEFAULT_OPTIONS, options);
 
-        // Array of deferred
-        this._dfds   = {};
+        this.dfds    = {};      // Array of deferred
+        this.results = {};      // Validating results
 
-        // First invalid field
-        this._firstInvalidField = null;
-
-        // Validating results
-        this._results = {};
+        this.invalidField  = null;  // First invalid field
+        this.$submitButton = null;  // The submit button which is clicked to submit form
 
         this._init();
     };
@@ -37,6 +34,10 @@
         // The number of grid columns
         // Change it if you use custom grid with different number of columns
         columns: 12,
+
+        // The submit buttons selector
+        // These buttons will be disabled when the form input are invalid
+        submitButtons: 'button[type="submit"]',
 
         // The custom submit handler
         // It will prevent the form from the default submission
@@ -80,6 +81,12 @@
                     that.validate();
                 });
 
+            this.$form
+                .find(this.options.submitButtons)
+                .on('click', function() {
+                    that.$submitButton = $(this);
+                });
+
             for (var field in this.options.fields) {
                 this._initField(field);
             }
@@ -97,8 +104,8 @@
                 return;
             }
 
-            this._dfds[field]    = {};
-            this._results[field] = {};
+            this.dfds[field]    = {};
+            this.results[field] = {};
 
             var fields = this.$form.find('[name="' + field + '"]');
 
@@ -107,7 +114,7 @@
                 || (fields.length == 1 && fields.is(':disabled')))  // ... disabled field
             {
                 delete this.options.fields[field];
-                delete this._dfds[field];
+                delete this.dfds[field];
                 return;
             }
 
@@ -148,7 +155,7 @@
                         continue;
                     }
 
-                    this._results[field][validatorName] = null;
+                    this.results[field][validatorName] = null;
                     $('<small/>')
                         .css('display', 'none')
                         .attr('data-bs-validator', validatorName)
@@ -196,8 +203,8 @@
                 }
 
                 // Focus to the first invalid field
-                if (this._firstInvalidField) {
-                    this.getFieldElements(this._firstInvalidField).focus();
+                if (this.invalidField) {
+                    this.getFieldElements(this.invalidField).focus();
                 }
 
                 return;
@@ -205,7 +212,7 @@
 
             // Call the custom submission if enabled
             if (this.options.submitHandler && 'function' == typeof this.options.submitHandler) {
-                this.options.submitHandler.call(this, this, this.$form);
+                this.options.submitHandler.call(this, this, this.$form, this.$submitButton);
             } else {
                 // Submit form
                 this.$form.off('submit.bootstrapValidator').submit();
@@ -253,16 +260,16 @@
                 validatorName,
                 validateResult;
             for (validatorName in validators) {
-                if (this._dfds[field][validatorName]) {
-                    this._dfds[field][validatorName].reject();
+                if (this.dfds[field][validatorName]) {
+                    this.dfds[field][validatorName].reject();
                 }
 
                 validateResult = $.fn.bootstrapValidator.validators[validatorName].validate(this, $field, validators[validatorName]);
                 if ('object' == typeof validateResult) {
-                    this._dfds[field][validatorName] = validateResult;
+                    this.dfds[field][validatorName] = validateResult;
                     validateResult.done(function(isValid, v) {
                         // v is validator name
-                        delete that._dfds[field][v];
+                        delete that.dfds[field][v];
                         /*
                         if (isValid) {
                             that._submit();
@@ -271,7 +278,7 @@
                 }
 
                 $.when(validateResult).then(function(isValid) {
-                    that._results[field][validatorName] = isValid;
+                    that.results[field][validatorName] = isValid;
                     if (isValid) {
                         that.removeError($field, validatorName);
                     } else {
@@ -288,10 +295,10 @@
          */
         isValid: function() {
             var field, validatorName;
-            for (field in this._results) {
-                for (validatorName in this._results[field]) {
-                    if (!this._results[field][validatorName]) {
-                        this._firstInvalidField = field;
+            for (field in this.results) {
+                for (validatorName in this.results[field]) {
+                    if (!this.results[field][validatorName]) {
+                        this.invalidField = field;
                         return false;
                     }
                 }
