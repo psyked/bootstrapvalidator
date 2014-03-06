@@ -5,6 +5,7 @@
 __New features__:
 
 * [#44: Rewrite entirely using Deferred](https://github.com/nghuuphuoc/bootstrapvalidator/issues/44)
+* #26, #27, #67: Add choice validator
 * [#64: Support Danish zip code](https://github.com/nghuuphuoc/bootstrapvalidator/issues/64)
 * [#65: Support Sweden zip code](https://github.com/nghuuphuoc/bootstrapvalidator/issues/64)
 * [#71: Show all errors](https://github.com/nghuuphuoc/bootstrapvalidator/issues/71)

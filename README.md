@@ -118,6 +118,7 @@ Validator name                          | Description
 ----------------------------------------|------------
 [between](#between-validator)           | Check if the input value is between (strictly or not) two given numbers
 [callback](#callback-validator)         | Return the validity from a callback method
+[choice](#choice-validator)             | Check if the number of checked boxes are less or more than a given number
 creditCard                              | Validate a credit card number
 [different](#different-validator)       | Return true if the input value is different with given field's value
 digits                                  | Return true if the value contains only digits
@@ -164,6 +165,14 @@ function(fieldValue, validator) {
     // return true or false
 }
 ```
+
+### Choice Validator
+
+Option name | Default | Description
+------------|---------|------------
+message     | n/a     | The error message
+min         | n/a     | The minimum number of check boxes required to be checked
+max         | n/a     | The maximum number of check boxes required to be checked. At least one of ```min``` and ```max``` is required
 
 ### Different Validator
 
