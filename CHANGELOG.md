@@ -8,6 +8,7 @@ __New features__:
 * #26, #27, #67: Add choice validator
 * [#36, #58: Add method to validate form manually](https://github.com/nghuuphuoc/bootstrapvalidator/issues/58)
 * [#42: Add submit button to ```submitHandler()``` parameter](https://github.com/nghuuphuoc/bootstrapvalidator/issues/42)
+* [#48: Add optional feedback icons](https://github.com/nghuuphuoc/bootstrapvalidator/issues/48)
 * [#64: Support Danish zip code](https://github.com/nghuuphuoc/bootstrapvalidator/issues/64)
 * [#65: Support Sweden zip code](https://github.com/nghuuphuoc/bootstrapvalidator/issues/64)
 * [#70: Support custom grid columns](https://github.com/nghuuphuoc/bootstrapvalidator/issues/70)

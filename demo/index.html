@@ -31,7 +31,7 @@
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Email address</label>
                             <div class="col-lg-5">
-                                <input type="text" class="form-control" name="email" disabled />
+                                <input type="text" class="form-control" name="email" />
                             </div>
                         </div>
 
@@ -51,7 +51,7 @@
 
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Gender</label>
-                            <div class="col-lg-9">
+                            <div class="col-lg-5">
                                 <div class="radio">
                                     <label>
                                         <input type="radio" name="gender" value="male" /> Male
@@ -72,7 +72,7 @@
 
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Languages</label>
-                            <div class="col-lg-9">
+                            <div class="col-lg-5">
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" name="languages[]" value="english" /> English
@@ -103,7 +103,7 @@
 
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Programming Languages</label>
-                            <div class="col-lg-9">
+                            <div class="col-lg-5">
                                 <div class="checkbox">
                                     <label>
                                         <input type="checkbox" name="programs[]" value="net" /> .Net
@@ -194,10 +194,10 @@ $(document).ready(function() {
                         regexp: /^[a-zA-Z0-9_\.]+$/,
                         message: 'The username can only consist of alphabetical, number, dot and underscore'
                     },
-                    remote: {
-                        url: 'remote.php',
-                        message: 'The username is not available'
-                    },
+//                    remote: {
+//                        url: 'remote.php',
+//                        message: 'The username is not available'
+//                    },
                     different: {
                         field: 'password',
                         message: 'The username and password can\'t be the same as each other'

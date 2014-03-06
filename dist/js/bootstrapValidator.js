@@ -165,6 +165,14 @@
                         .appendTo($parent);
                 }
             }
+
+            // Prepare the feedback icons
+            // Available from Bootstrap 3.1 (http://getbootstrap.com/css/#forms-control-validation)
+            $parent.addClass('has-feedback');
+            $('<span/>')
+                .css('display', 'none')
+                .addClass('glyphicon form-control-feedback')
+                .insertAfter($(fields[fields.length - 1]));
         },
 
         /**
@@ -318,14 +326,22 @@
                 validator = this.options.fields[field].validators[validatorName],
                 message   = validator.message || this.options.message;
 
-            // Add has-error class to parent element
             $field
                 .parents('.form-group')
+                    // Add has-error class to parent element
                     .removeClass('has-success')
                     .addClass('has-error')
+                    // Show error element
                     .find('.help-block[data-bs-validator="' + validatorName + '"]')
                         .html(message)
+                        .show()
+                        .end()
+                    // Show feedback icon
+                    .find('.form-control-feedback')
+                        .removeClass('glyphicon-ok')
+                        .addClass('glyphicon-remove')
                         .show();
+
         },
 
         /**
@@ -334,12 +350,24 @@
          * @param {jQuery} $field The field element
          */
         removeError: function($field, validatorName) {
-            $field
-                .parents('.form-group')
+            var $parent = $field.parents('.form-group'),
+                $errors = $parent.find('.help-block[data-bs-validator]');
+
+            // Hide error element
+            $errors
+                .filter('[data-bs-validator="' + validatorName + '"]')
+                    .hide();
+
+            // If the field is valid then show the "ok" icon
+            if ($errors.filter(function() { return 'block' == $(this).css('display'); }).length == 0) {
+                $parent
                     .removeClass('has-error')
                     .addClass('has-success')
-                    .find('.help-block[data-bs-validator="' + validatorName + '"]')
-                        .hide();
+                    .find('.form-control-feedback')
+                        .removeClass('glyphicon-remove')
+                        .addClass('glyphicon-ok')
+                        .show();
+            }
         }
     };
 
