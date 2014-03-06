@@ -7,7 +7,10 @@
 * [#51: Submit after submit doesn't work](https://github.com/nghuuphuoc/bootstrapvalidator/issues/51)
 * [#53: Fix notEmpty validator for radios and checkboxes](https://github.com/nghuuphuoc/bootstrapvalidator/issues/53)
 * [#62: The callback validator passes wrong parameter](https://github.com/nghuuphuoc/bootstrapvalidator/issues/62)
+
+Document:
 * [#60: Update the installation guide](https://github.com/nghuuphuoc/bootstrapvalidator/pull/60)
+* [#73: Describe which version should be included in the Usage section](https://github.com/nghuuphuoc/bootstrapvalidator/issues/73)
 
 ## v0.2.2 (2014-01-07)
 

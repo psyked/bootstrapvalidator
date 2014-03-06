@@ -21,17 +21,41 @@ You can see the live demo here:
 * [Validator examples](https://rawgithub.com/nghuuphuoc/bootstrapvalidator/master/demo/validators.html)
 * [Custom submit handler](https://rawgithub.com/nghuuphuoc/bootstrapvalidator/master/demo/submitHandler.html)
 
+## Install
+
+You can download the [latest version](https://github.com/nghuuphuoc/bootstrapvalidator/releases) or use [bower](http://bower.io) to install BootstrapValidator:
+
+```bash
+$ bower install bootstrapValidator
+```
+
 ## Usage
+
+The plugin has two versions:
+
+* The source one placed in ```src/js``` directory which is not compressed and doesn't include any validators.
+It is used in case you want to debug or develop new validator.
+* The compressed one placed in ```dist/js``` directory which include all validators.
+It should be used in the production site.
 
 Since the bootstrapValidator plugin requires jQuery and Bootstrap 3, you have to include the required CSS and JS files to your page:
 
 ```html
 <link rel="stylesheet" href="/path/to/bootstrap/css/bootstrap.css"/>
-<link rel="stylesheet" href="/path/to/bootstrapValidator.min.css"/>
+<link rel="stylesheet" href="/path/to/dist/js/bootstrapValidator.min.css"/>
 
 <script type="text/javascript" src="/path/to/jquery/jquery-1.10.2.min.js"></script>
 <script type="text/javascript" src="/path/to/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/path/to/bootstrapValidator.min.js"></script>
+
+// Either use the compressed version (recommended in the production site)
+<script type="text/javascript" src="/path/to/dist/js/bootstrapValidator.min.js"></script>
+
+// Or use the original one with all validators included
+// <script type="text/javascript" src="/path/to/dist/js/bootstrapValidator.js"></script>
+
+// Or use the plugin with required validators
+// <script type="text/javascript" src="/path/to/src/js/bootstrapValidator.js"></script>
+// <script type="text/javascript" src="/path/to/src/js/validator/...validator..."></script>
 ```
 
 Call the plugin to validate the form as following:
@@ -196,14 +220,6 @@ Option name | Default | Description
 message     | n/a     | The error message
 min         | n/a     | The minimum length
 max         | n/a     | The maximum length. One of ```min```, ```max``` options is required
-
-## Install
-
-You can download the [latest version](https://github.com/nghuuphuoc/bootstrapvalidator/releases) or use [bower](http://bower.io) to install BootstrapValidator:
-
-```bash
-$ bower install bootstrapValidator
-```
 
 ## Write new validator
 
