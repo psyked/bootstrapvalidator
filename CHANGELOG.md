@@ -20,6 +20,7 @@ __Fixes__:
 * [#50: Don't validate disabled element](https://github.com/nghuuphuoc/bootstrapvalidator/issues/50)
 * [#51: Submit after submit doesn't work](https://github.com/nghuuphuoc/bootstrapvalidator/issues/51)
 * [#53: Fix notEmpty validator for radios and checkboxes](https://github.com/nghuuphuoc/bootstrapvalidator/issues/53)
+* [#55: The plugin doesn't validate other fields if the ```remote``` validator returns true](https://github.com/nghuuphuoc/bootstrapvalidator/issues/55)
 * [#62: The callback validator passes wrong parameter](https://github.com/nghuuphuoc/bootstrapvalidator/issues/62)
 
 __Document__:

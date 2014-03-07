@@ -18,8 +18,14 @@
 
         this.invalidField  = null;  // First invalid field
         this.$submitButton = null;  // The submit button which is clicked to submit form
+        this.formSubmitted = false; // Flag to indicate the form is submitted or not
 
         this._init();
+
+        this.STATUS_NOT_VALIDATED = 'NOT_VALIDATED';
+        this.STATUS_VALIDATING    = 'VALIDATING';
+        this.STATUS_INVALID       = 'INVALID';
+        this.STATUS_VALID         = 'VALID';
     };
 
     // The default options
@@ -41,7 +47,7 @@
         feedbackIcons: false,
 
         // The submit buttons selector
-        // These buttons will be disabled when the form input are invalid
+        // These buttons will be disabled to prevent the valid form from multiple submissions
         submitButtons: 'button[type="submit"]',
 
         // The custom submit handler
@@ -83,14 +89,13 @@
                 // Disable the default submission first
                 .on('submit.bootstrapValidator', function(e) {
                     e.preventDefault();
+                    that.formSubmitted = true;
                     that.validate();
-                });
-
-            this.$form
+                })
                 .find(this.options.submitButtons)
-                .on('click', function() {
-                    that.$submitButton = $(this);
-                });
+                    .on('click', function() {
+                        that.$submitButton = $(this);
+                    });
 
             for (var field in this.options.fields) {
                 this._initField(field);
@@ -160,7 +165,7 @@
                         continue;
                     }
 
-                    this.results[field][validatorName] = null;
+                    this.results[field][validatorName] = this.STATUS_NOT_VALIDATED;
                     $('<small/>')
                         .css('display', 'none')
                         .attr('data-bs-validator', validatorName)
@@ -196,6 +201,10 @@
                                 event = ('radio' == type || 'checkbox' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup';
 
                             fields.on(event, function() {
+                                // Whenever the user change the field value, make it as not validated yet
+                                for (var v in that.options.fields[f].validators) {
+                                    that.results[f][v] = that.STATUS_NOT_VALIDATED;
+                                }
                                 that.validateField(f);
                             });
                         }
@@ -232,8 +241,6 @@
                 if (this.invalidField) {
                     this.getFieldElements(this.invalidField).focus();
                 }
-
-                this._disableSubmitButtons(false);
                 return;
             }
 
@@ -290,21 +297,27 @@
                 validators = this.options.fields[field].validators,
                 validatorName,
                 validateResult;
+
             for (validatorName in validators) {
                 if (this.dfds[field][validatorName]) {
                     this.dfds[field][validatorName].reject();
                 }
 
+                // Don't validate field if it is already done
+                if (this.results[field][validatorName] == this.STATUS_VALID || this.results[field][validatorName] == this.STATUS_INVALID) {
+                    continue;
+                }
+
+                this.results[field][validatorName] = this.STATUS_VALIDATING;
                 validateResult = $.fn.bootstrapValidator.validators[validatorName].validate(this, $field, validators[validatorName]);
                 if ('object' == typeof validateResult) {
                     this.dfds[field][validatorName] = validateResult;
                     validateResult.done(function(isValid, v) {
                         // v is validator name
                         delete that.dfds[field][v];
-                        /*
-                        if (isValid) {
+                        if (isValid && that.formSubmitted) {
                             that._submit();
-                        }*/
+                        }
                     });
                 }
 
@@ -327,7 +340,11 @@
             var field, validatorName;
             for (field in this.results) {
                 for (validatorName in this.results[field]) {
-                    if (this.results[field][validatorName] !== true) {
+                    if (this.results[field][validatorName] == this.STATUS_VALIDATING) {
+                        return false;
+                    }
+
+                    if (this.results[field][validatorName] == this.STATUS_INVALID) {
                         this.invalidField = field;
                         return false;
                     }
@@ -349,7 +366,7 @@
                 message   = validator.message || this.options.message,
                 $parent   = $field.parents('.form-group');
 
-            this.results[field][validatorName] = false;
+            this.results[field][validatorName] = this.STATUS_INVALID;
             this._disableSubmitButtons(true);
 
             $parent
@@ -381,7 +398,7 @@
                 $errors = $parent.find('.help-block[data-bs-validator]'),
                 field   = $field.attr('name');
 
-            this.results[field][validatorName] = true;
+            this.results[field][validatorName] = this.STATUS_VALID;
 
             // Hide error element
             $errors
@@ -391,13 +408,15 @@
             // If the field is valid
             var that = this;
             if ($errors.filter(function() {
-                    var display = $(this).css('display');
-                    return ('block' == display) || ('none' == display && that.results[field][validatorName] == null);
+                    var display = $(this).css('display'), v = $(this).attr('data-bs-validator');
+                    return ('block' == display) || (that.results[field][v] != that.STATUS_VALID);
                 }).length == 0
             ) {
+                this._disableSubmitButtons(false);
+
                 $parent
                     .removeClass('has-error')
-                    .addClass('has-success')
+                    .addClass('has-success');
                 // Show the "ok" icon
                 if (this.options.feedbackIcons) {
                     $parent
@@ -406,10 +425,6 @@
                             .addClass('glyphicon-ok')
                             .show();
                 }
-            }
-
-            if (this.isValid()) {
-                this._disableSubmitButtons(false);
             }
         }
     };
