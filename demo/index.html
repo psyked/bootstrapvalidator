@@ -20,7 +20,7 @@
                         <h2>Sign up</h2>
                     </div>
 
-                    <form id="defaultForm" method="post" class="form-horizontal">
+                    <form id="defaultForm" method="post" class="form-horizontal" action="target.php">
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Username</label>
                             <div class="col-lg-5">
@@ -176,7 +176,7 @@ $(document).ready(function() {
     $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
 
     $('#defaultForm').bootstrapValidator({
-        live: 'disabled',
+        live: 'enabled',
         message: 'This value is not valid',
         feedbackIcons: true,
         fields: {
