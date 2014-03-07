@@ -311,14 +311,16 @@
                 this.results[field][validatorName] = this.STATUS_VALIDATING;
                 validateResult = $.fn.bootstrapValidator.validators[validatorName].validate(this, $field, validators[validatorName]);
                 if ('object' == typeof validateResult) {
+                    this._disableSubmitButtons(true);
                     this.dfds[field][validatorName] = validateResult;
                     validateResult.done(function(isValid, v) {
                         // v is validator name
                         delete that.dfds[field][v];
                         isValid ? that.removeError($field, v) : that.showError($field, v);
+                        /*
                         if (isValid && that.formSubmitted) {
                             that._submit();
-                        }
+                        }*/
                     });
                 } else if ('boolean' == typeof validateResult) {
                     validateResult ? this.removeError($field, validatorName) : this.showError($field, validatorName);
