@@ -355,7 +355,8 @@
          * Can be STATUS_VALIDATING, STATUS_INVALID, STATUS_VALID
          */
         updateStatus: function($field, validatorName, status) {
-            var field     = $field.attr('name'),
+            var that      = this,
+                field     = $field.attr('name'),
                 validator = this.options.fields[field].validators[validatorName],
                 message   = validator.message || this.options.message,
                 $parent   = $field.parents('.form-group'),
@@ -383,10 +384,7 @@
                     // Add has-error class to parent element
                     $parent.removeClass('has-success').addClass('has-error');
 
-                    $errors
-                        .filter('[data-bs-validator="' + validatorName + '"]')
-                            .html(message)
-                            .show();
+                    $errors.filter('[data-bs-validator="' + validatorName + '"]').html(message).show();
 
                     if (this.options.feedbackIcons) {
                         // Show "error" icon
@@ -401,7 +399,6 @@
                     $errors.filter('[data-bs-validator="' + validatorName + '"]').hide();
 
                     // If the field is valid
-                    var that = this;
                     if ($errors.filter(function() {
                             var display = $(this).css('display'), v = $(this).attr('data-bs-validator');
                             return ('block' == display) || (that.results[field][v] != that.STATUS_VALID);
