@@ -4,7 +4,7 @@
 // and open the remote.html file:
 // http://domain.com/demo/remote.html
 
-//sleep(5);
+sleep(5);
 
 $valid = true;
 

@@ -21,7 +21,7 @@
             }
 
             if (value == compareWith.val()) {
-                validator.removeError(compareWith, 'identical');
+                validator.updateStatus(compareWith, 'identical', validator.STATUS_VALID);
                 return true;
             } else {
                 return false;

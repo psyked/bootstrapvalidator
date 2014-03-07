@@ -183,22 +183,22 @@ $(document).ready(function() {
             username: {
                 message: 'The username is not valid',
                 validators: {
-                    notEmpty: {
-                        message: 'The username is required and can\'t be empty'
-                    },
-                    stringLength: {
-                        min: 6,
-                        max: 30,
-                        message: 'The username must be more than 6 and less than 30 characters long'
-                    },
-                    regexp: {
-                        regexp: /^[a-zA-Z0-9_\.]+$/,
-                        message: 'The username can only consist of alphabetical, number, dot and underscore'
-                    },
-//                    remote: {
-//                        url: 'remote.php',
-//                        message: 'The username is not available'
+//                    notEmpty: {
+//                        message: 'The username is required and can\'t be empty'
 //                    },
+//                    stringLength: {
+//                        min: 6,
+//                        max: 30,
+//                        message: 'The username must be more than 6 and less than 30 characters long'
+//                    },
+//                    regexp: {
+//                        regexp: /^[a-zA-Z0-9_\.]+$/,
+//                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+//                    },
+                    remote: {
+                        url: 'remote.php',
+                        message: 'The username is not available'
+                    },
                     different: {
                         field: 'password',
                         message: 'The username and password can\'t be the same as each other'
@@ -221,10 +221,10 @@ $(document).ready(function() {
                         field: 'confirmPassword',
                         message: 'The password and its confirm are not the same'
                     },
-                    different: {
-                        field: 'username',
-                        message: 'The password can\'t be the same as username'
-                    }
+//                    different: {
+//                        field: 'username',
+//                        message: 'The password can\'t be the same as username'
+//                    }
                 }
             },
             confirmPassword: {

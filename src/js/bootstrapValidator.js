@@ -18,7 +18,6 @@
 
         this.invalidField  = null;  // First invalid field
         this.$submitButton = null;  // The submit button which is clicked to submit form
-        this.formSubmitted = false; // Flag to indicate the form is submitted or not
 
         this._init();
 
@@ -89,7 +88,6 @@
                 // Disable the default submission first
                 .on('submit.bootstrapValidator', function(e) {
                     e.preventDefault();
-                    that.formSubmitted = true;
                     that.validate();
                 })
                 .find(this.options.submitButtons)
@@ -180,10 +178,7 @@
             // Available from Bootstrap 3.1 (http://getbootstrap.com/css/#forms-control-validation)
             if (this.options.feedbackIcons) {
                 $parent.addClass('has-feedback');
-                $('<span/>')
-                    .css('display', 'none')
-                    .addClass('glyphicon form-control-feedback')
-                    .insertAfter($(fields[fields.length - 1]));
+                $('<span/>').css('display', 'none').addClass('glyphicon form-control-feedback').insertAfter($(fields[fields.length - 1]));
             }
         },
 
@@ -310,20 +305,20 @@
 
                 this.results[field][validatorName] = this.STATUS_VALIDATING;
                 validateResult = $.fn.bootstrapValidator.validators[validatorName].validate(this, $field, validators[validatorName]);
+
                 if ('object' == typeof validateResult) {
-                    this._disableSubmitButtons(true);
+                    this.updateStatus($field, validatorName, this.STATUS_VALIDATING);
                     this.dfds[field][validatorName] = validateResult;
+
                     validateResult.done(function(isValid, v) {
                         // v is validator name
                         delete that.dfds[field][v];
-                        isValid ? that.removeError($field, v) : that.showError($field, v);
-                        /*
-                        if (isValid && that.formSubmitted) {
-                            that._submit();
-                        }*/
+                        isValid ? that.updateStatus($field, v, that.STATUS_VALID)
+                                : that.updateStatus($field, v, that.STATUS_INVALID);
                     });
                 } else if ('boolean' == typeof validateResult) {
-                    validateResult ? this.removeError($field, validatorName) : this.showError($field, validatorName);
+                    validateResult ? this.updateStatus($field, validatorName, this.STATUS_VALID)
+                                   : this.updateStatus($field, validatorName, this.STATUS_INVALID);
                 }
             }
         },
@@ -352,76 +347,78 @@
         },
 
         /**
-         * Show field error
+         * Update field status
          *
          * @param {jQuery} $field The field element
          * @param {String} validatorName
+         * @param {String} status The status
+         * Can be STATUS_VALIDATING, STATUS_INVALID, STATUS_VALID
          */
-        showError: function($field, validatorName) {
+        updateStatus: function($field, validatorName, status) {
             var field     = $field.attr('name'),
                 validator = this.options.fields[field].validators[validatorName],
                 message   = validator.message || this.options.message,
-                $parent   = $field.parents('.form-group');
+                $parent   = $field.parents('.form-group'),
+                $errors   = $parent.find('.help-block[data-bs-validator]');
 
-            this.results[field][validatorName] = this.STATUS_INVALID;
-            this._disableSubmitButtons(true);
+            switch (status) {
+                case this.STATUS_VALIDATING:
+                    this.results[field][validatorName] = this.STATUS_VALIDATING;
+                    this._disableSubmitButtons(true);
 
-            $parent
-                // Add has-error class to parent element
-                .removeClass('has-success')
-                .addClass('has-error')
-                // Show error element
-                .find('.help-block[data-bs-validator="' + validatorName + '"]')
-                    .html(message)
-                    .show();
+                    $parent.removeClass('has-success').removeClass('has-error');
+                    // TODO: Show validating message
+                    $errors.filter('.help-block[data-bs-validator="' + validatorName + '"]').html(message).hide();
 
-            if (this.options.feedbackIcons) {
-                // Show "error" icon
-                $parent
-                    .find('.form-control-feedback')
-                        .removeClass('glyphicon-ok')
-                        .addClass('glyphicon-remove')
-                        .show();
-            }
-        },
+                    if (this.options.feedbackIcons) {
+                        // Show "loading" icon
+                        $parent.find('.form-control-feedback').removeClass('glyphicon-ok').removeClass('glyphicon-remove').addClass('glyphicon-refresh').show();
+                    }
+                    break;
 
-        /**
-         * Remove error from given field
-         *
-         * @param {jQuery} $field The field element
-         */
-        removeError: function($field, validatorName) {
-            var $parent = $field.parents('.form-group'),
-                $errors = $parent.find('.help-block[data-bs-validator]'),
-                field   = $field.attr('name');
+                case this.STATUS_INVALID:
+                    this.results[field][validatorName] = this.STATUS_INVALID;
+                    this._disableSubmitButtons(true);
 
-            this.results[field][validatorName] = this.STATUS_VALID;
+                    // Add has-error class to parent element
+                    $parent.removeClass('has-success').addClass('has-error');
 
-            // Hide error element
-            $errors
-                .filter('[data-bs-validator="' + validatorName + '"]')
-                    .hide();
-
-            // If the field is valid
-            var that = this;
-            if ($errors.filter(function() {
-                    var display = $(this).css('display'), v = $(this).attr('data-bs-validator');
-                    return ('block' == display) || (that.results[field][v] != that.STATUS_VALID);
-                }).length == 0
-            ) {
-                this._disableSubmitButtons(false);
-
-                $parent
-                    .removeClass('has-error')
-                    .addClass('has-success');
-                // Show the "ok" icon
-                if (this.options.feedbackIcons) {
-                    $parent
-                        .find('.form-control-feedback')
-                            .removeClass('glyphicon-remove')
-                            .addClass('glyphicon-ok')
+                    $errors
+                        .filter('[data-bs-validator="' + validatorName + '"]')
+                            .html(message)
                             .show();
-                }
+
+                    if (this.options.feedbackIcons) {
+                        // Show "error" icon
+                        $parent.find('.form-control-feedback').removeClass('glyphicon-ok').removeClass('glyphicon-refresh').addClass('glyphicon-remove').show();
+                    }
+                    break;
+
+                case this.STATUS_VALID:
+                    this.results[field][validatorName] = this.STATUS_VALID;
+
+                    // Hide error element
+                    $errors.filter('[data-bs-validator="' + validatorName + '"]').hide();
+
+                    // If the field is valid
+                    var that = this;
+                    if ($errors.filter(function() {
+                            var display = $(this).css('display'), v = $(this).attr('data-bs-validator');
+                            return ('block' == display) || (that.results[field][v] != that.STATUS_VALID);
+                        }).length == 0
+                    ) {
+                        this._disableSubmitButtons(false);
+
+                        $parent.removeClass('has-error').addClass('has-success');
+                        // Show the "ok" icon
+                        if (this.options.feedbackIcons) {
+                            $parent.find('.form-control-feedback').removeClass('glyphicon-remove').removeClass('glyphicon-refresh').addClass('glyphicon-ok').show();
+                        }
+                    }
+                    break;
+
+                default:
+                    break;
             }
         }
     };
