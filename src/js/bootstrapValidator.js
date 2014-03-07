@@ -315,19 +315,14 @@
                     validateResult.done(function(isValid, v) {
                         // v is validator name
                         delete that.dfds[field][v];
+                        isValid ? that.removeError($field, v) : that.showError($field, v);
                         if (isValid && that.formSubmitted) {
                             that._submit();
                         }
                     });
+                } else if ('boolean' == typeof validateResult) {
+                    validateResult ? this.removeError($field, validatorName) : this.showError($field, validatorName);
                 }
-
-                $.when(validateResult).then(function(isValid) {
-                    if (isValid) {
-                        that.removeError($field, validatorName);
-                    } else {
-                        that.showError($field, validatorName);
-                    }
-                });
             }
         },
 
@@ -340,7 +335,7 @@
             var field, validatorName;
             for (field in this.results) {
                 for (validatorName in this.results[field]) {
-                    if (this.results[field][validatorName] == this.STATUS_VALIDATING) {
+                    if (this.results[field][validatorName] == this.STATUS_NOT_VALIDATED || this.results[field][validatorName] == this.STATUS_VALIDATING) {
                         return false;
                     }
 
