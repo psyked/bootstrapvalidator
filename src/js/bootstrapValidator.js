@@ -425,6 +425,46 @@
                 default:
                     break;
             }
+        },
+
+        // Useful APIs which aren't use internally
+
+        /**
+         * Reset the form
+         *
+         * @param {Boolean} resetFormData Reset current form data
+         */
+        resetForm: function(resetFormData) {
+            for (var field in this.options.fields) {
+                this.dfds[field]    = {};
+                this.results[field] = {};
+
+                // Mark all fields as not validated yet
+                for (var v in this.options.fields[field].validators) {
+                    this.results[field][v] = this.STATUS_NOT_VALIDATED;
+                }
+            }
+
+            this.invalidField  = null;
+            this.$submitButton = null;
+
+            // Hide all error elements
+            this.$form
+                .find('.has-error').removeClass('has-error').end()
+                .find('.has-success').removeClass('has-success').end()
+                .find('.help-block[data-bs-validator]').hide();
+
+            // Enable submit buttons
+            this._disableSubmitButtons(false);
+
+            // Hide all feeback icons
+            if (this.options.feedbackIcons) {
+                this.$form.find('.form-control-feedback').removeClass('glyphicon-ok').removeClass('glyphicon-remove').removeClass('glyphicon-refresh').hide();
+            }
+
+            if (resetFormData) {
+                this.$form.reset();
+            }
         }
     };
 
