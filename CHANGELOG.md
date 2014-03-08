@@ -1,6 +1,6 @@
 # Change Log
 
-## v0.3.0
+## v0.3.0 (Not released yet, but you can [try it](https://github.com/nghuuphuoc/bootstrapvalidator/archive/master.zip))
 
 __New features__:
 

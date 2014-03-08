@@ -1,6 +1,8 @@
 # BootstrapValidator
 
-A jQuery plugin to validate form fields. Use with Bootstrap 3
+A jQuery plugin to validate form fields. Use with [Bootstrap 3](http://getbootstrap.com)
+
+![Screenshot](screenshots/screenshot.png)
 
 ## Features
 
@@ -294,8 +296,8 @@ $(form).bootstrapValidator({
 });
 ```
 
-For Rails, the input field is constructed from model name and field name. For Example, User have email as field, when form helper render
-view, the input field name will be 'user[email]'. The syntax for these is somewhat different as shown below:
+For Rails, the input field is constructed from model name and field name. For example, user have email as field, when form helper render
+view, the input field name will be ```'user[email]'```. The syntax for these is somewhat different as shown below:
 
 ```javascript
 $(form).bootstrapValidator({
