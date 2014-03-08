@@ -37,10 +37,10 @@ The plugin has two versions:
 
 * The source one placed in ```src/js``` directory which is not compressed and doesn't include any validators.
 It is used in case you want to debug or develop new validator.
-* The compressed one placed in ```dist/js``` directory which include all validators.
+* The compressed one placed in ```dist/js``` directory which includes all validators.
 It should be used in the production site.
 
-Since the bootstrapValidator plugin requires jQuery and Bootstrap 3, you have to include the required CSS and JS files to your page:
+Since the __BootstrapValidator__ plugin requires jQuery and Bootstrap 3, you have to include the required CSS and JS files to your page:
 
 ```html
 <link rel="stylesheet" href="/path/to/bootstrap/css/bootstrap.css"/>
@@ -67,13 +67,13 @@ $(document).ready(function() {
     $(<form Selector>).bootstrapValidator({
         // The default error message for all fields
         // You can specify the error message for any fields
-        message: ...,
+        message: 'This value is not valid',
 
         // The number of grid columns
         // Change it if you use custom grid with different number of columns
         columns: 12,
 
-        // Shows ok/error icons based on the field validity.
+        // Shows ok/error/validating icons based on the field validity.
         // This feature requires Bootstrap v3.1.0 or later (http://getbootstrap.com/css/#forms-control-validation).
         // Since Bootstrap doesn't provide any methods to know its version, this option cannot be on/off automatically.
         // In other word, to use this feature you have to upgrade your Bootstrap to v3.1.0 or later.
@@ -84,7 +84,7 @@ $(document).ready(function() {
         submitButtons: ...,
 
         // Custom submit handler
-        // The handler has two arguments
+        // The handler has three arguments:
         // - validator is the instance of BootstrapValidator
         // - form is jQuery object representing the current form
         // - submitButton is jQuery object representing the submit button which is clicked
@@ -344,7 +344,7 @@ Look at the [Change Log](CHANGELOG.md)
 
 ## Author
 
-This software is written by Nguyen Huu Phuoc, aka @nghuuphuoc
+The __BootstrapValidator__ plugin is written by Nguyen Huu Phuoc, aka @nghuuphuoc
 
 * [http://twitter.com/nghuuphuoc](http://twitter.com/nghuuphuoc)
 * [http://github.com/nghuuphuoc](http://github.com/nghuuphuoc)

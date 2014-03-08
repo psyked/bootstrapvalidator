@@ -17,13 +17,10 @@
         validate: function(validator, $field, options) {
             var value = $field.val();
             if (options.callback && 'function' == typeof options.callback) {
-<<<<<<< HEAD
                 var dfd = new $.Deferred();
                 dfd.resolve(options.callback.call(this, value, validator), 'callback');
                 return dfd;
-=======
                 return options.callback.call(this, value, validator);
->>>>>>> c025cbea8fc37eb3c7b6c2d3dad0b670a5de40b6
             }
             return true;
         }
