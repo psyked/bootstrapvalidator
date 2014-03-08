@@ -115,10 +115,10 @@
             this.dfds[field]    = {};
             this.results[field] = {};
 
-            var fields = this.$form.find('[name="' + field + '"]');
+            var fields = this.getFieldElements(field);
 
             // We don't need to validate ...
-            if (fields.length == 0                                  // ... non-existing fields
+            if (fields == null                                      // ... non-existing fields
                 || (fields.length == 1 && fields.is(':disabled')))  // ... disabled field
             {
                 delete this.options.fields[field];
@@ -180,6 +180,18 @@
                 $parent.addClass('has-feedback');
                 $('<span/>').css('display', 'none').addClass('glyphicon form-control-feedback').insertAfter($(fields[fields.length - 1]));
             }
+
+            // Whenever the user change the field value, make it as not validated yet
+            var that  = this,
+                type  = fields.attr('type'),
+                event = ('radio' == type || 'checkbox' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup';
+
+            fields.on(event, function() {
+                // Whenever the user change the field value, make it as not validated yet
+                for (var v in that.options.fields[field].validators) {
+                    that.results[field][v] = that.STATUS_NOT_VALIDATED;
+                }
+            });
         },
 
         /**
@@ -196,10 +208,6 @@
                                 event = ('radio' == type || 'checkbox' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup';
 
                             fields.on(event, function() {
-                                // Whenever the user change the field value, make it as not validated yet
-                                for (var v in that.options.fields[f].validators) {
-                                    that.results[f][v] = that.STATUS_NOT_VALIDATED;
-                                }
                                 that.validateField(f);
                             });
                         }
