@@ -296,7 +296,10 @@ $(form).bootstrapValidator({
 
 For Rails, the input field is constructed from model name and field name. For Example, User have email as field, when form helper render
 view, the input field name will be 'user[email]'. The syntax for these is somewhat different as shown below:
+<<<<<<< HEAD
 
+=======
+>>>>>>> c025cbea8fc37eb3c7b6c2d3dad0b670a5de40b6
 ```javascript
 $(form).bootstrapValidator({
     fields: {
@@ -310,6 +313,10 @@ $(form).bootstrapValidator({
 });
 ```
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> c025cbea8fc37eb3c7b6c2d3dad0b670a5de40b6
 To see how built-in validators are developed, you can look at their sources located at the [```src/js/validator```](src/js/validator) directory.
 
 ## Build
