@@ -39,11 +39,25 @@
         // Change it if you use custom grid with different number of columns
         columns: 12,
 
-        // Shows ok/error icons based on the field validity.
+        // Shows ok/error/loading icons based on the field validity.
         // This feature requires Bootstrap v3.1.0 or later (http://getbootstrap.com/css/#forms-control-validation).
         // Since Bootstrap doesn't provide any methods to know its version, this option cannot be on/off automatically.
         // In other word, to use this feature you have to upgrade your Bootstrap to v3.1.0 or later.
-        feedbackIcons: false,
+        //
+        // Examples:
+        // - Use Glyphicons icons:
+        //  feedbackIcons: {
+        //      valid: 'glyphicon glyphicon-ok',
+        //      invalid: 'glyphicon glyphicon-remove',
+        //      validating: 'glyphicon glyphicon-refresh'
+        //  }
+        // - Use FontAwesome icons:
+        //  feedbackIcons: {
+        //      valid: 'fa fa-check',
+        //      invalid: 'fa fa-times',
+        //      validating: 'fa fa-refresh'
+        //  }
+        feedbackIcons: null,
 
         // The submit buttons selector
         // These buttons will be disabled to prevent the valid form from multiple submissions
@@ -178,7 +192,7 @@
             // Available from Bootstrap 3.1 (http://getbootstrap.com/css/#forms-control-validation)
             if (this.options.feedbackIcons) {
                 $parent.addClass('has-feedback');
-                $('<span/>').css('display', 'none').addClass('glyphicon form-control-feedback').insertAfter($(fields[fields.length - 1]));
+                $('<i/>').css('display', 'none').addClass('form-control-feedback').insertAfter($(fields[fields.length - 1]));
             }
 
             // Whenever the user change the field value, make it as not validated yet
@@ -381,7 +395,7 @@
 
                     if (this.options.feedbackIcons) {
                         // Show "loading" icon
-                        $parent.find('.form-control-feedback').removeClass('glyphicon-ok').removeClass('glyphicon-remove').addClass('glyphicon-refresh').show();
+                        $parent.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).addClass(this.options.feedbackIcons.validating).show();
                     }
                     break;
 
@@ -396,7 +410,7 @@
 
                     if (this.options.feedbackIcons) {
                         // Show "error" icon
-                        $parent.find('.form-control-feedback').removeClass('glyphicon-ok').removeClass('glyphicon-refresh').addClass('glyphicon-remove').show();
+                        $parent.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
                     }
                     break;
 
@@ -417,7 +431,7 @@
                         $parent.removeClass('has-error').addClass('has-success');
                         // Show the "ok" icon
                         if (this.options.feedbackIcons) {
-                            $parent.find('.form-control-feedback').removeClass('glyphicon-remove').removeClass('glyphicon-refresh').addClass('glyphicon-ok').show();
+                            $parent.find('.form-control-feedback').removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.valid).show();
                         }
                     }
                     break;

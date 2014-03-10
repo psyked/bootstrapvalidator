@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
     <link rel="stylesheet" href="../dist/css/bootstrapValidator.css"/>
 
+    <!-- Include the FontAwesome CSS if you want to use feedback icons provided by FontAwesome -->
+    <!--<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />-->
+
     <script type="text/javascript" src="../vendor/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../dist/js/bootstrapValidator.js"></script>
@@ -179,7 +182,11 @@ $(document).ready(function() {
     $('#defaultForm').bootstrapValidator({
 //        live: 'disabled',
         message: 'This value is not valid',
-        feedbackIcons: true,
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
         fields: {
             username: {
                 message: 'The username is not valid',
