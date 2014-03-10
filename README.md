@@ -289,7 +289,7 @@ remote: {
         // For example, the sample code below posts the username to remote URL:
         //  return {
         //      username: validator.getFieldElements('username').val()
-        //  }
+        //  };
     }
 }
 ```
@@ -326,8 +326,8 @@ validator.validate();
 
 ### ```resetForm(resetFormData)```
 
-Reset form. It hide all error elements and feedback icons. All the fields are marked as not validated yet.
-If ```resetFormData``` are ```true```, the method resets the form fields.
+Reset form. It hides all error elements and feedback icons. All the fields are marked as not validated yet.
+If ```resetFormData``` is ```true```, the method resets the form fields.
 
 ```javascript
 var validator = $(form).bootstrapValidator(options);
