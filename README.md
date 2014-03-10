@@ -251,6 +251,30 @@ max         | n/a     | The maximum length. One of ```min```, ```max``` options 
 | country     | US      | A ISO 3166 country code. Currently it supports the following countries:
 |             |         | US (United State), DK (Denmark), SE (Sweden)
 
+## API
+
+### ```validate()```
+
+Validate form manually. It is useful when you want to validate form by clicking a button or a link instead of a submit buttons.
+
+```javascript
+$(form).bootstrapValidator(options).bootstrapValidator('validate');
+
+// or
+var validator = $(form).bootstrapValidator(options);
+validator.validate();
+```
+
+### ```resetForm(resetFormData)```
+
+Reset form. It hide all error elements and feedback icons. All the fields are marked as not validated yet.
+If ```resetFormData``` are ```true```, the method resets the form fields.
+
+```javascript
+var validator = $(form).bootstrapValidator(options);
+validator.resetForm();
+```
+
 ## Write new validator
 
 A validator has to follow the syntax:

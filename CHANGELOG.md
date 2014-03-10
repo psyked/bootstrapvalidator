@@ -14,6 +14,7 @@ __New features__:
 * [#65: Support Sweden zip code](https://github.com/nghuuphuoc/bootstrapvalidator/issues/64)
 * [#70: Support custom grid columns](https://github.com/nghuuphuoc/bootstrapvalidator/issues/70)
 * [#71: Show all errors](https://github.com/nghuuphuoc/bootstrapvalidator/issues/71)
+* [#76: Add resetForm() method](https://github.com/nghuuphuoc/bootstrapvalidator/issues/76)
 
 __Fixes__:
 

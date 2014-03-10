@@ -464,7 +464,7 @@
             }
 
             if (resetFormData) {
-                this.$form.reset();
+                this.$form.get(0).reset();
             }
         }
     };
