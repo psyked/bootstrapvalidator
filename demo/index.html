@@ -74,6 +74,13 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="col-lg-3 control-label">Birthday</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" name="birthday" /> (YYYY/MM/DD)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="col-lg-3 control-label">Languages</label>
                             <div class="col-lg-5">
                                 <div class="checkbox">
@@ -247,6 +254,14 @@ $(document).ready(function() {
                     different: {
                         field: 'username',
                         message: 'The password can\'t be the same as username'
+                    }
+                }
+            },
+            birthday: {
+                validators: {
+                    date: {
+                        format: 'YYYY/MM/DD',
+                        message: 'The birthday is not valid'
                     }
                 }
             },

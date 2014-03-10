@@ -441,7 +441,7 @@
             }
         },
 
-        // Useful APIs which aren't use internally
+        // Useful APIs which aren't used internally
 
         /**
          * Reset the form
