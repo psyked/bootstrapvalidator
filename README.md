@@ -82,7 +82,7 @@ $(document).ready(function() {
 
 ```feedbackIcons```: Show valid/invalid/validating icons based on the field validity.
 
-This feature requires Bootstrap v3.1.0 or later (http://getbootstrap.com/css/#forms-control-validation).
+This feature requires [Bootstrap v3.1.0 or later](http://getbootstrap.com/css/#forms-control-validation).
 Since Bootstrap doesn't provide any methods to know its version, this option cannot be on/off automatically.
 In other word, to use this feature you have to upgrade your Bootstrap to v3.1.0 or later.
 
@@ -110,11 +110,27 @@ feedbackIcons: {
 
 ```submitHandler```: Custom submit handler.
 
+```javascript
+submitHandler: function(validator, form, submitButton) {
+},
+```
+
 The handler has three arguments:
 
 - ```validator``` is the instance of BootstrapValidator
 - ```form``` is jQuery object representing the current form
 - ```submitButton``` is jQuery object representing the submit button which is clicked
+
+This option is useful when you want to use Ajax to submit the form data:
+
+```javascript
+submitHandler: function(validator, form, submitButton) {
+    // Use Ajax to submit form data
+    $.post(form.attr('action'), form.serialize(), function(result) {
+        // ... process the result ...
+    }, 'json');
+}
+```
 
 By default, ```submitHandler``` is ```null```
 
