@@ -24,6 +24,10 @@
             if (data == null) {
                 data = {};
             }
+            // Support dynamic data
+            if ('function' == typeof data) {
+                data = data.call(this, validator);
+            }
             data[name] = value;
 
             var dfd = new $.Deferred();

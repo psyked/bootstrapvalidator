@@ -6,6 +6,7 @@ __New features__:
 
 * [#44: Rewrite entirely using Deferred](https://github.com/nghuuphuoc/bootstrapvalidator/issues/44)
 * #26, #27, #67: Add choice validator
+* [#31: The ```remote``` validator supports dynamic data](https://github.com/nghuuphuoc/bootstrapvalidator/issues/31)
 * [#36, #58: Add method to validate form manually](https://github.com/nghuuphuoc/bootstrapvalidator/issues/58)
 * [#41: Disable submit button on successful form submit](https://github.com/nghuuphuoc/bootstrapvalidator/issues/41)
 * [#42: Add submit button to ```submitHandler()``` parameter](https://github.com/nghuuphuoc/bootstrapvalidator/issues/42)

@@ -271,10 +271,28 @@ regexp (*)  | n/a     | The Javascript regular expression
 
 ### Remote Validator
 
-Option name | Default | Description
-------------|---------|------------
-message     | n/a     | The error message
-url (*)     | n/a     | The remote URL that responses an encoded JSON of array containing the ```valid``` key
+Option name | Default                        | Description
+------------|--------------------------------|------------
+message     | n/a                            | The error message
+url (*)     | n/a                            | The remote URL that responses an encoded JSON of array containing the ```valid``` key
+data        | ```{ fieldName: fieldValue}``` | The data sent to remote URL
+
+It also supports dynamic data which is returned by a function:
+
+```
+remote: {
+    url: 'remote.php',
+    data: function(validator) {
+        // validator is the plugin instance
+
+        // Returns an object which is used to send to remote URL
+        // For example, the sample code below posts the username to remote URL:
+        //  return {
+        //      username: validator.getFieldElements('username').val()
+        //  }
+    }
+}
+```
 
 ### StringLength Validator
 
