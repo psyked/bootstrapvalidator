@@ -190,7 +190,7 @@ uri                                     | Validate an URL address
 
 The validator options are described in the following section:
 
-(**The options masked with * are required**)
+(**The options marked with * are required**)
 
 ### between validator
 

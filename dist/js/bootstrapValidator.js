@@ -196,7 +196,11 @@
                 $('<i/>').css('display', 'none').addClass('form-control-feedback').insertAfter($(fields[fields.length - 1]));
             }
 
-            // Whenever the user change the field value, make it as not validated yet
+            if (this.options.fields[field]['enabled'] == null) {
+                this.options.fields[field]['enabled'] = true;
+            }
+
+            // Whenever the user change the field value, mark it as not validated yet
             var that  = this,
                 type  = fields.attr('type'),
                 event = ('radio' == type || 'checkbox' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup';
@@ -286,6 +290,8 @@
 
         /**
          * Validate the form
+         *
+         * @return {BootstrapValidator}
          */
         validate: function() {
             if (!this.options.fields) {
@@ -307,6 +313,10 @@
          * @param {String} field The field name
          */
         validateField: function(field) {
+            if (!this.options.fields[field]['enabled']) {
+                return;
+            }
+
             var that       = this,
                 $field     = $(this.getFieldElements(field)[0]),
                 validators = this.options.fields[field].validators,
@@ -351,6 +361,10 @@
         isValid: function() {
             var field, validatorName;
             for (field in this.results) {
+                if (!this.options.fields[field]['enabled']) {
+                    continue;
+                }
+
                 for (validatorName in this.results[field]) {
                     if (this.results[field][validatorName] == this.STATUS_NOT_VALIDATED || this.results[field][validatorName] == this.STATUS_VALIDATING) {
                         return false;
@@ -373,6 +387,7 @@
          * @param {String} validatorName
          * @param {String} status The status
          * Can be STATUS_VALIDATING, STATUS_INVALID, STATUS_VALID
+         * @return {BootstrapValidator}
          */
         updateStatus: function($field, validatorName, status) {
             var that      = this,
@@ -437,6 +452,8 @@
                 default:
                     break;
             }
+
+            return this;
         },
 
         // Useful APIs which aren't used internally
@@ -445,6 +462,7 @@
          * Reset the form
          *
          * @param {Boolean} resetFormData Reset current form data
+         * @return {BootstrapValidator}
          */
         resetForm: function(resetFormData) {
             for (var field in this.options.fields) {
@@ -469,7 +487,7 @@
             // Enable submit buttons
             this._disableSubmitButtons(false);
 
-            // Hide all feeback icons
+            // Hide all feedback icons
             if (this.options.feedbackIcons) {
                 this.$form.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).hide();
             }
@@ -477,6 +495,37 @@
             if (resetFormData) {
                 this.$form.get(0).reset();
             }
+
+            return this;
+        },
+
+        /**
+         * Enable/Disable all validators to given field
+         *
+         * @param {String} field The field name
+         * @param {Boolean} enabled Enable/Disable field validators
+         * @return {BootstrapValidator}
+         */
+        enableFieldValidators: function(field, enabled) {
+            this.options.fields[field]['enabled'] = enabled;
+            if (!enabled) {
+                // this.results[field] = {};
+                for (var v in this.options.fields[field].validators) {
+                    this.results[field][v] = this.STATUS_NOT_VALIDATED;
+                }
+
+                var $field  = this.getFieldElements(field),
+                    $parent = $field.parents('.form-group');
+
+                $parent.removeClass('has-success has-error').find('.help-block[data-bs-validator]').hide();
+                if (this.options.feedbackIcons) {
+                    $parent.find('.form-control-feedback').removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).removeClass(this.options.feedbackIcons.valid).hide();
+                }
+
+                this._disableSubmitButtons(false);
+            }
+
+            return this;
         }
     };
 
