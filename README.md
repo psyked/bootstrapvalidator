@@ -7,8 +7,8 @@ A jQuery plugin to validate form fields. Use with [Bootstrap 3](http://getbootst
 ## Features
 
 * Built from scratch. The code is solid and clean
-* Many built-in [validators](#validators)
-* It is easy to [write new validator](#write-new-validator)
+* 17 built-in [validators](#validators)
+* Cannot find the validator you need? Don't worry, it is easy to [write new validator](#write-new-validator)
 
 ## Required
 
@@ -192,16 +192,16 @@ The validator options are described in the following section:
 
 (**The options masked with * are required**)
 
-### Between Validator
+### between validator
 
 Option name | Default | Description
 ------------|---------|------------
 message     | n/a     | The error message
 min (*)     | n/a     | The lower value in the range
 max (*)     | n/a     | The upper value in the range
-inclusive   | true    | Can be true or false. If true, the input value must be in the range strictly
+inclusive   | true    | Can be ```true``` or ```false```. If ```true```, the input value must be in the range strictly
 
-### Callback Validator
+### callback validator
 
 Option name  | Default | Description
 -------------|---------|------------
@@ -220,7 +220,7 @@ function(fieldValue, validator) {
 }
 ```
 
-### Choice Validator
+### choice validator
 
 Option name | Default | Description
 ------------|---------|------------
@@ -228,48 +228,48 @@ message     | n/a     | The error message
 min         | n/a     | The minimum number of check boxes required to be checked
 max         | n/a     | The maximum number of check boxes required to be checked. At least one of ```min``` and ```max``` is required
 
-### Different Validator
+### different validator
 
 Option name | Default | Description
 ------------|---------|------------
 message     | n/a     | The error message
 field (*)   | n/a     | The name of field that will be used to compare with current one
 
-### GreaterThan Validator
+### greaterThan validator
 
 | Option name | Default | Description
 |-------------|---------|------------
 | message     | n/a     | The error message
 | value (*)   | n/a     | The number to make a comparison to
-| inclusive   | false   | Can be true or false
-|             |         | If true, the input value must be greater than the comparison one
-|             |         | If false, the input value must be greater than or equal to the comparison one
+| inclusive   | false   | Can be ```true``` or ```false```
+|             |         | If ```true```, the input value must be greater than the comparison one
+|             |         | If ```false```, the input value must be greater than or equal to the comparison one
 
-### Identical Validator
+### identical validator
 
 Option name | Default | Description
 ------------|---------|------------
 message     | n/a     | The error message
 field (*)   | n/a     | The name of field that will be used to compare with current one
 
-### LessThan Validator
+### lessThan validator
 
 | Option name | Default | Description
 | ------------|---------|------------
 | message     | n/a     | The error message
 | value (*)   | n/a     | The number to make a comparison to
-| inclusive   | false   | Can be true or false
-|             |         | If true, the input value must be less than the comparison one
-|             |         | If false, the input value must be less than or equal to the comparison one
+| inclusive   | false   | Can be ```true``` or ```false```
+|             |         | If ```true```, the input value must be less than the comparison one
+|             |         | If ```false```, the input value must be less than or equal to the comparison one
 
-### Regexp Validator
+### regexp validator
 
 Option name | Default | Description
 ------------|---------|------------
 message     | n/a     | The error message
 regexp (*)  | n/a     | The Javascript regular expression
 
-### Remote Validator
+### remote validator
 
 Option name | Default                        | Description
 ------------|--------------------------------|------------
@@ -294,7 +294,7 @@ remote: {
 }
 ```
 
-### StringLength Validator
+### stringLength validator
 
 Option name | Default | Description
 ------------|---------|------------
@@ -302,13 +302,12 @@ message     | n/a     | The error message
 min         | n/a     | The minimum length
 max         | n/a     | The maximum length. One of ```min```, ```max``` options is required
 
-### ZipCode Validator
+### zipCode validator
 
 | Option name | Default | Description
 | ------------|---------|------------
 | message     | n/a     | The error message
-| country     | US      | A ISO 3166 country code. Currently it supports the following countries:
-|             |         | US (United State), DK (Denmark), SE (Sweden)
+| country     | US      | A ISO 3166 country code. Currently it supports the following countries: US (United State), DK (Denmark), SE (Sweden)
 
 ## API
 
@@ -439,7 +438,7 @@ Big thanks to the contributors:
 * [@kristian-puccio](https://github.com/kristian-puccio)
 * [@iplus](https://github.com/iplus)
 * [@vaz](https://github.com/vaz)
-* ... might be you! Let's [fork](https://github.com/nghuuphuoc/bootstrapvalidator/fork) and make a pull request!
+* ... might be you! Let's [fork](https://github.com/nghuuphuoc/bootstrapvalidator/fork) and pull a request!
 
 ## License
 
