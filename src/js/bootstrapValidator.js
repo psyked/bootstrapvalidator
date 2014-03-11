@@ -131,10 +131,8 @@
 
             var fields = this.getFieldElements(field);
 
-            // We don't need to validate ...
-            if (fields == null                                      // ... non-existing fields
-                || (fields.length == 1 && fields.is(':disabled')))  // ... disabled field
-            {
+            // We don't need to validate non-existing fields
+            if (fields == null) {
                 delete this.options.fields[field];
                 delete this.dfds[field];
                 return;
@@ -317,10 +315,18 @@
             }
 
             var that       = this,
-                $field     = $(this.getFieldElements(field)[0]),
+                fields     = this.getFieldElements(field),
+                $field     = $(fields[0]),
                 validators = this.options.fields[field].validators,
                 validatorName,
                 validateResult;
+
+            // We don't need to validate disabled field
+            if (fields.length == 1 && fields.is(':disabled')) {
+                delete this.options.fields[field];
+                delete this.dfds[field];
+                return;
+            }
 
             for (validatorName in validators) {
                 if (this.dfds[field][validatorName]) {
@@ -507,12 +513,11 @@
          */
         enableFieldValidators: function(field, enabled) {
             this.options.fields[field]['enabled'] = enabled;
-            if (!enabled) {
-                // this.results[field] = {};
+            if (enabled) {
                 for (var v in this.options.fields[field].validators) {
                     this.results[field][v] = this.STATUS_NOT_VALIDATED;
                 }
-
+            } else {
                 var $field  = this.getFieldElements(field),
                     $parent = $field.parents('.form-group');
 
