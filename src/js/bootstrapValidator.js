@@ -199,9 +199,7 @@
             var that  = this,
                 type  = fields.attr('type'),
                 event = ('radio' == type || 'checkbox' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup';
-
             fields.on(event, function() {
-                // Whenever the user change the field value, make it as not validated yet
                 for (var v in that.options.fields[field].validators) {
                     that.results[field][v] = that.STATUS_NOT_VALIDATED;
                 }
@@ -393,7 +391,7 @@
                     $errors.filter('.help-block[data-bs-validator="' + validatorName + '"]').html(message).hide();
 
                     if (this.options.feedbackIcons) {
-                        // Show "loading" icon
+                        // Show validating icon
                         $parent.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).addClass(this.options.feedbackIcons.validating).show();
                     }
                     break;
@@ -408,7 +406,7 @@
                     $errors.filter('[data-bs-validator="' + validatorName + '"]').html(message).show();
 
                     if (this.options.feedbackIcons) {
-                        // Show "error" icon
+                        // Show invalid icon
                         $parent.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
                     }
                     break;
@@ -428,7 +426,7 @@
                         this._disableSubmitButtons(false);
 
                         $parent.removeClass('has-error').addClass('has-success');
-                        // Show the "ok" icon
+                        // Show valid icon
                         if (this.options.feedbackIcons) {
                             $parent.find('.form-control-feedback').removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.valid).show();
                         }
@@ -472,7 +470,7 @@
 
             // Hide all feeback icons
             if (this.options.feedbackIcons) {
-                this.$form.find('.form-control-feedback').removeClass('glyphicon-ok').removeClass('glyphicon-remove').removeClass('glyphicon-refresh').hide();
+                this.$form.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).hide();
             }
 
             if (resetFormData) {
