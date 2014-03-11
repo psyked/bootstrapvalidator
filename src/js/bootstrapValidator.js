@@ -309,8 +309,7 @@
          */
         validateField: function(field) {
             var that       = this,
-                fields     = this.$form.find('[name="' + field + '"]'),
-                $field     = $(fields[0]),
+                $field     = $(this.getFieldElements(field)[0]),
                 validators = this.options.fields[field].validators,
                 validatorName,
                 validateResult;
