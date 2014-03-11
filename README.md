@@ -9,6 +9,8 @@ A jQuery plugin to validate form fields. Use with [Bootstrap 3](http://getbootst
 * Built from scratch. The code is solid and clean
 * 17 built-in [validators](#validators)
 * Cannot find the validator you need? Don't worry, it is easy to [write new validator](#write-new-validator)
+* Show feedback icons based on field validity
+* Support Ajax in both validator and form submission
 
 ## Required
 
@@ -112,7 +114,7 @@ feedbackIcons: {
 
 ```javascript
 submitHandler: function(validator, form, submitButton) {
-},
+}
 ```
 
 The handler has three arguments:
@@ -279,7 +281,7 @@ data        | ```{ fieldName: fieldValue}``` | The data sent to remote URL
 
 It also supports dynamic data which is returned by a function:
 
-```
+```javascript
 remote: {
     url: 'remote.php',
     data: function(validator) {
@@ -313,7 +315,7 @@ max         | n/a     | The maximum length. One of ```min```, ```max``` options 
 
 ### ```validate()```
 
-Validate form manually. It is useful when you want to validate form by clicking a button or a link instead of a submit buttons.
+```validate()```: Validate form manually. It is useful when you want to validate form by clicking a button or a link instead of a submit buttons.
 
 ```javascript
 $(form).bootstrapValidator(options).bootstrapValidator('validate');
@@ -323,9 +325,9 @@ var validator = $(form).bootstrapValidator(options);
 validator.validate();
 ```
 
-### ```resetForm(resetFormData)```
+### ```resetForm```
 
-Reset form. It hides all error elements and feedback icons. All the fields are marked as not validated yet.
+```resetForm(resetFormData)```: Reset form. It hides all error elements and feedback icons. All the fields are marked as not validated yet.
 If ```resetFormData``` is ```true```, the method resets the form fields.
 
 ```javascript
@@ -334,6 +336,9 @@ validator.resetForm();
 ```
 
 ## Write new validator
+
+> If you develop new validator which might be useful to other, please [fork](https://github.com/nghuuphuoc/bootstrapvalidator/fork) and pull a new request.
+> Then I will add it as a built-in validator
 
 A validator has to follow the syntax:
 
