@@ -313,7 +313,7 @@ max         | n/a     | The maximum length. One of ```min```, ```max``` options 
 
 ## API
 
-### ```validate()```
+### ```validate```
 
 ```validate()```: Validate form manually. It is useful when you want to validate form by clicking a button or a link instead of a submit buttons.
 

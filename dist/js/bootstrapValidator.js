@@ -169,29 +169,32 @@
                 }
             }
 
-            if (size && offset) {
-                for (var validatorName in this.options.fields[field].validators) {
-                    if (!$.fn.bootstrapValidator.validators[validatorName]) {
-                        delete this.options.fields[field].validators[validatorName];
-                        continue;
-                    }
-
-                    this.results[field][validatorName] = this.STATUS_NOT_VALIDATED;
-                    $('<small/>')
-                        .css('display', 'none')
-                        .attr('data-bs-validator', validatorName)
-                        .addClass('help-block')
-                        .addClass(['col-', size, '-offset-', offset].join(''))
-                        .addClass(['col-', size, '-', this.options.columns - offset].join(''))
-                        .appendTo($parent);
+            for (var validatorName in this.options.fields[field].validators) {
+                if (!$.fn.bootstrapValidator.validators[validatorName]) {
+                    delete this.options.fields[field].validators[validatorName];
+                    continue;
                 }
+
+                this.results[field][validatorName] = this.STATUS_NOT_VALIDATED;
+                $('<small/>')
+                    .css('display', 'none')
+                    .attr('data-bs-validator', validatorName)
+                    .addClass('help-block')
+                    .addClass(size && offset ? ['col-', size, '-offset-', offset].join('') : '')
+                    .addClass(size && offset ? ['col-', size, '-', this.options.columns - offset].join('') : '')
+                    .appendTo($parent);
             }
 
             // Prepare the feedback icons
             // Available from Bootstrap 3.1 (http://getbootstrap.com/css/#forms-control-validation)
             if (this.options.feedbackIcons) {
                 $parent.addClass('has-feedback');
-                $('<i/>').css('display', 'none').addClass('form-control-feedback').insertAfter($(fields[fields.length - 1]));
+                var $icon = $('<i/>').css('display', 'none').addClass('form-control-feedback').insertAfter($(fields[fields.length - 1]));
+                // The feedback icon does not render correctly if there is no label
+                // https://github.com/twbs/bootstrap/issues/12873
+                if (label == null) {
+                    $icon.css('top', 0);
+                }
             }
 
             if (this.options.fields[field]['enabled'] == null) {
