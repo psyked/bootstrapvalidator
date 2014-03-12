@@ -11,14 +11,19 @@
     <script type="text/javascript" src="../dist/js/bootstrapValidator.js"></script>
 
     <!-- Support datetime picker plugin: http://eonasdan.github.io/bootstrap-datetimepicker/ -->
-    <link rel="stylesheet" href="http://eonasdan.github.io/bootstrap-datetimepicker/styles/bootstrap-datetimepicker.min.css"/>
-    <script type="text/javascript" src="http://eonasdan.github.io/bootstrap-datetimepicker/scripts/moment-2.4.0.js"></script>
+    <link rel="stylesheet" href="http://eonasdan.github.io/bootstrap-datetimepicker/content/bootstrap-datetimepicker.css"/>
+    <script type="text/javascript" src="http://eonasdan.github.io/bootstrap-datetimepicker/scripts/moment.js"></script>
     <script type="text/javascript" src="http://eonasdan.github.io/bootstrap-datetimepicker/scripts/bootstrap-datetimepicker.js"></script>
 
     <style type="text/css">
     /* Override to make the feedback icons shown properly */
-    .bootstrap-validator-datetime .form-control-feedback {
-        right: -30px !important;
+    .form-horizontal .has-feedback .form-control-feedback {
+        top: 0;
+        right: -15px;
+    }
+    .form-horizontal .has-feedback .input-group .form-control-feedback {
+        top: 0;
+        right: -30px;
     }
     </style>
 </head>
@@ -62,11 +67,11 @@
                         </div>
 
                         <!-- datetime picker -->
-                        <div class="form-group bootstrap-validator-datetime">
+                        <div class="form-group">
                             <label class="col-lg-3 control-label"><a href="http://eonasdan.github.io/bootstrap-datetimepicker/">DateTime Picker</a> (MM/DD/YYYY h:m A)</label>
                             <div class="col-lg-5">
                                 <div class="input-group date" id="datetimePicker">
-                                    <input type="text" class="form-control" name="datetimePicker" />
+                                    <input type="text" class="form-control" name="datetimePicker" value="03/12/2001 10:12 PM" />
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                 </div>
                                 <span class="help-block">Choose a leap year</span>
@@ -127,19 +132,17 @@ $(document).ready(function() {
             },
             datetimePicker: {
                 validators: {
-//                    date: {
-//                        format: 'MM/DD/YYYY h:m A'
-//                    },
+                    date: {
+                        format: 'MM/DD/YYYY h:m A'
+                    },
                     callback: {
                         callback: function(value, validator) {
                             // m is moment object
                             var m = new moment(value, 'MM/DD/YYYY h:m A', true);
-                            console.log(value, m.isValid());
                             if (!m.isValid()) {
                                 return false;
                             }
                             var year = m.years();
-                            console.log(year);
                             return (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0));
                         },
                         message: 'Chosen year is not a leap one'
@@ -149,9 +152,12 @@ $(document).ready(function() {
         }
     });
 
-    $('#datetimePicker').on('change.dp', function(e) {
+    $('#datetimePicker').on('dp.change', function(e) {
         // Validate the date when user change it
-        $('#defaultForm').data('bootstrapValidator').validateField('datetimePicker');
+        $('#defaultForm')
+            .data('bootstrapValidator')             // Get the bootstrapValidator instance
+            .setNotValidated('datetimePicker')      // Mark the field as not validated, so it'll be re-validated when the user change date
+            .validateField('datetimePicker');       // Validate the field
     });
 });
 </script>

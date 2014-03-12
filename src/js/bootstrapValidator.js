@@ -205,9 +205,7 @@
                 type  = fields.attr('type'),
                 event = ('radio' == type || 'checkbox' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup';
             fields.on(event, function() {
-                for (var v in that.options.fields[field].validators) {
-                    that.results[field][v] = that.STATUS_NOT_VALIDATED;
-                }
+                that.setNotValidated(field);
             });
         },
 
@@ -459,6 +457,22 @@
 
                 default:
                     break;
+            }
+
+            return this;
+        },
+
+        /**
+         * Mark a field as not validated yet
+         * The plugin doesn't re-validate a field if it is marked as valid.
+         * In some cases, we need to force the plugin validate it again
+         *
+         * @param {String} field The field name
+         * @returns {BootstrapValidator}
+         */
+        setNotValidated: function(field) {
+            for (var v in this.options.fields[field].validators) {
+                this.results[field][v] = this.STATUS_NOT_VALIDATED;
             }
 
             return this;
