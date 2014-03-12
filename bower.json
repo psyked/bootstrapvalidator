@@ -1,0 +1,18 @@
+{
+  "name": "bootstrapValidator",
+  "homepage": "https://github.com/nghuuphuoc/bootstrapvalidator",
+  "version": "0.3.0",
+  "main": [
+    "./dist/js/bootstrapValidator.js"
+  ],
+  "_release": "0.3.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.3.0",
+    "commit": "8419c8126d83b01271d3ad9c6d913adaf17c893e"
+  },
+  "_source": "git://github.com/nghuuphuoc/bootstrapvalidator.git",
+  "_target": "~0.3.0",
+  "_originalSource": "bootstrapValidator",
+  "_direct": true
+}
