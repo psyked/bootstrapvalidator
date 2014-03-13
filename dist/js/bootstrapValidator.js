@@ -139,35 +139,10 @@
                 return;
             }
 
-            // Create a help block element for showing the error
-            var $field  = $(fields[0]),
-                $parent = $field.parents('.form-group'),
-                // Calculate the number of columns of the label/field element
-                // Then set offset to the help block element
-                label, cssClasses, offset, size;
-
-            if (label = $parent.find('label').get(0)) {
-                // The default Bootstrap form don't require class for label (http://getbootstrap.com/css/#forms)
-                if (cssClasses = $(label).attr('class')) {
-                    cssClasses = cssClasses.split(' ');
-                    for (var i = 0; i < cssClasses.length; i++) {
-                        if (/^col-(xs|sm|md|lg)-\d+$/.test(cssClasses[i])) {
-                            offset = cssClasses[i].substr(7);
-                            size   = cssClasses[i].substr(4, 2);
-                            break;
-                        }
-                    }
-                }
-            } else if (cssClasses = $parent.children().eq(0).attr('class')) {
-                cssClasses = cssClasses.split(' ');
-                for (var i = 0; i < cssClasses.length; i++) {
-                    if (/^col-(xs|sm|md|lg)-offset-\d+$/.test(cssClasses[i])) {
-                        offset = cssClasses[i].substr(14);
-                        size   = cssClasses[i].substr(4, 2);
-                        break;
-                    }
-                }
-            }
+            // Create help block elements for showing the error messages
+            var $field            = $(fields[0]),
+                $parent           = $field.parents('.form-group'),
+                $messageContainer = this._getMessageContainer($field);
 
             for (var validatorName in this.options.fields[field].validators) {
                 if (!$.fn.bootstrapValidator.validators[validatorName]) {
@@ -180,9 +155,7 @@
                     .css('display', 'none')
                     .attr('data-bs-validator', validatorName)
                     .addClass('help-block')
-                    .addClass(size && offset ? ['col-', size, '-offset-', offset].join('') : '')
-                    .addClass(size && offset ? ['col-', size, '-', this.options.columns - offset].join('') : '')
-                    .appendTo($parent);
+                    .appendTo($messageContainer);
             }
 
             // Prepare the feedback icons
@@ -192,7 +165,7 @@
                 var $icon = $('<i/>').css('display', 'none').addClass('form-control-feedback').insertAfter($(fields[fields.length - 1]));
                 // The feedback icon does not render correctly if there is no label
                 // https://github.com/twbs/bootstrap/issues/12873
-                if (label == null) {
+                if ($parent.find('label').length == 0) {
                     $icon.css('top', 0);
                 }
             }
@@ -208,6 +181,34 @@
             fields.on(event, function() {
                 that.setNotValidated(field);
             });
+        },
+
+        /**
+         * Get the element to place the error messages
+         *
+         * @param {jQuery} $field The field element
+         * @returns {jQuery}
+         */
+        _getMessageContainer: function($field) {
+            var $parent = $field.parent();
+            if ($parent.hasClass('form-group')) {
+                return $parent;
+            }
+
+            var cssClasses = $parent.attr('class');
+            if (!cssClasses) {
+                return this._getMessageContainer($parent);
+            }
+
+            cssClasses = cssClasses.split(' ');
+            var n = cssClasses.length;
+            for (var i = 0; i < n; i++) {
+                if (/^col-(xs|sm|md|lg)-\d+$/.test(cssClasses[i]) || /^col-(xs|sm|md|lg)-offset-\d+$/.test(cssClasses[i])) {
+                    return $parent;
+                }
+            }
+
+            return this._getMessageContainer($parent);
         },
 
         /**
@@ -492,10 +493,8 @@
                 this.dfds[field]    = {};
                 this.results[field] = {};
 
-                // Mark all fields as not validated yet
-                for (var v in this.options.fields[field].validators) {
-                    this.results[field][v] = this.STATUS_NOT_VALIDATED;
-                }
+                // Mark field as not validated yet
+                this.setNotValidated(field);
             }
 
             this.invalidField  = null;
@@ -532,9 +531,7 @@
         enableFieldValidators: function(field, enabled) {
             this.options.fields[field]['enabled'] = enabled;
             if (enabled) {
-                for (var v in this.options.fields[field].validators) {
-                    this.results[field][v] = this.STATUS_NOT_VALIDATED;
-                }
+                this.setNotValidated(field);
             } else {
                 var $field  = this.getFieldElements(field),
                     $parent = $field.parents('.form-group');
@@ -618,7 +615,6 @@
                 var dfd = new $.Deferred();
                 dfd.resolve(options.callback.call(this, value, validator), 'callback');
                 return dfd;
-                return options.callback.call(this, value, validator);
             }
             return true;
         }

@@ -8,8 +8,9 @@ __New features__:
 
 * [#4: Add ```date``` validator](https://github.com/nghuuphuoc/bootstrapvalidator/issues/4)
 * [#72, #79: Add ```setNotValidated()``` method to make the plugin play well with another](https://github.com/nghuuphuoc/bootstrapvalidator/issues/72)
-* [#80: Add ```enableFieldValidators()``` method to enable/disable all validators to given field](https://github.com/nghuuphuoc/bootstrapvalidator/issues/80)
+* [#80: Add ```enabled``` option and  ```enableFieldValidators()``` method to enable/disable all validators to given field](https://github.com/nghuuphuoc/bootstrapvalidator/issues/80)
 * Add ```bower.json``` file
+* [#3, #92: Support more form controls on the same row](https://github.com/nghuuphuoc/bootstrapvalidator/issues/92)
 
 __Fixes__:
 
@@ -22,7 +23,7 @@ Released on 2014-03-10
 __New features__:
 
 * [#44: Rewrite entirely using Deferred](https://github.com/nghuuphuoc/bootstrapvalidator/issues/44)
-* #26, #27, #67: Add choice validator
+* #26, #27, #67: Add ```choice``` validator
 * [#31: The ```remote``` validator supports dynamic data](https://github.com/nghuuphuoc/bootstrapvalidator/issues/31)
 * [#36, #58: Add method to validate form manually](https://github.com/nghuuphuoc/bootstrapvalidator/issues/58)
 * [#41: Disable submit button on successful form submit](https://github.com/nghuuphuoc/bootstrapvalidator/issues/41)
