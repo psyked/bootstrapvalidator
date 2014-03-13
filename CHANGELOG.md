@@ -9,6 +9,7 @@ __New features__:
 * [#4: Add ```date``` validator](https://github.com/nghuuphuoc/bootstrapvalidator/issues/4)
 * [#72, #79: Add ```setNotValidated()``` method to make the plugin play well with another](https://github.com/nghuuphuoc/bootstrapvalidator/issues/72)
 * [#80: Add ```enableFieldValidators()``` method to enable/disable all validators to given field](https://github.com/nghuuphuoc/bootstrapvalidator/issues/80)
+* Add ```bower.json``` file
 
 __Fixes__:
 

@@ -1,18 +1,23 @@
 {
-  "name": "bootstrapValidator",
-  "homepage": "https://github.com/nghuuphuoc/bootstrapvalidator",
-  "version": "0.3.0",
-  "main": [
-    "./dist/js/bootstrapValidator.js"
-  ],
-  "_release": "0.3.0",
-  "_resolution": {
-    "type": "version",
-    "tag": "v0.3.0",
-    "commit": "8419c8126d83b01271d3ad9c6d913adaf17c893e"
-  },
-  "_source": "git://github.com/nghuuphuoc/bootstrapvalidator.git",
-  "_target": "~0.3.0",
-  "_originalSource": "bootstrapValidator",
-  "_direct": true
+    "name": "bootstrapValidator",
+    "description": "A jQuery plugin to validate form fields. Use with Bootstrap 3",
+    "version": "0.3.0",
+    "main": [
+        "dist/css/bootstrapValidator.css",
+        "dist/js/bootstrapValidator.js"
+    ],
+    "license": "MIT",
+    "keywords": ["jQuery", "plugin", "validator", "Bootstrap"],
+    "authors": [
+        { "name": "Nguyen Huu Phuoc", "email": "phuoc@huuphuoc.me"," homepage": "https://twitter.com/nghuuphuoc" }
+    ],
+    "homepage": "https://github.com/nghuuphuoc/bootstrapvalidator",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nghuuphuoc/bootstrapvalidator.git"
+    },
+    "dependencies": {
+        "jquery": ">= 1.9.0",
+        "bootstrap": ">= 3.0.0"
+    }
 }
