@@ -21,6 +21,10 @@ __Fixes__:
 * [#82, #84: The error messages aren't shown if the form field doesn't have label](https://github.com/nghuuphuoc/bootstrapvalidator/issues/82)
 * [#89: ```submitHandler``` or default submission isn't called after ```remote``` validation completes](https://github.com/nghuuphuoc/bootstrapvalidator/issues/89)
 
+__Document__:
+
+* Add ```isValid()``` method to the _API_ section
+
 ## v0.3.0
 
 Released on 2014-03-10

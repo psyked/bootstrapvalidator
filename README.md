@@ -325,6 +325,12 @@ var validator = $(form).bootstrapValidator(options);
 validator.validate();
 ```
 
+### ```isValid```
+
+```isValid()```: Returns ```true``` if all form fields are valid. Otherwise, returns ```false```.
+
+Ensure that the ```validate``` method is already called after calling this one.
+
 ### ```resetForm```
 
 ```resetForm(resetFormData)```: Reset form. It hides all error elements and feedback icons. All the fields are marked as not validated yet.
@@ -441,6 +447,7 @@ Big thanks to the contributors:
 * [@emilchristensen](https://github.com/emilchristensen)
 * [@khangvm53](https://github.com/khangvm53)
 * [@kristian-puccio](https://github.com/kristian-puccio)
+* [@ikanedo](https://github.com/ikanedo)
 * [@iplus](https://github.com/iplus)
 * [@vaz](https://github.com/vaz)
 * ... might be you! Let's [fork](https://github.com/nghuuphuoc/bootstrapvalidator/fork) and pull a request!
