@@ -140,10 +140,11 @@
             }
 
             // Create help block elements for showing the error messages
-            var $field            = $(fields[0]),
-                $parent           = $field.parents('.form-group'),
-                $messageContainer = this._getMessageContainer($field);
+            var $field   = $(fields[0]),
+                $parent  = $field.parents('.form-group'),
+                $message = this._getMessageContainer($field);
 
+            $field.data('bootstrapValidator.messageContainer', $message);
             for (var validatorName in this.options.fields[field].validators) {
                 if (!$.fn.bootstrapValidator.validators[validatorName]) {
                     delete this.options.fields[field].validators[validatorName];
@@ -155,7 +156,7 @@
                     .css('display', 'none')
                     .attr('data-bs-validator', validatorName)
                     .addClass('help-block')
-                    .appendTo($messageContainer);
+                    .appendTo($message);
             }
 
             // Prepare the feedback icons
@@ -392,7 +393,7 @@
          * Update field status
          *
          * @param {jQuery} $field The field element
-         * @param {String} validatorName
+         * @param {String} validatorName The validator name
          * @param {String} status The status
          * Can be STATUS_VALIDATING, STATUS_INVALID, STATUS_VALID
          * @return {BootstrapValidator}
@@ -403,7 +404,8 @@
                 validator = this.options.fields[field].validators[validatorName],
                 message   = validator.message || this.options.message,
                 $parent   = $field.parents('.form-group'),
-                $errors   = $parent.find('.help-block[data-bs-validator]');
+                $message  = $field.data('bootstrapValidator.messageContainer'),
+                $errors   = $message.find('.help-block[data-bs-validator]');
 
             switch (status) {
                 case this.STATUS_VALIDATING:
@@ -416,7 +418,7 @@
 
                     if (this.options.feedbackIcons) {
                         // Show validating icon
-                        $parent.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).addClass(this.options.feedbackIcons.validating).show();
+                        $message.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).addClass(this.options.feedbackIcons.validating).show();
                     }
                     break;
 
@@ -431,7 +433,7 @@
 
                     if (this.options.feedbackIcons) {
                         // Show invalid icon
-                        $parent.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
+                        $message.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
                     }
                     break;
 
@@ -452,7 +454,7 @@
                         $parent.removeClass('has-error').addClass('has-success');
                         // Show valid icon
                         if (this.options.feedbackIcons) {
-                            $parent.find('.form-control-feedback').removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.valid).show();
+                            $message.find('.form-control-feedback').removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.valid).show();
                         }
                     }
                     break;
@@ -533,12 +535,13 @@
             if (enabled) {
                 this.setNotValidated(field);
             } else {
-                var $field  = this.getFieldElements(field),
-                    $parent = $field.parents('.form-group');
+                var $field   = this.getFieldElements(field),
+                    $message = $field.data('bootstrapValidator.messageContainer');
 
-                $parent.removeClass('has-success has-error').find('.help-block[data-bs-validator]').hide();
+                $field.parents('.form-group').removeClass('has-success has-error');
+                $message.find('.help-block[data-bs-validator]').hide();
                 if (this.options.feedbackIcons) {
-                    $parent.find('.form-control-feedback').removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).removeClass(this.options.feedbackIcons.valid).hide();
+                    $message.find('.form-control-feedback').removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).removeClass(this.options.feedbackIcons.valid).hide();
                 }
 
                 this._disableSubmitButtons(false);
