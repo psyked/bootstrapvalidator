@@ -48,7 +48,7 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-lg-9 col-lg-offset-3">
+                                <div class="col-lg-5 col-lg-offset-3">
                                     <div class="checkbox">
                                         <input type="checkbox" name="acceptTerms" /> Accept the terms and policies
                                     </div>
@@ -148,6 +148,11 @@
 $(document).ready(function() {
     $('#defaultForm').bootstrapValidator({
         message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
         fields: {
             username: {
                 message: 'The username is not valid',
