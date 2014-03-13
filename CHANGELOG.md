@@ -12,9 +12,14 @@ __New features__:
 * Add ```bower.json``` file
 * [#3, #92: Support more form controls on the same row](https://github.com/nghuuphuoc/bootstrapvalidator/issues/92)
 
+__Changes__:
+
+* Remove the ```columns``` option
+
 __Fixes__:
 
-* [#82, #84: The error/success messages aren't shown if the form field doesn't have label](https://github.com/nghuuphuoc/bootstrapvalidator/issues/82)
+* [#82, #84: The error messages aren't shown if the form field doesn't have label](https://github.com/nghuuphuoc/bootstrapvalidator/issues/82)
+* [#89: ```submitHandler``` or default submission isn't called after ```remote``` validation completes](https://github.com/nghuuphuoc/bootstrapvalidator/issues/89)
 
 ## v0.3.0
 

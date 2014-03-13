@@ -60,11 +60,16 @@
     $(document).ready(function() {
         $('#defaultForm').bootstrapValidator({
             message: 'This value is not valid',
+            live: 'disabled',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
             submitHandler: function(validator, form, submitButton) {
                 // validator is the BootstrapValidator instance
                 // form is the jQuery object present the current form
                 form.find('.alert').html('Thanks for signing up. Now you can sign in as ' + validator.getFieldElements('username').val()).show();
-                //form.submit();
             },
             fields: {
                 username: {
@@ -77,6 +82,10 @@
                             min: 6,
                             max: 30,
                             message: 'The username must be more than 6 and less than 30 characters long'
+                        },
+                        remote: {
+                            url: 'remote.php',
+                            message: 'The username is not available'
                         },
                         regexp: {
                             regexp: /^[a-zA-Z0-9_\.]+$/,

@@ -36,10 +36,6 @@
         // Default invalid message
         message: 'This value is not valid',
 
-        // The number of grid columns
-        // Change it if you use custom grid with different number of columns
-        columns: 12,
-
         // Shows ok/error/loading icons based on the field validity.
         // This feature requires Bootstrap v3.1.0 or later (http://getbootstrap.com/css/#forms-control-validation).
         // Since Bootstrap doesn't provide any methods to know its version, this option cannot be on/off automatically.
@@ -354,6 +350,10 @@
                         delete that.dfds[field][v];
                         isValid ? that.updateStatus($field, v, that.STATUS_VALID)
                                 : that.updateStatus($field, v, that.STATUS_INVALID);
+
+                        if (isValid && that.options.live == 'disabled') {
+                            that._submit();
+                        }
                     });
                 } else if ('boolean' == typeof validateResult) {
                     validateResult ? this.updateStatus($field, validatorName, this.STATUS_VALID)

@@ -349,6 +349,10 @@
                         delete that.dfds[field][v];
                         isValid ? that.updateStatus($field, v, that.STATUS_VALID)
                                 : that.updateStatus($field, v, that.STATUS_INVALID);
+
+                        if (isValid && that.options.live == 'disabled') {
+                            that._submit();
+                        }
                     });
                 } else if ('boolean' == typeof validateResult) {
                     validateResult ? this.updateStatus($field, validatorName, this.STATUS_VALID)
