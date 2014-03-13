@@ -20,7 +20,6 @@
                 var dfd = new $.Deferred();
                 dfd.resolve(options.callback.call(this, value, validator), 'callback');
                 return dfd;
-                return options.callback.call(this, value, validator);
             }
             return true;
         }

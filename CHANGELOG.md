@@ -1,6 +1,22 @@
 # Change Log
 
-## v0.3.0 (2014-03-10)
+## v0.3.1
+
+Not released yet
+
+__New features__:
+
+* [#4: Add ```date``` validator](https://github.com/nghuuphuoc/bootstrapvalidator/issues/4)
+* [#72, #79: Add ```setNotValidated()``` method to make the plugin play well with another](https://github.com/nghuuphuoc/bootstrapvalidator/issues/72)
+* [#80: Add ```enableFieldValidators()``` method to enable/disable all validators to given field](https://github.com/nghuuphuoc/bootstrapvalidator/issues/80)
+
+__Fixes__:
+
+* [#82, #84: The error/success messages aren't shown if the form field doesn't have label](https://github.com/nghuuphuoc/bootstrapvalidator/issues/82)
+
+## v0.3.0
+
+Released on 2014-03-10
 
 __New features__:
 
@@ -15,7 +31,7 @@ __New features__:
 * [#65: Support Sweden zip code](https://github.com/nghuuphuoc/bootstrapvalidator/issues/64)
 * [#70: Support custom grid columns](https://github.com/nghuuphuoc/bootstrapvalidator/issues/70)
 * [#71: Show all errors](https://github.com/nghuuphuoc/bootstrapvalidator/issues/71)
-* [#76: Add resetForm() method](https://github.com/nghuuphuoc/bootstrapvalidator/issues/76)
+* [#76: Add ```resetForm()``` method](https://github.com/nghuuphuoc/bootstrapvalidator/issues/76)
 
 __Fixes__:
 
@@ -30,7 +46,9 @@ __Document__:
 * [#60: Update the installation guide](https://github.com/nghuuphuoc/bootstrapvalidator/pull/60)
 * [#73: Describe which version should be included in the Usage section](https://github.com/nghuuphuoc/bootstrapvalidator/issues/73)
 
-## v0.2.2 (2014-01-07)
+## v0.2.2
+
+Released on 2014-01-07
 
 * [#15: Focus to the first invalid element](https://github.com/nghuuphuoc/bootstrapvalidator/issues/15)
 * [#31: ```remote``` validator: Allow to set additional data to remote URL](https://github.com/nghuuphuoc/bootstrapvalidator/issues/31)
@@ -39,12 +57,16 @@ __Document__:
 * [#40: Fix the issue when the form label doesn't have class](https://github.com/nghuuphuoc/bootstrapvalidator/issues/40)
 * [#32, #43, #47: Only validate not empty field](https://github.com/nghuuphuoc/bootstrapvalidator/issues/43)
 
-## v0.2.1 (2013-11-08)
+## v0.2.1
+
+Released on 2013-11-08
 
 * [#29: Upgrade Bootstrap to v3.0.2](https://github.com/nghuuphuoc/bootstrapvalidator/issues/29)
 * [#30: Hide the error block containers before validating](https://github.com/nghuuphuoc/bootstrapvalidator/issues/30)
 
-## v0.2.0 (2013-10-21)
+## v0.2.0
+
+Released on 2013-10-21
 
 * [#9: Add ```creditCard``` validator](https://github.com/nghuuphuoc/bootstrapvalidator/issues/9)
 * [#18: Add ```different``` validator](https://github.com/nghuuphuoc/bootstrapvalidator/issues/18)
@@ -54,14 +76,18 @@ __Document__:
 * [#24: Add ```live``` option](https://github.com/nghuuphuoc/bootstrapvalidator/issues/24)
 * [#25: The ```regexp``` validator does not work](https://github.com/nghuuphuoc/bootstrapvalidator/issues/25)
 
-## v0.1.1 (2013-10-17)
+## v0.1.1
+
+Released on 2013-10-17
 
 * Add ```submitButtons``` option
 * [#16: Disable client side validation in HTML 5](https://github.com/nghuuphuoc/bootstrapvalidator/issues/16)
 * [#17: Support default Bootstrap form without labels](https://github.com/nghuuphuoc/bootstrapvalidator/issues/17)
 * [#19: Support select box validator](https://github.com/nghuuphuoc/bootstrapvalidator/issues/19)
 
-## v0.1.0 (2013-10-14)
+## v0.1.0
+
+Released on 2013-10-14
 
 * First release
 * Provide various validators

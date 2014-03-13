@@ -491,10 +491,8 @@
                 this.dfds[field]    = {};
                 this.results[field] = {};
 
-                // Mark all fields as not validated yet
-                for (var v in this.options.fields[field].validators) {
-                    this.results[field][v] = this.STATUS_NOT_VALIDATED;
-                }
+                // Mark field as not validated yet
+                this.setNotValidated(field);
             }
 
             this.invalidField  = null;
@@ -531,9 +529,7 @@
         enableFieldValidators: function(field, enabled) {
             this.options.fields[field]['enabled'] = enabled;
             if (enabled) {
-                for (var v in this.options.fields[field].validators) {
-                    this.results[field][v] = this.STATUS_NOT_VALIDATED;
-                }
+                this.setNotValidated(field);
             } else {
                 var $field  = this.getFieldElements(field),
                     $parent = $field.parents('.form-group');
