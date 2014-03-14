@@ -74,7 +74,6 @@
                                     <input type="text" class="form-control" name="datetimePicker" />
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                                 </div>
-                                <span class="help-block">Choose a leap year</span>
                             </div>
                         </div>
 
@@ -132,33 +131,25 @@ $(document).ready(function() {
             },
             datetimePicker: {
                 validators: {
+                    notEmpty: {
+                        message: 'The date is required and cannot be empty'
+                    },
                     date: {
                         format: 'MM/DD/YYYY h:m A'
-                    },
-                    callback: {
-                        callback: function(value, validator) {
-                            // m is moment object
-                            var m = new moment(value, 'MM/DD/YYYY h:m A', true);
-                            if (!m.isValid()) {
-                                return false;
-                            }
-                            var year = m.years();
-                            return (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0));
-                        },
-                        message: 'Chosen year is not a leap one'
                     }
                 }
             }
         }
     });
 
-    $('#datetimePicker').on('dp.change', function(e) {
-        // Validate the date when user change it
-        $('#defaultForm')
-            .data('bootstrapValidator')             // Get the bootstrapValidator instance
-            .setNotValidated('datetimePicker')      // Mark the field as not validated, so it'll be re-validated when the user change date
-            .validateField('datetimePicker');       // Validate the field
-    });
+    $('#datetimePicker')
+        .on('dp.change dp.show', function(e) {
+            // Validate the date when user change it
+            $('#defaultForm')
+                .data('bootstrapValidator')             // Get the bootstrapValidator instance
+                .setNotValidated('datetimePicker')      // Mark the field as not validated, so it'll be re-validated when the user change date
+                .validateField('datetimePicker');       // Validate the field
+        });
 });
 </script>
 </body>
