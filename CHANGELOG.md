@@ -9,7 +9,7 @@ __New features__:
 * [#4: Add ```date``` validator](https://github.com/nghuuphuoc/bootstrapvalidator/issues/4)
 * [#72, #79: Add ```setNotValidated()``` method to make the plugin play well with another](https://github.com/nghuuphuoc/bootstrapvalidator/issues/72)
 * [#80: Add ```enabled``` option and  ```enableFieldValidators()``` method to enable/disable all validators to given field](https://github.com/nghuuphuoc/bootstrapvalidator/issues/80)
-* Add ```bower.json``` file
+* [#90: Add ```bower.json``` file](https://github.com/nghuuphuoc/bootstrapvalidator/pull/90), thanks to [@ikanedo](https://github.com/ikanedo)
 * [#3, #92: Support more form controls on the same row](https://github.com/nghuuphuoc/bootstrapvalidator/issues/92)
 
 __Changes__:
@@ -32,14 +32,14 @@ Released on 2014-03-10
 __New features__:
 
 * [#44: Rewrite entirely using Deferred](https://github.com/nghuuphuoc/bootstrapvalidator/issues/44)
-* #26, #27, #67: Add ```choice``` validator
+* [#26, #27, #67: Add ```choice``` validator](https://github.com/nghuuphuoc/bootstrapvalidator/pull/67), thanks to [@emilchristensen](https://github.com/emilchristensen)
 * [#31: The ```remote``` validator supports dynamic data](https://github.com/nghuuphuoc/bootstrapvalidator/issues/31)
 * [#36, #58: Add method to validate form manually](https://github.com/nghuuphuoc/bootstrapvalidator/issues/58)
 * [#41: Disable submit button on successful form submit](https://github.com/nghuuphuoc/bootstrapvalidator/issues/41)
 * [#42: Add submit button to ```submitHandler()``` parameter](https://github.com/nghuuphuoc/bootstrapvalidator/issues/42)
 * [#48: Add optional feedback icons](https://github.com/nghuuphuoc/bootstrapvalidator/issues/48)
-* [#64: Support Danish zip code](https://github.com/nghuuphuoc/bootstrapvalidator/issues/64)
-* [#65: Support Sweden zip code](https://github.com/nghuuphuoc/bootstrapvalidator/issues/64)
+* [#64: Support Danish zip code](https://github.com/nghuuphuoc/bootstrapvalidator/pull/64), thanks to [@emilchristensen](https://github.com/emilchristensen)
+* [#65: Support Sweden zip code](https://github.com/nghuuphuoc/bootstrapvalidator/pull/65), thanks to [@emilchristensen](https://github.com/emilchristensen)
 * [#70: Support custom grid columns](https://github.com/nghuuphuoc/bootstrapvalidator/issues/70)
 * [#71: Show all errors](https://github.com/nghuuphuoc/bootstrapvalidator/issues/71)
 * [#76: Add ```resetForm()``` method](https://github.com/nghuuphuoc/bootstrapvalidator/issues/76)
@@ -48,13 +48,14 @@ __Fixes__:
 
 * [#50: Don't validate disabled element](https://github.com/nghuuphuoc/bootstrapvalidator/issues/50)
 * [#51: Submit after submit doesn't work](https://github.com/nghuuphuoc/bootstrapvalidator/issues/51)
-* [#53: Fix notEmpty validator for radios and checkboxes](https://github.com/nghuuphuoc/bootstrapvalidator/issues/53)
+* [#53, #54: Fix notEmpty validator for radios and checkboxes](https://github.com/nghuuphuoc/bootstrapvalidator/pull/54), thanks to [@kristian-puccio](https://github.com/kristian-puccio)
 * [#55: The plugin doesn't validate other fields if the ```remote``` validator returns true](https://github.com/nghuuphuoc/bootstrapvalidator/issues/55)
-* [#62: The callback validator passes wrong parameter](https://github.com/nghuuphuoc/bootstrapvalidator/issues/62)
+* [#62: The callback validator passes wrong parameter](https://github.com/nghuuphuoc/bootstrapvalidator/pull/62), thanks to [@iplus](https://github.com/iplus)
 
 __Document__:
 
-* [#60: Update the installation guide](https://github.com/nghuuphuoc/bootstrapvalidator/pull/60)
+* [#59: Add example for Rail field convention](https://github.com/nghuuphuoc/bootstrapvalidator/pull/59), thanks to [@narutosanjiv](https://github.com/narutosanjiv)
+* [#60: Update the installation guide](https://github.com/nghuuphuoc/bootstrapvalidator/pull/60), thanks to [@vaz](https://github.com/vaz)
 * [#73: Describe which version should be included in the Usage section](https://github.com/nghuuphuoc/bootstrapvalidator/issues/73)
 
 ## v0.2.2

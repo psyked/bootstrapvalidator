@@ -449,6 +449,7 @@ Big thanks to the contributors:
 * [@kristian-puccio](https://github.com/kristian-puccio)
 * [@ikanedo](https://github.com/ikanedo)
 * [@iplus](https://github.com/iplus)
+* [@narutosanjiv](https://github.com/narutosanjiv)
 * [@vaz](https://github.com/vaz)
 * ... might be you! Let's [fork](https://github.com/nghuuphuoc/bootstrapvalidator/fork) and pull a request!
 

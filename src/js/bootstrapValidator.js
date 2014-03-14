@@ -347,16 +347,14 @@
                     validateResult.done(function(isValid, v) {
                         // v is validator name
                         delete that.dfds[field][v];
-                        isValid ? that.updateStatus($field, v, that.STATUS_VALID)
-                                : that.updateStatus($field, v, that.STATUS_INVALID);
+                        that.updateStatus($field, v, isValid ? that.STATUS_VALID : that.STATUS_INVALID);
 
-                        if (isValid && that.options.live == 'disabled') {
+                        if (isValid && 'disabled' == that.options.live) {
                             that._submit();
                         }
                     });
                 } else if ('boolean' == typeof validateResult) {
-                    validateResult ? this.updateStatus($field, validatorName, this.STATUS_VALID)
-                                   : this.updateStatus($field, validatorName, this.STATUS_INVALID);
+                    this.updateStatus($field, validatorName, validateResult ? this.STATUS_VALID : this.STATUS_INVALID);
                 }
             }
         },
