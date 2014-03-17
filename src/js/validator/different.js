@@ -21,7 +21,7 @@
             }
 
             if (value != compareWith.val()) {
-                validator.updateStatus(compareWith, 'different', validator.STATUS_VALID);
+                validator.updateStatus(compareWith, validator.STATUS_VALID, 'different');
                 return true;
             } else {
                 return false;

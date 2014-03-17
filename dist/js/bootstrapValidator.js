@@ -1,5 +1,5 @@
 /**
- * BootstrapValidator (http://github.com/nghuuphuoc/bootstrapvalidator)
+ * BootstrapValidator (https://github.com/nghuuphuoc/bootstrapvalidator)
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
@@ -151,6 +151,7 @@
                 $('<small/>')
                     .css('display', 'none')
                     .attr('data-bs-validator', validatorName)
+                    .html(this.options.fields[field].validators[validatorName].message || this.options.message)
                     .addClass('help-block')
                     .appendTo($message);
             }
@@ -342,22 +343,20 @@
                 validateResult = $.fn.bootstrapValidator.validators[validatorName].validate(this, $field, validators[validatorName]);
 
                 if ('object' == typeof validateResult) {
-                    this.updateStatus($field, validatorName, this.STATUS_VALIDATING);
+                    this.updateStatus($field, this.STATUS_VALIDATING, validatorName);
                     this.dfds[field][validatorName] = validateResult;
 
                     validateResult.done(function(isValid, v) {
                         // v is validator name
                         delete that.dfds[field][v];
-                        isValid ? that.updateStatus($field, v, that.STATUS_VALID)
-                                : that.updateStatus($field, v, that.STATUS_INVALID);
+                        that.updateStatus($field, isValid ? that.STATUS_VALID : that.STATUS_INVALID, v);
 
-                        if (isValid && that.options.live == 'disabled') {
+                        if (isValid && 'disabled' == that.options.live) {
                             that._submit();
                         }
                     });
                 } else if ('boolean' == typeof validateResult) {
-                    validateResult ? this.updateStatus($field, validatorName, this.STATUS_VALID)
-                                   : this.updateStatus($field, validatorName, this.STATUS_INVALID);
+                    this.updateStatus($field, validateResult ? this.STATUS_VALID : this.STATUS_INVALID, validatorName);
                 }
             }
         },
@@ -398,14 +397,12 @@
          * Can be STATUS_VALIDATING, STATUS_INVALID, STATUS_VALID
          * @return {BootstrapValidator}
          */
-        updateStatus: function($field, validatorName, status) {
-            var that      = this,
-                field     = $field.attr('name'),
-                validator = this.options.fields[field].validators[validatorName],
-                message   = validator.message || this.options.message,
-                $parent   = $field.parents('.form-group'),
-                $message  = $field.data('bootstrapValidator.messageContainer'),
-                $errors   = $message.find('.help-block[data-bs-validator]');
+        updateStatus: function($field, status, validatorName) {
+            var that     = this,
+                field    = $field.attr('name'),
+                $parent  = $field.parents('.form-group'),
+                $message = $field.data('bootstrapValidator.messageContainer'),
+                $errors  = $message.find('.help-block[data-bs-validator]');
 
             switch (status) {
                 case this.STATUS_VALIDATING:
@@ -414,7 +411,7 @@
 
                     $parent.removeClass('has-success').removeClass('has-error');
                     // TODO: Show validating message
-                    $errors.filter('.help-block[data-bs-validator="' + validatorName + '"]').html(message).hide();
+                    $errors.filter('.help-block[data-bs-validator="' + validatorName + '"]').hide();
 
                     if (this.options.feedbackIcons) {
                         // Show validating icon
@@ -429,7 +426,7 @@
                     // Add has-error class to parent element
                     $parent.removeClass('has-success').addClass('has-error');
 
-                    $errors.filter('[data-bs-validator="' + validatorName + '"]').html(message).show();
+                    $errors.filter('[data-bs-validator="' + validatorName + '"]').show();
 
                     if (this.options.feedbackIcons) {
                         // Show invalid icon
@@ -839,7 +836,7 @@
             }
 
             if (value != compareWith.val()) {
-                validator.updateStatus(compareWith, 'different', validator.STATUS_VALID);
+                validator.updateStatus(compareWith, validator.STATUS_VALID, 'different');
                 return true;
             } else {
                 return false;
@@ -956,7 +953,7 @@
             }
 
             if (value == compareWith.val()) {
-                validator.updateStatus(compareWith, 'identical', validator.STATUS_VALID);
+                validator.updateStatus(compareWith, validator.STATUS_VALID, 'identical');
                 return true;
             } else {
                 return false;
