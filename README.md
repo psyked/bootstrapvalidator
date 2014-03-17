@@ -27,6 +27,8 @@ You can see the live demo here:
 * [Sample demo](https://rawgithub.com/nghuuphuoc/bootstrapvalidator/master/demo/index.html)
 * [Validator examples](https://rawgithub.com/nghuuphuoc/bootstrapvalidator/master/demo/validators.html)
 * [Custom submit handler](https://rawgithub.com/nghuuphuoc/bootstrapvalidator/master/demo/submitHandler.html)
+* [Enable/disable validators on the fly](https://rawgithub.com/nghuuphuoc/bootstrapvalidator/master/demo/enable.html)
+* [Use with a datetime picker plugin](https://rawgithub.com/nghuuphuoc/bootstrapvalidator/master/demo/date.html)
 
 ## Install
 
