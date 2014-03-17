@@ -16,9 +16,8 @@
         this.dfds    = {};      // Array of deferred
         this.results = {};      // Validating results
 
-        this.invalidField   = null; // First invalid field
-        this.$submitButton  = null; // The submit button which is clicked to submit form
-        this.originalValues = {};   // Original field values
+        this.invalidField  = null;  // First invalid field
+        this.$submitButton = null;  // The submit button which is clicked to submit form
 
         this._init();
 
@@ -397,7 +396,7 @@
          *
          * @param {String|jQuery} field The field name or field element
          * @param {String} status The status
-         * Can be 'not_validated', 'validating', 'invalid', or 'valid'
+         * Can be 'not_validated', 'validating', 'invalid' or 'valid'
          * @param {String|null} validatorName The validator name. If null, the method updates validity result for all validators
          * @return {BootstrapValidator}
          */

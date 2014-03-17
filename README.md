@@ -7,10 +7,13 @@ A jQuery plugin to validate form fields. Use with [Bootstrap 3](http://getbootst
 ## Features
 
 * Built from scratch. The code is solid and clean
-* 17 built-in [validators](#validators)
+* 18 built-in [validators](#validators) and counting!
 * Cannot find the validator you need? Don't worry, it is easy to [write new validator](#write-new-validator)
 * Show feedback icons based on field validity
 * Support Ajax in both validator and form submission
+* Field validators can be enabled/disabled on the fly
+* Can be used with other plugins such as [Date Picker](http://eternicode.github.io/bootstrap-datepicker/),
+[Datetime Picker](http://eonasdan.github.io/bootstrap-datetimepicker/), [Select2](http://ivaynberg.github.io/select2/), [Raty](http://wbotelhos.com/raty) etc.
 
 ## Required
 
@@ -108,6 +111,8 @@ feedbackIcons: {
 }
 ```
 
+By default, these icons are not set
+
 ```submitButtons```: The submit buttons selector. These buttons will be disabled when the form input are invalid
 
 ```submitHandler```: Custom submit handler.
@@ -150,8 +155,8 @@ fields: {
     // The field name
     // It is value of the name attribute
     <fieldName>: {
-        // The default error message for this field
-        message: ...,
+        message: ...,       // The default error message for this field
+        enabled: true,      // Can be true of false
 
         // Array of validators
         validators: {
@@ -176,6 +181,7 @@ Validator name                          | Description
 [callback](#callback-validator)         | Return the validity from a callback method
 [choice](#choice-validator)             | Check if the number of checked boxes are less or more than a given number
 creditCard                              | Validate a credit card number
+[date](#date-validator)                 | Validate date
 [different](#different-validator)       | Return true if the input value is different with given field's value
 digits                                  | Return true if the value contains only digits
 emailAddress                            | Validate an email address
@@ -229,6 +235,35 @@ Option name | Default | Description
 message     | n/a     | The error message
 min         | n/a     | The minimum number of check boxes required to be checked
 max         | n/a     | The maximum number of check boxes required to be checked. At least one of ```min``` and ```max``` is required
+
+## date validator
+
+Option name | Default           | Description
+------------|-------------------|------------
+message     | n/a               | The error message
+format (*)  | ```MM/DD/YYYY```  | The date format
+
+The ```format``` can be one of the following values:
+
+* YYYY/DD/MM, YYYY/DD/MM h:m A
+* YYYY/MM/DD, YYYY/MM/DD h:m A
+* YYYY-DD-MM, YYYY-DD-MM h:m A
+* YYYY-MM-DD, YYYY-MM-DD h:m A
+* MM/DD/YYYY, MM/DD/YYYY h:m A
+* DD/MM/YYYY, DD/MM/YYYY h:m A
+* MM-DD-YYYY, MM-DD-YYYY h:m A
+* DD-MM-YYYY, DD-MM-YYYY h:m A
+
+> If you want to use other format, you can use the ```callback``` validator and [momentjs](http://momentjs.com)
+
+Format | Description
+-------|------------
+MM     | Month number (1 - 12)
+DD     | Day of month
+YYYY   | 4 digit year
+h      | 12 hour time
+m      | Minutes
+A      | AM/PM
 
 ### different validator
 
@@ -306,10 +341,10 @@ max         | n/a     | The maximum length. One of ```min```, ```max``` options 
 
 ### zipCode validator
 
-| Option name | Default | Description
-| ------------|---------|------------
-| message     | n/a     | The error message
-| country     | US      | A ISO 3166 country code. Currently it supports the following countries: US (United State), DK (Denmark), SE (Sweden)
+Option name | Default | Description
+------------|---------|------------
+message     | n/a     | The error message
+country     | US      | A ISO 3166 country code. Currently it supports the following countries: US (United State), DK (Denmark), SE (Sweden)
 
 ## API
 
@@ -330,6 +365,87 @@ validator.validate();
 ```isValid()```: Returns ```true``` if all form fields are valid. Otherwise, returns ```false```.
 
 Ensure that the ```validate``` method is already called after calling this one.
+
+### ```updateStatus```
+
+```updateStatus(field, status, validatorName)```: Update validator result for given field
+
+Parameter     | Description
+--------------|------------
+field         | The field name or field element
+status        | Can be ```not_validated```, ```validating```, ```invalid``` or ```valid```
+validatorName | The validator name. If ```null```, the method updates validity result for all validators
+
+This method is useful when you want to use BootstrapValidator with other plugin such as [Date Picker](http://eternicode.github.io/bootstrap-datepicker/),
+[Datetime Picker](http://eonasdan.github.io/bootstrap-datetimepicker/), [Select2](http://ivaynberg.github.io/select2/), etc.
+
+By default, the plugin doesn't re-validate a field once it is already validated and mark as a valid field. When using with other plugin,
+the field value is changed and therefore need to be re-validated.
+
+The following example describes how to re-validate a field which uses with [Datetime Picker](http://eonasdan.github.io/bootstrap-datetimepicker/):
+
+```html
+<form id="defaultForm" method="post" class="form-horizontal">
+    ...
+    <div class="form-group">
+        <label class="col-lg-3 control-label"><a href="http://eonasdan.github.io/bootstrap-datetimepicker/">DateTime Picker</a></label>
+        <div class="col-lg-5">
+            <div class="input-group date" id="datetimePicker">
+                <input type="text" class="form-control" name="datetimePicker" />
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+        </div>
+    </div>
+    ...
+</form>
+```
+
+```javascript
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#datetimePicker').datetimepicker();
+
+    $('#defaultForm').bootstrapValidator({
+        fields: {
+            ...
+            datetimePicker: {
+                validators: {
+                    notEmpty: {
+                        message: 'The date is required and cannot be empty'
+                    },
+                    date: {
+                        format: 'MM/DD/YYYY h:m A'
+                    }
+                }
+            }
+        }
+    });
+
+    $('#datetimePicker')
+        .on('dp.change dp.show', function(e) {
+            // Validate the date when user change it
+            $('#defaultForm')
+                // Get the bootstrapValidator instance
+                .data('bootstrapValidator')
+
+                // Mark the field as not validated, so it'll be re-validated when the user change date
+                .updateStatus('datetimePicker', 'not_validated', null)
+
+                // Validate the field
+                .validateField('datetimePicker');
+        });
+});
+</script>
+```
+
+### ```enableFieldValidators```
+
+```enableFieldValidators(field, enabled)```: Enable/disable all validators to given field
+
+Parameter | Description
+----------|------------
+field     | The field name
+enabled   | If ```true```, enable field validators. If ```false```, disable field validators
 
 ### ```resetForm```
 
