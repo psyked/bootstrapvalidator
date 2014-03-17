@@ -372,7 +372,7 @@ Ensure that the ```validate``` method is already called after calling this one.
 Parameter     | Description
 --------------|------------
 field         | The field name or field element
-status        | Can be ```not_validated```, ```validating```, ```invalid``` or ```valid```
+status        | Can be ```NOT_VALIDATED```, ```VALIDATING```, ```INVALID``` or ```VALID```
 validatorName | The validator name. If ```null```, the method updates validity result for all validators
 
 This method is useful when you want to use BootstrapValidator with other plugins such as [Date Picker](http://eternicode.github.io/bootstrap-datepicker/),
@@ -432,7 +432,7 @@ $(document).ready(function() {
                 .data('bootstrapValidator')
                 // Mark the field as not validated,
                 // so it'll be re-validated when the user change date
-                .updateStatus('datetimePicker', 'not_validated', null)
+                .updateStatus('datetimePicker', 'NOT_VALIDATED', null)
                 // Validate the field
                 .validateField('datetimePicker');
         });

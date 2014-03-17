@@ -147,7 +147,7 @@ $(document).ready(function() {
             // Validate the date when user change it
             $('#defaultForm')
                 .data('bootstrapValidator')                                 // Get the bootstrapValidator instance
-                .updateStatus('datetimePicker', 'not_validated', null)      // Mark the field as not validated, so it'll be re-validated when the user change date
+                .updateStatus('datetimePicker', 'NOT_VALIDATED', null)      // Mark the field as not validated, so it'll be re-validated when the user change date
                 .validateField('datetimePicker');                           // Validate the field
         });
 });

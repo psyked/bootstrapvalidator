@@ -396,7 +396,7 @@
          *
          * @param {String|jQuery} field The field name or field element
          * @param {String} status The status
-         * Can be 'not_validated', 'validating', 'invalid' or 'valid'
+         * Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
          * @param {String|null} validatorName The validator name. If null, the method updates validity result for all validators
          * @return {BootstrapValidator}
          */

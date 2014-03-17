@@ -3,7 +3,7 @@
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
- * @version     v0.3.1
+ * @version     v0.3.2-dev
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -397,7 +397,7 @@
          *
          * @param {String|jQuery} field The field name or field element
          * @param {String} status The status
-         * Can be 'not_validated', 'validating', 'invalid' or 'valid'
+         * Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
          * @param {String|null} validatorName The validator name. If null, the method updates validity result for all validators
          * @return {BootstrapValidator}
          */
