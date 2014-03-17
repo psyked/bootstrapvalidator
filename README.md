@@ -73,8 +73,7 @@ Call the plugin to validate the form as following:
 $(document).ready(function() {
     $(<form Selector>).bootstrapValidator({
         message: 'This value is not valid',
-        columns: 12,
-        feedbackIcons: null,
+        feedbackIcons: ...,
         submitButtons: 'button[type="submit"]',
         submitHandler: null,
         live: 'enabled',
@@ -85,9 +84,7 @@ $(document).ready(function() {
 
 ```message```: The default error message for all fields. You can specify the error message for any fields
 
-```columns```: The number of grid columns. Change it if you use custom grid with different number of columns
-
-```feedbackIcons```: Show valid/invalid/validating icons based on the field validity.
+```feedbackIcons```: Indicate valid/invalid/validating icons based on the field validity.
 
 This feature requires [Bootstrap v3.1.0 or later](http://getbootstrap.com/css/#forms-control-validation).
 Since Bootstrap doesn't provide any methods to know its version, this option cannot be on/off automatically.
@@ -113,7 +110,7 @@ feedbackIcons: {
 }
 ```
 
-By default, these icons are not set
+By default, these icons are not set.
 
 ```submitButtons```: The submit buttons selector. These buttons will be disabled when the form input are invalid
 
@@ -124,11 +121,11 @@ submitHandler: function(validator, form, submitButton) {
 }
 ```
 
-The handler has three arguments:
-
-- ```validator``` is the instance of BootstrapValidator
-- ```form``` is jQuery object representing the current form
-- ```submitButton``` is jQuery object representing the submit button which is clicked
+Parameter    | Description
+-------------|------------
+validator    | The instance of BootstrapValidator
+form         | jQuery object representing the current form
+submitButton | jQuery object representing the submit button which is clicked
 
 This option is useful when you want to use Ajax to submit the form data:
 
@@ -141,7 +138,7 @@ submitHandler: function(validator, form, submitButton) {
 }
 ```
 
-By default, ```submitHandler``` is ```null```
+By default, ```submitHandler``` is ```null```.
 
 ```live```: Live validating. Can be one of 3 values:
 
@@ -238,7 +235,7 @@ message     | n/a     | The error message
 min         | n/a     | The minimum number of check boxes required to be checked
 max         | n/a     | The maximum number of check boxes required to be checked. At least one of ```min``` and ```max``` is required
 
-## date validator
+### date validator
 
 Option name | Default           | Description
 ------------|-------------------|------------
@@ -256,7 +253,7 @@ The ```format``` can be one of the following values:
 * MM-DD-YYYY, MM-DD-YYYY h:m A
 * DD-MM-YYYY, DD-MM-YYYY h:m A
 
-> If you want to use other format, you can use the ```callback``` validator and [momentjs](http://momentjs.com)
+> If you want to use other format, you can use the ```callback``` validator and [momentjs](http://momentjs.com) to parse/validate the input.
 
 Format | Description
 -------|------------
@@ -378,13 +375,15 @@ field         | The field name or field element
 status        | Can be ```not_validated```, ```validating```, ```invalid``` or ```valid```
 validatorName | The validator name. If ```null```, the method updates validity result for all validators
 
-This method is useful when you want to use BootstrapValidator with other plugin such as [Date Picker](http://eternicode.github.io/bootstrap-datepicker/),
+This method is useful when you want to use BootstrapValidator with other plugins such as [Date Picker](http://eternicode.github.io/bootstrap-datepicker/),
 [Datetime Picker](http://eonasdan.github.io/bootstrap-datetimepicker/), [Select2](http://ivaynberg.github.io/select2/), etc.
 
-By default, the plugin doesn't re-validate a field once it is already validated and mark as a valid field. When using with other plugin,
+By default, the plugin doesn't re-validate a field once it is already validated and marked as a valid one. When using with other plugins,
 the field value is changed and therefore need to be re-validated.
 
 The following example describes how to re-validate a field which uses with [Datetime Picker](http://eonasdan.github.io/bootstrap-datetimepicker/):
+
+_The form markup_:
 
 ```html
 <form id="defaultForm" method="post" class="form-horizontal">
@@ -401,6 +400,8 @@ The following example describes how to re-validate a field which uses with [Date
     ...
 </form>
 ```
+
+_Javascript_:
 
 ```javascript
 <script type="text/javascript">
@@ -429,10 +430,9 @@ $(document).ready(function() {
             $('#defaultForm')
                 // Get the bootstrapValidator instance
                 .data('bootstrapValidator')
-
-                // Mark the field as not validated, so it'll be re-validated when the user change date
+                // Mark the field as not validated,
+                // so it'll be re-validated when the user change date
                 .updateStatus('datetimePicker', 'not_validated', null)
-
                 // Validate the field
                 .validateField('datetimePicker');
         });
@@ -452,7 +452,7 @@ enabled   | If ```true```, enable field validators. If ```false```, disable fiel
 ### ```resetForm```
 
 ```resetForm(resetFormData)```: Reset form. It hides all error elements and feedback icons. All the fields are marked as not validated yet.
-If ```resetFormData``` is ```true```, the method resets the form fields.
+If ```resetFormData``` is ```true```, the method resets the fields which have validator rules.
 
 ```javascript
 var validator = $(form).bootstrapValidator(options);
