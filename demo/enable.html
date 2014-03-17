@@ -194,7 +194,6 @@ $(document).ready(function() {
         var bootstrapValidator = $('#checkoutForm').data('bootstrapValidator'),
             shipNewAddress     = ($(this).val() == 'new');
 
-        //$('#newAddress').toggle();
         shipNewAddress ? $('#newAddress').find('.form-control').removeAttr('disabled')
                        : $('#newAddress').find('.form-control').attr('disabled', 'disabled');
 

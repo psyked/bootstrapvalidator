@@ -53,7 +53,11 @@
         //      invalid: 'fa fa-times',
         //      validating: 'fa fa-refresh'
         //  }
-        feedbackIcons: null,
+        feedbackIcons: {
+            valid: null,
+            invalid: null,
+            validating: null
+        },
 
         // The submit buttons selector
         // These buttons will be disabled to prevent the valid form from multiple submissions
@@ -176,7 +180,7 @@
                 type  = fields.attr('type'),
                 event = ('radio' == type || 'checkbox' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup';
             fields.on(event, function() {
-                that.setNotValidated(field);
+                that.updateStatus($field, that.STATUS_NOT_VALIDATED, null);
             });
         },
 
@@ -390,54 +394,48 @@
         /**
          * Update field status
          *
-         * @param {jQuery} $field The field element
-         * @param {String} validatorName The validator name
+         * @param {String|jQuery} field The field name or field element
          * @param {String} status The status
-         * Can be STATUS_VALIDATING, STATUS_INVALID, STATUS_VALID
+         * Can be 'not_validated', 'validating', 'invalid', or 'valid'
+         * @param {String|null} validatorName The validator name. If null, the method updates validity result for all validators
          * @return {BootstrapValidator}
          */
-        updateStatus: function($field, status, validatorName) {
-            var that     = this,
+        updateStatus: function(field, status, validatorName) {
+            var $field   = ('string' == typeof field) ? this.getFieldElements(field) : field,
+                that     = this,
                 field    = $field.attr('name'),
                 $parent  = $field.parents('.form-group'),
                 $message = $field.data('bootstrapValidator.messageContainer'),
                 $errors  = $message.find('.help-block[data-bs-validator]');
 
+            // Update status
+            if (validatorName) {
+                this.results[field][validatorName] = status;
+            } else {
+                for (var v in this.options.fields[field].validators) {
+                    this.results[field][v] = status;
+                }
+            }
+
+            // Show/hide error elements and feedback icons
             switch (status) {
                 case this.STATUS_VALIDATING:
-                    this.results[field][validatorName] = this.STATUS_VALIDATING;
                     this._disableSubmitButtons(true);
-
                     $parent.removeClass('has-success').removeClass('has-error');
                     // TODO: Show validating message
-                    $errors.filter('.help-block[data-bs-validator="' + validatorName + '"]').hide();
-
-                    if (this.options.feedbackIcons) {
-                        // Show validating icon
-                        $message.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).addClass(this.options.feedbackIcons.validating).show();
-                    }
+                    validatorName ? $errors.filter('.help-block[data-bs-validator="' + validatorName + '"]').hide() : $errors.hide();
+                    $message.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).addClass(this.options.feedbackIcons.validating).show();
                     break;
 
                 case this.STATUS_INVALID:
-                    this.results[field][validatorName] = this.STATUS_INVALID;
                     this._disableSubmitButtons(true);
-
-                    // Add has-error class to parent element
                     $parent.removeClass('has-success').addClass('has-error');
-
-                    $errors.filter('[data-bs-validator="' + validatorName + '"]').show();
-
-                    if (this.options.feedbackIcons) {
-                        // Show invalid icon
-                        $message.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
-                    }
+                    validatorName ? $errors.filter('[data-bs-validator="' + validatorName + '"]').show() : $errors.show();
+                    $message.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
                     break;
 
                 case this.STATUS_VALID:
-                    this.results[field][validatorName] = this.STATUS_VALID;
-
-                    // Hide error element
-                    $errors.filter('[data-bs-validator="' + validatorName + '"]').hide();
+                    validatorName ? $errors.filter('[data-bs-validator="' + validatorName + '"]').hide() : $errors.hide();
 
                     // If the field is valid
                     if ($errors.filter(function() {
@@ -446,33 +444,18 @@
                         }).length == 0
                     ) {
                         this._disableSubmitButtons(false);
-
                         $parent.removeClass('has-error').addClass('has-success');
-                        // Show valid icon
-                        if (this.options.feedbackIcons) {
-                            $message.find('.form-control-feedback').removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.valid).show();
-                        }
+                        $message.find('.form-control-feedback').removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.valid).show();
                     }
                     break;
 
+                case this.STATUS_NOT_VALIDATED:
                 default:
+                    this._disableSubmitButtons(false);
+                    $parent.removeClass('has-success').removeClass('has-error');
+                    validatorName ? $errors.filter('.help-block[data-bs-validator="' + validatorName + '"]').hide() : $errors.hide();
+                    $message.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).hide();
                     break;
-            }
-
-            return this;
-        },
-
-        /**
-         * Mark a field as not validated yet
-         * The plugin doesn't re-validate a field if it is marked as valid.
-         * In some cases, we need to force the plugin validate it again
-         *
-         * @param {String} field The field name
-         * @returns {BootstrapValidator}
-         */
-        setNotValidated: function(field) {
-            for (var v in this.options.fields[field].validators) {
-                this.results[field][v] = this.STATUS_NOT_VALIDATED;
             }
 
             return this;
@@ -492,25 +475,14 @@
                 this.results[field] = {};
 
                 // Mark field as not validated yet
-                this.setNotValidated(field);
+                this.updateStatus(field, this.STATUS_NOT_VALIDATED, null);
             }
 
             this.invalidField  = null;
             this.$submitButton = null;
 
-            // Hide all error elements
-            this.$form
-                .find('.has-error').removeClass('has-error').end()
-                .find('.has-success').removeClass('has-success').end()
-                .find('.help-block[data-bs-validator]').hide();
-
             // Enable submit buttons
             this._disableSubmitButtons(false);
-
-            // Hide all feedback icons
-            if (this.options.feedbackIcons) {
-                this.$form.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).hide();
-            }
 
             if (resetFormData) {
                 this.$form.get(0).reset();
@@ -528,20 +500,7 @@
          */
         enableFieldValidators: function(field, enabled) {
             this.options.fields[field]['enabled'] = enabled;
-            if (enabled) {
-                this.setNotValidated(field);
-            } else {
-                var $field   = this.getFieldElements(field),
-                    $message = $field.data('bootstrapValidator.messageContainer');
-
-                $field.parents('.form-group').removeClass('has-success has-error');
-                $message.find('.help-block[data-bs-validator]').hide();
-                if (this.options.feedbackIcons) {
-                    $message.find('.form-control-feedback').removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).removeClass(this.options.feedbackIcons.valid).hide();
-                }
-
-                this._disableSubmitButtons(false);
-            }
+            this.updateStatus(field, this.STATUS_NOT_VALIDATED, null);
 
             return this;
         }

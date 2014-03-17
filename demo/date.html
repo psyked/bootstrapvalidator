@@ -146,9 +146,9 @@ $(document).ready(function() {
         .on('dp.change dp.show', function(e) {
             // Validate the date when user change it
             $('#defaultForm')
-                .data('bootstrapValidator')         // Get the bootstrapValidator instance
-                .setNotValidated('datetimePicker')  // Mark the field as not validated, so it'll be re-validated when the user change date
-                .validateField('datetimePicker');   // Validate the field
+                .data('bootstrapValidator')                                 // Get the bootstrapValidator instance
+                .updateStatus('datetimePicker', 'not_validated', null)      // Mark the field as not validated, so it'll be re-validated when the user change date
+                .validateField('datetimePicker');                           // Validate the field
         });
 });
 </script>
