@@ -355,8 +355,8 @@ country     | US      | A ISO 3166 country code. Currently it supports the follo
 $(form).bootstrapValidator(options).bootstrapValidator('validate');
 
 // or
-var validator = $(form).bootstrapValidator(options);
-validator.validate();
+$(form).bootstrapValidator(options);
+$(form).data('bootstrapValidator').validate();
 ```
 
 ### ```isValid```
@@ -455,8 +455,8 @@ enabled   | If ```true```, enable field validators. If ```false```, disable fiel
 If ```resetFormData``` is ```true```, the method resets the fields which have validator rules.
 
 ```javascript
-var validator = $(form).bootstrapValidator(options);
-validator.resetForm();
+$(form).bootstrapValidator(options);
+$(form).data('bootstrapValidator').resetForm();
 ```
 
 ## Write new validator
