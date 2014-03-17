@@ -7,14 +7,15 @@ Not released yet
 __New features__:
 
 * [#4: Add ```date``` validator](https://github.com/nghuuphuoc/bootstrapvalidator/issues/4)
-* [#72, #79: Add ```setNotValidated()``` method to make the plugin play well with another](https://github.com/nghuuphuoc/bootstrapvalidator/issues/72)
+* [#72, #79: Improve ```updateStatus()``` method to make the plugin play well with another](https://github.com/nghuuphuoc/bootstrapvalidator/issues/72)
 * [#80: Add ```enabled``` option and  ```enableFieldValidators()``` method to enable/disable all validators to given field](https://github.com/nghuuphuoc/bootstrapvalidator/issues/80)
 * [#90: Add ```bower.json``` file](https://github.com/nghuuphuoc/bootstrapvalidator/pull/90), thanks to [@ikanedo](https://github.com/ikanedo)
 * [#3, #92: Support more form controls on the same row](https://github.com/nghuuphuoc/bootstrapvalidator/issues/92)
 
 __Changes__:
 
-* Remove the ```columns``` option
+* Remove the ```columns``` option. Now the plugin works normally no matter how many columns the form uses
+* [#102: The ```resetForm``` method now only resets fields with validator rules](https://github.com/nghuuphuoc/bootstrapvalidator/issues/102)
 
 __Fixes__:
 

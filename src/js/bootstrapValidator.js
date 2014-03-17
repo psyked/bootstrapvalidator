@@ -16,8 +16,9 @@
         this.dfds    = {};      // Array of deferred
         this.results = {};      // Validating results
 
-        this.invalidField  = null;  // First invalid field
-        this.$submitButton = null;  // The submit button which is clicked to submit form
+        this.invalidField   = null; // First invalid field
+        this.$submitButton  = null; // The submit button which is clicked to submit form
+        this.originalValues = {};   // Original field values
 
         this._init();
 
@@ -470,12 +471,19 @@
          * @return {BootstrapValidator}
          */
         resetForm: function(resetFormData) {
-            for (var field in this.options.fields) {
+            var field, $field, type;
+            for (field in this.options.fields) {
                 this.dfds[field]    = {};
                 this.results[field] = {};
 
+                $field = this.getFieldElements(field);
                 // Mark field as not validated yet
-                this.updateStatus(field, this.STATUS_NOT_VALIDATED, null);
+                this.updateStatus($field, this.STATUS_NOT_VALIDATED, null);
+
+                if (resetFormData) {
+                    type = $field.attr('type');
+                    ('radio' == type || 'checkbox' == type) ? $field.removeAttr('checked').removeAttr('selected') : $field.val('');
+                }
             }
 
             this.invalidField  = null;
@@ -483,10 +491,6 @@
 
             // Enable submit buttons
             this._disableSubmitButtons(false);
-
-            if (resetFormData) {
-                this.$form.get(0).reset();
-            }
 
             return this;
         },
