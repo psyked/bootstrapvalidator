@@ -162,7 +162,9 @@
 
             // Prepare the feedback icons
             // Available from Bootstrap 3.1 (http://getbootstrap.com/css/#forms-control-validation)
-            if (this.options.feedbackIcons) {
+            if (this.options.feedbackIcons
+                && this.options.feedbackIcons.validating && this.options.feedbackIcons.invalid && this.options.feedbackIcons.valid)
+            {
                 $parent.addClass('has-feedback');
                 var $icon = $('<i/>').css('display', 'none').addClass('form-control-feedback').insertAfter($(fields[fields.length - 1]));
                 // The feedback icon does not render correctly if there is no label
