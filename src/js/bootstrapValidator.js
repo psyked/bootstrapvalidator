@@ -182,7 +182,7 @@
             var that  = this,
                 type  = fields.attr('type'),
                 event = ('radio' == type || 'checkbox' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup';
-            fields.on(event, function() {
+            fields.on(event + '.bootstrapValidator', function() {
                 that.updateStatus($field, that.STATUS_NOT_VALIDATED, null);
             });
         },
@@ -228,7 +228,7 @@
                             var type  = fields.attr('type'),
                                 event = ('radio' == type || 'checkbox' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup';
 
-                            fields.on(event, function() {
+                            fields.on(event + '.bootstrapValidator', function() {
                                 that.validateField(f);
                             });
                         }
