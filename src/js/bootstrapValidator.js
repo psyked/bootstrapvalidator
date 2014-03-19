@@ -141,7 +141,8 @@
             // Create help block elements for showing the error messages
             var $field   = $(fields[0]),
                 $parent  = $field.parents('.form-group'),
-                $message = this._getMessageContainer($field);
+                // Allow user to indicate where the error messages are shown
+                $message = this.options.fields[field].container ? $parent.find(this.options.fields[field].container) : this._getMessageContainer($field);
 
             $field.data('bootstrapValidator.messageContainer', $message);
             for (var validatorName in this.options.fields[field].validators) {
@@ -153,7 +154,7 @@
                 this.results[field][validatorName] = this.STATUS_NOT_VALIDATED;
                 $('<small/>')
                     .css('display', 'none')
-                    .attr('data-bs-validator', validatorName)
+                    .attr('data-bv-validator', validatorName)
                     .html(this.options.fields[field].validators[validatorName].message || this.options.message)
                     .addClass('help-block')
                     .appendTo($message);
@@ -165,7 +166,7 @@
                 && this.options.feedbackIcons.validating && this.options.feedbackIcons.invalid && this.options.feedbackIcons.valid)
             {
                 $parent.addClass('has-feedback');
-                var $icon = $('<i/>').css('display', 'none').addClass('form-control-feedback').insertAfter($(fields[fields.length - 1]));
+                var $icon = $('<i/>').css('display', 'none').addClass('form-control-feedback').attr('data-bv-field', field).insertAfter($(fields[fields.length - 1]));
                 // The feedback icon does not render correctly if there is no label
                 // https://github.com/twbs/bootstrap/issues/12873
                 if ($parent.find('label').length == 0) {
@@ -408,7 +409,8 @@
                 field    = $field.attr('name'),
                 $parent  = $field.parents('.form-group'),
                 $message = $field.data('bootstrapValidator.messageContainer'),
-                $errors  = $message.find('.help-block[data-bs-validator]');
+                $errors  = $message.find('.help-block[data-bv-validator]'),
+                $icon    = $parent.find('.form-control-feedback[data-bv-field="' + field + '"]');
 
             // Update status
             if (validatorName) {
@@ -425,29 +427,35 @@
                     this._disableSubmitButtons(true);
                     $parent.removeClass('has-success').removeClass('has-error');
                     // TODO: Show validating message
-                    validatorName ? $errors.filter('.help-block[data-bs-validator="' + validatorName + '"]').hide() : $errors.hide();
-                    $message.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).addClass(this.options.feedbackIcons.validating).show();
+                    validatorName ? $errors.filter('.help-block[data-bv-validator="' + validatorName + '"]').hide() : $errors.hide();
+                    if ($icon) {
+                        $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).addClass(this.options.feedbackIcons.validating).show();
+                    }
                     break;
 
                 case this.STATUS_INVALID:
                     this._disableSubmitButtons(true);
                     $parent.removeClass('has-success').addClass('has-error');
-                    validatorName ? $errors.filter('[data-bs-validator="' + validatorName + '"]').show() : $errors.show();
-                    $message.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
+                    validatorName ? $errors.filter('[data-bv-validator="' + validatorName + '"]').show() : $errors.show();
+                    if ($icon) {
+                        $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
+                    }
                     break;
 
                 case this.STATUS_VALID:
-                    validatorName ? $errors.filter('[data-bs-validator="' + validatorName + '"]').hide() : $errors.hide();
+                    validatorName ? $errors.filter('[data-bv-validator="' + validatorName + '"]').hide() : $errors.hide();
 
                     // If the field is valid
                     if ($errors.filter(function() {
-                            var display = $(this).css('display'), v = $(this).attr('data-bs-validator');
+                            var display = $(this).css('display'), v = $(this).attr('data-bv-validator');
                             return ('block' == display) || (that.results[field][v] != that.STATUS_VALID);
                         }).length == 0
                     ) {
                         this._disableSubmitButtons(false);
                         $parent.removeClass('has-error').addClass('has-success');
-                        $message.find('.form-control-feedback').removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.valid).show();
+                        if ($icon) {
+                            $icon.removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.valid).show();
+                        }
                     }
                     break;
 
@@ -455,8 +463,10 @@
                 default:
                     this._disableSubmitButtons(false);
                     $parent.removeClass('has-success').removeClass('has-error');
-                    validatorName ? $errors.filter('.help-block[data-bs-validator="' + validatorName + '"]').hide() : $errors.hide();
-                    $message.find('.form-control-feedback').removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).hide();
+                    validatorName ? $errors.filter('.help-block[data-bv-validator="' + validatorName + '"]').hide() : $errors.hide();
+                    if ($icon) {
+                        $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).hide();
+                    }
                     break;
             }
 
