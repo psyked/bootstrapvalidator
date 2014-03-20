@@ -139,6 +139,8 @@
                 return;
             }
 
+            fields.attr('data-bv-field', field);
+
             // Create help block elements for showing the error messages
             var $field   = $(fields[0]),
                 $parent  = $field.parents('.form-group'),
@@ -289,7 +291,7 @@
          * @returns {null|jQuery[]}
          */
         getFieldElements: function(field) {
-            var fields = this.$form.find('[name="' + field + '"]');
+            var fields = this.$form.find(this.options.fields[field].selector || '[name="' + field + '"]');
             return (fields.length == 0) ? null : fields;
         },
 
@@ -407,7 +409,7 @@
         updateStatus: function(field, status, validatorName) {
             var $field   = ('string' == typeof field) ? this.getFieldElements(field) : field,
                 that     = this,
-                field    = $field.attr('name'),
+                field    = $field.attr('data-bv-field'),
                 $parent  = $field.parents('.form-group'),
                 $message = $field.data('bootstrapValidator.messageContainer'),
                 $errors  = $message.find('.help-block[data-bv-validator]'),
