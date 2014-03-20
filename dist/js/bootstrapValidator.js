@@ -632,7 +632,7 @@
          */
         validate: function(validator, $field, options) {
             var numChoices = validator
-                                    .getFieldElements($field.attr('name'))
+                                    .getFieldElements($field.attr('data-bv-field'))
                                     .filter(':checked')
                                     .length;
             if ((options.min && numChoices < options.min) || (options.max && numChoices > options.max)) {
@@ -1130,7 +1130,7 @@
             var type = $field.attr('type');
             if ('radio' == type || 'checkbox' == type) {
                 return validator
-                            .getFieldElements($field.attr('name'))
+                            .getFieldElements($field.attr('data-bv-field'))
                             .filter(':checked')
                             .length > 0;
             }
@@ -1211,7 +1211,7 @@
                 return true;
             }
 
-            var name = $field.attr('name'), data = options.data;
+            var name = $field.attr('data-bv-field'), data = options.data;
             if (data == null) {
                 data = {};
             }

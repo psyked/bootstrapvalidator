@@ -13,7 +13,7 @@
          */
         validate: function(validator, $field, options) {
             var numChoices = validator
-                                    .getFieldElements($field.attr('name'))
+                                    .getFieldElements($field.attr('data-bv-field'))
                                     .filter(':checked')
                                     .length;
             if ((options.min && numChoices < options.min) || (options.max && numChoices > options.max)) {

@@ -20,7 +20,7 @@
                 return true;
             }
 
-            var name = $field.attr('name'), data = options.data;
+            var name = $field.attr('data-bv-field'), data = options.data;
             if (data == null) {
                 data = {};
             }
