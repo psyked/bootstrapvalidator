@@ -15,11 +15,13 @@
          *
          * @returns {Boolean}
          */
-        validate: function(validateInstance, $field, options) {
+        validate: function(validator, $field, options) {
             var value = $field.val();
             if (value == '' || !options.country) {
                 return true;
             }
+
+            options.country = options.country || 'US';
             switch (options.country.toUpperCase()) {
                 case 'DK':
                     return /^(DK(-|\s)?)?\d{4}$/i.test(value);
