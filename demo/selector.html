@@ -119,13 +119,9 @@ $(document).ready(function() {
                     notEmpty: {
                         message: 'The CVV number is required'
                     },
-                    digits: {
-                        message: 'The CVV number can contain digits only'
-                    },
-                    stringLength: {
-                        min: 3,
-                        max: 4,
-                        message: 'Invalid CVV number'
+                    cvv: {
+                        message: 'The value is not a valid CVV',
+                        creditCardField: 'ccNumber'
                     }
                 }
             }

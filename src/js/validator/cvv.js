@@ -26,6 +26,9 @@
 
             // Get the credit card number
             var creditCard = validator.getFieldElements(options.creditCardField).val();
+            if (creditCard == '') {
+                return true;
+            }
 
             // Supported credit card types
             var cards = {
@@ -78,17 +81,18 @@
                           '622920', '622921', '622922', '622923', '622924', '622925']
                 },
                 VISA: {
-                    length: ['16'],
+                    length: [16],
                     ccv: ['4']
                 }
             };
-            var type, prefix, creditCardType = null;
+            var type, i, creditCardType = null;
             for (type in cards) {
-                for (prefix in cards[type]['ccv']) {
-                    if (creditCard.substr(0, prefix.length) == prefix                // Check the prefix
-                        && cards[type]['length'].indexOf(creditCard.length) != -1)   // and length
+                for (i in cards[type]['ccv']) {
+                    if (creditCard.substr(0, cards[type]['ccv'][i].length) == cards[type]['ccv'][i] // Check the prefix
+                        && cards[type]['length'].indexOf(creditCard.length) != -1)                  // and length
                     {
                         creditCardType = type;
+                        break;
                     }
                 }
             }
