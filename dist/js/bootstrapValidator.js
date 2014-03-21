@@ -689,67 +689,67 @@
                 return false;
             }
 
-            // Validate the card number based on prefix and length
+            // Validate the card number based on prefix (IIN ranges) and length
             var cards = {
                 AMERICAN_EXPRESS: {
                     length: [15],
-                    ccv: ['34', '37']
+                    prefix: ['34', '37']
                 },
                 DINERS_CLUB: {
                     length: [14],
-                    ccv: ['300', '301', '302', '303', '304', '305', '36']
+                    prefix: ['300', '301', '302', '303', '304', '305', '36']
                 },
                 DINERS_CLUB_US: {
                     length: [16],
-                    ccv: ['54', '55']
+                    prefix: ['54', '55']
                 },
                 DISCOVER: {
                     length: [16],
-                    ccv: ['6011', '622126', '622127', '622128', '622129', '62213',
-                          '62214', '62215', '62216', '62217', '62218', '62219',
-                          '6222', '6223', '6224', '6225', '6226', '6227', '6228',
-                          '62290', '62291', '622920', '622921', '622922', '622923',
-                          '622924', '622925', '644', '645', '646', '647', '648',
-                          '649', '65']
+                    prefix: ['6011', '622126', '622127', '622128', '622129', '62213',
+                             '62214', '62215', '62216', '62217', '62218', '62219',
+                             '6222', '6223', '6224', '6225', '6226', '6227', '6228',
+                             '62290', '62291', '622920', '622921', '622922', '622923',
+                             '622924', '622925', '644', '645', '646', '647', '648',
+                             '649', '65']
                 },
                 JCB: {
                     length: [16],
-                    ccv: ['3528', '3529', '353', '354', '355', '356', '357', '358']
+                    prefix: ['3528', '3529', '353', '354', '355', '356', '357', '358']
                 },
                 LASER: {
                     length: [16, 17, 18, 19],
-                    ccv: ['3528', '3529', '353', '354', '355', '356', '357', '358']
+                    prefix: ['3528', '3529', '353', '354', '355', '356', '357', '358']
                 },
                 MAESTRO: {
                     length: [12, 13, 14, 15, 16, 17, 18, 19],
-                    ccv: ['5018', '5020', '5038', '6304', '6759', '6761', '6762', '6763', '6764', '6765', '6766']
+                    prefix: ['5018', '5020', '5038', '6304', '6759', '6761', '6762', '6763', '6764', '6765', '6766']
                 },
                 MASTERCARD: {
                     length: [16],
-                    ccv: ['51', '52', '53', '54', '55']
+                    prefix: ['51', '52', '53', '54', '55']
                 },
                 SOLO: {
                     length: [16, 18, 19],
-                    ccv: ['6334', '6767']
+                    prefix: ['6334', '6767']
                 },
                 UNIONPAY: {
                     length: [16, 17, 18, 19],
-                    ccv: ['622126', '622127', '622128', '622129', '62213', '62214',
-                          '62215', '62216', '62217', '62218', '62219', '6222', '6223',
-                          '6224', '6225', '6226', '6227', '6228', '62290', '62291',
-                          '622920', '622921', '622922', '622923', '622924', '622925']
+                    prefix: ['622126', '622127', '622128', '622129', '62213', '62214',
+                             '62215', '62216', '62217', '62218', '62219', '6222', '6223',
+                             '6224', '6225', '6226', '6227', '6228', '62290', '62291',
+                             '622920', '622921', '622922', '622923', '622924', '622925']
                 },
                 VISA: {
                     length: [16],
-                    ccv: ['4']
+                    prefix: ['4']
                 }
             };
 
             var type, i;
             for (type in cards) {
-                for (i in cards[type]['ccv']) {
-                    if (value.substr(0, cards[type]['ccv'][i].length) == cards[type]['ccv'][i]  // Check the prefix
-                        && cards[type]['length'].indexOf(value.length) != -1)                   // and length
+                for (i in cards[type]['prefix']) {
+                    if (value.substr(0, cards[type]['prefix'][i].length) == cards[type]['prefix'][i]    // Check the prefix
+                        && cards[type]['length'].indexOf(value.length) != -1)                           // and length
                     {
                         return true;
                     }
@@ -796,62 +796,62 @@
             var cards = {
                 AMERICAN_EXPRESS: {
                     length: [15],
-                    ccv: ['34', '37']
+                    prefix: ['34', '37']
                 },
                 DINERS_CLUB: {
                     length: [14],
-                    ccv: ['300', '301', '302', '303', '304', '305', '36']
+                    prefix: ['300', '301', '302', '303', '304', '305', '36']
                 },
                 DINERS_CLUB_US: {
                     length: [16],
-                    ccv: ['54', '55']
+                    prefix: ['54', '55']
                 },
                 DISCOVER: {
                     length: [16],
-                    ccv: ['6011', '622126', '622127', '622128', '622129', '62213',
-                          '62214', '62215', '62216', '62217', '62218', '62219',
-                          '6222', '6223', '6224', '6225', '6226', '6227', '6228',
-                          '62290', '62291', '622920', '622921', '622922', '622923',
-                          '622924', '622925', '644', '645', '646', '647', '648',
-                          '649', '65']
+                    prefix: ['6011', '622126', '622127', '622128', '622129', '62213',
+                             '62214', '62215', '62216', '62217', '62218', '62219',
+                             '6222', '6223', '6224', '6225', '6226', '6227', '6228',
+                             '62290', '62291', '622920', '622921', '622922', '622923',
+                             '622924', '622925', '644', '645', '646', '647', '648',
+                             '649', '65']
                 },
                 JCB: {
                     length: [16],
-                    ccv: ['3528', '3529', '353', '354', '355', '356', '357', '358']
+                    prefix: ['3528', '3529', '353', '354', '355', '356', '357', '358']
                 },
                 LASER: {
                     length: [16, 17, 18, 19],
-                    ccv: ['3528', '3529', '353', '354', '355', '356', '357', '358']
+                    prefix: ['3528', '3529', '353', '354', '355', '356', '357', '358']
                 },
                 MAESTRO: {
                     length: [12, 13, 14, 15, 16, 17, 18, 19],
-                    ccv: ['5018', '5020', '5038', '6304', '6759', '6761', '6762', '6763', '6764', '6765', '6766']
+                    prefix: ['5018', '5020', '5038', '6304', '6759', '6761', '6762', '6763', '6764', '6765', '6766']
                 },
                 MASTERCARD: {
                     length: [16],
-                    ccv: ['51', '52', '53', '54', '55']
+                    prefix: ['51', '52', '53', '54', '55']
                 },
                 SOLO: {
                     length: [16, 18, 19],
-                    ccv: ['6334', '6767']
+                    prefix: ['6334', '6767']
                 },
                 UNIONPAY: {
                     length: [16, 17, 18, 19],
-                    ccv: ['622126', '622127', '622128', '622129', '62213', '62214',
-                          '62215', '62216', '62217', '62218', '62219', '6222', '6223',
-                          '6224', '6225', '6226', '6227', '6228', '62290', '62291',
-                          '622920', '622921', '622922', '622923', '622924', '622925']
+                    prefix: ['622126', '622127', '622128', '622129', '62213', '62214',
+                             '62215', '62216', '62217', '62218', '62219', '6222', '6223',
+                             '6224', '6225', '6226', '6227', '6228', '62290', '62291',
+                             '622920', '622921', '622922', '622923', '622924', '622925']
                 },
                 VISA: {
                     length: [16],
-                    ccv: ['4']
+                    prefix: ['4']
                 }
             };
             var type, i, creditCardType = null;
             for (type in cards) {
-                for (i in cards[type]['ccv']) {
-                    if (creditCard.substr(0, cards[type]['ccv'][i].length) == cards[type]['ccv'][i] // Check the prefix
-                        && cards[type]['length'].indexOf(creditCard.length) != -1)                  // and length
+                for (i in cards[type]['prefix']) {
+                    if (creditCard.substr(0, cards[type]['prefix'][i].length) == cards[type]['prefix'][i]   // Check the prefix
+                        && cards[type]['length'].indexOf(creditCard.length) != -1)                          // and length
                     {
                         creditCardType = type;
                         break;
@@ -1154,6 +1154,63 @@
             }
 
             return /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(value);
+        }
+    };
+}(window.jQuery));
+;(function($) {
+    $.fn.bootstrapValidator.validators.isbn = {
+        /**
+         * Return true if the input value is a valid ISBN 10 or ISBN 13 number
+         *
+         * @param {BootstrapValidator} validator The validator plugin instance
+         * @param {jQuery} $field Field element
+         * @param {Object} options Can consist of the following keys:
+         * - message: The invalid message
+         * @returns {Boolean}
+         */
+        validate: function(validator, $field, options) {
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            // Replace all special characters except digits and X
+            value = value.replace(/[^\dX]/gi, '');
+            var chars = value.split(''),
+                sum   = 0,
+                checksum;
+
+            // See http://en.wikipedia.org/wiki/International_Standard_Book_Number
+            switch (chars.length) {
+                // ISBN 10
+                case 10:
+                    sum = 0;
+                    for (var i = 0; i < 9; i++) {
+                        sum += ((10 - i) * parseInt(chars[i]));
+                    }
+                    checksum = 11 - (sum % 11);
+                    if (checksum == 11) {
+                        checksum = 0;
+                    } else if (checksum == 10) {
+                        checksum = 'X';
+                    }
+                    return (checksum == chars[9]);
+
+                // ISBN 13
+                case 13:
+                    sum = 0;
+                    for (var i = 0; i < 12; i++) {
+                        sum += ((i % 2 == 0) ? parseInt(chars[i]) : (parseInt(chars[i]) * 3));
+                    }
+                    checksum = 10 - (sum % 10);
+                    if (checksum == 10) {
+                        checksum = '0';
+                    }
+                    return (checksum == chars[12]);
+
+                default:
+                    return false;
+            }
         }
     };
 }(window.jQuery));
