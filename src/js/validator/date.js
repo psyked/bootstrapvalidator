@@ -119,4 +119,3 @@
         }
     };
 }(window.jQuery));
-
