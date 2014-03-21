@@ -689,7 +689,7 @@
                 return false;
             }
 
-            // Validate the card number based on pattern
+            // Validate the card number based on prefix and length
             var cards = {
                 AMERICAN_EXPRESS: {
                     length: [15],
@@ -740,15 +740,16 @@
                           '622920', '622921', '622922', '622923', '622924', '622925']
                 },
                 VISA: {
-                    length: ['16'],
+                    length: [16],
                     ccv: ['4']
                 }
             };
-            var type, prefix;
+
+            var type, i;
             for (type in cards) {
-                for (prefix in cards[type]['ccv']) {
-                    if (value.substr(0, prefix.length) == prefix                // Check the prefix
-                        && cards[type]['length'].indexOf(value.length) != -1)   // and length
+                for (i in cards[type]['ccv']) {
+                    if (value.substr(0, cards[type]['ccv'][i].length) == cards[type]['ccv'][i]  // Check the prefix
+                        && cards[type]['length'].indexOf(value.length) != -1)                   // and length
                     {
                         return true;
                     }
