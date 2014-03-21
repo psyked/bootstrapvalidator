@@ -1,5 +1,28 @@
 # Change Log
 
+## v0.3.2
+
+Released on 2014-03-21
+
+__New features__:
+
+* [#56: Add ```selector``` option for each field. The field can be defined by CSS validator instead of the ```name``` attribute](https://github.com/nghuuphuoc/bootstrapvalidator/issues/56)
+* [#107: Add ```container``` option for each field to indicate where the error messages are shown](https://github.com/nghuuphuoc/bootstrapvalidator/issues/107)
+
+__New validators__:
+
+* [#5: Add ```ip``` validator. Support both IPv4 and IPv6](https://github.com/nghuuphuoc/bootstrapvalidator/issues/5)
+* [#6: Add ```isbn``` validator, support both ISBN 10 and ISBN 13](https://github.com/nghuuphuoc/bootstrapvalidator/issues/6)
+* [#7: Add ```step``` validator](https://github.com/nghuuphuoc/bootstrapvalidator/issues/7)
+* [#95: Add ```mac``` validator](https://github.com/nghuuphuoc/bootstrapvalidator/issues/95)
+* [#96: Add ```base64``` validator](https://github.com/nghuuphuoc/bootstrapvalidator/issues/96)
+* [#97: Add ```cvv``` validator](https://github.com/nghuuphuoc/bootstrapvalidator/issues/97)
+* [#99, #100: Add ```phone``` validator. Support US phone number only](https://github.com/nghuuphuoc/bootstrapvalidator/pull/100), thanks to [@gercheq](https://github.com/gercheq)
+
+__Improvements__:
+
+* [#112: ```creditCard``` validator now validates both IIN ranges and length](https://github.com/nghuuphuoc/bootstrapvalidator/issues/112)
+
 ## v0.3.1
 
 Released on 2014-03-17
@@ -45,7 +68,7 @@ __Fixes__:
 
 * [#50: Don't validate disabled element](https://github.com/nghuuphuoc/bootstrapvalidator/issues/50)
 * [#51: Submit after submit doesn't work](https://github.com/nghuuphuoc/bootstrapvalidator/issues/51)
-* [#53, #54: Fix notEmpty validator for radios and checkboxes](https://github.com/nghuuphuoc/bootstrapvalidator/pull/54), thanks to [@kristian-puccio](https://github.com/kristian-puccio)
+* [#53, #54: Fix ```notEmpty``` validator for radios and checkboxes](https://github.com/nghuuphuoc/bootstrapvalidator/pull/54), thanks to [@kristian-puccio](https://github.com/kristian-puccio)
 * [#55: The plugin doesn't validate other fields if the ```remote``` validator returns true](https://github.com/nghuuphuoc/bootstrapvalidator/issues/55)
 * [#62: The callback validator passes wrong parameter](https://github.com/nghuuphuoc/bootstrapvalidator/pull/62), thanks to [@iplus](https://github.com/iplus)
 
