@@ -183,7 +183,7 @@
             // Whenever the user change the field value, mark it as not validated yet
             var that  = this,
                 type  = fields.attr('type'),
-                event = ('radio' == type || 'checkbox' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup';
+                event = ('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup';
             fields.on(event + '.bootstrapValidator', function() {
                 that.updateStatus($field, that.STATUS_NOT_VALIDATED, null);
             });
@@ -228,7 +228,7 @@
                         var fields = that.getFieldElements(f);
                         if (fields) {
                             var type  = fields.attr('type'),
-                                event = ('radio' == type || 'checkbox' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup';
+                                event = ('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup';
 
                             fields.on(event + '.bootstrapValidator', function() {
                                 that.validateField(f);

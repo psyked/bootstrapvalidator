@@ -1,5 +1,13 @@
 # Change Log
 
+## v0.3.3
+
+Not released yet
+
+__Fixes__:
+
+[#77, #117: ```notEmpty``` validator doesn't work on file input](https://github.com/nghuuphuoc/bootstrapvalidator/issues/117)
+
 ## v0.3.2
 
 Released on 2014-03-21
