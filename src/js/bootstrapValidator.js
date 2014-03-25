@@ -377,7 +377,7 @@
         isValid: function() {
             var field, validatorName;
             for (field in this.results) {
-                if (!this.options.fields[field]['enabled']) {
+                if (this.options.fields[field] == null || !this.options.fields[field]['enabled']) {
                     continue;
                 }
 
