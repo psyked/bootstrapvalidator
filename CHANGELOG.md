@@ -2,12 +2,14 @@
 
 ## v0.3.3
 
-Not released yet
+Released on 2014-03-27
 
 __Fixes__:
 
+* [#50: Don't validate disabled element](https://github.com/nghuuphuoc/bootstrapvalidator/issues/50)
+* [#34, #105: Cannot call ```form.submit()``` inside ```submitHandler```](https://github.com/nghuuphuoc/bootstrapvalidator/issues/105)
 * [#77, #117: ```notEmpty``` validator doesn't work on file input](https://github.com/nghuuphuoc/bootstrapvalidator/issues/117)
-* [#105: Cannot call ```form.submit()``` inside ```submitHandler```](https://github.com/nghuuphuoc/bootstrapvalidator/issues/105)
+* [#120: Handle case where a field is removed after the bootstrap validation](https://github.com/nghuuphuoc/bootstrapvalidator/pull/120), thanks to [@patmoore](https://github.com/patmoore)
 
 ## v0.3.2
 

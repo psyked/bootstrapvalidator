@@ -7,7 +7,7 @@
 ## Features
 
 * Built from scratch. The code is solid and clean
-* 18 built-in [validators](#validators) and counting!
+* 25 built-in [validators](#validators) and counting!
 * Cannot find the validator you need? Don't worry, it is easy to [write new validator](#write-new-validator)
 * Show feedback icons based on field validity
 * Support Ajax in both validator and form submission
@@ -55,6 +55,7 @@ Big thanks to the contributors:
 * [@ikanedo](https://github.com/ikanedo)
 * [@iplus](https://github.com/iplus)
 * [@narutosanjiv](https://github.com/narutosanjiv)
+* [@patmoore](https://github.com/patmoore)
 * [@vaz](https://github.com/vaz)
 * ... might be you! Let's [fork](https://github.com/nghuuphuoc/bootstrapvalidator/fork) and pull a request!
 
