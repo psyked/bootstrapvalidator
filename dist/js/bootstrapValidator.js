@@ -275,6 +275,8 @@
 
             // Call the custom submission if enabled
             if (this.options.submitHandler && 'function' == typeof this.options.submitHandler) {
+                // Turn off the submit handler, so user can call form.submit() inside their submitHandler method
+                this.$form.off('submit.bootstrapValidator');
                 this.options.submitHandler.call(this, this, this.$form, this.$submitButton);
             } else {
                 // Submit form

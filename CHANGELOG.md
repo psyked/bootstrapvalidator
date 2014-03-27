@@ -6,7 +6,8 @@ Not released yet
 
 __Fixes__:
 
-[#77, #117: ```notEmpty``` validator doesn't work on file input](https://github.com/nghuuphuoc/bootstrapvalidator/issues/117)
+* [#77, #117: ```notEmpty``` validator doesn't work on file input](https://github.com/nghuuphuoc/bootstrapvalidator/issues/117)
+* [#105: Cannot call ```form.submit()``` inside ```submitHandler```](https://github.com/nghuuphuoc/bootstrapvalidator/issues/105)
 
 ## v0.3.2
 
