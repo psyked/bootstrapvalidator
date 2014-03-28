@@ -1394,6 +1394,10 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.regexp = {
+        enableByHtml5: function($field) {
+            return ($field.attr('pattern') + '' != '');
+        },
+
         /**
          * Check if the element value matches given regular expression
          *
@@ -1408,8 +1412,15 @@
             if (value == '') {
                 return true;
             }
+            var pattern = $field.attr('pattern'),
+                regexp;
+            if (pattern) {
+                regexp = new RegExp(pattern);
+            } else {
+                regexp = ('string' == typeof options.regexp) ? new RegExp(options.regexp) : options.regexp;
+            }
 
-            return options.regexp.test(value);
+            return regexp.test(value);
         }
     };
 }(window.jQuery));
