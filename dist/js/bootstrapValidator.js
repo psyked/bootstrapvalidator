@@ -1171,6 +1171,10 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.hexColor = {
+        enableByHtml5: function($field) {
+            return ('color' == $field.attr('type'));
+        },
+
         /**
          * Return true if the input value is a valid hex color
          *
