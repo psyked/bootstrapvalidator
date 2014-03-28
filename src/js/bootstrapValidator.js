@@ -107,8 +107,8 @@
                 v,          // Validator name
                 enabled,
                 optionName,
-                optionValue;
-
+                optionValue,
+                html5Attrs;
 
             this.$form
                 // Disable client side validation in HTML 5
@@ -136,21 +136,29 @@
                     }, options.fields[field]);
 
                     for (v in $.fn.bootstrapValidator.validators) {
-                        validator = $.fn.bootstrapValidator.validators[v];
-                        enabled   = $field.attr('data-bv-' + v.toLowerCase()) + '';
+                        validator  = $.fn.bootstrapValidator.validators[v];
+                        enabled    = $field.attr('data-bv-' + v.toLowerCase()) + '';
+                        html5Attrs = {};
 
                         if (('function' == typeof validator.enableByHtml5
-                                && validator.enableByHtml5($(this))
+                                && (html5Attrs = validator.enableByHtml5($(this)))
                                 && (enabled != 'false'))
                             || ('undefined' == typeof validator.enableByHtml5 && ('' == enabled || 'true' == enabled)))
                         {
                             // Try to parse the options via attributes
                             validator.html5Attributes = validator.html5Attributes || ['message'];
-                            options.fields[field]['validators'][v] = options.fields[field]['validators'][v] || {};
+
+                            options.fields[field]['validators'][v] = $.extend({}, html5Attrs == true ? {} : html5Attrs, options.fields[field]['validators'][v]);
+
                             for (i in validator.html5Attributes) {
                                 optionName  = validator.html5Attributes[i];
                                 optionValue = $field.attr('data-bv-' + v.toLowerCase() + '-' + optionName.toLowerCase());
                                 if (optionValue) {
+                                    if ('true' == optionValue) {
+                                        optionValue = true;
+                                    } else if ('false' == optionValue) {
+                                        optionValue = false;
+                                    }
                                     options.fields[field]['validators'][v][optionName] = optionValue;
                                 }
                             }

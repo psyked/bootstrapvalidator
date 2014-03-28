@@ -108,8 +108,8 @@
                 v,          // Validator name
                 enabled,
                 optionName,
-                optionValue;
-
+                optionValue,
+                html5Attrs;
 
             this.$form
                 // Disable client side validation in HTML 5
@@ -137,21 +137,29 @@
                     }, options.fields[field]);
 
                     for (v in $.fn.bootstrapValidator.validators) {
-                        validator = $.fn.bootstrapValidator.validators[v];
-                        enabled   = $field.attr('data-bv-' + v.toLowerCase()) + '';
+                        validator  = $.fn.bootstrapValidator.validators[v];
+                        enabled    = $field.attr('data-bv-' + v.toLowerCase()) + '';
+                        html5Attrs = {};
 
                         if (('function' == typeof validator.enableByHtml5
-                                && validator.enableByHtml5($(this))
+                                && (html5Attrs = validator.enableByHtml5($(this)))
                                 && (enabled != 'false'))
                             || ('undefined' == typeof validator.enableByHtml5 && ('' == enabled || 'true' == enabled)))
                         {
                             // Try to parse the options via attributes
                             validator.html5Attributes = validator.html5Attributes || ['message'];
-                            options.fields[field]['validators'][v] = options.fields[field]['validators'][v] || {};
+
+                            options.fields[field]['validators'][v] = $.extend({}, html5Attrs == true ? {} : html5Attrs, options.fields[field]['validators'][v]);
+
                             for (i in validator.html5Attributes) {
                                 optionName  = validator.html5Attributes[i];
                                 optionValue = $field.attr('data-bv-' + v.toLowerCase() + '-' + optionName.toLowerCase());
                                 if (optionValue) {
+                                    if ('true' == optionValue) {
+                                        optionValue = true;
+                                    } else if ('false' == optionValue) {
+                                        optionValue = false;
+                                    }
                                     options.fields[field]['validators'][v][optionName] = optionValue;
                                 }
                             }
@@ -1291,6 +1299,19 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.lessThan = {
+        html5Attributes: ['message', 'value', 'inclusive'],
+
+        enableByHtml5: function($field) {
+            var max = $field.attr('max');
+            if (max) {
+                return {
+                    value: max
+                };
+            }
+
+            return false;
+        },
+
         /**
          * Return true if the input value is less than or equal to given number
          *
@@ -1308,7 +1329,7 @@
                 return true;
             }
             value = parseFloat(value);
-            return (options.inclusive === true) ? (value < options.value) : (value <= options.value);
+            return (options.inclusive === false) ? (value <= options.value) : (value < options.value);
         }
     };
 }(window.jQuery));
@@ -1394,8 +1415,17 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.regexp = {
+        html5Attributes: ['message', 'regexp'],
+
         enableByHtml5: function($field) {
-            return ($field.attr('pattern') + '' != '');
+            var pattern = $field.attr('pattern');
+            if (pattern) {
+                return {
+                    regexp: pattern
+                };
+            }
+
+            return false;
         },
 
         /**
@@ -1412,14 +1442,8 @@
             if (value == '') {
                 return true;
             }
-            var pattern = $field.attr('pattern'),
-                regexp;
-            if (pattern) {
-                regexp = new RegExp(pattern);
-            } else {
-                regexp = ('string' == typeof options.regexp) ? new RegExp(options.regexp) : options.regexp;
-            }
 
+            var regexp = ('string' == typeof options.regexp) ? new RegExp(options.regexp) : options.regexp;
             return regexp.test(value);
         }
     };

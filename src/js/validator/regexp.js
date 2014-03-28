@@ -1,7 +1,16 @@
 (function($) {
     $.fn.bootstrapValidator.validators.regexp = {
+        html5Attributes: ['message', 'regexp'],
+
         enableByHtml5: function($field) {
-            return ($field.attr('pattern') + '' != '');
+            var pattern = $field.attr('pattern');
+            if (pattern) {
+                return {
+                    regexp: pattern
+                };
+            }
+
+            return false;
         },
 
         /**
@@ -18,14 +27,8 @@
             if (value == '') {
                 return true;
             }
-            var pattern = $field.attr('pattern'),
-                regexp;
-            if (pattern) {
-                regexp = new RegExp(pattern);
-            } else {
-                regexp = ('string' == typeof options.regexp) ? new RegExp(options.regexp) : options.regexp;
-            }
 
+            var regexp = ('string' == typeof options.regexp) ? new RegExp(options.regexp) : options.regexp;
             return regexp.test(value);
         }
     };
