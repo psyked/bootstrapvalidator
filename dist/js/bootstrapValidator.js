@@ -1569,6 +1569,17 @@
     $.fn.bootstrapValidator.validators.stringLength = {
         html5Attributes: ['message', 'min', 'max'],
 
+        enableByHtml5: function($field) {
+            var maxLength = $field.attr('maxlength');
+            if (maxLength) {
+                return {
+                    max: parseInt(maxLength, 10)
+                };
+            }
+
+            return true;
+        },
+
         /**
          * Check if the length of element value is less or more than given number
          *
