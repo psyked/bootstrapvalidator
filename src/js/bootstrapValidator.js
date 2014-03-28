@@ -92,6 +92,7 @@
         _init: function() {
             var that    = this,
                 options = {
+                    trigger:        this.$form.attr('data-bv-trigger'),
                     message:        this.$form.attr('data-bv-message'),
                     submitButtons:  this.$form.attr('data-bv-submitbuttons'),
                     live:           this.$form.attr('data-bv-live'),
@@ -129,6 +130,7 @@
                     $field.attr('data-bv-field', field);
 
                     options.fields[field] = $.extend({}, {
+                        trigger:    $field.attr('data-bv-trigger'),
                         message:    $field.attr('data-bv-message'),
                         container:  $field.attr('data-bv-container'),
                         selector:   $field.attr('data-bv-selector'),
@@ -287,10 +289,15 @@
                     (function(f) {
                         var fields = that.getFieldElements(f);
                         if (fields) {
-                            var type  = fields.attr('type'),
-                                event = ('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup';
+                            var type    = fields.attr('type'),
+                                trigger = that.options.fields[field].trigger
+                                        || that.options.trigger
+                                        || (('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup'),
+                                events  = trigger.split(' ').map(function(item) {
+                                    return item + '.bootstrapValidator';
+                                }).join(' ');
 
-                            fields.on(event + '.bootstrapValidator', function() {
+                            fields.on(events, function() {
                                 that.validateField(f);
                             });
                         }

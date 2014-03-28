@@ -28,10 +28,10 @@
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Full name</label>
                         <div class="col-lg-4">
-                            <input type="text" class="form-control" name="firstName" placeholder="First name" required data-bv-notempty-message="The first name is required and cannot be empty" />
+                            <input type="text" class="form-control" name="firstName" placeholder="First name" data-bv-trigger="keyup" required data-bv-notempty-message="The first name is required and cannot be empty" />
                         </div>
                         <div class="col-lg-4">
-                            <input type="text" class="form-control" name="lastName" placeholder="Last name" required data-bv-notempty-message="The last name is required and cannot be empty" />
+                            <input type="text" class="form-control" name="lastName" placeholder="Last name" required data-bv-trigger="blur" data-bv-notempty-message="The last name is required and cannot be empty" />
                         </div>
                     </div>
 
@@ -39,6 +39,7 @@
                         <label class="col-lg-3 control-label">Username</label>
                         <div class="col-lg-5">
                             <input type="text" class="form-control" name="username"
+                                   data-bv-trigger="blur"
                                    data-bv-message="The username is not valid"
                                    required data-bv-notempty-message="The username is required and cannot be empty"
                                    pattern="[a-zA-Z0-9_\.]+" data-bv-regexp-message="The username can only consist of alphabetical, number, dot and underscore"
@@ -71,8 +72,9 @@
                         <label class="col-lg-3 control-label">Age</label>
                         <div class="col-lg-2">
                             <input type="text" class="form-control" name="age"
-                                   min="10" required data-bv-greaterthan-inclusive="false" data-bv-greaterthan-message="The input must be greater than or equal to 10"
-                                   max="100" required data-bv-lessthan-inclusive="true" data-bv-lessthan-message="The input must be less than 100"
+                                   required
+                                   min="10" data-bv-greaterthan-inclusive="false" data-bv-greaterthan-message="The input must be greater than or equal to 10"
+                                   max="100" data-bv-lessthan-inclusive="true" data-bv-lessthan-message="The input must be less than 100"
                                     />
                         </div>
                     </div>
