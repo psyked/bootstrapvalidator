@@ -210,7 +210,7 @@
                 $('<small/>')
                     .css('display', 'none')
                     .attr('data-bv-validator', validatorName)
-                    .html(this.options.fields[field].validators[validatorName].message || this.options.message)
+                    .html(this.options.fields[field].validators[validatorName].message || this.options.fields[field].message || this.options.message)
                     .addClass('help-block')
                     .appendTo($message);
             }
