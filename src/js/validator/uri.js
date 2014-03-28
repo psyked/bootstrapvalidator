@@ -1,5 +1,9 @@
 (function($) {
     $.fn.bootstrapValidator.validators.uri = {
+        enableByHtml5: function($field) {
+            return ('url' == $field.attr('type'));
+        },
+
         /**
          * Return true if the input value is a valid URL
          *
