@@ -104,7 +104,7 @@
                 },
                 validator,
                 i = 0,
-                v,
+                v,          // Validator name
                 enabled,
                 optionName,
                 optionValue;
@@ -128,12 +128,12 @@
                         field  = $field.attr('name') || $field.attr('data-bv-field');
                     $field.attr('data-bv-field', field);
 
-                    options.fields[field] = {
+                    options.fields[field] = $.extend({}, {
                         message:    $field.attr('data-bv-message'),
                         container:  $field.attr('data-bv-container'),
                         selector:   $field.attr('data-bv-selector'),
                         validators: {}
-                    };
+                    }, options.fields[field]);
 
                     for (v in $.fn.bootstrapValidator.validators) {
                         validator = $.fn.bootstrapValidator.validators[v];
@@ -146,11 +146,11 @@
                         {
                             // Try to parse the options via attributes
                             validator.html5Attributes = validator.html5Attributes || ['message'];
+                            options.fields[field]['validators'][v] = options.fields[field]['validators'][v] || {};
                             for (i in validator.html5Attributes) {
                                 optionName  = validator.html5Attributes[i];
                                 optionValue = $field.attr('data-bv-' + v.toLowerCase() + '-' + optionName.toLowerCase());
                                 if (optionValue) {
-                                    options.fields[field]['validators'][v]             = options.fields[field]['validators'][v] || {};
                                     options.fields[field]['validators'][v][optionName] = optionValue;
                                 }
                             }
@@ -159,7 +159,7 @@
                 });
 
             this.options = $.extend(true, this.options, options);
-            console.log(this.options);
+            //console.log(this.options);
 
             for (var field in this.options.fields) {
                 this._initField(field);
