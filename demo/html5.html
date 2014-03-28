@@ -63,7 +63,10 @@
                     <div class="form-group">
                         <label class="col-lg-3 control-label">Age</label>
                         <div class="col-lg-2">
-                            <input type="text" class="form-control" name="age" max="100" required data-bv-lessthan-inclusive="true" data-bv-lessthan-message="The input must be less than 100" />
+                            <input type="text" class="form-control" name="age"
+                                   min="10" required data-bv-greaterthan-inclusive="false" data-bv-greaterthan-message="The input must be greater than or equal to 10"
+                                   max="100" required data-bv-lessthan-inclusive="true" data-bv-lessthan-message="The input must be less than 100"
+                                    />
                         </div>
                     </div>
 

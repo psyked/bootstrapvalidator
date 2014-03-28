@@ -1,5 +1,18 @@
 (function($) {
     $.fn.bootstrapValidator.validators.greaterThan = {
+        html5Attributes: ['message', 'value', 'inclusive'],
+
+        enableByHtml5: function($field) {
+            var min = $field.attr('min');
+            if (min) {
+                return {
+                    value: min
+                };
+            }
+
+            return false;
+        },
+
         /**
          * Return true if the input value is greater than or equals to given number
          *
