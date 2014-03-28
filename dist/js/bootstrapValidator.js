@@ -1100,6 +1100,10 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.emailAddress = {
+        enableByHtml5: function($field) {
+            return ('email' == $field.attr('type'));
+        },
+
         /**
          * Return true if and only if the input value is a valid email address
          *
