@@ -1,5 +1,7 @@
 (function($) {
     $.fn.bootstrapValidator.validators.date = {
+        html5Attributes: ['message', 'format'],
+
         /**
          * Return true if the input value is valid date
          *

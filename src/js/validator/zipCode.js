@@ -1,18 +1,20 @@
 (function($) {
     $.fn.bootstrapValidator.validators.zipCode = {
+        html5Attributes: ['message', 'country'],
+
         /**
          * Return true if and only if the input value is a valid country zip code
          *
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options Consist of key:
+         * - message: The invalid message
          * - country: The ISO 3166 country code
          *
          * Currently it supports the following countries:
          * - US (United State)
          * - DK (Denmark)
          * - SE (Sweden)
-         *
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {

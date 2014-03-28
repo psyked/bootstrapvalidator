@@ -1,5 +1,10 @@
 (function($) {
     $.fn.bootstrapValidator.validators.notEmpty = {
+        enableByHtml5: function($field) {
+            var required = $field.attr('required') + '';
+            return ('required' == required || 'true' == required);
+        },
+
         /**
          * Check if input value is empty or not
          *

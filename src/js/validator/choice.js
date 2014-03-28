@@ -1,5 +1,7 @@
 (function($) {
     $.fn.bootstrapValidator.validators.choice = {
+        html5Attributes: ['min', 'max'],
+
         /**
          * Check if the number of checked boxes are less or more than a given number
          *

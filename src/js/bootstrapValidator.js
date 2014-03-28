@@ -54,8 +54,8 @@
         //      validating: 'fa fa-refresh'
         //  }
         feedbackIcons: {
-            valid: null,
-            invalid: null,
+            valid:      null,
+            invalid:    null,
             validating: null
         },
 
@@ -90,11 +90,26 @@
          * Init form
          */
         _init: function() {
-            if (this.options.fields == null) {
-                return;
-            }
+            var that    = this,
+                options = {
+                    message:        this.$form.attr('data-bv-message'),
+                    submitButtons:  this.$form.attr('data-bv-submitbuttons'),
+                    live:           this.$form.attr('data-bv-live'),
+                    fields:         {},
+                    feedbackIcons: {
+                        valid:      this.$form.attr('data-bv-feedbackicons-valid'),
+                        invalid:    this.$form.attr('data-bv-feedbackicons-invalid'),
+                        validating: this.$form.attr('data-bv-feedbackicons-validating')
+                    }
+                },
+                validator,
+                i = 0,
+                v,
+                enabled,
+                optionName,
+                optionValue;
 
-            var that = this;
+
             this.$form
                 // Disable client side validation in HTML 5
                 .attr('novalidate', 'novalidate')
@@ -104,10 +119,47 @@
                     e.preventDefault();
                     that.validate();
                 })
-                .find(this.options.submitButtons)
-                    .on('click', function() {
-                        that.$submitButton = $(this);
-                    });
+                .on('click', this.options.submitButtons, function() {
+                    that.$submitButton = $(this);
+                })
+                // Find all fields which have either "name" or "data-bv-field" attribute
+                .find('[name], [data-bv-field]').each(function() {
+                    var $field = $(this),
+                        field  = $field.attr('name') || $field.attr('data-bv-field');
+                    $field.attr('data-bv-field', field);
+
+                    options.fields[field] = {
+                        message:    $field.attr('data-bv-message'),
+                        container:  $field.attr('data-bv-container'),
+                        selector:   $field.attr('data-bv-selector'),
+                        validators: {}
+                    };
+
+                    for (v in $.fn.bootstrapValidator.validators) {
+                        validator = $.fn.bootstrapValidator.validators[v];
+                        enabled   = $field.attr('data-bv-' + v.toLowerCase()) + '';
+
+                        if (('function' == typeof validator.enableByHtml5
+                                && validator.enableByHtml5($(this))
+                                && (enabled != 'false'))
+                            || ('undefined' == typeof validator.enableByHtml5 && ('' == enabled || 'true' == enabled)))
+                        {
+                            // Try to parse the options via attributes
+                            validator.html5Attributes = validator.html5Attributes || ['message'];
+                            for (i in validator.html5Attributes) {
+                                optionName  = validator.html5Attributes[i];
+                                optionValue = $field.attr('data-bv-' + v.toLowerCase() + '-' + optionName.toLowerCase());
+                                if (optionValue) {
+                                    options.fields[field]['validators'][v]             = options.fields[field]['validators'][v] || {};
+                                    options.fields[field]['validators'][v][optionName] = optionValue;
+                                }
+                            }
+                        }
+                    }
+                });
+
+            this.options = $.extend(true, this.options, options);
+            console.log(this.options);
 
             for (var field in this.options.fields) {
                 this._initField(field);

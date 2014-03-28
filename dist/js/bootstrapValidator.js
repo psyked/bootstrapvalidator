@@ -3,7 +3,7 @@
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
- * @version     v0.3.3
+ * @version     v0.4.0-dev
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -55,8 +55,8 @@
         //      validating: 'fa fa-refresh'
         //  }
         feedbackIcons: {
-            valid: null,
-            invalid: null,
+            valid:      null,
+            invalid:    null,
             validating: null
         },
 
@@ -91,11 +91,26 @@
          * Init form
          */
         _init: function() {
-            if (this.options.fields == null) {
-                return;
-            }
+            var that    = this,
+                options = {
+                    message:        this.$form.attr('data-bv-message'),
+                    submitButtons:  this.$form.attr('data-bv-submitbuttons'),
+                    live:           this.$form.attr('data-bv-live'),
+                    fields:         {},
+                    feedbackIcons: {
+                        valid:      this.$form.attr('data-bv-feedbackicons-valid'),
+                        invalid:    this.$form.attr('data-bv-feedbackicons-invalid'),
+                        validating: this.$form.attr('data-bv-feedbackicons-validating')
+                    }
+                },
+                validator,
+                i = 0,
+                v,
+                enabled,
+                optionName,
+                optionValue;
 
-            var that = this;
+
             this.$form
                 // Disable client side validation in HTML 5
                 .attr('novalidate', 'novalidate')
@@ -105,10 +120,47 @@
                     e.preventDefault();
                     that.validate();
                 })
-                .find(this.options.submitButtons)
-                    .on('click', function() {
-                        that.$submitButton = $(this);
-                    });
+                .on('click', this.options.submitButtons, function() {
+                    that.$submitButton = $(this);
+                })
+                // Find all fields which have either "name" or "data-bv-field" attribute
+                .find('[name], [data-bv-field]').each(function() {
+                    var $field = $(this),
+                        field  = $field.attr('name') || $field.attr('data-bv-field');
+                    $field.attr('data-bv-field', field);
+
+                    options.fields[field] = {
+                        message:    $field.attr('data-bv-message'),
+                        container:  $field.attr('data-bv-container'),
+                        selector:   $field.attr('data-bv-selector'),
+                        validators: {}
+                    };
+
+                    for (v in $.fn.bootstrapValidator.validators) {
+                        validator = $.fn.bootstrapValidator.validators[v];
+                        enabled   = $field.attr('data-bv-' + v.toLowerCase()) + '';
+
+                        if (('function' == typeof validator.enableByHtml5
+                                && validator.enableByHtml5($(this))
+                                && (enabled != 'false'))
+                            || ('undefined' == typeof validator.enableByHtml5 && ('' == enabled || 'true' == enabled)))
+                        {
+                            // Try to parse the options via attributes
+                            validator.html5Attributes = validator.html5Attributes || ['message'];
+                            for (i in validator.html5Attributes) {
+                                optionName  = validator.html5Attributes[i];
+                                optionValue = $field.attr('data-bv-' + v.toLowerCase() + '-' + optionName.toLowerCase());
+                                if (optionValue) {
+                                    options.fields[field]['validators'][v]             = options.fields[field]['validators'][v] || {};
+                                    options.fields[field]['validators'][v][optionName] = optionValue;
+                                }
+                            }
+                        }
+                    }
+                });
+
+            this.options = $.extend(true, this.options, options);
+            console.log(this.options);
 
             for (var field in this.options.fields) {
                 this._initField(field);
@@ -621,6 +673,8 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.choice = {
+        html5Attributes: ['min', 'max'],
+
         /**
          * Check if the number of checked boxes are less or more than a given number
          *
@@ -869,6 +923,8 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.date = {
+        html5Attributes: ['message', 'format'],
+
         /**
          * Return true if the input value is valid date
          *
@@ -990,6 +1046,8 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.different = {
+        html5Attributes: ['message', 'field'],
+
         /**
          * Return true if the input value is different with given field's value
          *
@@ -997,6 +1055,7 @@
          * @param {jQuery} $field Field element
          * @param {Object} options Consists of the following key:
          * - field: The name of field that will be used to compare with current one
+         * - message: The invalid message
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
@@ -1107,6 +1166,8 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.identical = {
+        html5Attributes: ['message', 'field'],
+
         /**
          * Check if input value equals to value of particular one
          *
@@ -1138,6 +1199,8 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.ip = {
+        html5Attributes: ['message', 'ipv4', 'ipv6'],
+
         /**
          * Return true if the input value is a IP address.
          *
@@ -1268,6 +1331,11 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.notEmpty = {
+        enableByHtml5: function($field) {
+            var required = $field.attr('required') + '';
+            return ('required' == required || 'true' == required);
+        },
+
         /**
          * Check if input value is empty or not
          *
@@ -1291,14 +1359,16 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.phone = {
+        html5Attributes: ['message', 'country'],
+
         /**
          * Return true if the input value contains a valid US phone number only
          *
          * @param {BootstrapValidator} validator Validate plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options Consist of key:
+         * - message: The invalid message
          * - country: The ISO 3166 country code
-         *
          * Currently it only supports United State (US) country
          * @returns {Boolean}
          */
@@ -1341,6 +1411,8 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.remote = {
+        html5Attributes: ['message', 'url'],
+
         /**
          * Request a remote server to check the input value
          *
@@ -1443,6 +1515,8 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.stringLength = {
+        html5Attributes: ['message', 'min', 'max'],
+
         /**
          * Check if the length of element value is less or more than given number
          *
@@ -1564,19 +1638,21 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.zipCode = {
+        html5Attributes: ['message', 'country'],
+
         /**
          * Return true if and only if the input value is a valid country zip code
          *
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options Consist of key:
+         * - message: The invalid message
          * - country: The ISO 3166 country code
          *
          * Currently it supports the following countries:
          * - US (United State)
          * - DK (Denmark)
          * - SE (Sweden)
-         *
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {

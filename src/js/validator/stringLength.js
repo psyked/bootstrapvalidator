@@ -1,5 +1,7 @@
 (function($) {
     $.fn.bootstrapValidator.validators.stringLength = {
+        html5Attributes: ['message', 'min', 'max'],
+
         /**
          * Check if the length of element value is less or more than given number
          *

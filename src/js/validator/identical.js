@@ -1,5 +1,7 @@
 (function($) {
     $.fn.bootstrapValidator.validators.identical = {
+        html5Attributes: ['message', 'field'],
+
         /**
          * Check if input value equals to value of particular one
          *
