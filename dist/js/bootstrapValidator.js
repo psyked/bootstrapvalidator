@@ -1235,6 +1235,10 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.integer = {
+        enableByHtml5: function($field) {
+            return ('number' == $field.attr('type'));
+        },
+
         /**
          * Return true if the input value is an integer
          *
