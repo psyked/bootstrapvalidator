@@ -40,7 +40,7 @@
                 data: data
             });
             xhr.then(function(response) {
-                dfd.resolve(response.valid === true || response.valid === 'true', 'remote');
+                dfd.resolve($field, 'remote', response.valid === true || response.valid === 'true');
             });
 
             dfd.fail(function() {

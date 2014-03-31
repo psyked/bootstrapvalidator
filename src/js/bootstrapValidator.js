@@ -13,8 +13,7 @@
         this.$form   = $(form);
         this.options = $.extend({}, BootstrapValidator.DEFAULT_OPTIONS, options);
 
-        this.dfds    = {};      // Array of deferred
-        this.results = {};      // Validating results
+        this.results = {};          // Validating results
 
         this.invalidField  = null;  // First invalid field
         this.$submitButton = null;  // The submit button which is clicked to submit form
@@ -188,7 +187,6 @@
                 return;
             }
 
-            this.dfds[field]    = {};
             this.results[field] = {};
 
             var fields = this.getFieldElements(field);
@@ -196,11 +194,13 @@
             // We don't need to validate non-existing fields
             if (fields == null) {
                 delete this.options.fields[field];
-                delete this.dfds[field];
                 return;
             }
 
-            fields.attr('data-bv-field', field);
+            // Set the attribute to indicate the fields which are defined by selector
+            if (fields.attr('data-bv-field')) {
+                fields.attr('data-bv-field', field);
+            }
 
             // Create help block elements for showing the error messages
             var $field   = $(fields[0]),
@@ -402,13 +402,12 @@
             // We don't need to validate disabled field
             if (fields.length == 1 && fields.is(':disabled')) {
                 delete this.options.fields[field];
-                delete this.dfds[field];
                 return;
             }
 
             for (validatorName in validators) {
-                if (this.dfds[field][validatorName]) {
-                    this.dfds[field][validatorName].reject();
+                if ($field.data('bv.dfs.' + validatorName)) {
+                    $field.data('bv.dfs.' + validatorName).reject();
                 }
 
                 // Don't validate field if it is already done
@@ -421,12 +420,12 @@
 
                 if ('object' == typeof validateResult) {
                     this.updateStatus($field, this.STATUS_VALIDATING, validatorName);
-                    this.dfds[field][validatorName] = validateResult;
+                    $field.data('bv.dfs.' + validatorName, validateResult);
 
-                    validateResult.done(function(isValid, v) {
+                    validateResult.done(function($f, v, isValid) {
                         // v is validator name
-                        delete that.dfds[field][v];
-                        that.updateStatus($field, isValid ? that.STATUS_VALID : that.STATUS_INVALID, v);
+                        $f.removeData('bv.dfs.' + v);
+                        that.updateStatus(field, isValid ? that.STATUS_VALID : that.STATUS_INVALID, v);
 
                         if (isValid && 'disabled' == that.options.live) {
                             that._submit();
@@ -555,10 +554,10 @@
         resetForm: function(resetFormData) {
             var field, $field, type;
             for (field in this.options.fields) {
-                this.dfds[field]    = {};
                 this.results[field] = {};
 
                 $field = this.getFieldElements(field);
+                $field.removeData('bv.dfs');
                 // Mark field as not validated yet
                 this.updateStatus($field, this.STATUS_NOT_VALIDATED, null);
 
