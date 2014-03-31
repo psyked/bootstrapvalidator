@@ -10,7 +10,7 @@
                 };
             }
 
-            return true;
+            return maxLength;
         },
 
         /**
