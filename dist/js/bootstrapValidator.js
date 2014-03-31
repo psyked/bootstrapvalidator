@@ -14,8 +14,6 @@
         this.$form   = $(form);
         this.options = $.extend({}, BootstrapValidator.DEFAULT_OPTIONS, options);
 
-        this.results = {};          // Validating results
-
         this.$invalidField = null;  // First invalid field
         this.$submitButton = null;  // The submit button which is clicked to submit form
 
@@ -189,8 +187,6 @@
                 return;
             }
 
-            this.results[field] = {};
-
             var fields = this.getFieldElements(field);
 
             // We don't need to validate non-existing fields
@@ -228,10 +224,9 @@
                 });
 
                 // Create help block elements for showing the error messages
-                $field.data('bv.messageContainer', $message);
+                $field.data('bv.messages', $message);
                 for (validatorName in this.options.fields[field].validators) {
                     $field.data('bv.result.' + validatorName, this.STATUS_NOT_VALIDATED);
-                    //this.results[field][validatorName] = this.STATUS_NOT_VALIDATED;
 
                     if (!updateAll || i == total - 1) {
                         $('<small/>')
@@ -508,7 +503,7 @@
             var that     = this,
                 field    = $field.attr('data-bv-field'),
                 $parent  = $field.parents('.form-group'),
-                $message = $field.data('bv.messageContainer'),
+                $message = $field.data('bv.messages'),
                 $errors  = $message.find('.help-block[data-bv-validator]'),
                 $icon    = $parent.find('.form-control-feedback[data-bv-field="' + field + '"]');
 
