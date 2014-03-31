@@ -23,7 +23,7 @@
             }
 
             if (value == compareWith.val()) {
-                validator.updateStatus(compareWith, validator.STATUS_VALID, 'identical');
+                validator.updateStatus(options.field, validator.STATUS_VALID, 'identical');
                 return true;
             } else {
                 return false;
