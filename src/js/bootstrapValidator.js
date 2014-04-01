@@ -131,6 +131,13 @@
 
             var fields = this.getFieldElements(field);
 
+            // We don't need to validate invisible or hidden fields
+            if(!fields.parent('.form-group').is(":visible") || fields.parent('.form-group').is(":hidden")) {
+                delete this.options.fields[field];
+                delete this.dfds[field];
+                return;
+            }
+            
             // We don't need to validate non-existing fields
             if (fields == null) {
                 delete this.options.fields[field];
@@ -334,6 +341,13 @@
 
             // We don't need to validate disabled field
             if (fields.length == 1 && fields.is(':disabled')) {
+                delete this.options.fields[field];
+                delete this.dfds[field];
+                return;
+            }
+
+            // We don't need to validate hide field
+            if (fields.length == 1 && (fields.parent('.form-group').is(':hidden') || !fields.parent('.form-group').is(':visible'))) {
                 delete this.options.fields[field];
                 delete this.dfds[field];
                 return;
