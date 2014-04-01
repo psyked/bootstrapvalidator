@@ -317,20 +317,6 @@
         },
 
         /**
-         * Disable/Enable submit buttons
-         *
-         * @param {Boolean} disabled
-         */
-        _disableSubmitButtons: function(disabled) {
-            if (!disabled) {
-                this.$form.find(this.options.submitButtons).removeAttr('disabled');
-            } else if (this.options.live != 'disabled') {
-                // Don't disable if the live validating mode is disabled
-                this.$form.find(this.options.submitButtons).attr('disabled', 'disabled');
-            }
-        },
-
-        /**
          * Called when all validations are completed
          */
         _submit: function() {
@@ -347,20 +333,34 @@
                 return;
             }
 
-            this._disableSubmitButtons(true);
-
             // Call the custom submission if enabled
             if (this.options.submitHandler && 'function' == typeof this.options.submitHandler) {
                 // Turn off the submit handler, so user can call form.submit() inside their submitHandler method
                 this.$form.off('submit.bv');
                 this.options.submitHandler.call(this, this, this.$form, this.$submitButton);
             } else {
+                this.disableSubmitButtons(true);
+
                 // Submit form
                 this.$form.off('submit.bv').submit();
             }
         },
 
         // --- Public methods ---
+
+        /**
+         * Disable/Enable submit buttons
+         *
+         * @param {Boolean} disabled
+         */
+        disableSubmitButtons: function(disabled) {
+            if (!disabled) {
+                this.$form.find(this.options.submitButtons).removeAttr('disabled');
+            } else if (this.options.live != 'disabled') {
+                // Don't disable if the live validating mode is disabled
+                this.$form.find(this.options.submitButtons).attr('disabled', 'disabled');
+            }
+        },
 
         /**
          * Retrieve the field elements by given name
@@ -382,7 +382,7 @@
             if (!this.options.fields) {
                 return this;
             }
-            this._disableSubmitButtons(true);
+            this.disableSubmitButtons(true);
 
             for (var field in this.options.fields) {
                 this.validateField(field);
@@ -517,7 +517,7 @@
             // Show/hide error elements and feedback icons
             switch (status) {
                 case this.STATUS_VALIDATING:
-                    this._disableSubmitButtons(true);
+                    this.disableSubmitButtons(true);
                     $parent.removeClass('has-success').removeClass('has-error');
                     // TODO: Show validating message
                     validatorName ? $errors.filter('.help-block[data-bv-validator="' + validatorName + '"]').hide() : $errors.hide();
@@ -527,7 +527,7 @@
                     break;
 
                 case this.STATUS_INVALID:
-                    this._disableSubmitButtons(true);
+                    this.disableSubmitButtons(true);
                     $parent.removeClass('has-success').addClass('has-error');
                     validatorName ? $errors.filter('[data-bv-validator="' + validatorName + '"]').show() : $errors.show();
                     if ($icon) {
@@ -544,12 +544,13 @@
                             return ('block' == display) || ($field.data('bv.result.' + v) != that.STATUS_VALID);
                         }).length == 0)
                     {
-                        this._disableSubmitButtons(false);
+                        this.disableSubmitButtons(false);
                         $parent.removeClass('has-error').addClass('has-success');
                         if ($icon) {
                             $icon.removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.valid).show();
                         }
                     } else {
+                        this.disableSubmitButtons(true);
                         $parent.removeClass('has-success').addClass('has-error');
                         if ($icon) {
                             $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
@@ -559,7 +560,7 @@
 
                 case this.STATUS_NOT_VALIDATED:
                 default:
-                    this._disableSubmitButtons(false);
+                    this.disableSubmitButtons(false);
                     $parent.removeClass('has-success').removeClass('has-error');
                     validatorName ? $errors.filter('.help-block[data-bv-validator="' + validatorName + '"]').hide() : $errors.hide();
                     if ($icon) {
@@ -641,7 +642,7 @@
             this.$submitButton = null;
 
             // Enable submit buttons
-            this._disableSubmitButtons(false);
+            this.disableSubmitButtons(false);
 
             return this;
         },
