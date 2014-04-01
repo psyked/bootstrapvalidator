@@ -434,7 +434,7 @@
                 validateResult;
 
             // We don't need to validate disabled field
-            if ($field.is(':disabled')) {
+            if ($field.is(':disabled') || $field.is(':hidden') || !$field.is(':visible')) {
                 return this;
             }
 
