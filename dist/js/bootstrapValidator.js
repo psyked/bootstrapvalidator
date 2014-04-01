@@ -168,7 +168,6 @@
                 });
 
             this.options = $.extend(true, this.options, options);
-            //console.log(this.options);
 
             for (var field in this.options.fields) {
                 this._initField(field);
@@ -200,11 +199,6 @@
                 }
             }
 
-            // Set the attribute to indicate the fields which are defined by selector
-            if (!fields.attr('data-bv-field')) {
-                fields.attr('data-bv-field', field);
-            }
-
             var that      = this,
                 type      = fields.attr('type'),
                 event     = ('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup',
@@ -216,6 +210,11 @@
                     $parent  = $field.parents('.form-group'),
                     // Allow user to indicate where the error messages are shown
                     $message = this.options.fields[field].container ? $parent.find(this.options.fields[field].container) : this._getMessageContainer($field);
+
+                // Set the attribute to indicate the fields which are defined by selector
+                if (!$field.attr('data-bv-field')) {
+                    $field.attr('data-bv-field', field);
+                }
 
                 // Whenever the user change the field value, mark it as not validated yet
                 $field.on(event + '.bv', function() {
@@ -308,7 +307,7 @@
                                 }).join(' ');
 
                             for (var i = 0; i < total; i++) {
-                                $(fields[i]).on(events, function () {
+                                $(fields[i]).on(events, function() {
                                     updateAll ? that.validateField(f) : that.validateFieldElement($(this), false);
                                 });
                             }
@@ -506,8 +505,6 @@
                 $message = $field.data('bv.messages'),
                 $errors  = $message.find('.help-block[data-bv-validator]'),
                 $icon    = $parent.find('.form-control-feedback[data-bv-field="' + field + '"]');
-
-            console.log(field, validatorName, status);
 
             // Update status
             if (validatorName) {
