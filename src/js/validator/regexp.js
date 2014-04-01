@@ -1,5 +1,21 @@
 (function($) {
     $.fn.bootstrapValidator.validators.regexp = {
+        html5Attributes: {
+            message: 'message',
+            regexp: 'regexp'
+        },
+
+        enableByHtml5: function($field) {
+            var pattern = $field.attr('pattern');
+            if (pattern) {
+                return {
+                    regexp: pattern
+                };
+            }
+
+            return false;
+        },
+
         /**
          * Check if the element value matches given regular expression
          *
@@ -15,7 +31,8 @@
                 return true;
             }
 
-            return options.regexp.test(value);
+            var regexp = ('string' == typeof options.regexp) ? new RegExp(options.regexp) : options.regexp;
+            return regexp.test(value);
         }
     };
 }(window.jQuery));

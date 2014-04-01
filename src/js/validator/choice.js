@@ -1,5 +1,11 @@
 (function($) {
     $.fn.bootstrapValidator.validators.choice = {
+        html5Attributes: {
+            message: 'message',
+            min: 'min',
+            max: 'max'
+        },
+
         /**
          * Check if the number of checked boxes are less or more than a given number
          *
@@ -9,6 +15,7 @@
          * - min
          * - max
          * At least one of two keys is required
+         * - message: The invalid message
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {

@@ -1,5 +1,11 @@
 (function($) {
     $.fn.bootstrapValidator.validators.ip = {
+        html5Attributes: {
+            message: 'message',
+            ipv4: 'ipv4',
+            ipv6: 'ipv6'
+        },
+
         /**
          * Return true if the input value is a IP address.
          *

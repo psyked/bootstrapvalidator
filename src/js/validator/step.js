@@ -1,5 +1,11 @@
 (function($) {
     $.fn.bootstrapValidator.validators.step = {
+        html5Attributes: {
+            message: 'message',
+            base: 'baseValue',
+            step: 'step'
+        },
+
         /**
          * Return true if the input value is valid step one
          *

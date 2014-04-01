@@ -1,5 +1,12 @@
 (function($) {
     $.fn.bootstrapValidator.validators.between = {
+        html5Attributes: {
+            message: 'message',
+            min: 'min',
+            max: 'max',
+            inclusive: 'inclusive'
+        },
+
         /**
          * Return true if the input value is between (strictly or not) two given numbers
          *

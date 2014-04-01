@@ -1,5 +1,10 @@
 (function($) {
     $.fn.bootstrapValidator.validators.remote = {
+        html5Attributes: {
+            message: 'message',
+            url: 'url'
+        },
+
         /**
          * Request a remote server to check the input value
          *
@@ -38,7 +43,7 @@
                 data: data
             });
             xhr.then(function(response) {
-                dfd.resolve(response.valid === true || response.valid === 'true', 'remote');
+                dfd.resolve($field, 'remote', response.valid === true || response.valid === 'true');
             });
 
             dfd.fail(function() {
