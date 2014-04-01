@@ -1,5 +1,5 @@
 /**
- * BootstrapValidator (https://github.com/nghuuphuoc/bootstrapvalidator)
+ * BootstrapValidator (http://bootstrapvalidator.com)
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
@@ -507,6 +507,8 @@
                 $errors  = $message.find('.help-block[data-bv-validator]'),
                 $icon    = $parent.find('.form-control-feedback[data-bv-field="' + field + '"]');
 
+            console.log(field, validatorName, status);
+
             // Update status
             if (validatorName) {
                 $field.data('bv.result.' + validatorName, status);
@@ -540,16 +542,21 @@
                 case this.STATUS_VALID:
                     validatorName ? $errors.filter('[data-bv-validator="' + validatorName + '"]').hide() : $errors.hide();
 
-                    // If the field is valid
+                    // If the field is valid (passes all validators)
                     if ($errors.filter(function() {
-                        var display = $(this).css('display'), v = $(this).attr('data-bv-validator');
-                        return ('block' == display) || ($field.data('bv.result.' + v) != that.STATUS_VALID);
-                    }).length == 0
-                        ) {
+                            var display = $(this).css('display'), v = $(this).attr('data-bv-validator');
+                            return ('block' == display) || ($field.data('bv.result.' + v) != that.STATUS_VALID);
+                        }).length == 0)
+                    {
                         this._disableSubmitButtons(false);
                         $parent.removeClass('has-error').addClass('has-success');
                         if ($icon) {
                             $icon.removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.valid).show();
+                        }
+                    } else {
+                        $parent.removeClass('has-success').addClass('has-error');
+                        if ($icon) {
+                            $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
                         }
                     }
                     break;
