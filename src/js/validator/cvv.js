@@ -1,5 +1,10 @@
 (function($) {
     $.fn.bootstrapValidator.validators.cvv = {
+        html5Attributes: {
+            message: 'message',
+            ccfield: 'creditCardField'
+        },
+
         /**
          * Return true if the input value is a valid CVV number.
          *

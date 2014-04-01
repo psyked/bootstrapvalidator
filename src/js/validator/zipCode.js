@@ -1,6 +1,9 @@
 (function($) {
     $.fn.bootstrapValidator.validators.zipCode = {
-        html5Attributes: ['message', 'country'],
+        html5Attributes: {
+            message: 'message',
+            country: 'country'
+        },
 
         /**
          * Return true if and only if the input value is a valid country zip code

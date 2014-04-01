@@ -1,6 +1,10 @@
 (function($) {
     $.fn.bootstrapValidator.validators.greaterThan = {
-        html5Attributes: ['message', 'value', 'inclusive'],
+        html5Attributes: {
+            message: 'message',
+            value: 'value',
+            inclusive: 'inclusive'
+        },
 
         enableByHtml5: function($field) {
             var min = $field.attr('min');

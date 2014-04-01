@@ -1,6 +1,9 @@
 (function($) {
     $.fn.bootstrapValidator.validators.different = {
-        html5Attributes: ['message', 'field'],
+        html5Attributes: {
+            message: 'message',
+            field: 'field'
+        },
 
         /**
          * Return true if the input value is different with given field's value

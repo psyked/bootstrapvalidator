@@ -1,6 +1,9 @@
 (function($) {
     $.fn.bootstrapValidator.validators.phone = {
-        html5Attributes: ['message', 'country'],
+        html5Attributes: {
+            message: 'message',
+            country: 'country'
+        },
 
         /**
          * Return true if the input value contains a valid US phone number only

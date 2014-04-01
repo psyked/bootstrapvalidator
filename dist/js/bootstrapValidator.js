@@ -106,6 +106,7 @@
                 i = 0,
                 v,          // Validator name
                 enabled,
+                html5AttrName,
                 optionName,
                 optionValue,
                 html5Attrs;
@@ -139,21 +140,18 @@
                     for (v in $.fn.bootstrapValidator.validators) {
                         validator  = $.fn.bootstrapValidator.validators[v];
                         enabled    = $field.attr('data-bv-' + v.toLowerCase()) + '';
-                        html5Attrs = {};
+                        html5Attrs = ('function' == typeof validator.enableByHtml5) ? validator.enableByHtml5($(this)) : null;
 
-                        if (('function' == typeof validator.enableByHtml5
-                                && (html5Attrs = validator.enableByHtml5($(this)))
-                                && (enabled != 'false'))
-                            || ('undefined' == typeof validator.enableByHtml5 && ('' == enabled || 'true' == enabled)))
+                        if ((html5Attrs && enabled != 'false')
+                            || (html5Attrs !== true && ('' == enabled || 'true' == enabled)))
                         {
                             // Try to parse the options via attributes
-                            validator.html5Attributes = validator.html5Attributes || ['message'];
-
+                            validator.html5Attributes = validator.html5Attributes || { message: 'message' };
                             options.fields[field]['validators'][v] = $.extend({}, html5Attrs == true ? {} : html5Attrs, options.fields[field]['validators'][v]);
 
-                            for (i in validator.html5Attributes) {
-                                optionName  = validator.html5Attributes[i];
-                                optionValue = $field.attr('data-bv-' + v.toLowerCase() + '-' + optionName.toLowerCase());
+                            for (html5AttrName in validator.html5Attributes) {
+                                optionName  = validator.html5Attributes[html5AttrName];
+                                optionValue = $field.attr('data-bv-' + v.toLowerCase() + '-' + html5AttrName);
                                 if (optionValue) {
                                     if ('true' == optionValue) {
                                         optionValue = true;
@@ -704,6 +702,13 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.between = {
+        html5Attributes: {
+            message: 'message',
+            min: 'min',
+            max: 'max',
+            inclusive: 'inclusive'
+        },
+
         /**
          * Return true if the input value is between (strictly or not) two given numbers
          *
@@ -758,7 +763,11 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.choice = {
-        html5Attributes: ['message', 'min', 'max'],
+        html5Attributes: {
+            message: 'message',
+            min: 'min',
+            max: 'max'
+        },
 
         /**
          * Check if the number of checked boxes are less or more than a given number
@@ -769,6 +778,7 @@
          * - min
          * - max
          * At least one of two keys is required
+         * - message: The invalid message
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
@@ -903,6 +913,11 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.cvv = {
+        html5Attributes: {
+            message: 'message',
+            ccfield: 'creditCardField'
+        },
+
         /**
          * Return true if the input value is a valid CVV number.
          *
@@ -1008,7 +1023,10 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.date = {
-        html5Attributes: ['message', 'format'],
+        html5Attributes: {
+            message: 'message',
+            format: 'format'
+        },
 
         /**
          * Return true if the input value is valid date
@@ -1131,7 +1149,10 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.different = {
-        html5Attributes: ['message', 'field'],
+        html5Attributes: {
+            message: 'message',
+            field: 'field'
+        },
 
         /**
          * Return true if the input value is different with given field's value
@@ -1212,7 +1233,11 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.greaterThan = {
-        html5Attributes: ['message', 'value', 'inclusive'],
+        html5Attributes: {
+            message: 'message',
+            value: 'value',
+            inclusive: 'inclusive'
+        },
 
         enableByHtml5: function($field) {
             var min = $field.attr('min');
@@ -1272,7 +1297,10 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.identical = {
-        html5Attributes: ['message', 'field'],
+        html5Attributes: {
+            message: 'message',
+            field: 'field'
+        },
 
         /**
          * Check if input value equals to value of particular one
@@ -1329,7 +1357,11 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.ip = {
-        html5Attributes: ['message', 'ipv4', 'ipv6'],
+        html5Attributes: {
+            message: 'message',
+            ipv4: 'ipv4',
+            ipv6: 'ipv6'
+        },
 
         /**
          * Return true if the input value is a IP address.
@@ -1417,7 +1449,11 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.lessThan = {
-        html5Attributes: ['message', 'value', 'inclusive'],
+        html5Attributes: {
+            message: 'message',
+            value: 'value',
+            inclusive: 'inclusive'
+        },
 
         enableByHtml5: function($field) {
             var max = $field.attr('max');
@@ -1502,7 +1538,10 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.phone = {
-        html5Attributes: ['message', 'country'],
+        html5Attributes: {
+            message: 'message',
+            country: 'country'
+        },
 
         /**
          * Return true if the input value contains a valid US phone number only
@@ -1533,7 +1572,10 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.regexp = {
-        html5Attributes: ['message', 'regexp'],
+        html5Attributes: {
+            message: 'message',
+            regexp: 'regexp'
+        },
 
         enableByHtml5: function($field) {
             var pattern = $field.attr('pattern');
@@ -1568,7 +1610,10 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.remote = {
-        html5Attributes: ['message', 'url'],
+        html5Attributes: {
+            message: 'message',
+            url: 'url'
+        },
 
         /**
          * Request a remote server to check the input value
@@ -1621,6 +1666,12 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.step = {
+        html5Attributes: {
+            message: 'message',
+            base: 'baseValue',
+            step: 'step'
+        },
+
         /**
          * Return true if the input value is valid step one
          *
@@ -1672,7 +1723,11 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.stringLength = {
-        html5Attributes: ['message', 'min', 'max'],
+        html5Attributes: {
+            message: 'message',
+            min: 'min',
+            max: 'max'
+        },
 
         enableByHtml5: function($field) {
             var maxLength = $field.attr('maxlength');
@@ -1682,7 +1737,7 @@
                 };
             }
 
-            return maxLength;
+            return false;
         },
 
         /**
@@ -1694,6 +1749,7 @@
          * - min
          * - max
          * At least one of two keys is required
+         * - message: The invalid message
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
@@ -1810,7 +1866,10 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.zipCode = {
-        html5Attributes: ['message', 'country'],
+        html5Attributes: {
+            message: 'message',
+            country: 'country'
+        },
 
         /**
          * Return true if and only if the input value is a valid country zip code

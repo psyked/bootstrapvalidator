@@ -1,6 +1,10 @@
 (function($) {
     $.fn.bootstrapValidator.validators.lessThan = {
-        html5Attributes: ['message', 'value', 'inclusive'],
+        html5Attributes: {
+            message: 'message',
+            value: 'value',
+            inclusive: 'inclusive'
+        },
 
         enableByHtml5: function($field) {
             var max = $field.attr('max');

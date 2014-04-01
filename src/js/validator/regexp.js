@@ -1,6 +1,9 @@
 (function($) {
     $.fn.bootstrapValidator.validators.regexp = {
-        html5Attributes: ['message', 'regexp'],
+        html5Attributes: {
+            message: 'message',
+            regexp: 'regexp'
+        },
 
         enableByHtml5: function($field) {
             var pattern = $field.attr('pattern');

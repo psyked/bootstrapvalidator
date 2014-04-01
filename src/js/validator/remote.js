@@ -1,6 +1,9 @@
 (function($) {
     $.fn.bootstrapValidator.validators.remote = {
-        html5Attributes: ['message', 'url'],
+        html5Attributes: {
+            message: 'message',
+            url: 'url'
+        },
 
         /**
          * Request a remote server to check the input value

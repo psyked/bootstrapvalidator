@@ -105,6 +105,7 @@
                 i = 0,
                 v,          // Validator name
                 enabled,
+                html5AttrName,
                 optionName,
                 optionValue,
                 html5Attrs;
@@ -138,21 +139,18 @@
                     for (v in $.fn.bootstrapValidator.validators) {
                         validator  = $.fn.bootstrapValidator.validators[v];
                         enabled    = $field.attr('data-bv-' + v.toLowerCase()) + '';
-                        html5Attrs = {};
+                        html5Attrs = ('function' == typeof validator.enableByHtml5) ? validator.enableByHtml5($(this)) : null;
 
-                        if (('function' == typeof validator.enableByHtml5
-                                && (html5Attrs = validator.enableByHtml5($(this)))
-                                && (enabled != 'false'))
-                            || ('undefined' == typeof validator.enableByHtml5 && ('' == enabled || 'true' == enabled)))
+                        if ((html5Attrs && enabled != 'false')
+                            || (html5Attrs !== true && ('' == enabled || 'true' == enabled)))
                         {
                             // Try to parse the options via attributes
-                            validator.html5Attributes = validator.html5Attributes || ['message'];
-
+                            validator.html5Attributes = validator.html5Attributes || { message: 'message' };
                             options.fields[field]['validators'][v] = $.extend({}, html5Attrs == true ? {} : html5Attrs, options.fields[field]['validators'][v]);
 
-                            for (i in validator.html5Attributes) {
-                                optionName  = validator.html5Attributes[i];
-                                optionValue = $field.attr('data-bv-' + v.toLowerCase() + '-' + optionName.toLowerCase());
+                            for (html5AttrName in validator.html5Attributes) {
+                                optionName  = validator.html5Attributes[html5AttrName];
+                                optionValue = $field.attr('data-bv-' + v.toLowerCase() + '-' + html5AttrName);
                                 if (optionValue) {
                                     if ('true' == optionValue) {
                                         optionValue = true;
