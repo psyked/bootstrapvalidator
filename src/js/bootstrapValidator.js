@@ -170,7 +170,7 @@
                 this._initField(field);
             }
 
-            this._setLiveValidating();
+            this.setLiveMode(this.options.live);
         },
 
         /**
@@ -214,7 +214,7 @@
                 }
 
                 // Whenever the user change the field value, mark it as not validated yet
-                $field.on(event + '.bv', function() {
+                $field.on(event + '.update.bv', function() {
                     updateAll ? that.updateStatus(field, that.STATUS_NOT_VALIDATED, null)
                               : that.updateElementStatus($(this), that.STATUS_NOT_VALIDATED, null);
                 });
@@ -284,44 +284,12 @@
         },
 
         /**
-         * Enable live validating
-         */
-        _setLiveValidating: function() {
-            if ('enabled' == this.options.live) {
-                var that = this;
-                for (var field in this.options.fields) {
-                    (function(f) {
-                        var fields = that.getFieldElements(f);
-                        if (fields) {
-                            var type      = fields.attr('type'),
-                                total     = fields.length,
-                                updateAll = (total == 1) || ('radio' == type) || ('checkbox' == type),
-                                trigger   = that.options.fields[field].trigger
-                                            || that.options.trigger
-                                            || (('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup'),
-                                events    = trigger.split(' ').map(function(item) {
-                                    return item + '.bv';
-                                }).join(' ');
-
-                            for (var i = 0; i < total; i++) {
-                                $(fields[i]).on(events, function() {
-                                    updateAll ? that.validateField(f) : that.validateFieldElement($(this), false);
-                                });
-                            }
-                        }
-                    })(field);
-                }
-            }
-        },
-
-        /**
          * Called when all validations are completed
          */
         _submit: function() {
             if (!this.isValid()) {
                 if ('submitted' == this.options.live) {
-                    this.options.live = 'enabled';
-                    this._setLiveValidating();
+                    this.setLiveMode('enabled');
                 }
 
                 // Focus to the first invalid field
@@ -347,20 +315,6 @@
         // --- Public methods ---
 
         /**
-         * Disable/Enable submit buttons
-         *
-         * @param {Boolean} disabled
-         */
-        disableSubmitButtons: function(disabled) {
-            if (!disabled) {
-                this.$form.find(this.options.submitButtons).removeAttr('disabled');
-            } else if (this.options.live != 'disabled') {
-                // Don't disable if the live validating mode is disabled
-                this.$form.find(this.options.submitButtons).attr('disabled', 'disabled');
-            }
-        },
-
-        /**
          * Retrieve the field elements by given name
          *
          * @param {String} field The field name
@@ -369,6 +323,63 @@
         getFieldElements: function(field) {
             var fields = this.$form.find(this.options.fields[field].selector || '[name="' + field + '"]');
             return (fields.length == 0) ? null : fields;
+        },
+
+        /**
+         * Set live validating mode
+         *
+         * @param {String} mode Live validating mode. Can be 'enabled', 'disabled', 'submitted'
+         * @returns {BootstrapValidator}
+         */
+        setLiveMode: function(mode) {
+            this.options.live = mode;
+            if ('submitted' == mode) {
+                return this;
+            }
+
+            var that = this;
+            for (var field in this.options.fields) {
+                (function(f) {
+                    var fields = that.getFieldElements(f);
+                    if (fields) {
+                        var type      = fields.attr('type'),
+                            total     = fields.length,
+                            updateAll = (total == 1) || ('radio' == type) || ('checkbox' == type),
+                            trigger   = that.options.fields[field].trigger
+                                || that.options.trigger
+                                || (('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup'),
+                            events    = trigger.split(' ').map(function(item) {
+                                return item + '.live.bv';
+                            }).join(' ');
+
+                        for (var i = 0; i < total; i++) {
+                            ('enabled' == mode)
+                                ? $(fields[i]).on(events, function() {
+                                    updateAll ? that.validateField(f) : that.validateFieldElement($(this), false);
+                                })
+                                : $(fields[i]).off(events);
+                        }
+                    }
+                })(field);
+            }
+
+            return this;
+        },
+
+        /**
+         * Disable/enable submit buttons
+         *
+         * @param {Boolean} disabled Can be true or false
+         * @returns {BootstrapValidator}
+         */
+        disableSubmitButtons: function(disabled) {
+            if (!disabled) {
+                this.$form.find(this.options.submitButtons).removeAttr('disabled');
+            } else if (this.options.live != 'disabled') {
+                // Don't disable if the live validating mode is disabled
+                this.$form.find(this.options.submitButtons).attr('disabled', 'disabled');
+            }
+            return this;
         },
 
         /**
