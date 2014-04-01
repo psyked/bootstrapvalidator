@@ -102,12 +102,11 @@
                     }
                 },
                 validator,
-                i = 0,
                 v,          // Validator name
                 enabled,
-                html5AttrName,
                 optionName,
                 optionValue,
+                html5AttrName,
                 html5Attrs;
 
             this.$form
