@@ -1,5 +1,116 @@
 # Change Log
 
+## v0.4.0 (not released yet)
+
+__New features__:
+
+* [#14](https://github.com/nghuuphuoc/bootstrapvalidator/issues/14), [#57](https://github.com/nghuuphuoc/bootstrapvalidator/issues/57): Set validator option by using HTML 5 attributes
+
+Form attributes:
+
+```html
+<form
+    data-bv-message="This value is not valid"
+    data-bv-feedbackicons-valid="glyphicon glyphicon-ok"
+    data-bv-feedbackicons-invalid="glyphicon glyphicon-remove"
+    data-bv-feedbackicons-validating="glyphicon glyphicon-refresh"
+    >
+```
+
+Field attributes:
+
+```html
+<input type="text" class="form-control" name="username"
+    data-bv-message="The username is not valid"
+    data-bv-notempty data-bv-notempty-message="The username is required and cannot be empty"
+    data-bv-stringlength="true" data-bv-stringlength-min="6" data-bv-stringlength-max="30" data-bv-stringlength-message="The username must be more than 6 and less than 30 characters long"
+    data-bv-different="true" data-bv-different-field="password" data-bv-different-message="The username and password cannot be the same as each other"
+    data-bv-remote="true" data-bv-remote-url="remote.php" data-bv-remote-message="The username is not available"
+    />
+```
+
+* Support HTML 5 input types:
+
+HTML 5 attribute      | Validator
+----------------------|----------
+```min="..."```       | [```greaterThan``` validator](http://bootstrapvalidator.com/validators/greater-than/)
+```max="..."```       | [```lessThan``` validator](http://bootstrapvalidator.com/validators/less-than/)
+```maxlength="..."``` | [```stringLength``` validator](http://bootstrapvalidator.com/validators/string-length/)
+```pattern="..."```   | [```regexp``` validator](http://bootstrapvalidator.com/validators/regexp/)
+```required```        | [```notEmpty``` validator](http://bootstrapvalidator.com/validators/not-empty/)
+```type="email"```    | [```emailAddress``` validator](http://bootstrapvalidator.com/validators/email-address/)
+```type="url"```      | [```uri``` validator](http://bootstrapvalidator.com/validators/uri/)
+```type="color"```    | [```hexColor``` validator](http://bootstrapvalidator.com/validators/hex-color/)
+
+* [#74](https://github.com/nghuuphuoc/bootstrapvalidator/issues/74), [#103](https://github.com/nghuuphuoc/bootstrapvalidator/issues/103), [#122](https://github.com/nghuuphuoc/bootstrapvalidator/issues/122): Set the custom trigger event
+
+It's possible to use ```data-bv-trigger``` attribute:
+
+```html
+<form data-bv-trigger="keyup">
+    <input type="text" class="form-control" name="firstName" placeholder="First name"
+           data-bv-trigger="keyup" />
+    ...
+    <input type="text" class="form-control" name="lastName" placeholder="First name"
+           data-bv-trigger="blur" />
+</form>
+```
+
+or ```trigger``` option:
+
+```javascript
+$(form).bootstrapValidator({
+    trigger: 'blur',            // Set for all fields
+    fields: {
+        firstName: {
+            trigger: 'keyup',   // Custom for each field. Can be 'event1 event2 event3'
+            validators: {
+                ...
+            }
+        },
+        lastName: {
+            trigger: 'blur',
+            validators: {
+                ...
+            }
+        }
+    }
+});
+```
+
+* [#136](https://github.com/nghuuphuoc/bootstrapvalidator/issues/136): Support multiple elements with the same name
+
+```html
+<div class="form-group">
+    <input class="form-control" type="text" name="surveyAnswer[]" />
+</div>
+<div class="form-group">
+    <input class="form-control" type="text" name="surveyAnswer[]" />
+</div>
+<div class="form-group">
+    <input class="form-control" type="text" name="surveyAnswer[]" />
+</div>
+```
+
+* [#109](https://github.com/nghuuphuoc/bootstrapvalidator/issues/109): Add ```setLiveMode()``` method to turn on/off the live validating mode
+* [#114](https://github.com/nghuuphuoc/bootstrapvalidator/issues/114): Add ```iban``` validator for validating IBAN (International Bank Account Number)
+* [#116](https://github.com/nghuuphuoc/bootstrapvalidator/issues/116): Add ```uuid``` validator, support UUID v3, v4, v5
+* [#128](https://github.com/nghuuphuoc/bootstrapvalidator/issues/128): Add ```numeric``` validator
+* [#135](https://github.com/nghuuphuoc/bootstrapvalidator/issues/135): Add ```integer``` validator
+* [#138](https://github.com/nghuuphuoc/bootstrapvalidator/issues/138): Add ```hex``` validator
+* [#139](https://github.com/nghuuphuoc/bootstrapvalidator/issues/139): Add ```stringCase``` validator to check a string is lower or upper case
+* [#137](https://github.com/nghuuphuoc/bootstrapvalidator/issues/137): Register the plugin with [jQuery plugins site](http://plugins.jquery.com/)
+
+__Improvements__:
+
+* [#133](https://github.com/nghuuphuoc/bootstrapvalidator/issues/133): The [```regexp``` validator](http://bootstrapvalidator.com/validators/regexp/) allows to pass a string
+* [#140](https://github.com/nghuuphuoc/bootstrapvalidator/pull/140): Do not validate hidden (```type="hidden"```) and invisible element, thanks to [@easonhan007](https://github.com/easonhan007)
+
+__Fixes__:
+
+* [#126](https://github.com/nghuuphuoc/bootstrapvalidator/issues/126): Submit button remains disabled after calling custom ```submitHandler``` and the form is valid
+* [#132](https://github.com/nghuuphuoc/bootstrapvalidator/issues/132): The ```fields.[fieldName].message``` option is not used when showing the error message
+
 ## v0.3.3 (2014-03-27)
 
 __Fixes__:
