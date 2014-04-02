@@ -106,6 +106,11 @@ __Improvements__:
 * [#133](https://github.com/nghuuphuoc/bootstrapvalidator/issues/133): The [```regexp``` validator](http://bootstrapvalidator.com/validators/regexp/) allows to pass a string
 * [#140](https://github.com/nghuuphuoc/bootstrapvalidator/pull/140): Do not validate hidden (```type="hidden"```) and invisible element, thanks to [@easonhan007](https://github.com/easonhan007)
 
+__Changes__:
+
+* ```disableSubmitButtons()``` is now marked as a public API
+* The first parameter of [```updateStatus()``` method](http://bootstrapvalidator.com/api/#update-status) now accepts the field name only
+
 __Fixes__:
 
 * [#126](https://github.com/nghuuphuoc/bootstrapvalidator/issues/126): Submit button remains disabled after calling custom ```submitHandler``` and the form is valid
