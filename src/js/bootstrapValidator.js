@@ -124,7 +124,8 @@
                 // Find all fields which have either "name" or "data-bv-field" attribute
                 .find('[name], [data-bv-field]').each(function() {
                     var $field = $(this);
-                    if ($field.is(':hidden') || !$field.is(':visible')) {
+                    // Don't initialize hidden input
+                    if ('hidden' == $field.attr('type')) {
                         return;
                     }
 
@@ -436,7 +437,7 @@
                 validatorName,
                 validateResult;
 
-            // We don't need to validate disabled field
+            // We don't need to validate disabled, hidden field
             if ($field.is(':disabled') || $field.is(':hidden') || !$field.is(':visible')) {
                 return this;
             }
@@ -604,6 +605,10 @@
 
                 for (i = 0; i < n; i++) {
                     $field = $(fields[i]);
+                    if ($field.is(':disabled') || $field.is(':hidden') || !$field.is(':visible')) {
+                        continue;
+                    }
+
                     for (validatorName in this.options.fields[field].validators) {
                         status = $field.data('bv.result.' + validatorName);
                         if (status == this.STATUS_NOT_VALIDATED || status == this.STATUS_VALIDATING) {
