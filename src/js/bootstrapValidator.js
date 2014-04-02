@@ -123,8 +123,12 @@
                 })
                 // Find all fields which have either "name" or "data-bv-field" attribute
                 .find('[name], [data-bv-field]').each(function() {
-                    var $field = $(this),
-                        field  = $field.attr('name') || $field.attr('data-bv-field');
+                    var $field = $(this);
+                    if ($field.is(':hidden') || !$field.is(':visible')) {
+                        return;
+                    }
+
+                    var field  = $field.attr('name') || $field.attr('data-bv-field');
                     $field.attr('data-bv-field', field);
 
                     options.fields[field] = $.extend({}, {
