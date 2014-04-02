@@ -21,6 +21,13 @@
 
                     <form id="paymentForm" method="post" class="form-horizontal" action="target.php">
                         <div class="form-group">
+                            <label class="col-lg-3 control-label">Card holder</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" id="cardHolder" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="col-lg-3 control-label">Credit card number</label>
                             <div class="col-lg-5">
                                 <input type="text" class="form-control" id="ccNumber" />
@@ -64,6 +71,18 @@ $(document).ready(function() {
             validating: 'glyphicon glyphicon-refresh'
         },
         fields: {
+            cardHolder: {
+                selector: '#cardHolder',
+                validators: {
+                    notEmpty: {
+                        message: 'The card holder is required'
+                    },
+                    stringCase: {
+                        message: 'The card holder must contain upper case characters only',
+                        case: 'upper'
+                    }
+                }
+            },
             ccNumber: {
                 selector: '#ccNumber',
                 validators: {
