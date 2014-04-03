@@ -7,8 +7,8 @@
 ## Features
 
 * Built from scratch. The code is solid and clean
-* 25 built-in [validators](#validators) and counting!
-* Cannot find the validator you need? Don't worry, it is easy to [write new validator](#write-new-validator)
+* 25 built-in [validators](http://bootstrapvalidator.com/validators/) and counting!
+* Cannot find the validator you need? Don't worry, it is easy to [write new validator](http://bootstrapvalidator.com/developing/)
 * Show feedback icons based on field validity
 * Support Ajax in both validator and form submission
 * Field validators can be enabled/disabled on the fly
