@@ -7,6 +7,17 @@
             inclusive: 'inclusive'
         },
 
+        enableByHtml5: function($field) {
+            if ('range' == $field.attr('type')) {
+                return {
+                    min: $field.attr('min'),
+                    max: $field.attr('max')
+                };
+            }
+
+            return false;
+        },
+
         /**
          * Return true if the input value is between (strictly or not) two given numbers
          *

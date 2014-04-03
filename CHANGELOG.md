@@ -38,9 +38,10 @@ HTML 5 attribute      | Validator
 ```maxlength="..."``` | [```stringLength``` validator](http://bootstrapvalidator.com/validators/string-length/)
 ```pattern="..."```   | [```regexp``` validator](http://bootstrapvalidator.com/validators/regexp/)
 ```required```        | [```notEmpty``` validator](http://bootstrapvalidator.com/validators/not-empty/)
-```type="email"```    | [```emailAddress``` validator](http://bootstrapvalidator.com/validators/email-address/)
-```type="url"```      | [```uri``` validator](http://bootstrapvalidator.com/validators/uri/)
 ```type="color"```    | [```hexColor``` validator](http://bootstrapvalidator.com/validators/hex-color/)
+```type="email"```    | [```emailAddress``` validator](http://bootstrapvalidator.com/validators/email-address/)
+```type="range"```    | [```between``` validator](http://bootstrapvalidator.com/validators/between/)
+```type="url"```      | [```uri``` validator](http://bootstrapvalidator.com/validators/uri/)
 
 * [#74](https://github.com/nghuuphuoc/bootstrapvalidator/issues/74), [#103](https://github.com/nghuuphuoc/bootstrapvalidator/issues/103), [#122](https://github.com/nghuuphuoc/bootstrapvalidator/issues/122): Set the custom trigger event
 
