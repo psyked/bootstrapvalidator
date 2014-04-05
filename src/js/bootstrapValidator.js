@@ -486,7 +486,7 @@
          * @param {String} field The field name
          * @param {String} status The status
          * Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
-         * @param {String|null} validatorName The validator name. If null, the method updates validity result for all validators
+         * @param {String} [validatorName] The validator name. If null, the method updates validity result for all validators
          * @return {BootstrapValidator}
          */
         updateStatus: function(field, status, validatorName) {
@@ -507,16 +507,17 @@
          * @param {String} field The field name
          * @param {String} status The status
          * Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
-         * @param {String|null} validatorName The validator name. If null, the method updates validity result for all validators
+         * @param {String} [validatorName] The validator name. If null, the method updates validity result for all validators
          * @return {BootstrapValidator}
          */
         updateElementStatus: function($field, status, validatorName) {
-            var that     = this,
-                field    = $field.attr('data-bv-field'),
-                $parent  = $field.parents('.form-group'),
-                $message = $field.data('bv.messages'),
-                $errors  = $message.find('.help-block[data-bv-validator]'),
-                $icon    = $parent.find('.form-control-feedback[data-bv-field="' + field + '"]');
+            var that       = this,
+                field      = $field.attr('data-bv-field'),
+                $parent    = $field.parents('.form-group'),
+                $message   = $field.data('bv.messages'),
+                $rowErrors = $parent.find('.help-block[data-bv-validator]'),
+                $errors    = $message.find('.help-block[data-bv-validator]'),
+                $icon      = $parent.find('.form-control-feedback[data-bv-field="' + field + '"]');
 
             // Update status
             if (validatorName) {
@@ -552,23 +553,24 @@
                     validatorName ? $errors.filter('[data-bv-validator="' + validatorName + '"]').hide() : $errors.hide();
 
                     // If the field is valid (passes all validators)
-                    if ($errors.filter(function() {
-                            var display = $(this).css('display'), v = $(this).attr('data-bv-validator');
-                            return ('block' == display) || ($field.data('bv.result.' + v) != that.STATUS_VALID);
-                        }).length == 0)
-                    {
-                        this.disableSubmitButtons(false);
-                        $parent.removeClass('has-error').addClass('has-success');
-                        if ($icon) {
-                            $icon.removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.valid).show();
-                        }
-                    } else {
-                        this.disableSubmitButtons(true);
-                        $parent.removeClass('has-success').addClass('has-error');
-                        if ($icon) {
-                            $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
-                        }
+                    var validField = ($errors.filter(function() {
+                                        var display = $(this).css('display'), v = $(this).attr('data-bv-validator');
+                                        return ('block' == display) || ($field.data('bv.result.' + v) != that.STATUS_VALID);
+                                    }).length == 0);
+                    this.disableSubmitButtons(validField ? false : true);
+                    if ($icon) {
+                        $icon
+                            .removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).removeClass(this.options.feedbackIcons.valid)
+                            .addClass(validField ? this.options.feedbackIcons.valid : this.options.feedbackIcons.invalid)
+                            .show();
                     }
+
+                    // Check if all fields in the same row are valid
+                    var validRow = ($rowErrors.filter(function() {
+                                        var display = $(this).css('display'), v = $(this).attr('data-bv-validator');
+                                        return ('block' == display) || ($field.data('bv.result.' + v) != that.STATUS_VALID);
+                                    }).length == 0);
+                    $parent.removeClass('has-error has-success').addClass(validRow ? 'has-success' : 'has-error');
                     break;
 
                 case this.STATUS_NOT_VALIDATED:

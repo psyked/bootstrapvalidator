@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.4.1 (not released yet)
+
+__Improvements__:
+
+* [#145](https://github.com/nghuuphuoc/bootstrapvalidator/issues/145): The row state is now only marked as success if all fields on it are valid
+
 ## v0.4.0 (2014-04-03)
 
 __New features__:
