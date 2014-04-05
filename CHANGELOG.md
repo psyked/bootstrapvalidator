@@ -4,6 +4,7 @@
 
 __Improvements__:
 
+* [#131](https://github.com/nghuuphuoc/bootstrapvalidator/issues/131): Doesn't trigger validation on the first focus
 * [#145](https://github.com/nghuuphuoc/bootstrapvalidator/issues/145): The row state is now only marked as success if all fields on it are valid
 
 ## v0.4.0 (2014-04-03)
