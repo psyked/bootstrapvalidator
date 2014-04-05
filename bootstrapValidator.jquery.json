@@ -7,7 +7,12 @@
         "email": "phuoc@huuphuoc.me",
         "url": "https://twitter.com/nghuuphuoc"
     },
-    "license": "MIT",
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://opensource.org/licenses/mit-license.html"
+        }
+    ],
     "dependencies": {
         "jquery": ">= 1.9.0",
         "bootstrap": ">= 3.0.0"
