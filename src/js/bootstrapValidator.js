@@ -22,6 +22,13 @@
         this.STATUS_INVALID       = 'INVALID';
         this.STATUS_VALID         = 'VALID';
 
+        // Determine the event that is fired when user change the field value
+        // Most modern browsers supports input event except IE 7, 8.
+        // IE 9 supports input event but the event is still not fired if I press the backspace key.
+        // In that case I will use the keydown event
+        var el = document.createElement('div');
+        this._changeEvent = ('oninput' in el) ? 'input' : 'keydown';
+
         this._init();
     };
 
@@ -202,7 +209,7 @@
 
             var that      = this,
                 type      = fields.attr('type'),
-                event     = ('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup',
+                event     = ('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : that._changeEvent,
                 total     = fields.length,
                 updateAll = (total == 1) || ('radio' == type) || ('checkbox' == type);
 
@@ -351,7 +358,7 @@
                             updateAll = (total == 1) || ('radio' == type) || ('checkbox' == type),
                             trigger   = that.options.fields[field].trigger
                                 || that.options.trigger
-                                || (('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup'),
+                                || (('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : that._changeEvent),
                             events    = trigger.split(' ').map(function(item) {
                                 return item + '.live.bv';
                             }).join(' ');
@@ -408,7 +415,7 @@
         /**
          * Validate given field
          *
-         * @param {String} field The field element
+         * @param {String} field The field name
          * @returns {BootstrapValidator}
          */
         validateField: function(field) {
@@ -484,8 +491,7 @@
          * Update all validating results of elements which have the same field name
          *
          * @param {String} field The field name
-         * @param {String} status The status
-         * Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
+         * @param {String} status The status. Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
          * @param {String} [validatorName] The validator name. If null, the method updates validity result for all validators
          * @return {BootstrapValidator}
          */
@@ -504,9 +510,8 @@
         /**
          * Update validating result of given element
          *
-         * @param {String} field The field name
-         * @param {String} status The status
-         * Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
+         * @param {jQuery} $field The field element
+         * @param {String} status The status. Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
          * @param {String} [validatorName] The validator name. If null, the method updates validity result for all validators
          * @return {BootstrapValidator}
          */

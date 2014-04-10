@@ -3,7 +3,7 @@
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
- * @version     v0.4.0
+ * @version     v0.4.1-dev
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -22,6 +22,13 @@
         this.STATUS_VALIDATING    = 'VALIDATING';
         this.STATUS_INVALID       = 'INVALID';
         this.STATUS_VALID         = 'VALID';
+
+        // Determine the event that is fired when user change the field value
+        // Most modern browsers supports input event except IE 7, 8.
+        // IE 9 supports input event but the event is still not fired if I press the backspace key.
+        // In that case I will use the keydown event
+        var el = document.createElement('div');
+        this._changeEvent = ('oninput' in el) ? 'input' : 'keydown';
 
         this._init();
     };
@@ -203,7 +210,7 @@
 
             var that      = this,
                 type      = fields.attr('type'),
-                event     = ('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup',
+                event     = ('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : that._changeEvent,
                 total     = fields.length,
                 updateAll = (total == 1) || ('radio' == type) || ('checkbox' == type);
 
@@ -352,10 +359,11 @@
                             updateAll = (total == 1) || ('radio' == type) || ('checkbox' == type),
                             trigger   = that.options.fields[field].trigger
                                 || that.options.trigger
-                                || (('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : 'keyup'),
-                            events    = trigger.split(' ').map(function(item) {
-                                return item + '.live.bv';
-                            }).join(' ');
+                                || (('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : that._changeEvent),
+                            events    = $.map(trigger.split(' '), function(item) {
+	                            return item + '.live.bv';
+	                        }).join(' ');
+
 
                         for (var i = 0; i < total; i++) {
                             ('enabled' == mode)
@@ -409,7 +417,7 @@
         /**
          * Validate given field
          *
-         * @param {String} field The field element
+         * @param {String} field The field name
          * @returns {BootstrapValidator}
          */
         validateField: function(field) {
@@ -485,8 +493,7 @@
          * Update all validating results of elements which have the same field name
          *
          * @param {String} field The field name
-         * @param {String} status The status
-         * Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
+         * @param {String} status The status. Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
          * @param {String} [validatorName] The validator name. If null, the method updates validity result for all validators
          * @return {BootstrapValidator}
          */
@@ -505,9 +512,8 @@
         /**
          * Update validating result of given element
          *
-         * @param {String} field The field name
-         * @param {String} status The status
-         * Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
+         * @param {jQuery} $field The field element
+         * @param {String} status The status. Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
          * @param {String} [validatorName] The validator name. If null, the method updates validity result for all validators
          * @return {BootstrapValidator}
          */
@@ -1935,7 +1941,7 @@
     $.fn.bootstrapValidator.validators.stringCase = {
         html5Attributes: {
             message: 'message',
-            case: 'case'
+            'case': 'case'
         },
 
         /**
@@ -1954,7 +1960,7 @@
                 return true;
             }
 
-            var stringCase = (options.case || 'lower').toLowerCase();
+            var stringCase = (options['case'] || 'lower').toLowerCase();
             switch (stringCase) {
                 case 'upper':
                     return value === value.toUpperCase();
