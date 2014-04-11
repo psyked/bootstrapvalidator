@@ -329,7 +329,7 @@
          * @returns {null|jQuery[]}
          */
         getFieldElements: function(field) {
-            var fields = this.$form.find(this.options.fields[field].selector || '[name="' + field + '"]');
+            var fields = this.options.fields[field].selector ? $(this.options.fields[field].selector) : this.$form.find('[name="' + field + '"]');
             return (fields.length == 0) ? null : fields;
         },
 
