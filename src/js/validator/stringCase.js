@@ -2,7 +2,7 @@
     $.fn.bootstrapValidator.validators.stringCase = {
         html5Attributes: {
             message: 'message',
-            case: 'case'
+            'case': 'case'
         },
 
         /**
@@ -21,7 +21,7 @@
                 return true;
             }
 
-            var stringCase = (options.case || 'lower').toLowerCase();
+            var stringCase = (options['case'] || 'lower').toLowerCase();
             switch (stringCase) {
                 case 'upper':
                     return value === value.toUpperCase();

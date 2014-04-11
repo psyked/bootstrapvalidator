@@ -361,9 +361,8 @@
                                 || that.options.trigger
                                 || (('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : that._changeEvent),
                             events    = $.map(trigger.split(' '), function(item) {
-	                            return item + '.live.bv';
-	                        }).join(' ');
-
+                                return item + '.live.bv';
+                            }).join(' ');
 
                         for (var i = 0; i < total; i++) {
                             ('enabled' == mode)

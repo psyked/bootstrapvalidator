@@ -357,9 +357,9 @@
                             total     = fields.length,
                             updateAll = (total == 1) || ('radio' == type) || ('checkbox' == type),
                             trigger   = that.options.fields[field].trigger
-                                || that.options.trigger
-                                || (('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : that._changeEvent),
-                            events    = trigger.split(' ').map(function(item) {
+                                        || that.options.trigger
+                                        || (('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : that._changeEvent),
+                            events    = $.map(trigger.split(' '), function(item) {
                                 return item + '.live.bv';
                             }).join(' ');
 
