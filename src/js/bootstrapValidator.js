@@ -312,14 +312,10 @@
 
             // Call the custom submission if enabled
             if (this.options.submitHandler && 'function' == typeof this.options.submitHandler) {
-                // Turn off the submit handler, so user can call form.submit() inside their submitHandler method
-                this.$form.off('submit.bv');
+                // If you want to submit the form inside your submit Handler, please call defaultSubmit() method
                 this.options.submitHandler.call(this, this, this.$form, this.$submitButton);
             } else {
-                this.disableSubmitButtons(true);
-
-                // Submit form
-                this.$form.off('submit.bv').submit();
+                this.disableSubmitButtons(true).defaultSubmit();
             }
         },
 
@@ -390,6 +386,7 @@
                 // Don't disable if the live validating mode is disabled
                 this.$form.find(this.options.submitButtons).attr('disabled', 'disabled');
             }
+
             return this;
         },
 
@@ -408,7 +405,11 @@
                 this.validateField(field);
             }
 
-            this._submit();
+            // Check if whether the submit button is clicked
+            if (this.$submitButton) {
+                this._submit();
+            }
+
             return this;
         },
 
@@ -474,7 +475,7 @@
                         updateAll ? that.updateStatus($f.attr('data-bv-field'), isValid ? that.STATUS_VALID : that.STATUS_INVALID, v)
                                   : that.updateElementStatus($f, isValid ? that.STATUS_VALID : that.STATUS_INVALID, v);
 
-                        if (isValid && 'disabled' == that.options.live) {
+                        if (isValid && 'disabled' == that.options.live && that.$submitButton) {
                             that._submit();
                         }
                     });
@@ -631,6 +632,16 @@
             }
 
             return true;
+        },
+
+        /**
+         * Submit the form using default submission.
+         * It also does not perform any validations when submitting the form
+         *
+         * It might be used when you want to submit the form right inside the submitHandler()
+         */
+        defaultSubmit: function() {
+            this.$form.off('submit.bv').submit();
         },
 
         // Useful APIs which aren't used internally
