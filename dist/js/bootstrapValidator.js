@@ -313,7 +313,7 @@
 
             // Call the custom submission if enabled
             if (this.options.submitHandler && 'function' == typeof this.options.submitHandler) {
-                // If you want to submit the form inside your submit Handler, please call defaultSubmit() method
+                // If you want to submit the form inside your submit handler, please call defaultSubmit() method
                 this.options.submitHandler.call(this, this, this.$form, this.$submitButton);
             } else {
                 this.disableSubmitButtons(true).defaultSubmit();

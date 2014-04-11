@@ -2,6 +2,8 @@
 
 ## v0.4.1 (not released yet)
 
+* [#144](https://github.com/nghuuphuoc/bootstrapvalidator/issues/144), [#158](https://github.com/nghuuphuoc/bootstrapvalidator/issues/158): Fixed an issue that the custom submit handler is not fired from the second time
+* [#106](https://github.com/nghuuphuoc/bootstrapvalidator/issues/106): Prevent the ```validate()``` method from submit the form automatically. So we can call ```validate()``` to validate the form
 * [#131](https://github.com/nghuuphuoc/bootstrapvalidator/issues/131): Doesn't trigger validation on the first focus
 * [#145](https://github.com/nghuuphuoc/bootstrapvalidator/issues/145): The row state is now only marked as success if all fields on it are valid
 * [#162](https://github.com/nghuuphuoc/bootstrapvalidator/pull/162): Fix errors in IE 8, thanks to [@adgrafik](https://github.com/adgrafik)
