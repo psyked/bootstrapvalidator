@@ -360,9 +360,10 @@
                             trigger   = that.options.fields[field].trigger
                                 || that.options.trigger
                                 || (('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : that._changeEvent),
-                            events    = trigger.split(' ').map(function(item) {
-                                return item + '.live.bv';
-                            }).join(' ');
+                            events    = $.map(trigger.split(' '), function(item) {
+	                            return item + '.live.bv';
+	                        }).join(' ');
+
 
                         for (var i = 0; i < total; i++) {
                             ('enabled' == mode)
@@ -1940,7 +1941,7 @@
     $.fn.bootstrapValidator.validators.stringCase = {
         html5Attributes: {
             message: 'message',
-            case: 'case'
+            'case': 'case'
         },
 
         /**
@@ -1959,7 +1960,7 @@
                 return true;
             }
 
-            var stringCase = (options.case || 'lower').toLowerCase();
+            var stringCase = (options['case'] || 'lower').toLowerCase();
             switch (stringCase) {
                 case 'upper':
                     return value === value.toUpperCase();
