@@ -30,6 +30,7 @@
         var el = document.createElement('div');
         this._changeEvent = ('oninput' in el) ? 'input' : 'keydown';
 
+        this._submitIfValid = null;
         this._init();
     };
 
@@ -128,6 +129,8 @@
                 })
                 .on('click', this.options.submitButtons, function() {
                     that.$submitButton = $(this);
+					// The user just click the submit button
+					that._submitIfValid = true;
                 })
                 // Find all fields which have either "name" or "data-bv-field" attribute
                 .find('[name], [data-bv-field]').each(function() {
@@ -227,6 +230,7 @@
 
                 // Whenever the user change the field value, mark it as not validated yet
                 $field.on(event + '.update.bv', function() {
+                    that._submitIfValid = false;    // Reset the flag
                     updateAll ? that.updateStatus(field, that.STATUS_NOT_VALIDATED, null)
                               : that.updateElementStatus($(this), that.STATUS_NOT_VALIDATED, null);
                 });
@@ -476,9 +480,11 @@
                         updateAll ? that.updateStatus($f.attr('data-bv-field'), isValid ? that.STATUS_VALID : that.STATUS_INVALID, v)
                                   : that.updateElementStatus($f, isValid ? that.STATUS_VALID : that.STATUS_INVALID, v);
 
-                        if (isValid && 'disabled' == that.options.live && that.$submitButton) {
-                            that._submit();
-                        }
+                        if (isValid && that._submitIfValid == true) {
+						    // If a remote validator returns true
+							// and the form is ready to submit, then do it
+							that._submit();
+						}
                     });
                 } else if ('boolean' == typeof validateResult) {
                     updateAll ? this.updateStatus(field, validateResult ? this.STATUS_VALID : this.STATUS_INVALID, validatorName)
@@ -1786,12 +1792,13 @@
                 return true;
             }
 
-            options.country = options.country || 'US';
-            switch (options.country.toUpperCase()) {
+            var country = (options.country || 'US').toUpperCase();
+            switch (country) {
                 case 'US':
                 default:
+                    // Make sure US phone numbers have 10 digits
                     value = value.replace(/\(|\)|\s+/g, '');
-                    return (/^(?:1\-?)?(\d{3})[\-\.]?(\d{3})[\-\.]?(\d{4})$/).test(value);
+                    return (/^(?:1\-?)?(\d{3})[\-\.]?(\d{3})[\-\.]?(\d{4})$/).test(value) && (value.length == 10);
             }
         }
     }

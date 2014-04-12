@@ -22,15 +22,13 @@
                 return true;
             }
 
-            options.country = options.country || 'US';
-            switch (options.country.toUpperCase()) {
+            var country = (options.country || 'US').toUpperCase();
+            switch (country) {
                 case 'US':
-                  // Make sure US phone numbers have 10 digits
-                  value = value.replace(/\(|\)|\s+/g, '');
-                  return (/^(?:1\-?)?(\d{3})[\-\.]?(\d{3})[\-\.]?(\d{4})$/).test(value) && value.length == 10;
                 default:
+                    // Make sure US phone numbers have 10 digits
                     value = value.replace(/\(|\)|\s+/g, '');
-                    return (/^(?:1\-?)?(\d{3})[\-\.]?(\d{3})[\-\.]?(\d{4})$/).test(value);
+                    return (/^(?:1\-?)?(\d{3})[\-\.]?(\d{3})[\-\.]?(\d{4})$/).test(value) && (value.length == 10);
             }
         }
     }
