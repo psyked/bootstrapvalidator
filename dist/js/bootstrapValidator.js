@@ -30,7 +30,9 @@
         var el = document.createElement('div');
         this._changeEvent = ('oninput' in el) ? 'input' : 'keydown';
 
+        // The flag to indicate that the form is ready to submit when a remote/callback validator returns
         this._submitIfValid = null;
+
         this._init();
     };
 
@@ -128,7 +130,7 @@
                     that.validate();
                 })
                 .on('click', this.options.submitButtons, function() {
-                    that.$submitButton = $(this);
+                    that.$submitButton  = $(this);
 					// The user just click the submit button
 					that._submitIfValid = true;
                 })
@@ -230,7 +232,8 @@
 
                 // Whenever the user change the field value, mark it as not validated yet
                 $field.on(event + '.update.bv', function() {
-                    that._submitIfValid = false;    // Reset the flag
+                    // Reset the flag
+                    that._submitIfValid = false;
                     updateAll ? that.updateStatus(field, that.STATUS_NOT_VALIDATED, null)
                               : that.updateElementStatus($(this), that.STATUS_NOT_VALIDATED, null);
                 });
@@ -481,8 +484,7 @@
                                   : that.updateElementStatus($f, isValid ? that.STATUS_VALID : that.STATUS_INVALID, v);
 
                         if (isValid && that._submitIfValid == true) {
-						    // If a remote validator returns true
-							// and the form is ready to submit, then do it
+						    // If a remote validator returns true and the form is ready to submit, then do it
 							that._submit();
 						}
                     });

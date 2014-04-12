@@ -56,6 +56,7 @@ Big thanks to the contributors:
 * [@kristian-puccio](https://github.com/kristian-puccio)
 * [@ikanedo](https://github.com/ikanedo)
 * [@iplus](https://github.com/iplus)
+* [@jswale](https://github.com/jswale)
 * [@narutosanjiv](https://github.com/narutosanjiv)
 * [@patmoore](https://github.com/patmoore)
 * [@vaz](https://github.com/vaz)
