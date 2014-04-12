@@ -1,6 +1,6 @@
 # Change Log
 
-## v0.4.1 (not released yet)
+## v0.4.1 (2014-04-12)
 
 * [#144](https://github.com/nghuuphuoc/bootstrapvalidator/issues/144), [#158](https://github.com/nghuuphuoc/bootstrapvalidator/issues/158): Fixed an issue that the custom submit handler is not fired from the second time
 * [#106](https://github.com/nghuuphuoc/bootstrapvalidator/issues/106): Prevent the ```validate()``` method from submit the form automatically. So we can call ```validate()``` to validate the form
