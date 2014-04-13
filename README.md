@@ -60,6 +60,7 @@ Big thanks to the contributors:
 * [@narutosanjiv](https://github.com/narutosanjiv)
 * [@patmoore](https://github.com/patmoore)
 * [@vaz](https://github.com/vaz)
+* [@tomByrer](https://github.com/tomByrer)
 * ... might be you! Let's [fork](https://github.com/nghuuphuoc/bootstrapvalidator/fork) and pull a request!
 
 ## License

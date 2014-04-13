@@ -27,9 +27,9 @@
                 case 'US':
                 default:
                     // Make sure US phone numbers have 10 digits
-                    // may start with 1, +1, or 1-; should discard
-                    // area code may be delimited with (), & sections may be delimited with . or -
-                    // test: http://regexr.com/38mqi
+                    // May start with 1, +1, or 1-; should discard
+                    // Area code may be delimited with (), & sections may be delimited with . or -
+                    // Test: http://regexr.com/38mqi
                     value = value.replace(/\(|\)|\s+/g, '');
                     return (/^(?:(1\-?)|(\+1 ?))?\(?(\d{3})[\)\-\.]?(\d{3})[\-\.]?(\d{4})$/).test(value) && (value.length == 10);
             }

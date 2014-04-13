@@ -3,6 +3,7 @@
 ## v0.4.2 (not released yet)
 
 * [#168](https://github.com/nghuuphuoc/bootstrapvalidator/pull/168): Add siren and siret validators, thanks to [@jswale](https://github.com/jswale)
+* [#171](https://github.com/nghuuphuoc/bootstrapvalidator/pull/171): The [```phone``` validator](http://bootstrapvalidator.com/validators/phone/) now supports +1 country code and area code for US phone number, thanks to [@tomByrer](https://github.com/tomByrer)
 
 ## v0.4.1 (2014-04-12)
 
