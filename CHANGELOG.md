@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.4.2 (not released yet)
+
+* [#168](https://github.com/nghuuphuoc/bootstrapvalidator/pull/168): Add siren and siret validators, thanks to [@jswale](https://github.com/jswale)
+
 ## v0.4.1 (2014-04-12)
 
 * [#144](https://github.com/nghuuphuoc/bootstrapvalidator/issues/144), [#158](https://github.com/nghuuphuoc/bootstrapvalidator/issues/158): Fixed an issue that the custom submit handler is not fired from the second time
