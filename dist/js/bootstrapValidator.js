@@ -3,7 +3,7 @@
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
- * @version     v0.4.1
+ * @version     v0.4.2-dev
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -1799,8 +1799,11 @@
                 case 'US':
                 default:
                     // Make sure US phone numbers have 10 digits
+                    // May start with 1, +1, or 1-; should discard
+                    // Area code may be delimited with (), & sections may be delimited with . or -
+                    // Test: http://regexr.com/38mqi
                     value = value.replace(/\(|\)|\s+/g, '');
-                    return (/^(?:1\-?)?(\d{3})[\-\.]?(\d{3})[\-\.]?(\d{4})$/).test(value) && (value.length == 10);
+                    return (/^(?:(1\-?)|(\+1 ?))?\(?(\d{3})[\)\-\.]?(\d{3})[\-\.]?(\d{4})$/).test(value) && (value.length == 10);
             }
         }
     }
@@ -1900,6 +1903,74 @@
     };
 }(window.jQuery));
 ;(function($) {
+	$.fn.bootstrapValidator.validators.siret = {
+		/**
+		 * Check if a string is a siren number
+		 *
+		 * @param {BootstrapValidator} validator The validator plugin instance
+		 * @param {jQuery} $field Field element
+		 * @param {Object} options Consist of key:
+         * - message: The invalid message
+		 * @returns {Boolean}
+		 */
+		validate : function(validator, $field, options) {
+			var value = $field.val();
+			if (value == '') {
+				return true;
+			}
+
+			var sum    = 0,
+                length = value.length,
+			    tmp;
+			for (var i = 0; i < length; i++) {
+				if ((i % 2) == 1) {
+					tmp = value.charAt(i) * 2;
+					if (tmp > 9) {
+						tmp -= 9;
+					}
+				} else {
+					tmp = value.charAt(i);
+				}
+				sum += parseInt(tmp);
+			}
+			return ((sum % 10) == 0);
+		}
+	};
+}(window.jQuery));;(function($) {
+	$.fn.bootstrapValidator.validators.siret = {
+        /**
+         * Check if a string is a siret number
+         *
+         * @param {BootstrapValidator} validator The validator plugin instance
+         * @param {jQuery} $field Field element
+         * @param {Object} options Consist of key:
+         * - message: The invalid message
+         * @returns {Boolean}
+         */
+		validate : function(validator, $field, options) {
+			var value = $field.val();
+			if (value == '') {
+				return true;
+			}
+
+			var sum    = 0,
+                length = value.length,
+                tmp;
+			for (var i = 0; i < length; i++) {
+				if ((i % 2) == 0) {
+					tmp = value.charAt(i) * 2;
+					if (tmp > 9) {
+						tmp -= 9;
+					}
+				} else {
+					tmp = value.charAt(i);
+				}
+				sum += parseInt(tmp);
+			}
+			return ((sum % 10) == 0);
+		}
+	};
+}(window.jQuery));;(function($) {
     $.fn.bootstrapValidator.validators.step = {
         html5Attributes: {
             message: 'message',
