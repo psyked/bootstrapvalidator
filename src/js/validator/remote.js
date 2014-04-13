@@ -3,7 +3,7 @@
 				html5Attributes: {
 						message: 'message',
 						url: 'url',
-			name : 'name'
+						name : 'name'
 				},
 
 				/**
