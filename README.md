@@ -61,6 +61,7 @@ Big thanks to the contributors:
 * [@patmoore](https://github.com/patmoore)
 * [@vaz](https://github.com/vaz)
 * ... might be you! Let's [fork](https://github.com/nghuuphuoc/bootstrapvalidator/fork) and pull a request!
+  * If you submit new RegEx, please build it using [RegExr.com](http://regexr.com/), add several tests that pass and fail there, and include the "share" link in your JS as a `// ` comment.  Example: `// http://regexr.com/38mqi`
 
 ## License
 
