@@ -6,14 +6,45 @@
 
 ## Features
 
-* Built from scratch. The code is solid and clean
-* 25 built-in [validators](http://bootstrapvalidator.com/validators/) and counting!
-* Cannot find the validator you need? Don't worry, it is easy to [write new validator](http://bootstrapvalidator.com/developing/)
-* Show feedback icons based on field validity
-* Support Ajax in both validator and form submission
+__Code__
+* Written from scratch
+* Very solid and clean
+* The core plugin and validators code are separated
+
+__Bootstrap__
+* Designed to use with [Bootstrap 3](http://getbootstrap.com)
+* Support almost [Bootstrap forms](http://getbootstrap.com/css/#forms)
+* Support Bootstrap form [validation states](http://getbootstrap.com/css/#forms-control-validation)
+
+__HTML 5__
+* Support setting the plugin, validator options via [HTML 5 attributes](http://bootstrapvalidator.com/examples#attribute) prefixed with ```data-bv-```
+* Support HTML 5 attributes such as ```min```, ```max```, ```pattern```, ```required```
+* Support [HTML 5 input types](http://bootstrapvalidator.com/examples#html5) such as ```color```, ```email```, ```range``` and ```url```
+
+__Validator__
+* [31 built-in validators](http://bootstrapvalidator.com/validators/) and counting!
+* Easy to [write a new validator](http://bootstrapvalidator.com/developing/)
+ 
+__Friendly__
+* Show [feedback icons](http://bootstrapvalidator.com/settings/#feedback-icons) based on field validity
+* Support [Glyphicons](http://getbootstrap.com/components/#glyphicons) and [FontAwesome](http://fontawesome.io/icons) icons
+* Focus on the first invalid field
+ 
+__Ajax__
+* Support [validating via Ajax](http://bootstrapvalidator.com/validators/remote/)
+* Support using Ajax for form submission
+ 
+__Flexible__
+* The elements can be defined by either ```name``` or [CSS selector](http://bootstrapvalidator.com/settings/#selector-example)
+* Support multiple elements with the [same name](http://bootstrapvalidator.com/examples/#fields-with-same-name)
 * Field validators can be enabled/disabled on the fly
-* Can be used with other plugins such as [Date Picker](http://eternicode.github.io/bootstrap-datepicker/),
-[Datetime Picker](http://eonasdan.github.io/bootstrap-datetimepicker/), [Select2](http://ivaynberg.github.io/select2/), [Raty](http://wbotelhos.com/raty) etc.
+ 
+__Compatibility__
+* [Color Picker](http://mjolnic.github.io/bootstrap-colorpicker/)
+* [Date Picker](http://eternicode.github.io/bootstrap-datepicker/), [Datetime Picker](http://eonasdan.github.io/bootstrap-datetimepicker/)
+* [Select2](http://ivaynberg.github.io/select2/)
+* [Raty](http://wbotelhos.com/raty)
+* ... We play nice with all of them!
 
 ## Required
 
