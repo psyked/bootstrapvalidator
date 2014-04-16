@@ -50,6 +50,10 @@ __Compatibility__
 
 * [jQuery](http://jquery.com/)
 * [Bootstrap 3](http://getbootstrap.com/)
+ 
+## Download
+
+[v0.4.1 - 77kB](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.1/bootstrapvalidator-dist-0.4.1.zip)
 
 ## Live Demo
 
