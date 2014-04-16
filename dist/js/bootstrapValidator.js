@@ -2243,6 +2243,114 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.validators.vat = {
+        html5Attributes: {
+            message: 'message',
+            country: 'country'
+        },
+
+        /**
+         * Validate an European VAT number
+         *
+         * @param {BootstrapValidator} validator The validator plugin instance
+         * @param {jQuery} $field Field element
+         * @param {Object} options Consist of key:
+         * - message: The invalid message
+         * - country: The ISO 3166-1 country code
+         * @returns {Boolean}
+         */
+        validate: function(validator, $field, options) {
+            var value = $field.val();
+            if (value == '' || !options.country) {
+                return true;
+            }
+
+            var vatRegex = {
+                'AT': 'ATU[0-9]{8}',                                // Austria
+                'BE': 'BE[0]{0,1}[0-9]{9}',                         // Belgium
+                'BG': 'BG[0-9]{9,10}',                              // Bulgaria
+                'CY': 'CY[0-9]{8}L',                                // Cyprus
+                'CZ': 'CZ[0-9]{8,10}',                              // Czech Republic
+                'DE': 'DE[0-9]{9}',                                 // Germany
+                'DK': 'DK[0-9]{8}',                                 // Denmark
+                'EE': 'EE[0-9]{9}',                                 // Estonia
+                'ES': 'ES[0-9A-Z][0-9]{7}[0-9A-Z]',                 // Spain
+                'FI': 'FI[0-9]{8}',                                 // Finland
+                'FR': 'FR[0-9A-Z]{2}[0-9]{9}',                      // France
+                'EL': 'EL[0-9]{9}',                                 // Greece (EL is traditionally prefix of Greek VAT numbers)
+                'GR': 'GR[0-9]{9}',                                 // Greece
+                'GB': 'GB([0-9]{9}([0-9]{3})?|[A-Z]{2}[0-9]{3})',   // United Kingdom
+                'HU': 'HU[0-9]{8}',                                 // Hungary
+                'IE': 'IE[0-9]S[0-9]{5}L',                          // Ireland
+                'IT': 'IT[0-9]{11}',                                // Italy
+                'LT': 'LT([0-9]{9}|[0-9]{12})',                     // Lithuania
+                'LU': 'LU[0-9]{8}',                                 // Luxembourg
+                'LV': 'LV[0-9]{11}',                                // Latvia
+                'MT': 'MT[0-9]{8}',                                 // Malta
+                'NL': 'NL[0-9]{9}B[0-9]{2}',                        // Netherlands
+                'PL': 'PL[0-9]{10}',                                // Poland
+                'PT': 'PT[0-9]{9}',                                 // Portugal
+                'RO': 'RO[0-9]{2,10}',                              // Romania
+                'SE': 'SE[0-9]{12}',                                // Sweden
+                'SI': 'SI[0-9]{8}',                                 // Slovenia
+                'SK': 'SK[0-9]{10}'                                 // Slovakia
+            };
+
+            value = value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+            var country = options.country || value.substr(0, 2);
+            if (!vatRegex[country]) {
+                return false;
+            }
+            return (new RegExp('^' + vatRegex[country] + '$')).test(value);
+        }
+    };
+}(window.jQuery));
+;(function($) {
+    $.fn.bootstrapValidator.validators.vin = {
+        /**
+         * Validate an US VIN (Vehicle Identification Number)
+         *
+         * @param {BootstrapValidator} validator The validator plugin instance
+         * @param {jQuery} $field Field element
+         * @param {Object} options Consist of key:
+         * - message: The invalid message
+         * @returns {Boolean}
+         */
+        validate: function(validator, $field, options) {
+            var value = $field.val();
+            if (value == '' || !options.country) {
+                return true;
+            }
+
+            // Don't accept I, O, Q characters
+            if (!/^[a-hj-npr-z0-9]{8}[0-9xX][a-hj-npr-z0-9]{8}$/i.test(value)) {
+                return false;
+            }
+
+            value = value.toUpperCase();
+            var chars   = {
+                    A: 1,   B: 2,   C: 3,   D: 4,   E: 5,   F: 6,   G: 7,   H: 8,
+                    J: 1,   K: 2,   L: 3,   M: 4,   N: 5,           P: 7,           R: 9,
+                            S: 2,   T: 3,   U: 4,   V: 5,   W: 6,   X: 7,   Y: 8,   Z: 9,
+                    '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '0': 0
+                },
+                weights = [8, 7, 6, 5, 4, 3, 2, 10, 0, 9, 8, 7, 6, 5, 4, 3, 2],
+                sum     = 0,
+                length  = value.length;
+            for (var i = 0; i < length; i++) {
+                sum += chars[value[i] + ''] * weights[i];
+            }
+
+            var reminder = sum % 11;
+            if (reminder == 10) {
+                reminder = 'X';
+            }
+
+            return reminder == value[8];
+        }
+    };
+}(window.jQuery));
+;(function($) {
     $.fn.bootstrapValidator.validators.zipCode = {
         html5Attributes: {
             message: 'message',
