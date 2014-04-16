@@ -454,7 +454,7 @@
                 validateResult;
 
             // We don't need to validate disabled, hidden field
-            if ($field.is(':disabled') || $field.is(':hidden') || !$field.is(':visible')) {
+            if ($field.is(':disabled') || $field.is(':hidden') || !$field.is(':visible') || !this.options.fields[field]['enabled']) {
                 return this;
             }
 
@@ -1846,11 +1846,12 @@
         }
     };
 }(window.jQuery));
-;(function($) {
+;(function ($) {
     $.fn.bootstrapValidator.validators.remote = {
         html5Attributes: {
             message: 'message',
-            url: 'url'
+            url: 'url',
+            name: 'name'
         },
 
         /**
@@ -1864,6 +1865,7 @@
          *  {
          *      <fieldName>: <fieldValue>
          *  }
+         * - name [optional]: Override the field name for the request.
          * - message: The invalid message
          * @returns {Boolean|Deferred}
          */
@@ -1881,7 +1883,7 @@
             if ('function' == typeof data) {
                 data = data.call(this, validator);
             }
-            data[name] = value;
+            data[options.name || name] = value;
 
             var dfd = new $.Deferred();
             var xhr = $.ajax({
@@ -1913,7 +1915,7 @@
          * - message: The invalid message
 		 * @returns {Boolean}
 		 */
-		validate : function(validator, $field, options) {
+		validate: function(validator, $field, options) {
 			var value = $field.val();
 			if (value == '') {
 				return true;
@@ -1947,7 +1949,7 @@
          * - message: The invalid message
          * @returns {Boolean}
          */
-		validate : function(validator, $field, options) {
+		validate: function(validator, $field, options) {
 			var value = $field.val();
 			if (value == '') {
 				return true;

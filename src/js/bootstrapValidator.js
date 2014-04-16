@@ -453,7 +453,7 @@
                 validateResult;
 
             // We don't need to validate disabled, hidden field
-            if ($field.is(':disabled') || $field.is(':hidden') || !$field.is(':visible') || !this.options.fields[field].enabled) {
+            if ($field.is(':disabled') || $field.is(':hidden') || !$field.is(':visible') || !this.options.fields[field]['enabled']) {
                 return this;
             }
 
