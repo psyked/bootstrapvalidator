@@ -29,7 +29,7 @@
                   value = value.replace(/\(|\)|\s+/g, '');
                   return (/^(?:1\-?)?(\d{3})[\-\.]?(\d{3})[\-\.]?(\d{4})$/).test(value) && value.length == 10;
                 default:
-                    value = value.replace(/\(|\)|\s+/g, '');
+                    value = value.replace(/\D/g,'');
                     return (/^(?:1\-?)?(\d{3})[\-\.]?(\d{3})[\-\.]?(\d{4})$/).test(value);
             }
         }
