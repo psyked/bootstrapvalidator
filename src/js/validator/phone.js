@@ -22,15 +22,16 @@
                 return true;
             }
 
-            options.country = options.country || 'US';
-            switch (options.country.toUpperCase()) {
+            var country = (options.country || 'US').toUpperCase();
+            switch (country) {
                 case 'US':
-                  // Make sure US phone numbers have 10 digits
-                  value = value.replace(/\(|\)|\s+/g, '');
-                  return (/^(?:1\-?)?(\d{3})[\-\.]?(\d{3})[\-\.]?(\d{4})$/).test(value) && value.length == 10;
                 default:
-                    value = value.replace(/\D/g,'');
-                    return (/^(?:1\-?)?(\d{3})[\-\.]?(\d{3})[\-\.]?(\d{4})$/).test(value);
+                    // Make sure US phone numbers have 10 digits
+                    // May start with 1, +1, or 1-; should discard
+                    // Area code may be delimited with (), & sections may be delimited with . or -
+                    // Test: http://regexr.com/38mqi
+                    value = value.replace(/\D/g, '');
+                    return (/^(?:(1\-?)|(\+1 ?))?\(?(\d{3})[\)\-\.]?(\d{3})[\-\.]?(\d{4})$/).test(value) && (value.length == 10);
             }
         }
     }
