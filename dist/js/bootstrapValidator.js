@@ -1802,7 +1802,7 @@
                     // May start with 1, +1, or 1-; should discard
                     // Area code may be delimited with (), & sections may be delimited with . or -
                     // Test: http://regexr.com/38mqi
-                    value = value.replace(/\(|\)|\s+/g, '');
+                    value = value.replace(/\D/g, '');
                     return (/^(?:(1\-?)|(\+1 ?))?\(?(\d{3})[\)\-\.]?(\d{3})[\-\.]?(\d{4})$/).test(value) && (value.length == 10);
             }
         }
@@ -2386,7 +2386,7 @@
                     return /^(S-)?\d{3}\s?\d{2}$/i.test(value);
                 case 'US':
                 default:
-                    return /^\d{5}([\-]\d{4})?$/.test(value);
+                    return /^\d{4,5}([\-]\d{4})?$/.test(value);
             }
         }
     };
