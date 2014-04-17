@@ -109,7 +109,7 @@
         _init: function() {
             var that    = this,
                 options = {
-                    excluded:       this.$form.attr('data-bv-excluded') ? this.$form.attr('data-bv-excluded').split(' ') : [],
+                    excluded:       this.$form.attr('data-bv-excluded') || [],
                     trigger:        this.$form.attr('data-bv-trigger'),
                     message:        this.$form.attr('data-bv-message'),
                     submitButtons:  this.$form.attr('data-bv-submitbuttons'),
@@ -190,8 +190,13 @@
                     }
                 });
 
-            this.options          = $.extend(true, this.options, options);
-            this.options.excluded = ('string' == typeof this.options.excluded) ? this.options.excluded.split(' ') : this.options.excluded;
+            this.options = $.extend(true, this.options, options);
+            if ('string' == typeof this.options.excluded) {
+                this.options.excluded = $.map(this.options.excluded.split(','), function(item) {
+                    // Trim the spaces
+                    return item.trim();
+                });
+            }
 
             for (var field in this.options.fields) {
                 this._initField(field);
