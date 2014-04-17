@@ -44,6 +44,14 @@
         // Default invalid message
         message: 'This value is not valid',
 
+        // By default, the plugin will not validate the following kind of fields:
+        // - disabled
+        // - hidden
+        // - invisible
+        excluded: [':disabled', ':hidden', function($field) {
+            return !$field.is(':visible');
+        }],
+
         // Shows ok/error/loading icons based on the field validity.
         // This feature requires Bootstrap v3.1.0 or later (http://getbootstrap.com/css/#forms-control-validation).
         // Since Bootstrap doesn't provide any methods to know its version, this option cannot be on/off automatically.
@@ -101,6 +109,7 @@
         _init: function() {
             var that    = this,
                 options = {
+                    excluded:       this.$form.attr('data-bv-excluded') ? this.$form.attr('data-bv-excluded').split(' ') : [],
                     trigger:        this.$form.attr('data-bv-trigger'),
                     message:        this.$form.attr('data-bv-message'),
                     submitButtons:  this.$form.attr('data-bv-submitbuttons'),
@@ -181,7 +190,8 @@
                     }
                 });
 
-            this.options = $.extend(true, this.options, options);
+            this.options          = $.extend(true, this.options, options);
+            this.options.excluded = ('string' == typeof this.options.excluded) ? this.options.excluded.split(' ') : this.options.excluded;
 
             for (var field in this.options.fields) {
                 this._initField(field);
@@ -327,6 +337,27 @@
             }
         },
 
+        /**
+         * Check if the field is excluded.
+         * Returning true means that the field will not be validated
+         *
+         * @param {jQuery} $field The field element
+         * @return {Boolean}
+         */
+        _isExcluded: function($field) {
+            if (this.options.excluded) {
+                for (var i in this.options.excluded) {
+                    if (('string' == typeof this.options.excluded[i] && $field.is(this.options.excluded[i]))
+                        || ('function' == typeof this.options.excluded[i] && this.options.excluded[i].call(this, $field, this) == true))
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        },
+
         // --- Public methods ---
 
         /**
@@ -453,8 +484,7 @@
                 validatorName,
                 validateResult;
 
-            // We don't need to validate disabled, hidden field
-            if ($field.is(':disabled') || $field.is(':hidden') || !$field.is(':visible') || !this.options.fields[field]['enabled']) {
+            if (!this.options.fields[field]['enabled'] || this._isExcluded($field)) {
                 return this;
             }
 
@@ -622,7 +652,7 @@
 
                 for (i = 0; i < n; i++) {
                     $field = $(fields[i]);
-                    if ($field.is(':disabled') || $field.is(':hidden') || !$field.is(':visible')) {
+                    if (this._isExcluded($field)) {
                         continue;
                     }
 
