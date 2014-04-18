@@ -43,13 +43,30 @@
         // Default invalid message
         message: 'This value is not valid',
 
+        // Indicate fields which won't be validated
         // By default, the plugin will not validate the following kind of fields:
         // - disabled
         // - hidden
         // - invisible
-        excluded: [':disabled', ':hidden', function($field) {
-            return !$field.is(':visible');
-        }],
+        //
+        // The setting consists of jQuery filters. Accept 3 formats:
+        // - A string. Use a comma to separate filter
+        // - An array. Each element is a filter
+        // - An array. Each element can be a callback function
+        //      function($field, validator) {
+        //          $field is jQuery object representing the field element
+        //          validator is the BootstrapValidator instance
+        //          return true or false;
+        //      }
+        //
+        // The 3 following settings are equivalent:
+        //
+        // 1) ':disabled, :hidden, :not(:visible)'
+        // 2) [':disabled', ':hidden', ':not(:visible)']
+        // 3) [':disabled', ':hidden', function($field) {
+        //        return !$field.is(':visible');
+        //    }]
+        excluded: [':disabled', ':hidden', ':not(:visible)'],
 
         // Shows ok/error/loading icons based on the field validity.
         // This feature requires Bootstrap v3.1.0 or later (http://getbootstrap.com/css/#forms-control-validation).
@@ -108,7 +125,7 @@
         _init: function() {
             var that    = this,
                 options = {
-                    excluded:       this.$form.attr('data-bv-excluded') || [],
+                    excluded:       this.$form.attr('data-bv-excluded'),
                     trigger:        this.$form.attr('data-bv-trigger'),
                     message:        this.$form.attr('data-bv-message'),
                     submitButtons:  this.$form.attr('data-bv-submitbuttons'),
