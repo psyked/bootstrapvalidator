@@ -1957,7 +1957,7 @@
     };
 }(window.jQuery));
 ;(function($) {
-	$.fn.bootstrapValidator.validators.siret = {
+	$.fn.bootstrapValidator.validators.siren = {
 		/**
 		 * Check if a string is a siren number
 		 *
@@ -1989,7 +1989,8 @@
 			return ((sum % 10) == 0);
 		}
 	};
-}(window.jQuery));;(function($) {
+}(window.jQuery));
+;(function($) {
 	$.fn.bootstrapValidator.validators.siret = {
         /**
          * Check if a string is a siret number
@@ -2022,7 +2023,8 @@
 			return ((sum % 10) == 0);
 		}
 	};
-}(window.jQuery));;(function($) {
+}(window.jQuery));
+;(function($) {
     $.fn.bootstrapValidator.validators.step = {
         html5Attributes: {
             message: 'message',

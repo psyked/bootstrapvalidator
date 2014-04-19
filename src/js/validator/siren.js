@@ -1,5 +1,5 @@
 (function($) {
-	$.fn.bootstrapValidator.validators.siret = {
+	$.fn.bootstrapValidator.validators.siren = {
 		/**
 		 * Check if a string is a siren number
 		 *
