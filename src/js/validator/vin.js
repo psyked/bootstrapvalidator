@@ -31,7 +31,7 @@
                 sum     = 0,
                 length  = value.length;
             for (var i = 0; i < length; i++) {
-                sum += chars[value[i] + ''] * weights[i];
+                sum += chars[value.charAt(i) + ''] * weights[i];
             }
 
             var reminder = sum % 11;

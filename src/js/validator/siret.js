@@ -19,15 +19,14 @@
                 length = value.length,
                 tmp;
 			for (var i = 0; i < length; i++) {
+                tmp = parseInt(value.charAt(i));
 				if ((i % 2) == 0) {
-					tmp = value.charAt(i) * 2;
+					tmp = tmp * 2;
 					if (tmp > 9) {
 						tmp -= 9;
 					}
-				} else {
-					tmp = value.charAt(i);
 				}
-				sum += parseInt(tmp);
+				sum += tmp;
 			}
 			return ((sum % 10) == 0);
 		}
