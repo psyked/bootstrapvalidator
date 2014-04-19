@@ -1,10 +1,9 @@
 # Change Log
 
-## v0.4.2 (not released yet)
+## v0.4.2 (2014-04-19)
 
 * [#168](https://github.com/nghuuphuoc/bootstrapvalidator/pull/168): Add siren and siret validators, thanks to [@jswale](https://github.com/jswale)
 * [#177](https://github.com/nghuuphuoc/bootstrapvalidator/issues/177): Add Vehicle Identification Number (VIN) validator
-* [#179](https://github.com/nghuuphuoc/bootstrapvalidator/issues/179): Add European VAT number validator
 * [#184](https://github.com/nghuuphuoc/bootstrapvalidator/issues/184): Add ```excluded``` option
 * [#171](https://github.com/nghuuphuoc/bootstrapvalidator/pull/171): The [```phone``` validator](http://bootstrapvalidator.com/validators/phone/) now supports +1 country code and area code for US phone number, thanks to [@tomByrer](https://github.com/tomByrer)
 * [#173](https://github.com/nghuuphuoc/bootstrapvalidator/pull/173): The [```remote``` validator](http://bootstrapvalidator.com/validators/remote/) allows to override ```name``` option, thanks to [@jswale](https://github.com/jswale)

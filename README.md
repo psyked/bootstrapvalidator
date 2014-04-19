@@ -53,7 +53,7 @@ __Compatibility__
  
 ## Download
 
-[v0.4.1 - 77kB](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.1/bootstrapvalidator-dist-0.4.1.zip)
+[v0.4.2 - 61 KB](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.2/bootstrapvalidator-dist-0.4.2.zip)
 
 ## Live Demo
 
