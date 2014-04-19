@@ -11,7 +11,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '' || !options.country) {
+            if (value == '') {
                 return true;
             }
 
@@ -39,7 +39,7 @@
                 reminder = 'X';
             }
 
-            return reminder == value[8];
+            return reminder == value.charAt(8);
         }
     };
 }(window.jQuery));
