@@ -28,6 +28,8 @@
 
             options.country = options.country || 'US';
             switch (options.country.toUpperCase()) {
+                case 'CA':
+                    return /(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}\s?[0-9]{1}(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}/i.test(value);
                 case 'DK':
                     return /^(DK(-|\s)?)?\d{4}$/i.test(value);
                 case 'SE':
