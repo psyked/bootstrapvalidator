@@ -16,6 +16,7 @@
          *
          * Currently it supports the following countries:
          * - US (United State)
+         * - CA (Canada)
          * - DK (Denmark)
          * - SE (Sweden)
          * @returns {Boolean}
@@ -26,8 +27,8 @@
                 return true;
             }
 
-            options.country = options.country || 'US';
-            switch (options.country.toUpperCase()) {
+            var country = (options.country || 'US').toUpperCase();
+            switch (country) {
                 case 'CA':
                     return /(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}\s?[0-9]{1}(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}/i.test(value);
                 case 'DK':

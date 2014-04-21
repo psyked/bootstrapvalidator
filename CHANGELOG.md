@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.4.3 (not released yet)
+
+* [#198](https://github.com/nghuuphuoc/bootstrapvalidator/pull/198): Add Canadian Postal Code support for the [```zipCode``` validator](http://bootstrapvalidator.com/validators/zip-code/), thanks to [@Francismori7](https://github.com/Francismori7)
+
 ## v0.4.2 (2014-04-19)
 
 * [#168](https://github.com/nghuuphuoc/bootstrapvalidator/pull/168): Add siren and siret validators, thanks to [@jswale](https://github.com/jswale)

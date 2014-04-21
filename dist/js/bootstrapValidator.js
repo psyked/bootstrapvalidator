@@ -3,7 +3,7 @@
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
- * @version     v0.4.2
+ * @version     v0.4.3-dev
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -2357,6 +2357,7 @@
          *
          * Currently it supports the following countries:
          * - US (United State)
+         * - CA (Canada)
          * - DK (Denmark)
          * - SE (Sweden)
          * @returns {Boolean}
@@ -2367,8 +2368,10 @@
                 return true;
             }
 
-            options.country = options.country || 'US';
-            switch (options.country.toUpperCase()) {
+            var country = (options.country || 'US').toUpperCase();
+            switch (country) {
+                case 'CA':
+                    return /(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}\s?[0-9]{1}(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}/i.test(value);
                 case 'DK':
                     return /^(DK(-|\s)?)?\d{4}$/i.test(value);
                 case 'SE':

@@ -86,6 +86,7 @@ Big thanks to the contributors:
 * [@adgrafik](https://github.com/adgrafik)
 * [@easonhan007](https://github.com/easonhan007)
 * [@emilchristensen](https://github.com/emilchristensen)
+* [@Francismori7](https://github.com/Francismori7)
 * [@gercheq](https://github.com/gercheq)
 * [@khangvm53](https://github.com/khangvm53)
 * [@kristian-puccio](https://github.com/kristian-puccio)
