@@ -1,6 +1,8 @@
-# BootstrapValidator
+# BootstrapValidator - [v0.4.2](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.2/bootstrapvalidator-dist-0.4.2.zip)
 
 [http://bootstrapvalidator.com](http://bootstrapvalidator.com) - A jQuery plugin to validate form fields. Use with [Bootstrap 3](http://getbootstrap.com)
+
+<a href="https://pledgie.com/campaigns/24885"><img alt="Click here to lend your support to: BootstrapValidator and make a donation at pledgie.com!" src="https://pledgie.com/campaigns/24885.png?skin_name=chrome" border="0" /></a>
 
 ![Screenshot](screenshots/screenshot.png)
 
@@ -22,7 +24,7 @@ __HTML 5__
 * Support [HTML 5 input types](http://bootstrapvalidator.com/examples#html5) such as ```color```, ```email```, ```range``` and ```url```
 
 __Validator__
-* [31 built-in validators](http://bootstrapvalidator.com/validators/) and counting!
+* [34 built-in validators](http://bootstrapvalidator.com/validators/) and counting!
 * Easy to [write a new validator](http://bootstrapvalidator.com/developing/)
  
 __Friendly__
@@ -37,6 +39,7 @@ __Ajax__
 __Flexible__
 * The elements can be defined by either ```name``` or [CSS selector](http://bootstrapvalidator.com/settings/#selector-example)
 * Support multiple elements with the [same name](http://bootstrapvalidator.com/examples/#fields-with-same-name)
+* Possible to indicate [excluded](http://bootstrapvalidator.com/settings/#excluded) fields
 * Field validators can be enabled/disabled on the fly
  
 __Compatibility__
@@ -44,7 +47,7 @@ __Compatibility__
 * [Date Picker](http://eternicode.github.io/bootstrap-datepicker/), [Datetime Picker](http://eonasdan.github.io/bootstrap-datetimepicker/)
 * [Select2](http://ivaynberg.github.io/select2/)
 * [Raty](http://wbotelhos.com/raty)
-* ... We play nice with all of them!
+* ... We [play nice](http://bootstrapvalidator.com/examples/#compatibility) with all of them!
 
 ## Required
 
@@ -53,7 +56,9 @@ __Compatibility__
  
 ## Download
 
-[v0.4.2 - 61 KB](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.2/bootstrapvalidator-dist-0.4.2.zip)
+Latest version: [v0.4.2 (61 KB)](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.2/bootstrapvalidator-dist-0.4.2.zip), released on 2014-04-19.
+
+For older versions, look at the [Releases](https://github.com/nghuuphuoc/bootstrapvalidator/releases) page.
 
 ## Live Demo
 
