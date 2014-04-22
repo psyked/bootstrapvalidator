@@ -346,7 +346,15 @@
                 // Focus to the first invalid field
                 if (this.$invalidField) {
                     this.$invalidField.focus();
+
+                    // Activate the tab containing the invalid field if exists
+                    var $tab = this.$invalidField.parents('.tab-pane'),
+                        tabId;
+                    if ($tab && (tabId = $tab.attr('id'))) {
+                        $('a[href="#' + tabId + '"][data-toggle="tab"]').trigger('click.bs.tab.data-api');
+                    }
                 }
+
                 return;
             }
 
