@@ -767,14 +767,19 @@
     };
 
     // Plugin definition
-    $.fn.bootstrapValidator = function(options) {
+    $.fn.bootstrapValidator = function(option, params) {
         return this.each(function() {
-            var $this = $(this), data = $this.data('bootstrapValidator');
+            var $this   = $(this),
+                data    = $this.data('bootstrapValidator'),
+                options = 'object' == typeof option && option;
             if (!data) {
-                $this.data('bootstrapValidator', (data = new BootstrapValidator(this, options)));
+                data = new BootstrapValidator(this, options);
+                $this.data('bootstrapValidator', data);
             }
-            if ('string' == typeof options) {
-                data[options]();
+
+            // Allow to call plugin method
+            if ('string' == typeof option) {
+                data[option](params);
             }
         });
     };

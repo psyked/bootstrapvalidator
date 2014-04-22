@@ -96,8 +96,8 @@ Big thanks to the contributors:
 * [@jswale](https://github.com/jswale)
 * [@narutosanjiv](https://github.com/narutosanjiv)
 * [@patmoore](https://github.com/patmoore)
-* [@vaz](https://github.com/vaz)
 * [@tomByrer](https://github.com/tomByrer)
+* [@vaz](https://github.com/vaz)
 * ... might be you! Let's [fork](https://github.com/nghuuphuoc/bootstrapvalidator/fork) and pull a request!
 
 > If you submit new RegEx, please build it using [RegExr.com](http://regexr.com/), add several tests that pass and fail there,
