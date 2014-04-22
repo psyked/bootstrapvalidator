@@ -6,6 +6,10 @@
 
 ![Screenshot](screenshots/screenshot.png)
 
+## Live demo
+
+http://bootstrapvalidator.com/examples/
+
 ## Features
 
 __Code__
@@ -59,16 +63,6 @@ __Compatibility__
 Latest version: [v0.4.2 (61 KB)](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.2/bootstrapvalidator-dist-0.4.2.zip), released on 2014-04-19.
 
 For older versions, look at the [Releases](https://github.com/nghuuphuoc/bootstrapvalidator/releases) page.
-
-## Live Demo
-
-You can see the live demo here:
-
-* [Sample demo](https://rawgithub.com/nghuuphuoc/bootstrapvalidator/master/demo/index.html)
-* [Validator examples](https://rawgithub.com/nghuuphuoc/bootstrapvalidator/master/demo/validators.html)
-* [Custom submit handler](https://rawgithub.com/nghuuphuoc/bootstrapvalidator/master/demo/submitHandler.html)
-* [Enable/disable validators on the fly](https://rawgithub.com/nghuuphuoc/bootstrapvalidator/master/demo/enable.html)
-* [Use with a datetime picker plugin](https://rawgithub.com/nghuuphuoc/bootstrapvalidator/master/demo/date.html)
 
 ## Documentation
 
