@@ -2558,6 +2558,30 @@
             }
 
             return (sum % 11 == 0);
+        },
+
+        /**
+         * Validate Portuguese VAT number
+         * Examples:
+         * - Valid: PT501964843
+         * - Invalid: PT501964842
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _isValidPTVat: function(value) {
+            value = value.substr(2);
+            var sum    = 0,
+                weight = [9, 8, 7, 6, 5, 4, 3, 2];
+
+            for (var i = 0; i < 8; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+            sum = 11 - sum % 11;
+            if (sum > 9) {
+                sum = 0;
+            }
+            return (sum == value.substr(8, 1));
         }
     };
 }(window.jQuery));
