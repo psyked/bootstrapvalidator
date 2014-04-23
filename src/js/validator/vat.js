@@ -90,6 +90,31 @@
         },
 
         /**
+         * Validate German VAT number
+         * Examples:
+         * - Valid: DE136695976
+         * - Invalid: DE136695978
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _isValidDEVat: function(value) {
+            value = value.substr(2);
+            var product = 10,
+                sum     = 0;
+            for (var i = 0; i < 8; i++) {
+                sum = (parseInt(value.charAt(i), 10) + product) % 10;
+                if (sum == 0) {
+                    sum = 10;
+                }
+                product = (sum * 2) % 11;
+            }
+
+            var checkDigit = (11 - product == 10) ? 0 : (11 - product);
+            return (checkDigit == value.substr(8, 1));
+        },
+
+        /**
          * Validate Danish VAT number
          * Example:
          * - Valid: DK13585628
