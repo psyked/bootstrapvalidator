@@ -2537,6 +2537,27 @@
             }
 
             return (sum % 37 == 0);
+        },
+
+        /**
+         * Validate Polish VAT number
+         * Examples:
+         * - Valid: PL8567346215
+         * - Invalid: PL8567346216
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _isValidPLVat: function(value) {
+            value = value.substr(2);
+            var sum    = 0,
+                weight = [6, 5, 7, 2, 3, 4, 5, 6, 7, -1];
+
+            for (var i = 0; i < 10; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+
+            return (sum % 11 == 0);
         }
     };
 }(window.jQuery));
