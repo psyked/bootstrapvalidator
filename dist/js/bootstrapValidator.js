@@ -2505,6 +2505,27 @@
         },
 
         /**
+         * Validate Finnish VAT number
+         * Examples:
+         * - Valid: FI20774740
+         * - Invalid: FI20774741
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _isValidFIVat: function(value) {
+            value = value.substr(2);
+            var sum    = 0,
+                weight = [7, 9, 10, 5, 8, 4, 2, 1];
+
+            for (var i = 0; i < 8; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+
+            return (sum % 11 == 0);
+        },
+
+        /**
          * Validate Luxembourg VAT number
          * Examples:
          * - Valid: LU15027442
