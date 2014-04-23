@@ -68,7 +68,9 @@
 
         /**
          * Validate Belgium VAT number
-         * Example: BE0428759497
+         * Example:
+         * - Valid: BE0428759497
+         * - Invalid: BE431150351
          *
          * @param {String} value VAT number
          * @return {Boolean}
@@ -83,25 +85,49 @@
                 return false;
             }
 
-            return (97 - value.substr(0, 8) % 97 == value.substr(8, 2));
+            var sum = parseInt(value.substr(0, 8), 10) + parseInt(value.substr(8, 2), 10);
+            return (sum % 97 == 0);
         },
 
         /**
          * Validate Danish VAT number
-         * Example: DK13585628
+         * Example:
+         * - Valid: DK13585628
+         * - Invalid: DK13585627
          *
          * @param {String} value VAT number
          * @return {Boolean}
          */
         _isValidDKVat: function(value) {
             value = value.substr(2);
-            var sum   = 0,
-                weigh = [2, 7, 6, 5, 4, 3, 2, 1];
+            var sum    = 0,
+                weight = [2, 7, 6, 5, 4, 3, 2, 1];
             for (var i = 0; i < 8; i++) {
-                sum += parseInt(value.charAt(i), 10) * weigh[i];
+                sum += parseInt(value.charAt(i), 10) * weight[i];
             }
 
             return (sum % 11 == 0);
+        },
+
+        /**
+         * Validate Estonian VAT number
+         * Examples:
+         * - Valid: EE100931558, EE100594102
+         * - Invalid: EE100594103
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _isValidEEVat: function(value) {
+            value = value.substr(2);
+            var sum    = 0,
+                weight = [3, 7, 1, 3, 7, 1, 3, 7, 1];
+
+            for (var i = 0; i < 9; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+
+            return (sum % 10 == 0);
         }
     };
 }(window.jQuery));
