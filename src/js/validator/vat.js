@@ -152,6 +152,27 @@
         },
 
         /**
+         * Validate Hungarian VAT number
+         * Examples:
+         * - Valid: HU12892312
+         * - Invalid: HU12892313
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _isValidHUVat: function(value) {
+            value = value.substr(2);
+            var sum    = 0,
+                weight = [9, 7, 3, 1, 9, 7, 3, 1];
+
+            for (var i = 0; i < 8; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+
+            return (sum % 10 == 0);
+        },
+
+        /**
          * Validate Luxembourg VAT number
          * Examples:
          * - Valid: LU15027442
