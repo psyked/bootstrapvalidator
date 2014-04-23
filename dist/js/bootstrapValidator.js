@@ -2502,6 +2502,20 @@
             }
 
             return (sum % 10 == 0);
+        },
+
+        /**
+         * Validate Luxembourg VAT number
+         * Examples:
+         * - Valid: LU15027442
+         * - Invalid: LU15027443
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _isValidLUVat: function(value) {
+            value = value.substr(2);
+            return (value.substr(0, 6) % 89 == value.substr(6, 2));
         }
     };
 }(window.jQuery));
