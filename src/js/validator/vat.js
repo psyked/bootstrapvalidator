@@ -54,10 +54,36 @@
 
             value = value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
             var country = options.country || value.substr(0, 2);
-            if (!vatRegex[country]) {
+            if (!vatRegex[country] || !(new RegExp('^' + vatRegex[country] + '$')).test(value)) {
                 return false;
             }
-            return (new RegExp('^' + vatRegex[country] + '$')).test(value);
+
+            var method = '_isValid' + country + 'Vat';
+            if (this[method] && 'function' == typeof this[method]) {
+                return this[method](value);
+            }
+
+            return true;
+        },
+
+        /**
+         * Validate Belgium VAT number
+         * Example: BE0428759497
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _isValidBEVat: function(value) {
+            value = value.substr(2);
+            if (value.length == 9) {
+                value = '0' + value;
+            }
+
+            if (value.substr(1, 1) == 0) {
+                return false;
+            }
+
+            return (97 - value.substr(0, 8) % 97 == value.substr(8, 2));
         }
     };
 }(window.jQuery));
