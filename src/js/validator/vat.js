@@ -142,6 +142,27 @@
         _isValidLUVat: function(value) {
             value = value.substr(2);
             return (value.substr(0, 6) % 89 == value.substr(6, 2));
+        },
+
+        /**
+         * Validate Maltese VAT number
+         * Examples:
+         * - Valid: MT11679112
+         * - Invalid: MT11679113
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _isValidMTVat: function(value) {
+            value = value.substr(2);
+            var sum    = 0,
+                weight = [3, 4, 6, 7, 8, 9, 10, 1];
+
+            for (var i = 0; i < 8; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+
+            return (sum % 37 == 0);
         }
     };
 }(window.jQuery));
