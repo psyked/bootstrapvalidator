@@ -2458,6 +2458,24 @@
             }
 
             return (97 - value.substr(0, 8) % 97 == value.substr(8, 2));
+        },
+
+        /**
+         * Validate Danish VAT number
+         * Example: DK13585628
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _isValidDKVat: function(value) {
+            value = value.substr(2);
+            var sum   = 0,
+                weigh = [2, 7, 6, 5, 4, 3, 2, 1];
+            for (var i = 0; i < 8; i++) {
+                sum += parseInt(value.charAt(i), 10) * weigh[i];
+            }
+
+            return (sum % 11 == 0);
         }
     };
 }(window.jQuery));
