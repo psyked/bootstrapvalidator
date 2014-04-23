@@ -152,6 +152,35 @@
         },
 
         /**
+         * Validate Greek VAT number
+         * Examples:
+         * - Valid: GR023456780, EL094259216
+         * - Invalid: EL123456781
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _isValidGRVat: function(value) {
+            value = value.substr(2);
+            if (value.length == 8) {
+                value = '0' + value;
+            }
+
+            var sum    = 0,
+                weight = [256, 128, 64, 32, 16, 8, 4, 2];
+            for (var i = 0; i < 8; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+            sum = (sum % 11) % 10;
+
+            return (sum == value.substr(8, 1));
+        },
+
+        _isValidELVat: function(value) {
+            return this._isValidGRVat(value);
+        },
+
+        /**
          * Validate Hungarian VAT number
          * Examples:
          * - Valid: HU12892312
