@@ -2624,6 +2624,30 @@
                 sum = 0;
             }
             return (sum == value.substr(8, 1));
+        },
+
+        /**
+         * Validate Slovenian VAT number
+         * Examples:
+         * - Valid: SI50223054
+         * - Invalid: SI50223055
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _isValidSIVat: function(value) {
+            value = value.substr(2);
+            var sum    = 0,
+                weight = [8, 7, 6, 5, 4, 3, 2];
+
+            for (var i = 0; i < 7; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+            sum = 11 - sum % 11;
+            if (sum == 10) {
+                sum = 0;
+            }
+            return (sum == value.substr(7, 1));
         }
     };
 }(window.jQuery));
