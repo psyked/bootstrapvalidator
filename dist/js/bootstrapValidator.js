@@ -3090,6 +3090,53 @@
         },
 
         /**
+         * Validate Italian VAT number, which consists of 11 digits.
+         * - First 7 digits are a company identifier
+         * - Next 3 are the province of residence
+         * - The last one is a check digit
+         *
+         * Examples:
+         * - Valid: IT00743110157
+         * - Invalid: IT00743110158
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _it: function(value) {
+            if (!/^IT[0-9]{11}$/.test(value)) {
+                return false;
+            }
+
+            value = value.substr(2);
+            if (parseInt(value.substr(0, 7)) == 0) {
+                return false;
+            }
+
+            var lastThree = parseInt(value.substr(7, 3));
+            if ((lastThree < 1) || (lastThree > 201) && lastThree != 999 && lastThree != 888) {
+                return false;
+            }
+
+            var sum    = 0,
+                weight = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2],
+                temp;
+            for (var i = 0; i < 10; i++) {
+                temp = parseInt(value.charAt(i)) * weight[i];
+                if (temp > 9) {
+                    temp = Math.floor(temp / 10) + temp % 10;
+                }
+                sum += temp;
+            }
+
+            sum = 10 - sum % 10;
+            if (sum > 9) {
+                sum = 0;
+            }
+
+            return (sum == value.substr(10, 1));
+        },
+
+        /**
          * Validate Luxembourg VAT number
          * Examples:
          * - Valid: LU15027442
