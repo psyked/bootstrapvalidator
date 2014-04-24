@@ -2448,7 +2448,7 @@
         },
 
         /**
-         * Validate Belgium VAT number
+         * Validate Belgian VAT number
          * Example:
          * - Valid: BE0428759497
          * - Invalid: BE431150351
@@ -2962,6 +2962,56 @@
                 }
                 return ((parseInt(value.substr(2), 10) + 1 + Math.floor(check / 11)) % 11) == (check % 11);
             }
+        },
+
+        /**
+         * Validate United Kingdom VAT number
+         * Example:
+         * - Valid: GB980780684
+         * - Invalid: GB802311781
+         *
+         * @param {String} value VAT number
+         * @returns {Boolean}
+         */
+        _gb: function(value) {
+            if (!/^GB[0-9]{9}$/.test(value)             // Standard
+                && !/^GB[0-9]{12}$/.test(value)         // Branches
+                && !/^GBGD[0-9]{3}$/.test(value)        // Government department
+                && !/^GBHA[0-9]{3}$/.test(value)        // Health authority
+                && !/^GB(GD|HA)8888[0-9]{5}$/.test(value))
+            {
+                return false;
+            }
+
+            value = value.substr(2);
+            var length = value.length;
+            if (length == 5) {
+                var firstTwo  = value.substr(0, 2),
+                    lastThree = parseInt(value.substr(2));
+                return ('GD' == firstTwo && lastThree < 500) || ('HA' == firstTwo && lastThree >= 500);
+            } else if (length == 11 && ('GD8888' == value.substr(0, 6) || 'HA8888' == value.substr(0, 6))) {
+                if (('GD' == value.substr(0, 2) && parseInt(value.substr(6, 3)) >= 500)
+                    || ('HA' == value.substr(0, 2) && parseInt(value.substr(6, 3)) < 500))
+                {
+                    return false;
+                }
+                return (parseInt(value.substr(6, 3)) % 97 == parseInt(value.substr(9, 2)));
+            } else if (length == 9 || length == 12) {
+                var sum    = 0,
+                    weight = [8, 7, 6, 5, 4, 3, 2, 10, 1];
+                for (var i = 0; i < 9; i++) {
+                    sum += parseInt(value.charAt(i)) * weight[i];
+                }
+                sum = sum % 97;
+
+                if (parseInt(value.substr(0, 3)) >= 100) {
+                    return (sum == 0 || sum == 42 || sum == 55);
+                } else {
+                    return (sum == 0);
+                }
+            }
+
+            return true;
         },
 
         /**
