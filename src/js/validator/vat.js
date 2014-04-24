@@ -911,6 +911,32 @@
         },
 
         /**
+         * Validate Romanian VAT number
+         * Examples:
+         * - Valid: RO18547290
+         * - Invalid: RO18547291
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _ro: function(value) {
+            if (!/^RO[1-9][0-9]{1,9}$/.test(value)) {
+                return false;
+            }
+            value = value.substr(2);
+
+            var length = value.length,
+                weight = [7, 5, 3, 2, 1, 7, 5, 3, 2].slice(10 - length),
+                sum    = 0;
+            for (var i = 0; i < length - 1; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+
+            sum = (10 * sum) % 11 % 10;
+            return (sum == value.substr(length - 1, 1));
+        },
+
+        /**
          * Validate Serbian VAT number
          *
          * @param {String} value VAT number
