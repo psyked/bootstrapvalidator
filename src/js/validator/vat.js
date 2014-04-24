@@ -30,6 +30,31 @@
             return true;
         },
 
+        // Helper methods
+
+        /**
+         * Implement Luhn validation algorithm
+         * Credit to https://gist.github.com/ShirtlessKirk/2134376
+         *
+         * @param {String} value
+         * @returns {boolean}
+         */
+        _luhn: function(value) {
+            var length  = value.length,
+                mul     = 0,
+                prodArr = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [0, 2, 4, 6, 8, 1, 3, 5, 7, 9]],
+                sum     = 0;
+
+            while (length--) {
+                sum += prodArr[mul][parseInt(value.charAt(length), 10)];
+                mul ^= 1;
+            }
+
+            return (sum % 10 === 0 && sum > 0);
+        },
+
+        // VAT validators
+
         /**
          * Validate Austrian VAT number
          * Example:
@@ -37,7 +62,7 @@
          * - Invalid: ATU13585626
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _at: function(value) {
             if (!/^ATU[0-9]{8}$/.test(value)) {
@@ -72,7 +97,7 @@
          * - Invalid: BE431150351
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _be: function(value) {
             if (!/^BE[0]{0,1}[0-9]{9}$/.test(value)) {
@@ -102,7 +127,7 @@
          * - Invalid: BG175074753, BG7552A10004, BG7111042922
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _bg: function(value) {
             if (!/^BG[0-9]{9,10}$/.test(value)) {
@@ -194,7 +219,7 @@
          * Validate Swiss VAT number
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _ch: function(value) {
             if (!/^CHE[0-9]{9}(MWST)?$/.test(value)) {
@@ -226,7 +251,7 @@
          * - Invalid: CY10259033Z
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _cy: function(value) {
             if (!/^CY[0-5|9]{1}[0-9]{7}[A-Z]{1}$/.test(value)) {
@@ -270,7 +295,7 @@
          * - Invalid: i) CZ25123890; ii) CZ1103492745, CZ590312123
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _cz: function(value) {
             if (!/^CZ[0-9]{8,10}$/.test(value)) {
@@ -360,7 +385,7 @@
          * - Invalid: DE136695978
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _de: function(value) {
             if (!/^DE[0-9]{9}$/.test(value)) {
@@ -389,7 +414,7 @@
          * - Invalid: DK13585627
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _dk: function(value) {
             if (!/^DK[0-9]{8}$/.test(value)) {
@@ -413,7 +438,7 @@
          * - Invalid: EE100594103
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _ee: function(value) {
             if (!/^EE[0-9]{9}$/.test(value)) {
@@ -443,7 +468,7 @@
          * - Invalid: i) ES54362315Z; ii) ESX2482300A; iii) ESJ99216583
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _es: function(value) {
             if (!/^ES[0-9A-Z][0-9]{7}[0-9A-Z]$/.test(value)) {
@@ -507,7 +532,7 @@
          * - Invalid: FI20774741
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _fi: function(value) {
             if (!/^FI[0-9]{8}$/.test(value)) {
@@ -534,7 +559,7 @@
          * - Invalid: FR84323140391
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _fr: function(value) {
             if (!/^FR[0-9A-Z]{2}[0-9]{9}$/.test(value)) {
@@ -589,7 +614,7 @@
          * - Invalid: EL123456781
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _gr: function(value) {
             if (!/^GR[0-9]{9}$/.test(value)) {
@@ -628,7 +653,7 @@
          * - Invalid: HU12892313
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _hu: function(value) {
             if (!/^HU[0-9]{8}$/.test(value)) {
@@ -653,7 +678,7 @@
          * - Invalid: HR33392005962
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _hr: function(value) {
             if (!/^HR[0-9]{11}$/.test(value)) {
@@ -682,7 +707,7 @@
          * - Invalid: IE8D79738J
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _ie: function(value) {
             if (!/^IE[0-9]{1}[0-9A-Z\*\+]{1}[0-9]{5}[A-Z]{1,2}$/.test(value)) {
@@ -726,7 +751,7 @@
          * - Invalid: IT00743110158
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _it: function(value) {
             if (!/^IT[0-9]{11}$/.test(value)) {
@@ -769,7 +794,7 @@
          * - Invalid: LU15027443
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _lu: function(value) {
             if (!/^LU[0-9]{8}$/.test(value)) {
@@ -787,7 +812,7 @@
          * - Invalid: MT11679113
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _mt: function(value) {
             if (!/^MT[0-9]{8}$/.test(value)) {
@@ -812,7 +837,7 @@
          * - Invalid: NL123456789B90
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _nl: function(value) {
             if (!/^NL[0-9]{9}B[0-9]{2}$/.test(value)) {
@@ -837,7 +862,7 @@
          *
          * @see http://www.brreg.no/english/coordination/number.html
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _no: function(value) {
             if (!/^NO[0-9]{9}$/.test(value)) {
@@ -864,7 +889,7 @@
          * - Invalid: PL8567346216
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _pl: function(value) {
             if (!/^PL[0-9]{10}$/.test(value)) {
@@ -889,7 +914,7 @@
          * - Invalid: PT501964842
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _pt: function(value) {
             if (!/^PT[0-9]{9}$/.test(value)) {
@@ -917,7 +942,7 @@
          * - Invalid: RO18547291
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _ro: function(value) {
             if (!/^RO[1-9][0-9]{1,9}$/.test(value)) {
@@ -940,7 +965,7 @@
          * Validate Serbian VAT number
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _rs: function(value) {
             if (!/^RS[0-9]{9}$/.test(value)) {
@@ -968,7 +993,7 @@
          * - Invalid: SI50223055
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _si: function(value) {
             if (!/^SI[0-9]{8}$/.test(value)) {
@@ -990,13 +1015,31 @@
         },
 
         /**
+         * Validate Swedish VAT number
+         * Examples:
+         * - Valid: SE123456789701
+         * - Invalid: SE123456789101
+         *
+         * @param {String} value VAT number
+         * @returns {Boolean}
+         */
+        _se: function(value) {
+            if (!/^SE[0-9]{10}01$/.test(value)) {
+                return false;
+            }
+
+            value = value.substr(2, 10);
+            return this._luhn(value);
+        },
+
+        /**
          * Validate Slovak VAT number
          * Examples:
          * - Valid: SK2022749619
          * - Invalid: SK2022749618
          *
          * @param {String} value VAT number
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _sk: function(value) {
             if (!/^SK[1-9][0-9][(2-4)|(6-9)][0-9]{7}$/.test(value)) {
