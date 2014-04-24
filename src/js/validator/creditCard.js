@@ -22,25 +22,7 @@
             }
             value = value.replace(/\D/g, '');
 
-            // Validate the check sum
-            // The Luhn Algorithm
-            // http://en.wikipedia.org/wiki/Luhn
-            var check = 0, digit = 0, even = false, length = value.length;
-
-            for (var n = length - 1; n >= 0; n--) {
-                digit = parseInt(value.charAt(n), 10);
-
-                if (even) {
-                    if ((digit *= 2) > 9) {
-                        digit -= 9;
-                    }
-                }
-
-                check += digit;
-                even = !even;
-            }
-
-            if ((check % 10) != 0) {
+            if (!$.fn.bootstrapValidator.helpers.luhn(value)) {
                 return false;
             }
 

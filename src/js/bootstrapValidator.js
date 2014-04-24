@@ -791,7 +791,7 @@
     // Helper methods, which can be used in validator class
     $.fn.bootstrapValidator.helpers = {
         /**
-         * Implement Luhn validation algorithm
+         * Implement Luhn validation algorithm ((http://en.wikipedia.org/wiki/Luhn))
          * Credit to https://gist.github.com/ShirtlessKirk/2134376
          *
          * @param {String} value
