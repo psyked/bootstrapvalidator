@@ -749,24 +749,6 @@
         },
 
         /**
-         * Validate Luxembourg VAT number
-         * Examples:
-         * - Valid: LU15027442
-         * - Invalid: LU15027443
-         *
-         * @param {String} value VAT number
-         * @returns {Boolean}
-         */
-        _lu: function(value) {
-            if (!/^LU[0-9]{8}$/.test(value)) {
-                return false;
-            }
-
-            value = value.substr(2);
-            return (value.substr(0, 6) % 89 == value.substr(6, 2));
-        },
-
-        /**
          * Validate Lithuanian VAT number
          * It can be:
          * - 9 digits, for legal entities
@@ -799,6 +781,79 @@
             }
             check = check % 11 % 10;
             return (check == value.charAt(length - 1));
+        },
+
+        /**
+         * Validate Luxembourg VAT number
+         * Examples:
+         * - Valid: LU15027442
+         * - Invalid: LU15027443
+         *
+         * @param {String} value VAT number
+         * @returns {Boolean}
+         */
+        _lu: function(value) {
+            if (!/^LU[0-9]{8}$/.test(value)) {
+                return false;
+            }
+
+            value = value.substr(2);
+            return (value.substr(0, 6) % 89 == value.substr(6, 2));
+        },
+
+        /**
+         * Validate Latvian VAT number
+         * Examples:
+         * - Valid: LV40003521600, LV16117519997
+         * - Invalid: LV40003521601, LV16137519997
+         *
+         * @param {String} value VAT number
+         * @returns {Boolean}
+         */
+        _lv: function(value) {
+            if (!/^LV[0-9]{11}$/.test(value)) {
+                return false;
+            }
+
+            value = value.substr(2);
+            var first  = parseInt(value.charAt(0)),
+                sum    = 0,
+                weight = [],
+                i      = 0,
+                length = value.length;
+            if (first > 3) {
+                // Legal entity
+                sum    = 0;
+                weight = [9, 1, 4, 8, 3, 10, 2, 5, 7, 6, 1];
+                for (i = 0; i < length; i++) {
+                    sum += parseInt(value.charAt(i)) * weight[i];
+                }
+                sum = sum % 11;
+                return (sum == 3);
+            } else {
+                // Check birth date
+                var day   = parseInt(value.substr(0, 2)),
+                    month = parseInt(value.substr(2, 2)),
+                    year  = parseInt(value.substr(4, 2));
+                year = year + 1800 + parseInt(value.charAt(6)) * 100;
+
+                try {
+                    var d = new Date(year, month, day);
+                } catch (ex) {
+                    return false;
+                }
+
+                // Check personal code
+                sum    = 0;
+                weight = [10, 5, 8, 4, 2, 1, 6, 3, 7, 9];
+                for (i = 0; i < length - 1; i++) {
+                    sum += parseInt(value.charAt(i)) * weight[i];
+                }
+                sum = (sum + 1) % 11 % 10;
+                return (sum == value.charAt(length - 1));
+            }
+
+            return true;
         },
 
         /**
