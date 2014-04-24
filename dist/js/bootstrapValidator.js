@@ -3440,6 +3440,24 @@
         },
 
         /**
+         * Validate Swedish VAT number
+         * Examples:
+         * - Valid: SE123456789701
+         * - Invalid: SE123456789101
+         *
+         * @param {String} value VAT number
+         * @returns {Boolean}
+         */
+        _se: function(value) {
+            if (!/^SE[0-9]{10}01$/.test(value)) {
+                return false;
+            }
+
+            value = value.substr(2, 10);
+            return $.fn.bootstrapValidator.helpers.luhn(value);
+        },
+
+        /**
          * Validate Slovenian VAT number
          * Examples:
          * - Valid: SI50223054
@@ -3465,24 +3483,6 @@
                 sum = 0;
             }
             return (sum == value.substr(7, 1));
-        },
-
-        /**
-         * Validate Swedish VAT number
-         * Examples:
-         * - Valid: SE123456789701
-         * - Invalid: SE123456789101
-         *
-         * @param {String} value VAT number
-         * @returns {Boolean}
-         */
-        _se: function(value) {
-            if (!/^SE[0-9]{10}01$/.test(value)) {
-                return false;
-            }
-
-            value = value.substr(2, 10);
-            return $.fn.bootstrapValidator.helpers.luhn(value);
         },
 
         /**
