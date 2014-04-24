@@ -837,6 +837,24 @@
                 sum = 0;
             }
             return (sum == value.substr(7, 1));
+        },
+
+        /**
+         * Validate Slovak VAT number
+         * Examples:
+         * - Valid: SK2022749619
+         * - Invalid: SK2022749618
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _sk: function(value) {
+            if (!/^SK[1-9][0-9][(2-4)|(6-9)][0-9]{7}$/.test(value)) {
+                return false;
+            }
+
+            value = value.substr(2);
+            return (value % 11 == 0);
         }
     };
 }(window.jQuery));
