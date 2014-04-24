@@ -3207,8 +3207,9 @@
         },
 
         /**
-         * Validate Norway VAT number
+         * Validate Norwegian VAT number
          *
+         * @see http://www.brreg.no/english/coordination/number.html
          * @param {String} value VAT number
          * @return {Boolean}
          */
@@ -3281,6 +3282,31 @@
                 sum = 0;
             }
             return (sum == value.substr(8, 1));
+        },
+
+        /**
+         * Validate Serbian VAT number
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _rs: function(value) {
+            if (!/^RS[0-9]{9}$/.test(value)) {
+                return false;
+            }
+
+            value = value.substr(2);
+            var sum  = 10,
+                temp = 0;
+            for (var i = 0; i < 8; i++) {
+                temp = (parseInt(value.charAt(i)) + sum) % 10;
+                if (temp == 0) {
+                    temp = 10;
+                }
+                sum = (2 * temp) % 11;
+            }
+
+            return ((sum + parseInt(value.substr(8, 1))) % 10 == 1);
         },
 
         /**
