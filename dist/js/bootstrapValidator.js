@@ -2395,46 +2395,8 @@
                 return true;
             }
 
-            var vatRegex = {
-                'AT': 'ATU[0-9]{8}',                                // Austria
-                'BE': 'BE[0]{0,1}[0-9]{9}',                         // Belgium
-                'BG': 'BG[0-9]{9,10}',                              // Bulgaria
-                'CH': 'CHE[0-9]{9}(MWST)?',                         // Switzerland
-                'CY': 'CY[0-5|9]{1}[0-9]{7}[A-Z]{1}',               // Cyprus
-                'CZ': 'CZ[0-9]{8,10}',                              // Czech Republic
-                'DE': 'DE[0-9]{9}',                                 // Germany
-                'DK': 'DK[0-9]{8}',                                 // Denmark
-                'EE': 'EE[0-9]{9}',                                 // Estonia
-                'ES': 'ES[0-9A-Z][0-9]{7}[0-9A-Z]',                 // Spain
-                'FI': 'FI[0-9]{8}',                                 // Finland
-                'FR': 'FR[0-9A-Z]{2}[0-9]{9}',                      // France
-                'EL': 'EL[0-9]{9}',                                 // Greece (EL is traditionally prefix of Greek VAT numbers)
-                'GR': 'GR[0-9]{9}',                                 // Greece
-                'GB': 'GB([0-9]{9}([0-9]{3})?|[A-Z]{2}[0-9]{3})',   // United Kingdom
-                'HU': 'HU[0-9]{8}',                                 // Hungary
-                'HR': 'HR[0-9]{11}',                                // Croatia
-                'IE': 'IE[0-9]S[0-9]{5}L',                          // Ireland
-                'IT': 'IT[0-9]{11}',                                // Italy
-                'LT': 'LT([0-9]{9}|[0-9]{12})',                     // Lithuania
-                'LU': 'LU[0-9]{8}',                                 // Luxembourg
-                'LV': 'LV[0-9]{11}',                                // Latvia
-                'MT': 'MT[0-9]{8}',                                 // Malta
-                'NL': 'NL[0-9]{9}B[0-9]{2}',                        // Netherlands
-                'PL': 'PL[0-9]{10}',                                // Poland
-                'PT': 'PT[0-9]{9}',                                 // Portugal
-                'RO': 'RO[0-9]{2,10}',                              // Romania
-                'SE': 'SE[0-9]{12}',                                // Sweden
-                'SI': 'SI[0-9]{8}',                                 // Slovenia
-                'SK': 'SK[0-9]{10}'                                 // Slovakia
-            };
-
-            value = value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
-            var country = (options.country || value.substr(0, 2)).toUpperCase();
-            if (!vatRegex[country] || !(new RegExp('^' + vatRegex[country] + '$')).test(value)) {
-                return false;
-            }
-
-            var method = ['_', country.toLowerCase()].join('');
+            var country = options.country || value.substr(0, 2),
+                method  = ['_', country.toLowerCase()].join('');
             if (this[method] && 'function' == typeof this[method]) {
                 return this[method](value);
             }
@@ -2452,6 +2414,10 @@
          * @return {Boolean}
          */
         _at: function(value) {
+            if (!/^ATU[0-9]{8}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(3);
             var sum    = 0,
                 weight = [1, 2, 1, 2, 1, 2, 1],
@@ -2483,6 +2449,10 @@
          * @return {Boolean}
          */
         _be: function(value) {
+            if (!/^BE[0]{0,1}[0-9]{9}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
             if (value.length == 9) {
                 value = '0' + value;
@@ -2509,6 +2479,10 @@
          * @return {Boolean}
          */
         _bg: function(value) {
+            if (!/^BG[0-9]{9,10}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
 
             var total = 0, sum = 0, weight = [], i = 0;
@@ -2597,6 +2571,10 @@
          * @return {Boolean}
          */
         _ch: function(value) {
+            if (!/^CHE[0-9]{9}(MWST)?$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(3);
             var sum    = 0,
                 weight = [5, 4, 3, 2, 7, 6, 5, 4];
@@ -2625,6 +2603,10 @@
          * @return {Boolean}
          */
         _cy: function(value) {
+            if (!/^CY[0-5|9]{1}[0-9]{7}[A-Z]{1}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
 
             // Do not allow to start with "12"
@@ -2665,6 +2647,10 @@
          * @return {Boolean}
          */
         _cz: function(value) {
+            if (!/^CZ[0-9]{8,10}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
 
             var sum = 0, weight = [], i = 0;
@@ -2751,6 +2737,10 @@
          * @return {Boolean}
          */
         _de: function(value) {
+            if (!/^DE[0-9]{9}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
             var product = 10,
                 sum     = 0;
@@ -2776,6 +2766,10 @@
          * @return {Boolean}
          */
         _dk: function(value) {
+            if (!/^DK[0-9]{8}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
             var sum    = 0,
                 weight = [2, 7, 6, 5, 4, 3, 2, 1];
@@ -2796,6 +2790,10 @@
          * @return {Boolean}
          */
         _ee: function(value) {
+            if (!/^EE[0-9]{9}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
             var sum    = 0,
                 weight = [3, 7, 1, 3, 7, 1, 3, 7, 1];
@@ -2822,6 +2820,10 @@
          * @return {Boolean}
          */
         _es: function(value) {
+            if (!/^ES[0-9A-Z][0-9]{7}[0-9A-Z]$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
             var dni = function(value) {
                     var check = parseInt(value.substr(0, 8), 10);
@@ -2882,6 +2884,10 @@
          * @return {Boolean}
          */
         _fi: function(value) {
+            if (!/^FI[0-9]{8}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
             var sum    = 0,
                 weight = [7, 9, 10, 5, 8, 4, 2, 1];
@@ -2905,6 +2911,10 @@
          * @return {Boolean}
          */
         _fr: function(value) {
+            if (!/^FR[0-9A-Z]{2}[0-9]{9}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
 
             // Validate SIREN number first
@@ -2956,6 +2966,10 @@
          * @return {Boolean}
          */
         _gr: function(value) {
+            if (!/^GR[0-9]{9}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
             if (value.length == 8) {
                 value = '0' + value;
@@ -2971,7 +2985,13 @@
             return (sum == value.substr(8, 1));
         },
 
+        // EL is traditionally prefix of Greek VAT numbers
         _el: function(value) {
+            if (!/^EL[0-9]{9}$/.test(value)) {
+                return false;
+            }
+
+            value = 'GR' + value.substr(2);
             return this._gr(value);
         },
 
@@ -2985,6 +3005,10 @@
          * @return {Boolean}
          */
         _hu: function(value) {
+            if (!/^HU[0-9]{8}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
             var sum    = 0,
                 weight = [9, 7, 3, 1, 9, 7, 3, 1];
@@ -3006,6 +3030,10 @@
          * @return {Boolean}
          */
         _hr: function(value) {
+            if (!/^HR[0-9]{11}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
             var sum  = 10,
                 temp = 0;
@@ -3022,6 +3050,46 @@
         },
 
         /**
+         * Validate Irish VAT number
+         * Examples:
+         * - Valid: IE6433435F, IE6433435OA, IE8D79739I
+         * - Invalid: IE8D79738J
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _ie: function(value) {
+            if (!/^IE[0-9]{1}[0-9A-Z\*\+]{1}[0-9]{5}[A-Z]{1,2}$/.test(value)) {
+                return false;
+            }
+
+            value = value.substr(2);
+            var getCheckDigit = function(value) {
+                while (value.length < 7) {
+                    value = '0' + value;
+                }
+                var alphabet = 'WABCDEFGHIJKLMNOPQRSTUV',
+                    sum      = 0;
+                for (var i = 0; i < 7; i++) {
+                    sum += parseInt(value.charAt(i)) * (8 - i);
+                }
+                sum += 9 * alphabet.indexOf(value.substr(7));
+                return alphabet[sum % 23];
+            };
+
+            // The first 7 characters are digits
+            if (/^[0-9]+$/.test(value.substr(0, 7))) {
+                // New system
+                return value.charAt(7) == getCheckDigit(value.substr(0, 7) + value.substr(8) + '');
+            } else if ('ABCDEFGHIJKLMNOPQRSTUVWXYZ+*'.indexOf(value.charAt(1)) != -1) {
+                // Old system
+                return value.charAt(7) == getCheckDigit(value.substr(2, 5) + value.substr(0, 1) + '');
+            }
+
+            return true;
+        },
+
+        /**
          * Validate Luxembourg VAT number
          * Examples:
          * - Valid: LU15027442
@@ -3031,6 +3099,10 @@
          * @return {Boolean}
          */
         _lu: function(value) {
+            if (!/^LU[0-9]{8}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
             return (value.substr(0, 6) % 89 == value.substr(6, 2));
         },
@@ -3045,6 +3117,10 @@
          * @return {Boolean}
          */
         _mt: function(value) {
+            if (!/^MT[0-9]{8}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
             var sum    = 0,
                 weight = [3, 4, 6, 7, 8, 9, 10, 1];
@@ -3066,6 +3142,10 @@
          * @return {Boolean}
          */
         _pl: function(value) {
+            if (!/^PL[0-9]{10}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
             var sum    = 0,
                 weight = [6, 5, 7, 2, 3, 4, 5, 6, 7, -1];
@@ -3087,6 +3167,10 @@
          * @return {Boolean}
          */
         _pt: function(value) {
+            if (!/^PT[0-9]{9}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
             var sum    = 0,
                 weight = [9, 8, 7, 6, 5, 4, 3, 2];
@@ -3111,6 +3195,10 @@
          * @return {Boolean}
          */
         _si: function(value) {
+            if (!/^SI[0-9]{8}$/.test(value)) {
+                return false;
+            }
+
             value = value.substr(2);
             var sum    = 0,
                 weight = [8, 7, 6, 5, 4, 3, 2];
