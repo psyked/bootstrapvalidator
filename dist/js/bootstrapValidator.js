@@ -2442,6 +2442,37 @@
         },
 
         /**
+         * Validate Austrian VAT number
+         * Example:
+         * - Valid: ATU13585627
+         * - Invalid: ATU13585626
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _isValidATVat: function(value) {
+            value = value.substr(3);
+            var sum    = 0,
+                weight = [1, 2, 1, 2, 1, 2, 1],
+                temp   = 0;
+
+            for (var i = 0; i < 7; i++) {
+                temp = parseInt(value.charAt(i)) * weight[i];
+                if (temp > 9) {
+                    temp = Math.floor(temp / 10) + temp % 10;
+                }
+                sum += temp;
+            }
+
+            sum = 10 - (sum + 4) % 10;
+            if (sum == 10) {
+                sum = 0;
+            }
+
+            return (sum == value.substr(7, 1));
+        },
+
+        /**
          * Validate Belgium VAT number
          * Example:
          * - Valid: BE0428759497
