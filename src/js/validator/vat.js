@@ -26,7 +26,7 @@
                 'BE': 'BE[0]{0,1}[0-9]{9}',                         // Belgium
                 'BG': 'BG[0-9]{9,10}',                              // Bulgaria
                 'CH': 'CHE[0-9]{9}(MWST)?',                         // Switzerland
-                'CY': 'CY[0-9]{8}L',                                // Cyprus
+                'CY': 'CY[0-5|9]{1}[0-9]{7}[A-Z]{1}',               // Cyprus
                 'CZ': 'CZ[0-9]{8,10}',                              // Czech Republic
                 'DE': 'DE[0-9]{9}',                                 // Germany
                 'DK': 'DK[0-9]{8}',                                 // Denmark
@@ -237,6 +237,41 @@
                 sum = 0;
             }
 
+            return (sum == value.substr(8, 1));
+        },
+
+        /**
+         * Validate Cypriot VAT number
+         * Examples:
+         * - Valid: CY10259033P
+         * - Invalid: CY10259033Z
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _cy: function(value) {
+            value = value.substr(2);
+
+            // Do not allow to start with "12"
+            if (value.substr(0, 2) == '12') {
+                return false;
+            }
+
+            // Extract the next digit and multiply by the counter.
+            var sum         = 0,
+                translation = {
+                    '0': 1,  '1': 0,  '2': 5,  '3': 7,  '4': 9,
+                    '5': 13, '6': 15, '7': 17, '8': 19, '9': 21
+                };
+            for (var i = 0; i < 8; i++) {
+                var temp = parseInt(value.charAt(i), 10);
+                if (i % 2 == 0) {
+                    temp = translation[temp + ''];
+                }
+                sum += temp;
+            }
+
+            sum = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[sum % 26];
             return (sum == value.substr(8, 1));
         },
 
