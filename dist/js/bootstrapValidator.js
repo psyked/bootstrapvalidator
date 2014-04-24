@@ -792,7 +792,7 @@
     // Helper methods, which can be used in validator class
     $.fn.bootstrapValidator.helpers = {
         /**
-         * Implement Luhn validation algorithm
+         * Implement Luhn validation algorithm ((http://en.wikipedia.org/wiki/Luhn))
          * Credit to https://gist.github.com/ShirtlessKirk/2134376
          *
          * @param {String} value
@@ -963,25 +963,7 @@
             }
             value = value.replace(/\D/g, '');
 
-            // Validate the check sum
-            // The Luhn Algorithm
-            // http://en.wikipedia.org/wiki/Luhn
-            var check = 0, digit = 0, even = false, length = value.length;
-
-            for (var n = length - 1; n >= 0; n--) {
-                digit = parseInt(value.charAt(n), 10);
-
-                if (even) {
-                    if ((digit *= 2) > 9) {
-                        digit -= 9;
-                    }
-                }
-
-                check += digit;
-                even = !even;
-            }
-
-            if ((check % 10) != 0) {
+            if (!$.fn.bootstrapValidator.helpers.luhn(value)) {
                 return false;
             }
 
@@ -3162,6 +3144,41 @@
 
             value = value.substr(2);
             return (value.substr(0, 6) % 89 == value.substr(6, 2));
+        },
+
+        /**
+         * Validate Lithuanian VAT number
+         * It can be:
+         * - 9 digits, for legal entities
+         * - 12 digits, for temporarily registered taxpayers
+         *
+         * Examples:
+         * - Valid: LT119511515, LT100001919017, LT100004801610
+         * - Invalid: LT100001919018
+         *
+         * @param {String} value VAT number
+         * @returns {Boolean}
+         */
+        _lt: function(value) {
+            if (!/^LT([0-9]{7}1[0-9]{1}|[0-9]{10}1[0-9]{1})$/.test(value)) {
+                return false;
+            }
+
+            value = value.substr(2);
+            var length = value.length,
+                sum    = 0;
+            for (var i = 0; i < length - 1; i++) {
+                sum += parseInt(value.charAt(i)) * (1 + i % 9);
+            }
+            var check = sum % 11;
+            if (check == 10) {
+                sum = 0;
+                for (var i = 0; i < length - 1; i++) {
+                    sum += parseInt(value.charAt(i)) * (1 + (i + 2) % 9);
+                }
+            }
+            check = check % 11 % 10;
+            return (check == value.charAt(length - 1));
         },
 
         /**

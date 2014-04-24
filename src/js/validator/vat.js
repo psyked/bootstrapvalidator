@@ -767,6 +767,41 @@
         },
 
         /**
+         * Validate Lithuanian VAT number
+         * It can be:
+         * - 9 digits, for legal entities
+         * - 12 digits, for temporarily registered taxpayers
+         *
+         * Examples:
+         * - Valid: LT119511515, LT100001919017, LT100004801610
+         * - Invalid: LT100001919018
+         *
+         * @param {String} value VAT number
+         * @returns {Boolean}
+         */
+        _lt: function(value) {
+            if (!/^LT([0-9]{7}1[0-9]{1}|[0-9]{10}1[0-9]{1})$/.test(value)) {
+                return false;
+            }
+
+            value = value.substr(2);
+            var length = value.length,
+                sum    = 0;
+            for (var i = 0; i < length - 1; i++) {
+                sum += parseInt(value.charAt(i)) * (1 + i % 9);
+            }
+            var check = sum % 11;
+            if (check == 10) {
+                sum = 0;
+                for (var i = 0; i < length - 1; i++) {
+                    sum += parseInt(value.charAt(i)) * (1 + (i + 2) % 9);
+                }
+            }
+            check = check % 11 % 10;
+            return (check == value.charAt(length - 1));
+        },
+
+        /**
          * Validate Maltese VAT number
          * Examples:
          * - Valid: MT11679112
