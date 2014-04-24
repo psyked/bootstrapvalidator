@@ -59,7 +59,7 @@
                 return false;
             }
 
-            var method = ['_isValid', country, 'Vat'].join('');
+            var method = ['_', country.toLowerCase()].join('');
             if (this[method] && 'function' == typeof this[method]) {
                 return this[method](value);
             }
@@ -76,7 +76,7 @@
          * @param {String} value VAT number
          * @return {Boolean}
          */
-        _isValidATVat: function(value) {
+        _at: function(value) {
             value = value.substr(3);
             var sum    = 0,
                 weight = [1, 2, 1, 2, 1, 2, 1],
@@ -107,7 +107,7 @@
          * @param {String} value VAT number
          * @return {Boolean}
          */
-        _isValidBEVat: function(value) {
+        _be: function(value) {
             value = value.substr(2);
             if (value.length == 9) {
                 value = '0' + value;
@@ -122,12 +122,106 @@
         },
 
         /**
+         * Validate Bulgarian VAT number
+         * Example:
+         * - Valid: BG175074752,
+         * BG7523169263, BG8032056031,
+         * BG7542011030,
+         * BG7111042925
+         * - Invalid: BG175074753, BG7552A10004, BG7111042922
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _bg: function(value) {
+            value = value.substr(2);
+
+            var total = 0, sum = 0, weight = [], i = 0;
+
+            // Legal entities
+            if (value.length == 9) {
+                for (i = 0; i < 8; i++) {
+                    sum += parseInt(value.charAt(i)) * (i + 1);
+                }
+                sum = sum % 11;
+                if (sum == 10) {
+                    sum = 0;
+                    for (i = 0; i < 8; i++) {
+                        sum += parseInt(value.charAt(i)) * (i + 3);
+                    }
+                }
+                sum = sum % 10;
+                return (sum == value.substr(8));
+            }
+            // Physical persons, foreigners and others
+            else if (value.length == 10) {
+                // Validate Bulgarian national identification numbers
+                var egn = function(value) {
+                        // Check the birth date
+                        var year  = parseInt(value.substr(0, 2), 10) + 1900,
+                            month = parseInt(value.substr(2, 2), 10),
+                            day   = parseInt(value.substr(4, 2), 10);
+                        if (month > 40) {
+                            year += 100;
+                            month -= 40;
+                        } else if (month > 20) {
+                            year -= 100;
+                            month -= 20;
+                        }
+
+                        try {
+                            var d = new Date(year, month, day);
+                        } catch (ex) {
+                            return false;
+                        }
+
+                        var sum    = 0,
+                            weight = [2, 4, 8, 5, 10, 9, 7, 3, 6];
+                        for (var i = 0; i < 9; i++) {
+                            sum += parseInt(value.charAt(i)) * weight[i];
+                        }
+                        sum = (sum % 11) % 10;
+                        return (sum == value.substr(9, 1));
+                    },
+                    // Validate Bulgarian personal number of a foreigner
+                    pnf = function(value) {
+                        var sum    = 0,
+                            weight = [21, 19, 17, 13, 11, 9, 7, 3, 1];
+                        for (var i = 0; i < 9; i++) {
+                            sum += parseInt(value.charAt(i)) * weight[i];
+                        }
+                        sum = sum % 10;
+                        return (sum == value.substr(9, 1));
+                    },
+                    // Finally, consider it as a VAT number
+                    vat = function(value) {
+                        var sum    = 0,
+                            weight = [4, 3, 2, 7, 6, 5, 4, 3, 2];
+                        for (var i = 0; i < 9; i++) {
+                            sum += parseInt(value.charAt(i)) * weight[i];
+                        }
+                        sum = 11 - sum % 11;
+                        if (sum == 10) {
+                            return false;
+                        }
+                        if (sum == 11) {
+                            sum = 0;
+                        }
+                        return (sum == value.substr(9, 1));
+                    };
+                return (egn(value) || pnf(value) || vat(value));
+            }
+
+            return false;
+        },
+
+        /**
          * Validate Swiss VAT number
          *
          * @param {String} value VAT number
          * @return {Boolean}
          */
-        _isValidCHVat: function(value) {
+        _ch: function(value) {
             value = value.substr(3);
             var sum    = 0,
                 weight = [5, 4, 3, 2, 7, 6, 5, 4];
@@ -155,7 +249,7 @@
          * @param {String} value VAT number
          * @return {Boolean}
          */
-        _isValidDEVat: function(value) {
+        _de: function(value) {
             value = value.substr(2);
             var product = 10,
                 sum     = 0;
@@ -180,7 +274,7 @@
          * @param {String} value VAT number
          * @return {Boolean}
          */
-        _isValidDKVat: function(value) {
+        _dk: function(value) {
             value = value.substr(2);
             var sum    = 0,
                 weight = [2, 7, 6, 5, 4, 3, 2, 1];
@@ -200,7 +294,7 @@
          * @param {String} value VAT number
          * @return {Boolean}
          */
-        _isValidEEVat: function(value) {
+        _ee: function(value) {
             value = value.substr(2);
             var sum    = 0,
                 weight = [3, 7, 1, 3, 7, 1, 3, 7, 1];
@@ -221,7 +315,7 @@
          * @param {String} value VAT number
          * @return {Boolean}
          */
-        _isValidFIVat: function(value) {
+        _fi: function(value) {
             value = value.substr(2);
             var sum    = 0,
                 weight = [7, 9, 10, 5, 8, 4, 2, 1];
@@ -242,7 +336,7 @@
          * @param {String} value VAT number
          * @return {Boolean}
          */
-        _isValidGRVat: function(value) {
+        _gr: function(value) {
             value = value.substr(2);
             if (value.length == 8) {
                 value = '0' + value;
@@ -258,8 +352,8 @@
             return (sum == value.substr(8, 1));
         },
 
-        _isValidELVat: function(value) {
-            return this._isValidGRVat(value);
+        _el: function(value) {
+            return this._gr(value);
         },
 
         /**
@@ -271,7 +365,7 @@
          * @param {String} value VAT number
          * @return {Boolean}
          */
-        _isValidHUVat: function(value) {
+        _hu: function(value) {
             value = value.substr(2);
             var sum    = 0,
                 weight = [9, 7, 3, 1, 9, 7, 3, 1];
@@ -292,7 +386,7 @@
          * @param {String} value VAT number
          * @return {Boolean}
          */
-        _isValidLUVat: function(value) {
+        _lu: function(value) {
             value = value.substr(2);
             return (value.substr(0, 6) % 89 == value.substr(6, 2));
         },
@@ -306,7 +400,7 @@
          * @param {String} value VAT number
          * @return {Boolean}
          */
-        _isValidMTVat: function(value) {
+        _mt: function(value) {
             value = value.substr(2);
             var sum    = 0,
                 weight = [3, 4, 6, 7, 8, 9, 10, 1];
@@ -327,7 +421,7 @@
          * @param {String} value VAT number
          * @return {Boolean}
          */
-        _isValidPLVat: function(value) {
+        _pl: function(value) {
             value = value.substr(2);
             var sum    = 0,
                 weight = [6, 5, 7, 2, 3, 4, 5, 6, 7, -1];
@@ -348,7 +442,7 @@
          * @param {String} value VAT number
          * @return {Boolean}
          */
-        _isValidPTVat: function(value) {
+        _pt: function(value) {
             value = value.substr(2);
             var sum    = 0,
                 weight = [9, 8, 7, 6, 5, 4, 3, 2];
@@ -372,7 +466,7 @@
          * @param {String} value VAT number
          * @return {Boolean}
          */
-        _isValidSIVat: function(value) {
+        _si: function(value) {
             value = value.substr(2);
             var sum    = 0,
                 weight = [8, 7, 6, 5, 4, 3, 2];
