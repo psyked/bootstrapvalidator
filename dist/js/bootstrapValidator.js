@@ -2657,8 +2657,8 @@
          * iii) Individuals without a RC (9 digit numbers beginning with 6)
          *
          * Examples:
-         * - Valid: (i) CZ25123891; (ii) CZ7103192745, CZ991231123; (iii) CZ640903926
-         * - Invalid: (ii) CZ1103492745, CZ590312123
+         * - Valid: i) CZ25123891; ii) CZ7103192745, CZ991231123; iii) CZ640903926
+         * - Invalid: i) CZ25123890; ii) CZ1103492745, CZ590312123
          *
          * @param {String} value VAT number
          * @return {Boolean}
@@ -2804,6 +2804,71 @@
             }
 
             return (sum % 10 == 0);
+        },
+
+        /**
+         * Validate Spanish VAT number (NIF - Número de Identificación Fiscal)
+         * Can be:
+         * i) DNI (Documento nacional de identidad), for Spaniards
+         * ii) NIE (Número de Identificación de Extranjeros), for foreigners
+         * iii) CIF (Certificado de Identificación Fiscal), for legal entities and others
+         *
+         * Examples:
+         * - Valid: i) ES54362315K; ii) ESX2482300W, ESX5253868R; iii) ESM1234567L, ESJ99216582, ESB58378431, ESB64717838
+         * - Invalid: i) ES54362315Z; ii) ESX2482300A; iii) ESJ99216583
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _es: function(value) {
+            value = value.substr(2);
+            var dni = function(value) {
+                    var check = parseInt(value.substr(0, 8), 10);
+                    check = 'TRWAGMYFPDXBNJZSQVHLCKE'[check % 23];
+                    return (check == value.substr(8, 1));
+                },
+                nie = function(value) {
+                    var check = ['XYZ'.indexOf(value.charAt(0)), value.substr(1)].join('');
+                    check = parseInt(check, 10);
+                    check = 'TRWAGMYFPDXBNJZSQVHLCKE'[check % 23];
+                    return (check == value.substr(8, 1));
+                },
+                cif = function(value) {
+                    var first = value.charAt(0), check;
+                    if ('KLM'.indexOf(first) != -1) {
+                        // K: Spanish younger than 14 year old
+                        // L: Spanish living outside Spain without DNI
+                        // M: Granted the tax to foreigners who have no NIE
+                        check = parseInt(value.substr(1, 8), 10);
+                        check = 'TRWAGMYFPDXBNJZSQVHLCKE'[check % 23];
+                        return (check == value.substr(8, 1));
+                    } else if ('ABCDEFGHJNPQRSUVW'.indexOf(first) != -1) {
+                        var sum    = 0,
+                            weight = [2, 1, 2, 1, 2, 1, 2],
+                            temp   = 0;
+
+                        for (var i = 0; i < 7; i++) {
+                            temp = parseInt(value.charAt(i + 1)) * weight[i];
+                            if (temp > 9) {
+                                temp = Math.floor(temp / 10) + temp % 10;
+                            }
+                            sum += temp;
+                        }
+                        sum = 10 - sum % 10;
+                        return (sum == value.substr(8, 1) || 'JABCDEFGHI'[sum] == value.substr(8, 1));
+                    }
+
+                    return false;
+                };
+
+            var first = value.charAt(0);
+            if (/^[0-9]$/.test(first)) {
+                return dni(value);
+            } else if (/^[XYZ]$/.test(first)) {
+                return nie(value);
+            } else {
+                return cif(value);
+            }
         },
 
         /**
