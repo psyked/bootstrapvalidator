@@ -19,7 +19,7 @@
                 length = value.length,
 			    tmp;
 			for (var i = 0; i < length; i++) {
-                tmp = parseInt(value.charAt(i));
+                tmp = parseInt(value.charAt(i), 10);
 				if ((i % 2) == 1) {
 					tmp = tmp * 2;
 					if (tmp > 9) {
@@ -28,7 +28,7 @@
 				}
 				sum += tmp;
 			}
-			return ((sum % 10) == 0);
+			return (sum % 10 == 0);
 		}
 	};
 }(window.jQuery));

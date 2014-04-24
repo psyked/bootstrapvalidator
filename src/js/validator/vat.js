@@ -519,6 +519,55 @@
         },
 
         /**
+         * Validate French VAT number (TVA - taxe sur la valeur ajoutée)
+         * It's constructed by a SIREN number, prefixed by two characters.
+         *
+         * Examples:
+         * - Valid: FR40303265045, FR23334175221, FRK7399859412, FR4Z123456782
+         * - Invalid: FR84323140391
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _fr: function(value) {
+            value = value.substr(2);
+
+            // Validate SIREN number first
+            var siren = value.substr(2),
+                sum   = 0,
+			    tmp;
+			for (var i = 0; i < 9; i++) {
+                tmp = parseInt(siren.charAt(i), 10);
+				if ((i % 2) == 1) {
+					tmp = tmp * 2;
+					if (tmp > 9) {
+						tmp -= 9;
+					}
+				}
+				sum += tmp;
+			}
+			if (sum % 10 != 0) {
+                return false;
+            }
+
+            if (/^[0-9]{2}$/.test(value.substr(0, 2))) {
+                // First two characters are digits
+                return value.substr(0, 2) == (parseInt(value.substr(2) + '12', 10) % 97);
+            } else {
+                // The first characters cann't be O and I
+                var alphabet = '0123456789ABCDEFGHJKLMNPQRSTUVWXYZ',
+                    check;
+                // First one is digit
+                if (/^[0-9]{1}$/.test(value.charAt(0))) {
+                    check = alphabet.indexOf(value.charAt(0)) * 24 + alphabet.indexOf(value.charAt(1)) - 10;
+                } else {
+                    check = alphabet.indexOf(value.charAt(0)) * 34 + alphabet.indexOf(value.charAt(1)) - 100;
+                }
+                return ((parseInt(value.substr(2), 10) + 1 + Math.floor(check / 11)) % 11) == (check % 11);
+            }
+        },
+
+        /**
          * Validate Greek VAT number
          * Examples:
          * - Valid: GR023456780, EL094259216
