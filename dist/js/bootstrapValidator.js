@@ -2412,6 +2412,7 @@
                 'GR': 'GR[0-9]{9}',                                 // Greece
                 'GB': 'GB([0-9]{9}([0-9]{3})?|[A-Z]{2}[0-9]{3})',   // United Kingdom
                 'HU': 'HU[0-9]{8}',                                 // Hungary
+                'HR': 'HR[0-9]{11}',                                // Croatia
                 'IE': 'IE[0-9]S[0-9]{5}L',                          // Ireland
                 'IT': 'IT[0-9]{11}',                                // Italy
                 'LT': 'LT([0-9]{9}|[0-9]{12})',                     // Lithuania
@@ -2907,20 +2908,24 @@
             value = value.substr(2);
 
             // Validate SIREN number first
-            var siren = value.substr(2),
-                sum   = 0,
-			    tmp;
-			for (var i = 0; i < 9; i++) {
-                tmp = parseInt(siren.charAt(i), 10);
-				if ((i % 2) == 1) {
-					tmp = tmp * 2;
-					if (tmp > 9) {
-						tmp -= 9;
-					}
-				}
-				sum += tmp;
-			}
-			if (sum % 10 != 0) {
+            var siren = function(value) {
+                var sum    = 0,
+                    length = value.length,
+			        tmp;
+                for (var i = 0; i < length; i++) {
+                    tmp = parseInt(value.charAt(i), 10);
+                    if ((i % 2) == 1) {
+                        tmp = tmp * 2;
+                        if (tmp > 9) {
+                            tmp -= 9;
+                        }
+                    }
+                    sum += tmp;
+                }
+                return (sum % 10 == 0);
+            };
+
+			if (!siren(value.substr(2))) {
                 return false;
             }
 
@@ -2989,6 +2994,31 @@
             }
 
             return (sum % 10 == 0);
+        },
+
+        /**
+         * Validate Croatian VAT number
+         * Examples:
+         * - Valid: HR33392005961
+         * - Invalid: HR33392005962
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _hr: function(value) {
+            value = value.substr(2);
+            var sum  = 10,
+                temp = 0;
+
+            for (var i = 0; i < 10; i++) {
+                temp = (parseInt(value.charAt(i), 10) + sum) % 10;
+                if (temp == 0) {
+                    temp = 10;
+                }
+                sum = (temp * 2) % 11;
+            }
+            sum += parseInt(value.substr(10, 1), 10);
+            return (sum % 10 == 1);
         },
 
         /**
