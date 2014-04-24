@@ -787,4 +787,28 @@
     $.fn.bootstrapValidator.validators = {};
 
     $.fn.bootstrapValidator.Constructor = BootstrapValidator;
+
+    // Helper methods, which can be used in validator class
+    $.fn.bootstrapValidator.helpers = {
+        /**
+         * Implement Luhn validation algorithm
+         * Credit to https://gist.github.com/ShirtlessKirk/2134376
+         *
+         * @param {String} value
+         * @returns {boolean}
+         */
+        luhn: function(value) {
+            var length  = value.length,
+                mul     = 0,
+                prodArr = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [0, 2, 4, 6, 8, 1, 3, 5, 7, 9]],
+                sum     = 0;
+
+            while (length--) {
+                sum += prodArr[mul][parseInt(value.charAt(length), 10)];
+                mul ^= 1;
+            }
+
+            return (sum % 10 === 0 && sum > 0);
+        }
+    };
 }(window.jQuery));

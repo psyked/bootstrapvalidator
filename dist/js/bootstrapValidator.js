@@ -788,6 +788,30 @@
     $.fn.bootstrapValidator.validators = {};
 
     $.fn.bootstrapValidator.Constructor = BootstrapValidator;
+
+    // Helper methods, which can be used in validator class
+    $.fn.bootstrapValidator.helpers = {
+        /**
+         * Implement Luhn validation algorithm
+         * Credit to https://gist.github.com/ShirtlessKirk/2134376
+         *
+         * @param {String} value
+         * @returns {boolean}
+         */
+        luhn: function(value) {
+            var length  = value.length,
+                mul     = 0,
+                prodArr = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [0, 2, 4, 6, 8, 1, 3, 5, 7, 9]],
+                sum     = 0;
+
+            while (length--) {
+                sum += prodArr[mul][parseInt(value.charAt(length), 10)];
+                mul ^= 1;
+            }
+
+            return (sum % 10 === 0 && sum > 0);
+        }
+    };
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.base64 = {
@@ -2404,29 +2428,6 @@
             return true;
         },
 
-        // Helper methods
-
-        /**
-         * Implement Luhn validation algorithm
-         * Credit to https://gist.github.com/ShirtlessKirk/2134376
-         *
-         * @param {String} value
-         * @returns {boolean}
-         */
-        _luhn: function(value) {
-            var length  = value.length,
-                mul     = 0,
-                prodArr = [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9], [0, 2, 4, 6, 8, 1, 3, 5, 7, 9]],
-                sum     = 0;
-
-            while (length--) {
-                sum += prodArr[mul][parseInt(value.charAt(length), 10)];
-                mul ^= 1;
-            }
-
-            return (sum % 10 === 0 && sum > 0);
-        },
-
         // VAT validators
 
         /**
@@ -3142,23 +3143,7 @@
                 return false;
             }
 
-            var sum    = 0,
-                weight = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2],
-                temp;
-            for (var i = 0; i < 10; i++) {
-                temp = parseInt(value.charAt(i)) * weight[i];
-                if (temp > 9) {
-                    temp = Math.floor(temp / 10) + temp % 10;
-                }
-                sum += temp;
-            }
-
-            sum = 10 - sum % 10;
-            if (sum > 9) {
-                sum = 0;
-            }
-
-            return (sum == value.substr(10, 1));
+            return $.fn.bootstrapValidator.helpers.luhn(value);
         },
 
         /**
@@ -3403,7 +3388,7 @@
             }
 
             value = value.substr(2, 10);
-            return this._luhn(value);
+            return $.fn.bootstrapValidator.helpers.luhn(value);
         },
 
         /**
