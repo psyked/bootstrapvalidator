@@ -25,6 +25,7 @@
                 'AT': 'ATU[0-9]{8}',                                // Austria
                 'BE': 'BE[0]{0,1}[0-9]{9}',                         // Belgium
                 'BG': 'BG[0-9]{9,10}',                              // Bulgaria
+                'CH': 'CHE[0-9]{9}(MWST)?',                         // Switzerland
                 'CY': 'CY[0-9]{8}L',                                // Cyprus
                 'CZ': 'CZ[0-9]{8,10}',                              // Czech Republic
                 'DE': 'DE[0-9]{9}',                                 // Germany
@@ -53,12 +54,12 @@
             };
 
             value = value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
-            var country = options.country || value.substr(0, 2);
+            var country = (options.country || value.substr(0, 2)).toUpperCase();
             if (!vatRegex[country] || !(new RegExp('^' + vatRegex[country] + '$')).test(value)) {
                 return false;
             }
 
-            var method = '_isValid' + country + 'Vat';
+            var method = ['_isValid', country, 'Vat'].join('');
             if (this[method] && 'function' == typeof this[method]) {
                 return this[method](value);
             }
@@ -87,6 +88,31 @@
 
             var sum = parseInt(value.substr(0, 8), 10) + parseInt(value.substr(8, 2), 10);
             return (sum % 97 == 0);
+        },
+
+        /**
+         * Validate Swiss VAT number
+         *
+         * @param {String} value VAT number
+         * @return {Boolean}
+         */
+        _isValidCHVat: function(value) {
+            value = value.substr(3);
+            var sum    = 0,
+                weight = [5, 4, 3, 2, 7, 6, 5, 4];
+            for (var i = 0; i < 8; i++) {
+                sum += parseInt(value.charAt(i), 10) * weight[i];
+            }
+
+            sum = 11 - sum % 11;
+            if (sum == 10) {
+                return false;
+            }
+            if (sum == 11) {
+                sum = 0;
+            }
+
+            return (sum == value.substr(8, 1));
         },
 
         /**
