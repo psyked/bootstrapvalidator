@@ -211,7 +211,7 @@
             if ('string' == typeof this.options.excluded) {
                 this.options.excluded = $.map(this.options.excluded.split(','), function(item) {
                     // Trim the spaces
-                    return item.trim();
+                    return $.trim(item);
                 });
             }
 

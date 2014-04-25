@@ -8,6 +8,7 @@
 * [#201](https://github.com/nghuuphuoc/bootstrapvalidator/issues/201): ```choice``` validator supports select element
 * [#202](https://github.com/nghuuphuoc/bootstrapvalidator/issues/202): Activate tab containing the first invalid field
 * [#205](https://github.com/nghuuphuoc/bootstrapvalidator/issues/205): Plugin method invocation
+* [#209](https://github.com/nghuuphuoc/bootstrapvalidator/issues/209): The ```excluded: ':disabled'``` setting does not work on IE 8, thanks to [@adgrafik](https://github.com/adgrafik)
 * [#210](https://github.com/nghuuphuoc/bootstrapvalidator/issues/210): ```isbn``` validator accepts letters and special characters
 
 ## v0.4.2 (2014-04-19)
