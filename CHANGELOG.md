@@ -3,7 +3,7 @@
 ## v0.4.3 (not released yet)
 
 * [#77](https://github.com/nghuuphuoc/bootstrapvalidator/issues/77): Add ```file``` validator
-* [#179](https://github.com/nghuuphuoc/bootstrapvalidator/issues/179): Add ```vat``` validator, support 32 countries
+* [#179](https://github.com/nghuuphuoc/bootstrapvalidator/issues/179): Add ```vat``` validator, support 33 countries
 * [#198](https://github.com/nghuuphuoc/bootstrapvalidator/pull/198): Add Canadian Postal Code support for the [```zipCode``` validator](http://bootstrapvalidator.com/validators/zip-code/), thanks to [@Francismori7](https://github.com/Francismori7)
 * [#201](https://github.com/nghuuphuoc/bootstrapvalidator/issues/201): ```choice``` validator supports select element
 * [#202](https://github.com/nghuuphuoc/bootstrapvalidator/issues/202): Activate tab containing the first invalid field

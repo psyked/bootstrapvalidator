@@ -3437,6 +3437,55 @@
         },
 
         /**
+         * Validate Russian VAT number (Taxpayer Identification Number - INN)
+         *
+         * @param {String} value VAT number
+         * @returns {Boolean}
+         */
+        _ru: function(value) {
+            if (!/^RU([0-9]{9}|[0-9]{12})$/.test(value)) {
+                return false;
+            }
+
+            value = value.substr(2);
+            if (value.length == 10) {
+                var sum    = 0,
+                    weight = [2, 4, 10, 3, 5, 9, 4, 6, 8, 0];
+                for (var i = 0; i < 10; i++) {
+                    sum += parseInt(value.charAt(i)) * weight[i];
+                }
+                sum = sum % 11;
+                if (sum > 9) {
+                    sum = sum % 10;
+                }
+
+                return (sum == value.substr(9, 1));
+            } else if (value.length == 12) {
+                var sum1    = 0,
+                    weight1 = [7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 0],
+                    sum2    = 0,
+                    weight2 = [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 0];
+
+                for (var i = 0; i < 11; i++) {
+                    sum1 += parseInt(value.charAt(i)) * weight1[i];
+                    sum2 += parseInt(value.charAt(i)) * weight2[i];
+                }
+                sum1 = sum1 % 11;
+                if (sum1 > 9) {
+                    sum1 = sum1 % 10;
+                }
+                sum2 = sum2 % 11;
+                if (sum2 > 9) {
+                    sum2 = sum2 % 10;
+                }
+
+                return (sum1 == value.substr(10, 1) && sum2 == value.substr(11, 1));
+            }
+
+            return false;
+        },
+
+        /**
          * Validate Serbian VAT number
          *
          * @param {String} value VAT number
