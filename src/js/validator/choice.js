@@ -19,10 +19,9 @@
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
-            var numChoices = validator
-                                    .getFieldElements($field.attr('data-bv-field'))
-                                    .filter(':checked')
-                                    .length;
+            var numChoices = $field.is('select')
+                            ? validator.getFieldElements($field.attr('data-bv-field')).find('option').filter(':selected').length
+                            : validator.getFieldElements($field.attr('data-bv-field')).filter(':checked').length;
             if ((options.min && numChoices < options.min) || (options.max && numChoices > options.max)) {
                 return false;
             }
