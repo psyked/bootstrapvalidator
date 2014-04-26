@@ -3,7 +3,7 @@
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
- * @version     v0.4.3
+ * @version     v0.4.3-dev
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -345,14 +345,14 @@
 
                 // Focus to the first invalid field
                 if (this.$invalidField) {
-                    this.$invalidField.focus();
-
                     // Activate the tab containing the invalid field if exists
                     var $tab = this.$invalidField.parents('.tab-pane'),
                         tabId;
                     if ($tab && (tabId = $tab.attr('id'))) {
                         $('a[href="#' + tabId + '"][data-toggle="tab"]').trigger('click.bs.tab.data-api');
                     }
+
+                    this.$invalidField.focus();
                 }
 
                 return;
