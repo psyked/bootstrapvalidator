@@ -1,16 +1,16 @@
 # Change Log
 
-## v0.4.3 (not released yet)
+## v0.4.3 (2014-04-26)
 
-* [#77](https://github.com/nghuuphuoc/bootstrapvalidator/issues/77): Add ```file``` validator
-* [#179](https://github.com/nghuuphuoc/bootstrapvalidator/issues/179): Add ```vat``` validator, support 33 countries
+* [#77](https://github.com/nghuuphuoc/bootstrapvalidator/issues/77): Add [```file``` validator](http://bootstrapvalidator.com/validators/file/)
+* [#179](https://github.com/nghuuphuoc/bootstrapvalidator/issues/179): Add [```vat``` validator](http://bootstrapvalidator.com/validators/vat/), support 32 countries
 * [#198](https://github.com/nghuuphuoc/bootstrapvalidator/pull/198): Add Canadian Postal Code support for the [```zipCode``` validator](http://bootstrapvalidator.com/validators/zip-code/), thanks to [@Francismori7](https://github.com/Francismori7)
-* [#201](https://github.com/nghuuphuoc/bootstrapvalidator/issues/201): ```choice``` validator supports select element
+* [#201](https://github.com/nghuuphuoc/bootstrapvalidator/issues/201): The [```choice``` validator](http://bootstrapvalidator.com/validators/choice/) supports ```select``` element
 * [#202](https://github.com/nghuuphuoc/bootstrapvalidator/issues/202): Activate tab containing the first invalid field
 * [#205](https://github.com/nghuuphuoc/bootstrapvalidator/issues/205): Plugin method invocation
 * [#207](https://github.com/nghuuphuoc/bootstrapvalidator/issues/207): IE8 error
-* [#209](https://github.com/nghuuphuoc/bootstrapvalidator/issues/209): The ```excluded: ':disabled'``` setting does not work on IE 8, thanks to [@adgrafik](https://github.com/adgrafik)
-* [#210](https://github.com/nghuuphuoc/bootstrapvalidator/issues/210): ```isbn``` validator accepts letters and special characters
+* [#209](https://github.com/nghuuphuoc/bootstrapvalidator/issues/209): The [```excluded: ':disabled'``` setting](http://bootstrapvalidator.com/settings/#excluded) does not work on IE 8, thanks to [@adgrafik](https://github.com/adgrafik)
+* [#210](https://github.com/nghuuphuoc/bootstrapvalidator/issues/210): The [```isbn``` validator](http://bootstrapvalidator.com/validators/isbn/) accepts letters and special characters
 
 ## v0.4.2 (2014-04-19)
 
