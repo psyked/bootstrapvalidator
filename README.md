@@ -1,4 +1,4 @@
-# BootstrapValidator - [v0.4.2](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.2/bootstrapvalidator-dist-0.4.2.zip)
+# BootstrapValidator - [v0.4.3](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.3/bootstrapvalidator-dist-0.4.3.zip)
 
 [http://bootstrapvalidator.com](http://bootstrapvalidator.com) - A jQuery plugin to validate form fields. Use with [Bootstrap 3](http://getbootstrap.com)
 
@@ -60,7 +60,7 @@ __Compatibility__
  
 ## Download
 
-Latest version: [v0.4.2 (61 KB)](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.2/bootstrapvalidator-dist-0.4.2.zip), released on 2014-04-19.
+Latest version: [v0.4.3 (78 KB)](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.3/bootstrapvalidator-dist-0.4.3.zip), released on 2014-04-26.
 
 For older versions, look at the [Releases](https://github.com/nghuuphuoc/bootstrapvalidator/releases) page.
 
