@@ -2673,7 +2673,8 @@
 
             value = value.substr(2);
 
-            var sum = 0, weight = [], i = 0;
+            var sum = 0,
+                i   = 0;
             if (value.length == 8) {
                 // Do not allow to start with '9'
                 if (value.charAt(0) + '' == '9') {
@@ -2681,7 +2682,7 @@
                 }
 
                 sum = 0;
-                for (var i = 0; i < 7; i++) {
+                for (i = 0; i < 7; i++) {
                     sum += parseInt(value.charAt(i), 10) * (8 - i);
                 }
                 sum = 11 - sum % 11;
@@ -2696,7 +2697,7 @@
             } else if (value.length == 9 && (value.charAt(0) + '' == '6')) {
                 sum = 0;
                 // Skip the first (which is 6)
-                for (var i = 0; i < 7; i++) {
+                for (i = 0; i < 7; i++) {
                     sum += parseInt(value.charAt(i + 1), 10) * (8 - i);
                 }
                 sum = 11 - sum % 11;
@@ -2710,38 +2711,36 @@
                 return (sum == value.substr(8, 1));
             } else if (value.length == 9 || value.length == 10) {
                 // Validate Czech birth number (Rodné číslo), which is also national identifier
-                var rc = function(value) {
-                    var year  = 1900 + parseInt(value.substr(0, 2)),
-                        month = parseInt(value.substr(2, 2)) % 50 % 20,
-                        day   = parseInt(value.substr(4, 2));
-                    if (value.length == 9) {
-                        if (year >= 1980) {
-                            year -= 100;
-                        }
-                        if (year > 1953) {
-                            return false;
-                        }
-                    } else if (year < 1954) {
-                        year += 100;
+                var year  = 1900 + parseInt(value.substr(0, 2)),
+                    month = parseInt(value.substr(2, 2)) % 50 % 20,
+                    day   = parseInt(value.substr(4, 2));
+                if (value.length == 9) {
+                    if (year >= 1980) {
+                        year -= 100;
                     }
-
-                    try {
-                        var d = new Date(year, month, day);
-                    } catch (ex) {
+                    if (year > 1953) {
                         return false;
                     }
+                } else if (year < 1954) {
+                    year += 100;
+                }
 
-                    // Check that the birth date is not in the future
-                    if (value.length == 10) {
-                        var check = parseInt(value.substr(0, 9), 10) % 11;
-                        if (year < 1985) {
-                            check = check % 10;
-                        }
-                        return (check == value.substr(9, 1));
+                try {
+                    var d = new Date(year, month, day);
+                } catch (ex) {
+                    return false;
+                }
+
+                // Check that the birth date is not in the future
+                if (value.length == 10) {
+                    var check = parseInt(value.substr(0, 9), 10) % 11;
+                    if (year < 1985) {
+                        check = check % 10;
                     }
+                    return (check == value.substr(9, 1));
+                }
 
-                    return true;
-                };
+                return true;
             }
 
             return false;
