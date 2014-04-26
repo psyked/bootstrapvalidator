@@ -25,9 +25,16 @@
         // Determine the event that is fired when user change the field value
         // Most modern browsers supports input event except IE 7, 8.
         // IE 9 supports input event but the event is still not fired if I press the backspace key.
-        // In that case I will use the keydown event
+        // Get IE version
+        // https://gist.github.com/padolsey/527683/#comment-7595
+        var ieVersion = (function() {
+            var v = 3, div = document.createElement('div'), a = div.all || [];
+            while (div.innerHTML = '<!--[if gt IE '+(++v)+']><br><![endif]-->', a[0]);
+            return v > 4 ? v : !v;
+        }());
+
         var el = document.createElement('div');
-        this._changeEvent = ('oninput' in el) ? 'input' : 'keydown';
+        this._changeEvent = (ieVersion === 9 || !('oninput' in el)) ? 'keyup' : 'input';
 
         // The flag to indicate that the form is ready to submit when a remote/callback validator returns
         this._submitIfValid = null;
