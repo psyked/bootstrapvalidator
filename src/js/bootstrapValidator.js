@@ -264,7 +264,7 @@
                     $message = this.options.fields[field].container ? $parent.find(this.options.fields[field].container) : this._getMessageContainer($field);
 
                 // Set the attribute to indicate the fields which are defined by selector
-                if (!$field.attr('data-bv-field')) {
+                if (this.options.fields[field].selector) {
                     $field.attr('data-bv-field', field);
                 }
 

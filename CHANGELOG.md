@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.4.4 (not released yet)
+
+* [#191](https://github.com/nghuuphuoc/bootstrapvalidator/issues/191), [#223](https://github.com/nghuuphuoc/bootstrapvalidator/issues/223): Support using both the ```name``` attribute and ```selector``` option for field
+
 ## v0.4.3 (2014-04-26)
 
 * [#77](https://github.com/nghuuphuoc/bootstrapvalidator/issues/77): Add [```file``` validator](http://bootstrapvalidator.com/validators/file/)

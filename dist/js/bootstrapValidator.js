@@ -3,7 +3,7 @@
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
- * @version     v0.4.3
+ * @version     v0.4.4-dev
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -265,7 +265,7 @@
                     $message = this.options.fields[field].container ? $parent.find(this.options.fields[field].container) : this._getMessageContainer($field);
 
                 // Set the attribute to indicate the fields which are defined by selector
-                if (!$field.attr('data-bv-field')) {
+                if (this.options.fields[field].selector) {
                     $field.attr('data-bv-field', field);
                 }
 
