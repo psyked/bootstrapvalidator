@@ -265,8 +265,8 @@
                 $field.on(event + '.update.bv', function() {
                     // Reset the flag
                     that._submitIfValid = false;
-                    updateAll ? that.updateStatus(field, that.STATUS_NOT_VALIDATED, null)
-                              : that.updateElementStatus($(this), that.STATUS_NOT_VALIDATED, null);
+                    updateAll ? that.updateStatus(field, that.STATUS_NOT_VALIDATED)
+                              : that.updateElementStatus($(this), that.STATUS_NOT_VALIDATED);
                 });
 
                 // Create help block elements for showing the error messages
@@ -419,7 +419,6 @@
                     if (fields) {
                         var type      = fields.attr('type'),
                             total     = fields.length,
-                            updateAll = (total == 1) || ('radio' == type) || ('checkbox' == type),
                             trigger   = that.options.fields[field].trigger
                                         || that.options.trigger
                                         || (('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : that._changeEvent),
@@ -430,7 +429,7 @@
                         for (var i = 0; i < total; i++) {
                             ('enabled' == mode)
                                 ? $(fields[i]).on(events, function() {
-                                    updateAll ? that.validateField(f) : that.validateFieldElement($(this), false);
+                                    that.validateFieldElement($(this));
                                 })
                                 : $(fields[i]).off(events);
                         }
@@ -493,7 +492,7 @@
                 n      = (('radio' == type) || ('checkbox' == type)) ? 1 : fields.length;
 
             for (var i = 0; i < n; i++) {
-                this.validateFieldElement($(fields[i]), (n == 1));
+                this.validateFieldElement($(fields[i]));
             }
 
             return this;
@@ -503,12 +502,14 @@
          * Validate field element
          *
          * @param {jQuery} $field The field element
-         * @param {Boolean} updateAll If true, update status of all elements which have the same name
          * @returns {BootstrapValidator}
          */
-        validateFieldElement: function($field, updateAll) {
+        validateFieldElement: function($field) {
             var that       = this,
                 field      = $field.attr('data-bv-field'),
+                fields     = this.getFieldElements(field),
+                type       = $field.attr('type'),
+                updateAll  = (fields && fields.length == 1) || ('radio' == type) || ('checkbox' == type),
                 validators = this.options.fields[field].validators,
                 validatorName,
                 validateResult;
@@ -714,6 +715,14 @@
 
         // Useful APIs which aren't used internally
 
+        addFieldElement: function($field, options) {
+            return this;
+        },
+
+        removeFieldElement: function($field) {
+            return this;
+        },
+
         /**
          * Reset the form
          *
@@ -733,7 +742,7 @@
                 }
 
                 // Mark field as not validated yet
-                this.updateStatus(field, this.STATUS_NOT_VALIDATED, null);
+                this.updateStatus(field, this.STATUS_NOT_VALIDATED);
 
                 if (resetFormData) {
                     type = fields.attr('type');
@@ -759,7 +768,7 @@
          */
         enableFieldValidators: function(field, enabled) {
             this.options.fields[field]['enabled'] = enabled;
-            this.updateStatus(field, this.STATUS_NOT_VALIDATED, null);
+            this.updateStatus(field, this.STATUS_NOT_VALIDATED);
 
             return this;
         }
