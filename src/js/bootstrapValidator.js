@@ -32,6 +32,7 @@
         // The flag to indicate that the form is ready to submit when a remote/callback validator returns
         this._submitIfValid = null;
 
+        // Field elements
         this._cacheFields = {};
 
         this._init();
@@ -253,20 +254,20 @@
         },
 
         _initFieldElement: function($field) {
-            var that     = this,
-                field    = $field.attr('name') || $field.attr('data-bv-field'),
-                fields   = this.getFieldElements(field),
-                index    = fields.index($field),
-                type     = $field.attr('type'),
+            var that      = this,
+                field     = $field.attr('name') || $field.attr('data-bv-field'),
+                fields    = this.getFieldElements(field),
+                index     = fields.index($field),
+                type      = $field.attr('type'),
                 total     = fields.length,
                 updateAll = (total == 1) || ('radio' == type) || ('checkbox' == type),
-                $parent  = $field.parents('.form-group'),
+                $parent   = $field.parents('.form-group'),
                 // Allow user to indicate where the error messages are shown
-                $message = this.options.fields[field].container ? $parent.find(this.options.fields[field].container) : this._getMessageContainer($field);
+                $message  = this.options.fields[field].container ? $parent.find(this.options.fields[field].container) : this._getMessageContainer($field);
 
             // Remove all error messages and feedback icons
-            //$message.find('.help-block[data-bv-validator]').remove();
-            //$parent.find('i[data-bv-field]').remove();
+            $message.find('.help-block[data-bv-validator]').remove();
+            $parent.find('i[data-bv-field]').remove();
 
             // Set the attribute to indicate the fields which are defined by selector
             if (!$field.attr('data-bv-field')) {
@@ -275,7 +276,7 @@
 
             // Whenever the user change the field value, mark it as not validated yet
             var event = ('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == $field.get(0).tagName) ? 'change' : this._changeEvent;
-            $field.on(event + '.update.bv', function() {
+            $field.off(event + '.update.bv').on(event + '.update.bv', function() {
                 // Reset the flag
                 that._submitIfValid = false;
                 that.updateElementStatus($(this), that.STATUS_NOT_VALIDATED);
@@ -302,7 +303,7 @@
                 && this.options.feedbackIcons.validating && this.options.feedbackIcons.invalid && this.options.feedbackIcons.valid
                 && (!updateAll || index == total - 1))
             {
-                $parent.addClass('has-feedback');
+                $parent.removeClass('has-success').removeClass('has-error').addClass('has-feedback');
                 var $icon = $('<i/>').css('display', 'none').addClass('form-control-feedback').attr('data-bv-field', field).insertAfter($field);
                 // The feedback icon does not render correctly if there is no label
                 // https://github.com/twbs/bootstrap/issues/12873
@@ -727,16 +728,49 @@
 
         // Useful APIs which aren't used internally
 
+        /**
+         * Add new field element
+         *
+         * @param {jQuery} $field The field element
+         * @param {Object} options The field options
+         * @returns {BootstrapValidator}
+         */
         addFieldElement: function($field, options) {
-            var field = $field.attr('name') || $field.attr('data-bv-field');
-            this._cacheFields[field].push($field);
-            this._initFieldElement($field);
+            var field      = $field.attr('name') || $field.attr('data-bv-field'),
+                type       = $field.attr('type'),
+                isNewField = !this._cacheFields[field];
+
+            // Update cache
+            if (!isNewField && this._cacheFields[field].index($field) == -1) {
+                this._cacheFields[field] = this._cacheFields[field].add($field);
+            }
+
+            if ('checkbox' == type || 'radio' == type || isNewField) {
+                this._initField(field);
+            } else {
+                this._initFieldElement($field);
+            }
+
             return this;
         },
 
+        /**
+         * Remove given field element
+         *
+         * @param {jQuery} $field The field element
+         * @returns {BootstrapValidator}
+         */
         removeFieldElement: function($field) {
-            var field = $field.attr('name') || $field.attr('data-bv-field');
-            delete this._cacheFields[field];
+            var field = $field.attr('name') || $field.attr('data-bv-field'),
+                type  = $field.attr('type'),
+                index = this._cacheFields[field].index($field);
+
+            (index == -1) ? (delete this._cacheFields[field]) : this._cacheFields[field].splice(index, 1);
+
+            if ('checkbox' == type || 'radio' == type) {
+                this._initField(field);
+            }
+
             return this;
         },
 
