@@ -803,7 +803,7 @@
          * Credit to https://gist.github.com/ShirtlessKirk/2134376
          *
          * @param {String} value
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         luhn: function(value) {
             var length  = value.length,
@@ -817,6 +817,21 @@
             }
 
             return (sum % 10 === 0 && sum > 0);
+        },
+
+        /**
+         * Implement modulus 11, 10 (ISO 7064) algorithm
+         *
+         * @param {String} value
+         * @returns {Boolean}
+         */
+        mod_11_10: function(value) {
+            var check  = 5,
+                length = value.length;
+            for (var i = 0; i < length; i++) {
+                check = (((check || 10) * 2) % 11 + parseInt(value.charAt(i), 10)) % 10;
+            }
+            return (check == 1);
         }
     };
 }(window.jQuery));
@@ -2932,18 +2947,7 @@
             }
 
             value = value.substr(2);
-            var product = 10,
-                sum     = 0;
-            for (var i = 0; i < 8; i++) {
-                sum = (parseInt(value.charAt(i), 10) + product) % 10;
-                if (sum == 0) {
-                    sum = 10;
-                }
-                product = (sum * 2) % 11;
-            }
-
-            var checkDigit = (11 - product == 10) ? 0 : (11 - product);
-            return (checkDigit == value.substr(8, 1));
+            return $.fn.bootstrapValidator.helpers.mod_11_10(value);
         },
 
         /**
@@ -3257,18 +3261,7 @@
             }
 
             value = value.substr(2);
-            var sum  = 10,
-                temp = 0;
-
-            for (var i = 0; i < 10; i++) {
-                temp = (parseInt(value.charAt(i), 10) + sum) % 10;
-                if (temp == 0) {
-                    temp = 10;
-                }
-                sum = (temp * 2) % 11;
-            }
-            sum += parseInt(value.substr(10, 1), 10);
-            return (sum % 10 == 1);
+            return $.fn.bootstrapValidator.helpers.mod_11_10(value);
         },
 
         /**

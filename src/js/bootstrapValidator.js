@@ -802,7 +802,7 @@
          * Credit to https://gist.github.com/ShirtlessKirk/2134376
          *
          * @param {String} value
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         luhn: function(value) {
             var length  = value.length,
@@ -816,6 +816,21 @@
             }
 
             return (sum % 10 === 0 && sum > 0);
+        },
+
+        /**
+         * Implement modulus 11, 10 (ISO 7064) algorithm
+         *
+         * @param {String} value
+         * @returns {Boolean}
+         */
+        mod_11_10: function(value) {
+            var check  = 5,
+                length = value.length;
+            for (var i = 0; i < length; i++) {
+                check = (((check || 10) * 2) % 11 + parseInt(value.charAt(i), 10)) % 10;
+            }
+            return (check == 1);
         }
     };
 }(window.jQuery));

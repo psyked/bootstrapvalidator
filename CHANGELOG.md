@@ -2,6 +2,7 @@
 
 ## v0.4.4 (not released yet)
 
+* Add ```$.fn.bootstrapValidator.helpers.mod_11_10``` method that implements modulus 11, 10 (ISO 7064) algorithm. The helper is then reused in validating [German and Croatian VAT](http://bootstrapvalidator.com/validators/vat/) numbers
 * [#213](https://github.com/nghuuphuoc/bootstrapvalidator/issues/213): Add EAN (International Article Number) validator
 * [#215](https://github.com/nghuuphuoc/bootstrapvalidator/issues/215): Add IMEI (International Mobile Station Equipment Identity) validator
 * [#216](https://github.com/nghuuphuoc/bootstrapvalidator/issues/216): Add ISMN (International Standard Music Number) validator
@@ -11,6 +12,7 @@
 
 ## v0.4.3 (2014-04-26)
 
+* Add ```$.fn.bootstrapValidator.helpers.luhn``` method that implements the Luhn algorithm
 * [#77](https://github.com/nghuuphuoc/bootstrapvalidator/issues/77): Add [```file``` validator](http://bootstrapvalidator.com/validators/file/)
 * [#179](https://github.com/nghuuphuoc/bootstrapvalidator/issues/179): Add [```vat``` validator](http://bootstrapvalidator.com/validators/vat/), support 32 countries
 * [#198](https://github.com/nghuuphuoc/bootstrapvalidator/pull/198): Add Canadian Postal Code support for the [```zipCode``` validator](http://bootstrapvalidator.com/validators/zip-code/), thanks to [@Francismori7](https://github.com/Francismori7)
