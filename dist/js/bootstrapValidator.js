@@ -1167,28 +1167,14 @@
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options Can consist of the following keys:
-         * - format: The date format. Default is MM/DD/YYYY
-         * Support the following formats:
-         *      YYYY/DD/MM
-         *      YYYY/DD/MM h:m A
-         *      YYYY/MM/DD
-         *      YYYY/MM/DD h:m A
-         *
-         *      YYYY-DD-MM
-         *      YYYY-DD-MM h:m A
-         *      YYYY-MM-DD
-         *      YYYY-MM-DD h:m A
-         *
-         *      MM/DD/YYYY
-         *      MM/DD/YYYY h:m A
-         *      DD/MM/YYYY
-         *      DD/MM/YYYY h:m A
-         *
-         *      MM-DD-YYYY
-         *      MM-DD-YYYY h:m A
-         *      DD-MM-YYYY
-         *      DD-MM-YYYY h:m A
          * - message: The invalid message
+         * - format: The date format. Default is MM/DD/YYYY
+         * The format can be:
+         *
+         * i) date: Consist of DD, MM, YYYY parts which are separated by /
+         * ii) date and time:
+         * The time can consist of h, m, s parts which are separated by :
+         * ii) date, time and A (indicating AM or PM)
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
@@ -1196,67 +1182,70 @@
             if (value == '') {
                 return true;
             }
-            // Determine the separator
+
             options.format = options.format || 'MM/DD/YYYY';
-            var separator = (options.format.indexOf('/') != -1)
-                            ? '/'
-                            : ((options.format.indexOf('-') != -1) ? '-' : null);
+
+            var formats    = options.format.split(' '),
+                dateFormat = formats[0],
+                timeFormat = (formats.length > 1) ? formats[1] : null,
+                amOrPm     = (formats.length > 2) ? formats[2] : null,
+                sections   = value.split(' '),
+                date       = sections[0],
+                time       = (sections.length > 1) ? sections[1] : null;
+
+            if (formats.length != sections.length) {
+                return false;
+            }
+
+            // Determine the separator
+            var separator = (date.indexOf('/') != -1) ? '/' : ((date.indexOf('-') != -1) ? '-' : null);
             if (separator == null) {
                 return false;
             }
 
-            var month, day, year, minutes = null, hours = null, matches;
-            switch (true) {
-                case (separator == '/' && (matches = value.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/i)) && options.format == 'YYYY/DD/MM'):
-                case (separator == '-' && (matches = value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/i)) && options.format == 'YYYY-DD-MM'):
-                    year = matches[1]; day = matches[2]; month = matches[3];
-                    break;
+            // Determine the date
+            date       = date.split(separator);
+            dateFormat = dateFormat.split(separator);
+            var year  = date[dateFormat.indexOf('YYYY')],
+                month = date[dateFormat.indexOf('MM')],
+                day   = date[dateFormat.indexOf('DD')];
 
-                case (separator == '/' && (matches = value.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/i)) && options.format == 'DD/MM/YYYY'):
-                case (separator == '-' && (matches = value.match(/^(\d{1,2})-(\d{1,2})-(\d{4})$/i)) && options.format == 'DD-MM-YYYY'):
-                    day = matches[1]; month = matches[2]; year = matches[3];
-                    break;
+            // Determine the time
+            var minutes = null, hours = null, seconds = null;
+            if (timeFormat) {
+                timeFormat = timeFormat.split(':'),
+                time       = time.split(':');
 
-                case (separator == '/' && (matches = value.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/i)) && options.format == 'YYYY/MM/DD'):
-                case (separator == '-' && (matches = value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/i)) && options.format == 'YYYY-MM-DD'):
-                    year = matches[1]; month = matches[2]; day = matches[3];
-                    break;
-
-                case (separator == '/' && (matches = value.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/i)) && options.format == 'MM/DD/YYYY'):
-                case (separator == '-' && (matches = value.match(/^(\d{1,2})-(\d{1,2})-(\d{4})$/i)) && options.format == 'MM-DD-YYYY'):
-                    month = matches[1]; day = matches[2]; year = matches[3];
-                    break;
-
-                case (separator == '/' && (matches = value.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})\s+(\d{1,2}):(\d{1,2})\s+(AM|PM)$/i)) && options.format == 'YYYY/DD/MM h:m A'):
-                case (separator == '-' && (matches = value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})\s+(\d{1,2}):(\d{1,2})\s+(AM|PM)$/i)) && options.format == 'YYYY-DD-MM h:m A'):
-                    year = matches[1]; day = matches[2]; month = matches[3]; hours = matches[4]; minutes = matches[5];
-                    break;
-
-                case (separator == '/' && (matches = value.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})\s+(\d{1,2}):(\d{1,2})\s+(AM|PM)$/i)) && options.format == 'DD/MM/YYYY h:m A'):
-                case (separator == '-' && (matches = value.match(/^(\d{1,2})-(\d{1,2})-(\d{4})\s+(\d{1,2}):(\d{1,2})\s+(AM|PM)$/i)) && options.format == 'DD-MM-YYYY h:m A'):
-                    day = matches[1]; month = matches[2]; year = matches[3]; hours = matches[4]; minutes = matches[5];
-                    break;
-
-                case (separator == '/' && (matches = value.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})\s+(\d{1,2}):(\d{1,2})\s+(AM|PM)$/i)) && options.format == 'YYYY/MM/DD h:m A'):
-                case (separator == '-' && (matches = value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})\s+(\d{1,2}):(\d{1,2})\s+(AM|PM)$/i)) && options.format == 'YYYY-MM-DD h:m A'):
-                    year = matches[1]; month = matches[2]; day = matches[3]; hours = matches[4]; minutes = matches[5];
-                    break;
-
-                case (separator == '/' && (matches = value.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})\s+(\d{1,2}):(\d{1,2})\s+(AM|PM)$/i)) && options.format == 'MM/DD/YYYY h:m A'):
-                case (separator == '-' && (matches = value.match(/^(\d{1,2})-(\d{1,2})-(\d{4})\s+(\d{1,2}):(\d{1,2})\s+(AM|PM)$/i)) && options.format == 'MM-DD-YYYY h:m A'):
-                    month = matches[1]; day = matches[2]; year = matches[3]; hours = matches[4]; minutes = matches[5];
-                    break;
-
-                default:
+                if (timeFormat.length != time.length) {
                     return false;
-            }
+                }
 
-            // Validate hours and minutes
-            if (hours && minutes) {
-                hours   = parseInt(hours, 10);
-                minutes = parseInt(minutes, 10);
-                if (hours < 1 || hours > 12 || minutes < 0 || minutes > 59) {
-                    return false;
+                hours   = time.length > 0 ? time[0] : null;
+                minutes = time.length > 1 ? time[1] : null;
+                seconds = time.length > 2 ? time[2] : null;
+
+                // Validate seconds
+                if (seconds) {
+                    seconds = parseInt(seconds, 10);
+                    if (seconds < 0 || seconds > 60) {
+                        return false;
+                    }
+                }
+
+                // Validate hours
+                if (hours) {
+                    hours = parseInt(hours, 10);
+                    if (hours < 0 || hours >= 24 || (amOrPm && hours > 12)) {
+                        return false;
+                    }
+                }
+
+                // Validate minutes
+                if (minutes) {
+                    minutes = parseInt(minutes, 10);
+                    if (minutes < 0 || minutes > 59) {
+                        return false;
+                    }
                 }
             }
 
