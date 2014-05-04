@@ -831,6 +831,27 @@
                 check = (((check || 10) * 2) % 11 + parseInt(value.charAt(i), 10)) % 10;
             }
             return (check == 1);
+        },
+
+        /**
+         * Implements Mod 37, 36 (ISO 7064) algorithm
+         * Usages:
+         * mod_37_36('A12425GABC1234002M')
+         * mod_37_36('002006673085', '0123456789')
+         *
+         * @param {String} value
+         * @param {String} alphabet
+         * @returns {Boolean}
+         */
+        mod_37_36: function(value, alphabet) {
+            alphabet = alphabet || '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var modulus = alphabet.length,
+                length  = value.length,
+                check   = Math.floor(modulus / 2);
+            for (var i = 0; i < length; i++) {
+                check = (((check || modulus) * 2) % (modulus + 1) + alphabet.indexOf(value.charAt(i))) % modulus;
+            }
+            return (check == 1);
         }
     };
 }(window.jQuery));

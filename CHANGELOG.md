@@ -3,7 +3,9 @@
 ## v0.4.4 (not released yet)
 
 * Add ```$.fn.bootstrapValidator.helpers.mod_11_10``` method that implements modulus 11, 10 (ISO 7064) algorithm. The helper is then reused in validating [German and Croatian VAT](http://bootstrapvalidator.com/validators/vat/) numbers
+* Add ```$.fn.bootstrapValidator.helpers.mod_37_36``` method that implements modulus 37, 36 (ISO 7064) algorithm, used in GRid validator
 * [#213](https://github.com/nghuuphuoc/bootstrapvalidator/issues/213): Add EAN (International Article Number) validator
+* [#214](https://github.com/nghuuphuoc/bootstrapvalidator/issues/214): Add GRId (Global Release Identifier) validator
 * [#215](https://github.com/nghuuphuoc/bootstrapvalidator/issues/215): Add IMEI (International Mobile Station Equipment Identity) validator
 * [#216](https://github.com/nghuuphuoc/bootstrapvalidator/issues/216): Add ISMN (International Standard Music Number) validator
 * [#217](https://github.com/nghuuphuoc/bootstrapvalidator/issues/217): Add ISSN (International Standard Serial Number) validator
