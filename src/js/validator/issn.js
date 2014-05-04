@@ -6,6 +6,7 @@
          * - Valid: 0378-5955, 0024-9319, 0032-1478
          * - Invalid: 0032-147X
          *
+         * @see http://en.wikipedia.org/wiki/International_Standard_Serial_Number
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options Can consist of the following keys:
@@ -18,7 +19,6 @@
                 return true;
             }
 
-            // http://en.wikipedia.org/wiki/International_Standard_Serial_Number
             // Groups are separated by a hyphen or a space
             if (!/^\d{4}\-\d{3}[\dX]$/.test(value)) {
                 return false;

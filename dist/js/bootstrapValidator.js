@@ -1338,6 +1338,42 @@
     }
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.validators.ean = {
+        /**
+         * Validate EAN (International Article Number)
+         * Examples:
+         * - Valid: 73513537, 9780471117094, 4006381333931
+         * - Invalid: 73513536
+         *
+         * @see http://en.wikipedia.org/wiki/European_Article_Number
+         * @param {BootstrapValidator} validator The validator plugin instance
+         * @param {jQuery} $field Field element
+         * @param {Object} options Can consist of the following keys:
+         * - message: The invalid message
+         * @returns {Boolean}
+         */
+        validate: function(validator, $field, options) {
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            if (!/^(\d{8}|\d{12}|\d{13})$/.test(value)) {
+                return false;
+            }
+
+            var length = value.length,
+                sum    = 0,
+                weight = (length == 8) ? [3, 1] : [1, 3];
+            for (var i = 0; i < length - 1; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i % 2];
+            }
+            sum = 10 - sum % 10;
+            return (sum == value.charAt(length - 1));
+        }
+    };
+}(window.jQuery));
+;(function($) {
     $.fn.bootstrapValidator.validators.emailAddress = {
         enableByHtml5: function($field) {
             return ('email' == $field.attr('type'));
@@ -1757,6 +1793,7 @@
          * ISBN 10: 99921-58-10-6
          * ISBN 13: 978-0-306-40615-6
          *
+         * @see http://en.wikipedia.org/wiki/International_Standard_Book_Number
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options Can consist of the following keys:
@@ -1833,6 +1870,7 @@
          * - Valid: 0378-5955, 0024-9319, 0032-1478
          * - Invalid: 0032-147X
          *
+         * @see http://en.wikipedia.org/wiki/International_Standard_Serial_Number
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options Can consist of the following keys:
@@ -1845,7 +1883,6 @@
                 return true;
             }
 
-            // http://en.wikipedia.org/wiki/International_Standard_Serial_Number
             // Groups are separated by a hyphen or a space
             if (!/^\d{4}\-\d{3}[\dX]$/.test(value)) {
                 return false;

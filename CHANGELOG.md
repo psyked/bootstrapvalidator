@@ -2,6 +2,7 @@
 
 ## v0.4.4 (not released yet)
 
+* [#213](https://github.com/nghuuphuoc/bootstrapvalidator/issues/213): Add EAN (International Article Number) validator
 * [#217](https://github.com/nghuuphuoc/bootstrapvalidator/issues/217): Add ISSN (International Standard Serial Number) validator
 * [#191](https://github.com/nghuuphuoc/bootstrapvalidator/issues/191), [#223](https://github.com/nghuuphuoc/bootstrapvalidator/issues/223): Support using both the ```name``` attribute and ```selector``` option for field
 
