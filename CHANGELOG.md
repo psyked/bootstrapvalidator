@@ -16,15 +16,15 @@
 * [#201](https://github.com/nghuuphuoc/bootstrapvalidator/issues/201): The [```choice``` validator](http://bootstrapvalidator.com/validators/choice/) supports ```select``` element
 * [#202](https://github.com/nghuuphuoc/bootstrapvalidator/issues/202): Activate tab containing the first invalid field
 * [#205](https://github.com/nghuuphuoc/bootstrapvalidator/issues/205): Plugin method invocation
-* [#207](https://github.com/nghuuphuoc/bootstrapvalidator/issues/207): IE8 error
+* [#207](https://github.com/nghuuphuoc/bootstrapvalidator/issues/207): IE8 error. The field is only validated when its value is changed. It also fixes [#153](https://github.com/nghuuphuoc/bootstrapvalidator/issues/153), [#193](https://github.com/nghuuphuoc/bootstrapvalidator/issues/193), [#197](https://github.com/nghuuphuoc/bootstrapvalidator/issues/197)
 * [#209](https://github.com/nghuuphuoc/bootstrapvalidator/issues/209): The [```excluded: ':disabled'``` setting](http://bootstrapvalidator.com/settings/#excluded) does not work on IE 8, thanks to [@adgrafik](https://github.com/adgrafik)
 * [#210](https://github.com/nghuuphuoc/bootstrapvalidator/issues/210): The [```isbn``` validator](http://bootstrapvalidator.com/validators/isbn/) accepts letters and special characters
 
 ## v0.4.2 (2014-04-19)
 
-* [#168](https://github.com/nghuuphuoc/bootstrapvalidator/pull/168): Add siren and siret validators, thanks to [@jswale](https://github.com/jswale)
-* [#177](https://github.com/nghuuphuoc/bootstrapvalidator/issues/177): Add Vehicle Identification Number (VIN) validator
-* [#184](https://github.com/nghuuphuoc/bootstrapvalidator/issues/184): Add ```excluded``` option
+* [#168](https://github.com/nghuuphuoc/bootstrapvalidator/pull/168): Add [siren](http://bootstrapvalidator.com/validators/siren/) and [siret](http://bootstrapvalidator.com/validators/siret/) validators, thanks to [@jswale](https://github.com/jswale)
+* [#177](https://github.com/nghuuphuoc/bootstrapvalidator/issues/177): Add [Vehicle Identification Number (VIN) validator](http://bootstrapvalidator.com/validators/vin/)
+* [#184](https://github.com/nghuuphuoc/bootstrapvalidator/issues/184): Add [```excluded``` option](http://bootstrapvalidator.com/settings/#excluded)
 * [#171](https://github.com/nghuuphuoc/bootstrapvalidator/pull/171): The [```phone``` validator](http://bootstrapvalidator.com/validators/phone/) now supports +1 country code and area code for US phone number, thanks to [@tomByrer](https://github.com/tomByrer)
 * [#173](https://github.com/nghuuphuoc/bootstrapvalidator/pull/173): The [```remote``` validator](http://bootstrapvalidator.com/validators/remote/) allows to override ```name``` option, thanks to [@jswale](https://github.com/jswale)
 * [#178](https://github.com/nghuuphuoc/bootstrapvalidator/pull/178): Do not validate fields that ```enabled``` is set to ```false```, thanks to [@henningda](https://github.com/henningda)
@@ -33,10 +33,10 @@
 ## v0.4.1 (2014-04-12)
 
 * [#144](https://github.com/nghuuphuoc/bootstrapvalidator/issues/144), [#158](https://github.com/nghuuphuoc/bootstrapvalidator/issues/158): Fixed an issue that the custom submit handler is not fired from the second time
-* [#106](https://github.com/nghuuphuoc/bootstrapvalidator/issues/106): Prevent the ```validate()``` method from submit the form automatically. So we can call ```validate()``` to validate the form
+* [#106](https://github.com/nghuuphuoc/bootstrapvalidator/issues/106): Prevent the [```validate()```](http://bootstrapvalidator.com/api/#validate) method from submit the form automatically. So we can call ```validate()``` to validate the form
 * [#131](https://github.com/nghuuphuoc/bootstrapvalidator/issues/131): Doesn't trigger validation on the first focus
 * [#145](https://github.com/nghuuphuoc/bootstrapvalidator/issues/145): The row state is now only marked as success if all fields on it are valid
-* [#157](https://github.com/nghuuphuoc/bootstrapvalidator/issues/157): Added support for element outside of form using the ```selector``` option
+* [#157](https://github.com/nghuuphuoc/bootstrapvalidator/issues/157): Added support for element outside of form using the [```selector```](http://bootstrapvalidator.com/settings/#fields) option
 * [#159](https://github.com/nghuuphuoc/bootstrapvalidator/issues/159), [#163](https://github.com/nghuuphuoc/bootstrapvalidator/pull/163): User doesn't need to submit the form twice when remote validator complete, thanks to [@jswale](https://github.com/jswale)
 * [#162](https://github.com/nghuuphuoc/bootstrapvalidator/pull/162): Fix errors in IE 8, thanks to [@adgrafik](https://github.com/adgrafik)
 * [#166](https://github.com/nghuuphuoc/bootstrapvalidator/issues/166), [#167](https://github.com/nghuuphuoc/bootstrapvalidator/pull/167): The [```phone``` validator](http://bootstrapvalidator.com/validators/phone/) now also checks the length of US phone number, thanks to [@gercheq](https://github.com/gercheq)
