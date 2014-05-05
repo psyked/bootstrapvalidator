@@ -13,6 +13,7 @@
 * [#206](https://github.com/nghuuphuoc/bootstrapvalidator/issues/206): Indicate success/error tab
 * [#220](https://github.com/nghuuphuoc/bootstrapvalidator/issues/220): Add UK postcode support for the [```zipCode``` validator](http://bootstrapvalidator.com/validators/zip-code/)
 * [#229](https://github.com/nghuuphuoc/bootstrapvalidator/issues/229): The [```date``` validator](http://bootstrapvalidator.com/validators/date/) supports seconds
+* [#231](https://github.com/nghuuphuoc/bootstrapvalidator/issues/231): Wrong prefix of Laser credit card number
 
 ## v0.4.3 (2014-04-26)
 
