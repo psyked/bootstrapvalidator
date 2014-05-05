@@ -1,6 +1,6 @@
-# BootstrapValidator - [v0.4.3](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.3/bootstrapvalidator-dist-0.4.3.zip)
+# BootstrapValidator - [v0.4.4](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.4/bootstrapvalidator-dist-0.4.4.zip)
 
-[http://bootstrapvalidator.com](http://bootstrapvalidator.com) - A jQuery plugin to validate form fields. Use with [Bootstrap 3](http://getbootstrap.com)
+[http://bootstrapvalidator.com](http://bootstrapvalidator.com) - The best jQuery plugin to validate form fields. Designed to use with [Bootstrap 3](http://getbootstrap.com)
 
 <a href="https://pledgie.com/campaigns/24885"><img alt="Click here to lend your support to: BootstrapValidator and make a donation at pledgie.com!" src="https://pledgie.com/campaigns/24885.png?skin_name=chrome" border="0" /></a>
 
@@ -28,7 +28,7 @@ __HTML 5__
 * Support [HTML 5 input types](http://bootstrapvalidator.com/examples#html5) such as ```color```, ```email```, ```range``` and ```url```
 
 __Validator__
-* [34 built-in validators](http://bootstrapvalidator.com/validators/) and counting!
+* [41 built-in validators](http://bootstrapvalidator.com/validators/) and counting!
 * Easy to [write a new validator](http://bootstrapvalidator.com/developing/)
  
 __Friendly__
@@ -60,7 +60,7 @@ __Compatibility__
  
 ## Download
 
-Latest version: [v0.4.3 (78 KB)](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.3/bootstrapvalidator-dist-0.4.3.zip), released on 2014-04-26.
+Latest version: [v0.4.4](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.4/bootstrapvalidator-dist-0.4.4.zip), released on 2014-05-05.
 
 For older versions, look at the [Releases](https://github.com/nghuuphuoc/bootstrapvalidator/releases) page.
 

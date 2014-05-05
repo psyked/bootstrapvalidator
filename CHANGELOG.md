@@ -1,6 +1,6 @@
 # Change Log
 
-## v0.4.4 (not released yet)
+## v0.4.4 (2014-05-05)
 
 * Add ```$.fn.bootstrapValidator.helpers.mod_11_10``` method that implements modulus 11, 10 (ISO 7064) algorithm. The helper is then reused in validating [German and Croatian VAT](http://bootstrapvalidator.com/validators/vat/) numbers
 * Add ```$.fn.bootstrapValidator.helpers.mod_37_36``` method that implements modulus 37, 36 (ISO 7064) algorithm, used in GRid validator
