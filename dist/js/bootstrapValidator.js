@@ -46,7 +46,7 @@
     // The default options
     BootstrapValidator.DEFAULT_OPTIONS = {
         // The form CSS class
-        elementClass: 'bootstrap-validator-form',
+        elementClass: 'bv-form',
 
         // Default invalid message
         message: 'This value is not valid',
@@ -286,6 +286,7 @@
                         $('<small/>')
                             .css('display', 'none')
                             .attr('data-bv-validator', validatorName)
+                            .attr('data-bv-validator-for', field)
                             .html(this.options.fields[field].validators[validatorName].message || this.options.fields[field].message || this.options.message)
                             .addClass('help-block')
                             .appendTo($message);
@@ -593,13 +594,12 @@
          * @return {BootstrapValidator}
          */
         updateElementStatus: function($field, status, validatorName) {
-            var that       = this,
-                field      = $field.attr('data-bv-field'),
-                $parent    = $field.parents('.form-group'),
-                $message   = $field.data('bv.messages'),
-                $rowErrors = $parent.find('.help-block[data-bv-validator]'),
-                $errors    = $message.find('.help-block[data-bv-validator]'),
-                $icon      = $parent.find('.form-control-feedback[data-bv-field="' + field + '"]');
+            var that     = this,
+                field    = $field.attr('data-bv-field'),
+                $parent  = $field.parents('.form-group'),
+                $message = $field.data('bv.messages'),
+                $errors  = $message.find('.help-block[data-bv-validator]'),
+                $icon    = $parent.find('.form-control-feedback[data-bv-field="' + field + '"]');
 
             // Update status
             if (validatorName) {
@@ -608,6 +608,14 @@
                 for (var v in this.options.fields[field].validators) {
                     $field.data('bv.result.' + v, status);
                 }
+            }
+
+            // Determine the tab containing the element
+            var $tabPane = $field.parents('.tab-pane'),
+                tabId,
+                $tab;
+            if ($tabPane && (tabId = $tabPane.attr('id'))) {
+                $tab = $('a[href="#' + tabId + '"][data-toggle="tab"]').parent();
             }
 
             // Show/hide error elements and feedback icons
@@ -620,6 +628,9 @@
                     if ($icon) {
                         $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).addClass(this.options.feedbackIcons.validating).show();
                     }
+                    if ($tab) {
+                        $tab.removeClass('bv-tab-success').removeClass('bv-tab-error');
+                    }
                     break;
 
                 case this.STATUS_INVALID:
@@ -628,6 +639,9 @@
                     validatorName ? $errors.filter('[data-bv-validator="' + validatorName + '"]').show() : $errors.show();
                     if ($icon) {
                         $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
+                    }
+                    if ($tab) {
+                        $tab.removeClass('bv-tab-success').addClass('bv-tab-error');
                     }
                     break;
 
@@ -647,12 +661,20 @@
                             .show();
                     }
 
-                    // Check if all fields in the same row are valid
-                    var validRow = ($rowErrors.filter(function() {
+                    // Check if all elements in given container are valid
+                    var isValidContainer = function($container) {
+                        return $container
+                                    .find('.help-block[data-bv-validator]')
+                                    .filter(function() {
                                         var display = $(this).css('display'), v = $(this).attr('data-bv-validator');
-                                        return ('block' == display) || ($field.data('bv.result.' + v) != that.STATUS_VALID);
-                                    }).length == 0);
-                    $parent.removeClass('has-error has-success').addClass(validRow ? 'has-success' : 'has-error');
+                                        return ('block' == display) || ($field.data('bv.result.' + v) && $field.data('bv.result.' + v) != that.STATUS_VALID);
+                                    })
+                                    .length == 0;
+                    };
+                    $parent.removeClass('has-error has-success').addClass(isValidContainer($parent) ? 'has-success' : 'has-error');
+                    if ($tab) {
+                        $tab.removeClass('bv-tab-success').removeClass('bv-tab-error').addClass(isValidContainer($tabPane) ? 'bv-tab-success' : 'bv-tab-error');
+                    }
                     break;
 
                 case this.STATUS_NOT_VALIDATED:
@@ -662,6 +684,9 @@
                     validatorName ? $errors.filter('.help-block[data-bv-validator="' + validatorName + '"]').hide() : $errors.hide();
                     if ($icon) {
                         $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).hide();
+                    }
+                    if ($tab) {
+                        $tab.removeClass('bv-tab-success').removeClass('bv-tab-error');
                     }
                     break;
             }

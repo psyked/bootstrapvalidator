@@ -10,6 +10,7 @@
 * [#216](https://github.com/nghuuphuoc/bootstrapvalidator/issues/216): Add ISMN (International Standard Music Number) validator
 * [#217](https://github.com/nghuuphuoc/bootstrapvalidator/issues/217): Add ISSN (International Standard Serial Number) validator
 * [#191](https://github.com/nghuuphuoc/bootstrapvalidator/issues/191), [#223](https://github.com/nghuuphuoc/bootstrapvalidator/issues/223): Support using both the ```name``` attribute and ```selector``` option for field
+* [#206](https://github.com/nghuuphuoc/bootstrapvalidator/issues/206): Indicate success/error tab
 * [#220](https://github.com/nghuuphuoc/bootstrapvalidator/issues/220): Add UK postcode support for the [```zipCode``` validator](http://bootstrapvalidator.com/validators/zip-code/)
 * [#229](https://github.com/nghuuphuoc/bootstrapvalidator/issues/229): The [```date``` validator](http://bootstrapvalidator.com/validators/date/) supports seconds
 
