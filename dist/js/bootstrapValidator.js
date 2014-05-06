@@ -1830,7 +1830,49 @@
         },
 
         /**
-         * Validate Brazilian ID (CFP)
+         * Validate Bulgarian national identification number (EGN)
+         * Examples:
+         * - Valid: 7523169263, 8032056031, 803205 603 1, 8001010008, 7501020018, 7552010005, 7542011030
+         * - Invalid: 8019010008
+         *
+         * @see http://en.wikipedia.org/wiki/Uniform_civil_number
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _bg: function(value) {
+            if (!/^\d{10}$/.test(value) && !/^\d{6}\s\d{3}\s\d{1}$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/\s/g, '');
+            // Check the birth date
+            var year  = parseInt(value.substr(0, 2), 10) + 1900,
+                month = parseInt(value.substr(2, 2), 10),
+                day   = parseInt(value.substr(4, 2), 10);
+            if (month > 40) {
+                year += 100;
+                month -= 40;
+            } else if (month > 20) {
+                year -= 100;
+                month -= 20;
+            }
+
+            try {
+                var d = new Date(year, month, day);
+            } catch (ex) {
+                return false;
+            }
+
+            var sum    = 0,
+                weight = [2, 4, 8, 5, 10, 9, 7, 3, 6];
+            for (var i = 0; i < 9; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+            sum = (sum % 11) % 10;
+            return (sum == value.substr(9, 1));
+        },
+
+        /**
+         * Validate Brazilian national identification number (CPF)
          * Examples:
          * - Valid: 39053344705, 390.533.447-05, 111.444.777-35
          * - Invalid: 231.002.999-00
