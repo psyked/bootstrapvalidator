@@ -50,6 +50,9 @@
         // Default invalid message
         message: 'This value is not valid',
 
+        // The field will not be live validated if its length is less than this number of characters
+        threshold: null,
+
         // Indicate fields which won't be validated
         // By default, the plugin will not validate the following kind of fields:
         // - disabled
@@ -136,6 +139,7 @@
                     trigger:        this.$form.attr('data-bv-trigger'),
                     message:        this.$form.attr('data-bv-message'),
                     submitButtons:  this.$form.attr('data-bv-submitbuttons'),
+                    threshold:      this.$form.attr('data-bv-threshold'),
                     live:           this.$form.attr('data-bv-live'),
                     fields:         {},
                     feedbackIcons: {
@@ -202,17 +206,19 @@
                         }
                     }
 
-                    // Check if there is any validators set using HTML attributes
-                    if (!$.isEmptyObject(validators)) {
-                        $field.attr('data-bv-field', field);
+                    var opts = {
+                        trigger:    $field.attr('data-bv-trigger'),
+                        message:    $field.attr('data-bv-message'),
+                        container:  $field.attr('data-bv-container'),
+                        selector:   $field.attr('data-bv-selector'),
+                        threshold:  $field.attr('data-bv-threshold'),
+                        validators: validators
+                    };
 
-                        options.fields[field] = $.extend({}, {
-                            trigger:    $field.attr('data-bv-trigger'),
-                            message:    $field.attr('data-bv-message'),
-                            container:  $field.attr('data-bv-container'),
-                            selector:   $field.attr('data-bv-selector'),
-                            validators: validators
-                        }, options.fields[field]);
+                    // Check if there is any validators set using HTML attributes
+                    if (!$.isEmptyObject(opts)) {
+                        $field.attr('data-bv-field', field);
+                        options.fields[field] = $.extend({}, opts, options.fields[field]);
                     }
                 });
 
@@ -398,6 +404,23 @@
             return false;
         },
 
+        /**
+         * Check if the number of characters of field value exceed the threshold or not
+         *
+         * @param {jQuery} $field The field element
+         * @returns {Boolean}
+         */
+        _exceedThreshold: function($field) {
+            var field     = $field.attr('data-bv-field'),
+                threshold = this.options.fields[field].threshold || this.options.threshold;
+            if (!threshold) {
+                return true;
+            }
+            var type       = $field.attr('type'),
+                cannotType = ['button', 'checkbox', 'file', 'hidden', 'image', 'radio', 'reset', 'submit'].indexOf(type) != -1;
+            return (cannotType || $field.val().length >= threshold);
+        },
+
         // --- Public methods ---
 
         /**
@@ -441,7 +464,9 @@
                         for (var i = 0; i < total; i++) {
                             ('enabled' == mode)
                                 ? $(fields[i]).on(events, function() {
-                                    updateAll ? that.validateField(f) : that.validateFieldElement($(this), false);
+                                    if (that._exceedThreshold($(this))) {
+                                        updateAll ? that.validateField(f) : that.validateFieldElement($(this), false);
+                                    }
                                 })
                                 : $(fields[i]).off(events);
                         }

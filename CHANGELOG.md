@@ -2,6 +2,7 @@
 
 ## v0.4.5 (not released yet)
 
+* [#233](https://github.com/nghuuphuoc/bootstrapvalidator/issues/233): Add ```threshold``` option
 * When parsing options from HTML attributes, don't add the field which hasn't validators. It improves fixes for [#191](https://github.com/nghuuphuoc/bootstrapvalidator/issues/191), [#223](https://github.com/nghuuphuoc/bootstrapvalidator/issues/223)
 
 ## v0.4.4 (2014-05-05)
