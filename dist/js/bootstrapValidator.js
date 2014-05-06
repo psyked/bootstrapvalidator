@@ -3,7 +3,7 @@
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
- * @version     v0.4.4
+ * @version     v0.4.5
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -170,22 +170,12 @@
                 // Find all fields which have either "name" or "data-bv-field" attribute
                 .find('[name], [data-bv-field]').each(function() {
                     var $field = $(this);
-                    // Don't initialize hidden input
-                    if ('hidden' == $field.attr('type')) {
+                    if (that._isExcluded($field)) {
                         return;
                     }
 
-                    var field  = $field.attr('name') || $field.attr('data-bv-field');
-                    $field.attr('data-bv-field', field);
-
-                    options.fields[field] = $.extend({}, {
-                        trigger:    $field.attr('data-bv-trigger'),
-                        message:    $field.attr('data-bv-message'),
-                        container:  $field.attr('data-bv-container'),
-                        selector:   $field.attr('data-bv-selector'),
-                        validators: {}
-                    }, options.fields[field]);
-
+                    var field      = $field.attr('name') || $field.attr('data-bv-field'),
+                        validators = {};
                     for (v in $.fn.bootstrapValidator.validators) {
                         validator  = $.fn.bootstrapValidator.validators[v];
                         enabled    = $field.attr('data-bv-' + v.toLowerCase()) + '';
@@ -196,7 +186,7 @@
                         {
                             // Try to parse the options via attributes
                             validator.html5Attributes = validator.html5Attributes || { message: 'message' };
-                            options.fields[field]['validators'][v] = $.extend({}, html5Attrs == true ? {} : html5Attrs, options.fields[field]['validators'][v]);
+                            validators[v] = $.extend({}, html5Attrs == true ? {} : html5Attrs, validators[v]);
 
                             for (html5AttrName in validator.html5Attributes) {
                                 optionName  = validator.html5Attributes[html5AttrName];
@@ -207,10 +197,23 @@
                                     } else if ('false' == optionValue) {
                                         optionValue = false;
                                     }
-                                    options.fields[field]['validators'][v][optionName] = optionValue;
+                                    validators[v][optionName] = optionValue;
                                 }
                             }
                         }
+                    }
+
+                    // Check if there is any validators set using HTML attributes
+                    if (!$.isEmptyObject(validators)) {
+                        $field.attr('data-bv-field', field);
+
+                        options.fields[field] = $.extend({}, {
+                            trigger:    $field.attr('data-bv-trigger'),
+                            message:    $field.attr('data-bv-message'),
+                            container:  $field.attr('data-bv-container'),
+                            selector:   $field.attr('data-bv-selector'),
+                            validators: validators
+                        }, options.fields[field]);
                     }
                 });
 
@@ -265,7 +268,7 @@
                     $message = this.options.fields[field].container ? $parent.find(this.options.fields[field].container) : this._getMessageContainer($field);
 
                 // Set the attribute to indicate the fields which are defined by selector
-                if (this.options.fields[field].selector) {
+                if (!$field.attr('data-bv-field')) {
                     $field.attr('data-bv-field', field);
                 }
 

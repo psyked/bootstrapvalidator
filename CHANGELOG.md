@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.4.5 (not released yet)
+
+* When parsing options from HTML attributes, don't add the field which hasn't validators. It improves fixes for [#191](https://github.com/nghuuphuoc/bootstrapvalidator/issues/191), [#223](https://github.com/nghuuphuoc/bootstrapvalidator/issues/223)
+
 ## v0.4.4 (2014-05-05)
 
 * Add ```$.fn.bootstrapValidator.helpers.mod_11_10``` method that implements modulus 11, 10 (ISO 7064) algorithm. The helper is then reused in validating [German and Croatian VAT](http://bootstrapvalidator.com/validators/vat/) numbers
