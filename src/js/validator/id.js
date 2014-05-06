@@ -178,6 +178,22 @@
             var check = parseInt(value.substr(0, 8), 10);
             check = 'TRWAGMYFPDXBNJZSQVHLCKE'[check % 23];
             return (check == value.substr(8, 1));
+        },
+
+        /**
+         * Validate Croatian personal identification number (OIB)
+         * Examples:
+         * - Valid: 33392005961
+         * - Invalid: 33392005962
+         *
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _hr: function(value) {
+            if (!/^[0-9]{11}$/.test(value)) {
+                return false;
+            }
+            return $.fn.bootstrapValidator.helpers.mod_11_10(value);
         }
     };
 }(window.jQuery));
