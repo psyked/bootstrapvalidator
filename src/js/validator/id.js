@@ -8,6 +8,7 @@
         /**
          * Validate identification number in different countries
          *
+         * @see http://en.wikipedia.org/wiki/National_identification_number
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options Consist of key:
@@ -158,6 +159,25 @@
             }
 
             return true;
+        },
+
+        /**
+         * Validate Spanish personal identity code (DNI)
+         * Examples:
+         * - Valid: 54362315K, 54362315-K
+         * - Invalid: 54362315Z
+         *
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _es: function(value) {
+            if (!/^[0-9A-Z]{8}[-]{0,1}[0-9A-Z]{1}$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/-/g, '');
+            var check = parseInt(value.substr(0, 8), 10);
+            check = 'TRWAGMYFPDXBNJZSQVHLCKE'[check % 23];
+            return (check == value.substr(8, 1));
         }
     };
 }(window.jQuery));
