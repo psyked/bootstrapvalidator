@@ -1831,6 +1831,96 @@
         },
 
         /**
+         * Validate Unique Master Citizen Number which uses in
+         * - Bosnia and Herzegovina (country code: BA)
+         * - Macedonia (MK)
+         * - Montenegro (ME)
+         * - Serbia (RS)
+         * - Slovenia (SI)
+         *
+         * @see http://en.wikipedia.org/wiki/Unique_Master_Citizen_Number
+         * @param {String} value The ID
+         * @param {String} countryCode The ISO country code, can be BA, MK, ME, RS, SI
+         * @returns {Boolean}
+         */
+        _validateJMBG: function(value, countryCode) {
+            if (!/^\d{13}$/.test(value)) {
+                return false;
+            }
+            var day   = parseInt(value.substr(0, 2), 10),
+                month = parseInt(value.substr(2, 2), 10),
+                year  = parseInt(value.substr(4, 3), 10),
+                rr    = parseInt(value.substr(7, 2), 10),
+                k     = parseInt(value.substr(12, 1), 10);
+
+            // Validate date of birth
+            // FIXME: Validate the year of birth
+            if (day > 31 || month > 12) {
+                return false;
+            }
+
+            // Validate checksum
+            var sum = 0;
+            for (var i = 0; i < 6; i++) {
+                sum += (7 - i) * (parseInt(value.charAt(i)) + parseInt(value.charAt(i + 6)));
+            }
+            sum = 11 - sum % 11;
+            if (sum == 10 || sum == 11) {
+                sum = 0;
+            }
+            if (sum != k) {
+                return false;
+            }
+
+            // Validate political region
+            // rr is the political region of birth, which can be in ranges:
+            // 10-19: Bosnia and Herzegovina
+            // 20-29: Montenegro
+            // 30-39: Croatia (not used anymore)
+            // 41-49: Macedonia
+            // 50-59: Slovenia (only 50 is used)
+            // 70-79: Central Serbia
+            // 80-89: Serbian province of Vojvodina
+            // 90-99: Kosovo
+            switch (countryCode.toUpperCase()) {
+                case 'BA':
+                    return (10 <= rr && rr <= 19);
+                case 'MK':
+                    return (41 <= rr && rr <= 49);
+                case 'ME':
+                    return (20 <= rr && rr <= 29);
+                case 'RS':
+                    return (70 <= rr && rr <= 99);
+                case 'SI':
+                    return (50 <= rr && rr <= 59);
+                default:
+                    return true;
+            }
+
+            return true;
+        },
+
+        _ba: function(value) {
+            return this._validateJMBG(value, 'BA');
+        },
+        _mk: function(value) {
+            return this._validateJMBG(value, 'MK');
+        },
+        _me: function(value) {
+            return this._validateJMBG(value, 'ME');
+        },
+        _rs: function(value) {
+            return this._validateJMBG(value, 'RS');
+        },
+
+        /**
+         * Examples: 0101006500006
+         */
+        _si: function(value) {
+            return this._validateJMBG(value, 'SI');
+        },
+
+        /**
          * Validate Bulgarian national identification number (EGN)
          * Examples:
          * - Valid: 7523169263, 8032056031, 803205 603 1, 8001010008, 7501020018, 7552010005, 7542011030
@@ -1961,6 +2051,20 @@
         },
 
         /**
+         * Validate Slovak national identifier number (RC)
+         * Examples:
+         * - Valid: 7103192745, 991231123
+         * - Invalid: 7103192746, 1103492745
+         *
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _sk: function(value) {
+            // Slovakia uses the same format as Czech Republic
+            return this._cz(value);
+        },
+
+        /**
          * Validate Spanish personal identity code (DNI)
          * Examples:
          * - Valid: 54362315K, 54362315-K
@@ -1993,20 +2097,6 @@
                 return false;
             }
             return $.fn.bootstrapValidator.helpers.mod_11_10(value);
-        },
-
-        /**
-         * Validate Slovak national identifier number (RC)
-         * Examples:
-         * - Valid: 7103192745, 991231123
-         * - Invalid: 7103192746, 1103492745
-         *
-         * @param {String} value The ID
-         * @returns {Boolean}
-         */
-        _sk: function(value) {
-            // Slovakia uses the same format as Czech Republic
-            return this._cz(value);
         }
     };
 }(window.jQuery));
