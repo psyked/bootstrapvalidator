@@ -148,9 +148,7 @@
                 month -= 20;
             }
 
-            try {
-                var d = new Date(year, month, day);
-            } catch (ex) {
+            if (!$.fn.bootstrapValidator.helpers.date(year, month, day)) {
                 return false;
             }
 
@@ -233,9 +231,7 @@
                 year += 100;
             }
 
-            try {
-                var d = new Date(year, month, day);
-            } catch (ex) {
+            if (!$.fn.bootstrapValidator.helpers.date(year, month, day)) {
                 return false;
             }
 
@@ -298,6 +294,62 @@
                 return false;
             }
             return $.fn.bootstrapValidator.helpers.mod_11_10(value);
+        },
+
+        /**
+         * Validate Romanian numerical personal code (CNP)
+         * Examples:
+         * - Valid: 1630615123457, 1800101221144
+         * - Invalid: 8800101221144, 1632215123457, 1630615123458
+         *
+         * @see http://en.wikipedia.org/wiki/National_identification_number#Romania
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _ro: function(value) {
+            if (!/^[0-9]{13}$/.test(value)) {
+                return false;
+            }
+            var gender = parseInt(value.charAt(0));
+            if (gender == 0 || gender == 7 || gender == 8) {
+                return false;
+            }
+
+            // Determine the date of birth
+            var year      = parseInt(value.substr(1, 2), 10),
+                month     = parseInt(value.substr(3, 2), 10),
+                day       = parseInt(value.substr(5, 2), 10),
+                // The year of date is determined base on the gender
+                centuries = {
+                    '1': 1900,  // Male born between 1900 and 1999
+                    '2': 1900,  // Female born between 1900 and 1999
+                    '3': 1800,  // Male born between 1800 and 1899
+                    '4': 1800,  // Female born between 1800 and 1899
+                    '5': 2000,  // Male born after 2000
+                    '6': 2000   // Female born after 2000
+                };
+            if (day > 31 && month > 12) {
+                return false;
+            }
+            if (gender != 9) {
+                year = centuries[gender + ''] + year;
+                if (!$.fn.bootstrapValidator.helpers.date(year, month, day)) {
+                    return false;
+                }
+            }
+
+            // Validate the check digit
+            var sum    = 0,
+                weight = [2, 7, 9, 1, 4, 6, 3, 5, 8, 2, 7, 9],
+                length = value.length;
+            for (var i = 0; i < length - 1; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+            sum = sum % 11;
+            if (sum == 10) {
+                sum = 1;
+            }
+            return (sum == value.charAt(length - 1));
         }
     };
 }(window.jQuery));
