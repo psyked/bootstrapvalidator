@@ -1993,6 +1993,20 @@
                 return false;
             }
             return $.fn.bootstrapValidator.helpers.mod_11_10(value);
+        },
+
+        /**
+         * Validate Slovak national identifier number (RC)
+         * Examples:
+         * - Valid: 7103192745, 991231123
+         * - Invalid: 7103192746, 1103492745
+         *
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _sk: function(value) {
+            // Slovakia uses the same format as Czech Republic
+            return this._cz(value);
         }
     };
 }(window.jQuery));
