@@ -2160,6 +2160,17 @@
                 sum = 1;
             }
             return (sum == value.charAt(length - 1));
+        },
+
+        /**
+         * Validate San Marino citizen number
+         *
+         * @see http://en.wikipedia.org/wiki/National_identification_number#San_Marino
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _sm: function(value) {
+            return /^\d{5}$/.test(value);
         }
     };
 }(window.jQuery));
