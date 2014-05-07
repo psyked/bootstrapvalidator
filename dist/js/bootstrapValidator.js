@@ -2163,6 +2163,33 @@
         },
 
         /**
+         * Validate Swedish personal identity number (personnummer)
+         * Examples:
+         * - Valid: 8112289874, 811228-9874, 811228+9874
+         * - Invalid: 811228-9873
+         *
+         * @see http://en.wikipedia.org/wiki/Personal_identity_number_(Sweden)
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _se: function(value) {
+            if (!/^[0-9]{10}$/.test(value) && !/^[0-9]{6}[-|+][0-9]{4}$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/[^0-9]/g, '');
+
+            var year  = parseInt(value.substr(0, 2)) + 1900,
+                month = parseInt(value.substr(2, 2)),
+                day   = parseInt(value.substr(4, 2));
+            if (!$.fn.bootstrapValidator.helpers.date(year, month, day)) {
+                return false;
+            }
+
+            // Validate the last check digit
+            return $.fn.bootstrapValidator.helpers.luhn(value);
+        },
+
+        /**
          * Validate San Marino citizen number
          *
          * @see http://en.wikipedia.org/wiki/National_identification_number#San_Marino
