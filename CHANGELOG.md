@@ -2,6 +2,7 @@
 
 ## v0.4.5 (not released yet)
 
+* Add ```$.fn.bootstrapValidator.helpers.date``` for validating a date, re-used in ```date```, ```id``` validators
 * [#233](https://github.com/nghuuphuoc/bootstrapvalidator/issues/233): Add ```threshold``` option
 * [#232](https://github.com/nghuuphuoc/bootstrapvalidator/issues/232): Add ```id``` validator
 * When parsing options from HTML attributes, don't add the field which hasn't validators. It improves fixes for [#191](https://github.com/nghuuphuoc/bootstrapvalidator/issues/191), [#223](https://github.com/nghuuphuoc/bootstrapvalidator/issues/223)
