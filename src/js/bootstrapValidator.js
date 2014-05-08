@@ -269,6 +269,11 @@
             }
         },
 
+        /**
+         * Init field element
+         *
+         * @param {jQuery} $field The field element
+         */
         _initFieldElement: function($field) {
             var that      = this,
                 field     = $field.attr('name') || $field.attr('data-bv-field'),
@@ -485,6 +490,39 @@
             }
         },
 
+        /**
+         * Called after validating a field element
+         *
+         * @param {jQuery} $field The field element
+         */
+        _onValidateFieldCompleted: function($field) {
+            var field         = $field.attr('data-bv-field'),
+                validators    = this.options.fields[field].validators,
+                counter       = {},
+                numValidators = 0;
+
+            counter[this.STATUS_NOT_VALIDATED] = 0;
+            counter[this.STATUS_VALIDATING]    = 0;
+            counter[this.STATUS_INVALID]       = 0;
+            counter[this.STATUS_VALID]         = 0;
+
+            for (var validatorName in validators) {
+                numValidators++;
+                var result = $field.data('bv.result.' + validatorName);
+                if (result) {
+                    counter[result]++;
+                }
+            }
+
+            if (counter[this.STATUS_VALID] == numValidators) {
+                this.$form.trigger($.Event('success.field.bv'), [field, $field]);
+            }
+            // If all validators are completed and there is at least one validator which doesn't pass
+            else if (counter[this.STATUS_NOT_VALIDATED] == 0 && counter[this.STATUS_VALIDATING] == 0 && counter[this.STATUS_INVALID] > 0) {
+                this.$form.trigger($.Event('error.field.bv'), [field, $field]);
+            }
+        },
+
         // --- Public methods ---
 
         /**
@@ -586,6 +624,7 @@
                 // Don't validate field if it is already done
                 var result = $field.data('bv.result.' + validatorName);
                 if (result == this.STATUS_VALID || result == this.STATUS_INVALID) {
+                    this._onValidateFieldCompleted($field);
                     continue;
                 }
 
@@ -671,6 +710,7 @@
             }
 
             // Show/hide error elements and feedback icons
+            validatorName ? $errors.filter('.help-block[data-bv-validator="' + validatorName + '"]').attr('data-bv-result', status) : $errors.attr('data-bv-result', status);
             switch (status) {
                 case this.STATUS_VALIDATING:
                     this.disableSubmitButtons(true);
@@ -701,10 +741,10 @@
                     validatorName ? $errors.filter('[data-bv-validator="' + validatorName + '"]').hide() : $errors.hide();
 
                     // If the field is valid (passes all validators)
-                    var validField = ($errors.filter(function() {
-                                        var display = $(this).css('display'), v = $(this).attr('data-bv-validator');
-                                        return ('block' == display) || ($field.data('bv.result.' + v) != that.STATUS_VALID);
-                                    }).length == 0);
+                    var validField = $errors.filter(function() {
+                                        var v = $(this).attr('data-bv-validator');
+                                        return $field.data('bv.result.' + v) != that.STATUS_VALID;
+                                    }).length == 0;
                     this.disableSubmitButtons(validField ? false : true);
                     if ($icon) {
                         $icon
@@ -742,6 +782,8 @@
                     }
                     break;
             }
+
+            this._onValidateFieldCompleted($field);
 
             return this;
         },

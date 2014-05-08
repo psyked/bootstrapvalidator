@@ -3,6 +3,7 @@
 ## v0.5.0 (not released yet)
 
 * [#121](https://github.com/nghuuphuoc/bootstrapvalidator/issues/121): Add events for form validate successfully or not
+* [#195](https://github.com/nghuuphuoc/bootstrapvalidator/issues/195): Add events for field validation
 
 ## v0.4.5 (not released yet)
 

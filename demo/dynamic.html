@@ -116,37 +116,44 @@
             });
         });
 
-        $('#defaultForm').bootstrapValidator({
-            message: 'This value is not valid',
-            feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                'textbox[]': {
-                    validators: {
-                        notEmpty: {
-                            message: 'The textbox field is required'
-                        }
-                    }
+        $('#defaultForm')
+            .bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
                 },
-                'checkbox[]': {
-                    validators: {
-                        notEmpty: {
-                            message: 'The checkbox field is required'
+                fields: {
+                    'textbox[]': {
+                        validators: {
+                            notEmpty: {
+                                message: 'The textbox field is required'
+                            }
                         }
-                    }
-                },
-                'radio[]': {
-                    validators: {
-                        notEmpty: {
-                            message: 'The radio field is required'
+                    },
+                    'checkbox[]': {
+                        validators: {
+                            notEmpty: {
+                                message: 'The checkbox field is required'
+                            }
+                        }
+                    },
+                    'radio[]': {
+                        validators: {
+                            notEmpty: {
+                                message: 'The radio field is required'
+                            }
                         }
                     }
                 }
-            }
-        });
+            })
+            .on('error.field.bv', function(e, field, $field) {
+                console.log(field, $field, '-->error');
+            })
+            .on('success.field.bv', function(e, field, $field) {
+                console.log(field, $field, '-->success');
+            });
     });
 </script>
 </body>

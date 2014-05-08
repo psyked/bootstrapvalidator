@@ -30,7 +30,6 @@
                             </div>
                         </div>
 
-                        <!--
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Username</label>
                             <div class="col-lg-5">
@@ -45,6 +44,7 @@
                             </div>
                         </div>
 
+                        <!--
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Password</label>
                             <div class="col-lg-5">
@@ -186,6 +186,10 @@ $(document).ready(function() {
                     validators: {
                         notEmpty: {
                             message: 'The first name is required and cannot be empty'
+                        },
+                        stringCase: {
+                            message: 'The first name must contain upper case characters only',
+                            case: 'upper'
                         }
                     }
                 },
@@ -284,14 +288,20 @@ $(document).ready(function() {
             }
         })
         .on('error.form.bv', function(e) {
-            console.log('error');
+            //console.log('error');
             // If you want to prevent the default handler (bootstrapValidator._onError)
             // e.preventDefault();
         })
         .on('success.form.bv', function(e) {
-            console.log('success');
+            //console.log('success');
             // If you want to prevent the default handler (bootstrapValidator._onSuccess)
             // e.preventDefault();
+        })
+        .on('error.field.bv', function(e, field) {
+            console.log(field, '-->error');
+        })
+        .on('success.field.bv', function(e, field) {
+            console.log(field, '-->success');
         });
 
     // Validate the form manually
