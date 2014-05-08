@@ -3,7 +3,7 @@
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
- * @version     v0.5.0-dev
+ * @version     v0.4.5-dev
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -26,15 +26,19 @@
         // Determine the event that is fired when user change the field value
         // Most modern browsers supports input event except IE 7, 8.
         // IE 9 supports input event but the event is still not fired if I press the backspace key.
-        // In that case I will use the keydown event
+        // Get IE version
+        // https://gist.github.com/padolsey/527683/#comment-7595
+        var ieVersion = (function() {
+            var v = 3, div = document.createElement('div'), a = div.all || [];
+            while (div.innerHTML = '<!--[if gt IE '+(++v)+']><br><![endif]-->', a[0]);
+            return v > 4 ? v : !v;
+        }());
+
         var el = document.createElement('div');
-        this._changeEvent = ('oninput' in el) ? 'input' : 'keydown';
+        this._changeEvent = (ieVersion === 9 || !('oninput' in el)) ? 'keyup' : 'input';
 
         // The flag to indicate that the form is ready to submit when a remote/callback validator returns
         this._submitIfValid = null;
-
-        // Field elements
-        this._cacheFields = {};
 
         this._init();
     };
@@ -42,10 +46,13 @@
     // The default options
     BootstrapValidator.DEFAULT_OPTIONS = {
         // The form CSS class
-        elementClass: 'bootstrap-validator-form',
+        elementClass: 'bv-form',
 
         // Default invalid message
         message: 'This value is not valid',
+
+        // The field will not be live validated if its length is less than this number of characters
+        threshold: null,
 
         // Indicate fields which won't be validated
         // By default, the plugin will not validate the following kind of fields:
@@ -133,6 +140,7 @@
                     trigger:        this.$form.attr('data-bv-trigger'),
                     message:        this.$form.attr('data-bv-message'),
                     submitButtons:  this.$form.attr('data-bv-submitbuttons'),
+                    threshold:      this.$form.attr('data-bv-threshold'),
                     live:           this.$form.attr('data-bv-live'),
                     fields:         {},
                     feedbackIcons: {
@@ -166,22 +174,12 @@
                 // Find all fields which have either "name" or "data-bv-field" attribute
                 .find('[name], [data-bv-field]').each(function() {
                     var $field = $(this);
-                    // Don't initialize hidden input
-                    if ('hidden' == $field.attr('type')) {
+                    if (that._isExcluded($field)) {
                         return;
                     }
 
-                    var field  = $field.attr('name') || $field.attr('data-bv-field');
-                    $field.attr('data-bv-field', field);
-
-                    options.fields[field] = $.extend({}, {
-                        trigger:    $field.attr('data-bv-trigger'),
-                        message:    $field.attr('data-bv-message'),
-                        container:  $field.attr('data-bv-container'),
-                        selector:   $field.attr('data-bv-selector'),
-                        validators: {}
-                    }, options.fields[field]);
-
+                    var field      = $field.attr('name') || $field.attr('data-bv-field'),
+                        validators = {};
                     for (v in $.fn.bootstrapValidator.validators) {
                         validator  = $.fn.bootstrapValidator.validators[v];
                         enabled    = $field.attr('data-bv-' + v.toLowerCase()) + '';
@@ -192,7 +190,7 @@
                         {
                             // Try to parse the options via attributes
                             validator.html5Attributes = validator.html5Attributes || { message: 'message' };
-                            options.fields[field]['validators'][v] = $.extend({}, html5Attrs == true ? {} : html5Attrs, options.fields[field]['validators'][v]);
+                            validators[v] = $.extend({}, html5Attrs == true ? {} : html5Attrs, validators[v]);
 
                             for (html5AttrName in validator.html5Attributes) {
                                 optionName  = validator.html5Attributes[html5AttrName];
@@ -203,10 +201,25 @@
                                     } else if ('false' == optionValue) {
                                         optionValue = false;
                                     }
-                                    options.fields[field]['validators'][v][optionName] = optionValue;
+                                    validators[v][optionName] = optionValue;
                                 }
                             }
                         }
+                    }
+
+                    var opts = {
+                        trigger:    $field.attr('data-bv-trigger'),
+                        message:    $field.attr('data-bv-message'),
+                        container:  $field.attr('data-bv-container'),
+                        selector:   $field.attr('data-bv-selector'),
+                        threshold:  $field.attr('data-bv-threshold'),
+                        validators: validators
+                    };
+
+                    // Check if there is any validators set using HTML attributes
+                    if (!$.isEmptyObject(opts)) {
+                        $field.attr('data-bv-field', field);
+                        options.fields[field] = $.extend({}, opts, options.fields[field]);
                     }
                 });
 
@@ -221,6 +234,8 @@
             for (var field in this.options.fields) {
                 this._initField(field);
             }
+
+            this.setLiveMode(this.options.live);
         },
 
         /**
@@ -236,7 +251,7 @@
             var fields = this.getFieldElements(field);
 
             // We don't need to validate non-existing fields
-            if (fields == []) {
+            if (fields == null) {
                 delete this.options.fields[field];
                 return;
             }
@@ -245,91 +260,66 @@
                     delete this.options.fields[field].validators[validatorName];
                 }
             }
+
+            var that      = this,
+                type      = fields.attr('type'),
+                event     = ('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : that._changeEvent,
+                total     = fields.length,
+                updateAll = (total == 1) || ('radio' == type) || ('checkbox' == type);
+
+            for (var i = 0; i < total; i++) {
+                var $field   = $(fields[i]),
+                    $parent  = $field.parents('.form-group'),
+                    // Allow user to indicate where the error messages are shown
+                    $message = this.options.fields[field].container ? $parent.find(this.options.fields[field].container) : this._getMessageContainer($field);
+
+                // Set the attribute to indicate the fields which are defined by selector
+                if (!$field.attr('data-bv-field')) {
+                    $field.attr('data-bv-field', field);
+                }
+
+                // Whenever the user change the field value, mark it as not validated yet
+                $field.on(event + '.update.bv', function() {
+                    // Reset the flag
+                    that._submitIfValid = false;
+                    updateAll ? that.updateStatus(field, that.STATUS_NOT_VALIDATED, null)
+                              : that.updateElementStatus($(this), that.STATUS_NOT_VALIDATED, null);
+                });
+
+                // Create help block elements for showing the error messages
+                $field.data('bv.messages', $message);
+                for (validatorName in this.options.fields[field].validators) {
+                    $field.data('bv.result.' + validatorName, this.STATUS_NOT_VALIDATED);
+
+                    if (!updateAll || i == total - 1) {
+                        $('<small/>')
+                            .css('display', 'none')
+                            .attr('data-bv-validator', validatorName)
+                            .attr('data-bv-validator-for', field)
+                            .html(this.options.fields[field].validators[validatorName].message || this.options.fields[field].message || this.options.message)
+                            .addClass('help-block')
+                            .appendTo($message);
+                    }
+                }
+
+                // Prepare the feedback icons
+                // Available from Bootstrap 3.1 (http://getbootstrap.com/css/#forms-control-validation)
+                if (this.options.feedbackIcons
+                    && this.options.feedbackIcons.validating && this.options.feedbackIcons.invalid && this.options.feedbackIcons.valid
+                    && (!updateAll || i == total - 1))
+                {
+                    $parent.addClass('has-feedback');
+                    var $icon = $('<i/>').css('display', 'none').addClass('form-control-feedback').attr('data-bv-field', field).insertAfter($field);
+                    // The feedback icon does not render correctly if there is no label
+                    // https://github.com/twbs/bootstrap/issues/12873
+                    if ($parent.find('label').length == 0) {
+                        $icon.css('top', 0);
+                    }
+                }
+            }
+
             if (this.options.fields[field]['enabled'] == null) {
                 this.options.fields[field]['enabled'] = true;
-            }
-
-            for (var i = 0; i < fields.length; i++) {
-                this._initFieldElement($(fields[i]));
-            }
-        },
-
-        _initFieldElement: function($field) {
-            var that      = this,
-                field     = $field.attr('name') || $field.attr('data-bv-field'),
-                fields    = this.getFieldElements(field),
-                index     = fields.index($field),
-                type      = $field.attr('type'),
-                total     = fields.length,
-                updateAll = (total == 1) || ('radio' == type) || ('checkbox' == type),
-                $parent   = $field.parents('.form-group'),
-                // Allow user to indicate where the error messages are shown
-                $message  = this.options.fields[field].container ? $parent.find(this.options.fields[field].container) : this._getMessageContainer($field);
-
-            // Remove all error messages and feedback icons
-            $message.find('.help-block[data-bv-validator]').remove();
-            $parent.find('i[data-bv-field]').remove();
-
-            // Set the attribute to indicate the fields which are defined by selector
-            if (!$field.attr('data-bv-field')) {
-                $field.attr('data-bv-field', field);
-            }
-
-            // Whenever the user change the field value, mark it as not validated yet
-            var event = ('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == $field.get(0).tagName) ? 'change' : this._changeEvent;
-            $field.off(event + '.update.bv').on(event + '.update.bv', function() {
-                // Reset the flag
-                that._submitIfValid = false;
-                that.updateElementStatus($(this), that.STATUS_NOT_VALIDATED);
-            });
-
-            // Create help block elements for showing the error messages
-            $field.data('bv.messages', $message);
-            for (var validatorName in this.options.fields[field].validators) {
-                $field.data('bv.result.' + validatorName, this.STATUS_NOT_VALIDATED);
-
-                if (!updateAll || index == total - 1) {
-                    $('<small/>')
-                        .css('display', 'none')
-                        .attr('data-bv-validator', validatorName)
-                        .html(this.options.fields[field].validators[validatorName].message || this.options.fields[field].message || this.options.message)
-                        .addClass('help-block')
-                        .appendTo($message);
-                }
-            }
-
-            // Prepare the feedback icons
-            // Available from Bootstrap 3.1 (http://getbootstrap.com/css/#forms-control-validation)
-            if (this.options.feedbackIcons
-                && this.options.feedbackIcons.validating && this.options.feedbackIcons.invalid && this.options.feedbackIcons.valid
-                && (!updateAll || index == total - 1))
-            {
-                $parent.removeClass('has-success').removeClass('has-error').addClass('has-feedback');
-                var $icon = $('<i/>').css('display', 'none').addClass('form-control-feedback').attr('data-bv-field', field).insertAfter($field);
-                // The feedback icon does not render correctly if there is no label
-                // https://github.com/twbs/bootstrap/issues/12873
-                if ($parent.find('label').length == 0) {
-                    $icon.css('top', 0);
-                }
-            }
-
-            // Set live mode
-            var trigger = this.options.fields[field].trigger || this.options.trigger || event,
-                events  = $.map(trigger.split(' '), function(item) {
-                    return item + '.live.bv';
-                }).join(' ');
-            switch (this.options.live) {
-                case 'submitted':
-                    break;
-                case 'disabled':
-                    $field.off(events);
-                    break;
-                case 'enabled':
-                default:
-                    $field.off(events).on(events, function() {
-                        that.validateFieldElement($(this));
-                    });
-                    break;
             }
         },
 
@@ -365,16 +355,32 @@
          * Called when all validations are completed
          */
         _submit: function() {
-            var isValid   = this.isValid(),
-                eventType = isValid ? 'success.form.bv' : 'error.form.bv',
-                e         = $.Event(eventType);
+            if (!this.isValid()) {
+                if ('submitted' == this.options.live) {
+                    this.setLiveMode('enabled');
+                }
 
-            this.$form.trigger(e);
+                // Focus to the first invalid field
+                if (this.$invalidField) {
+                    // Activate the tab containing the invalid field if exists
+                    var $tab = this.$invalidField.parents('.tab-pane'),
+                        tabId;
+                    if ($tab && (tabId = $tab.attr('id'))) {
+                        $('a[href="#' + tabId + '"][data-toggle="tab"]').trigger('click.bs.tab.data-api');
+                    }
 
-            // Call default handler
-            // Check if whether the submit button is clicked
-            if (this.$submitButton) {
-                isValid ? this._onSuccess(e) : this._onError(e);
+                    this.$invalidField.focus();
+                }
+
+                return;
+            }
+
+            // Call the custom submission if enabled
+            if (this.options.submitHandler && 'function' == typeof this.options.submitHandler) {
+                // If you want to submit the form inside your submit handler, please call defaultSubmit() method
+                this.options.submitHandler.call(this, this, this.$form, this.$submitButton);
+            } else {
+                this.disableSubmitButtons(true).defaultSubmit();
             }
         },
 
@@ -399,75 +405,21 @@
             return false;
         },
 
-        // --- Events ---
-
         /**
-         * The default handler of error.form.bv event.
-         * It will be called when there is a invalid field
+         * Check if the number of characters of field value exceed the threshold or not
          *
-         * @param {jQuery.Event} e The jQuery event object
+         * @param {jQuery} $field The field element
+         * @returns {Boolean}
          */
-        _onError: function(e) {
-            if (e.isDefaultPrevented()) {
-                return;
+        _exceedThreshold: function($field) {
+            var field     = $field.attr('data-bv-field'),
+                threshold = this.options.fields[field].threshold || this.options.threshold;
+            if (!threshold) {
+                return true;
             }
-
-            if ('submitted' == this.options.live) {
-                // Enable live mode
-                this.options.live = 'enabled';
-                var that = this;
-                for (var field in this.options.fields) {
-                    (function(f) {
-                        var fields  = that.getFieldElements(f);
-                        if (fields.length) {
-                            var type    = $(fields[0]).attr('type'),
-                                event   = ('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == $(fields[0]).get(0).tagName) ? 'change' : that._changeEvent,
-                                trigger = that.options.fields[field].trigger || that.options.trigger || event,
-                                events  = $.map(trigger.split(' '), function(item) {
-                                    return item + '.live.bv';
-                                }).join(' ');
-
-                            for (var i = 0; i < fields.length; i++) {
-                                $(fields[i]).off(events).on(events, function() {
-                                    that.validateFieldElement($(this));
-                                });
-                            }
-                        }
-                    })(field);
-                }
-            }
-
-            // Focus to the first invalid field
-            if (this.$invalidField) {
-                // Activate the tab containing the invalid field if exists
-                var $tab = this.$invalidField.parents('.tab-pane'),
-                    tabId;
-                if ($tab && (tabId = $tab.attr('id'))) {
-                    $('a[href="#' + tabId + '"][data-toggle="tab"]').trigger('click.bs.tab.data-api');
-                }
-
-                this.$invalidField.focus();
-            }
-        },
-
-        /**
-         * The default handler of success.form.bv event.
-         * It will be called when all the fields are valid
-         *
-         * @param {jQuery.Event} e The jQuery event object
-         */
-        _onSuccess: function(e) {
-            if (e.isDefaultPrevented()) {
-                return;
-            }
-
-            // Call the custom submission if enabled
-            if (this.options.submitHandler && 'function' == typeof this.options.submitHandler) {
-                // If you want to submit the form inside your submit handler, please call defaultSubmit() method
-                this.options.submitHandler.call(this, this, this.$form, this.$submitButton);
-            } else {
-                this.disableSubmitButtons(true).defaultSubmit();
-            }
+            var type       = $field.attr('type'),
+                cannotType = ['button', 'checkbox', 'file', 'hidden', 'image', 'radio', 'reset', 'submit'].indexOf(type) != -1;
+            return (cannotType || $field.val().length >= threshold);
         },
 
         // --- Public methods ---
@@ -479,13 +431,51 @@
          * @returns {null|jQuery[]}
          */
         getFieldElements: function(field) {
-            if (!this._cacheFields[field]) {
-                this._cacheFields[field] = this.options.fields[field].selector
-                                         ? $(this.options.fields[field].selector)
-                                         : this.$form.find('[name="' + field + '"]');
+            var fields = this.options.fields[field].selector ? $(this.options.fields[field].selector) : this.$form.find('[name="' + field + '"]');
+            return (fields.length == 0) ? null : fields;
+        },
+
+        /**
+         * Set live validating mode
+         *
+         * @param {String} mode Live validating mode. Can be 'enabled', 'disabled', 'submitted'
+         * @returns {BootstrapValidator}
+         */
+        setLiveMode: function(mode) {
+            this.options.live = mode;
+            if ('submitted' == mode) {
+                return this;
             }
 
-            return this._cacheFields[field];
+            var that = this;
+            for (var field in this.options.fields) {
+                (function(f) {
+                    var fields = that.getFieldElements(f);
+                    if (fields) {
+                        var type      = fields.attr('type'),
+                            total     = fields.length,
+                            updateAll = (total == 1) || ('radio' == type) || ('checkbox' == type),
+                            trigger   = that.options.fields[field].trigger
+                                        || that.options.trigger
+                                        || (('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == fields[0].tagName) ? 'change' : that._changeEvent),
+                            events    = $.map(trigger.split(' '), function(item) {
+                                return item + '.live.bv';
+                            }).join(' ');
+
+                        for (var i = 0; i < total; i++) {
+                            ('enabled' == mode)
+                                ? $(fields[i]).on(events, function() {
+                                    if (that._exceedThreshold($(this))) {
+                                        updateAll ? that.validateField(f) : that.validateFieldElement($(this), false);
+                                    }
+                                })
+                                : $(fields[i]).off(events);
+                        }
+                    }
+                })(field);
+            }
+
+            return this;
         },
 
         /**
@@ -520,7 +510,10 @@
                 this.validateField(field);
             }
 
-            this._submit();
+            // Check if whether the submit button is clicked
+            if (this.$submitButton) {
+                this._submit();
+            }
 
             return this;
         },
@@ -537,7 +530,7 @@
                 n      = (('radio' == type) || ('checkbox' == type)) ? 1 : fields.length;
 
             for (var i = 0; i < n; i++) {
-                this.validateFieldElement($(fields[i]));
+                this.validateFieldElement($(fields[i]), (n == 1));
             }
 
             return this;
@@ -547,14 +540,12 @@
          * Validate field element
          *
          * @param {jQuery} $field The field element
+         * @param {Boolean} updateAll If true, update status of all elements which have the same name
          * @returns {BootstrapValidator}
          */
-        validateFieldElement: function($field) {
+        validateFieldElement: function($field, updateAll) {
             var that       = this,
                 field      = $field.attr('data-bv-field'),
-                fields     = this.getFieldElements(field),
-                type       = $field.attr('type'),
-                updateAll  = (fields && fields.length == 1) || ('radio' == type) || ('checkbox' == type),
                 validators = this.options.fields[field].validators,
                 validatorName,
                 validateResult;
@@ -631,13 +622,12 @@
          * @return {BootstrapValidator}
          */
         updateElementStatus: function($field, status, validatorName) {
-            var that       = this,
-                field      = $field.attr('data-bv-field'),
-                $parent    = $field.parents('.form-group'),
-                $message   = $field.data('bv.messages'),
-                $rowErrors = $parent.find('.help-block[data-bv-validator]'),
-                $errors    = $message.find('.help-block[data-bv-validator]'),
-                $icon      = $parent.find('.form-control-feedback[data-bv-field="' + field + '"]');
+            var that     = this,
+                field    = $field.attr('data-bv-field'),
+                $parent  = $field.parents('.form-group'),
+                $message = $field.data('bv.messages'),
+                $errors  = $message.find('.help-block[data-bv-validator]'),
+                $icon    = $parent.find('.form-control-feedback[data-bv-field="' + field + '"]');
 
             // Update status
             if (validatorName) {
@@ -646,6 +636,14 @@
                 for (var v in this.options.fields[field].validators) {
                     $field.data('bv.result.' + v, status);
                 }
+            }
+
+            // Determine the tab containing the element
+            var $tabPane = $field.parents('.tab-pane'),
+                tabId,
+                $tab;
+            if ($tabPane && (tabId = $tabPane.attr('id'))) {
+                $tab = $('a[href="#' + tabId + '"][data-toggle="tab"]').parent();
             }
 
             // Show/hide error elements and feedback icons
@@ -658,6 +656,9 @@
                     if ($icon) {
                         $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).addClass(this.options.feedbackIcons.validating).show();
                     }
+                    if ($tab) {
+                        $tab.removeClass('bv-tab-success').removeClass('bv-tab-error');
+                    }
                     break;
 
                 case this.STATUS_INVALID:
@@ -666,6 +667,9 @@
                     validatorName ? $errors.filter('[data-bv-validator="' + validatorName + '"]').show() : $errors.show();
                     if ($icon) {
                         $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
+                    }
+                    if ($tab) {
+                        $tab.removeClass('bv-tab-success').addClass('bv-tab-error');
                     }
                     break;
 
@@ -685,12 +689,20 @@
                             .show();
                     }
 
-                    // Check if all fields in the same row are valid
-                    var validRow = ($rowErrors.filter(function() {
+                    // Check if all elements in given container are valid
+                    var isValidContainer = function($container) {
+                        return $container
+                                    .find('.help-block[data-bv-validator]')
+                                    .filter(function() {
                                         var display = $(this).css('display'), v = $(this).attr('data-bv-validator');
-                                        return ('block' == display) || ($field.data('bv.result.' + v) != that.STATUS_VALID);
-                                    }).length == 0);
-                    $parent.removeClass('has-error has-success').addClass(validRow ? 'has-success' : 'has-error');
+                                        return ('block' == display) || ($field.data('bv.result.' + v) && $field.data('bv.result.' + v) != that.STATUS_VALID);
+                                    })
+                                    .length == 0;
+                    };
+                    $parent.removeClass('has-error has-success').addClass(isValidContainer($parent) ? 'has-success' : 'has-error');
+                    if ($tab) {
+                        $tab.removeClass('bv-tab-success').removeClass('bv-tab-error').addClass(isValidContainer($tabPane) ? 'bv-tab-success' : 'bv-tab-error');
+                    }
                     break;
 
                 case this.STATUS_NOT_VALIDATED:
@@ -700,6 +712,9 @@
                     validatorName ? $errors.filter('.help-block[data-bv-validator="' + validatorName + '"]').hide() : $errors.hide();
                     if ($icon) {
                         $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).hide();
+                    }
+                    if ($tab) {
+                        $tab.removeClass('bv-tab-success').removeClass('bv-tab-error');
                     }
                     break;
             }
@@ -761,52 +776,6 @@
         // Useful APIs which aren't used internally
 
         /**
-         * Add new field element
-         *
-         * @param {jQuery} $field The field element
-         * @param {Object} options The field options
-         * @returns {BootstrapValidator}
-         */
-        addFieldElement: function($field, options) {
-            var field      = $field.attr('name') || $field.attr('data-bv-field'),
-                type       = $field.attr('type'),
-                isNewField = !this._cacheFields[field];
-
-            // Update cache
-            if (!isNewField && this._cacheFields[field].index($field) == -1) {
-                this._cacheFields[field] = this._cacheFields[field].add($field);
-            }
-
-            if ('checkbox' == type || 'radio' == type || isNewField) {
-                this._initField(field);
-            } else {
-                this._initFieldElement($field);
-            }
-
-            return this;
-        },
-
-        /**
-         * Remove given field element
-         *
-         * @param {jQuery} $field The field element
-         * @returns {BootstrapValidator}
-         */
-        removeFieldElement: function($field) {
-            var field = $field.attr('name') || $field.attr('data-bv-field'),
-                type  = $field.attr('type'),
-                index = this._cacheFields[field].index($field);
-
-            (index == -1) ? (delete this._cacheFields[field]) : this._cacheFields[field].splice(index, 1);
-
-            if ('checkbox' == type || 'radio' == type) {
-                this._initField(field);
-            }
-
-            return this;
-        },
-
-        /**
          * Reset the form
          *
          * @param {Boolean} resetFormData Reset current form data
@@ -825,7 +794,7 @@
                 }
 
                 // Mark field as not validated yet
-                this.updateStatus(field, this.STATUS_NOT_VALIDATED);
+                this.updateStatus(field, this.STATUS_NOT_VALIDATED, null);
 
                 if (resetFormData) {
                     type = fields.attr('type');
@@ -851,7 +820,7 @@
          */
         enableFieldValidators: function(field, enabled) {
             this.options.fields[field]['enabled'] = enabled;
-            this.updateStatus(field, this.STATUS_NOT_VALIDATED);
+            this.updateStatus(field, this.STATUS_NOT_VALIDATED, null);
 
             return this;
         }
@@ -887,7 +856,7 @@
          * Credit to https://gist.github.com/ShirtlessKirk/2134376
          *
          * @param {String} value
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         luhn: function(value) {
             var length  = value.length,
@@ -901,6 +870,42 @@
             }
 
             return (sum % 10 === 0 && sum > 0);
+        },
+
+        /**
+         * Implement modulus 11, 10 (ISO 7064) algorithm
+         *
+         * @param {String} value
+         * @returns {Boolean}
+         */
+        mod_11_10: function(value) {
+            var check  = 5,
+                length = value.length;
+            for (var i = 0; i < length; i++) {
+                check = (((check || 10) * 2) % 11 + parseInt(value.charAt(i), 10)) % 10;
+            }
+            return (check == 1);
+        },
+
+        /**
+         * Implements Mod 37, 36 (ISO 7064) algorithm
+         * Usages:
+         * mod_37_36('A12425GABC1234002M')
+         * mod_37_36('002006673085', '0123456789')
+         *
+         * @param {String} value
+         * @param {String} alphabet
+         * @returns {Boolean}
+         */
+        mod_37_36: function(value, alphabet) {
+            alphabet = alphabet || '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var modulus = alphabet.length,
+                length  = value.length,
+                check   = Math.floor(modulus / 2);
+            for (var i = 0; i < length; i++) {
+                check = (((check || modulus) * 2) % (modulus + 1) + alphabet.indexOf(value.charAt(i))) % modulus;
+            }
+            return (check == 1);
         }
     };
 }(window.jQuery));
@@ -1086,7 +1091,7 @@
                 },
                 LASER: {
                     length: [16, 17, 18, 19],
-                    prefix: ['3528', '3529', '353', '354', '355', '356', '357', '358']
+                    prefix: ['6304', '6706', '6771', '6709']
                 },
                 MAESTRO: {
                     length: [12, 13, 14, 15, 16, 17, 18, 19],
@@ -1194,7 +1199,7 @@
                 },
                 LASER: {
                     length: [16, 17, 18, 19],
-                    prefix: ['3528', '3529', '353', '354', '355', '356', '357', '358']
+                    prefix: ['6304', '6706', '6771', '6709']
                 },
                 MAESTRO: {
                     length: [12, 13, 14, 15, 16, 17, 18, 19],
@@ -1251,28 +1256,14 @@
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options Can consist of the following keys:
-         * - format: The date format. Default is MM/DD/YYYY
-         * Support the following formats:
-         *      YYYY/DD/MM
-         *      YYYY/DD/MM h:m A
-         *      YYYY/MM/DD
-         *      YYYY/MM/DD h:m A
-         *
-         *      YYYY-DD-MM
-         *      YYYY-DD-MM h:m A
-         *      YYYY-MM-DD
-         *      YYYY-MM-DD h:m A
-         *
-         *      MM/DD/YYYY
-         *      MM/DD/YYYY h:m A
-         *      DD/MM/YYYY
-         *      DD/MM/YYYY h:m A
-         *
-         *      MM-DD-YYYY
-         *      MM-DD-YYYY h:m A
-         *      DD-MM-YYYY
-         *      DD-MM-YYYY h:m A
          * - message: The invalid message
+         * - format: The date format. Default is MM/DD/YYYY
+         * The format can be:
+         *
+         * i) date: Consist of DD, MM, YYYY parts which are separated by /
+         * ii) date and time:
+         * The time can consist of h, m, s parts which are separated by :
+         * ii) date, time and A (indicating AM or PM)
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
@@ -1280,67 +1271,70 @@
             if (value == '') {
                 return true;
             }
-            // Determine the separator
+
             options.format = options.format || 'MM/DD/YYYY';
-            var separator = (options.format.indexOf('/') != -1)
-                            ? '/'
-                            : ((options.format.indexOf('-') != -1) ? '-' : null);
+
+            var formats    = options.format.split(' '),
+                dateFormat = formats[0],
+                timeFormat = (formats.length > 1) ? formats[1] : null,
+                amOrPm     = (formats.length > 2) ? formats[2] : null,
+                sections   = value.split(' '),
+                date       = sections[0],
+                time       = (sections.length > 1) ? sections[1] : null;
+
+            if (formats.length != sections.length) {
+                return false;
+            }
+
+            // Determine the separator
+            var separator = (date.indexOf('/') != -1) ? '/' : ((date.indexOf('-') != -1) ? '-' : null);
             if (separator == null) {
                 return false;
             }
 
-            var month, day, year, minutes = null, hours = null, matches;
-            switch (true) {
-                case (separator == '/' && (matches = value.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/i)) && options.format == 'YYYY/DD/MM'):
-                case (separator == '-' && (matches = value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/i)) && options.format == 'YYYY-DD-MM'):
-                    year = matches[1]; day = matches[2]; month = matches[3];
-                    break;
+            // Determine the date
+            date       = date.split(separator);
+            dateFormat = dateFormat.split(separator);
+            var year  = date[dateFormat.indexOf('YYYY')],
+                month = date[dateFormat.indexOf('MM')],
+                day   = date[dateFormat.indexOf('DD')];
 
-                case (separator == '/' && (matches = value.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/i)) && options.format == 'DD/MM/YYYY'):
-                case (separator == '-' && (matches = value.match(/^(\d{1,2})-(\d{1,2})-(\d{4})$/i)) && options.format == 'DD-MM-YYYY'):
-                    day = matches[1]; month = matches[2]; year = matches[3];
-                    break;
+            // Determine the time
+            var minutes = null, hours = null, seconds = null;
+            if (timeFormat) {
+                timeFormat = timeFormat.split(':'),
+                time       = time.split(':');
 
-                case (separator == '/' && (matches = value.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/i)) && options.format == 'YYYY/MM/DD'):
-                case (separator == '-' && (matches = value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})$/i)) && options.format == 'YYYY-MM-DD'):
-                    year = matches[1]; month = matches[2]; day = matches[3];
-                    break;
-
-                case (separator == '/' && (matches = value.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/i)) && options.format == 'MM/DD/YYYY'):
-                case (separator == '-' && (matches = value.match(/^(\d{1,2})-(\d{1,2})-(\d{4})$/i)) && options.format == 'MM-DD-YYYY'):
-                    month = matches[1]; day = matches[2]; year = matches[3];
-                    break;
-
-                case (separator == '/' && (matches = value.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})\s+(\d{1,2}):(\d{1,2})\s+(AM|PM)$/i)) && options.format == 'YYYY/DD/MM h:m A'):
-                case (separator == '-' && (matches = value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})\s+(\d{1,2}):(\d{1,2})\s+(AM|PM)$/i)) && options.format == 'YYYY-DD-MM h:m A'):
-                    year = matches[1]; day = matches[2]; month = matches[3]; hours = matches[4]; minutes = matches[5];
-                    break;
-
-                case (separator == '/' && (matches = value.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})\s+(\d{1,2}):(\d{1,2})\s+(AM|PM)$/i)) && options.format == 'DD/MM/YYYY h:m A'):
-                case (separator == '-' && (matches = value.match(/^(\d{1,2})-(\d{1,2})-(\d{4})\s+(\d{1,2}):(\d{1,2})\s+(AM|PM)$/i)) && options.format == 'DD-MM-YYYY h:m A'):
-                    day = matches[1]; month = matches[2]; year = matches[3]; hours = matches[4]; minutes = matches[5];
-                    break;
-
-                case (separator == '/' && (matches = value.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})\s+(\d{1,2}):(\d{1,2})\s+(AM|PM)$/i)) && options.format == 'YYYY/MM/DD h:m A'):
-                case (separator == '-' && (matches = value.match(/^(\d{4})-(\d{1,2})-(\d{1,2})\s+(\d{1,2}):(\d{1,2})\s+(AM|PM)$/i)) && options.format == 'YYYY-MM-DD h:m A'):
-                    year = matches[1]; month = matches[2]; day = matches[3]; hours = matches[4]; minutes = matches[5];
-                    break;
-
-                case (separator == '/' && (matches = value.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})\s+(\d{1,2}):(\d{1,2})\s+(AM|PM)$/i)) && options.format == 'MM/DD/YYYY h:m A'):
-                case (separator == '-' && (matches = value.match(/^(\d{1,2})-(\d{1,2})-(\d{4})\s+(\d{1,2}):(\d{1,2})\s+(AM|PM)$/i)) && options.format == 'MM-DD-YYYY h:m A'):
-                    month = matches[1]; day = matches[2]; year = matches[3]; hours = matches[4]; minutes = matches[5];
-                    break;
-
-                default:
+                if (timeFormat.length != time.length) {
                     return false;
-            }
+                }
 
-            // Validate hours and minutes
-            if (hours && minutes) {
-                hours   = parseInt(hours, 10);
-                minutes = parseInt(minutes, 10);
-                if (hours < 1 || hours > 12 || minutes < 0 || minutes > 59) {
-                    return false;
+                hours   = time.length > 0 ? time[0] : null;
+                minutes = time.length > 1 ? time[1] : null;
+                seconds = time.length > 2 ? time[2] : null;
+
+                // Validate seconds
+                if (seconds) {
+                    seconds = parseInt(seconds, 10);
+                    if (seconds < 0 || seconds > 60) {
+                        return false;
+                    }
+                }
+
+                // Validate hours
+                if (hours) {
+                    hours = parseInt(hours, 10);
+                    if (hours < 0 || hours >= 24 || (amOrPm && hours > 12)) {
+                        return false;
+                    }
+                }
+
+                // Validate minutes
+                if (minutes) {
+                    minutes = parseInt(minutes, 10);
+                    if (minutes < 0 || minutes > 59) {
+                        return false;
+                    }
                 }
             }
 
@@ -1420,6 +1414,42 @@
             return /^\d+$/.test(value);
         }
     }
+}(window.jQuery));
+;(function($) {
+    $.fn.bootstrapValidator.validators.ean = {
+        /**
+         * Validate EAN (International Article Number)
+         * Examples:
+         * - Valid: 73513537, 9780471117094, 4006381333931
+         * - Invalid: 73513536
+         *
+         * @see http://en.wikipedia.org/wiki/European_Article_Number
+         * @param {BootstrapValidator} validator The validator plugin instance
+         * @param {jQuery} $field Field element
+         * @param {Object} options Can consist of the following keys:
+         * - message: The invalid message
+         * @returns {Boolean}
+         */
+        validate: function(validator, $field, options) {
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            if (!/^(\d{8}|\d{12}|\d{13})$/.test(value)) {
+                return false;
+            }
+
+            var length = value.length,
+                sum    = 0,
+                weight = (length == 8) ? [3, 1] : [1, 3];
+            for (var i = 0; i < length - 1; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i % 2];
+            }
+            sum = 10 - sum % 10;
+            return (sum == value.charAt(length - 1));
+        }
+    };
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.emailAddress = {
@@ -1552,6 +1582,39 @@
             return (options.inclusive === true) ? (value > options.value) : (value >= options.value);
         }
     }
+}(window.jQuery));
+;(function($) {
+    $.fn.bootstrapValidator.validators.grid = {
+        /**
+         * Validate GRId (Global Release Identifier)
+         * Examples:
+         * - Valid: A12425GABC1234002M, A1-2425G-ABC1234002-M, A1 2425G ABC1234002 M, Grid:A1-2425G-ABC1234002-M
+         * - Invalid: A1-2425G-ABC1234002-Q
+         *
+         * @see http://en.wikipedia.org/wiki/Global_Release_Identifier
+         * @param {BootstrapValidator} validator The validator plugin instance
+         * @param {jQuery} $field Field element
+         * @param {Object} options Can consist of the following keys:
+         * - message: The invalid message
+         * @returns {Boolean}
+         */
+        validate: function(validator, $field, options) {
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            value = value.toUpperCase();
+            if (!/^[GRID:]*([0-9A-Z]{2})[-\s]*([0-9A-Z]{5})[-\s]*([0-9A-Z]{10})[-\s]*([0-9A-Z]{1})$/g.test(value)) {
+                return false;
+            }
+            value = value.replace(/\s/g, '').replace(/-/g, '');
+            if ('GRID:' == value.substr(0, 5)) {
+                value = value.substr(5);
+            }
+            return $.fn.bootstrapValidator.helpers.mod_37_36(value);
+        }
+    };
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.hex = {
@@ -1735,6 +1798,205 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.validators.id = {
+        html5Attributes: {
+            message: 'message',
+            country: 'country'
+        },
+
+        /**
+         * Validate identification number in different countries
+         *
+         * @see http://en.wikipedia.org/wiki/National_identification_number
+         * @param {BootstrapValidator} validator The validator plugin instance
+         * @param {jQuery} $field Field element
+         * @param {Object} options Consist of key:
+         * - message: The invalid message
+         * - country: The ISO 3166-1 country code
+         * @returns {Boolean}
+         */
+        validate: function(validator, $field, options) {
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            var country = options.country || value.substr(0, 2),
+                method  = ['_', country.toLowerCase()].join('');
+            if (this[method] && 'function' == typeof this[method]) {
+                return this[method](value);
+            }
+
+            return true;
+        },
+
+        /**
+         * Validate Bulgarian national identification number (EGN)
+         * Examples:
+         * - Valid: 7523169263, 8032056031, 803205 603 1, 8001010008, 7501020018, 7552010005, 7542011030
+         * - Invalid: 8019010008
+         *
+         * @see http://en.wikipedia.org/wiki/Uniform_civil_number
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _bg: function(value) {
+            if (!/^\d{10}$/.test(value) && !/^\d{6}\s\d{3}\s\d{1}$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/\s/g, '');
+            // Check the birth date
+            var year  = parseInt(value.substr(0, 2), 10) + 1900,
+                month = parseInt(value.substr(2, 2), 10),
+                day   = parseInt(value.substr(4, 2), 10);
+            if (month > 40) {
+                year += 100;
+                month -= 40;
+            } else if (month > 20) {
+                year -= 100;
+                month -= 20;
+            }
+
+            try {
+                var d = new Date(year, month, day);
+            } catch (ex) {
+                return false;
+            }
+
+            var sum    = 0,
+                weight = [2, 4, 8, 5, 10, 9, 7, 3, 6];
+            for (var i = 0; i < 9; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+            sum = (sum % 11) % 10;
+            return (sum == value.substr(9, 1));
+        },
+
+        /**
+         * Validate Brazilian national identification number (CPF)
+         * Examples:
+         * - Valid: 39053344705, 390.533.447-05, 111.444.777-35
+         * - Invalid: 231.002.999-00
+         *
+         * @see http://en.wikipedia.org/wiki/Cadastro_de_Pessoas_F%C3%ADsicas
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _br: function(value) {
+            if (/^1{11}|2{11}|3{11}|4{11}|5{11}|6{11}|7{11}|8{11}|9{11}|0{11}$/.test(value)) {
+                return false;
+            }
+            if (!/^\d{11}$/.test(value) && !/^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/\./g, '').replace(/-/g, '');
+
+            var d1 = 0;
+            for (var i = 0; i < 9; i++) {
+                d1 += (10 - i) * parseInt(value.charAt(i));
+            }
+            d1 = 11 - d1 % 11;
+            if (d1 == 10 || d1 == 11) {
+                d1 = 0;
+            }
+            if (d1 != value.charAt(9)) {
+                return false;
+            }
+
+            var d2 = 0;
+            for (i = 0; i < 10; i++) {
+                d2 += (11 - i) * parseInt(value.charAt(i));
+            }
+            d2 = 11 - d2 % 11;
+            if (d2 == 10 || d2 == 11) {
+                d2 = 0;
+            }
+
+            return (d2 == value.charAt(10));
+        },
+
+        /**
+         * Validate Czech national identification number (RC)
+         * Examples:
+         * - Valid: 7103192745, 991231123
+         * - Invalid: 1103492745, 590312123
+         *
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _cz: function(value) {
+            if (!/^\d{9,10}$/.test(value)) {
+                return false;
+            }
+            var year  = 1900 + parseInt(value.substr(0, 2)),
+                month = parseInt(value.substr(2, 2)) % 50 % 20,
+                day   = parseInt(value.substr(4, 2));
+            if (value.length == 9) {
+                if (year >= 1980) {
+                    year -= 100;
+                }
+                if (year > 1953) {
+                    return false;
+                }
+            } else if (year < 1954) {
+                year += 100;
+            }
+
+            try {
+                var d = new Date(year, month, day);
+            } catch (ex) {
+                return false;
+            }
+
+            // Check that the birth date is not in the future
+            if (value.length == 10) {
+                var check = parseInt(value.substr(0, 9), 10) % 11;
+                if (year < 1985) {
+                    check = check % 10;
+                }
+                return (check == value.substr(9, 1));
+            }
+
+            return true;
+        },
+
+        /**
+         * Validate Spanish personal identity code (DNI)
+         * Examples:
+         * - Valid: 54362315K, 54362315-K
+         * - Invalid: 54362315Z
+         *
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _es: function(value) {
+            if (!/^[0-9A-Z]{8}[-]{0,1}[0-9A-Z]{1}$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/-/g, '');
+            var check = parseInt(value.substr(0, 8), 10);
+            check = 'TRWAGMYFPDXBNJZSQVHLCKE'[check % 23];
+            return (check == value.substr(8, 1));
+        },
+
+        /**
+         * Validate Croatian personal identification number (OIB)
+         * Examples:
+         * - Valid: 33392005961
+         * - Invalid: 33392005962
+         *
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _hr: function(value) {
+            if (!/^[0-9]{11}$/.test(value)) {
+                return false;
+            }
+            return $.fn.bootstrapValidator.helpers.mod_11_10(value);
+        }
+    };
+}(window.jQuery));
+;(function($) {
     $.fn.bootstrapValidator.validators.identical = {
         html5Attributes: {
             message: 'message',
@@ -1766,6 +2028,47 @@
                 return true;
             } else {
                 return false;
+            }
+        }
+    };
+}(window.jQuery));
+;(function($) {
+    $.fn.bootstrapValidator.validators.imei = {
+        /**
+         * Validate IMEI (International Mobile Station Equipment Identity)
+         * Examples:
+         * - Valid: 35-209900-176148-1, 35-209900-176148-23, 3568680000414120, 490154203237518
+         * - Invalid: 490154203237517
+         *
+         * @see http://en.wikipedia.org/wiki/International_Mobile_Station_Equipment_Identity
+         * @param {BootstrapValidator} validator The validator plugin instance
+         * @param {jQuery} $field Field element
+         * @param {Object} options Can consist of the following keys:
+         * - message: The invalid message
+         * @returns {Boolean}
+         */
+        validate: function(validator, $field, options) {
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            switch (true) {
+                case /^\d{15}$/.test(value):
+                case /^\d{2}-\d{6}-\d{6}-\d{1}$/.test(value):
+                case /^\d{2}\s\d{6}\s\d{6}\s\d{1}$/.test(value):
+                    value = value.replace(/[^0-9]/g, '');
+                    return $.fn.bootstrapValidator.helpers.luhn(value);
+                    break;
+
+                case /^\d{14}$/.test(value):
+                case /^\d{16}$/.test(value):
+                case /^\d{2}-\d{6}-\d{6}(|-\d{2})$/.test(value):
+                case /^\d{2}\s\d{6}\s\d{6}(|\s\d{2})$/.test(value):
+                    return true;
+
+                default:
+                    return false;
             }
         }
     };
@@ -1841,6 +2144,7 @@
          * ISBN 10: 99921-58-10-6
          * ISBN 13: 978-0-306-40615-6
          *
+         * @see http://en.wikipedia.org/wiki/International_Standard_Book_Number
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options Can consist of the following keys:
@@ -1906,6 +2210,103 @@
                 default:
                     return false;
             }
+        }
+    };
+}(window.jQuery));
+;(function($) {
+    $.fn.bootstrapValidator.validators.ismn = {
+        /**
+         * Validate ISMN (International Standard Music Number)
+         * Examples:
+         * - Valid: M230671187, 979-0-0601-1561-5, 979 0 3452 4680 5, 9790060115615
+         * - Invalid: 9790060115614
+         *
+         * @see http://en.wikipedia.org/wiki/International_Standard_Music_Number
+         * @param {BootstrapValidator} validator The validator plugin instance
+         * @param {jQuery} $field Field element
+         * @param {Object} options Can consist of the following keys:
+         * - message: The invalid message
+         * @returns {Boolean}
+         */
+        validate: function(validator, $field, options) {
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            // Groups are separated by a hyphen or a space
+            var type;
+            switch (true) {
+                case /^M\d{9}$/.test(value):
+                case /^M-\d{4}-\d{4}-\d{1}$/.test(value):
+                case /^M\s\d{4}\s\d{4}\s\d{1}$/.test(value):
+                    type = 'ISMN10';
+                    break;
+                case /^9790\d{9}$/.test(value):
+                case /^979-0-\d{4}-\d{4}-\d{1}$/.test(value):
+                case /^979\s0\s\d{4}\s\d{4}\s\d{1}$/.test(value):
+                    type = 'ISMN13';
+                    break;
+                default:
+                    return false;
+            }
+
+            if ('ISMN10' == type) {
+                value = '9790' + value.substr(1);
+            }
+
+            // Replace all special characters except digits
+            value = value.replace(/[^0-9]/gi, '');
+            var length = value.length,
+                sum    = 0,
+                weight = [1, 3];
+            for (var i = 0; i < length - 1; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i % 2];
+            }
+            sum = 10 - sum % 10;
+            return (sum == value.charAt(length - 1));
+        }
+    };
+}(window.jQuery));
+;(function($) {
+    $.fn.bootstrapValidator.validators.issn = {
+        /**
+         * Validate ISSN (International Standard Serial Number)
+         * Examples:
+         * - Valid: 0378-5955, 0024-9319, 0032-1478
+         * - Invalid: 0032-147X
+         *
+         * @see http://en.wikipedia.org/wiki/International_Standard_Serial_Number
+         * @param {BootstrapValidator} validator The validator plugin instance
+         * @param {jQuery} $field Field element
+         * @param {Object} options Can consist of the following keys:
+         * - message: The invalid message
+         * @returns {Boolean}
+         */
+        validate: function(validator, $field, options) {
+            var value = $field.val();
+            if (value == '') {
+                return true;
+            }
+
+            // Groups are separated by a hyphen or a space
+            if (!/^\d{4}\-\d{3}[\dX]$/.test(value)) {
+                return false;
+            }
+
+            // Replace all special characters except digits and X
+            value = value.replace(/[^0-9X]/gi, '');
+            var chars  = value.split(''),
+                length = chars.length,
+                sum    = 0;
+
+            if (chars[7] == 'X') {
+                chars[7] = 10;
+            }
+            for (var i = 0; i < length; i++) {
+                sum += ((8 - i) * parseInt(chars[i]));
+            }
+            return (sum % 11 == 0);
         }
     };
 }(window.jQuery));
@@ -2500,7 +2901,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '' || !options.country) {
+            if (value == '') {
                 return true;
             }
 
@@ -2764,7 +3165,8 @@
 
             value = value.substr(2);
 
-            var sum = 0, weight = [], i = 0;
+            var sum = 0,
+                i   = 0;
             if (value.length == 8) {
                 // Do not allow to start with '9'
                 if (value.charAt(0) + '' == '9') {
@@ -2772,7 +3174,7 @@
                 }
 
                 sum = 0;
-                for (var i = 0; i < 7; i++) {
+                for (i = 0; i < 7; i++) {
                     sum += parseInt(value.charAt(i), 10) * (8 - i);
                 }
                 sum = 11 - sum % 11;
@@ -2787,7 +3189,7 @@
             } else if (value.length == 9 && (value.charAt(0) + '' == '6')) {
                 sum = 0;
                 // Skip the first (which is 6)
-                for (var i = 0; i < 7; i++) {
+                for (i = 0; i < 7; i++) {
                     sum += parseInt(value.charAt(i + 1), 10) * (8 - i);
                 }
                 sum = 11 - sum % 11;
@@ -2801,38 +3203,36 @@
                 return (sum == value.substr(8, 1));
             } else if (value.length == 9 || value.length == 10) {
                 // Validate Czech birth number (Rodné číslo), which is also national identifier
-                var rc = function(value) {
-                    var year  = 1900 + parseInt(value.substr(0, 2)),
-                        month = parseInt(value.substr(2, 2)) % 50 % 20,
-                        day   = parseInt(value.substr(4, 2));
-                    if (value.length == 9) {
-                        if (year >= 1980) {
-                            year -= 100;
-                        }
-                        if (year > 1953) {
-                            return false;
-                        }
-                    } else if (year < 1954) {
-                        year += 100;
+                var year  = 1900 + parseInt(value.substr(0, 2)),
+                    month = parseInt(value.substr(2, 2)) % 50 % 20,
+                    day   = parseInt(value.substr(4, 2));
+                if (value.length == 9) {
+                    if (year >= 1980) {
+                        year -= 100;
                     }
-
-                    try {
-                        var d = new Date(year, month, day);
-                    } catch (ex) {
+                    if (year > 1953) {
                         return false;
                     }
+                } else if (year < 1954) {
+                    year += 100;
+                }
 
-                    // Check that the birth date is not in the future
-                    if (value.length == 10) {
-                        var check = parseInt(value.substr(0, 9), 10) % 11;
-                        if (year < 1985) {
-                            check = check % 10;
-                        }
-                        return (check == value.substr(9, 1));
+                try {
+                    var d = new Date(year, month, day);
+                } catch (ex) {
+                    return false;
+                }
+
+                // Check that the birth date is not in the future
+                if (value.length == 10) {
+                    var check = parseInt(value.substr(0, 9), 10) % 11;
+                    if (year < 1985) {
+                        check = check % 10;
                     }
+                    return (check == value.substr(9, 1));
+                }
 
-                    return true;
-                };
+                return true;
             }
 
             return false;
@@ -2853,18 +3253,7 @@
             }
 
             value = value.substr(2);
-            var product = 10,
-                sum     = 0;
-            for (var i = 0; i < 8; i++) {
-                sum = (parseInt(value.charAt(i), 10) + product) % 10;
-                if (sum == 0) {
-                    sum = 10;
-                }
-                product = (sum * 2) % 11;
-            }
-
-            var checkDigit = (11 - product == 10) ? 0 : (11 - product);
-            return (checkDigit == value.substr(8, 1));
+            return $.fn.bootstrapValidator.helpers.mod_11_10(value);
         },
 
         /**
@@ -3178,18 +3567,7 @@
             }
 
             value = value.substr(2);
-            var sum  = 10,
-                temp = 0;
-
-            for (var i = 0; i < 10; i++) {
-                temp = (parseInt(value.charAt(i), 10) + sum) % 10;
-                if (temp == 0) {
-                    temp = 10;
-                }
-                sum = (temp * 2) % 11;
-            }
-            sum += parseInt(value.substr(10, 1), 10);
-            return (sum % 10 == 1);
+            return $.fn.bootstrapValidator.helpers.mod_11_10(value);
         },
 
         /**
@@ -3528,6 +3906,55 @@
         },
 
         /**
+         * Validate Russian VAT number (Taxpayer Identification Number - INN)
+         *
+         * @param {String} value VAT number
+         * @returns {Boolean}
+         */
+        _ru: function(value) {
+            if (!/^RU([0-9]{9}|[0-9]{12})$/.test(value)) {
+                return false;
+            }
+
+            value = value.substr(2);
+            if (value.length == 10) {
+                var sum    = 0,
+                    weight = [2, 4, 10, 3, 5, 9, 4, 6, 8, 0];
+                for (var i = 0; i < 10; i++) {
+                    sum += parseInt(value.charAt(i)) * weight[i];
+                }
+                sum = sum % 11;
+                if (sum > 9) {
+                    sum = sum % 10;
+                }
+
+                return (sum == value.substr(9, 1));
+            } else if (value.length == 12) {
+                var sum1    = 0,
+                    weight1 = [7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 0],
+                    sum2    = 0,
+                    weight2 = [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 0];
+
+                for (var i = 0; i < 11; i++) {
+                    sum1 += parseInt(value.charAt(i)) * weight1[i];
+                    sum2 += parseInt(value.charAt(i)) * weight2[i];
+                }
+                sum1 = sum1 % 11;
+                if (sum1 > 9) {
+                    sum1 = sum1 % 10;
+                }
+                sum2 = sum2 % 11;
+                if (sum2 > 9) {
+                    sum2 = sum2 % 10;
+                }
+
+                return (sum1 == value.substr(10, 1) && sum2 == value.substr(11, 1));
+            }
+
+            return false;
+        },
+
+        /**
          * Validate Serbian VAT number
          *
          * @param {String} value VAT number
@@ -3682,6 +4109,7 @@
          * - US (United State)
          * - CA (Canada)
          * - DK (Denmark)
+         * - GB (United Kingdom)
          * - SE (Sweden)
          * @returns {Boolean}
          */
@@ -3697,12 +4125,55 @@
                     return /(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}\s?[0-9]{1}(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}/i.test(value);
                 case 'DK':
                     return /^(DK(-|\s)?)?\d{4}$/i.test(value);
+                case 'GB':
+                    return this._gb(value);
                 case 'SE':
                     return /^(S-)?\d{3}\s?\d{2}$/i.test(value);
                 case 'US':
                 default:
                     return /^\d{4,5}([\-]\d{4})?$/.test(value);
             }
+        },
+
+        /**
+         * Validate United Kingdom postcode
+         * Examples:
+         * - Standard: EC1A 1BB, W1A 1HQ, M1 1AA, B33 8TH, CR2 6XH, DN55 1PT
+         * - Special cases:
+         * AI-2640, ASCN 1ZZ, GIR 0AA
+         *
+         * @see http://en.wikipedia.org/wiki/Postcodes_in_the_United_Kingdom
+         * @param {String} value The postcode
+         * @returns {Boolean}
+         */
+        _gb: function(value) {
+            var firstChar  = '[ABCDEFGHIJKLMNOPRSTUWYZ]',     // Does not accept QVX
+                secondChar = '[ABCDEFGHKLMNOPQRSTUVWXY]',     // Does not accept IJZ
+                thirdChar  = '[ABCDEFGHJKPMNRSTUVWXY]',
+                fouthChar  = '[ABEHMNPRVWXY]',
+                fifthChar  = '[ABDEFGHJLNPQRSTUWXYZ]',
+                regexps = [
+                    // AN NAA, ANN NAA, AAN NAA, AANN NAA format
+                    new RegExp('^(' + firstChar + '{1}' + secondChar + '?[0-9]{1,2})(\\s*)([0-9]{1}' + fifthChar + '{2})$', 'i'),
+                    // ANA NAA
+                    new RegExp('^(' + firstChar + '{1}[0-9]{1}' + thirdChar + '{1})(\\s*)([0-9]{1}' + fifthChar + '{2})$', 'i'),
+                    // AANA NAA
+                    new RegExp('^(' + firstChar + '{1}' + secondChar + '{1}?[0-9]{1}' + fouthChar + '{1})(\\s*)([0-9]{1}' + fifthChar + '{2})$', 'i'),
+
+                    new RegExp('^(BF1)(\\s*)([0-6]{1}[ABDEFGHJLNPQRST]{1}[ABDEFGHJLNPQRSTUWZYZ]{1})$', 'i'),        // BFPO postcodes
+                    /^(GIR)(\s*)(0AA)$/i,                       // Special postcode GIR 0AA
+                    /^(BFPO)(\s*)([0-9]{1,4})$/i,               // Standard BFPO numbers
+                    /^(BFPO)(\s*)(c\/o\s*[0-9]{1,3})$/i,        // c/o BFPO numbers
+                    /^([A-Z]{4})(\s*)(1ZZ)$/i,                  // Overseas Territories
+                    /^(AI-2640)$/i                              // Anguilla
+                ];
+            for (var i = 0; i < regexps.length; i++) {
+                if (regexps[i].test(value)) {
+                    return true;
+                }
+            }
+
+            return false;
         }
     };
 }(window.jQuery));

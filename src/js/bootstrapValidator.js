@@ -25,9 +25,16 @@
         // Determine the event that is fired when user change the field value
         // Most modern browsers supports input event except IE 7, 8.
         // IE 9 supports input event but the event is still not fired if I press the backspace key.
-        // In that case I will use the keydown event
+        // Get IE version
+        // https://gist.github.com/padolsey/527683/#comment-7595
+        var ieVersion = (function() {
+            var v = 3, div = document.createElement('div'), a = div.all || [];
+            while (div.innerHTML = '<!--[if gt IE '+(++v)+']><br><![endif]-->', a[0]);
+            return v > 4 ? v : !v;
+        }());
+
         var el = document.createElement('div');
-        this._changeEvent = ('oninput' in el) ? 'input' : 'keydown';
+        this._changeEvent = (ieVersion === 9 || !('oninput' in el)) ? 'keyup' : 'input';
 
         // The flag to indicate that the form is ready to submit when a remote/callback validator returns
         this._submitIfValid = null;
@@ -41,10 +48,13 @@
     // The default options
     BootstrapValidator.DEFAULT_OPTIONS = {
         // The form CSS class
-        elementClass: 'bootstrap-validator-form',
+        elementClass: 'bv-form',
 
         // Default invalid message
         message: 'This value is not valid',
+
+        // The field will not be live validated if its length is less than this number of characters
+        threshold: null,
 
         // Indicate fields which won't be validated
         // By default, the plugin will not validate the following kind of fields:
@@ -132,6 +142,7 @@
                     trigger:        this.$form.attr('data-bv-trigger'),
                     message:        this.$form.attr('data-bv-message'),
                     submitButtons:  this.$form.attr('data-bv-submitbuttons'),
+                    threshold:      this.$form.attr('data-bv-threshold'),
                     live:           this.$form.attr('data-bv-live'),
                     fields:         {},
                     feedbackIcons: {
@@ -165,22 +176,12 @@
                 // Find all fields which have either "name" or "data-bv-field" attribute
                 .find('[name], [data-bv-field]').each(function() {
                     var $field = $(this);
-                    // Don't initialize hidden input
-                    if ('hidden' == $field.attr('type')) {
+                    if (that._isExcluded($field)) {
                         return;
                     }
 
-                    var field  = $field.attr('name') || $field.attr('data-bv-field');
-                    $field.attr('data-bv-field', field);
-
-                    options.fields[field] = $.extend({}, {
-                        trigger:    $field.attr('data-bv-trigger'),
-                        message:    $field.attr('data-bv-message'),
-                        container:  $field.attr('data-bv-container'),
-                        selector:   $field.attr('data-bv-selector'),
-                        validators: {}
-                    }, options.fields[field]);
-
+                    var field      = $field.attr('name') || $field.attr('data-bv-field'),
+                        validators = {};
                     for (v in $.fn.bootstrapValidator.validators) {
                         validator  = $.fn.bootstrapValidator.validators[v];
                         enabled    = $field.attr('data-bv-' + v.toLowerCase()) + '';
@@ -191,7 +192,7 @@
                         {
                             // Try to parse the options via attributes
                             validator.html5Attributes = validator.html5Attributes || { message: 'message' };
-                            options.fields[field]['validators'][v] = $.extend({}, html5Attrs == true ? {} : html5Attrs, options.fields[field]['validators'][v]);
+                            validators[v] = $.extend({}, html5Attrs == true ? {} : html5Attrs, validators[v]);
 
                             for (html5AttrName in validator.html5Attributes) {
                                 optionName  = validator.html5Attributes[html5AttrName];
@@ -202,10 +203,25 @@
                                     } else if ('false' == optionValue) {
                                         optionValue = false;
                                     }
-                                    options.fields[field]['validators'][v][optionName] = optionValue;
+                                    validators[v][optionName] = optionValue;
                                 }
                             }
                         }
+                    }
+
+                    var opts = {
+                        trigger:    $field.attr('data-bv-trigger'),
+                        message:    $field.attr('data-bv-message'),
+                        container:  $field.attr('data-bv-container'),
+                        selector:   $field.attr('data-bv-selector'),
+                        threshold:  $field.attr('data-bv-threshold'),
+                        validators: validators
+                    };
+
+                    // Check if there is any validators set using HTML attributes
+                    if (!$.isEmptyObject(opts)) {
+                        $field.attr('data-bv-field', field);
+                        options.fields[field] = $.extend({}, opts, options.fields[field]);
                     }
                 });
 
@@ -220,6 +236,8 @@
             for (var field in this.options.fields) {
                 this._initField(field);
             }
+
+            this.setLiveMode(this.options.live);
         },
 
         /**
@@ -397,7 +415,7 @@
 
             return false;
         },
-
+        
         // --- Events ---
 
         /**
@@ -630,13 +648,12 @@
          * @return {BootstrapValidator}
          */
         updateElementStatus: function($field, status, validatorName) {
-            var that       = this,
-                field      = $field.attr('data-bv-field'),
-                $parent    = $field.parents('.form-group'),
-                $message   = $field.data('bv.messages'),
-                $rowErrors = $parent.find('.help-block[data-bv-validator]'),
-                $errors    = $message.find('.help-block[data-bv-validator]'),
-                $icon      = $parent.find('.form-control-feedback[data-bv-field="' + field + '"]');
+            var that     = this,
+                field    = $field.attr('data-bv-field'),
+                $parent  = $field.parents('.form-group'),
+                $message = $field.data('bv.messages'),
+                $errors  = $message.find('.help-block[data-bv-validator]'),
+                $icon    = $parent.find('.form-control-feedback[data-bv-field="' + field + '"]');
 
             // Update status
             if (validatorName) {
@@ -645,6 +662,14 @@
                 for (var v in this.options.fields[field].validators) {
                     $field.data('bv.result.' + v, status);
                 }
+            }
+
+            // Determine the tab containing the element
+            var $tabPane = $field.parents('.tab-pane'),
+                tabId,
+                $tab;
+            if ($tabPane && (tabId = $tabPane.attr('id'))) {
+                $tab = $('a[href="#' + tabId + '"][data-toggle="tab"]').parent();
             }
 
             // Show/hide error elements and feedback icons
@@ -657,6 +682,9 @@
                     if ($icon) {
                         $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).addClass(this.options.feedbackIcons.validating).show();
                     }
+                    if ($tab) {
+                        $tab.removeClass('bv-tab-success').removeClass('bv-tab-error');
+                    }
                     break;
 
                 case this.STATUS_INVALID:
@@ -665,6 +693,9 @@
                     validatorName ? $errors.filter('[data-bv-validator="' + validatorName + '"]').show() : $errors.show();
                     if ($icon) {
                         $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
+                    }
+                    if ($tab) {
+                        $tab.removeClass('bv-tab-success').addClass('bv-tab-error');
                     }
                     break;
 
@@ -684,12 +715,20 @@
                             .show();
                     }
 
-                    // Check if all fields in the same row are valid
-                    var validRow = ($rowErrors.filter(function() {
+                    // Check if all elements in given container are valid
+                    var isValidContainer = function($container) {
+                        return $container
+                                    .find('.help-block[data-bv-validator]')
+                                    .filter(function() {
                                         var display = $(this).css('display'), v = $(this).attr('data-bv-validator');
-                                        return ('block' == display) || ($field.data('bv.result.' + v) != that.STATUS_VALID);
-                                    }).length == 0);
-                    $parent.removeClass('has-error has-success').addClass(validRow ? 'has-success' : 'has-error');
+                                        return ('block' == display) || ($field.data('bv.result.' + v) && $field.data('bv.result.' + v) != that.STATUS_VALID);
+                                    })
+                                    .length == 0;
+                    };
+                    $parent.removeClass('has-error has-success').addClass(isValidContainer($parent) ? 'has-success' : 'has-error');
+                    if ($tab) {
+                        $tab.removeClass('bv-tab-success').removeClass('bv-tab-error').addClass(isValidContainer($tabPane) ? 'bv-tab-success' : 'bv-tab-error');
+                    }
                     break;
 
                 case this.STATUS_NOT_VALIDATED:
@@ -699,6 +738,9 @@
                     validatorName ? $errors.filter('.help-block[data-bv-validator="' + validatorName + '"]').hide() : $errors.hide();
                     if ($icon) {
                         $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).hide();
+                    }
+                    if ($tab) {
+                        $tab.removeClass('bv-tab-success').removeClass('bv-tab-error');
                     }
                     break;
             }
@@ -886,7 +928,7 @@
          * Credit to https://gist.github.com/ShirtlessKirk/2134376
          *
          * @param {String} value
-         * @returns {boolean}
+         * @returns {Boolean}
          */
         luhn: function(value) {
             var length  = value.length,
@@ -900,6 +942,42 @@
             }
 
             return (sum % 10 === 0 && sum > 0);
+        },
+
+        /**
+         * Implement modulus 11, 10 (ISO 7064) algorithm
+         *
+         * @param {String} value
+         * @returns {Boolean}
+         */
+        mod_11_10: function(value) {
+            var check  = 5,
+                length = value.length;
+            for (var i = 0; i < length; i++) {
+                check = (((check || 10) * 2) % 11 + parseInt(value.charAt(i), 10)) % 10;
+            }
+            return (check == 1);
+        },
+
+        /**
+         * Implements Mod 37, 36 (ISO 7064) algorithm
+         * Usages:
+         * mod_37_36('A12425GABC1234002M')
+         * mod_37_36('002006673085', '0123456789')
+         *
+         * @param {String} value
+         * @param {String} alphabet
+         * @returns {Boolean}
+         */
+        mod_37_36: function(value, alphabet) {
+            alphabet = alphabet || '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            var modulus = alphabet.length,
+                length  = value.length,
+                check   = Math.floor(modulus / 2);
+            for (var i = 0; i < length; i++) {
+                check = (((check || modulus) * 2) % (modulus + 1) + alphabet.indexOf(value.charAt(i))) % modulus;
+            }
+            return (check == 1);
         }
     };
 }(window.jQuery));

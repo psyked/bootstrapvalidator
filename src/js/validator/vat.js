@@ -17,7 +17,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '' || !options.country) {
+            if (value == '') {
                 return true;
             }
 
@@ -281,7 +281,8 @@
 
             value = value.substr(2);
 
-            var sum = 0, weight = [], i = 0;
+            var sum = 0,
+                i   = 0;
             if (value.length == 8) {
                 // Do not allow to start with '9'
                 if (value.charAt(0) + '' == '9') {
@@ -289,7 +290,7 @@
                 }
 
                 sum = 0;
-                for (var i = 0; i < 7; i++) {
+                for (i = 0; i < 7; i++) {
                     sum += parseInt(value.charAt(i), 10) * (8 - i);
                 }
                 sum = 11 - sum % 11;
@@ -304,7 +305,7 @@
             } else if (value.length == 9 && (value.charAt(0) + '' == '6')) {
                 sum = 0;
                 // Skip the first (which is 6)
-                for (var i = 0; i < 7; i++) {
+                for (i = 0; i < 7; i++) {
                     sum += parseInt(value.charAt(i + 1), 10) * (8 - i);
                 }
                 sum = 11 - sum % 11;
@@ -318,38 +319,36 @@
                 return (sum == value.substr(8, 1));
             } else if (value.length == 9 || value.length == 10) {
                 // Validate Czech birth number (Rodné číslo), which is also national identifier
-                var rc = function(value) {
-                    var year  = 1900 + parseInt(value.substr(0, 2)),
-                        month = parseInt(value.substr(2, 2)) % 50 % 20,
-                        day   = parseInt(value.substr(4, 2));
-                    if (value.length == 9) {
-                        if (year >= 1980) {
-                            year -= 100;
-                        }
-                        if (year > 1953) {
-                            return false;
-                        }
-                    } else if (year < 1954) {
-                        year += 100;
+                var year  = 1900 + parseInt(value.substr(0, 2)),
+                    month = parseInt(value.substr(2, 2)) % 50 % 20,
+                    day   = parseInt(value.substr(4, 2));
+                if (value.length == 9) {
+                    if (year >= 1980) {
+                        year -= 100;
                     }
-
-                    try {
-                        var d = new Date(year, month, day);
-                    } catch (ex) {
+                    if (year > 1953) {
                         return false;
                     }
+                } else if (year < 1954) {
+                    year += 100;
+                }
 
-                    // Check that the birth date is not in the future
-                    if (value.length == 10) {
-                        var check = parseInt(value.substr(0, 9), 10) % 11;
-                        if (year < 1985) {
-                            check = check % 10;
-                        }
-                        return (check == value.substr(9, 1));
+                try {
+                    var d = new Date(year, month, day);
+                } catch (ex) {
+                    return false;
+                }
+
+                // Check that the birth date is not in the future
+                if (value.length == 10) {
+                    var check = parseInt(value.substr(0, 9), 10) % 11;
+                    if (year < 1985) {
+                        check = check % 10;
                     }
+                    return (check == value.substr(9, 1));
+                }
 
-                    return true;
-                };
+                return true;
             }
 
             return false;
@@ -370,18 +369,7 @@
             }
 
             value = value.substr(2);
-            var product = 10,
-                sum     = 0;
-            for (var i = 0; i < 8; i++) {
-                sum = (parseInt(value.charAt(i), 10) + product) % 10;
-                if (sum == 0) {
-                    sum = 10;
-                }
-                product = (sum * 2) % 11;
-            }
-
-            var checkDigit = (11 - product == 10) ? 0 : (11 - product);
-            return (checkDigit == value.substr(8, 1));
+            return $.fn.bootstrapValidator.helpers.mod_11_10(value);
         },
 
         /**
@@ -695,18 +683,7 @@
             }
 
             value = value.substr(2);
-            var sum  = 10,
-                temp = 0;
-
-            for (var i = 0; i < 10; i++) {
-                temp = (parseInt(value.charAt(i), 10) + sum) % 10;
-                if (temp == 0) {
-                    temp = 10;
-                }
-                sum = (temp * 2) % 11;
-            }
-            sum += parseInt(value.substr(10, 1), 10);
-            return (sum % 10 == 1);
+            return $.fn.bootstrapValidator.helpers.mod_11_10(value);
         },
 
         /**
@@ -1042,6 +1019,55 @@
 
             sum = (10 * sum) % 11 % 10;
             return (sum == value.substr(length - 1, 1));
+        },
+
+        /**
+         * Validate Russian VAT number (Taxpayer Identification Number - INN)
+         *
+         * @param {String} value VAT number
+         * @returns {Boolean}
+         */
+        _ru: function(value) {
+            if (!/^RU([0-9]{9}|[0-9]{12})$/.test(value)) {
+                return false;
+            }
+
+            value = value.substr(2);
+            if (value.length == 10) {
+                var sum    = 0,
+                    weight = [2, 4, 10, 3, 5, 9, 4, 6, 8, 0];
+                for (var i = 0; i < 10; i++) {
+                    sum += parseInt(value.charAt(i)) * weight[i];
+                }
+                sum = sum % 11;
+                if (sum > 9) {
+                    sum = sum % 10;
+                }
+
+                return (sum == value.substr(9, 1));
+            } else if (value.length == 12) {
+                var sum1    = 0,
+                    weight1 = [7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 0],
+                    sum2    = 0,
+                    weight2 = [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 0];
+
+                for (var i = 0; i < 11; i++) {
+                    sum1 += parseInt(value.charAt(i)) * weight1[i];
+                    sum2 += parseInt(value.charAt(i)) * weight2[i];
+                }
+                sum1 = sum1 % 11;
+                if (sum1 > 9) {
+                    sum1 = sum1 % 10;
+                }
+                sum2 = sum2 % 11;
+                if (sum2 > 9) {
+                    sum2 = sum2 % 10;
+                }
+
+                return (sum1 == value.substr(10, 1) && sum2 == value.substr(11, 1));
+            }
+
+            return false;
         },
 
         /**

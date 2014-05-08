@@ -10,6 +10,7 @@
          * ISBN 10: 99921-58-10-6
          * ISBN 13: 978-0-306-40615-6
          *
+         * @see http://en.wikipedia.org/wiki/International_Standard_Book_Number
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options Can consist of the following keys:
