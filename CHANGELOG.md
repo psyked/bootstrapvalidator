@@ -1,6 +1,10 @@
 # Change Log
 
-## v0.4.3 (not released yet)
+## v0.5.0 (not released yet)
+
+* [#121](https://github.com/nghuuphuoc/bootstrapvalidator/issues/121): Add events for form validate successfully or not
+
+## v0.4.3 (2005-05-05)
 
 * [#77](https://github.com/nghuuphuoc/bootstrapvalidator/issues/77): Add ```file``` validator
 * [#179](https://github.com/nghuuphuoc/bootstrapvalidator/issues/179): Add ```vat``` validator, support 32 countries

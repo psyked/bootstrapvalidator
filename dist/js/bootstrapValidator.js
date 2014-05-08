@@ -365,53 +365,16 @@
          * Called when all validations are completed
          */
         _submit: function() {
-            if (!this.isValid()) {
-                if ('submitted' == this.options.live) {
-                    // Enable live mode
-                    this.options.live = 'enabled';
-                    var that = this;
-                    for (var field in this.options.fields) {
-                        (function(f) {
-                            var fields  = that.getFieldElements(f);
-                            if (fields.length) {
-                                var type    = $(fields[0]).attr('type'),
-                                    event   = ('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == $(fields[0]).get(0).tagName) ? 'change' : that._changeEvent,
-                                    trigger = that.options.fields[field].trigger || that.options.trigger || event,
-                                    events  = $.map(trigger.split(' '), function(item) {
-                                        return item + '.live.bv';
-                                    }).join(' ');
+            var isValid   = this.isValid(),
+                eventType = isValid ? 'success.form.bv' : 'error.form.bv',
+                e         = $.Event(eventType);
 
-                                for (var i = 0; i < fields.length; i++) {
-                                    $(fields[i]).off(events).on(events, function() {
-                                        that.validateFieldElement($(this));
-                                    });
-                                }
-                            }
-                        })(field);
-                    }
-                }
+            this.$form.trigger(e);
 
-                // Focus to the first invalid field
-                if (this.$invalidField) {
-                    this.$invalidField.focus();
-
-                    // Activate the tab containing the invalid field if exists
-                    var $tab = this.$invalidField.parents('.tab-pane'),
-                        tabId;
-                    if ($tab && (tabId = $tab.attr('id'))) {
-                        $('a[href="#' + tabId + '"][data-toggle="tab"]').trigger('click.bs.tab.data-api');
-                    }
-                }
-
-                return;
-            }
-
-            // Call the custom submission if enabled
-            if (this.options.submitHandler && 'function' == typeof this.options.submitHandler) {
-                // If you want to submit the form inside your submit handler, please call defaultSubmit() method
-                this.options.submitHandler.call(this, this, this.$form, this.$submitButton);
-            } else {
-                this.disableSubmitButtons(true).defaultSubmit();
+            // Call default handler
+            // Check if whether the submit button is clicked
+            if (this.$submitButton) {
+                isValid ? this._onSuccess(e) : this._onError(e);
             }
         },
 
@@ -434,6 +397,77 @@
             }
 
             return false;
+        },
+
+        // --- Events ---
+
+        /**
+         * The default handler of error.form.bv event.
+         * It will be called when there is a invalid field
+         *
+         * @param {jQuery.Event} e The jQuery event object
+         */
+        _onError: function(e) {
+            if (e.isDefaultPrevented()) {
+                return;
+            }
+
+            if ('submitted' == this.options.live) {
+                // Enable live mode
+                this.options.live = 'enabled';
+                var that = this;
+                for (var field in this.options.fields) {
+                    (function(f) {
+                        var fields  = that.getFieldElements(f);
+                        if (fields.length) {
+                            var type    = $(fields[0]).attr('type'),
+                                event   = ('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == $(fields[0]).get(0).tagName) ? 'change' : that._changeEvent,
+                                trigger = that.options.fields[field].trigger || that.options.trigger || event,
+                                events  = $.map(trigger.split(' '), function(item) {
+                                    return item + '.live.bv';
+                                }).join(' ');
+
+                            for (var i = 0; i < fields.length; i++) {
+                                $(fields[i]).off(events).on(events, function() {
+                                    that.validateFieldElement($(this));
+                                });
+                            }
+                        }
+                    })(field);
+                }
+            }
+
+            // Focus to the first invalid field
+            if (this.$invalidField) {
+                // Activate the tab containing the invalid field if exists
+                var $tab = this.$invalidField.parents('.tab-pane'),
+                    tabId;
+                if ($tab && (tabId = $tab.attr('id'))) {
+                    $('a[href="#' + tabId + '"][data-toggle="tab"]').trigger('click.bs.tab.data-api');
+                }
+
+                this.$invalidField.focus();
+            }
+        },
+
+        /**
+         * The default handler of success.form.bv event.
+         * It will be called when all the fields are valid
+         *
+         * @param {jQuery.Event} e The jQuery event object
+         */
+        _onSuccess: function(e) {
+            if (e.isDefaultPrevented()) {
+                return;
+            }
+
+            // Call the custom submission if enabled
+            if (this.options.submitHandler && 'function' == typeof this.options.submitHandler) {
+                // If you want to submit the form inside your submit handler, please call defaultSubmit() method
+                this.options.submitHandler.call(this, this, this.$form, this.$submitButton);
+            } else {
+                this.disableSubmitButtons(true).defaultSubmit();
+            }
         },
 
         // --- Public methods ---
@@ -486,10 +520,7 @@
                 this.validateField(field);
             }
 
-            // Check if whether the submit button is clicked
-            if (this.$submitButton) {
-                this._submit();
-            }
+            this._submit();
 
             return this;
         },
