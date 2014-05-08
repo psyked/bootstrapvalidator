@@ -236,8 +236,6 @@
             for (var field in this.options.fields) {
                 this._initField(field);
             }
-
-            this.setLiveMode(this.options.live);
         },
 
         /**
