@@ -922,6 +922,28 @@
     // Helper methods, which can be used in validator class
     $.fn.bootstrapValidator.helpers = {
         /**
+         * Validate a date
+         *
+         * @param {Number} year The full year in 4 digits
+         * @param {Number} month The month number
+         * @param {Number} day The day number
+         * @returns {Boolean}
+         */
+        date: function(year, month, day) {
+            if (year < 1000 || year > 9999 || month == 0 || month > 12) {
+                return false;
+            }
+            var numDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            // Update the number of days in Feb of leap year
+            if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)) {
+                numDays[1] = 29;
+            }
+
+            // Check the day
+            return (day > 0 && day <= numDays[month - 1]);
+        },
+
+        /**
          * Implement Luhn validation algorithm ((http://en.wikipedia.org/wiki/Luhn))
          * Credit to https://gist.github.com/ShirtlessKirk/2134376
          *

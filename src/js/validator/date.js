@@ -98,18 +98,7 @@
             month = parseInt(month, 10);
             year  = parseInt(year, 10);
 
-            if (year < 1000 || year > 9999 || month == 0 || month > 12) {
-                return false;
-            }
-
-            var numDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-            // Update the number of days in Feb of leap year
-            if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)) {
-                numDays[1] = 29;
-            }
-
-            // Check the day
-            return (day > 0 && day <= numDays[month - 1]);
+            return $.fn.bootstrapValidator.helpers.date(year, month, day);
         }
     };
 }(window.jQuery));

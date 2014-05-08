@@ -146,9 +146,7 @@
                             month -= 20;
                         }
 
-                        try {
-                            var d = new Date(year, month, day);
-                        } catch (ex) {
+                        if (!$.fn.bootstrapValidator.helpers.date(year, month, day)) {
                             return false;
                         }
 
@@ -333,9 +331,7 @@
                     year += 100;
                 }
 
-                try {
-                    var d = new Date(year, month, day);
-                } catch (ex) {
+                if (!$.fn.bootstrapValidator.helpers.date(year, month, day)) {
                     return false;
                 }
 
@@ -846,9 +842,7 @@
                     year  = parseInt(value.substr(4, 2));
                 year = year + 1800 + parseInt(value.charAt(6)) * 100;
 
-                try {
-                    var d = new Date(year, month, day);
-                } catch (ex) {
+                if (!$.fn.bootstrapValidator.helpers.date(year, month, day)) {
                     return false;
                 }
 
