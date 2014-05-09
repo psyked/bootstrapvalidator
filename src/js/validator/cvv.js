@@ -34,6 +34,8 @@
             if (creditCard == '') {
                 return true;
             }
+            
+            creditCard = creditCard.replace(/\D/g, '');
 
             // Supported credit card types
             var cards = {
