@@ -104,7 +104,7 @@
 
         // The submit buttons selector
         // These buttons will be disabled to prevent the valid form from multiple submissions
-        submitButtons: 'button[type="submit"]',
+        submitButtons: '[type="submit"]',
 
         // The custom submit handler
         // It will prevent the form from the default submission
