@@ -186,10 +186,6 @@ $(document).ready(function() {
                     validators: {
                         notEmpty: {
                             message: 'The first name is required and cannot be empty'
-                        },
-                        stringCase: {
-                            message: 'The first name must contain upper case characters only',
-                            case: 'upper'
                         }
                     }
                 },
@@ -288,20 +284,26 @@ $(document).ready(function() {
             }
         })
         .on('error.form.bv', function(e) {
-            //console.log('error');
-            // If you want to prevent the default handler (bootstrapValidator._onError)
+            console.log('error');
+
+            // You can get the form instance and then access API
+            var $form = $(e.target);
+            console.log($form.data('bootstrapValidator').getInvalidFields());
+
+            // If you want to prevent the default handler (bootstrapValidator._onError(e))
             // e.preventDefault();
         })
         .on('success.form.bv', function(e) {
-            //console.log('success');
-            // If you want to prevent the default handler (bootstrapValidator._onSuccess)
+            console.log('success');
+
+            // If you want to prevent the default handler (bootstrapValidator._onSuccess(e))
             // e.preventDefault();
         })
         .on('error.field.bv', function(e, field) {
-            console.log(field, '-->error');
+            //console.log(field, '-->error');
         })
         .on('success.field.bv', function(e, field) {
-            console.log(field, '-->success');
+            //console.log(field, '-->success');
         });
 
     // Validate the form manually

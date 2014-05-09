@@ -13,8 +13,8 @@
         this.$form   = $(form);
         this.options = $.extend({}, BootstrapValidator.DEFAULT_OPTIONS, options);
 
-        this.$invalidField = null;  // First invalid field
-        this.$submitButton = null;  // The submit button which is clicked to submit form
+        this.$invalidFields = $([]);    // Array of invalid fields
+        this.$submitButton  = null;     // The submit button which is clicked to submit form
 
         // Validating status
         this.STATUS_NOT_VALIDATED = 'NOT_VALIDATED';
@@ -458,15 +458,16 @@
             }
 
             // Focus to the first invalid field
-            if (this.$invalidField) {
+            var $firstInvalidField = this.$invalidFields.eq(0);
+            if ($firstInvalidField) {
                 // Activate the tab containing the invalid field if exists
-                var $tab = this.$invalidField.parents('.tab-pane'),
+                var $tab = $firstInvalidField.parents('.tab-pane'),
                     tabId;
                 if ($tab && (tabId = $tab.attr('id'))) {
                     $('a[href="#' + tabId + '"][data-toggle="tab"]').trigger('click.bs.tab.data-api');
                 }
 
-                this.$invalidField.focus();
+                $firstInvalidField.focus();
             }
         },
 
@@ -514,11 +515,20 @@
                 }
             }
 
+            var index = this.$invalidFields.index($field);
             if (counter[this.STATUS_VALID] == numValidators) {
+                // Remove from the list of invalid fields
+                if (index != -1) {
+                    this.$invalidFields.splice(index, 1);
+                }
                 this.$form.trigger($.Event('success.field.bv'), [field, $field]);
             }
             // If all validators are completed and there is at least one validator which doesn't pass
             else if (counter[this.STATUS_NOT_VALIDATED] == 0 && counter[this.STATUS_VALIDATING] == 0 && counter[this.STATUS_INVALID] > 0) {
+                // Add to the list of invalid fields
+                if (index == -1) {
+                    this.$invalidFields = this.$invalidFields.add($field);
+                }
                 this.$form.trigger($.Event('error.field.bv'), [field, $field]);
             }
         },
@@ -814,12 +824,7 @@
 
                     for (validatorName in this.options.fields[field].validators) {
                         status = $field.data('bv.result.' + validatorName);
-                        if (status == this.STATUS_NOT_VALIDATED || status == this.STATUS_VALIDATING) {
-                            return false;
-                        }
-
-                        if (status == this.STATUS_INVALID) {
-                            this.$invalidField = $field;
+                        if (status != this.STATUS_VALID) {
                             return false;
                         }
                     }
@@ -840,6 +845,15 @@
         },
 
         // Useful APIs which aren't used internally
+
+        /**
+         * Get the list of invalid fields
+         *
+         * @returns {jQuery[]}
+         */
+        getInvalidFields: function() {
+            return this.$invalidFields;
+        },
 
         /**
          * Add new field element
@@ -914,8 +928,8 @@
                 }
             }
 
-            this.$invalidField = null;
-            this.$submitButton = null;
+            this.$invalidFields = $([]);
+            this.$submitButton  = null;
 
             // Enable submit buttons
             this.disableSubmitButtons(false);
