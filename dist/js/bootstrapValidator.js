@@ -217,7 +217,7 @@
                     };
 
                     // Check if there is any validators set using HTML attributes
-                    if (!$.isEmptyObject(opts)) {
+                    if (!$.isEmptyObject(opts.validators) && !$.isEmptyObject(opts)) {
                         $field.attr('data-bv-field', field);
                         options.fields[field] = $.extend({}, opts, options.fields[field]);
                     }
@@ -309,7 +309,7 @@
                     && (!updateAll || i == total - 1))
                 {
                     $parent.addClass('has-feedback');
-                    var $icon = $('<i/>').css('display', 'none').addClass('form-control-feedback').attr('data-bv-icon', field).insertAfter($field);
+                    var $icon = $('<i/>').css('display', 'none').addClass('form-control-feedback').attr('data-bv-icon-for', field).insertAfter($field);
                     // The feedback icon does not render correctly if there is no label
                     // https://github.com/twbs/bootstrap/issues/12873
                     if ($parent.find('label').length == 0) {
@@ -627,7 +627,7 @@
                 $parent  = $field.parents('.form-group'),
                 $message = $field.data('bv.messages'),
                 $errors  = $message.find('.help-block[data-bv-validator]'),
-                $icon    = $parent.find('.form-control-feedback[data-bv-icon="' + field + '"]');
+                $icon    = $parent.find('.form-control-feedback[data-bv-icon-for="' + field + '"]');
 
             // Update status
             if (validatorName) {
