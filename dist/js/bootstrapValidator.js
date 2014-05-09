@@ -404,7 +404,7 @@
          * Returning true means that the field will not be validated
          *
          * @param {jQuery} $field The field element
-         * @return {Boolean}
+         * @returns {Boolean}
          */
         _isExcluded: function($field) {
             if (this.options.excluded) {
@@ -572,7 +572,7 @@
         /**
          * Validate the form
          *
-         * @return {BootstrapValidator}
+         * @returns {BootstrapValidator}
          */
         validate: function() {
             if (!this.options.fields) {
@@ -673,7 +673,7 @@
          * @param {String} field The field name
          * @param {String} status The status. Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
          * @param {String} [validatorName] The validator name. If null, the method updates validity result for all validators
-         * @return {BootstrapValidator}
+         * @returns {BootstrapValidator}
          */
         updateStatus: function(field, status, validatorName) {
             var fields = this.getFieldElements(field),
@@ -693,7 +693,7 @@
          * @param {jQuery} $field The field element
          * @param {String} status The status. Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
          * @param {String} [validatorName] The validator name. If null, the method updates validity result for all validators
-         * @return {BootstrapValidator}
+         * @returns {BootstrapValidator}
          */
         updateElementStatus: function($field, status, validatorName) {
             var that     = this,
@@ -894,6 +894,11 @@
                 index = this._cacheFields[field].index($field);
 
             (index == -1) ? (delete this._cacheFields[field]) : this._cacheFields[field].splice(index, 1);
+            // Remove from the list of invalid fields
+            index = this.$invalidFields.index($field);
+            if (index != -1) {
+                this.$invalidFields.splice(index, 1);
+            }
 
             if ('checkbox' == type || 'radio' == type) {
                 this._initField(field);
@@ -906,7 +911,7 @@
          * Reset the form
          *
          * @param {Boolean} resetFormData Reset current form data
-         * @return {BootstrapValidator}
+         * @returns {BootstrapValidator}
          */
         resetForm: function(resetFormData) {
             var field, fields, total, type, validator;
@@ -943,7 +948,7 @@
          *
          * @param {String} field The field name
          * @param {Boolean} enabled Enable/Disable field validators
-         * @return {BootstrapValidator}
+         * @returns {BootstrapValidator}
          */
         enableFieldValidators: function(field, enabled) {
             this.options.fields[field]['enabled'] = enabled;
@@ -1001,9 +1006,10 @@
         },
 
         /**
-         * Implement Luhn validation algorithm ((http://en.wikipedia.org/wiki/Luhn))
+         * Implement Luhn validation algorithm
          * Credit to https://gist.github.com/ShirtlessKirk/2134376
          *
+         * @see http://en.wikipedia.org/wiki/Luhn
          * @param {String} value
          * @returns {Boolean}
          */
