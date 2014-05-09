@@ -2202,6 +2202,39 @@
         },
 
         /**
+         * Validate Dutch national identification number (BSN)
+         * Examples:
+         * - Valid: 111222333, 941331490, 9413.31.490
+         * - Invalid: 111252333
+         *
+         * @see https://nl.wikipedia.org/wiki/Burgerservicenummer
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _nl: function(value) {
+            while (value.length < 9) {
+                value = '0' + value;
+            }
+            if (!/^[0-9]{4}[.]{0,1}[0-9]{2}[.]{0,1}[0-9]{3}$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/\./g, '');
+            if (parseInt(value, 10) == 0) {
+                return false;
+            }
+            var sum    = 0,
+                length = value.length;
+            for (var i = 0; i < length - 1; i++) {
+                sum += (9 - i) * parseInt(value.charAt(i));
+            }
+            sum = sum % 11;
+            if (sum == 10) {
+                sum = 0;
+            }
+            return (sum == value.charAt(length - 1));
+        },
+
+        /**
          * Validate Romanian numerical personal code (CNP)
          * Examples:
          * - Valid: 1630615123457, 1800101221144
