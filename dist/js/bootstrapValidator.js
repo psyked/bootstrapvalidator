@@ -2119,18 +2119,29 @@
 
         /**
          * Validate Spanish personal identity code (DNI)
-         * Examples:
-         * - Valid: 54362315K, 54362315-K
-         * - Invalid: 54362315Z
+         * Support i) DNI (for Spanish citizens) and ii) NIE (for foreign people)
          *
+         * Examples:
+         * - Valid: i) 54362315K, 54362315-K; ii) X2482300W, X-2482300W, X-2482300-W
+         * - Invalid: i) 54362315Z; ii) X-2482300A
+         *
+         * @see https://en.wikipedia.org/wiki/National_identification_number#Spain
          * @param {String} value The ID
          * @returns {Boolean}
          */
         _es: function(value) {
-            if (!/^[0-9A-Z]{8}[-]{0,1}[0-9A-Z]{1}$/.test(value)) {
+            if (!/^[0-9A-Z]{8}[-]{0,1}[0-9A-Z]$/.test(value)                // DNI
+                && !/^[XYZ][-]{0,1}[0-9]{7}[-]{0,1}[0-9A-Z]$/.test(value)) {   // NIE
                 return false;
             }
+
             value = value.replace(/-/g, '');
+            var index = 'XYZ'.indexOf(value.charAt(0));
+            if (index != -1) {
+                // It is NIE number
+                value = index + value.substr(1) + '';
+            }
+
             var check = parseInt(value.substr(0, 8), 10);
             check = 'TRWAGMYFPDXBNJZSQVHLCKE'[check % 23];
             return (check == value.substr(8, 1));
