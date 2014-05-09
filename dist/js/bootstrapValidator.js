@@ -172,56 +172,67 @@
 					that._submitIfValid = true;
                 })
                 // Find all fields which have either "name" or "data-bv-field" attribute
-                .find('[name], [data-bv-field]').each(function() {
-                    var $field = $(this);
-                    if (that._isExcluded($field)) {
-                        return;
-                    }
+                .find('[name], [data-bv-field]')
+                    .each(function() {
+                        var $field = $(this);
+                        if (that._isExcluded($field)) {
+                            return;
+                        }
 
-                    var field      = $field.attr('name') || $field.attr('data-bv-field'),
-                        validators = {};
-                    for (v in $.fn.bootstrapValidator.validators) {
-                        validator  = $.fn.bootstrapValidator.validators[v];
-                        enabled    = $field.attr('data-bv-' + v.toLowerCase()) + '';
-                        html5Attrs = ('function' == typeof validator.enableByHtml5) ? validator.enableByHtml5($(this)) : null;
+                        var field      = $field.attr('name') || $field.attr('data-bv-field'),
+                            validators = {};
+                        for (v in $.fn.bootstrapValidator.validators) {
+                            validator  = $.fn.bootstrapValidator.validators[v];
+                            enabled    = $field.attr('data-bv-' + v.toLowerCase()) + '';
+                            html5Attrs = ('function' == typeof validator.enableByHtml5) ? validator.enableByHtml5($(this)) : null;
 
-                        if ((html5Attrs && enabled != 'false')
-                            || (html5Attrs !== true && ('' == enabled || 'true' == enabled)))
-                        {
-                            // Try to parse the options via attributes
-                            validator.html5Attributes = validator.html5Attributes || { message: 'message' };
-                            validators[v] = $.extend({}, html5Attrs == true ? {} : html5Attrs, validators[v]);
+                            if ((html5Attrs && enabled != 'false')
+                                || (html5Attrs !== true && ('' == enabled || 'true' == enabled)))
+                            {
+                                // Try to parse the options via attributes
+                                validator.html5Attributes = validator.html5Attributes || { message: 'message' };
+                                validators[v] = $.extend({}, html5Attrs == true ? {} : html5Attrs, validators[v]);
 
-                            for (html5AttrName in validator.html5Attributes) {
-                                optionName  = validator.html5Attributes[html5AttrName];
-                                optionValue = $field.attr('data-bv-' + v.toLowerCase() + '-' + html5AttrName);
-                                if (optionValue) {
-                                    if ('true' == optionValue) {
-                                        optionValue = true;
-                                    } else if ('false' == optionValue) {
-                                        optionValue = false;
+                                for (html5AttrName in validator.html5Attributes) {
+                                    optionName  = validator.html5Attributes[html5AttrName];
+                                    optionValue = $field.attr('data-bv-' + v.toLowerCase() + '-' + html5AttrName);
+                                    if (optionValue) {
+                                        if ('true' == optionValue) {
+                                            optionValue = true;
+                                        } else if ('false' == optionValue) {
+                                            optionValue = false;
+                                        }
+                                        validators[v][optionName] = optionValue;
                                     }
-                                    validators[v][optionName] = optionValue;
                                 }
                             }
                         }
-                    }
 
-                    var opts = {
-                        trigger:    $field.attr('data-bv-trigger'),
-                        message:    $field.attr('data-bv-message'),
-                        container:  $field.attr('data-bv-container'),
-                        selector:   $field.attr('data-bv-selector'),
-                        threshold:  $field.attr('data-bv-threshold'),
-                        validators: validators
-                    };
+                        var opts = {
+                            trigger:    $field.attr('data-bv-trigger'),
+                            message:    $field.attr('data-bv-message'),
+                            container:  $field.attr('data-bv-container'),
+                            selector:   $field.attr('data-bv-selector'),
+                            threshold:  $field.attr('data-bv-threshold'),
+                            validators: validators
+                        };
 
-                    // Check if there is any validators set using HTML attributes
-                    if (!$.isEmptyObject(opts.validators) && !$.isEmptyObject(opts)) {
-                        $field.attr('data-bv-field', field);
-                        options.fields[field] = $.extend({}, opts, options.fields[field]);
-                    }
-                });
+                        // Check if there is any validators set using HTML attributes
+                        if (!$.isEmptyObject(opts.validators) && !$.isEmptyObject(opts)) {
+                            $field.attr('data-bv-field', field);
+                            options.fields[field] = $.extend({}, opts, options.fields[field]);
+                        }
+                    })
+                    .end()
+                // Create hidden inputs to send the submit buttons
+                .find(this.options.submitButtons)
+                    .each(function() {
+                        $('<input/>')
+                            .attr('type', 'hidden')
+                            .attr('name', $(this).attr('name'))
+                            .attr('value', $(this).val())
+                            .appendTo(that.$form);
+                    });
 
             this.options = $.extend(true, this.options, options);
             if ('string' == typeof this.options.excluded) {
