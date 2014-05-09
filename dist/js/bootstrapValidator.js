@@ -2104,20 +2104,6 @@
         },
 
         /**
-         * Validate Slovak national identifier number (RC)
-         * Examples:
-         * - Valid: 7103192745, 991231123
-         * - Invalid: 7103192746, 1103492745
-         *
-         * @param {String} value The ID
-         * @returns {Boolean}
-         */
-        _sk: function(value) {
-            // Slovakia uses the same format as Czech Republic
-            return this._cz(value);
-        },
-
-        /**
          * Validate Spanish personal identity code (DNI)
          * Support i) DNI (for Spanish citizens) and ii) NIE (for foreign people)
          *
@@ -2130,8 +2116,8 @@
          * @returns {Boolean}
          */
         _es: function(value) {
-            if (!/^[0-9A-Z]{8}[-]{0,1}[0-9A-Z]$/.test(value)                // DNI
-                && !/^[XYZ][-]{0,1}[0-9]{7}[-]{0,1}[0-9A-Z]$/.test(value)) {   // NIE
+            if (!/^[0-9A-Z]{8}[-]{0,1}[0-9A-Z]$/.test(value)                    // DNI
+                && !/^[XYZ][-]{0,1}[0-9]{7}[-]{0,1}[0-9A-Z]$/.test(value)) {    // NIE
                 return false;
             }
 
@@ -2145,6 +2131,42 @@
             var check = parseInt(value.substr(0, 8), 10);
             check = 'TRWAGMYFPDXBNJZSQVHLCKE'[check % 23];
             return (check == value.substr(8, 1));
+        },
+
+        /**
+         * Validate Finnish Personal Identity Code (HETU)
+         * Examples:
+         * - Valid: 311280-888Y, 131052-308T
+         * - Invalid: 131052-308U, 310252-308Y
+         *
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _fi: function(value) {
+            if (!/^[0-9]{6}[-+A][0-9]{3}[0-9ABCDEFHJKLMNPRSTUVWXY]$/.test(value)) {
+                return false;
+            }
+            var day       = parseInt(value.substr(0, 2), 10),
+                month     = parseInt(value.substr(2, 2), 10),
+                year      = parseInt(value.substr(4, 2), 10),
+                centuries = {
+                    '+': 1800,
+                    '-': 1900,
+                    'A': 2000
+                };
+            year = centuries[value.charAt(6)] + year;
+
+            if (!$.fn.bootstrapValidator.helpers.date(year, month, day)) {
+                return false;
+            }
+
+            var individual = parseInt(value.substr(7, 3));
+            if (individual < 2) {
+                return false;
+            }
+            var n = value.substr(0, 6) + value.substr(7, 3) + '';
+            n = parseInt(n);
+            return '0123456789ABCDEFHJKLMNPRSTUVWXY'.charAt(n % 31) == value.charAt(10);
         },
 
         /**
@@ -2315,6 +2337,20 @@
 
             // Validate the last check digit
             return $.fn.bootstrapValidator.helpers.luhn(value);
+        },
+
+        /**
+         * Validate Slovak national identifier number (RC)
+         * Examples:
+         * - Valid: 7103192745, 991231123
+         * - Invalid: 7103192746, 1103492745
+         *
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _sk: function(value) {
+            // Slovakia uses the same format as Czech Republic
+            return this._cz(value);
         },
 
         /**
