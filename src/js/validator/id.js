@@ -248,6 +248,41 @@
         },
 
         /**
+         * Validate Danish Personal Identification number (CPR)
+         * Examples:
+         * - Valid: 2110625629, 211062-5629
+         * - Invalid: 511062-5629
+         *
+         * @see https://en.wikipedia.org/wiki/Personal_identification_number_(Denmark)
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _dk: function(value) {
+            if (!/^[0-9]{6}[-]{0,1}[0-9]{4}$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/-/g, '');
+            var day   = parseInt(value.substr(0, 2), 10),
+                month = parseInt(value.substr(2, 2), 10),
+                year  = parseInt(value.substr(4, 2), 10);
+
+            switch (true) {
+                case ('5678'.indexOf(value.charAt(6)) != -1 && year >= 58):
+                    year += 1800;
+                    break;
+                case ('0123'.indexOf(value.charAt(6)) != -1):
+                case ('49'.indexOf(value.charAt(6)) != -1 && year >= 37):
+                    year += 1900;
+                    break;
+                default:
+                    year += 2000;
+                    break;
+            }
+
+            return $.fn.bootstrapValidator.helpers.date(year, month, day);
+        },
+
+        /**
          * Validate Slovak national identifier number (RC)
          * Examples:
          * - Valid: 7103192745, 991231123
