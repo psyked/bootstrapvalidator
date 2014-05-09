@@ -2164,6 +2164,44 @@
         },
 
         /**
+         * Validate Irish Personal Public Service Number (PPS)
+         * Examples:
+         * - Valid: 6433435F, 6433435FT, 6433435FW, 6433435OA, 6433435IH, 1234567TW, 1234567FA
+         * - Invalid: 6433435E, 6433435VH
+         *
+         * @see https://en.wikipedia.org/wiki/Personal_Public_Service_Number
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _ie: function(value) {
+            if (!/^\d{7}[A-W][AHWTX]?$/.test(value)) {
+                return false;
+            }
+
+            var getCheckDigit = function(value) {
+                while (value.length < 7) {
+                    value = '0' + value;
+                }
+                var alphabet = 'WABCDEFGHIJKLMNOPQRSTUV',
+                    sum      = 0;
+                for (var i = 0; i < 7; i++) {
+                    sum += parseInt(value.charAt(i)) * (8 - i);
+                }
+                sum += 9 * alphabet.indexOf(value.substr(7));
+                return alphabet[sum % 23];
+            };
+
+            // 2013 format
+            if (value.length == 9 && ('A' == value.charAt(8) || 'H' == value.charAt(8))) {
+                return value.charAt(7) == getCheckDigit(value.substr(0, 7) + value.substr(8) + '');
+            }
+            // The old format
+            else {
+                return value.charAt(7) == getCheckDigit(value.substr(0, 7));
+            }
+        },
+
+        /**
          * Validate Romanian numerical personal code (CNP)
          * Examples:
          * - Valid: 1630615123457, 1800101221144
