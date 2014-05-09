@@ -5,6 +5,7 @@
 * Add ```$.fn.bootstrapValidator.helpers.date``` for validating a date, re-used in ```date```, ```id```, [```vat```](http://bootstrapvalidator.com/validators/vat/) validators
 * [#233](https://github.com/nghuuphuoc/bootstrapvalidator/issues/233): Add ```threshold``` option
 * [#232](https://github.com/nghuuphuoc/bootstrapvalidator/issues/232): Add ```id``` validator
+* [#242](https://github.com/nghuuphuoc/bootstrapvalidator/issues/242): Add ```separator``` option to the [```numeric``` validator](http://bootstrapvalidator.com/validators/numeric/)
 * When parsing options from HTML attributes, don't add the field which hasn't validators. It improves fixes for [#191](https://github.com/nghuuphuoc/bootstrapvalidator/issues/191), [#223](https://github.com/nghuuphuoc/bootstrapvalidator/issues/223)
 
 ## v0.4.4 (2014-05-05)

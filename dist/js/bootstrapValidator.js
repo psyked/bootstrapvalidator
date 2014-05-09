@@ -3,7 +3,7 @@
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
- * @version     v0.5.0-dev
+ * @version     v0.4.5-dev
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -2606,6 +2606,11 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.numeric = {
+        html5Attributes: {
+            message: 'message',
+            separator: 'separator'
+        },
+
         /**
          * Validate decimal number
          *
@@ -2613,12 +2618,17 @@
          * @param {jQuery} $field Field element
          * @param {Object} options Consist of key:
          * - message: The invalid message
+         * - separator: The decimal separator. Can be "." (default), ","
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
             if (value == '') {
                 return true;
+            }
+            var separator = options.separator || '.';
+            if (separator != '.') {
+                value = value.replace(separator, '.');
             }
 
             return !isNaN(parseFloat(value)) && isFinite(value);
