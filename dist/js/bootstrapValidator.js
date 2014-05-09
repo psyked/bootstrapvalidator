@@ -3,7 +3,7 @@
  *
  * A jQuery plugin to validate form fields. Use with Bootstrap 3
  *
- * @version     v0.4.5-dev
+ * @version     v0.5.0-dev
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -309,7 +309,7 @@
                     && (!updateAll || i == total - 1))
                 {
                     $parent.addClass('has-feedback');
-                    var $icon = $('<i/>').css('display', 'none').addClass('form-control-feedback').attr('data-bv-field', field).insertAfter($field);
+                    var $icon = $('<i/>').css('display', 'none').addClass('form-control-feedback').attr('data-bv-icon', field).insertAfter($field);
                     // The feedback icon does not render correctly if there is no label
                     // https://github.com/twbs/bootstrap/issues/12873
                     if ($parent.find('label').length == 0) {
@@ -627,7 +627,7 @@
                 $parent  = $field.parents('.form-group'),
                 $message = $field.data('bv.messages'),
                 $errors  = $message.find('.help-block[data-bv-validator]'),
-                $icon    = $parent.find('.form-control-feedback[data-bv-field="' + field + '"]');
+                $icon    = $parent.find('.form-control-feedback[data-bv-icon="' + field + '"]');
 
             // Update status
             if (validatorName) {
