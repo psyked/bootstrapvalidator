@@ -230,7 +230,7 @@
                         $('<input/>')
                             .attr('type', 'hidden')
                             .attr('name', $(this).attr('name'))
-                            .attr('value', $(this).val())
+                            .val($(this).val())
                             .appendTo(that.$form);
                     });
 
