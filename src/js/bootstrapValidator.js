@@ -403,7 +403,8 @@
          */
         _isExcluded: function($field) {
             if (this.options.excluded) {
-                for (var i in this.options.excluded) {
+                var length = this.options.excluded.length;
+                for (var i = 0; i < length; i++) {
                     if (('string' == typeof this.options.excluded[i] && $field.is(this.options.excluded[i]))
                         || ('function' == typeof this.options.excluded[i] && this.options.excluded[i].call(this, $field, this) == true))
                     {
