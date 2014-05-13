@@ -340,6 +340,20 @@
         },
 
         /**
+         * Validate Estonian Personal Identification Code (isikukood)
+         * Examples:
+         * - Valid: 37605030299
+         *
+         * @see http://et.wikipedia.org/wiki/Isikukood
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _ee: function(value) {
+            // Use the same format as Lithuanian Personal Code
+            return this._lt(value);
+        },
+
+        /**
          * Validate Spanish personal identity code (DNI)
          * Support i) DNI (for Spanish citizens) and ii) NIE (for foreign people)
          *
@@ -460,7 +474,7 @@
         },
 
         /**
-         * Validate Lithuania Personal Code (Asmens kodas)
+         * Validate Lithuanian Personal Code (Asmens kodas)
          * Examples:
          * - Valid: 38703181745
          * - Invalid: 38703181746, 78703181745, 38703421745
