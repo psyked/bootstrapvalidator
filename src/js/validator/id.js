@@ -523,6 +523,41 @@
         },
 
         /**
+         * Validate Latvian Personal Code (Personas kods)
+         * Examples:
+         * - Valid: 161175-19997, 16117519997
+         * - Invalid: 161375-19997
+         *
+         * @see http://laacz.lv/2006/11/25/pk-parbaudes-algoritms/
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _lv: function(value) {
+            if (!/^[0-9]{6}[-]{0,1}[0-9]{5}$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/\D/g, '');
+            // Check birth date
+            var day   = parseInt(value.substr(0, 2)),
+                month = parseInt(value.substr(2, 2)),
+                year  = parseInt(value.substr(4, 2));
+            year = year + 1800 + parseInt(value.charAt(6)) * 100;
+
+            if (!$.fn.bootstrapValidator.helpers.date(year, month, day, true)) {
+                return false;
+            }
+
+            // Check personal code
+            var sum    = 0,
+                weight = [10, 5, 8, 4, 2, 1, 6, 3, 7, 9];
+            for (var i = 0; i < 10; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+            sum = (sum + 1) % 11 % 10;
+            return (sum == value.charAt(10));
+        },
+
+        /**
          * Validate Dutch national identification number (BSN)
          * Examples:
          * - Valid: 111222333, 941331490, 9413.31.490
