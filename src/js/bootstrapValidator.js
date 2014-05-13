@@ -868,9 +868,10 @@
          * @param {Number} year The full year in 4 digits
          * @param {Number} month The month number
          * @param {Number} day The day number
+         * @param {Boolean} notInFuture If true, the date must not be in the future
          * @returns {Boolean}
          */
-        date: function(year, month, day) {
+        date: function(year, month, day, notInFuture) {
             if (year < 1000 || year > 9999 || month == 0 || month > 12) {
                 return false;
             }
@@ -881,7 +882,21 @@
             }
 
             // Check the day
-            return (day > 0 && day <= numDays[month - 1]);
+            if (day < 0 || day > numDays[month - 1]) {
+                return false;
+            }
+
+            if (notInFuture === true) {
+                var currentDate  = new Date(),
+                    currentYear  = currentDate.getFullYear(),
+                    currentMonth = currentDate.getMonth(),
+                    currentDay   = currentDate.getDate();
+                return (year < currentYear
+                        || (year == currentYear && month - 1 < currentMonth)
+                        || (year == currentYear && month - 1 == currentMonth && day < currentDay));
+            }
+
+            return true;
         },
 
         /**
