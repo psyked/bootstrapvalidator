@@ -692,7 +692,7 @@
                                         var display = $(this).css('display'), v = $(this).attr('data-bv-validator');
                                         return ('block' == display) || ($field.data('bv.result.' + v) != that.STATUS_VALID);
                                     }).length == 0);
-                    this.disableSubmitButtons(validField ? false : true);
+                    this.disableSubmitButtons(!validField);
                     if ($icon) {
                         $icon
                             .removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).removeClass(this.options.feedbackIcons.valid)
