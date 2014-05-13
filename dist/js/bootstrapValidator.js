@@ -235,13 +235,6 @@
                     });
 
             this.options = $.extend(true, this.options, options);
-            if ('string' == typeof this.options.excluded) {
-                this.options.excluded = $.map(this.options.excluded.split(','), function(item) {
-                    // Trim the spaces
-                    return $.trim(item);
-                });
-            }
-
             for (var field in this.options.fields) {
                 this._initField(field);
             }
@@ -404,6 +397,14 @@
          */
         _isExcluded: function($field) {
             if (this.options.excluded) {
+                // Convert to array first
+                if ('string' == typeof this.options.excluded) {
+                    this.options.excluded = $.map(this.options.excluded.split(','), function(item) {
+                        // Trim the spaces
+                        return $.trim(item);
+                    });
+                }
+
                 var length = this.options.excluded.length;
                 for (var i = 0; i < length; i++) {
                     if (('string' == typeof this.options.excluded[i] && $field.is(this.options.excluded[i]))
