@@ -8,7 +8,7 @@ module.exports = function(grunt) {
             '/**',
             ' * BootstrapValidator (<%= pkg.homepage %>)',
             ' *',
-            ' * A jQuery plugin to validate form fields. Use with Bootstrap 3',
+            ' * <%= pkg.description %>',
             ' *',
             ' * @version     v<%= pkg.version %>',
             ' * @author      <%= pkg.author.url %>',
