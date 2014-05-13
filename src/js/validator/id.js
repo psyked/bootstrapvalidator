@@ -97,8 +97,6 @@
                 default:
                     return true;
             }
-
-            return true;
         },
 
         _ba: function(value) {
@@ -543,9 +541,9 @@
             }
 
             // Re-calculate the check digit
-            sum    = 0,
+            sum    = 0;
             weight = [3, 4, 5, 6, 7, 8, 9, 1, 2, 3];
-            for (var i = 0; i < 10; i++) {
+            for (i = 0; i < 10; i++) {
                 sum += parseInt(value.charAt(i)) * weight[i];
             }
             sum = sum % 11;
