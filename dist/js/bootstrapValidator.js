@@ -2029,6 +2029,38 @@
         },
 
         /**
+         * Validate Chilean national identification number (RUN/RUT)
+         * Examples:
+         * - Valid: 76086428-5, 22060449-7, 12531909-2
+         *
+         * @see http://en.wikipedia.org/wiki/National_identification_number#Chile
+         * @see https://palena.sii.cl/cvc/dte/ee_empresas_emisoras.html for samples
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _cl: function(value) {
+            if (!/^\d{7,8}[-]{0,1}[0-9K]$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/\D/g, '');
+            while (value.length < 9) {
+                value = '0' + value;
+            }
+            var sum    = 0,
+                weight = [3, 2, 7, 6, 5, 4, 3, 2];
+            for (var i = 0; i < 8; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+            sum = 11 - sum % 11;
+            if (sum == 11) {
+                sum = 0;
+            } else if (sum == 10) {
+                sum = 'K';
+            }
+            return sum == value.charAt(8);
+        },
+
+        /**
          * Validate Czech national identification number (RC)
          * Examples:
          * - Valid: 7103192745, 991231123
