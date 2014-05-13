@@ -869,9 +869,10 @@
          * @param {Number} year The full year in 4 digits
          * @param {Number} month The month number
          * @param {Number} day The day number
+         * @param {Boolean} notInFuture If true, the date must not be in the future
          * @returns {Boolean}
          */
-        date: function(year, month, day) {
+        date: function(year, month, day, notInFuture) {
             if (year < 1000 || year > 9999 || month == 0 || month > 12) {
                 return false;
             }
@@ -882,7 +883,21 @@
             }
 
             // Check the day
-            return (day > 0 && day <= numDays[month - 1]);
+            if (day < 0 || day > numDays[month - 1]) {
+                return false;
+            }
+
+            if (notInFuture === true) {
+                var currentDate  = new Date(),
+                    currentYear  = currentDate.getFullYear(),
+                    currentMonth = currentDate.getMonth(),
+                    currentDay   = currentDate.getDate();
+                return (year < currentYear
+                        || (year == currentYear && month - 1 < currentMonth)
+                        || (year == currentYear && month - 1 == currentMonth && day < currentDay));
+            }
+
+            return true;
         },
 
         /**
@@ -2281,6 +2296,55 @@
             else {
                 return value.charAt(7) == getCheckDigit(value.substr(0, 7));
             }
+        },
+
+        /**
+         * Validate Lithuania Personal Code (Asmens kodas)
+         * Examples:
+         * - Valid: 38703181745
+         * - Invalid: 38703181746, 78703181745, 38703421745
+         *
+         * @see http://en.wikipedia.org/wiki/National_identification_number#Lithuania
+         * @see http://www.adomas.org/midi2007/pcode.html
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _lt: function(value) {
+            if (!/^[0-9]{11}$/.test(value)) {
+                return false;
+            }
+            var gender  = parseInt(value.charAt(0)),
+                year    = parseInt(value.substr(1, 2), 10),
+                month   = parseInt(value.substr(3, 2), 10),
+                day     = parseInt(value.substr(5, 2), 10),
+                century = (gender % 2 == 0) ? (17 + gender / 2) : (17 + (gender + 1) / 2);
+            year = century * 100 + year;
+            if (!$.fn.bootstrapValidator.helpers.date(year, month, day, true)) {
+                return false;
+            }
+
+            // Validate the check digit
+            var sum    = 0,
+                weight = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1];
+            for (var i = 0; i < 10; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+            sum = sum % 11;
+            if (sum != 10) {
+                return sum == value.charAt(10);
+            }
+
+            // Re-calculate the check digit
+            sum    = 0,
+            weight = [3, 4, 5, 6, 7, 8, 9, 1, 2, 3];
+            for (var i = 0; i < 10; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+            sum = sum % 11;
+            if (sum == 10) {
+                sum = 0;
+            }
+            return (sum == value.charAt(10));
         },
 
         /**
