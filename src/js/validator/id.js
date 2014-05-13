@@ -541,6 +541,34 @@
          */
         _sm: function(value) {
             return /^\d{5}$/.test(value);
+        },
+
+        /**
+         * Validate South African ID
+         * Example:
+         * - Valid: 8001015009087
+         * - Invalid: 8001015009287, 8001015009086
+         *
+         * @see http://en.wikipedia.org/wiki/National_identification_number#South_Africa
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _za: function(value) {
+            if (!/^[0-9]{10}[0|1][8|9][0-9]$/.test(value)) {
+                return false;
+            }
+            var year        = parseInt(value.substr(0, 2)),
+                currentYear = new Date().getFullYear() % 100,
+                month       = parseInt(value.substr(2, 2)),
+                day         = parseInt(value.substr(4, 2));
+            year = (year >= currentYear) ? (year + 1900) : (year + 2000);
+
+            if (!$.fn.bootstrapValidator.helpers.date(year, month, day)) {
+                return false;
+            }
+
+            // Validate the last check digit
+            return $.fn.bootstrapValidator.helpers.luhn(value);
         }
     };
 }(window.jQuery));
