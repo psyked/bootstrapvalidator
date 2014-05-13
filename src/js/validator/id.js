@@ -205,6 +205,31 @@
         },
 
         /**
+         * Validate Swiss Social Security Number (AHV-Nr/No AVS)
+         * Examples:
+         * - Valid: 756.1234.5678.95, 7561234567895
+         *
+         * @see http://en.wikipedia.org/wiki/National_identification_number#Switzerland
+         * @see http://www.bsv.admin.ch/themen/ahv/00011/02185/index.html?lang=de
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _ch: function(value) {
+            if (!/^756[\.]{0,1}[0-9]{4}[\.]{0,1}[0-9]{4}[\.]{0,1}[0-9]{2}$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/\D/g, '').substr(3);
+            var length = value.length,
+                sum    = 0,
+                weight = (length == 8) ? [3, 1] : [1, 3];
+            for (var i = 0; i < length - 1; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i % 2];
+            }
+            sum = 10 - sum % 10;
+            return (sum == value.charAt(length - 1));
+        },
+
+        /**
          * Validate Chilean national identification number (RUN/RUT)
          * Examples:
          * - Valid: 76086428-5, 22060449-7, 12531909-2
