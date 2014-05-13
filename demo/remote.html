@@ -110,7 +110,8 @@ $(document).ready(function() {
                     },
                     remote: {
                         url: 'remote.php',
-                        message: 'The username is not available'
+                        message: 'The username is not available',
+                        debounceDelay: 800
                     },
                     different: {
                         field: 'password',

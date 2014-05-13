@@ -3137,7 +3137,9 @@
                 return true;
             }
 
-            var name = $field.attr('data-bv-field'), data = options.data;
+            var name = $field.attr('data-bv-field'),
+                data = options.data;
+
             if (data == null) {
                 data = {};
             }
@@ -3148,21 +3150,34 @@
             data[options.name || name] = value;
 
             var dfd = new $.Deferred();
-            var xhr = $.ajax({
-                type: 'POST',
-                url: options.url,
-                dataType: 'json',
-                data: data
-            });
-            xhr.then(function(response) {
-                dfd.resolve($field, 'remote', response.valid === true || response.valid === 'true');
-            });
 
-            dfd.fail(function() {
-                xhr.abort();
-            });
+            if (options.debounceDelay) {
+                if($.fn.bootstrapValidator.timer) {
+                    clearTimeout($.fn.bootstrapValidator.timer);
+                }
+                $.fn.bootstrapValidator.timer = setTimeout(runCallback, options.debounceDelay);
+                return dfd;
+            }
+            else
+                return runCallback();
 
-            return dfd;
+            function runCallback() {
+                var xhr = $.ajax({
+                    type: 'POST',
+                    url: options.url,
+                    dataType: 'json',
+                    data: data
+                });
+                xhr.then(function (response) {
+                    dfd.resolve($field, 'remote', response.valid === true || response.valid === 'true');
+                });
+
+                dfd.fail(function () {
+                    xhr.abort();
+                });
+
+                return dfd;
+            }
         }
     };
 }(window.jQuery));
