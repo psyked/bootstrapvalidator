@@ -474,6 +474,39 @@
         },
 
         /**
+         * Validate Iceland national identification number (Kennitala)
+         * Examples:
+         * - Valid: 120174-3399, 1201743399, 0902862349
+         *
+         * @see http://en.wikipedia.org/wiki/Kennitala
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _is: function(value) {
+            if (!/^[0-9]{6}[-]{0,1}[0-9]{4}$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/-/g, '');
+            var day     = parseInt(value.substr(0, 2), 10),
+                month   = parseInt(value.substr(2, 2), 10),
+                year    = parseInt(value.substr(4, 2), 10),
+                century = parseInt(value.charAt(9));
+
+            year = (century == 9) ? (1900 + year) : ((20 + century) * 100 + year);
+            if (!$.fn.bootstrapValidator.helpers.date(year, month, day, true)) {
+                return false;
+            }
+            // Validate the check digit
+            var sum    = 0,
+                weight = [3, 2, 7, 6, 5, 4, 3, 2];
+            for (var i = 0; i < 8; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+            sum = 11 - sum % 11;
+            return (sum == value.charAt(8));
+        },
+
+        /**
          * Validate Lithuanian Personal Code (Asmens kodas)
          * Examples:
          * - Valid: 38703181745
