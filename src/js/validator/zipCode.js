@@ -65,7 +65,7 @@
                 thirdChar  = '[ABCDEFGHJKPMNRSTUVWXY]',
                 fourthChar = '[ABEHMNPRVWXY]',
                 fifthChar  = '[ABDEFGHJLNPQRSTUWXYZ]',
-                regexps = [
+                regexps    = [
                     // AN NAA, ANN NAA, AAN NAA, AANN NAA format
                     new RegExp('^(' + firstChar + '{1}' + secondChar + '?[0-9]{1,2})(\\s*)([0-9]{1}' + fifthChar + '{2})$', 'i'),
                     // ANA NAA
