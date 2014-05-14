@@ -1,4 +1,4 @@
-(function ($) {
+(function($) {
     $.fn.bootstrapValidator.validators.remote = {
         html5Attributes: {
             message: 'message',

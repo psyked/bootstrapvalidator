@@ -2,14 +2,14 @@
 
 ## v0.4.5 (not released yet)
 
-* Add ```$.fn.bootstrapValidator.helpers.date``` for validating a date, re-used in ```date```, ```id```, [```vat```](http://bootstrapvalidator.com/validators/vat/) validators
+* Add ```$.fn.bootstrapValidator.helpers.date``` for validating a date, re-used in [```date```](http://bootstrapvalidator.com/validators/date/), [```id```](http://bootstrapvalidator.com/validators/id/), [```vat```](http://bootstrapvalidator.com/validators/vat/) validators
 * [#233](https://github.com/nghuuphuoc/bootstrapvalidator/issues/233): Add ```threshold``` option
-* [#232](https://github.com/nghuuphuoc/bootstrapvalidator/issues/232): Add ```id``` validator
+* [#232](https://github.com/nghuuphuoc/bootstrapvalidator/issues/232): Add [```id``` validator](http://bootstrapvalidator.com/validators/id/)
 * [#242](https://github.com/nghuuphuoc/bootstrapvalidator/issues/242): Add ```separator``` option to the [```numeric``` validator](http://bootstrapvalidator.com/validators/numeric/)
-* [#248](https://github.com/nghuuphuoc/bootstrapvalidator/issues/248): Add ```isin``` (International Securities Identification Number) validator
-* [#250](https://github.com/nghuuphuoc/bootstrapvalidator/issues/250): Add ```rtn``` (Routing transit number) validator
-* [#251](https://github.com/nghuuphuoc/bootstrapvalidator/issues/251): Add ```cusip``` (North American Securities) validator
-* [#252](https://github.com/nghuuphuoc/bootstrapvalidator/issues/252): Add ```sedol``` (Stock Exchange Daily Official List) validator
+* [#248](https://github.com/nghuuphuoc/bootstrapvalidator/issues/248): Add [```isin``` (International Securities Identification Number) validator](http://bootstrapvalidator.com/validators/issn/)
+* [#250](https://github.com/nghuuphuoc/bootstrapvalidator/issues/250): Add [```rtn``` (Routing transit number) validator](http://bootstrapvalidator.com/validators/rtn/)
+* [#251](https://github.com/nghuuphuoc/bootstrapvalidator/issues/251): Add [```cusip``` (North American Securities) validator](http://bootstrapvalidator.com/validators/cusip/)
+* [#252](https://github.com/nghuuphuoc/bootstrapvalidator/issues/252): Add [```sedol``` (Stock Exchange Daily Official List) validator](http://bootstrapvalidator.com/validators/sedol/)
 * The [```zipCode``` validator](http://bootstrapvalidator.com/validators/zipCode/) adds support for Italian, Dutch postcodes
 * [#245](https://github.com/nghuuphuoc/bootstrapvalidator/pull/245): The [```cvv``` validator](http://bootstrapvalidator.com/validators/cvv/) should support spaces in credit card, thanks to [@evilchili](https://github.com/evilchili)
 * Change default ```submitButtons``` to ```[type="submit"]``` to support ```input type="submit"```
