@@ -3117,7 +3117,7 @@
             debounceDelay: 'debounceDelay'
         },
 
-        _timer: null,
+        _timer: [],
 
         /**
          * Request a remote server to check the input value
@@ -3155,10 +3155,10 @@
             var dfd = new $.Deferred();
 
             if (options.debounceDelay) {
-                if(this._timer) {
-                    clearTimeout(this._timer);
+                if(this._timer[name]) {
+                    clearTimeout(this._timer[name]);
                 }
-                this._timer = setTimeout(runCallback, options.debounceDelay);
+                this._timer[name] = setTimeout(runCallback, options.debounceDelay);
                 return dfd;
             }
             else
