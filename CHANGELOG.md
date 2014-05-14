@@ -7,6 +7,7 @@
 * [#232](https://github.com/nghuuphuoc/bootstrapvalidator/issues/232): Add ```id``` validator
 * [#242](https://github.com/nghuuphuoc/bootstrapvalidator/issues/242): Add ```separator``` option to the [```numeric``` validator](http://bootstrapvalidator.com/validators/numeric/)
 * [#248](https://github.com/nghuuphuoc/bootstrapvalidator/issues/248): Add ```isin``` (International Securities Identification Number) validator
+* [#250](https://github.com/nghuuphuoc/bootstrapvalidator/issues/250): Add ```rtn``` (Routing transit number) validator
 * [#251](https://github.com/nghuuphuoc/bootstrapvalidator/issues/251): Add ```cusip``` (North American Securities) validator
 * [#252](https://github.com/nghuuphuoc/bootstrapvalidator/issues/252): Add ```sedol``` (Stock Exchange Daily Official List) validator
 * The [```zipCode``` validator](http://bootstrapvalidator.com/validators/zipCode/) adds support for Italian, Dutch postcodes
