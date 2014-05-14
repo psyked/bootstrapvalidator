@@ -1872,13 +1872,14 @@
             }
 
             value = value.substr(4) + value.substr(0, 4);
-            value = value.split('').map(function(n) {
+            value = $.map(value.split(''), function(n) {
                 var code = n.charCodeAt(0);
                 return (code >= 'A'.charCodeAt(0) && code <= 'Z'.charCodeAt(0))
-                    // Replace A, B, C, ..., Z with 10, 11, ..., 35
-                    ? (code - 'A'.charCodeAt(0) + 10)
-                    : n;
-            }).join('');
+                        // Replace A, B, C, ..., Z with 10, 11, ..., 35
+                        ? (code - 'A'.charCodeAt(0) + 10)
+                        : n;
+            });
+            value = value.join('');
 
             var temp   = parseInt(value.substr(0, 1), 10),
                 length = value.length;
