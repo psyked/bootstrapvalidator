@@ -3113,8 +3113,11 @@
         html5Attributes: {
             message: 'message',
             url: 'url',
-            name: 'name'
+            name: 'name',
+            debounceDelay: 'debounceDelay'
         },
+
+        _timer: null,
 
         /**
          * Request a remote server to check the input value
@@ -3152,10 +3155,10 @@
             var dfd = new $.Deferred();
 
             if (options.debounceDelay) {
-                if($.fn.bootstrapValidator.timer) {
-                    clearTimeout($.fn.bootstrapValidator.timer);
+                if(this._timer) {
+                    clearTimeout(this._timer);
                 }
-                $.fn.bootstrapValidator.timer = setTimeout(runCallback, options.debounceDelay);
+                this._timer = setTimeout(runCallback, options.debounceDelay);
                 return dfd;
             }
             else
