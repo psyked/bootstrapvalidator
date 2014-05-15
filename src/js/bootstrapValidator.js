@@ -851,7 +851,7 @@
             }
 
             // Allow to call plugin method
-            if ('string' == typeof option && params && params.length > 0) {
+            if ('string' == typeof option) {
                 data[option].apply(data, Array.prototype.slice.call(params, 1));
             }
         });
