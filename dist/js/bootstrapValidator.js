@@ -840,7 +840,8 @@
     };
 
     // Plugin definition
-    $.fn.bootstrapValidator = function(option, params) {
+    $.fn.bootstrapValidator = function(option) {
+        var params = arguments;
         return this.each(function() {
             var $this   = $(this),
                 data    = $this.data('bootstrapValidator'),
@@ -851,8 +852,8 @@
             }
 
             // Allow to call plugin method
-            if ('string' == typeof option) {
-                data[option](params);
+            if ('string' == typeof option && params && params.length > 0) {
+                data[option].apply(data, Array.prototype.slice.call(params, 1));
             }
         });
     };
