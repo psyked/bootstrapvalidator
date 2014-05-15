@@ -3,7 +3,7 @@
  *
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.4.5-dev
+ * @version     v0.4.5
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT

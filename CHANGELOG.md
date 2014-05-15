@@ -1,6 +1,6 @@
 # Change Log
 
-## v0.4.5 (not released yet)
+## v0.4.5 (2014-05-15)
 
 * Add ```$.fn.bootstrapValidator.helpers.date``` for validating a date, re-used in [```date```](http://bootstrapvalidator.com/validators/date/), [```id```](http://bootstrapvalidator.com/validators/id/), [```vat```](http://bootstrapvalidator.com/validators/vat/) validators
 * [#233](https://github.com/nghuuphuoc/bootstrapvalidator/issues/233): Add ```threshold``` option
