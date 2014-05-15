@@ -2,9 +2,17 @@
 
 [http://bootstrapvalidator.com](http://bootstrapvalidator.com) - The best jQuery plugin to validate form fields. Designed to use with [Bootstrap 3](http://getbootstrap.com)
 
+![Screenshot](screenshots/screenshot.png)
+
+## Help the project
+
+I've been spending a lot of time to work on this plugin. If it is useful to you, please consider to help the project by making a small donation:
+
 <a href="https://pledgie.com/campaigns/24885"><img alt="Click here to lend your support to: BootstrapValidator and make a donation at pledgie.com!" src="https://pledgie.com/campaigns/24885.png?skin_name=chrome" border="0" /></a>
 
-![Screenshot](screenshots/screenshot.png)
+Also, you can make me feel happy by [tweeting](https://twitter.com/intent/tweet?hashtags=javascript,jquery,twbootstrap&original_referer=http://github.com/nghuuphuoc/bootstrapvalidator&text=BootstrapValidator%20is%20the%20best%20jQuery%20plugin%20to%20validate%20form%20fields&url=http://bootstrapvalidator.com) about it and staring the project on Github:
+
+<iframe class="github-btn" style="border: 0;" src="http://ghbtns.com/github-btn.html?user=nghuuphuoc&amp;repo=bootstrapvalidator&amp;type=watch&amp;count=true&amp;size=large" title="Star on GitHub"></iframe>
 
 ## Live demo
 
