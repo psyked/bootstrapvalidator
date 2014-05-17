@@ -25,7 +25,7 @@ __Code__
 
 __Bootstrap__
 * Designed to use with [Bootstrap 3](http://getbootstrap.com)
-* Support almost [Bootstrap forms](http://getbootstrap.com/css/#forms)
+* Support almost all [Bootstrap forms](http://getbootstrap.com/css/#forms)
 * Support Bootstrap form [validation states](http://getbootstrap.com/css/#forms-control-validation)
 
 __HTML 5__
@@ -34,7 +34,7 @@ __HTML 5__
 * Support [HTML 5 input types](http://bootstrapvalidator.com/examples#html5) such as ```color```, ```email```, ```range``` and ```url```
 
 __Validator__
-* [41 built-in validators](http://bootstrapvalidator.com/validators/) and counting!
+* [46 built-in validators](http://bootstrapvalidator.com/validators/) and counting!
 * Easy to [write a new validator](http://bootstrapvalidator.com/developing/)
  
 __Friendly__
