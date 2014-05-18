@@ -1,10 +1,16 @@
-# BootstrapValidator - [v0.4.4](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.4/bootstrapvalidator-dist-0.4.4.zip)
+# BootstrapValidator - [v0.4.5](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.5/bootstrapvalidator-dist-0.4.5.zip)
 
 [http://bootstrapvalidator.com](http://bootstrapvalidator.com) - The best jQuery plugin to validate form fields. Designed to use with [Bootstrap 3](http://getbootstrap.com)
 
+![Screenshot](screenshots/screenshot.png)
+
+## Help the project
+
+I've been spending a lot of time to work on this plugin. If it is useful to you, please consider to help the project by making a small donation:
+
 <a href="https://pledgie.com/campaigns/24885"><img alt="Click here to lend your support to: BootstrapValidator and make a donation at pledgie.com!" src="https://pledgie.com/campaigns/24885.png?skin_name=chrome" border="0" /></a>
 
-![Screenshot](screenshots/screenshot.png)
+Also, you can make me feel happy by [tweeting](https://twitter.com/intent/tweet?hashtags=javascript,jquery,twbootstrap&original_referer=http://github.com/nghuuphuoc/bootstrapvalidator&text=BootstrapValidator%20is%20the%20best%20jQuery%20plugin%20to%20validate%20form%20fields&url=http://bootstrapvalidator.com) about it and [staring](https://github.com/nghuuphuoc/bootstrapvalidator/stargazers) the project on Github.
 
 ## Live demo
 
@@ -19,7 +25,7 @@ __Code__
 
 __Bootstrap__
 * Designed to use with [Bootstrap 3](http://getbootstrap.com)
-* Support almost [Bootstrap forms](http://getbootstrap.com/css/#forms)
+* Support almost all [Bootstrap forms](http://getbootstrap.com/css/#forms)
 * Support Bootstrap form [validation states](http://getbootstrap.com/css/#forms-control-validation)
 
 __HTML 5__
@@ -28,7 +34,7 @@ __HTML 5__
 * Support [HTML 5 input types](http://bootstrapvalidator.com/examples#html5) such as ```color```, ```email```, ```range``` and ```url```
 
 __Validator__
-* [41 built-in validators](http://bootstrapvalidator.com/validators/) and counting!
+* [46 built-in validators](http://bootstrapvalidator.com/validators/) and counting!
 * Easy to [write a new validator](http://bootstrapvalidator.com/developing/)
  
 __Friendly__
@@ -60,7 +66,7 @@ __Compatibility__
  
 ## Download
 
-Latest version: [v0.4.4](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.4/bootstrapvalidator-dist-0.4.4.zip), released on 2014-05-05.
+Latest version: [v0.4.5](https://github.com/nghuuphuoc/bootstrapvalidator/releases/download/v0.4.5/bootstrapvalidator-dist-0.4.5.zip), released on 2014-05-15.
 
 For older versions, look at the [Releases](https://github.com/nghuuphuoc/bootstrapvalidator/releases) page.
 
@@ -85,6 +91,7 @@ Big thanks to the contributors:
 * [@adgrafik](https://github.com/adgrafik)
 * [@easonhan007](https://github.com/easonhan007)
 * [@emilchristensen](https://github.com/emilchristensen)
+* [@evilchili](https://github.com/evilchili)
 * [@Francismori7](https://github.com/Francismori7)
 * [@gercheq](https://github.com/gercheq)
 * [@henningda](https://github.com/henningda)

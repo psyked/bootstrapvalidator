@@ -1,7 +1,7 @@
 /**
- * BootstrapValidator (https://github.com/nghuuphuoc/bootstrapvalidator)
+ * BootstrapValidator (http://bootstrapvalidator.com)
  *
- * A jQuery plugin to validate form fields. Use with Bootstrap 3
+ * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
  * @author      http://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
@@ -107,7 +107,7 @@
 
         // The submit buttons selector
         // These buttons will be disabled to prevent the valid form from multiple submissions
-        submitButtons: 'button[type="submit"]',
+        submitButtons: '[type="submit"]',
 
         // The custom submit handler
         // It will prevent the form from the default submission
@@ -174,65 +174,69 @@
 					that._submitIfValid = true;
                 })
                 // Find all fields which have either "name" or "data-bv-field" attribute
-                .find('[name], [data-bv-field]').each(function() {
-                    var $field = $(this);
-                    if (that._isExcluded($field)) {
-                        return;
-                    }
+                .find('[name], [data-bv-field]')
+                    .each(function() {
+                        var $field = $(this);
+                        if (that._isExcluded($field)) {
+                            return;
+                        }
 
-                    var field      = $field.attr('name') || $field.attr('data-bv-field'),
-                        validators = {};
-                    for (v in $.fn.bootstrapValidator.validators) {
-                        validator  = $.fn.bootstrapValidator.validators[v];
-                        enabled    = $field.attr('data-bv-' + v.toLowerCase()) + '';
-                        html5Attrs = ('function' == typeof validator.enableByHtml5) ? validator.enableByHtml5($(this)) : null;
+                        var field      = $field.attr('name') || $field.attr('data-bv-field'),
+                            validators = {};
+                        for (v in $.fn.bootstrapValidator.validators) {
+                            validator  = $.fn.bootstrapValidator.validators[v];
+                            enabled    = $field.attr('data-bv-' + v.toLowerCase()) + '';
+                            html5Attrs = ('function' == typeof validator.enableByHtml5) ? validator.enableByHtml5($(this)) : null;
 
-                        if ((html5Attrs && enabled != 'false')
-                            || (html5Attrs !== true && ('' == enabled || 'true' == enabled)))
-                        {
-                            // Try to parse the options via attributes
-                            validator.html5Attributes = validator.html5Attributes || { message: 'message' };
-                            validators[v] = $.extend({}, html5Attrs == true ? {} : html5Attrs, validators[v]);
+                            if ((html5Attrs && enabled != 'false')
+                                || (html5Attrs !== true && ('' == enabled || 'true' == enabled)))
+                            {
+                                // Try to parse the options via attributes
+                                validator.html5Attributes = validator.html5Attributes || { message: 'message' };
+                                validators[v] = $.extend({}, html5Attrs == true ? {} : html5Attrs, validators[v]);
 
-                            for (html5AttrName in validator.html5Attributes) {
-                                optionName  = validator.html5Attributes[html5AttrName];
-                                optionValue = $field.attr('data-bv-' + v.toLowerCase() + '-' + html5AttrName);
-                                if (optionValue) {
-                                    if ('true' == optionValue) {
-                                        optionValue = true;
-                                    } else if ('false' == optionValue) {
-                                        optionValue = false;
+                                for (html5AttrName in validator.html5Attributes) {
+                                    optionName  = validator.html5Attributes[html5AttrName];
+                                    optionValue = $field.attr('data-bv-' + v.toLowerCase() + '-' + html5AttrName);
+                                    if (optionValue) {
+                                        if ('true' == optionValue) {
+                                            optionValue = true;
+                                        } else if ('false' == optionValue) {
+                                            optionValue = false;
+                                        }
+                                        validators[v][optionName] = optionValue;
                                     }
-                                    validators[v][optionName] = optionValue;
                                 }
                             }
                         }
-                    }
 
-                    var opts = {
-                        trigger:    $field.attr('data-bv-trigger'),
-                        message:    $field.attr('data-bv-message'),
-                        container:  $field.attr('data-bv-container'),
-                        selector:   $field.attr('data-bv-selector'),
-                        threshold:  $field.attr('data-bv-threshold'),
-                        validators: validators
-                    };
+                        var opts = {
+                            trigger:    $field.attr('data-bv-trigger'),
+                            message:    $field.attr('data-bv-message'),
+                            container:  $field.attr('data-bv-container'),
+                            selector:   $field.attr('data-bv-selector'),
+                            threshold:  $field.attr('data-bv-threshold'),
+                            validators: validators
+                        };
 
-                    // Check if there is any validators set using HTML attributes
-                    if (!$.isEmptyObject(opts)) {
-                        $field.attr('data-bv-field', field);
-                        options.fields[field] = $.extend({}, opts, options.fields[field]);
-                    }
-                });
+                        // Check if there is any validators set using HTML attributes
+                        if (!$.isEmptyObject(opts.validators) && !$.isEmptyObject(opts)) {
+                            $field.attr('data-bv-field', field);
+                            options.fields[field] = $.extend({}, opts, options.fields[field]);
+                        }
+                    })
+                    .end()
+                // Create hidden inputs to send the submit buttons
+                .find(this.options.submitButtons)
+                    .each(function() {
+                        $('<input/>')
+                            .attr('type', 'hidden')
+                            .attr('name', $(this).attr('name'))
+                            .val($(this).val())
+                            .appendTo(that.$form);
+                    });
 
             this.options = $.extend(true, this.options, options);
-            if ('string' == typeof this.options.excluded) {
-                this.options.excluded = $.map(this.options.excluded.split(','), function(item) {
-                    // Trim the spaces
-                    return $.trim(item);
-                });
-            }
-
             for (var field in this.options.fields) {
                 this._initField(field);
             }
@@ -325,7 +329,7 @@
                 && (!updateAll || index == total - 1))
             {
                 $parent.removeClass('has-success').removeClass('has-error').addClass('has-feedback');
-                var $icon = $('<i/>').css('display', 'none').addClass('form-control-feedback').attr('data-bv-icon', field).insertAfter($field);
+                var $icon = $('<i/>').css('display', 'none').addClass('form-control-feedback').attr('data-bv-icon-for', field).insertAfter($field);
                 // The feedback icon does not render correctly if there is no label
                 // https://github.com/twbs/bootstrap/issues/12873
                 if ($parent.find('label').length == 0) {
@@ -407,7 +411,16 @@
          */
         _isExcluded: function($field) {
             if (this.options.excluded) {
-                for (var i in this.options.excluded) {
+                // Convert to array first
+                if ('string' == typeof this.options.excluded) {
+                    this.options.excluded = $.map(this.options.excluded.split(','), function(item) {
+                        // Trim the spaces
+                        return $.trim(item);
+                    });
+                }
+
+                var length = this.options.excluded.length;
+                for (var i = 0; i < length; i++) {
                     if (('string' == typeof this.options.excluded[i] && $field.is(this.options.excluded[i]))
                         || ('function' == typeof this.options.excluded[i] && this.options.excluded[i].call(this, $field, this) == true))
                     {
@@ -700,7 +713,7 @@
                 $parent  = $field.parents('.form-group'),
                 $message = $field.data('bv.messages'),
                 $errors  = $message.find('.help-block[data-bv-validator]'),
-                $icon    = $parent.find('.form-control-feedback[data-bv-icon="' + field + '"]');
+                $icon    = $parent.find('.form-control-feedback[data-bv-icon-for="' + field + '"]');
 
             // Update status
             if (validatorName) {
@@ -755,7 +768,7 @@
                                         var v = $(this).attr('data-bv-validator');
                                         return $field.data('bv.result.' + v) != that.STATUS_VALID;
                                     }).length == 0;
-                    this.disableSubmitButtons(validField ? false : true);
+                    this.disableSubmitButtons(!validField);
                     if ($icon) {
                         $icon
                             .removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).removeClass(this.options.feedbackIcons.valid)
@@ -910,7 +923,7 @@
          * Reset the form
          *
          * @param {Boolean} resetFormData Reset current form data
-         * @returns {BootstrapValidator}
+         * @return {BootstrapValidator}
          */
         resetForm: function(resetFormData) {
             var field, fields, total, type, validator;
@@ -958,7 +971,8 @@
     };
 
     // Plugin definition
-    $.fn.bootstrapValidator = function(option, params) {
+    $.fn.bootstrapValidator = function(option) {
+        var params = arguments;
         return this.each(function() {
             var $this   = $(this),
                 data    = $this.data('bootstrapValidator'),
@@ -970,7 +984,7 @@
 
             // Allow to call plugin method
             if ('string' == typeof option) {
-                data[option](params);
+                data[option].apply(data, Array.prototype.slice.call(params, 1));
             }
         });
     };
@@ -988,9 +1002,10 @@
          * @param {Number} year The full year in 4 digits
          * @param {Number} month The month number
          * @param {Number} day The day number
+         * @param {Boolean} [notInFuture] If true, the date must not be in the future
          * @returns {Boolean}
          */
-        date: function(year, month, day) {
+        date: function(year, month, day, notInFuture) {
             if (year < 1000 || year > 9999 || month == 0 || month > 12) {
                 return false;
             }
@@ -1001,7 +1016,21 @@
             }
 
             // Check the day
-            return (day > 0 && day <= numDays[month - 1]);
+            if (day < 0 || day > numDays[month - 1]) {
+                return false;
+            }
+
+            if (notInFuture === true) {
+                var currentDate  = new Date(),
+                    currentYear  = currentDate.getFullYear(),
+                    currentMonth = currentDate.getMonth(),
+                    currentDay   = currentDate.getDate();
+                return (year < currentYear
+                        || (year == currentYear && month - 1 < currentMonth)
+                        || (year == currentYear && month - 1 == currentMonth && day < currentDay));
+            }
+
+            return true;
         },
 
         /**

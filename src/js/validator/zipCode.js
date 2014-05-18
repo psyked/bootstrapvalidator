@@ -19,6 +19,8 @@
          * - CA (Canada)
          * - DK (Denmark)
          * - GB (United Kingdom)
+         * - IT (Italy)
+         * - NL (Netherlands)
          * - SE (Sweden)
          * @returns {Boolean}
          */
@@ -30,17 +32,19 @@
 
             var country = (options.country || 'US').toUpperCase();
             switch (country) {
-                case 'CA':
-                    return /(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}\s?[0-9]{1}(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}/i.test(value);
-                case 'DK':
-                    return /^(DK(-|\s)?)?\d{4}$/i.test(value);
-                case 'GB':
-                    return this._gb(value);
-                case 'SE':
-                    return /^(S-)?\d{3}\s?\d{2}$/i.test(value);
+                case 'CA': return /(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}\s?[0-9]{1}(?:A|B|C|E|G|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}/i.test(value);
+                case 'DK': return /^(DK(-|\s)?)?\d{4}$/i.test(value);
+                case 'GB': return this._gb(value);
+
+                // http://en.wikipedia.org/wiki/List_of_postal_codes_in_Italy
+                case 'IT': return /^(I-|IT-)?\d{5}$/i.test(value);
+
+                // http://en.wikipedia.org/wiki/Postal_codes_in_the_Netherlands
+                case 'NL': return /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i.test(value);
+
+                case 'SE': return /^(S-)?\d{3}\s?\d{2}$/i.test(value);
                 case 'US':
-                default:
-                    return /^\d{4,5}([\-]\d{4})?$/.test(value);
+                default: return /^\d{4,5}([\-]\d{4})?$/.test(value);
             }
         },
 
@@ -59,15 +63,15 @@
             var firstChar  = '[ABCDEFGHIJKLMNOPRSTUWYZ]',     // Does not accept QVX
                 secondChar = '[ABCDEFGHKLMNOPQRSTUVWXY]',     // Does not accept IJZ
                 thirdChar  = '[ABCDEFGHJKPMNRSTUVWXY]',
-                fouthChar  = '[ABEHMNPRVWXY]',
+                fourthChar = '[ABEHMNPRVWXY]',
                 fifthChar  = '[ABDEFGHJLNPQRSTUWXYZ]',
-                regexps = [
+                regexps    = [
                     // AN NAA, ANN NAA, AAN NAA, AANN NAA format
                     new RegExp('^(' + firstChar + '{1}' + secondChar + '?[0-9]{1,2})(\\s*)([0-9]{1}' + fifthChar + '{2})$', 'i'),
                     // ANA NAA
                     new RegExp('^(' + firstChar + '{1}[0-9]{1}' + thirdChar + '{1})(\\s*)([0-9]{1}' + fifthChar + '{2})$', 'i'),
                     // AANA NAA
-                    new RegExp('^(' + firstChar + '{1}' + secondChar + '{1}?[0-9]{1}' + fouthChar + '{1})(\\s*)([0-9]{1}' + fifthChar + '{2})$', 'i'),
+                    new RegExp('^(' + firstChar + '{1}' + secondChar + '{1}?[0-9]{1}' + fourthChar + '{1})(\\s*)([0-9]{1}' + fifthChar + '{2})$', 'i'),
 
                     new RegExp('^(BF1)(\\s*)([0-6]{1}[ABDEFGHJLNPQRST]{1}[ABDEFGHJLNPQRSTUWZYZ]{1})$', 'i'),        // BFPO postcodes
                     /^(GIR)(\s*)(0AA)$/i,                       // Special postcode GIR 0AA

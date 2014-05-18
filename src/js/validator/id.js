@@ -97,8 +97,6 @@
                 default:
                     return true;
             }
-
-            return true;
         },
 
         _ba: function(value) {
@@ -205,6 +203,63 @@
         },
 
         /**
+         * Validate Swiss Social Security Number (AHV-Nr/No AVS)
+         * Examples:
+         * - Valid: 756.1234.5678.95, 7561234567895
+         *
+         * @see http://en.wikipedia.org/wiki/National_identification_number#Switzerland
+         * @see http://www.bsv.admin.ch/themen/ahv/00011/02185/index.html?lang=de
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _ch: function(value) {
+            if (!/^756[\.]{0,1}[0-9]{4}[\.]{0,1}[0-9]{4}[\.]{0,1}[0-9]{2}$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/\D/g, '').substr(3);
+            var length = value.length,
+                sum    = 0,
+                weight = (length == 8) ? [3, 1] : [1, 3];
+            for (var i = 0; i < length - 1; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i % 2];
+            }
+            sum = 10 - sum % 10;
+            return (sum == value.charAt(length - 1));
+        },
+
+        /**
+         * Validate Chilean national identification number (RUN/RUT)
+         * Examples:
+         * - Valid: 76086428-5, 22060449-7, 12531909-2
+         *
+         * @see http://en.wikipedia.org/wiki/National_identification_number#Chile
+         * @see https://palena.sii.cl/cvc/dte/ee_empresas_emisoras.html for samples
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _cl: function(value) {
+            if (!/^\d{7,8}[-]{0,1}[0-9K]$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/\D/g, '');
+            while (value.length < 9) {
+                value = '0' + value;
+            }
+            var sum    = 0,
+                weight = [3, 2, 7, 6, 5, 4, 3, 2];
+            for (var i = 0; i < 8; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+            sum = 11 - sum % 11;
+            if (sum == 11) {
+                sum = 0;
+            } else if (sum == 10) {
+                sum = 'K';
+            }
+            return sum == value.charAt(8);
+        },
+
+        /**
          * Validate Czech national identification number (RC)
          * Examples:
          * - Valid: 7103192745, 991231123
@@ -248,36 +303,118 @@
         },
 
         /**
-         * Validate Slovak national identifier number (RC)
+         * Validate Danish Personal Identification number (CPR)
          * Examples:
-         * - Valid: 7103192745, 991231123
-         * - Invalid: 7103192746, 1103492745
+         * - Valid: 2110625629, 211062-5629
+         * - Invalid: 511062-5629
          *
+         * @see https://en.wikipedia.org/wiki/Personal_identification_number_(Denmark)
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _sk: function(value) {
-            // Slovakia uses the same format as Czech Republic
-            return this._cz(value);
+        _dk: function(value) {
+            if (!/^[0-9]{6}[-]{0,1}[0-9]{4}$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/-/g, '');
+            var day   = parseInt(value.substr(0, 2), 10),
+                month = parseInt(value.substr(2, 2), 10),
+                year  = parseInt(value.substr(4, 2), 10);
+
+            switch (true) {
+                case ('5678'.indexOf(value.charAt(6)) != -1 && year >= 58):
+                    year += 1800;
+                    break;
+                case ('0123'.indexOf(value.charAt(6)) != -1):
+                case ('49'.indexOf(value.charAt(6)) != -1 && year >= 37):
+                    year += 1900;
+                    break;
+                default:
+                    year += 2000;
+                    break;
+            }
+
+            return $.fn.bootstrapValidator.helpers.date(year, month, day);
+        },
+
+        /**
+         * Validate Estonian Personal Identification Code (isikukood)
+         * Examples:
+         * - Valid: 37605030299
+         *
+         * @see http://et.wikipedia.org/wiki/Isikukood
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _ee: function(value) {
+            // Use the same format as Lithuanian Personal Code
+            return this._lt(value);
         },
 
         /**
          * Validate Spanish personal identity code (DNI)
-         * Examples:
-         * - Valid: 54362315K, 54362315-K
-         * - Invalid: 54362315Z
+         * Support i) DNI (for Spanish citizens) and ii) NIE (for foreign people)
          *
+         * Examples:
+         * - Valid: i) 54362315K, 54362315-K; ii) X2482300W, X-2482300W, X-2482300-W
+         * - Invalid: i) 54362315Z; ii) X-2482300A
+         *
+         * @see https://en.wikipedia.org/wiki/National_identification_number#Spain
          * @param {String} value The ID
          * @returns {Boolean}
          */
         _es: function(value) {
-            if (!/^[0-9A-Z]{8}[-]{0,1}[0-9A-Z]{1}$/.test(value)) {
+            if (!/^[0-9A-Z]{8}[-]{0,1}[0-9A-Z]$/.test(value)                    // DNI
+                && !/^[XYZ][-]{0,1}[0-9]{7}[-]{0,1}[0-9A-Z]$/.test(value)) {    // NIE
                 return false;
             }
+
             value = value.replace(/-/g, '');
+            var index = 'XYZ'.indexOf(value.charAt(0));
+            if (index != -1) {
+                // It is NIE number
+                value = index + value.substr(1) + '';
+            }
+
             var check = parseInt(value.substr(0, 8), 10);
             check = 'TRWAGMYFPDXBNJZSQVHLCKE'[check % 23];
             return (check == value.substr(8, 1));
+        },
+
+        /**
+         * Validate Finnish Personal Identity Code (HETU)
+         * Examples:
+         * - Valid: 311280-888Y, 131052-308T
+         * - Invalid: 131052-308U, 310252-308Y
+         *
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _fi: function(value) {
+            if (!/^[0-9]{6}[-+A][0-9]{3}[0-9ABCDEFHJKLMNPRSTUVWXY]$/.test(value)) {
+                return false;
+            }
+            var day       = parseInt(value.substr(0, 2), 10),
+                month     = parseInt(value.substr(2, 2), 10),
+                year      = parseInt(value.substr(4, 2), 10),
+                centuries = {
+                    '+': 1800,
+                    '-': 1900,
+                    'A': 2000
+                };
+            year = centuries[value.charAt(6)] + year;
+
+            if (!$.fn.bootstrapValidator.helpers.date(year, month, day)) {
+                return false;
+            }
+
+            var individual = parseInt(value.substr(7, 3));
+            if (individual < 2) {
+                return false;
+            }
+            var n = value.substr(0, 6) + value.substr(7, 3) + '';
+            n = parseInt(n);
+            return '0123456789ABCDEFHJKLMNPRSTUVWXY'.charAt(n % 31) == value.charAt(10);
         },
 
         /**
@@ -294,6 +431,194 @@
                 return false;
             }
             return $.fn.bootstrapValidator.helpers.mod_11_10(value);
+        },
+
+        /**
+         * Validate Irish Personal Public Service Number (PPS)
+         * Examples:
+         * - Valid: 6433435F, 6433435FT, 6433435FW, 6433435OA, 6433435IH, 1234567TW, 1234567FA
+         * - Invalid: 6433435E, 6433435VH
+         *
+         * @see https://en.wikipedia.org/wiki/Personal_Public_Service_Number
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _ie: function(value) {
+            if (!/^\d{7}[A-W][AHWTX]?$/.test(value)) {
+                return false;
+            }
+
+            var getCheckDigit = function(value) {
+                while (value.length < 7) {
+                    value = '0' + value;
+                }
+                var alphabet = 'WABCDEFGHIJKLMNOPQRSTUV',
+                    sum      = 0;
+                for (var i = 0; i < 7; i++) {
+                    sum += parseInt(value.charAt(i)) * (8 - i);
+                }
+                sum += 9 * alphabet.indexOf(value.substr(7));
+                return alphabet[sum % 23];
+            };
+
+            // 2013 format
+            if (value.length == 9 && ('A' == value.charAt(8) || 'H' == value.charAt(8))) {
+                return value.charAt(7) == getCheckDigit(value.substr(0, 7) + value.substr(8) + '');
+            }
+            // The old format
+            else {
+                return value.charAt(7) == getCheckDigit(value.substr(0, 7));
+            }
+        },
+
+        /**
+         * Validate Iceland national identification number (Kennitala)
+         * Examples:
+         * - Valid: 120174-3399, 1201743399, 0902862349
+         *
+         * @see http://en.wikipedia.org/wiki/Kennitala
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _is: function(value) {
+            if (!/^[0-9]{6}[-]{0,1}[0-9]{4}$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/-/g, '');
+            var day     = parseInt(value.substr(0, 2), 10),
+                month   = parseInt(value.substr(2, 2), 10),
+                year    = parseInt(value.substr(4, 2), 10),
+                century = parseInt(value.charAt(9));
+
+            year = (century == 9) ? (1900 + year) : ((20 + century) * 100 + year);
+            if (!$.fn.bootstrapValidator.helpers.date(year, month, day, true)) {
+                return false;
+            }
+            // Validate the check digit
+            var sum    = 0,
+                weight = [3, 2, 7, 6, 5, 4, 3, 2];
+            for (var i = 0; i < 8; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+            sum = 11 - sum % 11;
+            return (sum == value.charAt(8));
+        },
+
+        /**
+         * Validate Lithuanian Personal Code (Asmens kodas)
+         * Examples:
+         * - Valid: 38703181745
+         * - Invalid: 38703181746, 78703181745, 38703421745
+         *
+         * @see http://en.wikipedia.org/wiki/National_identification_number#Lithuania
+         * @see http://www.adomas.org/midi2007/pcode.html
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _lt: function(value) {
+            if (!/^[0-9]{11}$/.test(value)) {
+                return false;
+            }
+            var gender  = parseInt(value.charAt(0)),
+                year    = parseInt(value.substr(1, 2), 10),
+                month   = parseInt(value.substr(3, 2), 10),
+                day     = parseInt(value.substr(5, 2), 10),
+                century = (gender % 2 == 0) ? (17 + gender / 2) : (17 + (gender + 1) / 2);
+            year = century * 100 + year;
+            if (!$.fn.bootstrapValidator.helpers.date(year, month, day, true)) {
+                return false;
+            }
+
+            // Validate the check digit
+            var sum    = 0,
+                weight = [1, 2, 3, 4, 5, 6, 7, 8, 9, 1];
+            for (var i = 0; i < 10; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+            sum = sum % 11;
+            if (sum != 10) {
+                return sum == value.charAt(10);
+            }
+
+            // Re-calculate the check digit
+            sum    = 0;
+            weight = [3, 4, 5, 6, 7, 8, 9, 1, 2, 3];
+            for (i = 0; i < 10; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+            sum = sum % 11;
+            if (sum == 10) {
+                sum = 0;
+            }
+            return (sum == value.charAt(10));
+        },
+
+        /**
+         * Validate Latvian Personal Code (Personas kods)
+         * Examples:
+         * - Valid: 161175-19997, 16117519997
+         * - Invalid: 161375-19997
+         *
+         * @see http://laacz.lv/2006/11/25/pk-parbaudes-algoritms/
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _lv: function(value) {
+            if (!/^[0-9]{6}[-]{0,1}[0-9]{5}$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/\D/g, '');
+            // Check birth date
+            var day   = parseInt(value.substr(0, 2)),
+                month = parseInt(value.substr(2, 2)),
+                year  = parseInt(value.substr(4, 2));
+            year = year + 1800 + parseInt(value.charAt(6)) * 100;
+
+            if (!$.fn.bootstrapValidator.helpers.date(year, month, day, true)) {
+                return false;
+            }
+
+            // Check personal code
+            var sum    = 0,
+                weight = [10, 5, 8, 4, 2, 1, 6, 3, 7, 9];
+            for (var i = 0; i < 10; i++) {
+                sum += parseInt(value.charAt(i)) * weight[i];
+            }
+            sum = (sum + 1) % 11 % 10;
+            return (sum == value.charAt(10));
+        },
+
+        /**
+         * Validate Dutch national identification number (BSN)
+         * Examples:
+         * - Valid: 111222333, 941331490, 9413.31.490
+         * - Invalid: 111252333
+         *
+         * @see https://nl.wikipedia.org/wiki/Burgerservicenummer
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _nl: function(value) {
+            while (value.length < 9) {
+                value = '0' + value;
+            }
+            if (!/^[0-9]{4}[.]{0,1}[0-9]{2}[.]{0,1}[0-9]{3}$/.test(value)) {
+                return false;
+            }
+            value = value.replace(/\./g, '');
+            if (parseInt(value, 10) == 0) {
+                return false;
+            }
+            var sum    = 0,
+                length = value.length;
+            for (var i = 0; i < length - 1; i++) {
+                sum += (9 - i) * parseInt(value.charAt(i));
+            }
+            sum = sum % 11;
+            if (sum == 10) {
+                sum = 0;
+            }
+            return (sum == value.charAt(length - 1));
         },
 
         /**
@@ -380,6 +705,20 @@
         },
 
         /**
+         * Validate Slovak national identifier number (RC)
+         * Examples:
+         * - Valid: 7103192745, 991231123
+         * - Invalid: 7103192746, 1103492745
+         *
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _sk: function(value) {
+            // Slovakia uses the same format as Czech Republic
+            return this._cz(value);
+        },
+
+        /**
          * Validate San Marino citizen number
          *
          * @see http://en.wikipedia.org/wiki/National_identification_number#San_Marino
@@ -388,6 +727,34 @@
          */
         _sm: function(value) {
             return /^\d{5}$/.test(value);
+        },
+
+        /**
+         * Validate South African ID
+         * Example:
+         * - Valid: 8001015009087
+         * - Invalid: 8001015009287, 8001015009086
+         *
+         * @see http://en.wikipedia.org/wiki/National_identification_number#South_Africa
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _za: function(value) {
+            if (!/^[0-9]{10}[0|1][8|9][0-9]$/.test(value)) {
+                return false;
+            }
+            var year        = parseInt(value.substr(0, 2)),
+                currentYear = new Date().getFullYear() % 100,
+                month       = parseInt(value.substr(2, 2)),
+                day         = parseInt(value.substr(4, 2));
+            year = (year >= currentYear) ? (year + 1900) : (year + 2000);
+
+            if (!$.fn.bootstrapValidator.helpers.date(year, month, day)) {
+                return false;
+            }
+
+            // Validate the last check digit
+            return $.fn.bootstrapValidator.helpers.luhn(value);
         }
     };
 }(window.jQuery));
