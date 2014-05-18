@@ -1,6 +1,12 @@
 # Change Log
 
-## v0.4.5 (2014-05-15)
+## v0.5.0 (not released yet)
+
+* [#121](https://github.com/nghuuphuoc/bootstrapvalidator/issues/121): Add events for form validate successfully or not
+* [#195](https://github.com/nghuuphuoc/bootstrapvalidator/issues/195): Add events for field validation
+* [#211](https://github.com/nghuuphuoc/bootstrapvalidator/issues/211), [#235](https://github.com/nghuuphuoc/bootstrapvalidator/issues/235): Add new method ```getInvalidFields()``` that returns all invalid fields
+
+## v0.4.5 (not released yet)
 
 * Add ```$.fn.bootstrapValidator.helpers.date``` for validating a date, re-used in [```date```](http://bootstrapvalidator.com/validators/date/), [```id```](http://bootstrapvalidator.com/validators/id/), [```vat```](http://bootstrapvalidator.com/validators/vat/) validators
 * [#233](https://github.com/nghuuphuoc/bootstrapvalidator/issues/233): Add ```threshold``` option
