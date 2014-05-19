@@ -855,7 +855,7 @@
                                             content: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html(),
                                             html: true,
                                             placement: 'top',
-                                            trigger: 'click'
+                                            trigger: 'hover click'
                                         });
                             break;
                         default:
