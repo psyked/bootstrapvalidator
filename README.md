@@ -42,8 +42,8 @@ __Friendly__
 - [x] Support [Glyphicons](http://getbootstrap.com/components/#glyphicons) and [FontAwesome](http://fontawesome.io/icons) icons
 - [x] Focus on the first invalid field
 - [x] Don't validate the field if the field length is less than given number using [threshold](http://bootstrapvalidator.com/settings/#threshold) option
-- [ ] Possible to show all error messages in given container
-- [ ] Possible to use Bootstrap [tooltip](http://getbootstrap.com/javascript/#tooltips) and [popover](http://getbootstrap.com/javascript/#popovers) to show error messages
+- [ ] [#164](https://github.com/nghuuphuoc/bootstrapvalidator/issues/164): Possible to show all error messages in given container
+- [ ] [#175](https://github.com/nghuuphuoc/bootstrapvalidator/issues/175): Possible to use Bootstrap [tooltip](http://getbootstrap.com/javascript/#tooltips) and [popover](http://getbootstrap.com/javascript/#popovers) to show error messages
  
 __Ajax__
 - [x] Support [validating via Ajax](http://bootstrapvalidator.com/validators/remote/)
@@ -54,16 +54,18 @@ __Flexible__
 - [x] Support multiple elements with the [same name](http://bootstrapvalidator.com/examples/#fields-with-same-name)
 - [x] Possible to indicate [excluded](http://bootstrapvalidator.com/settings/#excluded) fields
 - [x] Field validators can be enabled/disabled on the fly
-- [ ] Support dynamic field
+- [ ] [#125](https://github.com/nghuuphuoc/bootstrapvalidator/issues/125): Support dynamic field
  
 __Compatibility__
-- [x] ... We [play nice](http://bootstrapvalidator.com/examples/#compatibility) with popular plugins such as
-    - [x] [Color Picker](http://mjolnic.github.io/bootstrap-colorpicker/)
-    - [x] [Date Picker](http://eternicode.github.io/bootstrap-datepicker/)
-    - [x] [Datetime Picker](http://eonasdan.github.io/bootstrap-datetimepicker/)
-    - [x] [Select2](http://ivaynberg.github.io/select2/)
+- [x] We [play nice](http://bootstrapvalidator.com/examples/#compatibility) with popular plugins such as
+    - [x] [Bootstrap Button](http://getbootstrap.com/javascript/#buttons)
+    - [x] [Bootstrap Color Picker](http://mjolnic.github.io/bootstrap-colorpicker/) as seen in [```hexColor``` validator example](http://bootstrapvalidator.com/validators/hexColor/#color-picker-example)
+    - [x] [Bootstrap Datetime Picker](http://eonasdan.github.io/bootstrap-datetimepicker/) as seen in [```date``` validator example](http://bootstrapvalidator.com/validators/date/#date-picker-example)
+    - [x] [Bootstrap Multiselect](http://davidstutz.github.io/bootstrap-multiselect/)
+    - [x] [Chosen](http://harvesthq.github.io/chosen/)
+    - [x] [iCheck](http://fronteed.com/iCheck/)
+    - [x] [Mask](http://igorescobar.github.io/jQuery-Mask-Plugin/)
     - [x] [Raty](http://wbotelhos.com/raty)
-    - etc.
 
 ## Required
 
