@@ -53,6 +53,16 @@
         // Default invalid message
         message: 'This value is not valid',
 
+        // The error messages container
+        // It can be:
+        // * 'tooltip' if you want to use Bootstrap tooltip to show error messages
+        // * 'popover' if you want to use Bootstrap popover to show error messages
+        // * a CSS selector indicating the container
+        //
+        // In the first two cases, since the tooltip/popover should be small enough, the plugin only shows only one error message
+        // You also can define the message container for particular field
+        container: null,
+
         // The field will not be live validated if its length is less than this number of characters
         threshold: null,
 
@@ -141,6 +151,7 @@
                     excluded:       this.$form.attr('data-bv-excluded'),
                     trigger:        this.$form.attr('data-bv-trigger'),
                     message:        this.$form.attr('data-bv-message'),
+                    container:      this.$form.attr('data-bv-container'),
                     submitButtons:  this.$form.attr('data-bv-submitbuttons'),
                     threshold:      this.$form.attr('data-bv-threshold'),
                     live:           this.$form.attr('data-bv-live'),
@@ -775,6 +786,7 @@
                         $tab.removeClass('bv-tab-success').addClass('bv-tab-error');
                     }
                     switch (true) {
+                        // Only show the first error message if it is placed inside a tooltip or popover
                         case ($icon && 'tooltip' == container):
                             $icon.css('cursor', 'pointer').tooltip('destroy').tooltip({
                                 html: true,
@@ -841,6 +853,7 @@
                         $tab.removeClass('bv-tab-success').removeClass('bv-tab-error').addClass(isValidContainer($tabPane) ? 'bv-tab-success' : 'bv-tab-error');
                     }
                     switch (true) {
+                        // Only show the first error message if it is placed inside a tooltip or popover
                         case ($icon && 'tooltip' == container):
                             validField ? $icon.css('cursor', '').tooltip('destroy')
                                        : $icon.css('cursor', 'pointer').tooltip('destroy').tooltip({
