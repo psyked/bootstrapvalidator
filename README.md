@@ -19,45 +19,51 @@ http://bootstrapvalidator.com/examples/
 ## Features
 
 __Code__
-* Written from scratch
-* Very solid and clean
-* The core plugin and validators code are separated
+- [x] Written from scratch
+- [x] Very solid and clean
+- [x] The core plugin and validators code are separated
 
 __Bootstrap__
-* Designed to use with [Bootstrap 3](http://getbootstrap.com)
-* Support almost all [Bootstrap forms](http://getbootstrap.com/css/#forms)
-* Support Bootstrap form [validation states](http://getbootstrap.com/css/#forms-control-validation)
+- [x] Designed to use with [Bootstrap 3](http://getbootstrap.com)
+- [x] Support almost all [Bootstrap forms](http://getbootstrap.com/css/#forms)
+- [x] Support Bootstrap form [validation states](http://getbootstrap.com/css/#forms-control-validation)
 
 __HTML 5__
-* Support setting the plugin, validator options via [HTML 5 attributes](http://bootstrapvalidator.com/examples#attribute) prefixed with ```data-bv-```
-* Support HTML 5 attributes such as ```min```, ```max```, ```pattern```, ```required```
-* Support [HTML 5 input types](http://bootstrapvalidator.com/examples#html5) such as ```color```, ```email```, ```range``` and ```url```
+- [x] Support setting the plugin, validator options via [HTML 5 attributes](http://bootstrapvalidator.com/examples#attribute) prefixed with ```data-bv-```
+- [x] Support HTML 5 attributes such as ```min```, ```max```, ```pattern```, ```required```
+- [x] Support [HTML 5 input types](http://bootstrapvalidator.com/examples#html5) such as ```color```, ```email```, ```range``` and ```url```
 
 __Validator__
-* [46 built-in validators](http://bootstrapvalidator.com/validators/) and counting!
-* Easy to [write a new validator](http://bootstrapvalidator.com/developing/)
+- [x] [46 built-in validators](http://bootstrapvalidator.com/validators/) and counting!
+- [x] Easy to [write a new validator](http://bootstrapvalidator.com/developing/)
  
 __Friendly__
-* Show [feedback icons](http://bootstrapvalidator.com/settings/#feedback-icons) based on field validity
-* Support [Glyphicons](http://getbootstrap.com/components/#glyphicons) and [FontAwesome](http://fontawesome.io/icons) icons
-* Focus on the first invalid field
+- [x] Show [feedback icons](http://bootstrapvalidator.com/settings/#feedback-icons) based on field validity
+- [x] Support [Glyphicons](http://getbootstrap.com/components/#glyphicons) and [FontAwesome](http://fontawesome.io/icons) icons
+- [x] Focus on the first invalid field
+- [x] Don't validate the field if the field length is less than given number using [threshold](http://bootstrapvalidator.com/settings/#threshold) option
+- [ ] Possible to show all error messages in given container
+- [ ] Possible to use Bootstrap [tooltip](http://getbootstrap.com/javascript/#tooltips) and [popover](http://getbootstrap.com/javascript/#popovers) to show error messages
  
 __Ajax__
-* Support [validating via Ajax](http://bootstrapvalidator.com/validators/remote/)
-* Support using Ajax for form submission
+- [x] Support [validating via Ajax](http://bootstrapvalidator.com/validators/remote/)
+- [x] Support using Ajax for form submission
  
 __Flexible__
-* The elements can be defined by either ```name``` or [CSS selector](http://bootstrapvalidator.com/settings/#selector-example)
-* Support multiple elements with the [same name](http://bootstrapvalidator.com/examples/#fields-with-same-name)
-* Possible to indicate [excluded](http://bootstrapvalidator.com/settings/#excluded) fields
-* Field validators can be enabled/disabled on the fly
+- [x] The elements can be defined by either ```name``` or [CSS selector](http://bootstrapvalidator.com/settings/#selector-example)
+- [x] Support multiple elements with the [same name](http://bootstrapvalidator.com/examples/#fields-with-same-name)
+- [x] Possible to indicate [excluded](http://bootstrapvalidator.com/settings/#excluded) fields
+- [x] Field validators can be enabled/disabled on the fly
+- [ ] Support dynamic field
  
 __Compatibility__
-* [Color Picker](http://mjolnic.github.io/bootstrap-colorpicker/)
-* [Date Picker](http://eternicode.github.io/bootstrap-datepicker/), [Datetime Picker](http://eonasdan.github.io/bootstrap-datetimepicker/)
-* [Select2](http://ivaynberg.github.io/select2/)
-* [Raty](http://wbotelhos.com/raty)
-* ... We [play nice](http://bootstrapvalidator.com/examples/#compatibility) with all of them!
+- [x] ... We [play nice](http://bootstrapvalidator.com/examples/#compatibility) with popular plugins such as
+    - [x] [Color Picker](http://mjolnic.github.io/bootstrap-colorpicker/)
+    - [x] [Date Picker](http://eternicode.github.io/bootstrap-datepicker/)
+    - [x] [Datetime Picker](http://eonasdan.github.io/bootstrap-datetimepicker/)
+    - [x] [Select2](http://ivaynberg.github.io/select2/)
+    - [x] [Raty](http://wbotelhos.com/raty)
+    - etc.
 
 ## Required
 
