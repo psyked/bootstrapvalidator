@@ -289,9 +289,9 @@
                 $parent   = $field.parents('.form-group'),
                 // Allow user to indicate where the error messages are shown
                 container = this.options.fields[field].container || this.options.container,
-                $message  = container ? $(container) : this._getMessageContainer($field);
+                $message  = (container && ['tooltip', 'popover'].indexOf(container) == -1) ? $(container) : this._getMessageContainer($field);
 
-            if (container) {
+            if (container && ['tooltip', 'popover'].indexOf(container) == -1) {
                 $message.addClass('has-error');
             }
 
@@ -714,12 +714,14 @@
          * @returns {BootstrapValidator}
          */
         updateElementStatus: function($field, status, validatorName) {
-            var that     = this,
-                field    = $field.attr('data-bv-field'),
-                $parent  = $field.parents('.form-group'),
-                $message = $field.data('bv.messages'),
-                $errors  = $message.find('.help-block[data-bv-validator][data-bv-for="' + field + '"]'),
-                $icon    = $parent.find('.form-control-feedback[data-bv-icon-for="' + field + '"]');
+            var that       = this,
+                field      = $field.attr('data-bv-field'),
+                $parent    = $field.parents('.form-group'),
+                $message   = $field.data('bv.messages'),
+                $allErrors = $message.find('.help-block[data-bv-validator][data-bv-for="' + field + '"]'),
+                $errors    = validatorName ? $allErrors.filter('[data-bv-validator="' + validatorName + '"]') : $allErrors,
+                $icon      = $parent.find('.form-control-feedback[data-bv-icon-for="' + field + '"]'),
+                container  = this.options.fields[field].container || this.options.container;
 
             // Update status
             if (validatorName) {
@@ -739,38 +741,64 @@
             }
 
             // Show/hide error elements and feedback icons
-            validatorName ? $errors.filter('.help-block[data-bv-validator="' + validatorName + '"]').attr('data-bv-result', status) : $errors.attr('data-bv-result', status);
+            $errors.attr('data-bv-result', status);
             switch (status) {
                 case this.STATUS_VALIDATING:
                     this.disableSubmitButtons(true);
                     $parent.removeClass('has-success').removeClass('has-error');
-                    // TODO: Show validating message
-                    validatorName ? $errors.filter('.help-block[data-bv-validator="' + validatorName + '"]').hide() : $errors.hide();
                     if ($icon) {
                         $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).addClass(this.options.feedbackIcons.validating).show();
                     }
                     if ($tab) {
                         $tab.removeClass('bv-tab-success').removeClass('bv-tab-error');
                     }
+                    switch (true) {
+                        case ($icon && 'tooltip' == container):
+                            $icon.css('cursor', '').tooltip('destroy');
+                            break;
+                        case ($icon && 'popover' == container):
+                            $icon.css('cursor', '').popover('destroy');
+                            break;
+                        default:
+                            $errors.hide();
+                            break;
+                    }
                     break;
 
                 case this.STATUS_INVALID:
                     this.disableSubmitButtons(true);
                     $parent.removeClass('has-success').addClass('has-error');
-                    validatorName ? $errors.filter('[data-bv-validator="' + validatorName + '"]').show() : $errors.show();
                     if ($icon) {
                         $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
                     }
                     if ($tab) {
                         $tab.removeClass('bv-tab-success').addClass('bv-tab-error');
                     }
+                    switch (true) {
+                        case ($icon && 'tooltip' == container):
+                            $icon.css('cursor', 'pointer').tooltip('destroy').tooltip({
+                                html: true,
+                                placement: 'top',
+                                title: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html()
+                            });
+                            break;
+                        case ($icon && 'popover' == container):
+                            $icon.css('cursor', 'pointer').popover('destroy').popover({
+                                content: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html(),
+                                html: true,
+                                placement: 'top',
+                                trigger: 'hover click'
+                            });
+                            break;
+                        default:
+                            $errors.show();
+                            break;
+                    }
                     break;
 
                 case this.STATUS_VALID:
-                    validatorName ? $errors.filter('[data-bv-validator="' + validatorName + '"]').hide() : $errors.hide();
-
                     // If the field is valid (passes all validators)
-                    var validField = $errors.filter(function() {
+                    var validField = $allErrors.filter(function() {
                                         var v = $(this).attr('data-bv-validator');
                                         return $field.data('bv.result.' + v) != that.STATUS_VALID;
                                     }).length == 0;
@@ -812,18 +840,50 @@
                     if ($tab) {
                         $tab.removeClass('bv-tab-success').removeClass('bv-tab-error').addClass(isValidContainer($tabPane) ? 'bv-tab-success' : 'bv-tab-error');
                     }
+                    switch (true) {
+                        case ($icon && 'tooltip' == container):
+                            validField ? $icon.css('cursor', '').tooltip('destroy')
+                                       : $icon.css('cursor', 'pointer').tooltip('destroy').tooltip({
+                                            html: true,
+                                            placement: 'top',
+                                            title: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html()
+                                        });
+                            break;
+                        case ($icon && 'popover' == container):
+                            validField ? $icon.css('cursor', '').popover('destroy')
+                                       : $icon.css('cursor', 'pointer').popover('destroy').popover({
+                                            content: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html(),
+                                            html: true,
+                                            placement: 'top',
+                                            trigger: 'click'
+                                        });
+                            break;
+                        default:
+                            $errors.hide();
+                            break;
+                    }
                     break;
 
                 case this.STATUS_NOT_VALIDATED:
                 default:
                     this.disableSubmitButtons(false);
                     $parent.removeClass('has-success').removeClass('has-error');
-                    validatorName ? $errors.filter('.help-block[data-bv-validator="' + validatorName + '"]').hide() : $errors.hide();
                     if ($icon) {
                         $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).hide();
                     }
                     if ($tab) {
                         $tab.removeClass('bv-tab-success').removeClass('bv-tab-error');
+                    }
+                    switch (true) {
+                        case ($icon && 'tooltip' == container):
+                            $icon.css('cursor', '').tooltip('destroy');
+                            break;
+                        case ($icon && 'popover' == container):
+                            $icon.css('cursor', '').popover('destroy');
+                            break;
+                        default:
+                            $errors.hide();
+                            break;
                     }
                     break;
             }
