@@ -288,11 +288,16 @@
                 updateAll = (total == 1) || ('radio' == type) || ('checkbox' == type),
                 $parent   = $field.parents('.form-group'),
                 // Allow user to indicate where the error messages are shown
-                $message  = this.options.fields[field].container ? $parent.find(this.options.fields[field].container) : this._getMessageContainer($field);
+                container = this.options.fields[field].container || this.options.container,
+                $message  = container ? $(container) : this._getMessageContainer($field);
+
+            if (container) {
+                $message.addClass('has-error');
+            }
 
             // Remove all error messages and feedback icons
-            $message.find('.help-block[data-bv-validator]').remove();
-            $parent.find('i[data-bv-field]').remove();
+            $message.find('.help-block[data-bv-validator][data-bv-for="' + field + '"]').remove();
+            $parent.find('i[data-bv-icon-for="' + field + '"]').remove();
 
             // Set the attribute to indicate the fields which are defined by selector
             if (!$field.attr('data-bv-field')) {
@@ -315,9 +320,10 @@
                 if (!updateAll || index == total - 1) {
                     $('<small/>')
                         .css('display', 'none')
-                        .attr('data-bv-validator', validatorName)
-                        .html(this.options.fields[field].validators[validatorName].message || this.options.fields[field].message || this.options.message)
                         .addClass('help-block')
+                        .attr('data-bv-validator', validatorName)
+                        .attr('data-bv-for', field)
+                        .html(this.options.fields[field].validators[validatorName].message || this.options.fields[field].message || this.options.message)
                         .appendTo($message);
                 }
             }
@@ -712,7 +718,7 @@
                 field    = $field.attr('data-bv-field'),
                 $parent  = $field.parents('.form-group'),
                 $message = $field.data('bv.messages'),
-                $errors  = $message.find('.help-block[data-bv-validator]'),
+                $errors  = $message.find('.help-block[data-bv-validator][data-bv-for="' + field + '"]'),
                 $icon    = $parent.find('.form-control-feedback[data-bv-icon-for="' + field + '"]');
 
             // Update status
@@ -778,13 +784,29 @@
 
                     // Check if all elements in given container are valid
                     var isValidContainer = function($container) {
-                        return $container
-                                    .find('.help-block[data-bv-validator]')
+                        var map = {};
+                        $container.find('[data-bv-field]').each(function() {
+                            var field = $(this).attr('data-bv-field');
+                            if (!map[field]) {
+                                map[field] = $(this).data('bv.messages');
+                            }
+                        });
+
+                        for (var field in map) {
+                            if (map[field]
+                                    .find('.help-block[data-bv-validator][data-bv-for="' + field + '"]')
                                     .filter(function() {
                                         var display = $(this).css('display'), v = $(this).attr('data-bv-validator');
                                         return ('block' == display) || ($field.data('bv.result.' + v) && $field.data('bv.result.' + v) != that.STATUS_VALID);
                                     })
-                                    .length == 0;
+                                    .length != 0)
+                            {
+                                // The field is not valid
+                                return false;
+                            }
+                        }
+
+                        return true;
                     };
                     $parent.removeClass('has-error has-success').addClass(isValidContainer($parent) ? 'has-success' : 'has-error');
                     if ($tab) {
