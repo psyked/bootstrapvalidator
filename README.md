@@ -111,6 +111,7 @@ Big thanks to the contributors:
 * [@lloydde](https://github.com/lloydde)
 * [@narutosanjiv](https://github.com/narutosanjiv)
 * [@patmoore](https://github.com/patmoore)
+* [@tiagofontella](https://github.com/tiagofontella)
 * [@tomByrer](https://github.com/tomByrer)
 * [@vaz](https://github.com/vaz)
 * ... might be you! Let's [fork](https://github.com/nghuuphuoc/bootstrapvalidator/fork) and pull a request!
