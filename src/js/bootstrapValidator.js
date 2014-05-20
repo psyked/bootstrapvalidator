@@ -352,6 +352,10 @@
                 if ($parent.find('label').length == 0) {
                     $icon.css('top', 0);
                 }
+                // Fix icons in .form-group > .input-group
+	        if ($parent.find('.input-group-addon').length != 0) {
+	            $icon.css({'top':0, 'z-index':100});
+	        }
             }
 
             // Set live mode
