@@ -179,7 +179,7 @@
                     e.preventDefault();
                     that.validate();
                 })
-                .on('click', this.options.submitButtons, function() {
+                .on('click.bv', this.options.submitButtons, function() {
                     that.$submitButton  = $(this);
 					// The user just click the submit button
 					that._submitIfValid = true;
@@ -242,6 +242,7 @@
                     .each(function() {
                         $('<input/>')
                             .attr('type', 'hidden')
+                            .attr('data-bv-submit-hidden', '')
                             .attr('name', $(this).attr('name'))
                             .val($(this).val())
                             .appendTo(that.$form);
@@ -1113,6 +1114,64 @@
             this.updateStatus(field, this.STATUS_NOT_VALIDATED);
 
             return this;
+        },
+
+        /**
+         * Destroy the plugin
+         * It will remove all error messages, feedback icons and turn off the events
+         */
+        destroy: function() {
+            var field, fields, $field, validator, $icon, container;
+            for (field in this.options.fields) {
+                fields    = this.getFieldElements(field);
+                container = this.options.fields[field].container || this.options.container;
+                for (var i = 0; i < fields.length; i++) {
+                    $field = $(fields[i]);
+                    $field
+                        // Remove all error messages
+                        .data('bv.messages')
+                            .find('.help-block[data-bv-validator][data-bv-for="' + field + '"]').remove().end()
+                            .end()
+                        .removeData('bv.messages')
+                        // Remove feedback classes
+                        .parents('.form-group')
+                            .removeClass('has-feedback has-error has-success')
+                            .end()
+                        // Turn off events
+                        .off('.bv')
+                        .removeAttr('data-bv-field');
+
+                    // Remove feedback icons, tooltip/popover container
+                    $icon = $field.parents('.form-group').find('i[data-bv-icon-for="' + field + '"]');
+                    if ($icon) {
+                        switch (container) {
+                            case 'tooltip':
+                                $icon.tooltip('destroy').remove();
+                                break;
+                            case 'popover':
+                                $icon.popover('destroy').remove();
+                                break;
+                            default:
+                                $icon.remove();
+                                break;
+                        }
+                    }
+
+                    for (validator in this.options.fields[field].validators) {
+                        $field.removeData('bv.result.' + validator).removeData('bv.dfs.' + validator);
+                    }
+                }
+            }
+
+            // Enable submit buttons
+            this.disableSubmitButtons(false);
+
+            this.$form
+                .removeClass(this.options.elementClass)
+                .off('.bv')
+                .removeData('bootstrapValidator')
+                // Remove generated hidden elements
+                .find('[data-bv-submit-hidden]').remove();
         }
     };
 
