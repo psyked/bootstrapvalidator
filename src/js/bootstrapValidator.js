@@ -964,6 +964,50 @@
         },
 
         /**
+         * Get the error messages
+         *
+         * @param {jQuery|String} [field] The field, which can be
+         * - a string: The field name
+         * - a jQuery object representing the field element
+         * If the field is not defined, the method returns all error messages of all fields
+         * @returns {String[]}
+         */
+        getErrors: function(field) {
+            var that     = this,
+                messages = [],
+                $fields  = $([]);
+
+            switch (true) {
+                case (field && 'object' == typeof field):
+                    $fields = field;
+                    break;
+                case (field && 'string' == typeof field):
+                    var f = this.getFieldElements(field);
+                    if (f.length > 0) {
+                        var type = f.attr('type');
+                        $fields = ('radio' == type || 'checkbox' == type) ? $(f[0]) : f;
+                    }
+                    break;
+                default:
+                    $fields = this.$invalidFields;
+                    break;
+            }
+
+            $fields.each(function() {
+                messages = messages.concat(
+                    $(this)
+                        .data('bv.messages')
+                        .find('.help-block[data-bv-for="' + $(this).attr('data-bv-field') + '"][data-bv-result="' + that.STATUS_INVALID + '"]')
+                        .map(function() {
+                            return $(this).html()
+                        })
+                        .get()
+                );
+            });
+            return messages;
+        },
+
+        /**
          * Add new field element
          *
          * @param {jQuery} $field The field element
