@@ -733,14 +733,15 @@
          * @returns {BootstrapValidator}
          */
         updateElementStatus: function($field, status, validatorName) {
-            var that       = this,
-                field      = $field.attr('data-bv-field'),
-                $parent    = $field.parents('.form-group'),
-                $message   = $field.data('bv.messages'),
-                $allErrors = $message.find('.help-block[data-bv-validator][data-bv-for="' + field + '"]'),
-                $errors    = validatorName ? $allErrors.filter('[data-bv-validator="' + validatorName + '"]') : $allErrors,
-                $icon      = $parent.find('.form-control-feedback[data-bv-icon-for="' + field + '"]'),
-                container  = this.options.fields[field].container || this.options.container;
+            var that         = this,
+                field        = $field.attr('data-bv-field'),
+                $parent      = $field.parents('.form-group'),
+                $message     = $field.data('bv.messages'),
+                $allErrors   = $message.find('.help-block[data-bv-validator][data-bv-for="' + field + '"]'),
+                $errors      = validatorName ? $allErrors.filter('[data-bv-validator="' + validatorName + '"]') : $allErrors,
+                $icon        = $parent.find('.form-control-feedback[data-bv-icon-for="' + field + '"]'),
+                container    = this.options.fields[field].container || this.options.container,
+                isValidField = null;
 
             // Update status
             if (validatorName) {
@@ -763,6 +764,7 @@
             $errors.attr('data-bv-result', status);
             switch (status) {
                 case this.STATUS_VALIDATING:
+                    isValidField = null;
                     this.disableSubmitButtons(true);
                     $parent.removeClass('has-success').removeClass('has-error');
                     if ($icon) {
@@ -771,20 +773,10 @@
                     if ($tab) {
                         $tab.removeClass('bv-tab-success').removeClass('bv-tab-error');
                     }
-                    switch (true) {
-                        case ($icon && 'tooltip' == container):
-                            $icon.css('cursor', '').tooltip('destroy');
-                            break;
-                        case ($icon && 'popover' == container):
-                            $icon.css('cursor', '').popover('destroy');
-                            break;
-                        default:
-                            $errors.hide();
-                            break;
-                    }
                     break;
 
                 case this.STATUS_INVALID:
+                    isValidField = false;
                     this.disableSubmitButtons(true);
                     $parent.removeClass('has-success').addClass('has-error');
                     if ($icon) {
@@ -793,40 +785,19 @@
                     if ($tab) {
                         $tab.removeClass('bv-tab-success').addClass('bv-tab-error');
                     }
-                    switch (true) {
-                        // Only show the first error message if it is placed inside a tooltip or popover
-                        case ($icon && 'tooltip' == container):
-                            $icon.css('cursor', 'pointer').tooltip('destroy').tooltip({
-                                html: true,
-                                placement: 'top',
-                                title: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html()
-                            });
-                            break;
-                        case ($icon && 'popover' == container):
-                            $icon.css('cursor', 'pointer').popover('destroy').popover({
-                                content: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html(),
-                                html: true,
-                                placement: 'top',
-                                trigger: 'hover click'
-                            });
-                            break;
-                        default:
-                            $errors.show();
-                            break;
-                    }
                     break;
 
                 case this.STATUS_VALID:
                     // If the field is valid (passes all validators)
-                    var validField = $allErrors.filter(function() {
+                    isValidField = $allErrors.filter(function() {
                                         var v = $(this).attr('data-bv-validator');
                                         return $field.data('bv.result.' + v) != that.STATUS_VALID;
                                     }).length == 0;
-                    this.disableSubmitButtons(!validField);
+                    this.disableSubmitButtons(!isValidField);
                     if ($icon) {
                         $icon
                             .removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).removeClass(this.options.feedbackIcons.valid)
-                            .addClass(validField ? this.options.feedbackIcons.valid : this.options.feedbackIcons.invalid)
+                            .addClass(isValidField ? this.options.feedbackIcons.valid : this.options.feedbackIcons.invalid)
                             .show();
                     }
 
@@ -860,33 +831,11 @@
                     if ($tab) {
                         $tab.removeClass('bv-tab-success').removeClass('bv-tab-error').addClass(isValidContainer($tabPane) ? 'bv-tab-success' : 'bv-tab-error');
                     }
-                    switch (true) {
-                        // Only show the first error message if it is placed inside a tooltip or popover
-                        case ($icon && 'tooltip' == container):
-                            validField ? $icon.css('cursor', '').tooltip('destroy')
-                                       : $icon.css('cursor', 'pointer').tooltip('destroy').tooltip({
-                                            html: true,
-                                            placement: 'top',
-                                            title: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html()
-                                        });
-                            break;
-                        case ($icon && 'popover' == container):
-                            validField ? $icon.css('cursor', '').popover('destroy')
-                                       : $icon.css('cursor', 'pointer').popover('destroy').popover({
-                                            content: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html(),
-                                            html: true,
-                                            placement: 'top',
-                                            trigger: 'hover click'
-                                        });
-                            break;
-                        default:
-                            $errors.hide();
-                            break;
-                    }
                     break;
 
                 case this.STATUS_NOT_VALIDATED:
                 default:
+                    isValidField = null;
                     this.disableSubmitButtons(false);
                     $parent.removeClass('has-success').removeClass('has-error');
                     if ($icon) {
@@ -895,17 +844,33 @@
                     if ($tab) {
                         $tab.removeClass('bv-tab-success').removeClass('bv-tab-error');
                     }
-                    switch (true) {
-                        case ($icon && 'tooltip' == container):
-                            $icon.css('cursor', '').tooltip('destroy');
-                            break;
-                        case ($icon && 'popover' == container):
-                            $icon.css('cursor', '').popover('destroy');
-                            break;
-                        default:
-                            $errors.hide();
-                            break;
-                    }
+                    break;
+            }
+
+            switch (true) {
+                // Only show the first error message if it is placed inside a tooltip ...
+                case ($icon && 'tooltip' == container):
+                    (isValidField === false)
+                            ? $icon.css('cursor', 'pointer').tooltip('destroy').tooltip({
+                                html: true,
+                                placement: 'top',
+                                title: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html()
+                            })
+                            : $icon.css('cursor', '').tooltip('destroy');
+                    break;
+                // ... or popover
+                case ($icon && 'popover' == container):
+                    (isValidField === false)
+                            ? $icon.css('cursor', 'pointer').popover('destroy').popover({
+                                content: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html(),
+                                html: true,
+                                placement: 'top',
+                                trigger: 'hover click'
+                            })
+                            : $icon.css('cursor', '').popover('destroy');
+                    break;
+                default:
+                    (status == this.STATUS_INVALID) ? $errors.show() : $errors.hide();
                     break;
             }
 
