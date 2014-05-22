@@ -679,14 +679,20 @@
                 $field.data('bv.result.' + validatorName, this.STATUS_VALIDATING);
                 validateResult = $.fn.bootstrapValidator.validators[validatorName].validate(this, $field, validators[validatorName]);
 
+                // validateResult can be a $.Deferred object ...
                 if ('object' == typeof validateResult) {
                     updateAll ? this.updateStatus(field, this.STATUS_VALIDATING, validatorName)
                               : this.updateElementStatus($field, this.STATUS_VALIDATING, validatorName);
                     $field.data('bv.dfs.' + validatorName, validateResult);
 
-                    validateResult.done(function($f, v, isValid) {
+                    validateResult.done(function($f, v, isValid, message) {
                         // v is validator name
                         $f.removeData('bv.dfs.' + v);
+                        if (message) {
+                            // Update the error message
+                            $field.data('bv.messages').find('.help-block[data-bv-validator="' + v + '"][data-bv-for="' + $f.attr('data-bv-field') + '"]').html(message);
+                        }
+
                         updateAll ? that.updateStatus($f.attr('data-bv-field'), isValid ? that.STATUS_VALID : that.STATUS_INVALID, v)
                                   : that.updateElementStatus($f, isValid ? that.STATUS_VALID : that.STATUS_INVALID, v);
 
@@ -695,7 +701,9 @@
 							that._submit();
 						}
                     });
-                } else if ('boolean' == typeof validateResult) {
+                }
+                // ... or a boolean value
+                else if ('boolean' == typeof validateResult) {
                     updateAll ? this.updateStatus(field, validateResult ? this.STATUS_VALID : this.STATUS_INVALID, validatorName)
                               : this.updateElementStatus($field, validateResult ? this.STATUS_VALID : this.STATUS_INVALID, validatorName);
                 }
@@ -977,6 +985,7 @@
                         .get()
                 );
             });
+
             return messages;
         },
 
