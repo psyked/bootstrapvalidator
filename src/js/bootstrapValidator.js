@@ -235,17 +235,6 @@
                             $field.attr('data-bv-field', field);
                             options.fields[field] = $.extend({}, opts, options.fields[field]);
                         }
-                    })
-                    .end()
-                // Create hidden inputs to send the submit buttons
-                .find(this.options.submitButtons)
-                    .each(function() {
-                        $('<input/>')
-                            .attr('type', 'hidden')
-                            .attr('data-bv-submit-hidden', '')
-                            .attr('name', $(this).attr('name'))
-                            .val($(this).val())
-                            .appendTo(that.$form);
                     });
 
             this.options = $.extend(true, this.options, options);
@@ -930,6 +919,16 @@
          * It might be used when you want to submit the form right inside the submitHandler()
          */
         defaultSubmit: function() {
+            if (this.$submitButton) {
+                // Create hidden input to send the submit buttons
+                $('<input/>')
+                    .attr('type', 'hidden')
+                    .attr('data-bv-submit-hidden', '')
+                    .attr('name', this.$submitButton.attr('name'))
+                    .val(this.$submitButton.val())
+                    .appendTo(this.$form);
+            }
+            // Submit form
             this.$form.off('submit.bv').submit();
         },
 
