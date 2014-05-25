@@ -813,7 +813,7 @@
                                     .find('.help-block[data-bv-validator][data-bv-for="' + field + '"]')
                                     .filter(function() {
                                         var display = $(this).css('display'), v = $(this).attr('data-bv-validator');
-                                        return ('block' == display) || ($field.data('bv.result.' + v) && $field.data('bv.result.' + v) != that.STATUS_VALID);
+                                        return $field.data('bv.result.' + v) && $field.data('bv.result.' + v) != that.STATUS_VALID;
                                     })
                                     .length != 0)
                             {
