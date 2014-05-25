@@ -50,9 +50,9 @@
             // Determine the date
             date       = date.split(separator);
             dateFormat = dateFormat.split(separator);
-            var year  = date[dateFormat.indexOf('YYYY')],
-                month = date[dateFormat.indexOf('MM')],
-                day   = date[dateFormat.indexOf('DD')];
+            var year  = date[$.inArray('YYYY', dateFormat)],
+                month = date[$.inArray('MM', dateFormat)],
+                day   = date[$.inArray('DD', dateFormat)];
 
             // Determine the time
             var minutes = null, hours = null, seconds = null;

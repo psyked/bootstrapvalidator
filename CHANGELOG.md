@@ -9,6 +9,7 @@
 * [#211](https://github.com/nghuuphuoc/bootstrapvalidator/issues/211), [#235](https://github.com/nghuuphuoc/bootstrapvalidator/issues/235): Add new method ```getInvalidFields()``` that returns all invalid fields
 * [#275](https://github.com/nghuuphuoc/bootstrapvalidator/issues/275): Add ```destroy()``` method
 * [#274](https://github.com/nghuuphuoc/bootstrapvalidator/pull/274): Fix feedback icons in ```input-group```, thanks to [@tiagofontella](https://github.com/tiagofontella)
+* [#288](https://github.com/nghuuphuoc/bootstrapvalidator/issues/288): Fix [```date``` validator](http://bootstrapvalidator.com/validators/date/) issue on IE8
 
 ## v0.4.5 (2015-05-15)
 
