@@ -223,16 +223,18 @@
                         }
 
                         var opts = {
-                            trigger:    $field.attr('data-bv-trigger'),
-                            message:    $field.attr('data-bv-message'),
-                            container:  $field.attr('data-bv-container'),
-                            selector:   $field.attr('data-bv-selector'),
-                            threshold:  $field.attr('data-bv-threshold'),
-                            validators: validators
-                        };
+                                feedbackIcons: $field.attr('data-bv-feedbackicons'),
+                                trigger:       $field.attr('data-bv-trigger'),
+                                message:       $field.attr('data-bv-message'),
+                                container:     $field.attr('data-bv-container'),
+                                selector:      $field.attr('data-bv-selector'),
+                                threshold:     $field.attr('data-bv-threshold')
+                            },
+                            emptyOptions    = $.isEmptyObject(opts),        // Check if the field options are set using HTML attributes
+                            emptyValidators = $.isEmptyObject(validators);  // Check if the field validators are set using HTML attributes
 
-                        // Check if there is any validators set using HTML attributes
-                        if (!$.isEmptyObject(opts.validators) && !$.isEmptyObject(opts)) {
+                        if (!emptyValidators || (!emptyOptions && that.options.fields[field])) {
+                            opts.validators = validators;
                             $field.attr('data-bv-field', field);
                             options.fields[field] = $.extend({}, opts, options.fields[field]);
                         }
@@ -332,7 +334,8 @@
 
             // Prepare the feedback icons
             // Available from Bootstrap 3.1 (http://getbootstrap.com/css/#forms-control-validation)
-            if (this.options.feedbackIcons
+            if (this.options.fields[field].feedbackIcons !== false && this.options.fields[field].feedbackIcons !== 'false'
+                && this.options.feedbackIcons
                 && this.options.feedbackIcons.validating && this.options.feedbackIcons.invalid && this.options.feedbackIcons.valid
                 && (!updateAll || index == total - 1))
             {
