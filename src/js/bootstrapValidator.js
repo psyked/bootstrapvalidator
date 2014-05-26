@@ -292,9 +292,9 @@
                 $parent   = $field.parents('.form-group'),
                 // Allow user to indicate where the error messages are shown
                 container = this.options.fields[field].container || this.options.container,
-                $message  = (container && ['tooltip', 'popover'].indexOf(container) == -1) ? $(container) : this._getMessageContainer($field);
+                $message  = (container && container != 'tooltip' && container != 'popover') ? $(container) : this._getMessageContainer($field);
 
-            if (container && ['tooltip', 'popover'].indexOf(container) == -1) {
+            if (container && container != 'tooltip' && container != 'popover') {
                 $message.addClass('has-error');
             }
 
