@@ -12,6 +12,7 @@
 * [#282](https://github.com/nghuuphuoc/bootstrapvalidator/issues/282): Use error message that is returned from [```callback```](http://bootstrapvalidator.com/validators/callback/), [```remote```](http://bootstrapvalidator.com/validators/remote/) validators
 * [#287](https://github.com/nghuuphuoc/bootstrapvalidator/issues/287): Only send the submit button which is clicked. It's an enhancement for [#238](https://github.com/nghuuphuoc/bootstrapvalidator/issues/238)
 * [#288](https://github.com/nghuuphuoc/bootstrapvalidator/issues/288): Fix [```date``` validator](http://bootstrapvalidator.com/validators/date/) issue on IE8
+* [#292](https://github.com/nghuuphuoc/bootstrapvalidator/pull/292): Fix identical validator issue with not clearing ```has-error``` class, thanks to [@alavers](https://github.com/alavers)
 
 ## v0.4.5 (2015-05-15)
 

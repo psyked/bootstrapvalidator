@@ -805,18 +805,19 @@
                         $container.find('[data-bv-field]').each(function() {
                             var field = $(this).attr('data-bv-field');
                             if (!map[field]) {
-                                map[field] = $(this).data('bv.messages');
+                                map[field] = $(this);
                             }
                         });
 
                         for (var field in map) {
-                            if (map[field]
-                                    .find('.help-block[data-bv-validator][data-bv-for="' + field + '"]')
-                                    .filter(function() {
-                                        var display = $(this).css('display'), v = $(this).attr('data-bv-validator');
-                                        return ('block' == display) || ($field.data('bv.result.' + v) && $field.data('bv.result.' + v) != that.STATUS_VALID);
-                                    })
-                                    .length != 0)
+                            var $f = map[field];
+                            if ($f.data('bv.messages')
+                                  .find('.help-block[data-bv-validator][data-bv-for="' + field + '"]')
+                                  .filter(function() {
+                                      var v = $(this).attr('data-bv-validator');
+                                      return ($f.data('bv.result.' + v) && $f.data('bv.result.' + v) != that.STATUS_VALID);
+                                  })
+                                  .length != 0)
                             {
                                 // The field is not valid
                                 return false;
@@ -825,6 +826,7 @@
 
                         return true;
                     };
+
                     $parent.removeClass('has-error has-success').addClass(isValidContainer($parent) ? 'has-success' : 'has-error');
                     if ($tab) {
                         $tab.removeClass('bv-tab-success').removeClass('bv-tab-error').addClass(isValidContainer($tabPane) ? 'bv-tab-success' : 'bv-tab-error');
