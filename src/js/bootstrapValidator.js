@@ -876,6 +876,9 @@
                     break;
             }
 
+            // Trigger the "status.field.bv" event
+            this.$form.trigger($.Event('status.field.bv'), [field, $field, status]);
+
             this._onValidateFieldCompleted($field);
 
             return this;
