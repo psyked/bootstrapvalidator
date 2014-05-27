@@ -309,6 +309,9 @@ $(document).ready(function() {
             var $form = $(e.target);
             // I don't want to add has-success class to valid field container
             $field.parents('.form-group').removeClass('has-success');
+
+            // I want to enable the submit button all the time
+            $form.data('bootstrapValidator').disableSubmitButtons(false);
         });
 
     // Validate the form manually
