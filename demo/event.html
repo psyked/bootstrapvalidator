@@ -304,6 +304,11 @@ $(document).ready(function() {
         })
         .on('success.field.bv', function(e, field) {
             //console.log(field, '-->success');
+        })
+        .on('status.field.bv', function(e, field, $field, status) {
+            var $form = $(e.target);
+            // I don't want to add has-success class to valid field container
+            $field.parents('.form-group').removeClass('has-success');
         });
 
     // Validate the form manually
