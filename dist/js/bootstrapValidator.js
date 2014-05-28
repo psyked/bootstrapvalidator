@@ -1343,9 +1343,9 @@
             }
 
             value = parseFloat(value);
-            return (options.inclusive === true)
-                        ? (value > options.min && value < options.max)
-                        : (value >= options.min && value <= options.max);
+			return (options.inclusive === true || options.inclusive == undefined)
+				    ? (value >= options.min && value <= options.max)
+				    : (value > options.min && value < options.max);
         }
     };
 }(window.jQuery));
@@ -1995,8 +1995,8 @@
             if (value == '') {
                 return true;
             }
-            value = parseFloat(value);           
-			return (options.inclusive === false || options.inclusive==undefined) ? (value >= options.value) : (value > options.value);
+            value = parseFloat(value);
+			return (options.inclusive === true || options.inclusive == undefined) ? (value >= options.value) : (value > options.value);
         }
     }
 }(window.jQuery));
@@ -3380,7 +3380,7 @@
                 return true;
             }
             value = parseFloat(value);
-            return (options.inclusive === false || options.inclusive == undefined) ? (value <= options.value) : (value < options.value);
+            return (options.inclusive === true || options.inclusive == undefined) ? (value <= options.value) : (value < options.value);
         }
     };
 }(window.jQuery));

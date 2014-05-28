@@ -37,10 +37,9 @@
             }
 
             value = parseFloat(value);
-			return (options.inclusive === true || options.inclusive==undefined)
-				? (value >= options.min && value <= options.max)
-				: (value > options.min && value < options.max);
-			
+			return (options.inclusive === true || options.inclusive == undefined)
+				    ? (value >= options.min && value <= options.max)
+				    : (value > options.min && value < options.max);
         }
     };
 }(window.jQuery));
