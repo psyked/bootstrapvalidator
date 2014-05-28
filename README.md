@@ -110,6 +110,8 @@ Big thanks to the contributors:
 * [@khangvm53](https://github.com/khangvm53)
 * [@kristian-puccio](https://github.com/kristian-puccio)
 * [@lloydde](https://github.com/lloydde)
+* [@MartinDevillers](https://github.com/MartinDevillers)
+* [@MrC0mm0n](https://github.com/MrC0mm0n)
 * [@narutosanjiv](https://github.com/narutosanjiv)
 * [@patmoore](https://github.com/patmoore)
 * [@smeagol74](https://github.com/smeagol74)

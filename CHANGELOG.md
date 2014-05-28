@@ -16,6 +16,10 @@
 * [#287](https://github.com/nghuuphuoc/bootstrapvalidator/issues/287): Only send the submit button which is clicked. It's an enhancement for [#238](https://github.com/nghuuphuoc/bootstrapvalidator/issues/238)
 * [#288](https://github.com/nghuuphuoc/bootstrapvalidator/issues/288): Fix [```date``` validator](http://bootstrapvalidator.com/validators/date/) issue on IE8
 * [#292](https://github.com/nghuuphuoc/bootstrapvalidator/pull/292): Fix identical validator issue with not clearing ```has-error``` class, thanks to [@alavers](https://github.com/alavers)
+* [#259](https://github.com/nghuuphuoc/bootstrapvalidator/issues/259): Typo "Support almost Bootstrap forms"
+* [#261](https://github.com/nghuuphuoc/bootstrapvalidator/pull/261): English fix to 'amazing contributors' section, thanks to [@lloydde](https://github.com/lloydde)
+* [#278](https://github.com/nghuuphuoc/bootstrapvalidator/pull/278): Update [```choice``` validator](http://bootstrapvalidator.com/validators/choice/) document, thanks to [@MrC0mm0n](https://github.com/MrC0mm0n)
+* [#303](https://github.com/nghuuphuoc/bootstrapvalidator/pull/303): Fix typo in [```remote``` validator](http://bootstrapvalidator.com/validators/remote/) document, thanks to [@MartinDevillers](https://github.com/MartinDevillers)
 
 ## v0.4.5 (2015-05-15)
 
@@ -57,7 +61,7 @@
 * Add ```$.fn.bootstrapValidator.helpers.luhn``` method that implements the Luhn algorithm
 * [#77](https://github.com/nghuuphuoc/bootstrapvalidator/issues/77): Add [```file``` validator](http://bootstrapvalidator.com/validators/file/)
 * [#179](https://github.com/nghuuphuoc/bootstrapvalidator/issues/179): Add [```vat``` validator](http://bootstrapvalidator.com/validators/vat/), support 32 countries
-* [#198](https://github.com/nghuuphuoc/bootstrapvalidator/pull/198): Add Canadian Postal Code support for the [```zipCode``` validator](http://bootstrapvalidator.com/validators/zipCode/), thanks to [@Francismori7](https://github.com/Francismori7)
+* [#198](https://github.com/nghuuphuoc/bootstrapvalidator/pull/198), [#199](https://github.com/nghuuphuoc/bootstrapvalidator/pull/199): Add Canadian Postal Code support for the [```zipCode``` validator](http://bootstrapvalidator.com/validators/zipCode/), thanks to [@Francismori7](https://github.com/Francismori7)
 * [#201](https://github.com/nghuuphuoc/bootstrapvalidator/issues/201): The [```choice``` validator](http://bootstrapvalidator.com/validators/choice/) supports ```select``` element
 * [#202](https://github.com/nghuuphuoc/bootstrapvalidator/issues/202): Activate tab containing the first invalid field
 * [#205](https://github.com/nghuuphuoc/bootstrapvalidator/issues/205): Plugin method invocation
@@ -74,6 +78,7 @@
 * [#173](https://github.com/nghuuphuoc/bootstrapvalidator/pull/173): The [```remote``` validator](http://bootstrapvalidator.com/validators/remote/) allows to override ```name``` option, thanks to [@jswale](https://github.com/jswale)
 * [#178](https://github.com/nghuuphuoc/bootstrapvalidator/pull/178): Do not validate fields that ```enabled``` is set to ```false```, thanks to [@henningda](https://github.com/henningda)
 * [#182](https://github.com/nghuuphuoc/bootstrapvalidator/pull/182): Improve [```zipCode``` validator](http://bootstrapvalidator.com/validators/zipCode/), thanks to [@gercheq](https://github.com/gercheq)
+* [#169](https://github.com/nghuuphuoc/bootstrapvalidator/pull/169): Better to say: ```{validatorname}``` and ```{validatoroption}``` must be lowercase, thanks to [@tomByrer](https://github.com/tomByrer)
 
 ## v0.4.1 (2014-04-12)
 
