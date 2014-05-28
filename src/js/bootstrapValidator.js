@@ -1192,6 +1192,10 @@
          * @returns {Boolean}
          */
         date: function(year, month, day, notInFuture) {
+            if (isNaN(year) || isNaN(month) || isNaN(day)) {
+                return false;
+            }
+
             if (year < 1000 || year > 9999 || month == 0 || month > 12) {
                 return false;
             }

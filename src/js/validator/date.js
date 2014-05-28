@@ -71,7 +71,7 @@
                 // Validate seconds
                 if (seconds) {
                     seconds = parseInt(seconds, 10);
-                    if (seconds < 0 || seconds > 60) {
+                    if (isNaN(seconds) || seconds < 0 || seconds > 60) {
                         return false;
                     }
                 }
@@ -79,7 +79,7 @@
                 // Validate hours
                 if (hours) {
                     hours = parseInt(hours, 10);
-                    if (hours < 0 || hours >= 24 || (amOrPm && hours > 12)) {
+                    if (isNaN(hours) || hours < 0 || hours >= 24 || (amOrPm && hours > 12)) {
                         return false;
                     }
                 }
@@ -87,7 +87,7 @@
                 // Validate minutes
                 if (minutes) {
                     minutes = parseInt(minutes, 10);
-                    if (minutes < 0 || minutes > 59) {
+                    if (isNaN(minutes) || minutes < 0 || minutes > 59) {
                         return false;
                     }
                 }

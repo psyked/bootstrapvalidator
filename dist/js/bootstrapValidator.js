@@ -1193,6 +1193,10 @@
          * @returns {Boolean}
          */
         date: function(year, month, day, notInFuture) {
+            if (isNaN(year) || isNaN(month) || isNaN(day)) {
+                return false;
+            }
+
             if (year < 1000 || year > 9999 || month == 0 || month > 12) {
                 return false;
             }
@@ -1740,7 +1744,7 @@
                 // Validate seconds
                 if (seconds) {
                     seconds = parseInt(seconds, 10);
-                    if (seconds < 0 || seconds > 60) {
+                    if (isNaN(seconds) || seconds < 0 || seconds > 60) {
                         return false;
                     }
                 }
@@ -1748,7 +1752,7 @@
                 // Validate hours
                 if (hours) {
                     hours = parseInt(hours, 10);
-                    if (hours < 0 || hours >= 24 || (amOrPm && hours > 12)) {
+                    if (isNaN(hours) || hours < 0 || hours >= 24 || (amOrPm && hours > 12)) {
                         return false;
                     }
                 }
@@ -1756,7 +1760,7 @@
                 // Validate minutes
                 if (minutes) {
                     minutes = parseInt(minutes, 10);
-                    if (minutes < 0 || minutes > 59) {
+                    if (isNaN(minutes) || minutes < 0 || minutes > 59) {
                         return false;
                     }
                 }
@@ -1991,8 +1995,8 @@
             if (value == '') {
                 return true;
             }
-            value = parseFloat(value);
-            return (options.inclusive === true) ? (value > options.value) : (value >= options.value);
+            value = parseFloat(value);           
+			return (options.inclusive === false || options.inclusive==undefined) ? (value >= options.value) : (value > options.value);
         }
     }
 }(window.jQuery));
