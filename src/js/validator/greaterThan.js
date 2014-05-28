@@ -33,8 +33,8 @@
             if (value == '') {
                 return true;
             }
-            value = parseFloat(value);           
-			return (options.inclusive === false || options.inclusive==undefined) ? (value >= options.value) : (value > options.value);
+            value = parseFloat(value);
+			return (options.inclusive === true || options.inclusive==undefined) ? (value >= options.value) : (value > options.value);
         }
     }
 }(window.jQuery));
