@@ -106,6 +106,7 @@ Big thanks to the contributors:
 * [@henningda](https://github.com/henningda)
 * [@ikanedo](https://github.com/ikanedo)
 * [@iplus](https://github.com/iplus)
+* [@johanronn77](https://github.com/johanronn77)
 * [@jswale](https://github.com/jswale)
 * [@khangvm53](https://github.com/khangvm53)
 * [@kristian-puccio](https://github.com/kristian-puccio)
