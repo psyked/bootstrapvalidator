@@ -22,6 +22,7 @@
 * [#312](https://github.com/nghuuphuoc/bootstrapvalidator/pull/312): Fix broacast typo in the [```uri``` validator](http://bootstrapvalidator.com/validators/uri/), thanks to [@mrpollo](https://github.com/mrpollo)
 * [#313](https://github.com/nghuuphuoc/bootstrapvalidator/issues/313): Fix the [```file``` validator](http://bootstrapvalidator.com/validators/file/) issue on IE 8
 * [#314](https://github.com/nghuuphuoc/bootstrapvalidator/issues/314): The [```creditCard``` validator](http://bootstrapvalidator.com/validators/creditCard/) doesn't work IE 8
+* [#315](https://github.com/nghuuphuoc/bootstrapvalidator/issues/315): The [```cvv``` validator](http://bootstrapvalidator.com/validators/cvv/) doesn't work IE 8
 * [#259](https://github.com/nghuuphuoc/bootstrapvalidator/issues/259): Typo "Support almost Bootstrap forms"
 * [#261](https://github.com/nghuuphuoc/bootstrapvalidator/pull/261): English fix to 'amazing contributors' section, thanks to [@lloydde](https://github.com/lloydde)
 * [#278](https://github.com/nghuuphuoc/bootstrapvalidator/pull/278): Update [```choice``` validator](http://bootstrapvalidator.com/validators/choice/) document, thanks to [@MrC0mm0n](https://github.com/MrC0mm0n)
