@@ -113,6 +113,7 @@ Big thanks to the contributors:
 * [@lloydde](https://github.com/lloydde)
 * [@MartinDevillers](https://github.com/MartinDevillers)
 * [@MrC0mm0n](https://github.com/MrC0mm0n)
+* [@mrpollo](https://github.com/mrpollo)
 * [@narutosanjiv](https://github.com/narutosanjiv)
 * [@patmoore](https://github.com/patmoore)
 * [@smeagol74](https://github.com/smeagol74)
