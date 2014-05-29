@@ -9,6 +9,7 @@
 * [#175](https://github.com/nghuuphuoc/bootstrapvalidator/issues/175): Showing errors in tooltip or popover
 * [#211](https://github.com/nghuuphuoc/bootstrapvalidator/issues/211), [#235](https://github.com/nghuuphuoc/bootstrapvalidator/issues/235): Add new method ```getInvalidFields()``` that returns all invalid fields
 * [#275](https://github.com/nghuuphuoc/bootstrapvalidator/issues/275): Add ```destroy()``` method
+* [#316](https://github.com/nghuuphuoc/bootstrapvalidator/issues/316): Add ```isValidContainer()``` method
 * [#297](https://github.com/nghuuphuoc/bootstrapvalidator/issues/297): Disable feedback icons for particular fields
 * [#244](https://github.com/nghuuphuoc/bootstrapvalidator/pull/244): Only enable the submit buttons if all fields are valid, thanks to [@smeagol74](https://github.com/smeagol74)
 * [#274](https://github.com/nghuuphuoc/bootstrapvalidator/pull/274): Fix feedback icons in ```input-group```, thanks to [@tiagofontella](https://github.com/tiagofontella)
@@ -21,14 +22,14 @@
 * [#311](https://github.com/nghuuphuoc/bootstrapvalidator/issues/311): file validation extension is case sensitive
 * [#312](https://github.com/nghuuphuoc/bootstrapvalidator/pull/312): Fix broacast typo in the [```uri``` validator](http://bootstrapvalidator.com/validators/uri/), thanks to [@mrpollo](https://github.com/mrpollo)
 * [#313](https://github.com/nghuuphuoc/bootstrapvalidator/issues/313): Fix the [```file``` validator](http://bootstrapvalidator.com/validators/file/) issue on IE 8
-* [#314](https://github.com/nghuuphuoc/bootstrapvalidator/issues/314): The [```creditCard``` validator](http://bootstrapvalidator.com/validators/creditCard/) doesn't work IE 8
-* [#315](https://github.com/nghuuphuoc/bootstrapvalidator/issues/315): The [```cvv``` validator](http://bootstrapvalidator.com/validators/cvv/) doesn't work IE 8
+* [#314](https://github.com/nghuuphuoc/bootstrapvalidator/issues/314): The [```creditCard``` validator](http://bootstrapvalidator.com/validators/creditCard/) doesn't work on IE 8
+* [#315](https://github.com/nghuuphuoc/bootstrapvalidator/issues/315): The [```cvv``` validator](http://bootstrapvalidator.com/validators/cvv/) doesn't work on IE 8
 * [#259](https://github.com/nghuuphuoc/bootstrapvalidator/issues/259): Typo "Support almost Bootstrap forms"
 * [#261](https://github.com/nghuuphuoc/bootstrapvalidator/pull/261): English fix to 'amazing contributors' section, thanks to [@lloydde](https://github.com/lloydde)
 * [#278](https://github.com/nghuuphuoc/bootstrapvalidator/pull/278): Update [```choice``` validator](http://bootstrapvalidator.com/validators/choice/) document, thanks to [@MrC0mm0n](https://github.com/MrC0mm0n)
 * [#303](https://github.com/nghuuphuoc/bootstrapvalidator/pull/303): Fix typo in [```remote``` validator](http://bootstrapvalidator.com/validators/remote/) document, thanks to [@MartinDevillers](https://github.com/MartinDevillers)
 
-## v0.4.5 (2015-05-15)
+## v0.4.5 (2014-05-15)
 
 * Add ```$.fn.bootstrapValidator.helpers.date``` for validating a date, re-used in [```date```](http://bootstrapvalidator.com/validators/date/), [```id```](http://bootstrapvalidator.com/validators/id/), [```vat```](http://bootstrapvalidator.com/validators/vat/) validators
 * [#233](https://github.com/nghuuphuoc/bootstrapvalidator/issues/233): Add ```threshold``` option

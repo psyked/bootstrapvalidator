@@ -802,37 +802,9 @@
                             .show();
                     }
 
-                    // Check if all elements in given container are valid
-                    var isValidContainer = function($container) {
-                        var map = {};
-                        $container.find('[data-bv-field]').each(function() {
-                            var field = $(this).attr('data-bv-field');
-                            if (!map[field]) {
-                                map[field] = $(this);
-                            }
-                        });
-
-                        for (var field in map) {
-                            var $f = map[field];
-                            if ($f.data('bv.messages')
-                                  .find('.help-block[data-bv-validator][data-bv-for="' + field + '"]')
-                                  .filter(function() {
-                                      var v = $(this).attr('data-bv-validator');
-                                      return ($f.data('bv.result.' + v) && $f.data('bv.result.' + v) != that.STATUS_VALID);
-                                  })
-                                  .length != 0)
-                            {
-                                // The field is not valid
-                                return false;
-                            }
-                        }
-
-                        return true;
-                    };
-
-                    $parent.removeClass('has-error has-success').addClass(isValidContainer($parent) ? 'has-success' : 'has-error');
+                    $parent.removeClass('has-error has-success').addClass(this.isValidContainer($parent) ? 'has-success' : 'has-error');
                     if ($tab) {
-                        $tab.removeClass('bv-tab-success').removeClass('bv-tab-error').addClass(isValidContainer($tabPane) ? 'bv-tab-success' : 'bv-tab-error');
+                        $tab.removeClass('bv-tab-success').removeClass('bv-tab-error').addClass(this.isValidContainer($tabPane) ? 'bv-tab-success' : 'bv-tab-error');
                     }
                     break;
 
@@ -915,6 +887,40 @@
                             return false;
                         }
                     }
+                }
+            }
+
+            return true;
+        },
+
+        /**
+         * Check if all fields inside a given container are valid.
+         * It's useful when working with a wizard-like such as tab, collapse
+         *
+         * @param {jQuery} $container The container element
+         * @returns {Boolean}
+         */
+        isValidContainer: function($container) {
+            var that = this, map = {};
+            $container.find('[data-bv-field]').each(function() {
+                var field = $(this).attr('data-bv-field');
+                if (!map[field]) {
+                    map[field] = $(this);
+                }
+            });
+
+            for (var field in map) {
+                var $f = map[field];
+                if ($f.data('bv.messages')
+                      .find('.help-block[data-bv-validator][data-bv-for="' + field + '"]')
+                      .filter(function() {
+                          var v = $(this).attr('data-bv-validator');
+                          return ($f.data('bv.result.' + v) && $f.data('bv.result.' + v) != that.STATUS_VALID);
+                      })
+                      .length != 0)
+                {
+                    // The field is not valid
+                    return false;
                 }
             }
 
