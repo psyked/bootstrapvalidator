@@ -161,14 +161,7 @@
                         invalid:    this.$form.attr('data-bv-feedbackicons-invalid'),
                         validating: this.$form.attr('data-bv-feedbackicons-validating')
                     }
-                },
-                validator,
-                v,          // Validator name
-                enabled,
-                optionName,
-                optionValue,
-                html5AttrName,
-                html5Attrs;
+                };
 
             this.$form
                 // Disable client side validation in HTML 5
@@ -192,48 +185,8 @@
                             return;
                         }
 
-                        var field      = $field.attr('name') || $field.attr('data-bv-field'),
-                            validators = {};
-                        for (v in $.fn.bootstrapValidator.validators) {
-                            validator  = $.fn.bootstrapValidator.validators[v];
-                            enabled    = $field.attr('data-bv-' + v.toLowerCase()) + '';
-                            html5Attrs = ('function' == typeof validator.enableByHtml5) ? validator.enableByHtml5($(this)) : null;
-
-                            if ((html5Attrs && enabled != 'false')
-                                || (html5Attrs !== true && ('' == enabled || 'true' == enabled)))
-                            {
-                                // Try to parse the options via attributes
-                                validator.html5Attributes = validator.html5Attributes || { message: 'message' };
-                                validators[v] = $.extend({}, html5Attrs == true ? {} : html5Attrs, validators[v]);
-
-                                for (html5AttrName in validator.html5Attributes) {
-                                    optionName  = validator.html5Attributes[html5AttrName];
-                                    optionValue = $field.attr('data-bv-' + v.toLowerCase() + '-' + html5AttrName);
-                                    if (optionValue) {
-                                        if ('true' == optionValue) {
-                                            optionValue = true;
-                                        } else if ('false' == optionValue) {
-                                            optionValue = false;
-                                        }
-                                        validators[v][optionName] = optionValue;
-                                    }
-                                }
-                            }
-                        }
-
-                        var opts = {
-                                feedbackIcons: $field.attr('data-bv-feedbackicons'),
-                                trigger:       $field.attr('data-bv-trigger'),
-                                message:       $field.attr('data-bv-message'),
-                                container:     $field.attr('data-bv-container'),
-                                selector:      $field.attr('data-bv-selector'),
-                                threshold:     $field.attr('data-bv-threshold')
-                            },
-                            emptyOptions    = $.isEmptyObject(opts),        // Check if the field options are set using HTML attributes
-                            emptyValidators = $.isEmptyObject(validators);  // Check if the field validators are set using HTML attributes
-
-                        if (!emptyValidators || (!emptyOptions && that.options.fields[field])) {
-                            opts.validators = validators;
+                        var opts = that._parseOptions($field);
+                        if (opts) {
                             $field.attr('data-bv-field', field);
                             options.fields[field] = $.extend({}, opts, options.fields[field]);
                         }
@@ -242,6 +195,70 @@
             this.options = $.extend(true, this.options, options);
             for (var field in this.options.fields) {
                 this._initField(field);
+            }
+        },
+
+        /**
+         * Parse the validator options from HTML attributes
+         *
+         * @param {jQuery} $field The field element
+         * @returns {Object}
+         */
+        _parseOptions: function($field) {
+            var field      = $field.attr('name') || $field.attr('data-bv-field'),
+                validators = {},
+                validator,
+                v,          // Validator name
+                enabled,
+                optionName,
+                optionValue,
+                html5AttrName,
+                html5AttrMap;
+
+            for (v in $.fn.bootstrapValidator.validators) {
+                validator    = $.fn.bootstrapValidator.validators[v];
+                enabled      = $field.attr('data-bv-' + v.toLowerCase()) + '';
+                html5AttrMap = ('function' == typeof validator.enableByHtml5) ? validator.enableByHtml5($field) : null;
+
+                if ((html5AttrMap && enabled != 'false')
+                    || (html5AttrMap !== true && ('' == enabled || 'true' == enabled)))
+                {
+                    // Try to parse the options via attributes
+                    validator.html5Attributes = validator.html5Attributes || { message: 'message' };
+                    validators[v] = $.extend({}, html5AttrMap == true ? {} : html5AttrMap, validators[v]);
+
+                    for (html5AttrName in validator.html5Attributes) {
+                        optionName  = validator.html5Attributes[html5AttrName];
+                        optionValue = $field.attr('data-bv-' + v.toLowerCase() + '-' + html5AttrName);
+                        if (optionValue) {
+                            if ('true' == optionValue) {
+                                optionValue = true;
+                            } else if ('false' == optionValue) {
+                                optionValue = false;
+                            }
+                            validators[v][optionName] = optionValue;
+                        }
+                    }
+                }
+            }
+
+            var opts = {
+                    feedbackIcons: $field.attr('data-bv-feedbackicons'),
+                    trigger:       $field.attr('data-bv-trigger'),
+                    message:       $field.attr('data-bv-message'),
+                    container:     $field.attr('data-bv-container'),
+                    selector:      $field.attr('data-bv-selector'),
+                    threshold:     $field.attr('data-bv-threshold'),
+                    validators:    validators
+                },
+                emptyOptions    = $.isEmptyObject(opts),        // Check if the field options are set using HTML attributes
+                emptyValidators = $.isEmptyObject(validators);  // Check if the field validators are set using HTML attributes
+
+            if (!emptyValidators || (!emptyOptions && this.options.fields[field])) {
+                opts.validators = validators;
+                return opts;
+            } else {
+                return null;
             }
         },
 
@@ -563,7 +580,7 @@
          */
         getFieldElements: function(field) {
             if (!this._cacheFields[field]) {
-                this._cacheFields[field] = this.options.fields[field].selector
+                this._cacheFields[field] = (this.options.fields[field] && this.options.fields[field].selector)
                                          ? $(this.options.fields[field].selector)
                                          : this.$form.find('[name="' + field + '"]');
             }
@@ -642,7 +659,7 @@
                 validatorName,
                 validateResult;
 
-            if (!this.options.fields[field]['enabled'] || this._isExcluded($field)) {
+            if (this.options.fields[field]['enabled'] == false || this._isExcluded($field)) {
                 return this;
             }
 
@@ -973,73 +990,23 @@
         },
 
         /**
-         * Add new field element
-         *
-         * @param {jQuery} $field The field element
-         * @param {Object} options The field options
-         * @returns {BootstrapValidator}
-         */
-        addFieldElement: function($field, options) {
-            var field      = $field.attr('name') || $field.attr('data-bv-field'),
-                type       = $field.attr('type'),
-                isNewField = !this._cacheFields[field];
-
-            // Update cache
-            if (!isNewField && this._cacheFields[field].index($field) == -1) {
-                this._cacheFields[field] = this._cacheFields[field].add($field);
-            }
-
-            if ('checkbox' == type || 'radio' == type || isNewField) {
-                this._initField(field);
-            } else {
-                this._initFieldElement($field);
-            }
-
-            return this;
-        },
-
-        /**
-         * Remove given field element
-         *
-         * @param {jQuery} $field The field element
-         * @returns {BootstrapValidator}
-         */
-        removeFieldElement: function($field) {
-            var field = $field.attr('name') || $field.attr('data-bv-field'),
-                type  = $field.attr('type'),
-                index = this._cacheFields[field].index($field);
-
-            (index == -1) ? (delete this._cacheFields[field]) : this._cacheFields[field].splice(index, 1);
-            // Remove from the list of invalid fields
-            index = this.$invalidFields.index($field);
-            if (index != -1) {
-                this.$invalidFields.splice(index, 1);
-            }
-
-            if (this._cacheFields[field].length == 0) {
-                // There is no field with the same name
-                delete this.options.fields[field];
-                delete this._cacheFields[field];
-            } else if ('checkbox' == type || 'radio' == type) {
-                this._initField(field);
-            }
-
-            return this;
-        },
-
-        /**
          * Add a new field
          *
          * @param {String} field The field name
-         * @param {Object} options The validator rules
+         * @param {Object} [options] The validator rules
          * @returns {BootstrapValidator}
          */
         addField: function(field, options) {
-            if (!this.options.fields[field]) {
-                this.options.fields[field] = options;
-                this._initField(field);
+            this.options.fields[field] = options;
+            var fields = this.getFieldElements(field),
+                type   = fields.attr('type'),
+                n      = (('radio' == type) || ('checkbox' == type)) ? 1 : fields.length;
+
+            for (var i = 0; i < n; i++) {
+                this.addFieldElement($(fields[i]), options);
             }
 
+            this.disableSubmitButtons(false);
             return this;
         },
 
@@ -1058,14 +1025,70 @@
                 this.removeFieldElement($(fields[i]));
             }
 
+            this.disableSubmitButtons(false);
+            return this;
+        },
+
+        /**
+         * Add new field element
+         *
+         * @param {jQuery} $field The field element
+         * @param {Object} [options] The field options
+         * @returns {BootstrapValidator}
+         */
+        addFieldElement: function($field, options) {
+            var field = $field.attr('name');
+
+            delete this._cacheFields[field];
+
+            // Try to parse the options from HTML attributes
+            var opts = this._parseOptions($field);
+            this.options.fields[field] = (opts == null) ? options : $.extend(true, opts, options);
+
+            // Init the element
+            this._initFieldElement($field);
+
+            this.disableSubmitButtons(false);
+            return this;
+        },
+
+        /**
+         * Remove given field element
+         *
+         * @param {jQuery} $field The field element
+         * @returns {BootstrapValidator}
+         */
+        removeFieldElement: function($field) {
+            var field = $field.attr('name') || $field.attr('data-bv-field'),
+                type  = $field.attr('type');
+
+            // Update the cache
+            var index = this._cacheFields[field].index($field);
+            (index == -1) ? (delete this._cacheFields[field]) : this._cacheFields[field].splice(index, 1);
+
+            // Remove from the list of invalid fields
+            index = this.$invalidFields.index($field);
+            if (index != -1) {
+                this.$invalidFields.splice(index, 1);
+            }
+
+            if (this._cacheFields[field].length == 0) {
+                // There is no field with the same name
+                delete this.options.fields[field];
+                delete this._cacheFields[field];
+            } else if ('checkbox' == type || 'radio' == type) {
+                this._initField(field);
+            }
+
+            this.disableSubmitButtons(false);
             return this;
         },
 
         /**
          * Reset the form
          *
-         * @param {Boolean} resetFormData Reset current form data
-         * @return {BootstrapValidator}
+         * @param {Boolean} [resetFormData] Reset current form data
+         * @returns {BootstrapValidator}
          */
         resetForm: function(resetFormData) {
             var field, fields, total, type, validator;

@@ -7,6 +7,7 @@
 * Add ```status.field.bv``` event which is triggered after updating the field status. It can be used to solve [#300](https://github.com/nghuuphuoc/bootstrapvalidator/issues/300), [#301](https://github.com/nghuuphuoc/bootstrapvalidator/issues/301)
 * [#164](https://github.com/nghuuphuoc/bootstrapvalidator/issues/164): Add ```container``` option for indicating the element showing all errors
 * [#175](https://github.com/nghuuphuoc/bootstrapvalidator/issues/175): Showing errors in tooltip or popover
+* [#125](https://github.com/nghuuphuoc/bootstrapvalidator/issues/125): Support dynamic fields
 * [#130](https://github.com/nghuuphuoc/bootstrapvalidator/pull/130): Add ```addField()``` and ```removeField()``` methods for managing dynamic fields, thanks to [@jcnmulio](https://github.com/jcnmulio)
 * [#211](https://github.com/nghuuphuoc/bootstrapvalidator/issues/211), [#235](https://github.com/nghuuphuoc/bootstrapvalidator/issues/235): Add new method ```getInvalidFields()``` that returns all invalid fields
 * [#275](https://github.com/nghuuphuoc/bootstrapvalidator/issues/275): Add ```destroy()``` method

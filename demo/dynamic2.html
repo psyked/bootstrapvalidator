@@ -61,7 +61,6 @@
     $(document).ready(function() {
         $('.addPhoneButton').on('click', function() {
             var $that     = $(this),
-                $parent   = $that.parents('.form-group'),
                 $template = $('#template'),
                 $newRow   = $template.clone().removeAttr('id').insertBefore($template).show();
 
