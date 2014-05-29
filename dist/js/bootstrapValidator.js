@@ -1497,7 +1497,7 @@
             for (type in cards) {
                 for (i in cards[type]['prefix']) {
                     if (value.substr(0, cards[type]['prefix'][i].length) == cards[type]['prefix'][i]    // Check the prefix
-                        && cards[type]['length'].indexOf(value.length) != -1)                           // and length
+                        && $.inArray(value.length, cards[type]['length']) != -1)                        // and length
                     {
                         return true;
                     }
