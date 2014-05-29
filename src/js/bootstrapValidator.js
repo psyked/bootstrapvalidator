@@ -1016,8 +1016,46 @@
                 this.$invalidFields.splice(index, 1);
             }
 
-            if ('checkbox' == type || 'radio' == type) {
+            if (this._cacheFields[field].length == 0) {
+                // There is no field with the same name
+                delete this.options.fields[field];
+                delete this._cacheFields[field];
+            } else if ('checkbox' == type || 'radio' == type) {
                 this._initField(field);
+            }
+
+            return this;
+        },
+
+        /**
+         * Add a new field
+         *
+         * @param {String} field The field name
+         * @param {Object} options The validator rules
+         * @returns {BootstrapValidator}
+         */
+        addField: function(field, options) {
+            if (!this.options.fields[field]) {
+                this.options.fields[field] = options;
+                this._initField(field);
+            }
+
+            return this;
+        },
+
+        /**
+         * Remove a given field
+         *
+         * @param {String} field The field name
+         * @returns {BootstrapValidator}
+         */
+        removeField: function(field) {
+            var fields = this.getFieldElements(field),
+                type   = fields.attr('type'),
+                n      = (('radio' == type) || ('checkbox' == type)) ? 1 : fields.length;
+
+            for (var i = 0; i < n; i++) {
+                this.removeFieldElement($(fields[i]));
             }
 
             return this;
@@ -1129,38 +1167,6 @@
                 .removeData('bootstrapValidator')
                 // Remove generated hidden elements
                 .find('[data-bv-submit-hidden]').remove();
-        },
-        
-         /**
-         * Add a new field validation
-         *
-         * @param {String} field The field name
-         * @param {Object} Map the field name with validator rules
-         * 
-         * @return {BootstrapValidator}
-         */
-        addField: function(field, properties) {
-
-            this.options.fields[field] = properties;                    	           
-            this._initField(field);
-            
-            return this;
-                    	            
-        },
-        
-        /**
-         * Remove a field validation
-         *
-         * @param {String} field The field name 
-         * 
-         * @return {BootstrapValidator}
-         */
-        removeField: function(field) {
-
-        	delete this.options.fields[field];
-            
-            return this;
-                    	            
         }
     };
 
