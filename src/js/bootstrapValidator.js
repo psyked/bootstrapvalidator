@@ -1129,6 +1129,38 @@
                 .removeData('bootstrapValidator')
                 // Remove generated hidden elements
                 .find('[data-bv-submit-hidden]').remove();
+        },
+        
+         /**
+         * Add a new field validation
+         *
+         * @param {String} field The field name
+         * @param {Object} Map the field name with validator rules
+         * 
+         * @return {BootstrapValidator}
+         */
+        addField: function(field, properties) {
+
+            this.options.fields[field] = properties;                    	           
+            this._initField(field);
+            
+            return this;
+                    	            
+        },
+        
+        /**
+         * Remove a field validation
+         *
+         * @param {String} field The field name 
+         * 
+         * @return {BootstrapValidator}
+         */
+        removeField: function(field) {
+
+        	delete this.options.fields[field];
+            
+            return this;
+                    	            
         }
     };
 
