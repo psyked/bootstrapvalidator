@@ -299,16 +299,16 @@ $(document).ready(function() {
             // If you want to prevent the default handler (bootstrapValidator._onSuccess(e))
             // e.preventDefault();
         })
-        .on('error.field.bv', function(e, field) {
-            //console.log(field, '-->error');
+        .on('error.field.bv', function(e, data) {
+            console.log(data.field, '-->error');
         })
-        .on('success.field.bv', function(e, field) {
-            //console.log(field, '-->success');
+        .on('success.field.bv', function(e, data) {
+            console.log(data.field, '-->success');
         })
-        .on('status.field.bv', function(e, field, $field, status) {
+        .on('status.field.bv', function(e, data) {
             var $form = $(e.target);
             // I don't want to add has-success class to valid field container
-            $field.parents('.form-group').removeClass('has-success');
+            data.element.parents('.form-group').removeClass('has-success');
 
             // I want to enable the submit button all the time
             $form.data('bootstrapValidator').disableSubmitButtons(false);

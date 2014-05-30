@@ -119,11 +119,11 @@
                     }
                 }
             })
-            .on('error.field.bv', function(e, field, $field) {
-                console.log(field, $field, '-->error');
+            .on('error.field.bv', function(e, data) {
+                console.log(data.field, data.element, '-->error');
             })
-            .on('success.field.bv', function(e, field, $field) {
-                console.log(field, $field, '-->success');
+            .on('success.field.bv', function(e, data) {
+                console.log(data.field, data.element, '-->success');
             });
     });
 </script>

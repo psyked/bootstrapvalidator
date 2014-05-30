@@ -151,10 +151,10 @@ $(document).ready(function() {
                 $('a[href="#' + tabId + '"][data-toggle="tab"]').tab('show');
             }
         })
-        .on('status.field.bv', function(e, field, $field, status) {
+        .on('status.field.bv', function(e, data) {
             var $form     = $(e.target),
                 validator = $form.data('bootstrapValidator'),
-                $tabPane  = $field.parents('.tab-pane'),
+                $tabPane  = data.element.parents('.tab-pane'),
                 tabId     = $tabPane.attr('id');
             if (tabId) {
                 var $tab = $('a[href="#' + tabId + '"][data-toggle="tab"]').parent();
@@ -162,9 +162,9 @@ $(document).ready(function() {
                 // Add custom class to tab containing the field
                 if ($tab) {
                     $tab.removeClass('tab-success').removeClass('tab-error');
-                    if (status == validator.STATUS_INVALID) {
+                    if (data.status == validator.STATUS_INVALID) {
                         $tab.addClass('tab-error').find('i').removeClass('fa-check').addClass('fa-times');
-                    } else if (status == validator.STATUS_VALID) {
+                    } else if (data.status == validator.STATUS_VALID) {
                         var isValidTab = validator.isValidContainer($tabPane);
                         $tab.addClass(isValidTab ? 'tab-success' : 'tab-error')
                             .find('i')

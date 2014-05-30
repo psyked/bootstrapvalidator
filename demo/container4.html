@@ -163,17 +163,17 @@ $(document).ready(function() {
                 }
             }
         })
-        .on('error.field.bv', function(e, field, $field) {
+        .on('error.field.bv', function(e, data) {
             var $form    = $(e.target),
-                messages = $form.data('bootstrapValidator').getErrors($field);
-            $('#errors').find('li[data-bv-for="' + field + '"]').remove();
+                messages = $form.data('bootstrapValidator').getErrors(data.element);
+            $('#errors').find('li[data-bv-for="' + data.field + '"]').remove();
             for (var i in messages) {
-                $('<li/>').attr('data-bv-for', field).html(messages[i]).appendTo('#errors');
+                $('<li/>').attr('data-bv-for', data.field).html(messages[i]).appendTo('#errors');
             }
             $('#errors').parents('.form-group').removeClass('hide');
         })
-        .on('success.field.bv', function(e, field) {
-            $('#errors').find('li[data-bv-for="' + field + '"]').remove();
+        .on('success.field.bv', function(e, data) {
+            $('#errors').find('li[data-bv-for="' + data.field + '"]').remove();
         })
         .on('success.form.bv', function(e) {
             $('#errors')

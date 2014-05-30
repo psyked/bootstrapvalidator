@@ -559,7 +559,10 @@
                 if (index != -1) {
                     this.$invalidFields.splice(index, 1);
                 }
-                this.$form.trigger($.Event('success.field.bv'), [field, $field]);
+                this.$form.trigger($.Event('success.field.bv'), {
+                    field: field,
+                    element: $field
+                });
             }
             // If all validators are completed and there is at least one validator which doesn't pass
             else if (counter[this.STATUS_NOT_VALIDATED] == 0 && counter[this.STATUS_VALIDATING] == 0 && counter[this.STATUS_INVALID] > 0) {
@@ -567,7 +570,10 @@
                 if (index == -1) {
                     this.$invalidFields = this.$invalidFields.add($field);
                 }
-                this.$form.trigger($.Event('error.field.bv'), [field, $field]);
+                this.$form.trigger($.Event('error.field.bv'), {
+                    field: field,
+                    element: $field
+                });
             }
         },
 
@@ -837,7 +843,11 @@
             }
 
             // Trigger the "status.field.bv" event
-            this.$form.trigger($.Event('status.field.bv'), [field, $field, status]);
+            this.$form.trigger($.Event('status.field.bv'), {
+                field: field,
+                element: $field,
+                status: status
+            });
 
             this._onValidateFieldCompleted($field);
 
