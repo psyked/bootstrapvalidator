@@ -196,6 +196,8 @@
             for (var field in this.options.fields) {
                 this._initField(field);
             }
+
+            this.$form.trigger($.Event('init.form.bv'));
         },
 
         /**
