@@ -149,10 +149,16 @@
                 }
             })
             .on('error.field.bv', function(e, data) {
-                console.log(data.field, data.element, '-->error');
+                // console.log(data.field, data.element, '-->error');
             })
             .on('success.field.bv', function(e, data) {
-                console.log(data.field, data.element, '-->success');
+                // console.log(data.field, data.element, '-->success');
+            })
+            .on('added.field.bv', function(e, data) {
+                console.log('Added element:', data.field, data.element);
+            })
+            .on('removed.field.bv', function(e, data) {
+                console.log('Removed element:', data.field, data.element);
             });
     });
 </script>

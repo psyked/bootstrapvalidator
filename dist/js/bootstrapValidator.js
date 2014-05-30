@@ -842,7 +842,7 @@
                     break;
             }
 
-            // Trigger the "status.field.bv" event
+            // Trigger an event
             this.$form.trigger($.Event('status.field.bv'), {
                 field: field,
                 element: $field,
@@ -1054,12 +1054,22 @@
 
             // Try to parse the options from HTML attributes
             var opts = this._parseOptions($field);
-            this.options.fields[field] = (opts == null) ? options : $.extend(true, opts, options);
+            opts = (opts == null) ? options : $.extend(true, options, opts);
+
+            this.options.fields[field] = $.extend(true, this.options.fields[field], opts);
 
             // Init the element
             this._initFieldElement($field);
 
             this.disableSubmitButtons(false);
+
+            // Trigger an event
+            this.$form.trigger($.Event('added.field.bv'), {
+                field: field,
+                element: $field,
+                options: this.options.fields[field]
+            });
+
             return this;
         },
 
@@ -1092,6 +1102,13 @@
             }
 
             this.disableSubmitButtons(false);
+
+            // Trigger an event
+            this.$form.trigger($.Event('removed.field.bv'), {
+                field: field,
+                element: $field
+            });
+
             return this;
         },
 
