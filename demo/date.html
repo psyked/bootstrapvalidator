@@ -53,6 +53,13 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="col-lg-3 control-label">YYYY.MM.DD</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" name="yearMonthDay" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="col-lg-3 control-label">MM/DD/YYYY h:m A</label>
                             <div class="col-lg-5">
                                 <input type="text" class="form-control" name="monthDayYearTime" />
@@ -112,6 +119,14 @@ $(document).ready(function() {
                 validators: {
                     date: {
                         format: 'YYYY-DD-MM'
+                    }
+                }
+            },
+            yearMonthDay: {
+                validators: {
+                    date: {
+                        format: 'YYYY.MM.DD',
+                        separator: '.'
                     }
                 }
             },

@@ -2,7 +2,8 @@
     $.fn.bootstrapValidator.validators.date = {
         html5Attributes: {
             message: 'message',
-            format: 'format'
+            format: 'format',
+            separator: 'separator'
         },
 
         /**
@@ -12,10 +13,12 @@
          * @param {jQuery} $field Field element
          * @param {Object} options Can consist of the following keys:
          * - message: The invalid message
+         * - separator: Use to separate the date, month, and year.
+         * By default, it is /
          * - format: The date format. Default is MM/DD/YYYY
          * The format can be:
          *
-         * i) date: Consist of DD, MM, YYYY parts which are separated by /
+         * i) date: Consist of DD, MM, YYYY parts which are separated by the separator option
          * ii) date and time:
          * The time can consist of h, m, s parts which are separated by :
          * ii) date, time and A (indicating AM or PM)
@@ -42,8 +45,11 @@
             }
 
             // Determine the separator
-            var separator = (date.indexOf('/') != -1) ? '/' : ((date.indexOf('-') != -1) ? '-' : null);
-            if (separator == null) {
+            var separator = options.separator;
+            if (!separator) {
+                separator = (date.indexOf('/') != -1) ? '/' : ((date.indexOf('-') != -1) ? '-' : null);
+            }
+            if (separator == null || date.indexOf(separator) == -1) {
                 return false;
             }
 
