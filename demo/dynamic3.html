@@ -105,6 +105,9 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#shippingForm')
+            .on('init.form.bv', function(e, data) {
+                //console.log(data);
+            })
             .bootstrapValidator({
                 message: 'This value is not valid',
                 feedbackIcons: {
@@ -147,51 +150,49 @@
                     }
                 }
             })
-            .find('input[type="checkbox"][name="receiver"]')
-                .on('change', function() {
-                    var sameAsSender   = $(this).is(':checked'),
-                        $receiverPhone = $('#shippingForm').find('input[name="receiverPhone"]').eq(0),
-                        $receiverCity  = $('#shippingForm').find('input[name="receiverCity"]').eq(0);
+            .on('change', 'input[type="checkbox"][name="receiver"]', function() {
+                var sameAsSender   = $(this).is(':checked'),
+                    $receiverPhone = $('#shippingForm').find('input[name="receiverPhone"]').eq(0),
+                    $receiverCity  = $('#shippingForm').find('input[name="receiverCity"]').eq(0);
 
-                    if (sameAsSender) {
-                        $('#receiverInfo').hide();
+                if (sameAsSender) {
+                    $('#receiverInfo').hide();
 
-                        $('#shippingForm')
-                            // Use removeField() method
-                            .bootstrapValidator('removeField', 'receiverName')
-                            .bootstrapValidator('removeField', 'receiverAddress')
-                            // Use removeFieldElement() method
-                            .bootstrapValidator('removeFieldElement', $receiverPhone)
-                            .bootstrapValidator('removeFieldElement', $receiverCity);
+                    $('#shippingForm')
+                        // Use removeField() method
+                        .bootstrapValidator('removeField', 'receiverName')
+                        .bootstrapValidator('removeField', 'receiverAddress')
+                        // Use removeFieldElement() method
+                        .bootstrapValidator('removeFieldElement', $receiverPhone)
+                        .bootstrapValidator('removeFieldElement', $receiverCity);
+                } else {
+                    $('#receiverInfo').show();
 
-                    } else {
-                        $('#receiverInfo').show();
-
-                        $('#shippingForm')
-                            // Use addField() method
-                            .bootstrapValidator('addField', 'receiverName', {
-                                validators: {
-                                    notEmpty: {
-                                        message: 'The name is required'
-                                    }
+                    $('#shippingForm')
+                        // Use addField() method
+                        .bootstrapValidator('addField', 'receiverName', {
+                            validators: {
+                                notEmpty: {
+                                    message: 'The name is required'
                                 }
-                            })
-                            .bootstrapValidator('addField', 'receiverAddress')      // The options are automatically parsed from HTML attributes
-                            // Use addFieldElement() method
-                            .bootstrapValidator('addFieldElement', $receiverPhone, {
-                                message: 'The phone number is not valid',
-                                validators: {
-                                    notEmpty: {
-                                        message: 'The phone number is required'
-                                    },
-                                    digits: {
-                                        message: 'The value can contain only digits'
-                                    }
+                            }
+                        })
+                        .bootstrapValidator('addField', 'receiverAddress')      // The options are automatically parsed from HTML attributes
+                        // Use addFieldElement() method
+                        .bootstrapValidator('addFieldElement', $receiverPhone, {
+                            message: 'The phone number is not valid',
+                            validators: {
+                                notEmpty: {
+                                    message: 'The phone number is required'
+                                },
+                                digits: {
+                                    message: 'The value can contain only digits'
                                 }
-                            })
-                            .bootstrapValidator('addFieldElement', $receiverCity);  // The options are automatically parsed from HTML attributes
-                    }
-                });
+                            }
+                        })
+                        .bootstrapValidator('addFieldElement', $receiverCity);  // The options are automatically parsed from HTML attributes
+                }
+            });
     });
 </script>
 </body>

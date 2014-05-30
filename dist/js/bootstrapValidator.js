@@ -186,7 +186,8 @@
                             return;
                         }
 
-                        var opts = that._parseOptions($field);
+                        var field = $field.attr('name') || $field.attr('data-bv-field'),
+                            opts  = that._parseOptions($field);
                         if (opts) {
                             $field.attr('data-bv-field', field);
                             options.fields[field] = $.extend({}, opts, options.fields[field]);
@@ -198,7 +199,9 @@
                 this._initField(field);
             }
 
-            this.$form.trigger($.Event('init.form.bv'));
+            this.$form.trigger($.Event('init.form.bv'), {
+                options: this.options
+            });
         },
 
         /**
@@ -862,7 +865,7 @@
                 type, status, validatorName,
                 n, i;
             for (field in this.options.fields) {
-                if (this.options.fields[field] == null || !this.options.fields[field]['enabled']) {
+                if (this.options.fields[field] == null || this.options.fields[field]['enabled'] == false) {
                     continue;
                 }
 
@@ -1011,6 +1014,7 @@
                 type   = fields.attr('type'),
                 n      = (('radio' == type) || ('checkbox' == type)) ? 1 : fields.length;
 
+            fields.attr('data-bv-field', field);
             for (var i = 0; i < n; i++) {
                 this.addFieldElement($(fields[i]), options);
             }
@@ -1046,9 +1050,9 @@
          * @returns {BootstrapValidator}
          */
         addFieldElement: function($field, options) {
-            var field = $field.attr('name');
-
-            delete this._cacheFields[field];
+            var field = $field.attr('data-bv-field') || $field.attr('name'),
+                type  = $field.attr('type');
+            $field.attr('data-bv-field', field);
 
             // Try to parse the options from HTML attributes
             var opts = this._parseOptions($field);
@@ -1057,7 +1061,8 @@
             this.options.fields[field] = $.extend(true, this.options.fields[field], opts);
 
             // Init the element
-            this._initFieldElement($field);
+            delete this._cacheFields[field];
+            ('checkbox' == type || 'radio' == type) ? this._initField(field) : this._initFieldElement($field);
 
             this.disableSubmitButtons(false);
 
@@ -1078,8 +1083,10 @@
          * @returns {BootstrapValidator}
          */
         removeFieldElement: function($field) {
-            var field = $field.attr('name') || $field.attr('data-bv-field'),
+            var field = $field.attr('data-bv-field') || $field.attr('name'),
                 type  = $field.attr('type');
+
+            $field.attr('data-bv-field', field);
 
             // Update the cache
             var index = this._cacheFields[field].index($field);
@@ -1093,8 +1100,8 @@
 
             if (this._cacheFields[field].length == 0) {
                 // There is no field with the same name
-                delete this.options.fields[field];
-                delete this._cacheFields[field];
+                //delete this.options.fields[field];
+                //delete this._cacheFields[field];
             } else if ('checkbox' == type || 'radio' == type) {
                 this._initField(field);
             }
