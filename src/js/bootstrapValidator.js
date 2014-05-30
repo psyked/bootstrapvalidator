@@ -1087,21 +1087,15 @@
 
             $field.attr('data-bv-field', field);
 
-            // Update the cache
-            var index = this._cacheFields[field].index($field);
-            (index == -1) ? (delete this._cacheFields[field]) : this._cacheFields[field].splice(index, 1);
-
             // Remove from the list of invalid fields
-            index = this.$invalidFields.index($field);
+            var index = this.$invalidFields.index($field);
             if (index != -1) {
                 this.$invalidFields.splice(index, 1);
             }
 
-            if (this._cacheFields[field].length == 0) {
-                // There is no field with the same name
-                //delete this.options.fields[field];
-                //delete this._cacheFields[field];
-            } else if ('checkbox' == type || 'radio' == type) {
+            // Update the cache
+            delete this._cacheFields[field];
+            if ('checkbox' == type || 'radio' == type) {
                 this._initField(field);
             }
 
