@@ -137,7 +137,7 @@
         live: 'enabled',
 
         // Map the field name with validator rules
-        fields: null
+        fields: {}
     };
 
     BootstrapValidator.prototype = {
