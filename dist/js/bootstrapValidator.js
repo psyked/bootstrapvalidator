@@ -387,7 +387,9 @@
                 case 'enabled':
                 default:
                     $field.off(events).on(events, function() {
-                        that.validateFieldElement($(this));
+                        if (that._exceedThreshold($(this))) {
+                            that.validateFieldElement($(this));
+                        }
                     });
                     break;
             }
@@ -467,6 +469,23 @@
 
             return false;
         },
+
+        /**
+         * Check if the number of characters of field value exceed the threshold or not
+         *
+         * @param {jQuery} $field The field element
+         * @returns {Boolean}
+         */
+        _exceedThreshold: function($field) {
+            var field     = $field.attr('data-bv-field'),
+                threshold = this.options.fields[field].threshold || this.options.threshold;
+            if (!threshold) {
+                return true;
+            }
+            var type       = $field.attr('type'),
+                cannotType = ['button', 'checkbox', 'file', 'hidden', 'image', 'radio', 'reset', 'submit'].indexOf(type) != -1;
+            return (cannotType || $field.val().length >= threshold);
+        },
         
         // --- Events ---
 
@@ -498,7 +517,9 @@
 
                             for (var i = 0; i < fields.length; i++) {
                                 $(fields[i]).off(events).on(events, function() {
-                                    that.validateFieldElement($(this));
+                                    if (that._exceedThreshold($(this))) {
+                                        that.validateFieldElement($(this));
+                                    }
                                 });
                             }
                         }
