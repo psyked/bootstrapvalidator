@@ -290,6 +290,7 @@
                 this.options.fields[field]['enabled'] = true;
             }
 
+            fields.attr('data-bv-field', field);
             for (var i = 0; i < fields.length; i++) {
                 this._initFieldElement($(fields[i]));
             }
@@ -302,7 +303,7 @@
          */
         _initFieldElement: function($field) {
             var that      = this,
-                field     = $field.attr('name') || $field.attr('data-bv-field'),
+                field     = $field.attr('data-bv-field'),
                 fields    = this.getFieldElements(field),
                 index     = fields.index($field),
                 type      = $field.attr('type'),
@@ -320,11 +321,6 @@
             // Remove all error messages and feedback icons
             $message.find('.help-block[data-bv-validator][data-bv-for="' + field + '"]').remove();
             $parent.find('i[data-bv-icon-for="' + field + '"]').remove();
-
-            // Set the attribute to indicate the fields which are defined by selector
-            if (!$field.attr('data-bv-field')) {
-                $field.attr('data-bv-field', field);
-            }
 
             // Whenever the user change the field value, mark it as not validated yet
             var event = ('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == $field.get(0).tagName) ? 'change' : this._changeEvent;
