@@ -123,9 +123,10 @@
         // The custom submit handler
         // It will prevent the form from the default submission
         //
-        //  submitHandler: function(validator, form) {
+        //  submitHandler: function(validator, form, submitButton) {
         //      - validator is the BootstrapValidator instance
-        //      - form is the jQuery object present the current form
+        //      - form is the jQuery object presenting the current form
+        //      - submitButton is the jQuery object presenting the clicked button
         //  }
         submitHandler: null,
 
