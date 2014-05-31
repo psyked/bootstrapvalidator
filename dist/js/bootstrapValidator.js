@@ -332,7 +332,7 @@
             $field.off(event + '.update.bv').on(event + '.update.bv', function() {
                 // Reset the flag
                 that._submitIfValid = false;
-                that.updateElementStatus($(this), that.STATUS_NOT_VALIDATED);
+                that.updateStatus($(this), that.STATUS_NOT_VALIDATED);
             });
 
             // Create help block elements for showing the error messages
@@ -710,8 +710,7 @@
 
                 // validateResult can be a $.Deferred object ...
                 if ('object' == typeof validateResult) {
-                    updateAll ? this.updateStatus(field, this.STATUS_VALIDATING, validatorName)
-                              : this.updateElementStatus($field, this.STATUS_VALIDATING, validatorName);
+                    this.updateStatus(updateAll ? field : $field, this.STATUS_VALIDATING, validatorName);
                     $field.data('bv.dfs.' + validatorName, validateResult);
 
                     validateResult.done(function($f, v, isValid, message) {
@@ -722,8 +721,7 @@
                             $field.data('bv.messages').find('.help-block[data-bv-validator="' + v + '"][data-bv-for="' + $f.attr('data-bv-field') + '"]').html(message);
                         }
 
-                        updateAll ? that.updateStatus($f.attr('data-bv-field'), isValid ? that.STATUS_VALID : that.STATUS_INVALID, v)
-                                  : that.updateElementStatus($f, isValid ? that.STATUS_VALID : that.STATUS_INVALID, v);
+                        that.updateStatus(updateAll ? $f.attr('data-bv-field') : $f, isValid ? that.STATUS_VALID : that.STATUS_INVALID, v);
 
                         if (isValid && that._submitIfValid == true) {
 						    // If a remote validator returns true and the form is ready to submit, then do it
@@ -733,8 +731,7 @@
                 }
                 // ... or a boolean value
                 else if ('boolean' == typeof validateResult) {
-                    updateAll ? this.updateStatus(field, validateResult ? this.STATUS_VALID : this.STATUS_INVALID, validatorName)
-                              : this.updateElementStatus($field, validateResult ? this.STATUS_VALID : this.STATUS_INVALID, validatorName);
+                    this.updateStatus(updateAll ? field : $field, validateResult ? this.STATUS_VALID : this.STATUS_INVALID, validatorName);
                 }
             }
 
@@ -744,135 +741,132 @@
         /**
          * Update all validating results of elements which have the same field name
          *
-         * @param {String} field The field name
+         * @param {String|jQuery} field The field name or field element
          * @param {String} status The status. Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
          * @param {String} [validatorName] The validator name. If null, the method updates validity result for all validators
          * @returns {BootstrapValidator}
          */
         updateStatus: function(field, status, validatorName) {
-            var fields = this.getFieldElements(field),
-                type   = fields.attr('type'),
-                n      = (('radio' == type) || ('checkbox' == type)) ? 1 : fields.length;
+            var fields = $([]), type;
+            switch (typeof field) {
+                case 'object':
+                    fields = field;
+                    field  = field.attr('data-bv-field');
+                    break;
+                case 'string':
+                    fields = this.getFieldElements(field);
+                    break;
+                default:
+                    break;
+            }
+
+            var that = this,
+                type = fields.attr('type'),
+                n    = ('radio' == type || 'checkbox' == type) ? 1 : fields.length;
 
             for (var i = 0; i < n; i++) {
-                this.updateElementStatus($(fields[i]), status, validatorName);
-            }
+                var $field       = $(fields[i]),
+                    $parent      = $field.parents('.form-group'),
+                    $message     = $field.data('bv.messages'),
+                    $allErrors   = $message.find('.help-block[data-bv-validator][data-bv-for="' + field + '"]'),
+                    $errors      = validatorName ? $allErrors.filter('[data-bv-validator="' + validatorName + '"]') : $allErrors,
+                    $icon        = $parent.find('.form-control-feedback[data-bv-icon-for="' + field + '"]'),
+                    container    = this.options.fields[field].container || this.options.container,
+                    isValidField = null;
 
-            return this;
-        },
-
-        /**
-         * Update validating result of given element
-         *
-         * @param {jQuery} $field The field element
-         * @param {String} status The status. Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
-         * @param {String} [validatorName] The validator name. If null, the method updates validity result for all validators
-         * @returns {BootstrapValidator}
-         */
-        updateElementStatus: function($field, status, validatorName) {
-            var that         = this,
-                field        = $field.attr('data-bv-field'),
-                $parent      = $field.parents('.form-group'),
-                $message     = $field.data('bv.messages'),
-                $allErrors   = $message.find('.help-block[data-bv-validator][data-bv-for="' + field + '"]'),
-                $errors      = validatorName ? $allErrors.filter('[data-bv-validator="' + validatorName + '"]') : $allErrors,
-                $icon        = $parent.find('.form-control-feedback[data-bv-icon-for="' + field + '"]'),
-                container    = this.options.fields[field].container || this.options.container,
-                isValidField = null;
-
-            // Update status
-            if (validatorName) {
-                $field.data('bv.result.' + validatorName, status);
-            } else {
-                for (var v in this.options.fields[field].validators) {
-                    $field.data('bv.result.' + v, status);
+                // Update status
+                if (validatorName) {
+                    $field.data('bv.result.' + validatorName, status);
+                } else {
+                    for (var v in this.options.fields[field].validators) {
+                        $field.data('bv.result.' + v, status);
+                    }
                 }
+
+                // Show/hide error elements and feedback icons
+                $errors.attr('data-bv-result', status);
+                switch (status) {
+                    case this.STATUS_VALIDATING:
+                        isValidField = null;
+                        this.disableSubmitButtons(true);
+                        $parent.removeClass('has-success').removeClass('has-error');
+                        if ($icon) {
+                            $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).addClass(this.options.feedbackIcons.validating).show();
+                        }
+                        break;
+
+                    case this.STATUS_INVALID:
+                        isValidField = false;
+                        this.disableSubmitButtons(true);
+                        $parent.removeClass('has-success').addClass('has-error');
+                        if ($icon) {
+                            $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
+                        }
+                        break;
+
+                    case this.STATUS_VALID:
+                        // If the field is valid (passes all validators)
+                        isValidField = $allErrors.filter(function() {
+                                            var v = $(this).attr('data-bv-validator');
+                                            return $field.data('bv.result.' + v) != that.STATUS_VALID;
+                                        }).length == 0;
+                        this.disableSubmitButtons(this.$submitButton ? !this.isValid() : !isValidField);
+                        if ($icon) {
+                            $icon
+                                .removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).removeClass(this.options.feedbackIcons.valid)
+                                .addClass(isValidField ? this.options.feedbackIcons.valid : this.options.feedbackIcons.invalid)
+                                .show();
+                        }
+
+                        $parent.removeClass('has-error has-success').addClass(this.isValidContainer($parent) ? 'has-success' : 'has-error');
+                        break;
+
+                    case this.STATUS_NOT_VALIDATED:
+                    default:
+                        isValidField = null;
+                        this.disableSubmitButtons(false);
+                        $parent.removeClass('has-success').removeClass('has-error');
+                        if ($icon) {
+                            $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).hide();
+                        }
+                        break;
+                }
+
+                switch (true) {
+                    // Only show the first error message if it is placed inside a tooltip ...
+                    case ($icon && 'tooltip' == container):
+                        (isValidField === false)
+                                ? $icon.css('cursor', 'pointer').tooltip('destroy').tooltip({
+                                    html: true,
+                                    placement: 'top',
+                                    title: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html()
+                                })
+                                : $icon.css('cursor', '').tooltip('destroy');
+                        break;
+                    // ... or popover
+                    case ($icon && 'popover' == container):
+                        (isValidField === false)
+                                ? $icon.css('cursor', 'pointer').popover('destroy').popover({
+                                    content: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html(),
+                                    html: true,
+                                    placement: 'top',
+                                    trigger: 'hover click'
+                                })
+                                : $icon.css('cursor', '').popover('destroy');
+                        break;
+                    default:
+                        (status == this.STATUS_INVALID) ? $errors.show() : $errors.hide();
+                        break;
+                }
+
+                // Trigger an event
+                this.$form.trigger($.Event('status.field.bv'), {
+                    field: field,
+                    element: $field,
+                    status: status
+                });
+                this._onValidateFieldCompleted($field);
             }
-
-            // Show/hide error elements and feedback icons
-            $errors.attr('data-bv-result', status);
-            switch (status) {
-                case this.STATUS_VALIDATING:
-                    isValidField = null;
-                    this.disableSubmitButtons(true);
-                    $parent.removeClass('has-success').removeClass('has-error');
-                    if ($icon) {
-                        $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).addClass(this.options.feedbackIcons.validating).show();
-                    }
-                    break;
-
-                case this.STATUS_INVALID:
-                    isValidField = false;
-                    this.disableSubmitButtons(true);
-                    $parent.removeClass('has-success').addClass('has-error');
-                    if ($icon) {
-                        $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
-                    }
-                    break;
-
-                case this.STATUS_VALID:
-                    // If the field is valid (passes all validators)
-                    isValidField = $allErrors.filter(function() {
-                                        var v = $(this).attr('data-bv-validator');
-                                        return $field.data('bv.result.' + v) != that.STATUS_VALID;
-                                    }).length == 0;
-                    this.disableSubmitButtons(this.$submitButton ? !this.isValid() : !isValidField);
-                    if ($icon) {
-                        $icon
-                            .removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).removeClass(this.options.feedbackIcons.valid)
-                            .addClass(isValidField ? this.options.feedbackIcons.valid : this.options.feedbackIcons.invalid)
-                            .show();
-                    }
-
-                    $parent.removeClass('has-error has-success').addClass(this.isValidContainer($parent) ? 'has-success' : 'has-error');
-                    break;
-
-                case this.STATUS_NOT_VALIDATED:
-                default:
-                    isValidField = null;
-                    this.disableSubmitButtons(false);
-                    $parent.removeClass('has-success').removeClass('has-error');
-                    if ($icon) {
-                        $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).hide();
-                    }
-                    break;
-            }
-
-            switch (true) {
-                // Only show the first error message if it is placed inside a tooltip ...
-                case ($icon && 'tooltip' == container):
-                    (isValidField === false)
-                            ? $icon.css('cursor', 'pointer').tooltip('destroy').tooltip({
-                                html: true,
-                                placement: 'top',
-                                title: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html()
-                            })
-                            : $icon.css('cursor', '').tooltip('destroy');
-                    break;
-                // ... or popover
-                case ($icon && 'popover' == container):
-                    (isValidField === false)
-                            ? $icon.css('cursor', 'pointer').popover('destroy').popover({
-                                content: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html(),
-                                html: true,
-                                placement: 'top',
-                                trigger: 'hover click'
-                            })
-                            : $icon.css('cursor', '').popover('destroy');
-                    break;
-                default:
-                    (status == this.STATUS_INVALID) ? $errors.show() : $errors.hide();
-                    break;
-            }
-
-            // Trigger an event
-            this.$form.trigger($.Event('status.field.bv'), {
-                field: field,
-                element: $field,
-                status: status
-            });
-
-            this._onValidateFieldCompleted($field);
 
             return this;
         },
