@@ -11,7 +11,8 @@
 * [#130](https://github.com/nghuuphuoc/bootstrapvalidator/pull/130): Add ```addField()``` and ```removeField()``` methods for managing dynamic fields, thanks to [@jcnmulio](https://github.com/jcnmulio)
 * [#211](https://github.com/nghuuphuoc/bootstrapvalidator/issues/211), [#235](https://github.com/nghuuphuoc/bootstrapvalidator/issues/235): Add new method ```getInvalidFields()``` that returns all invalid fields
 * [#275](https://github.com/nghuuphuoc/bootstrapvalidator/issues/275): Add ```destroy()``` method
-* [#316](https://github.com/nghuuphuoc/bootstrapvalidator/issues/316): Add ```isValidContainer()``` method
+* [#316](https://github.com/nghuuphuoc/bootstrapvalidator/issues/316): Add ```isValidContainer(container)``` method
+* [#323](https://github.com/nghuuphuoc/bootstrapvalidator/issues/323): Add ```isValidField(field)``` method
 * [#297](https://github.com/nghuuphuoc/bootstrapvalidator/issues/297): Disable feedback icons for particular fields
 * [#244](https://github.com/nghuuphuoc/bootstrapvalidator/pull/244): Only enable the submit buttons if all fields are valid, thanks to [@smeagol74](https://github.com/smeagol74)
 * [#274](https://github.com/nghuuphuoc/bootstrapvalidator/pull/274): Fix feedback icons in ```input-group```, thanks to [@tiagofontella](https://github.com/tiagofontella)

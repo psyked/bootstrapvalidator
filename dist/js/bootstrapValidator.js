@@ -883,29 +883,53 @@
          * @returns {Boolean}
          */
         isValid: function() {
-            var fields, field, $field,
-                type, status, validatorName,
-                n, i;
-            for (field in this.options.fields) {
-                if (this.options.fields[field] == null || this.options.fields[field]['enabled'] == false) {
+            for (var field in this.options.fields) {
+                if (!this.isValidField(field)) {
+                    return false;
+                }
+            }
+
+            return true;
+        },
+
+        /**
+         * Check if the field is valid or not
+         *
+         * @param {String|jQuery} field Can be
+         * - the field name
+         * - or an jQuery object representing the field
+         * @returns {Boolean}
+         */
+        isValidField: function(field) {
+            var fields = $([]);
+            switch (typeof field) {
+                case 'object':
+                    fields = field;
+                    field  = field.attr('data-bv-field');
+                    break;
+                case 'string':
+                    fields = this.getFieldElements(field);
+                    break;
+                default:
+                    break;
+            }
+            if (fields.length == 0 || this.options.fields[field] == null || this.options.fields[field]['enabled'] == false) {
+                return true;
+            }
+
+            var type = fields.attr('type'),
+                n    = (('radio' == type) || ('checkbox' == type)) ? 1 : fields.length,
+                $field, validatorName, status;
+            for (var i = 0; i < n; i++) {
+                $field = $(fields[i]);
+                if (this._isExcluded($field)) {
                     continue;
                 }
 
-                fields = this.getFieldElements(field);
-                type   = fields.attr('type');
-                n      = (('radio' == type) || ('checkbox' == type)) ? 1 : fields.length;
-
-                for (i = 0; i < n; i++) {
-                    $field = $(fields[i]);
-                    if (this._isExcluded($field)) {
-                        continue;
-                    }
-
-                    for (validatorName in this.options.fields[field].validators) {
-                        status = $field.data('bv.result.' + validatorName);
-                        if (status != this.STATUS_VALID) {
-                            return false;
-                        }
+                for (validatorName in this.options.fields[field].validators) {
+                    status = $field.data('bv.result.' + validatorName);
+                    if (status != this.STATUS_VALID) {
+                        return false;
                     }
                 }
             }
