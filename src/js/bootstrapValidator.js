@@ -595,12 +595,10 @@
                 }
             }
 
-            var index = this.$invalidFields.index($field);
             if (counter[this.STATUS_VALID] == numValidators) {
                 // Remove from the list of invalid fields
-                if (index != -1) {
-                    this.$invalidFields.splice(index, 1);
-                }
+                this.$invalidFields = this.$invalidFields.not($field);
+
                 this.$form.trigger($.Event('success.field.bv'), {
                     field: field,
                     element: $field
@@ -609,9 +607,8 @@
             // If all validators are completed and there is at least one validator which doesn't pass
             else if (counter[this.STATUS_NOT_VALIDATED] == 0 && counter[this.STATUS_VALIDATING] == 0 && counter[this.STATUS_INVALID] > 0) {
                 // Add to the list of invalid fields
-                if (index == -1) {
-                    this.$invalidFields = this.$invalidFields.add($field);
-                }
+                this.$invalidFields = this.$invalidFields.add($field);
+
                 this.$form.trigger($.Event('error.field.bv'), {
                     field: field,
                     element: $field
@@ -694,7 +691,7 @@
                     break;
             }
 
-            if (this.options.fields[field]['enabled'] == false) {
+            if (this.options.fields[field] && this.options.fields[field]['enabled'] == false) {
                 return this;
             }
 
@@ -1082,17 +1079,53 @@
         /**
          * Remove a given field
          *
-         * @param {String} field The field name
+         * @param {String|jQuery} field The field name or field element
          * @returns {BootstrapValidator}
          */
         removeField: function(field) {
-            var fields = this.getFieldElements(field),
-                type   = fields.attr('type'),
-                n      = (('radio' == type) || ('checkbox' == type)) ? 1 : fields.length;
-
-            for (var i = 0; i < n; i++) {
-                this.removeFieldElement($(fields[i]));
+            var fields = $([]);
+            switch (typeof field) {
+                case 'object':
+                    fields = field;
+                    field  = field.attr('data-bv-field') || field.attr('name');
+                    fields.attr('data-bv-field', field);
+                    break;
+                case 'string':
+                    fields = this.getFieldElements(field);
+                    break;
+                default:
+                    break;
             }
+
+            if (fields.length == 0) {
+                return this;
+            }
+
+            var type  = fields.attr('type'),
+                total = ('radio' == type || 'checkbox' == type) ? 1 : fields.length;
+
+            for (var i = 0; i < total; i++) {
+                var $field = $(fields[i]);
+
+                // Remove from the list of invalid fields
+                this.$invalidFields = this.$invalidFields.not($field);
+
+                // Update the cache
+                this._cacheFields[field] = this._cacheFields[field].not($field);
+            }
+
+            if (!this._cacheFields[field] || this._cacheFields[field].length == 0) {
+                delete this.options.fields[field];
+            }
+            if ('checkbox' == type || 'radio' == type) {
+                this._initField(field);
+            }
+
+            // Trigger an event
+            this.$form.trigger($.Event('removed.field.bv'), {
+                field: field,
+                element: fields
+            });
 
             this.disableSubmitButtons(false);
             return this;
@@ -1127,42 +1160,6 @@
                 field: field,
                 element: $field,
                 options: this.options.fields[field]
-            });
-
-            return this;
-        },
-
-        /**
-         * Remove given field element
-         *
-         * @param {jQuery} $field The field element
-         * @returns {BootstrapValidator}
-         */
-        removeFieldElement: function($field) {
-            var field = $field.attr('data-bv-field') || $field.attr('name'),
-                type  = $field.attr('type');
-
-            $field.attr('data-bv-field', field);
-
-            // Remove from the list of invalid fields
-            var index = this.$invalidFields.index($field);
-            if (index != -1) {
-                this.$invalidFields.splice(index, 1);
-            }
-
-            // Update the cache
-            $field.remove();
-            delete this._cacheFields[field];
-            if ('checkbox' == type || 'radio' == type) {
-                this._initField(field);
-            }
-
-            this.disableSubmitButtons(false);
-
-            // Trigger an event
-            this.$form.trigger($.Event('removed.field.bv'), {
-                field: field,
-                element: $field
             });
 
             return this;

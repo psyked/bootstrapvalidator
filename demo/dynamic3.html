@@ -162,9 +162,8 @@
                         // Use removeField() method
                         .bootstrapValidator('removeField', 'receiverName')
                         .bootstrapValidator('removeField', 'receiverAddress')
-                        // Use removeFieldElement() method
-                        .bootstrapValidator('removeFieldElement', $receiverPhone)
-                        .bootstrapValidator('removeFieldElement', $receiverCity);
+                        .bootstrapValidator('removeField', $receiverPhone)
+                        .bootstrapValidator('removeField', $receiverCity);
                 } else {
                     $('#receiverInfo').show();
 
