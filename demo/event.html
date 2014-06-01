@@ -284,7 +284,7 @@ $(document).ready(function() {
             }
         })
         .on('error.form.bv', function(e) {
-            console.log('error');
+            console.log('error.form.bv');
 
             // You can get the form instance and then access API
             var $form = $(e.target);
@@ -294,16 +294,16 @@ $(document).ready(function() {
             // e.preventDefault();
         })
         .on('success.form.bv', function(e) {
-            console.log('success');
+            console.log('success.form.bv');
 
             // If you want to prevent the default handler (bootstrapValidator._onSuccess(e))
             // e.preventDefault();
         })
         .on('error.field.bv', function(e, data) {
-            console.log(data.field, '-->error');
+            console.log('error.field.bv -->', data);
         })
         .on('success.field.bv', function(e, data) {
-            console.log(data.field, '-->success');
+            console.log('success.field.bv -->', data);
         })
         .on('status.field.bv', function(e, data) {
             var $form = $(e.target);

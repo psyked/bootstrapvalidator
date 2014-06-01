@@ -149,16 +149,16 @@
                 }
             })
             .on('error.field.bv', function(e, data) {
-                //console.log(data.field, data.element, '-->error');
+                //console.log('error.field.bv -->', data.element);
             })
             .on('success.field.bv', function(e, data) {
-                //console.log(data.field, data.element, '-->success');
+                //console.log('success.field.bv -->', data.element);
             })
             .on('added.field.bv', function(e, data) {
-                //console.log('Added element:', data.field, data.element);
+                //console.log('Added element -->', data.field, data.element);
             })
             .on('removed.field.bv', function(e, data) {
-                //console.log('Removed element:', data.field, data.element);
+                //console.log('Removed element -->', data.field, data.element);
             });
     });
 </script>

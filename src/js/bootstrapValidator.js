@@ -312,7 +312,7 @@
                 updateAll = (total == 1) || ('radio' == type) || ('checkbox' == type);
 
             for (var i = 0; i < total; i++) {
-                var $field    = $(fields[i]),
+                var $field    = fields.eq(i),
                     $parent   = $field.parents('.form-group'),
                     // Allow user to indicate where the error messages are shown
                     container = this.options.fields[field].container || this.options.container,
@@ -517,7 +517,7 @@
                                 }).join(' ');
 
                             for (var i = 0; i < fields.length; i++) {
-                                $(fields[i]).off(events).on(events, function() {
+                                fields.eq(i).off(events).on(events, function() {
                                     if (that._exceedThreshold($(this))) {
                                         that.validateField($(this));
                                     }
@@ -705,7 +705,7 @@
                 validateResult;
 
             for (var i = 0; i < total; i++) {
-                var $field = $(fields[i]);
+                var $field = fields.eq(i);
                 if (this._isExcluded($field)) {
                     continue;
                 }
@@ -783,7 +783,7 @@
                 total = ('radio' == type || 'checkbox' == type) ? 1 : fields.length;
 
             for (var i = 0; i < total; i++) {
-                var $field       = $(fields[i]),
+                var $field       = fields.eq(i),
                     $parent      = $field.parents('.form-group'),
                     $message     = $field.data('bv.messages'),
                     $allErrors   = $message.find('.help-block[data-bv-validator][data-bv-for="' + field + '"]'),
@@ -931,7 +931,7 @@
                 total = ('radio' == type || 'checkbox' == type) ? 1 : fields.length,
                 $field, validatorName, status;
             for (var i = 0; i < total; i++) {
-                $field = $(fields[i]);
+                $field = fields.eq(i);
                 if (this._isExcluded($field)) {
                     continue;
                 }
@@ -1083,7 +1083,7 @@
                 total = ('radio' == type || 'checkbox' == type) ? 1 : fields.length;
 
             for (var i = 0; i < total; i++) {
-                var $field = $(fields[i]);
+                var $field = fields.eq(i);
 
                 // Try to parse the options from HTML attributes
                 var opts = this._parseOptions($field);
@@ -1138,7 +1138,7 @@
                 total = ('radio' == type || 'checkbox' == type) ? 1 : fields.length;
 
             for (var i = 0; i < total; i++) {
-                var $field = $(fields[i]);
+                var $field = fields.eq(i);
 
                 // Remove from the list of invalid fields
                 this.$invalidFields = this.$invalidFields.not($field);
@@ -1178,7 +1178,7 @@
 
                 for (var i = 0; i < total; i++) {
                     for (validator in this.options.fields[field].validators) {
-                        $(fields[i]).removeData('bv.dfs.' + validator);
+                        fields.eq(i).removeData('bv.dfs.' + validator);
                     }
                 }
 
@@ -1224,7 +1224,7 @@
                 fields    = this.getFieldElements(field);
                 container = this.options.fields[field].container || this.options.container;
                 for (var i = 0; i < fields.length; i++) {
-                    $field = $(fields[i]);
+                    $field = fields.eq(i);
                     $field
                         // Remove all error messages
                         .data('bv.messages')
