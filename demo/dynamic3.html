@@ -150,6 +150,9 @@
                     }
                 }
             })
+            .on('added.field.bv', function(e, data) {
+                console.log('Added element --> ', data.field, data.element, data.options);
+            })
             .on('change', 'input[type="checkbox"][name="receiver"]', function() {
                 var sameAsSender   = $(this).is(':checked'),
                     $receiverPhone = $('#shippingForm').find('input[name="receiverPhone"]').eq(0),
