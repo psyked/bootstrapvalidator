@@ -394,6 +394,11 @@
                     });
                     break;
             }
+
+            this.$form.trigger($.Event('init.field.bv'), {
+                field: field,
+                element: fields
+            });
         },
 
         /**
@@ -516,13 +521,11 @@
                                     return item + '.live.bv';
                                 }).join(' ');
 
-                            for (var i = 0; i < fields.length; i++) {
-                                fields.eq(i).off(events).on(events, function() {
-                                    if (that._exceedThreshold($(this))) {
-                                        that.validateField($(this));
-                                    }
-                                });
-                            }
+                            fields.off(events).on(events, function() {
+                                if (that._exceedThreshold($(this))) {
+                                    that.validateField($(this));
+                                }
+                            });
                         }
                     })(field);
                 }
@@ -1032,7 +1035,7 @@
                     var f = this.getFieldElements(field);
                     if (f.length > 0) {
                         var type = f.attr('type');
-                        $fields = ('radio' == type || 'checkbox' == type) ? $(f[0]) : f;
+                        $fields = ('radio' == type || 'checkbox' == type) ? f.eq(0) : f;
                     }
                     break;
                 default:
