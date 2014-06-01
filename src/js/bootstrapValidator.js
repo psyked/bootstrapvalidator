@@ -388,7 +388,7 @@
                 default:
                     $field.off(events).on(events, function() {
                         if (that._exceedThreshold($(this))) {
-                            that.validateFieldElement($(this));
+                            that.validateField($(this));
                         }
                     });
                     break;
@@ -518,7 +518,7 @@
                             for (var i = 0; i < fields.length; i++) {
                                 $(fields[i]).off(events).on(events, function() {
                                     if (that._exceedThreshold($(this))) {
-                                        that.validateFieldElement($(this));
+                                        that.validateField($(this));
                                     }
                                 });
                             }
@@ -661,76 +661,77 @@
          * @returns {BootstrapValidator}
          */
         validateField: function(field) {
-            var fields = this.getFieldElements(field),
-                type   = fields.attr('type'),
-                n      = (('radio' == type) || ('checkbox' == type)) ? 1 : fields.length;
-
-            for (var i = 0; i < n; i++) {
-                this.validateFieldElement($(fields[i]));
+            var fields = $([]), type;
+            switch (typeof field) {
+                case 'object':
+                    fields = field;
+                    field  = field.attr('data-bv-field');
+                    break;
+                case 'string':
+                    fields = this.getFieldElements(field);
+                    break;
+                default:
+                    break;
             }
 
-            return this;
-        },
+            if (this.options.fields[field]['enabled'] == false) {
+                return this;
+            }
 
-        /**
-         * Validate field element
-         *
-         * @param {jQuery} $field The field element
-         * @returns {BootstrapValidator}
-         */
-        validateFieldElement: function($field) {
             var that       = this,
-                field      = $field.attr('data-bv-field'),
-                fields     = this.getFieldElements(field),
-                type       = $field.attr('type'),
-                updateAll  = (fields && fields.length == 1) || ('radio' == type) || ('checkbox' == type),
+                type       = fields.attr('type'),
+                total      = ('radio' == type || 'checkbox' == type) ? 1 : fields.length,
+                updateAll  = ('radio' == type || 'checkbox' == type),
                 validators = this.options.fields[field].validators,
                 validatorName,
                 validateResult;
 
-            if (this.options.fields[field]['enabled'] == false || this._isExcluded($field)) {
-                return this;
-            }
-
-            for (validatorName in validators) {
-                if ($field.data('bv.dfs.' + validatorName)) {
-                    $field.data('bv.dfs.' + validatorName).reject();
-                }
-
-                // Don't validate field if it is already done
-                var result = $field.data('bv.result.' + validatorName);
-                if (result == this.STATUS_VALID || result == this.STATUS_INVALID) {
-                    this._onValidateFieldCompleted($field);
+            for (var i = 0; i < total; i++) {
+                var $field = $(fields[i]);
+                if (this._isExcluded($field)) {
                     continue;
                 }
 
-                $field.data('bv.result.' + validatorName, this.STATUS_VALIDATING);
-                validateResult = $.fn.bootstrapValidator.validators[validatorName].validate(this, $field, validators[validatorName]);
+                for (validatorName in validators) {
+                    if ($field.data('bv.dfs.' + validatorName)) {
+                        $field.data('bv.dfs.' + validatorName).reject();
+                    }
 
-                // validateResult can be a $.Deferred object ...
-                if ('object' == typeof validateResult) {
-                    this.updateStatus(updateAll ? field : $field, this.STATUS_VALIDATING, validatorName);
-                    $field.data('bv.dfs.' + validatorName, validateResult);
+                    // Don't validate field if it is already done
+                    var result = $field.data('bv.result.' + validatorName);
+                    if (result == this.STATUS_VALID || result == this.STATUS_INVALID) {
+                        this._onValidateFieldCompleted($field);
+                        continue;
+                    }
 
-                    validateResult.done(function($f, v, isValid, message) {
-                        // v is validator name
-                        $f.removeData('bv.dfs.' + v);
-                        if (message) {
-                            // Update the error message
-                            $field.data('bv.messages').find('.help-block[data-bv-validator="' + v + '"][data-bv-for="' + $f.attr('data-bv-field') + '"]').html(message);
-                        }
+                    $field.data('bv.result.' + validatorName, this.STATUS_VALIDATING);
+                    validateResult = $.fn.bootstrapValidator.validators[validatorName].validate(this, $field, validators[validatorName]);
 
-                        that.updateStatus(updateAll ? $f.attr('data-bv-field') : $f, isValid ? that.STATUS_VALID : that.STATUS_INVALID, v);
+                    // validateResult can be a $.Deferred object ...
+                    if ('object' == typeof validateResult) {
+                        this.updateStatus(updateAll ? field : $field, this.STATUS_VALIDATING, validatorName);
+                        $field.data('bv.dfs.' + validatorName, validateResult);
 
-                        if (isValid && that._submitIfValid == true) {
-						    // If a remote validator returns true and the form is ready to submit, then do it
-							that._submit();
-						}
-                    });
-                }
-                // ... or a boolean value
-                else if ('boolean' == typeof validateResult) {
-                    this.updateStatus(updateAll ? field : $field, validateResult ? this.STATUS_VALID : this.STATUS_INVALID, validatorName);
+                        validateResult.done(function($f, v, isValid, message) {
+                            // v is validator name
+                            $f.removeData('bv.dfs.' + v);
+                            if (message) {
+                                // Update the error message
+                                $field.data('bv.messages').find('.help-block[data-bv-validator="' + v + '"][data-bv-for="' + $f.attr('data-bv-field') + '"]').html(message);
+                            }
+
+                            that.updateStatus(updateAll ? $f.attr('data-bv-field') : $f, isValid ? that.STATUS_VALID : that.STATUS_INVALID, v);
+
+                            if (isValid && that._submitIfValid == true) {
+                                // If a remote validator returns true and the form is ready to submit, then do it
+                                that._submit();
+                            }
+                        });
+                    }
+                    // ... or a boolean value
+                    else if ('boolean' == typeof validateResult) {
+                        this.updateStatus(updateAll ? field : $field, validateResult ? this.STATUS_VALID : this.STATUS_INVALID, validatorName);
+                    }
                 }
             }
 
@@ -738,7 +739,7 @@
         },
 
         /**
-         * Update all validating results of elements which have the same field name
+         * Update all validating results of field
          *
          * @param {String|jQuery} field The field name or field element
          * @param {String} status The status. Can be 'NOT_VALIDATED', 'VALIDATING', 'INVALID' or 'VALID'
@@ -759,11 +760,11 @@
                     break;
             }
 
-            var that = this,
-                type = fields.attr('type'),
-                n    = ('radio' == type || 'checkbox' == type) ? 1 : fields.length;
+            var that  = this,
+                type  = fields.attr('type'),
+                total = ('radio' == type || 'checkbox' == type) ? 1 : fields.length;
 
-            for (var i = 0; i < n; i++) {
+            for (var i = 0; i < total; i++) {
                 var $field       = $(fields[i]),
                     $parent      = $field.parents('.form-group'),
                     $message     = $field.data('bv.messages'),
@@ -910,10 +911,10 @@
                 return true;
             }
 
-            var type = fields.attr('type'),
-                n    = (('radio' == type) || ('checkbox' == type)) ? 1 : fields.length,
+            var type  = fields.attr('type'),
+                total = ('radio' == type || 'checkbox' == type) ? 1 : fields.length,
                 $field, validatorName, status;
-            for (var i = 0; i < n; i++) {
+            for (var i = 0; i < total; i++) {
                 $field = $(fields[i]);
                 if (this._isExcluded($field)) {
                     continue;
@@ -1134,6 +1135,7 @@
             }
 
             // Update the cache
+            $field.remove();
             delete this._cacheFields[field];
             if ('checkbox' == type || 'radio' == type) {
                 this._initField(field);

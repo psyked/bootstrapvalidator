@@ -124,6 +124,9 @@
                     invalid: 'glyphicon glyphicon-remove',
                     validating: 'glyphicon glyphicon-refresh'
                 },
+                submitHandler: function(validator, form, submitButton) {
+                    console.log(validator.getInvalidFields());
+                },
                 fields: {
                     'textbox[]': {
                         validators: {
@@ -149,10 +152,10 @@
                 }
             })
             .on('error.field.bv', function(e, data) {
-                // console.log(data.field, data.element, '-->error');
+                //console.log(data.field, data.element, '-->error');
             })
             .on('success.field.bv', function(e, data) {
-                // console.log(data.field, data.element, '-->success');
+                //console.log(data.field, data.element, '-->success');
             })
             .on('added.field.bv', function(e, data) {
                 console.log('Added element:', data.field, data.element);
