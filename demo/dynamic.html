@@ -100,7 +100,7 @@
                 $templateEle = $('#' + template + 'Template'),
                 $row         = $templateEle.clone().removeAttr('id').insertBefore($templateEle).removeClass('hide'),
                 $el          = $row.find('input').eq(0).attr('name', template + '[]');
-            $('#defaultForm').bootstrapValidator('addFieldElement', $el);
+            $('#defaultForm').bootstrapValidator('addField', $el);
 
             // Set random value for checkbox and textbox
             if ('checkbox' == $el.attr('type') || 'radio' == $el.attr('type')) {
@@ -158,10 +158,10 @@
                 //console.log(data.field, data.element, '-->success');
             })
             .on('added.field.bv', function(e, data) {
-                console.log('Added element:', data.field, data.element);
+                //console.log('Added element:', data.field, data.element);
             })
             .on('removed.field.bv', function(e, data) {
-                console.log('Removed element:', data.field, data.element);
+                //console.log('Removed element:', data.field, data.element);
             });
     });
 </script>

@@ -159,7 +159,7 @@
                     $('#receiverInfo').hide();
 
                     $('#shippingForm')
-                        // Use removeField() method
+                        // Remove field
                         .bootstrapValidator('removeField', 'receiverName')
                         .bootstrapValidator('removeField', 'receiverAddress')
                         .bootstrapValidator('removeField', $receiverPhone)
@@ -168,7 +168,7 @@
                     $('#receiverInfo').show();
 
                     $('#shippingForm')
-                        // Use addField() method
+                        // Add field
                         .bootstrapValidator('addField', 'receiverName', {
                             validators: {
                                 notEmpty: {
@@ -177,8 +177,7 @@
                             }
                         })
                         .bootstrapValidator('addField', 'receiverAddress')      // The options are automatically parsed from HTML attributes
-                        // Use addFieldElement() method
-                        .bootstrapValidator('addFieldElement', $receiverPhone, {
+                        .bootstrapValidator('addField', $receiverPhone, {
                             message: 'The phone number is not valid',
                             validators: {
                                 notEmpty: {
@@ -189,7 +188,7 @@
                                 }
                             }
                         })
-                        .bootstrapValidator('addFieldElement', $receiverCity);  // The options are automatically parsed from HTML attributes
+                        .bootstrapValidator('addField', $receiverCity);  // The options are automatically parsed from HTML attributes
                 }
             });
     });

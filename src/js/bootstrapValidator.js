@@ -1057,22 +1057,53 @@
         /**
          * Add a new field
          *
-         * @param {String} field The field name
+         * @param {String|jQuery} field The field name or field element
          * @param {Object} [options] The validator rules
          * @returns {BootstrapValidator}
          */
         addField: function(field, options) {
-            this.options.fields[field] = options;
-            var fields = this.getFieldElements(field),
-                type   = fields.attr('type'),
-                n      = (('radio' == type) || ('checkbox' == type)) ? 1 : fields.length;
+            var fields = $([]);
+            switch (typeof field) {
+                case 'object':
+                    fields = field;
+                    field  = field.attr('data-bv-field') || field.attr('name');
+                    break;
+                case 'string':
+                    fields = this.getFieldElements(field);
+                    break;
+                default:
+                    break;
+            }
 
             fields.attr('data-bv-field', field);
-            for (var i = 0; i < n; i++) {
-                this.addFieldElement($(fields[i]), options);
+
+            var type  = fields.attr('type'),
+                total = ('radio' == type || 'checkbox' == type) ? 1 : fields.length;
+
+            for (var i = 0; i < total; i++) {
+                var $field = $(fields[i]);
+
+                // Try to parse the options from HTML attributes
+                var opts = this._parseOptions($field);
+                opts = (opts == null) ? options : $.extend(true, options, opts);
+
+                this.options.fields[field] = $.extend(true, this.options.fields[field], opts);
+
+                // Update the cache
+                this._cacheFields[field] = this._cacheFields[field] ? this._cacheFields[field].add($field) : $field;
+
+                // Init the element
+                ('checkbox' == type || 'radio' == type) ? this._initField(field) : this._initFieldElement($field);
             }
 
             this.disableSubmitButtons(false);
+            // Trigger an event
+            this.$form.trigger($.Event('added.field.bv'), {
+                field: field,
+                element: fields,
+                options: this.options.fields[field]
+            });
+
             return this;
         },
 
@@ -1121,45 +1152,11 @@
                 this._initField(field);
             }
 
+            this.disableSubmitButtons(false);
             // Trigger an event
             this.$form.trigger($.Event('removed.field.bv'), {
                 field: field,
                 element: fields
-            });
-
-            this.disableSubmitButtons(false);
-            return this;
-        },
-
-        /**
-         * Add new field element
-         *
-         * @param {jQuery} $field The field element
-         * @param {Object} [options] The field options
-         * @returns {BootstrapValidator}
-         */
-        addFieldElement: function($field, options) {
-            var field = $field.attr('data-bv-field') || $field.attr('name'),
-                type  = $field.attr('type');
-            $field.attr('data-bv-field', field);
-
-            // Try to parse the options from HTML attributes
-            var opts = this._parseOptions($field);
-            opts = (opts == null) ? options : $.extend(true, options, opts);
-
-            this.options.fields[field] = $.extend(true, this.options.fields[field], opts);
-
-            // Init the element
-            delete this._cacheFields[field];
-            ('checkbox' == type || 'radio' == type) ? this._initField(field) : this._initFieldElement($field);
-
-            this.disableSubmitButtons(false);
-
-            // Trigger an event
-            this.$form.trigger($.Event('added.field.bv'), {
-                field: field,
-                element: $field,
-                options: this.options.fields[field]
             });
 
             return this;
