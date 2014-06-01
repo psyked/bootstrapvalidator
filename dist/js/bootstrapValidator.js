@@ -556,21 +556,41 @@
          * Called after validating a field element
          *
          * @param {jQuery} $field The field element
+         * @param {String} [validatorName] The validator name
          */
-        _onValidateFieldCompleted: function($field) {
+        _onFieldValidated: function($field, validatorName) {
             var field         = $field.attr('data-bv-field'),
                 validators    = this.options.fields[field].validators,
                 counter       = {},
                 numValidators = 0;
+
+            // Trigger an event after given validator completes
+            if (validatorName) {
+                var data = {
+                    field: field,
+                    element: $field,
+                    validator: validatorName
+                };
+                switch ($field.data('bv.result.' + validatorName)) {
+                    case this.STATUS_INVALID:
+                        this.$form.trigger($.Event('error.validator.bv'), data);
+                        break;
+                    case this.STATUS_VALID:
+                        this.$form.trigger($.Event('success.validator.bv'), data);
+                        break;
+                    default:
+                        break;
+                }
+            }
 
             counter[this.STATUS_NOT_VALIDATED] = 0;
             counter[this.STATUS_VALIDATING]    = 0;
             counter[this.STATUS_INVALID]       = 0;
             counter[this.STATUS_VALID]         = 0;
 
-            for (var validatorName in validators) {
+            for (var v in validators) {
                 numValidators++;
-                var result = $field.data('bv.result.' + validatorName);
+                var result = $field.data('bv.result.' + v);
                 if (result) {
                     counter[result]++;
                 }
@@ -658,7 +678,7 @@
         /**
          * Validate given field
          *
-         * @param {String} field The field name
+         * @param {String|jQuery} field The field name or field element
          * @returns {BootstrapValidator}
          */
         validateField: function(field) {
@@ -701,7 +721,7 @@
                     // Don't validate field if it is already done
                     var result = $field.data('bv.result.' + validatorName);
                     if (result == this.STATUS_VALID || result == this.STATUS_INVALID) {
-                        this._onValidateFieldCompleted($field);
+                        this._onFieldValidated($field, validatorName);
                         continue;
                     }
 
@@ -866,7 +886,7 @@
                     element: $field,
                     status: status
                 });
-                this._onValidateFieldCompleted($field);
+                this._onFieldValidated($field, validatorName);
             }
 
             return this;
@@ -890,9 +910,7 @@
         /**
          * Check if the field is valid or not
          *
-         * @param {String|jQuery} field Can be
-         * - the field name
-         * - or an jQuery object representing the field
+         * @param {String|jQuery} field The field name or field element
          * @returns {Boolean}
          */
         isValidField: function(field) {
@@ -1000,9 +1018,7 @@
         /**
          * Get the error messages
          *
-         * @param {jQuery|String} [field] The field, which can be
-         * - a string: The field name
-         * - a jQuery object representing the field element
+         * @param {String|jQuery} [field] The field name or field element
          * If the field is not defined, the method returns all error messages of all fields
          * @returns {String[]}
          */

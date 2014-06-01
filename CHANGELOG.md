@@ -5,6 +5,7 @@
 * [#121](https://github.com/nghuuphuoc/bootstrapvalidator/issues/121): Add events for form validate successfully or not
 * [#195](https://github.com/nghuuphuoc/bootstrapvalidator/issues/195): Add events for field validation
 * Add ```status.field.bv``` event which is triggered after updating the field status. It can be used to solve [#300](https://github.com/nghuuphuoc/bootstrapvalidator/issues/300), [#301](https://github.com/nghuuphuoc/bootstrapvalidator/issues/301)
+* [#324](https://github.com/nghuuphuoc/bootstrapvalidator/issues/324): Add ```success.validator.bv``` and ```error.validator.bv``` events triggered after a validator completes
 * [#164](https://github.com/nghuuphuoc/bootstrapvalidator/issues/164): Add ```container``` option for indicating the element showing all errors
 * [#175](https://github.com/nghuuphuoc/bootstrapvalidator/issues/175): Showing errors in tooltip or popover
 * [#125](https://github.com/nghuuphuoc/bootstrapvalidator/issues/125): Support dynamic fields
