@@ -488,8 +488,7 @@
             if (!threshold) {
                 return true;
             }
-            var type       = $field.attr('type'),
-                cannotType = ['button', 'checkbox', 'file', 'hidden', 'image', 'radio', 'reset', 'submit'].indexOf(type) != -1;
+            var cannotType = $.inArray($field.attr('type'), ['button', 'checkbox', 'file', 'hidden', 'image', 'radio', 'reset', 'submit']) != -1;
             return (cannotType || $field.val().length >= threshold);
         },
         
