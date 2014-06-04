@@ -36,6 +36,7 @@
 * [#261](https://github.com/nghuuphuoc/bootstrapvalidator/pull/261): English fix to 'amazing contributors' section, thanks to [@lloydde](https://github.com/lloydde)
 * [#278](https://github.com/nghuuphuoc/bootstrapvalidator/pull/278): Update [```choice``` validator](http://bootstrapvalidator.com/validators/choice/) document, thanks to [@MrC0mm0n](https://github.com/MrC0mm0n)
 * [#303](https://github.com/nghuuphuoc/bootstrapvalidator/pull/303): Fix typo in [```remote``` validator](http://bootstrapvalidator.com/validators/remote/) document, thanks to [@MartinDevillers](https://github.com/MartinDevillers)
+* [#334](https://github.com/nghuuphuoc/bootstrapvalidator/pull/334): No ID is specified on the form object for registration, thanks to [@jjshoe](https://github.com/jjshoe)
 
 ## v0.4.5 (2014-05-15)
 

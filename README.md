@@ -108,6 +108,7 @@ Big thanks to the contributors:
 * [@ikanedo](https://github.com/ikanedo)
 * [@iplus](https://github.com/iplus)
 * [@jcnmulio](https://github.com/jcnmulio)
+* [@jjshoe](https://github.com/jjshoe)
 * [@johanronn77](https://github.com/johanronn77)
 * [@jswale](https://github.com/jswale)
 * [@khangvm53](https://github.com/khangvm53)
