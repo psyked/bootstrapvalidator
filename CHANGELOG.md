@@ -4,20 +4,21 @@
 
 __New Features__
 * [#121](https://github.com/nghuuphuoc/bootstrapvalidator/issues/121): Add events for form validate successfully or not
-* [#195](https://github.com/nghuuphuoc/bootstrapvalidator/issues/195): Add events for field validation
-* Add ```status.field.bv``` event which is triggered after updating the field status. It can be used to solve [#300](https://github.com/nghuuphuoc/bootstrapvalidator/issues/300), [#301](https://github.com/nghuuphuoc/bootstrapvalidator/issues/301)
-* [#324](https://github.com/nghuuphuoc/bootstrapvalidator/issues/324): Add ```success.validator.bv``` and ```error.validator.bv``` events triggered after a validator completes
-* [#164](https://github.com/nghuuphuoc/bootstrapvalidator/issues/164): Add ```container``` option for indicating the element showing all errors
-* [#175](https://github.com/nghuuphuoc/bootstrapvalidator/issues/175): Showing errors in tooltip or popover
 * [#125](https://github.com/nghuuphuoc/bootstrapvalidator/issues/125): Support dynamic fields
 * [#130](https://github.com/nghuuphuoc/bootstrapvalidator/pull/130): Add ```addField()``` and ```removeField()``` methods for managing dynamic fields, thanks to [@jcnmulio](https://github.com/jcnmulio)
+* [#164](https://github.com/nghuuphuoc/bootstrapvalidator/issues/164): Add ```container``` option for indicating the element showing all errors
+* [#175](https://github.com/nghuuphuoc/bootstrapvalidator/issues/175): Showing errors in tooltip or popover
+* [#195](https://github.com/nghuuphuoc/bootstrapvalidator/issues/195): Add events for field validation
 * [#211](https://github.com/nghuuphuoc/bootstrapvalidator/issues/211), [#235](https://github.com/nghuuphuoc/bootstrapvalidator/issues/235): Add new method ```getInvalidFields()``` that returns all invalid fields
 * [#275](https://github.com/nghuuphuoc/bootstrapvalidator/issues/275): Add ```destroy()``` method
-* [#316](https://github.com/nghuuphuoc/bootstrapvalidator/issues/316): Add ```isValidContainer(container)``` method
-* [#323](https://github.com/nghuuphuoc/bootstrapvalidator/issues/323): Add ```isValidField(field)``` method
 * [#282](https://github.com/nghuuphuoc/bootstrapvalidator/issues/282): Use error message that is returned from [```callback```](http://bootstrapvalidator.com/validators/callback/), [```remote```](http://bootstrapvalidator.com/validators/remote/) validators
+* Add ```status.field.bv``` event which is triggered after updating the field status. It can be used to solve [#300](https://github.com/nghuuphuoc/bootstrapvalidator/issues/300), [#301](https://github.com/nghuuphuoc/bootstrapvalidator/issues/301)
+* [#316](https://github.com/nghuuphuoc/bootstrapvalidator/issues/316): Add ```isValidContainer(container)``` method
 * [#320](https://github.com/nghuuphuoc/bootstrapvalidator/issues/320): Add ```separator``` option to the [```date``` validator](http://bootstrapvalidator.com/validators/date/)
+* [#323](https://github.com/nghuuphuoc/bootstrapvalidator/issues/323): Add ```isValidField(field)``` method
+* [#324](https://github.com/nghuuphuoc/bootstrapvalidator/issues/324): Add ```success.validator.bv``` and ```error.validator.bv``` events triggered after a validator completes
 * [#332](https://github.com/nghuuphuoc/bootstrapvalidator/pull/332): Add UK phone number support for the [```phone``` validator](http://bootstrapvalidator.com/validators/phone/), thanks to [@aca02djr](https://github.com/aca02djr)
+* [#336](https://github.com/nghuuphuoc/bootstrapvalidator/issues/336): Add ```$field``` instance to the [callback validator](http://bootstrapvalidator.com/validators/callback/)
 
 __Changes__
 * [#42](https://github.com/nghuuphuoc/bootstrapvalidator/issues/42): Remove the submit button from ```submitHandler()```.
@@ -27,8 +28,8 @@ You can use new ```getSubmitButton()``` method to get the clicked submit button
 __Improvements__
 * [#244](https://github.com/nghuuphuoc/bootstrapvalidator/pull/244): Only enable the submit buttons if all fields are valid, thanks to [@smeagol74](https://github.com/smeagol74)
 * [#274](https://github.com/nghuuphuoc/bootstrapvalidator/pull/274): Fix feedback icons in ```input-group```, thanks to [@tiagofontella](https://github.com/tiagofontella)
-* [#297](https://github.com/nghuuphuoc/bootstrapvalidator/issues/297): Disable feedback icons for particular fields
 * [#287](https://github.com/nghuuphuoc/bootstrapvalidator/issues/287): Only send the submit button which is clicked. It's an enhancement for [#238](https://github.com/nghuuphuoc/bootstrapvalidator/issues/238)
+* [#297](https://github.com/nghuuphuoc/bootstrapvalidator/issues/297): Disable feedback icons for particular fields
 
 __Bug Fixes__
 * [#288](https://github.com/nghuuphuoc/bootstrapvalidator/issues/288): Fix [```date``` validator](http://bootstrapvalidator.com/validators/date/) issue on IE8
