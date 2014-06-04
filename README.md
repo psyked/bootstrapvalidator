@@ -96,6 +96,7 @@ The __BootstrapValidator__ plugin is written by Nguyen Huu Phuoc, aka @nghuuphuo
 
 Big thanks to the contributors:
 
+* [@aca02djr](https://github.com/aca02djr)
 * [@adgrafik](https://github.com/adgrafik)
 * [@alavers](https://github.com/alavers)
 * [@easonhan007](https://github.com/easonhan007)
