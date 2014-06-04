@@ -41,7 +41,7 @@
                             <input type="text" class="form-control" name="username"
                                    data-bv-message="The username is not valid"
                                    required data-bv-notempty-message="The username is required and cannot be empty"
-                                   pattern="^[a-zA-Z0-9]+$" data-bv-regexp-message="The username can only consist of alphabetical, number, dot and underscore"
+                                   pattern="^[a-zA-Z0-9]+$" data-bv-regexp-message="The username can only consist of alphabetical and digits"
                                    data-bv-stringlength="true" data-bv-stringlength-min="6" data-bv-stringlength-max="30" data-bv-stringlength-message="The username must be more than 6 and less than 30 characters long"
                                    data-bv-different="true" data-bv-different-field="password" data-bv-different-message="The username and password cannot be the same as each other"
                                    data-bv-remote="true" data-bv-remote-url="remote.php" data-bv-remote-message="The username is not available"
@@ -101,6 +101,22 @@
                         <label class="col-lg-3 control-label">Birthday</label>
                         <div class="col-lg-5">
                             <input type="text" class="form-control" name="birthday" data-bv-date="false" data-bv-date-format="YYYY/MM/DD" data-bv-date-message="The birthday is not valid" /> (YYYY/MM/DD)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-3 control-label">Country</label>
+                        <div class="col-lg-5">
+                            <select class="form-control" name="country" data-bv-notempty data-bv-notempty-message="The country is required">
+                                <option value="">-- Select a country --</option>
+                                <option value="fr">France</option>
+                                <option value="de">Germany</option>
+                                <option value="it">Italy</option>
+                                <option value="jp">Japan</option>
+                                <option value="ru">Russia</option>
+                                <option value="gb">United Kingdom</option>
+                                <option value="us">United State</option>
+                            </select>
                         </div>
                     </div>
 
