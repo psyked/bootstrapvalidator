@@ -344,6 +344,7 @@
                             .addClass('help-block')
                             .attr('data-bv-validator', validatorName)
                             .attr('data-bv-for', field)
+                            .attr('data-bv-result', this.STATUS_NOT_VALIDATED)
                             .html(this.options.fields[field].validators[validatorName].message || this.options.fields[field].message || this.options.message)
                             .appendTo($message);
                     }
@@ -825,16 +826,17 @@
 
                     case this.STATUS_VALID:
                         // If the field is valid (passes all validators)
-                        isValidField = $allErrors.filter(function() {
-                                            var v = $(this).attr('data-bv-validator');
-                                            return $field.data('bv.result.' + v) != that.STATUS_VALID;
-                                        }).length == 0;
-                        this.disableSubmitButtons(this.$submitButton ? !this.isValid() : !isValidField);
-                        if ($icon) {
-                            $icon
-                                .removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).removeClass(this.options.feedbackIcons.valid)
-                                .addClass(isValidField ? this.options.feedbackIcons.valid : this.options.feedbackIcons.invalid)
-                                .show();
+                        isValidField = ($allErrors.filter('[data-bv-result="' + this.STATUS_NOT_VALIDATED +'"]').length == 0)
+                                     ? ($allErrors.filter('[data-bv-result="' + this.STATUS_VALID +'"]').length == $allErrors.length)   // All validators are completed
+                                     : null;                                                                                            // There are some validators that have not done
+                        if (isValidField != null) {
+                            this.disableSubmitButtons(this.$submitButton ? !this.isValid() : !isValidField);
+                            if ($icon) {
+                                $icon
+                                    .removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).removeClass(this.options.feedbackIcons.valid)
+                                    .addClass(isValidField ? this.options.feedbackIcons.valid : this.options.feedbackIcons.invalid)
+                                    .show();
+                            }
                         }
 
                         $parent.removeClass('has-error has-success').addClass(this.isValidContainer($parent) ? 'has-success' : 'has-error');

@@ -27,6 +27,7 @@ You can use new ```getSubmitButton()``` method to get the clicked submit button
 
 __Improvements__
 * [#244](https://github.com/nghuuphuoc/bootstrapvalidator/pull/244): Only enable the submit buttons if all fields are valid, thanks to [@smeagol74](https://github.com/smeagol74)
+* [#262](https://github.com/nghuuphuoc/bootstrapvalidator/issues/262): Improve the [```updateStatus()``` method](http://bootstrapvalidator.com/api/#update-status). The plugin now doesn't show the errors, feedback icons of given field if there are uncompleted validators
 * [#274](https://github.com/nghuuphuoc/bootstrapvalidator/pull/274): Fix feedback icons in ```input-group```, thanks to [@tiagofontella](https://github.com/tiagofontella)
 * [#287](https://github.com/nghuuphuoc/bootstrapvalidator/issues/287): Only send the submit button which is clicked. It's an enhancement for [#238](https://github.com/nghuuphuoc/bootstrapvalidator/issues/238)
 * [#297](https://github.com/nghuuphuoc/bootstrapvalidator/issues/297): Disable feedback icons for particular fields
