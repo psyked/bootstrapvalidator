@@ -122,10 +122,9 @@
         // The custom submit handler
         // It will prevent the form from the default submission
         //
-        //  submitHandler: function(validator, form, submitButton) {
+        //  submitHandler: function(validator, form) {
         //      - validator is the BootstrapValidator instance
         //      - form is the jQuery object presenting the current form
-        //      - submitButton is the jQuery object presenting the clicked button
         //  }
         submitHandler: null,
 
@@ -548,7 +547,7 @@
             // Call the custom submission if enabled
             if (this.options.submitHandler && 'function' == typeof this.options.submitHandler) {
                 // If you want to submit the form inside your submit handler, please call defaultSubmit() method
-                this.options.submitHandler.call(this, this, this.$form, this.$submitButton);
+                this.options.submitHandler.call(this, this, this.$form);
             } else {
                 this.disableSubmitButtons(true).defaultSubmit();
             }
@@ -1012,6 +1011,15 @@
          */
         getInvalidFields: function() {
             return this.$invalidFields;
+        },
+
+        /**
+         * Returns the clicked submit button
+         *
+         * @returns {jQuery}
+         */
+        getSubmitButton: function() {
+            return this.$submitButton;
         },
 
         /**

@@ -2,6 +2,7 @@
 
 ## v0.5.0 (not released yet)
 
+__New Features__
 * [#121](https://github.com/nghuuphuoc/bootstrapvalidator/issues/121): Add events for form validate successfully or not
 * [#195](https://github.com/nghuuphuoc/bootstrapvalidator/issues/195): Add events for field validation
 * Add ```status.field.bv``` event which is triggered after updating the field status. It can be used to solve [#300](https://github.com/nghuuphuoc/bootstrapvalidator/issues/300), [#301](https://github.com/nghuuphuoc/bootstrapvalidator/issues/301)
@@ -14,14 +15,22 @@
 * [#275](https://github.com/nghuuphuoc/bootstrapvalidator/issues/275): Add ```destroy()``` method
 * [#316](https://github.com/nghuuphuoc/bootstrapvalidator/issues/316): Add ```isValidContainer(container)``` method
 * [#323](https://github.com/nghuuphuoc/bootstrapvalidator/issues/323): Add ```isValidField(field)``` method
-* [#297](https://github.com/nghuuphuoc/bootstrapvalidator/issues/297): Disable feedback icons for particular fields
-* [#244](https://github.com/nghuuphuoc/bootstrapvalidator/pull/244): Only enable the submit buttons if all fields are valid, thanks to [@smeagol74](https://github.com/smeagol74)
-* [#274](https://github.com/nghuuphuoc/bootstrapvalidator/pull/274): Fix feedback icons in ```input-group```, thanks to [@tiagofontella](https://github.com/tiagofontella)
-* [#202](https://github.com/nghuuphuoc/bootstrapvalidator/issues/202), [#206](https://github.com/nghuuphuoc/bootstrapvalidator/issues/206): Does NOT active the tab containing the first invalid field automatically. The success/error tabs will NOT add custom CSS classes as well. These features are demonstrated in an example of using events
 * [#282](https://github.com/nghuuphuoc/bootstrapvalidator/issues/282): Use error message that is returned from [```callback```](http://bootstrapvalidator.com/validators/callback/), [```remote```](http://bootstrapvalidator.com/validators/remote/) validators
-* [#287](https://github.com/nghuuphuoc/bootstrapvalidator/issues/287): Only send the submit button which is clicked. It's an enhancement for [#238](https://github.com/nghuuphuoc/bootstrapvalidator/issues/238)
 * [#320](https://github.com/nghuuphuoc/bootstrapvalidator/issues/320): Add ```separator``` option to the [```date``` validator](http://bootstrapvalidator.com/validators/date/)
 * [#332](https://github.com/nghuuphuoc/bootstrapvalidator/pull/332): Add UK phone number support for the [```phone``` validator](http://bootstrapvalidator.com/validators/phone/), thanks to [@aca02djr](https://github.com/aca02djr)
+
+__Changes__
+* [#42](https://github.com/nghuuphuoc/bootstrapvalidator/issues/42): Remove the submit button from ```submitHandler()```.
+You can use new ```getSubmitButton()``` method to get the clicked submit button
+* [#202](https://github.com/nghuuphuoc/bootstrapvalidator/issues/202), [#206](https://github.com/nghuuphuoc/bootstrapvalidator/issues/206): Does NOT active the tab containing the first invalid field automatically. The success/error tabs will NOT add custom CSS classes as well. These features are demonstrated in an example of using events
+
+__Improvements__
+* [#244](https://github.com/nghuuphuoc/bootstrapvalidator/pull/244): Only enable the submit buttons if all fields are valid, thanks to [@smeagol74](https://github.com/smeagol74)
+* [#274](https://github.com/nghuuphuoc/bootstrapvalidator/pull/274): Fix feedback icons in ```input-group```, thanks to [@tiagofontella](https://github.com/tiagofontella)
+* [#297](https://github.com/nghuuphuoc/bootstrapvalidator/issues/297): Disable feedback icons for particular fields
+* [#287](https://github.com/nghuuphuoc/bootstrapvalidator/issues/287): Only send the submit button which is clicked. It's an enhancement for [#238](https://github.com/nghuuphuoc/bootstrapvalidator/issues/238)
+
+__Bug Fixes__
 * [#288](https://github.com/nghuuphuoc/bootstrapvalidator/issues/288): Fix [```date``` validator](http://bootstrapvalidator.com/validators/date/) issue on IE8
 * [#292](https://github.com/nghuuphuoc/bootstrapvalidator/pull/292): Fix identical validator issue with not clearing ```has-error``` class, thanks to [@alavers](https://github.com/alavers)
 * [#305](https://github.com/nghuuphuoc/bootstrapvalidator/pull/305), [#306](https://github.com/nghuuphuoc/bootstrapvalidator/pull/306), [#307](https://github.com/nghuuphuoc/bootstrapvalidator/pull/307): Fix ```inclusive``` option in the [```between```](http://bootstrapvalidator.com/validators/between/), [```greaterThan```](http://bootstrapvalidator.com/validators/greaterThan/) and [```lessThan```](http://bootstrapvalidator.com/validators/lessThan/) validators, thanks to [@johanronn77](https://github.com/johanronn77)
@@ -32,7 +41,9 @@
 * [#314](https://github.com/nghuuphuoc/bootstrapvalidator/issues/314): The [```creditCard``` validator](http://bootstrapvalidator.com/validators/creditCard/) doesn't work on IE 8
 * [#315](https://github.com/nghuuphuoc/bootstrapvalidator/issues/315): The [```cvv``` validator](http://bootstrapvalidator.com/validators/cvv/) doesn't work on IE 8
 * [#325](https://github.com/nghuuphuoc/bootstrapvalidator/issues/325): The [```threshold``` option](http://bootstrapvalidator.com/settings/#threshold) doesn't work on IE 8
-* [#259](https://github.com/nghuuphuoc/bootstrapvalidator/issues/259): Typo "Support almost Bootstrap forms"
+
+__Document__
+* [#259](https://github.com/nghuuphuoc/bootstrapvalidator/issues/259): Typo "Support almost Bootstrap forms", thanks to [@lloydde](https://github.com/lloydde)
 * [#261](https://github.com/nghuuphuoc/bootstrapvalidator/pull/261): English fix to 'amazing contributors' section, thanks to [@lloydde](https://github.com/lloydde)
 * [#278](https://github.com/nghuuphuoc/bootstrapvalidator/pull/278): Update [```choice``` validator](http://bootstrapvalidator.com/validators/choice/) document, thanks to [@MrC0mm0n](https://github.com/MrC0mm0n)
 * [#303](https://github.com/nghuuphuoc/bootstrapvalidator/pull/303): Fix typo in [```remote``` validator](http://bootstrapvalidator.com/validators/remote/) document, thanks to [@MartinDevillers](https://github.com/MartinDevillers)
