@@ -66,7 +66,7 @@
                 invalid: 'glyphicon glyphicon-remove',
                 validating: 'glyphicon glyphicon-refresh'
             },
-            submitHandler: function(validator, form, submitButton) {
+            submitHandler: function(validator, form) {
                 // validator is the BootstrapValidator instance
                 // form is the jQuery object present the current form
                 form.find('.alert').html('Thanks for signing up. Now you can sign in as ' + validator.getFieldElements('username').val()).show();
