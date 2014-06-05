@@ -10,15 +10,6 @@
     <script type="text/javascript" src="../vendor/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../dist/js/bootstrapValidator.js"></script>
-
-    <style type="text/css">
-    .nav-tabs li.tab-success > a {
-        color: #3c763d;
-    }
-    .nav-tabs li.tab-error > a {
-        color: #a94442;
-    }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -145,20 +136,15 @@ $(document).ready(function() {
                 $tabPane  = data.element.parents('.tab-pane'),
                 tabId     = $tabPane.attr('id');
             if (tabId) {
-                var $tab = $('a[href="#' + tabId + '"][data-toggle="tab"]').parent();
+                var $icon = $('a[href="#' + tabId + '"][data-toggle="tab"]').parent().find('i');
 
                 // Add custom class to tab containing the field
-                if ($tab) {
-                    $tab.removeClass('tab-success').removeClass('tab-error');
-                    if (data.status == validator.STATUS_INVALID) {
-                        $tab.addClass('tab-error').find('i').removeClass('fa-check').addClass('fa-times');
-                    } else if (data.status == validator.STATUS_VALID) {
-                        var isValidTab = validator.isValidContainer($tabPane);
-                        $tab.addClass(isValidTab ? 'tab-success' : 'tab-error')
-                            .find('i')
-                                .removeClass('fa-check fa-times')
-                                .addClass(isValidTab ? 'fa-check' : 'fa-times');
-                    }
+                if (data.status == validator.STATUS_INVALID) {
+                    $icon.removeClass('fa-check').addClass('fa-times');
+                } else if (data.status == validator.STATUS_VALID) {
+                    var isValidTab = validator.isValidContainer($tabPane);
+                    $icon.removeClass('fa-check fa-times')
+                         .addClass(isValidTab ? 'fa-check' : 'fa-times');
                 }
             }
         });

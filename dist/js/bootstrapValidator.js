@@ -815,6 +815,14 @@
 
                 // Show/hide error elements and feedback icons
                 $errors.attr('data-bv-result', status);
+
+                // Determine the tab containing the element
+                var $tabPane = $field.parents('.tab-pane'),
+                    tabId, $tab;
+                if ($tabPane && (tabId = $tabPane.attr('id'))) {
+                    $tab = $('a[href="#' + tabId + '"][data-toggle="tab"]').parent();
+                }
+
                 switch (status) {
                     case this.STATUS_VALIDATING:
                         isValidField = null;
@@ -822,6 +830,9 @@
                         $parent.removeClass('has-success').removeClass('has-error');
                         if ($icon) {
                             $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).addClass(this.options.feedbackIcons.validating).show();
+                        }
+                        if ($tab) {
+                            $tab.removeClass('bv-tab-success').removeClass('bv-tab-error');
                         }
                         break;
 
@@ -831,6 +842,9 @@
                         $parent.removeClass('has-success').addClass('has-error');
                         if ($icon) {
                             $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.validating).addClass(this.options.feedbackIcons.invalid).show();
+                        }
+                        if ($tab) {
+                            $tab.removeClass('bv-tab-success').addClass('bv-tab-error');
                         }
                         break;
 
@@ -850,6 +864,9 @@
                         }
 
                         $parent.removeClass('has-error has-success').addClass(this.isValidContainer($parent) ? 'has-success' : 'has-error');
+                        if ($tab) {
+                            $tab.removeClass('bv-tab-success').removeClass('bv-tab-error').addClass(this.isValidContainer($tabPane) ? 'bv-tab-success' : 'bv-tab-error');
+                        }
                         break;
 
                     case this.STATUS_NOT_VALIDATED:
@@ -859,6 +876,9 @@
                         $parent.removeClass('has-success').removeClass('has-error');
                         if ($icon) {
                             $icon.removeClass(this.options.feedbackIcons.valid).removeClass(this.options.feedbackIcons.invalid).removeClass(this.options.feedbackIcons.validating).hide();
+                        }
+                        if ($tab) {
+                            $tab.removeClass('bv-tab-success').removeClass('bv-tab-error');
                         }
                         break;
                 }
