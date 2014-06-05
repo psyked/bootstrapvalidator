@@ -139,18 +139,6 @@ $(document).ready(function() {
                 }
             }
         })
-        .on('error.form.bv', function(e) {
-            var $form         = $(e.target),
-                validator     = $form.data('bootstrapValidator'),
-                $invalidField = validator.getInvalidFields().eq(0),
-                $tabPane      = $invalidField.parents('.tab-pane'),
-                tabId         = $tabPane.attr('id');
-
-            // Activate the tab containing the invalid field if exists
-            if (tabId) {
-                $('a[href="#' + tabId + '"][data-toggle="tab"]').tab('show');
-            }
-        })
         .on('status.field.bv', function(e, data) {
             var $form     = $(e.target),
                 validator = $form.data('bootstrapValidator'),

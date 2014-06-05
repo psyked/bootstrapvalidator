@@ -530,8 +530,17 @@
                 }
             }
 
-            // Focus to the first invalid field
-            this.$invalidFields.eq(0).focus();
+            var $invalidField = this.$invalidFields.eq(0);
+            if ($invalidField) {
+                // Activate the tab containing the invalid field if exists
+                var $tabPane = $invalidField.parents('.tab-pane'), tabId;
+                if ($tabPane && (tabId = $tabPane.attr('id'))) {
+                    $('a[href="#' + tabId + '"][data-toggle="tab"]').tab('show');
+                }
+
+                // Focus to the first invalid field
+                $invalidField.focus();
+            }
         },
 
         /**

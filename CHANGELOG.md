@@ -21,9 +21,7 @@ __New Features__
 * [#336](https://github.com/nghuuphuoc/bootstrapvalidator/issues/336): Add ```$field``` instance to the [callback validator](http://bootstrapvalidator.com/validators/callback/)
 
 __Changes__
-* [#42](https://github.com/nghuuphuoc/bootstrapvalidator/issues/42): Remove the submit button from ```submitHandler()```.
-You can use new ```getSubmitButton()``` method to get the clicked submit button
-* [#202](https://github.com/nghuuphuoc/bootstrapvalidator/issues/202), [#206](https://github.com/nghuuphuoc/bootstrapvalidator/issues/206): Does NOT active the tab containing the first invalid field automatically. The success/error tabs will NOT add custom CSS classes as well. These features are demonstrated in an example of using events
+* [#42](https://github.com/nghuuphuoc/bootstrapvalidator/issues/42): Remove the submit button from ```submitHandler()```. You can use new ```getSubmitButton()``` method to get the clicked submit button
 
 __Improvements__
 * [#244](https://github.com/nghuuphuoc/bootstrapvalidator/pull/244): Only enable the submit buttons if all fields are valid, thanks to [@smeagol74](https://github.com/smeagol74)
