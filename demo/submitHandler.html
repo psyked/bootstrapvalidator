@@ -60,7 +60,7 @@
     $(document).ready(function() {
         $('#defaultForm').bootstrapValidator({
             message: 'This value is not valid',
-            live: 'disabled',
+            //live: 'submitted',
             feedbackIcons: {
                 valid: 'glyphicon glyphicon-ok',
                 invalid: 'glyphicon glyphicon-remove',
@@ -83,10 +83,10 @@
                             max: 30,
                             message: 'The username must be more than 6 and less than 30 characters long'
                         },
-                        remote: {
+                        /*remote: {
                             url: 'remote.php',
                             message: 'The username is not available'
-                        },
+                        },*/
                         regexp: {
                             regexp: /^[a-zA-Z0-9_\.]+$/,
                             message: 'The username can only consist of alphabetical, number, dot and underscore'
