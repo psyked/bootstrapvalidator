@@ -1,6 +1,6 @@
 # Change Log
 
-## v0.5.0 (not released yet)
+## v0.5.0 (not released yet) - It will be the big release
 
 __New Features__
 * [#121](https://github.com/nghuuphuoc/bootstrapvalidator/issues/121): Add events for form validate successfully or not
