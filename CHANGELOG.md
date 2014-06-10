@@ -41,6 +41,7 @@ __Bug Fixes__
 * [#314](https://github.com/nghuuphuoc/bootstrapvalidator/issues/314): The [```creditCard``` validator](http://bootstrapvalidator.com/validators/creditCard/) doesn't work on IE 8
 * [#315](https://github.com/nghuuphuoc/bootstrapvalidator/issues/315): The [```cvv``` validator](http://bootstrapvalidator.com/validators/cvv/) doesn't work on IE 8
 * [#325](https://github.com/nghuuphuoc/bootstrapvalidator/issues/325): The [```threshold``` option](http://bootstrapvalidator.com/settings/#threshold) doesn't work on IE 8
+* [#358](https://github.com/nghuuphuoc/bootstrapvalidator/issues/358): The [```zipCode``` validator](http://bootstrapvalidator.com/validators/zipCode/) doesn't work for Canadian zip code
 
 __Document__
 * [#259](https://github.com/nghuuphuoc/bootstrapvalidator/issues/259): Typo "Support almost Bootstrap forms", thanks to [@lloydde](https://github.com/lloydde)
