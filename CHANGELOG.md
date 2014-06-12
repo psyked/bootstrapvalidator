@@ -11,7 +11,7 @@ __New Features__
 * [#195](https://github.com/nghuuphuoc/bootstrapvalidator/issues/195): Add events for field validation
 * [#211](https://github.com/nghuuphuoc/bootstrapvalidator/issues/211), [#235](https://github.com/nghuuphuoc/bootstrapvalidator/issues/235): Add new method ```getInvalidFields()``` that returns all invalid fields
 * [#275](https://github.com/nghuuphuoc/bootstrapvalidator/issues/275): Add ```destroy()``` method
-* [#282](https://github.com/nghuuphuoc/bootstrapvalidator/issues/282): Use error message that is returned from [```callback```](http://bootstrapvalidator.com/validators/callback/), [```remote```](http://bootstrapvalidator.com/validators/remote/) validators
+* [#282](https://github.com/nghuuphuoc/bootstrapvalidator/issues/282), [#347](https://github.com/nghuuphuoc/bootstrapvalidator/issues/347): Use error message that is returned from [```callback```](http://bootstrapvalidator.com/validators/callback/), [```remote```](http://bootstrapvalidator.com/validators/remote/) validators
 * Add ```status.field.bv``` event which is triggered after updating the field status. It can be used to solve [#300](https://github.com/nghuuphuoc/bootstrapvalidator/issues/300), [#301](https://github.com/nghuuphuoc/bootstrapvalidator/issues/301)
 * [#316](https://github.com/nghuuphuoc/bootstrapvalidator/issues/316): Add ```isValidContainer(container)``` method
 * [#320](https://github.com/nghuuphuoc/bootstrapvalidator/issues/320): Add ```separator``` option to the [```date``` validator](http://bootstrapvalidator.com/validators/date/)
@@ -22,6 +22,7 @@ __New Features__
 
 __Changes__
 * [#42](https://github.com/nghuuphuoc/bootstrapvalidator/issues/42): Remove the submit button from ```submitHandler()```. You can use new ```getSubmitButton()``` method to get the clicked submit button
+* [#109](https://github.com/nghuuphuoc/bootstrapvalidator/issues/109): Remove the ```setLiveMode()``` method
 
 __Improvements__
 * [#244](https://github.com/nghuuphuoc/bootstrapvalidator/pull/244): Only enable the submit buttons if all fields are valid, thanks to [@smeagol74](https://github.com/smeagol74)
@@ -29,6 +30,7 @@ __Improvements__
 * [#274](https://github.com/nghuuphuoc/bootstrapvalidator/pull/274): Fix feedback icons in ```input-group```, thanks to [@tiagofontella](https://github.com/tiagofontella)
 * [#287](https://github.com/nghuuphuoc/bootstrapvalidator/issues/287): Only send the submit button which is clicked. It's an enhancement for [#238](https://github.com/nghuuphuoc/bootstrapvalidator/issues/238)
 * [#297](https://github.com/nghuuphuoc/bootstrapvalidator/issues/297): Disable feedback icons for particular fields
+* [#364](https://github.com/nghuuphuoc/bootstrapvalidator/issues/364): Clicking the feedback icon also effect to the checkbox, radio fields
 
 __Bug Fixes__
 * [#288](https://github.com/nghuuphuoc/bootstrapvalidator/issues/288): Fix [```date``` validator](http://bootstrapvalidator.com/validators/date/) issue on IE8

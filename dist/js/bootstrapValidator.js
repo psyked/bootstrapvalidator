@@ -359,7 +359,14 @@
                     && (!updateAll || i == total - 1))
                 {
                     $parent.removeClass('has-success').removeClass('has-error').addClass('has-feedback');
-                    var $icon = $('<i/>').css('display', 'none').addClass('form-control-feedback').attr('data-bv-icon-for', field).insertAfter($field);
+                    var $icon = $('<i/>')
+                                    .css('display', 'none')
+                                    .addClass('form-control-feedback')
+                                    .attr('data-bv-icon-for', field)
+                                    // Place it after the label containing the checkbox/radio
+                                    // so when clicking the icon, it doesn't effect to the checkbox/radio element
+                                    .insertAfter(('checkbox' == type || 'radio' == type) ? $field.parent() : $field);
+
                     // The feedback icon does not render correctly if there is no label
                     // https://github.com/twbs/bootstrap/issues/12873
                     if ($parent.find('label').length == 0) {
