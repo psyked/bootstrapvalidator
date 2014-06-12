@@ -30,6 +30,7 @@ __Improvements__
 * [#274](https://github.com/nghuuphuoc/bootstrapvalidator/pull/274): Fix feedback icons in ```input-group```, thanks to [@tiagofontella](https://github.com/tiagofontella)
 * [#287](https://github.com/nghuuphuoc/bootstrapvalidator/issues/287): Only send the submit button which is clicked. It's an enhancement for [#238](https://github.com/nghuuphuoc/bootstrapvalidator/issues/238)
 * [#297](https://github.com/nghuuphuoc/bootstrapvalidator/issues/297): Disable feedback icons for particular fields
+* [#348](https://github.com/nghuuphuoc/bootstrapvalidator/issues/348): The [uri validator](http://bootstrapvalidator.com/validators/uri/) now provides an option to support private/local network address
 * [#364](https://github.com/nghuuphuoc/bootstrapvalidator/issues/364): Clicking the feedback icon also effect to the checkbox, radio fields
 
 __Bug Fixes__
