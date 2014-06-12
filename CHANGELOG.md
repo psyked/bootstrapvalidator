@@ -32,6 +32,7 @@ __Improvements__
 * [#297](https://github.com/nghuuphuoc/bootstrapvalidator/issues/297): Disable feedback icons for particular fields
 * [#348](https://github.com/nghuuphuoc/bootstrapvalidator/issues/348): The [uri validator](http://bootstrapvalidator.com/validators/uri/) now provides an option to support private/local network address
 * [#364](https://github.com/nghuuphuoc/bootstrapvalidator/issues/364): Clicking the feedback icon also effect to the checkbox, radio fields
+* [#366](https://github.com/nghuuphuoc/bootstrapvalidator/issues/366): Don't change the enable setting when the new one is the same
 
 __Bug Fixes__
 * [#288](https://github.com/nghuuphuoc/bootstrapvalidator/issues/288): Fix [```date``` validator](http://bootstrapvalidator.com/validators/date/) issue on IE8

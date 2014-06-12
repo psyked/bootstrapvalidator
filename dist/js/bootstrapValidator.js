@@ -1257,8 +1257,10 @@
          * @returns {BootstrapValidator}
          */
         enableFieldValidators: function(field, enabled) {
-            this.options.fields[field]['enabled'] = enabled;
-            this.updateStatus(field, this.STATUS_NOT_VALIDATED);
+            if (this.options.fields[field]['enabled'] != enabled) {
+                this.options.fields[field]['enabled'] = enabled;
+                this.updateStatus(field, this.STATUS_NOT_VALIDATED);
+            }
 
             return this;
         },
