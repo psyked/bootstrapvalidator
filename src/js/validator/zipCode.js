@@ -43,8 +43,9 @@
                 case 'NL': return /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i.test(value);
 
                 case 'SE': return /^(S-)?\d{3}\s?\d{2}$/i.test(value);
-                case 'US':
-                default: return /^\d{4,5}([\-]\d{4})?$/.test(value);
+                case 'US': return /^\d{4,5}([\-]\d{4})?$/.test(value);
+                default: return value != '';
+                
             }
         },
 
