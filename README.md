@@ -111,6 +111,7 @@ Big thanks to the contributors:
 * [@jjshoe](https://github.com/jjshoe)
 * [@johanronn77](https://github.com/johanronn77)
 * [@jswale](https://github.com/jswale)
+* [@jzhang6](https://github.com/jzhang6)
 * [@khangvm53](https://github.com/khangvm53)
 * [@kristian-puccio](https://github.com/kristian-puccio)
 * [@lloydde](https://github.com/lloydde)
