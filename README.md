@@ -121,6 +121,7 @@ Big thanks to the contributors:
 * [@narutosanjiv](https://github.com/narutosanjiv)
 * [@patmoore](https://github.com/patmoore)
 * [@smeagol74](https://github.com/smeagol74)
+* [@thisisclement](https://github.com/thisisclement)
 * [@tiagofontella](https://github.com/tiagofontella)
 * [@tomByrer](https://github.com/tomByrer)
 * [@vaz](https://github.com/vaz)
