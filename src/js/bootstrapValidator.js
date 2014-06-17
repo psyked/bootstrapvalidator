@@ -1280,7 +1280,7 @@
          * It will remove all error messages, feedback icons and turn off the events
          */
         destroy: function() {
-            var field, fields, $field, validator, $icon, container;
+            var field, fields, $field, validator, $icon, container, group;
             for (field in this.options.fields) {
                 fields    = this.getFieldElements(field);
                 container = this.options.fields[field].container || this.options.container,
