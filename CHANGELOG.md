@@ -19,6 +19,7 @@ __New Features__
 * [#324](https://github.com/nghuuphuoc/bootstrapvalidator/issues/324): Add ```success.validator.bv``` and ```error.validator.bv``` events triggered after a validator completes
 * [#332](https://github.com/nghuuphuoc/bootstrapvalidator/pull/332): Add UK phone number support for the [```phone``` validator](http://bootstrapvalidator.com/validators/phone/), thanks to [@aca02djr](https://github.com/aca02djr)
 * [#336](https://github.com/nghuuphuoc/bootstrapvalidator/issues/336): Add ```$field``` instance to the [callback validator](http://bootstrapvalidator.com/validators/callback/)
+* [#356](https://github.com/nghuuphuoc/bootstrapvalidator/issues/356): Add ```group``` option
 * [#374](https://github.com/nghuuphuoc/bootstrapvalidator/pull/374): Add Singapore postal code to the [zipCode validator](http://bootstrapvalidator.com/validators/zipCode/), thanks to [@thisisclement](https://github.com/thisisclement)
 
 __Changes__
@@ -29,7 +30,7 @@ __Improvements__
 * [#244](https://github.com/nghuuphuoc/bootstrapvalidator/pull/244): Only enable the submit buttons if all fields are valid, thanks to [@smeagol74](https://github.com/smeagol74)
 * [#262](https://github.com/nghuuphuoc/bootstrapvalidator/issues/262): Improve the [```updateStatus()``` method](http://bootstrapvalidator.com/api/#update-status). The plugin now doesn't show the errors, feedback icons of given field if there are uncompleted validators
 * [#274](https://github.com/nghuuphuoc/bootstrapvalidator/pull/274): Fix feedback icons in ```input-group```, thanks to [@tiagofontella](https://github.com/tiagofontella)
-* [#287](https://github.com/nghuuphuoc/bootstrapvalidator/issues/287): Only send the submit button which is clicked. It's an enhancement for [#238](https://github.com/nghuuphuoc/bootstrapvalidator/issues/238)
+* [#287](https://github.com/nghuuphuoc/bootstrapvalidator/issues/287), [#291](https://github.com/nghuuphuoc/bootstrapvalidator/issues/291): Only send the submit button which is clicked. It's an enhancement for [#238](https://github.com/nghuuphuoc/bootstrapvalidator/issues/238)
 * [#297](https://github.com/nghuuphuoc/bootstrapvalidator/issues/297): Disable feedback icons for particular fields
 * [#348](https://github.com/nghuuphuoc/bootstrapvalidator/issues/348): The [uri validator](http://bootstrapvalidator.com/validators/uri/) now provides an option to support private/local network address
 * [#364](https://github.com/nghuuphuoc/bootstrapvalidator/issues/364): Clicking the feedback icon also effect to the checkbox, radio fields

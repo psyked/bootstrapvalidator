@@ -53,6 +53,11 @@
         // Default invalid message
         message: 'This value is not valid',
 
+        // The CSS selector for indicating the element consists the field
+        // By default, each field is placed inside the <div class="form-group"></div>
+        // You should adjust this option if your form group consists of many fields which not all of them need to be validated
+        group: '.form-group',
+
         // The error messages container
         // It can be:
         // * 'tooltip' if you want to use Bootstrap tooltip to show error messages
@@ -152,6 +157,7 @@
                     trigger:        this.$form.attr('data-bv-trigger'),
                     message:        this.$form.attr('data-bv-message'),
                     container:      this.$form.attr('data-bv-container'),
+                    group:          this.$form.attr('data-bv-group'),
                     submitButtons:  this.$form.attr('data-bv-submitbuttons'),
                     threshold:      this.$form.attr('data-bv-threshold'),
                     live:           this.$form.attr('data-bv-live'),
@@ -252,6 +258,7 @@
                     trigger:       $field.attr('data-bv-trigger'),
                     message:       $field.attr('data-bv-message'),
                     container:     $field.attr('data-bv-container'),
+                    group:         $field.attr('data-bv-group'),
                     selector:      $field.attr('data-bv-selector'),
                     threshold:     $field.attr('data-bv-threshold'),
                     validators:    validators
@@ -312,7 +319,8 @@
 
             for (var i = 0; i < total; i++) {
                 var $field    = fields.eq(i),
-                    $parent   = $field.parents('.form-group'),
+                    group     = this.options.fields[field].group || this.options.group,
+                    $parent   = $field.parents(group),
                     // Allow user to indicate where the error messages are shown
                     container = this.options.fields[field].container || this.options.container,
                     $message  = (container && container != 'tooltip' && container != 'popover') ? $(container) : this._getMessageContainer($field);
@@ -415,8 +423,10 @@
          * @returns {jQuery}
          */
         _getMessageContainer: function($field) {
-            var $parent = $field.parent();
-            if ($parent.hasClass('form-group')) {
+            var $parent = $field.parent(),
+                field   = $field.attr('data-bv-field'),
+                group   = this.options.fields[field].group || this.options.group;
+            if ($parent.is(group)) {
                 return $parent;
             }
 
@@ -798,11 +808,12 @@
 
             var that  = this,
                 type  = fields.attr('type'),
+                group = this.options.fields[field].group || this.options.group,
                 total = ('radio' == type || 'checkbox' == type) ? 1 : fields.length;
 
             for (var i = 0; i < total; i++) {
                 var $field       = fields.eq(i),
-                    $parent      = $field.parents('.form-group'),
+                    $parent      = $field.parents(group),
                     $message     = $field.data('bv.messages'),
                     $allErrors   = $message.find('.help-block[data-bv-validator][data-bv-for="' + field + '"]'),
                     $errors      = validatorName ? $allErrors.filter('[data-bv-validator="' + validatorName + '"]') : $allErrors,
@@ -1272,7 +1283,8 @@
             var field, fields, $field, validator, $icon, container;
             for (field in this.options.fields) {
                 fields    = this.getFieldElements(field);
-                container = this.options.fields[field].container || this.options.container;
+                container = this.options.fields[field].container || this.options.container,
+                group     = this.options.fields[field].group || this.options.group;
                 for (var i = 0; i < fields.length; i++) {
                     $field = fields.eq(i);
                     $field
@@ -1282,7 +1294,7 @@
                             .end()
                         .removeData('bv.messages')
                         // Remove feedback classes
-                        .parents('.form-group')
+                        .parents(group)
                             .removeClass('has-feedback has-error has-success')
                             .end()
                         // Turn off events
@@ -1290,7 +1302,7 @@
                         .removeAttr('data-bv-field');
 
                     // Remove feedback icons, tooltip/popover container
-                    $icon = $field.parents('.form-group').find('i[data-bv-icon-for="' + field + '"]');
+                    $icon = $field.parents(group).find('i[data-bv-icon-for="' + field + '"]');
                     if ($icon) {
                         switch (container) {
                             case 'tooltip':
