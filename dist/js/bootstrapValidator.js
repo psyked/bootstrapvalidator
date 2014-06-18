@@ -12,7 +12,7 @@
 (function($) {
     var BootstrapValidator = function(form, options) {
         this.$form   = $(form);
-        this.options = $.extend({}, BootstrapValidator.DEFAULT_OPTIONS, options);
+        this.options = $.extend({}, $.fn.bootstrapValidator.DEFAULT_OPTIONS, options);
 
         this.$invalidFields = $([]);    // Array of invalid fields
         this.$submitButton  = null;     // The submit button which is clicked to submit form
@@ -44,105 +44,6 @@
         this._cacheFields = {};
 
         this._init();
-    };
-
-    // The default options
-    BootstrapValidator.DEFAULT_OPTIONS = {
-        // The form CSS class
-        elementClass: 'bv-form',
-
-        // Default invalid message
-        message: 'This value is not valid',
-
-        // The CSS selector for indicating the element consists the field
-        // By default, each field is placed inside the <div class="form-group"></div>
-        // You should adjust this option if your form group consists of many fields which not all of them need to be validated
-        group: '.form-group',
-
-        // The error messages container
-        // It can be:
-        // * 'tooltip' if you want to use Bootstrap tooltip to show error messages
-        // * 'popover' if you want to use Bootstrap popover to show error messages
-        // * a CSS selector indicating the container
-        //
-        // In the first two cases, since the tooltip/popover should be small enough, the plugin only shows only one error message
-        // You also can define the message container for particular field
-        container: null,
-
-        // The field will not be live validated if its length is less than this number of characters
-        threshold: null,
-
-        // Indicate fields which won't be validated
-        // By default, the plugin will not validate the following kind of fields:
-        // - disabled
-        // - hidden
-        // - invisible
-        //
-        // The setting consists of jQuery filters. Accept 3 formats:
-        // - A string. Use a comma to separate filter
-        // - An array. Each element is a filter
-        // - An array. Each element can be a callback function
-        //      function($field, validator) {
-        //          $field is jQuery object representing the field element
-        //          validator is the BootstrapValidator instance
-        //          return true or false;
-        //      }
-        //
-        // The 3 following settings are equivalent:
-        //
-        // 1) ':disabled, :hidden, :not(:visible)'
-        // 2) [':disabled', ':hidden', ':not(:visible)']
-        // 3) [':disabled', ':hidden', function($field) {
-        //        return !$field.is(':visible');
-        //    }]
-        excluded: [':disabled', ':hidden', ':not(:visible)'],
-
-        // Shows ok/error/loading icons based on the field validity.
-        // This feature requires Bootstrap v3.1.0 or later (http://getbootstrap.com/css/#forms-control-validation).
-        // Since Bootstrap doesn't provide any methods to know its version, this option cannot be on/off automatically.
-        // In other word, to use this feature you have to upgrade your Bootstrap to v3.1.0 or later.
-        //
-        // Examples:
-        // - Use Glyphicons icons:
-        //  feedbackIcons: {
-        //      valid: 'glyphicon glyphicon-ok',
-        //      invalid: 'glyphicon glyphicon-remove',
-        //      validating: 'glyphicon glyphicon-refresh'
-        //  }
-        // - Use FontAwesome icons:
-        //  feedbackIcons: {
-        //      valid: 'fa fa-check',
-        //      invalid: 'fa fa-times',
-        //      validating: 'fa fa-refresh'
-        //  }
-        feedbackIcons: {
-            valid:      null,
-            invalid:    null,
-            validating: null
-        },
-
-        // The submit buttons selector
-        // These buttons will be disabled to prevent the valid form from multiple submissions
-        submitButtons: '[type="submit"]',
-
-        // The custom submit handler
-        // It will prevent the form from the default submission
-        //
-        //  submitHandler: function(validator, form) {
-        //      - validator is the BootstrapValidator instance
-        //      - form is the jQuery object presenting the current form
-        //  }
-        submitHandler: null,
-
-        // Live validating option
-        // Can be one of 3 values:
-        // - enabled: The plugin validates fields as soon as they are changed
-        // - disabled: Disable the live validating. The error messages are only shown after the form is submitted
-        // - submitted: The live validating is enabled after the form is submitted
-        live: 'enabled',
-
-        // Map the field name with validator rules
-        fields: null
     };
 
     BootstrapValidator.prototype = {
@@ -1352,6 +1253,103 @@
                 data[option].apply(data, Array.prototype.slice.call(params, 1));
             }
         });
+    };
+
+    // The default options
+    $.fn.bootstrapValidator.DEFAULT_OPTIONS = {
+        // The form CSS class
+        elementClass: 'bv-form',
+
+        // Default invalid message
+        message: 'This value is not valid',
+
+        // The CSS selector for indicating the element consists the field
+        // By default, each field is placed inside the <div class="form-group"></div>
+        // You should adjust this option if your form group consists of many fields which not all of them need to be validated
+        group: '.form-group',
+
+        //The error messages container. It can be:
+        // - 'tooltip' if you want to use Bootstrap tooltip to show error messages
+        // - 'popover' if you want to use Bootstrap popover to show error messages
+        // - a CSS selector indicating the container
+        // In the first two cases, since the tooltip/popover should be small enough, the plugin only shows only one error message
+        // You also can define the message container for particular field
+        container: null,
+
+        // The field will not be live validated if its length is less than this number of characters
+        threshold: null,
+
+        // Indicate fields which won't be validated
+        // By default, the plugin will not validate the following kind of fields:
+        // - disabled
+        // - hidden
+        // - invisible
+        //
+        // The setting consists of jQuery filters. Accept 3 formats:
+        // - A string. Use a comma to separate filter
+        // - An array. Each element is a filter
+        // - An array. Each element can be a callback function
+        //      function($field, validator) {
+        //          $field is jQuery object representing the field element
+        //          validator is the BootstrapValidator instance
+        //          return true or false;
+        //      }
+        //
+        // The 3 following settings are equivalent:
+        //
+        // 1) ':disabled, :hidden, :not(:visible)'
+        // 2) [':disabled', ':hidden', ':not(:visible)']
+        // 3) [':disabled', ':hidden', function($field) {
+        //        return !$field.is(':visible');
+        //    }]
+        excluded: [':disabled', ':hidden', ':not(:visible)'],
+
+        // Shows ok/error/loading icons based on the field validity.
+        // This feature requires Bootstrap v3.1.0 or later (http://getbootstrap.com/css/#forms-control-validation).
+        // Since Bootstrap doesn't provide any methods to know its version, this option cannot be on/off automatically.
+        // In other word, to use this feature you have to upgrade your Bootstrap to v3.1.0 or later.
+        //
+        // Examples:
+        // - Use Glyphicons icons:
+        //  feedbackIcons: {
+        //      valid: 'glyphicon glyphicon-ok',
+        //      invalid: 'glyphicon glyphicon-remove',
+        //      validating: 'glyphicon glyphicon-refresh'
+        //  }
+        // - Use FontAwesome icons:
+        //  feedbackIcons: {
+        //      valid: 'fa fa-check',
+        //      invalid: 'fa fa-times',
+        //      validating: 'fa fa-refresh'
+        //  }
+        feedbackIcons: {
+            valid:      null,
+            invalid:    null,
+            validating: null
+        },
+
+        // The submit buttons selector
+        // These buttons will be disabled to prevent the valid form from multiple submissions
+        submitButtons: '[type="submit"]',
+
+        // The custom submit handler
+        // It will prevent the form from the default submission
+        //
+        //  submitHandler: function(validator, form) {
+        //      - validator is the BootstrapValidator instance
+        //      - form is the jQuery object presenting the current form
+        //  }
+        submitHandler: null,
+
+        // Live validating option
+        // Can be one of 3 values:
+        // - enabled: The plugin validates fields as soon as they are changed
+        // - disabled: Disable the live validating. The error messages are only shown after the form is submitted
+        // - submitted: The live validating is enabled after the form is submitted
+        live: 'enabled',
+
+        // Map the field name with validator rules
+        fields: null
     };
 
     // Available validators
