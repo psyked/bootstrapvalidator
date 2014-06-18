@@ -343,7 +343,7 @@
                 case (!!this.options.fields[field].message):
                     return this.options.fields[field].message;
                 default:
-                    this.options.message
+                    return this.options.message;
             }
         },
 
