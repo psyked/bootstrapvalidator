@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.rtn = $.extend($.fn.bootstrapValidator.i18n.rtn || {}, {
+        'default': 'The value is not a valid RTN number'
+    });
+
     $.fn.bootstrapValidator.validators.rtn = {
         /**
          * Validate a RTN (Routing transit number)

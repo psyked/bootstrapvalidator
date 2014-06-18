@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.hexColor = $.extend($.fn.bootstrapValidator.i18n.hexColor || {}, {
+        'default': 'The value is not a valid hex color'
+    });
+
     $.fn.bootstrapValidator.validators.hexColor = {
         enableByHtml5: function($field) {
             return ('color' == $field.attr('type'));

@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.cusip = $.extend($.fn.bootstrapValidator.i18n.cusip || {}, {
+        'default': 'The value is not a valid CUSIP number'
+    });
+
     $.fn.bootstrapValidator.validators.cusip = {
         /**
          * Validate a CUSIP

@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.emailAddress = $.extend($.fn.bootstrapValidator.i18n.emailAddress || {}, {
+        'default': 'The value is not a valid email address'
+    });
+
     $.fn.bootstrapValidator.validators.emailAddress = {
         enableByHtml5: function($field) {
             return ('email' == $field.attr('type'));

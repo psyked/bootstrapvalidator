@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.siret = $.extend($.fn.bootstrapValidator.i18n.siret || {}, {
+        'default': 'The value is not a valid siret number'
+    });
+
 	$.fn.bootstrapValidator.validators.siret = {
         /**
          * Check if a string is a siret number

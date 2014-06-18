@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.ismn = $.extend($.fn.bootstrapValidator.i18n.ismn || {}, {
+        'default': 'The value is not a valid ISMN number'
+    });
+
     $.fn.bootstrapValidator.validators.ismn = {
         /**
          * Validate ISMN (International Standard Music Number)

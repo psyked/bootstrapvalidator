@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.uuid = $.extend($.fn.bootstrapValidator.i18n.uuid || {}, {
+        'default': 'The value is not a valid UUID'
+    });
+
     $.fn.bootstrapValidator.validators.uuid = {
         html5Attributes: {
             message: 'message',

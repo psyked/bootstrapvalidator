@@ -255,7 +255,7 @@
                             .attr('data-bv-validator', validatorName)
                             .attr('data-bv-for', field)
                             .attr('data-bv-result', this.STATUS_NOT_VALIDATED)
-                            .html(this.options.fields[field].validators[validatorName].message || this.options.fields[field].message || this.options.message)
+                            .html(this._getMessage(field, validatorName))
                             .appendTo($message);
                     }
                 }
@@ -316,6 +316,35 @@
                 field: field,
                 element: fields
             });
+        },
+
+        /**
+         * Get the error message for given field and validator
+         *
+         * @param {String} field The field name
+         * @param {String} validatorName The validator name
+         * @returns {String}
+         */
+        _getMessage: function(field, validatorName) {
+            if (!this.options.fields[field] || !$.fn.bootstrapValidator.validators[validatorName]
+                || !this.options.fields[field].validators || !this.options.fields[field].validators[validatorName])
+            {
+                return '';
+            }
+
+            var options = this.options.fields[field].validators[validatorName];
+            switch (true) {
+                case (!!options.message):
+                    return options.message;
+                case (!!$.fn.bootstrapValidator.i18n[validatorName]):
+                    return ('function' == typeof $.fn.bootstrapValidator.i18n[validatorName].getMessage)
+                            ? $.fn.bootstrapValidator.i18n[validatorName].getMessage(options)
+                            : $.fn.bootstrapValidator.i18n[validatorName]['default'];
+                case (!!this.options.fields[field].message):
+                    return this.options.fields[field].message;
+                default:
+                    this.options.message
+            }
         },
 
         /**
@@ -1354,11 +1383,29 @@
 
     // Available validators
     $.fn.bootstrapValidator.validators = {};
+    $.fn.bootstrapValidator.i18n       = {};
 
     $.fn.bootstrapValidator.Constructor = BootstrapValidator;
 
     // Helper methods, which can be used in validator class
     $.fn.bootstrapValidator.helpers = {
+        /**
+         * Format a string
+         * It's used to format the error message
+         * format('The field must between %s and %s', [10, 20]) = 'The field must between 10 and 20'
+         *
+         * @param {String} message
+         * @param {Array} parameters
+         * @returns {String}
+         */
+        format: function(message, parameters) {
+            for (var i in parameters) {
+                message = message.replace('%s', parameters[i]);
+            }
+
+            return message;
+        },
+
         /**
          * Validate a date
          *
@@ -1460,6 +1507,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.base64 = $.extend($.fn.bootstrapValidator.i18n.base64 || {}, {
+        'default': 'The value is not a valid base 64 encoded'
+    });
+
     $.fn.bootstrapValidator.validators.base64 = {
         /**
          * Return true if the input value is a base 64 encoded string.
@@ -1481,6 +1532,18 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.between = $.extend($.fn.bootstrapValidator.i18n.between || {}, {
+        'default': 'The value is not valid',
+        inclusive: 'The value must be between %s and %s',
+        notInclusive: 'The value must be between %s and %s strictly',
+
+        getMessage: function(options) {
+            return (options.inclusive === true || options.inclusive == undefined)
+                    ? $.fn.bootstrapValidator.helpers.format(this.inclusive, [options.min, options.max])
+                    : $.fn.bootstrapValidator.helpers.format(this.notInclusive, [options.min, options.max]);
+        }
+    });
+
     $.fn.bootstrapValidator.validators.between = {
         html5Attributes: {
             message: 'message',
@@ -1526,6 +1589,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.callback = $.extend($.fn.bootstrapValidator.i18n.callback || {}, {
+        'default': 'The value is not valid'
+    });
+
     $.fn.bootstrapValidator.validators.callback = {
         /**
          * Return result from the callback method
@@ -1555,6 +1622,25 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.choice = $.extend($.fn.bootstrapValidator.i18n.choice || {}, {
+        'default': 'The value is not valid',
+        less: 'Choose %s options at minimum',
+        more: 'Choose %s options at maximum',
+        between: 'Choose %s - %s options',
+
+        getMessage: function(options) {
+            switch (true) {
+                case (!!options.min && !!options.max):
+                    return $.fn.bootstrapValidator.helpers.format(this.between, [options.min, options.max]);
+                    break;
+                case (!!options.min):
+                    return $.fn.bootstrapValidator.helpers.format(this.less, [options.min]);
+                case (!!options.max):
+                    return $.fn.bootstrapValidator.helpers.format(this.more, [options.max]);
+            }
+        }
+    });
+
     $.fn.bootstrapValidator.validators.choice = {
         html5Attributes: {
             message: 'message',
@@ -1587,6 +1673,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.creditCard = $.extend($.fn.bootstrapValidator.i18n.creditCard || {}, {
+        'default': 'The value is not a valid credit card number'
+    });
+
     $.fn.bootstrapValidator.validators.creditCard = {
         /**
          * Return true if the input value is valid credit card number
@@ -1686,6 +1776,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.cusip = $.extend($.fn.bootstrapValidator.i18n.cusip || {}, {
+        'default': 'The value is not a valid CUSIP number'
+    });
+
     $.fn.bootstrapValidator.validators.cusip = {
         /**
          * Validate a CUSIP
@@ -1737,6 +1831,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.cvv = $.extend($.fn.bootstrapValidator.i18n.cvv || {}, {
+        'default': 'The value is not a valid CVV number'
+    });
+
     $.fn.bootstrapValidator.validators.cvv = {
         html5Attributes: {
             message: 'message',
@@ -2016,6 +2114,10 @@
     }
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.ean = $.extend($.fn.bootstrapValidator.i18n.ean || {}, {
+        'default': 'The value is not a valid EAN number'
+    });
+
     $.fn.bootstrapValidator.validators.ean = {
         /**
          * Validate EAN (International Article Number)
@@ -2052,6 +2154,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.emailAddress = $.extend($.fn.bootstrapValidator.i18n.emailAddress || {}, {
+        'default': 'The value is not a valid email address'
+    });
+
     $.fn.bootstrapValidator.validators.emailAddress = {
         enableByHtml5: function($field) {
             return ('email' == $field.attr('type'));
@@ -2184,6 +2290,10 @@
     }
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.grid = $.extend($.fn.bootstrapValidator.i18n.grid || {}, {
+        'default': 'The value is not a valid GRId number'
+    });
+
     $.fn.bootstrapValidator.validators.grid = {
         /**
          * Validate GRId (Global Release Identifier)
@@ -2217,6 +2327,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.hex = $.extend($.fn.bootstrapValidator.i18n.hex || {}, {
+        'default': 'The value is not a valid hexadecimal number'
+    });
+
     $.fn.bootstrapValidator.validators.hex = {
         /**
          * Return true if and only if the input value is a valid hexadecimal number
@@ -2238,6 +2352,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.hexColor = $.extend($.fn.bootstrapValidator.i18n.hexColor || {}, {
+        'default': 'The value is not a valid hex color'
+    });
+
     $.fn.bootstrapValidator.validators.hexColor = {
         enableByHtml5: function($field) {
             return ('color' == $field.attr('type'));
@@ -2262,6 +2380,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.iban = $.extend($.fn.bootstrapValidator.i18n.iban || {}, {
+        'default': 'The value is not a valid IBAN number'
+    });
+
     $.fn.bootstrapValidator.validators.iban = {
         html5Attributes: {
             message: 'message',
@@ -3195,6 +3317,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.imei = $.extend($.fn.bootstrapValidator.i18n.imei || {}, {
+        'default': 'The value is not a valid IMEI number'
+    });
+
     $.fn.bootstrapValidator.validators.imei = {
         /**
          * Validate IMEI (International Mobile Station Equipment Identity)
@@ -3260,6 +3386,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.ip = $.extend($.fn.bootstrapValidator.i18n.ip || {}, {
+        'default': 'The value is not a valid IP address'
+    });
+
     $.fn.bootstrapValidator.validators.ip = {
         html5Attributes: {
             message: 'message',
@@ -3295,6 +3425,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.isbn = $.extend($.fn.bootstrapValidator.i18n.isbn || {}, {
+        'default': 'The value is not a valid ISBN number'
+    });
+
     $.fn.bootstrapValidator.validators.isbn = {
         /**
          * Return true if the input value is a valid ISBN 10 or ISBN 13 number
@@ -3376,6 +3510,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.isin = $.extend($.fn.bootstrapValidator.i18n.isin || {}, {
+        'default': 'The value is not a valid ISIN number'
+    });
+
     $.fn.bootstrapValidator.validators.isin = {
         // Available country codes
         // See http://isin.net/country-codes/
@@ -3431,6 +3569,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.ismn = $.extend($.fn.bootstrapValidator.i18n.ismn || {}, {
+        'default': 'The value is not a valid ISMN number'
+    });
+
     $.fn.bootstrapValidator.validators.ismn = {
         /**
          * Validate ISMN (International Standard Music Number)
@@ -3486,6 +3628,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.issn = $.extend($.fn.bootstrapValidator.i18n.issn || {}, {
+        'default': 'The value is not a valid ISSN number'
+    });
+
     $.fn.bootstrapValidator.validators.issn = {
         /**
          * Validate ISSN (International Standard Serial Number)
@@ -3568,6 +3714,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.mac = $.extend($.fn.bootstrapValidator.i18n.mac || {}, {
+        'default': 'The value is not a valid MAC address'
+    });
+
     $.fn.bootstrapValidator.validators.mac = {
         /**
          * Return true if the input value is a MAC address.
@@ -3589,6 +3739,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.notEmpty = $.extend($.fn.bootstrapValidator.i18n.notEmpty || {}, {
+        'default': 'The value is required'
+    });
+
     $.fn.bootstrapValidator.validators.notEmpty = {
         enableByHtml5: function($field) {
             var required = $field.attr('required') + '';
@@ -3788,6 +3942,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.rtn = $.extend($.fn.bootstrapValidator.i18n.rtn || {}, {
+        'default': 'The value is not a valid RTN number'
+    });
+
     $.fn.bootstrapValidator.validators.rtn = {
         /**
          * Validate a RTN (Routing transit number)
@@ -3822,6 +3980,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.sedol = $.extend($.fn.bootstrapValidator.i18n.sedol || {}, {
+        'default': 'The value is not a valid SEDOL number'
+    });
+
     $.fn.bootstrapValidator.validators.sedol = {
         /**
          * Validate a SEDOL (Stock Exchange Daily Official List)
@@ -3858,6 +4020,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.siren = $.extend($.fn.bootstrapValidator.i18n.siren || {}, {
+        'default': 'The value is not a valid siren number'
+    });
+
 	$.fn.bootstrapValidator.validators.siren = {
 		/**
 		 * Check if a string is a siren number
@@ -3882,6 +4048,10 @@
 	};
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.siret = $.extend($.fn.bootstrapValidator.i18n.siret || {}, {
+        'default': 'The value is not a valid siret number'
+    });
+
 	$.fn.bootstrapValidator.validators.siret = {
         /**
          * Check if a string is a siret number
@@ -4007,6 +4177,25 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.stringLength = $.extend($.fn.bootstrapValidator.i18n.stringLength || {}, {
+        'default': 'The value length is not valid',
+        less: 'The value must be less than %s characters long',
+        more: 'The value must be more than %s characters long',
+        between: 'The value must be between %s and %s characters long',
+
+        getMessage: function(options) {
+            switch (true) {
+                case (!!options.min && !!options.max):
+                    return $.fn.bootstrapValidator.helpers.format(this.between, [options.min, options.max]);
+                    break;
+                case (!!options.min):
+                    return $.fn.bootstrapValidator.helpers.format(this.more, [options.min]);
+                case (!!options.max):
+                    return $.fn.bootstrapValidator.helpers.format(this.less, [options.max]);
+            }
+        }
+    });
+
     $.fn.bootstrapValidator.validators.stringLength = {
         html5Attributes: {
             message: 'message',
@@ -4053,6 +4242,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.uri = $.extend($.fn.bootstrapValidator.i18n.uri || {}, {
+        'default': 'The value is not a valid URI'
+    });
+
     $.fn.bootstrapValidator.validators.uri = {
         html5Attributes: {
             message: 'message',
@@ -4150,6 +4343,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.uuid = $.extend($.fn.bootstrapValidator.i18n.uuid || {}, {
+        'default': 'The value is not a valid UUID'
+    });
+
     $.fn.bootstrapValidator.validators.uuid = {
         html5Attributes: {
             message: 'message',
@@ -5342,6 +5539,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.vin = $.extend($.fn.bootstrapValidator.i18n.vin || {}, {
+        'default': 'The value is not a valid VIN number'
+    });
+
     $.fn.bootstrapValidator.validators.vin = {
         /**
          * Validate an US VIN (Vehicle Identification Number)

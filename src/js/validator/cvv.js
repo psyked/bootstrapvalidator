@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.cvv = $.extend($.fn.bootstrapValidator.i18n.cvv || {}, {
+        'default': 'The value is not a valid CVV number'
+    });
+
     $.fn.bootstrapValidator.validators.cvv = {
         html5Attributes: {
             message: 'message',

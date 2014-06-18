@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.issn = $.extend($.fn.bootstrapValidator.i18n.issn || {}, {
+        'default': 'The value is not a valid ISSN number'
+    });
+
     $.fn.bootstrapValidator.validators.issn = {
         /**
          * Validate ISSN (International Standard Serial Number)

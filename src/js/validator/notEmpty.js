@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.notEmpty = $.extend($.fn.bootstrapValidator.i18n.notEmpty || {}, {
+        'default': 'The value is required'
+    });
+
     $.fn.bootstrapValidator.validators.notEmpty = {
         enableByHtml5: function($field) {
             var required = $field.attr('required') + '';

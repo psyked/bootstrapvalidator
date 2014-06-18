@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.iban = $.extend($.fn.bootstrapValidator.i18n.iban || {}, {
+        'default': 'The value is not a valid IBAN number'
+    });
+
     $.fn.bootstrapValidator.validators.iban = {
         html5Attributes: {
             message: 'message',

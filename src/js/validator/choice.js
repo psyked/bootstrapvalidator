@@ -1,4 +1,23 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.choice = $.extend($.fn.bootstrapValidator.i18n.choice || {}, {
+        'default': 'The value is not valid',
+        less: 'Choose %s options at minimum',
+        more: 'Choose %s options at maximum',
+        between: 'Choose %s - %s options',
+
+        getMessage: function(options) {
+            switch (true) {
+                case (!!options.min && !!options.max):
+                    return $.fn.bootstrapValidator.helpers.format(this.between, [options.min, options.max]);
+                    break;
+                case (!!options.min):
+                    return $.fn.bootstrapValidator.helpers.format(this.less, [options.min]);
+                case (!!options.max):
+                    return $.fn.bootstrapValidator.helpers.format(this.more, [options.max]);
+            }
+        }
+    });
+
     $.fn.bootstrapValidator.validators.choice = {
         html5Attributes: {
             message: 'message',

@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.siren = $.extend($.fn.bootstrapValidator.i18n.siren || {}, {
+        'default': 'The value is not a valid siren number'
+    });
+
 	$.fn.bootstrapValidator.validators.siren = {
 		/**
 		 * Check if a string is a siren number

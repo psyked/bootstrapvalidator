@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.isbn = $.extend($.fn.bootstrapValidator.i18n.isbn || {}, {
+        'default': 'The value is not a valid ISBN number'
+    });
+
     $.fn.bootstrapValidator.validators.isbn = {
         /**
          * Return true if the input value is a valid ISBN 10 or ISBN 13 number

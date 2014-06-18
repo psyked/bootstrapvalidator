@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.vin = $.extend($.fn.bootstrapValidator.i18n.vin || {}, {
+        'default': 'The value is not a valid VIN number'
+    });
+
     $.fn.bootstrapValidator.validators.vin = {
         /**
          * Validate an US VIN (Vehicle Identification Number)

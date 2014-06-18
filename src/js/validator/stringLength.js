@@ -1,4 +1,23 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.stringLength = $.extend($.fn.bootstrapValidator.i18n.stringLength || {}, {
+        'default': 'The value length is not valid',
+        less: 'The value must be less than %s characters long',
+        more: 'The value must be more than %s characters long',
+        between: 'The value must be between %s and %s characters long',
+
+        getMessage: function(options) {
+            switch (true) {
+                case (!!options.min && !!options.max):
+                    return $.fn.bootstrapValidator.helpers.format(this.between, [options.min, options.max]);
+                    break;
+                case (!!options.min):
+                    return $.fn.bootstrapValidator.helpers.format(this.more, [options.min]);
+                case (!!options.max):
+                    return $.fn.bootstrapValidator.helpers.format(this.less, [options.max]);
+            }
+        }
+    });
+
     $.fn.bootstrapValidator.validators.stringLength = {
         html5Attributes: {
             message: 'message',

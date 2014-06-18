@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.creditCard = $.extend($.fn.bootstrapValidator.i18n.creditCard || {}, {
+        'default': 'The value is not a valid credit card number'
+    });
+
     $.fn.bootstrapValidator.validators.creditCard = {
         /**
          * Return true if the input value is valid credit card number

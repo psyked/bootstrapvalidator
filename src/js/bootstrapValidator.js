@@ -254,7 +254,7 @@
                             .attr('data-bv-validator', validatorName)
                             .attr('data-bv-for', field)
                             .attr('data-bv-result', this.STATUS_NOT_VALIDATED)
-                            .html(this.options.fields[field].validators[validatorName].message || this.options.fields[field].message || this.options.message)
+                            .html(this._getMessage(field, validatorName))
                             .appendTo($message);
                     }
                 }
@@ -315,6 +315,35 @@
                 field: field,
                 element: fields
             });
+        },
+
+        /**
+         * Get the error message for given field and validator
+         *
+         * @param {String} field The field name
+         * @param {String} validatorName The validator name
+         * @returns {String}
+         */
+        _getMessage: function(field, validatorName) {
+            if (!this.options.fields[field] || !$.fn.bootstrapValidator.validators[validatorName]
+                || !this.options.fields[field].validators || !this.options.fields[field].validators[validatorName])
+            {
+                return '';
+            }
+
+            var options = this.options.fields[field].validators[validatorName];
+            switch (true) {
+                case (!!options.message):
+                    return options.message;
+                case (!!$.fn.bootstrapValidator.i18n[validatorName]):
+                    return ('function' == typeof $.fn.bootstrapValidator.i18n[validatorName].getMessage)
+                            ? $.fn.bootstrapValidator.i18n[validatorName].getMessage(options)
+                            : $.fn.bootstrapValidator.i18n[validatorName]['default'];
+                case (!!this.options.fields[field].message):
+                    return this.options.fields[field].message;
+                default:
+                    this.options.message
+            }
         },
 
         /**
@@ -1353,11 +1382,29 @@
 
     // Available validators
     $.fn.bootstrapValidator.validators = {};
+    $.fn.bootstrapValidator.i18n       = {};
 
     $.fn.bootstrapValidator.Constructor = BootstrapValidator;
 
     // Helper methods, which can be used in validator class
     $.fn.bootstrapValidator.helpers = {
+        /**
+         * Format a string
+         * It's used to format the error message
+         * format('The field must between %s and %s', [10, 20]) = 'The field must between 10 and 20'
+         *
+         * @param {String} message
+         * @param {Array} parameters
+         * @returns {String}
+         */
+        format: function(message, parameters) {
+            for (var i in parameters) {
+                message = message.replace('%s', parameters[i]);
+            }
+
+            return message;
+        },
+
         /**
          * Validate a date
          *

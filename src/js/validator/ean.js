@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.ean = $.extend($.fn.bootstrapValidator.i18n.ean || {}, {
+        'default': 'The value is not a valid EAN number'
+    });
+
     $.fn.bootstrapValidator.validators.ean = {
         /**
          * Validate EAN (International Article Number)

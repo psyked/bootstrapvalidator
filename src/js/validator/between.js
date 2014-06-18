@@ -1,4 +1,16 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.between = $.extend($.fn.bootstrapValidator.i18n.between || {}, {
+        'default': 'The value is not valid',
+        inclusive: 'The value must be between %s and %s',
+        notInclusive: 'The value must be between %s and %s strictly',
+
+        getMessage: function(options) {
+            return (options.inclusive === true || options.inclusive == undefined)
+                    ? $.fn.bootstrapValidator.helpers.format(this.inclusive, [options.min, options.max])
+                    : $.fn.bootstrapValidator.helpers.format(this.notInclusive, [options.min, options.max]);
+        }
+    });
+
     $.fn.bootstrapValidator.validators.between = {
         html5Attributes: {
             message: 'message',

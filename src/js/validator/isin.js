@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.isin = $.extend($.fn.bootstrapValidator.i18n.isin || {}, {
+        'default': 'The value is not a valid ISIN number'
+    });
+
     $.fn.bootstrapValidator.validators.isin = {
         // Available country codes
         // See http://isin.net/country-codes/
