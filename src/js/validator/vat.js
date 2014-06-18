@@ -27,7 +27,7 @@
                 return this[method](value);
             }
 
-            return true;
+            return false;
         },
 
         // VAT validators
