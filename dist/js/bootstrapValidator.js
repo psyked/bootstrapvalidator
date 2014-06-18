@@ -142,7 +142,7 @@
         live: 'enabled',
 
         // Map the field name with validator rules
-        fields: {}
+        fields: null
     };
 
     BootstrapValidator.prototype = {
@@ -267,7 +267,7 @@
                 emptyOptions    = $.isEmptyObject(opts),        // Check if the field options are set using HTML attributes
                 emptyValidators = $.isEmptyObject(validators);  // Check if the field validators are set using HTML attributes
 
-            if (!emptyValidators || (!emptyOptions && this.options.fields[field])) {
+            if (!emptyValidators || (!emptyOptions && this.options.fields && this.options.fields[field])) {
                 opts.validators = validators;
                 return opts;
             } else {
