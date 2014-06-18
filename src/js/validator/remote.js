@@ -27,7 +27,7 @@
                 return true;
             }
 
-            var name = $field.attr('data-bv-field'), data = options.data, url = options.url, type = options.url;
+            var name = $field.attr('data-bv-field'), data = options.data, url = options.url, type = options.type;
             if (type == null || type != "GET") type = "POST";
             if (data == null) {
                 data = {};
