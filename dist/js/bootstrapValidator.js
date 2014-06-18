@@ -324,7 +324,7 @@
                     $parent   = $field.parents(group),
                     // Allow user to indicate where the error messages are shown
                     container = this.options.fields[field].container || this.options.container,
-                    $message  = (container && container != 'tooltip' && container != 'popover') ? $(container) : this._getMessageContainer($field);
+                    $message  = (container && container != 'tooltip' && container != 'popover') ? $(container) : this._getMessageContainer($field, group);
 
                 if (container && container != 'tooltip' && container != 'popover') {
                     $message.addClass('has-error');
@@ -421,19 +421,18 @@
          * Get the element to place the error messages
          *
          * @param {jQuery} $field The field element
+         * @param {String} group
          * @returns {jQuery}
          */
-        _getMessageContainer: function($field) {
-            var $parent = $field.parent(),
-                field   = $field.attr('data-bv-field'),
-                group   = this.options.fields[field].group || this.options.group;
+        _getMessageContainer: function($field, group) {
+            var $parent = $field.parent();
             if ($parent.is(group)) {
                 return $parent;
             }
 
             var cssClasses = $parent.attr('class');
             if (!cssClasses) {
-                return this._getMessageContainer($parent);
+                return this._getMessageContainer($parent, group);
             }
 
             cssClasses = cssClasses.split(' ');
@@ -444,7 +443,7 @@
                 }
             }
 
-            return this._getMessageContainer($parent);
+            return this._getMessageContainer($parent, group);
         },
 
         /**
