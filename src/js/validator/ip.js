@@ -1,6 +1,6 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.ip = $.extend($.fn.bootstrapValidator.i18n.ip || {}, {
-        'default': 'The value is not a valid IP address'
+        'default': 'Please enter a valid IP address'
     });
 
     $.fn.bootstrapValidator.validators.ip = {

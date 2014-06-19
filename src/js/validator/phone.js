@@ -1,8 +1,8 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.phone = $.extend($.fn.bootstrapValidator.i18n.phone || {}, {
-        'default': 'The value is not a valid phone number',
+        'default': 'Please enter a valid phone number',
         countryNotSupported: 'The country code %s is not supported',
-        country: 'The value is not a valid phone number in %s',
+        country: 'Please enter a valid phone number in %s',
         countries: {
             GB: 'United Kingdom',
             US: 'USA'

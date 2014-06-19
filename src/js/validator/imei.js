@@ -1,6 +1,6 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.imei = $.extend($.fn.bootstrapValidator.i18n.imei || {}, {
-        'default': 'The value is not a valid IMEI number'
+        'default': 'Please enter a valid IMEI number'
     });
 
     $.fn.bootstrapValidator.validators.imei = {

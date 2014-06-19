@@ -1,6 +1,6 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.numeric = $.extend($.fn.bootstrapValidator.i18n.numeric || {}, {
-        'default': 'The value is not a valid number'
+        'default': 'Please enter a valid float number'
     });
 
     $.fn.bootstrapValidator.validators.numeric = {

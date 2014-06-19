@@ -1,6 +1,6 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.grid = $.extend($.fn.bootstrapValidator.i18n.grid || {}, {
-        'default': 'The value is not a valid GRId number'
+        'default': 'Please enter a valid GRId number'
     });
 
     $.fn.bootstrapValidator.validators.grid = {

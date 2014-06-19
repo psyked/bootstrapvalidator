@@ -1,6 +1,6 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.mac = $.extend($.fn.bootstrapValidator.i18n.mac || {}, {
-        'default': 'The value is not a valid MAC address'
+        'default': 'Please enter a valid MAC address'
     });
 
     $.fn.bootstrapValidator.validators.mac = {

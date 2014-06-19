@@ -1,7 +1,7 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.stringCase = $.extend($.fn.bootstrapValidator.i18n.stringCase || {}, {
-        'default': 'The value must be lowercase',
-        upper: 'The value must be uppercase',
+        'default': 'Please enter only lowercase characters',
+        upper: 'Please enter only uppercase characters',
 
         getMessage: function(options) {
             var stringCase = (options['case'] || 'lower').toLowerCase();

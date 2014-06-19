@@ -1,8 +1,8 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.vat = $.extend($.fn.bootstrapValidator.i18n.vat || {}, {
-        'default': 'The value is not a valid VAT number',
+        'default': 'Please enter a valid VAT number',
         countryNotSupported: 'The country code %s is not supported',
-        country: 'The value is not a valid %s VAT number',
+        country: 'Please enter a valid %s VAT number',
         countries: {
             AT: 'Austrian',
             BE: 'Belgian',

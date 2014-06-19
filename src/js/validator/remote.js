@@ -1,6 +1,6 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.remote = $.extend($.fn.bootstrapValidator.i18n.remote || {}, {
-        'default': 'The value is not valid'
+        'default': 'Please enter a valid value'
     });
 
     $.fn.bootstrapValidator.validators.remote = {

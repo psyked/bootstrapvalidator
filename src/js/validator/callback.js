@@ -1,6 +1,6 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.callback = $.extend($.fn.bootstrapValidator.i18n.callback || {}, {
-        'default': 'The value is not valid'
+        'default': 'Please enter a valid value'
     });
 
     $.fn.bootstrapValidator.validators.callback = {

@@ -1,6 +1,6 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.hexColor = $.extend($.fn.bootstrapValidator.i18n.hexColor || {}, {
-        'default': 'The value is not a valid hex color'
+        'default': 'Please enter a valid hex color'
     });
 
     $.fn.bootstrapValidator.validators.hexColor = {

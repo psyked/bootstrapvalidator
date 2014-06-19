@@ -1,6 +1,6 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.uri = $.extend($.fn.bootstrapValidator.i18n.uri || {}, {
-        'default': 'The value is not a valid URI'
+        'default': 'Please enter a valid URI'
     });
 
     $.fn.bootstrapValidator.validators.uri = {

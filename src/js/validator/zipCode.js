@@ -1,8 +1,8 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.zipCode = $.extend($.fn.bootstrapValidator.i18n.zipCode || {}, {
-        'default': 'The value is not a valid zip code',
+        'default': 'Please enter a valid zip code',
         countryNotSupported: 'The country code %s is not supported',
-        country: 'The value is not a valid %s',
+        country: 'Please enter a valid %s',
         countries: {
             'CA': 'Canadian postal code',
             'DK': 'Danish postal code',

@@ -1,6 +1,6 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.siren = $.extend($.fn.bootstrapValidator.i18n.siren || {}, {
-        'default': 'The value is not a valid siren number'
+        'default': 'Please enter a valid SIREN number'
     });
 
 	$.fn.bootstrapValidator.validators.siren = {

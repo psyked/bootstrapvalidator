@@ -1,7 +1,7 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.greaterThan = $.extend($.fn.bootstrapValidator.i18n.greaterThan || {}, {
-        'default': 'The value must be greater than or equal to %s',
-        notInclusive: 'The value must be greater than %s',
+        'default': 'Please enter a value greater than or equal to %s',
+        notInclusive: 'Please enter a value greater than %s',
 
         getMessage: function(options) {
             return (options.inclusive === true || options.inclusive == undefined)

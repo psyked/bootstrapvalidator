@@ -1,8 +1,8 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.iban = $.extend($.fn.bootstrapValidator.i18n.iban || {}, {
-        'default': 'The value is not a valid IBAN number',
+        'default': 'Please enter a valid IBAN number',
         countryNotSupported: 'The country code %s is not supported',
-        country: 'The value is not a valid IBAN number in %s',
+        country: 'Please enter a valid IBAN number in %s',
         countries: {
             AD: 'Andorra',
             AE: 'United Arab Emirates',

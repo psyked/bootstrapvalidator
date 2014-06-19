@@ -1,9 +1,9 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.stringLength = $.extend($.fn.bootstrapValidator.i18n.stringLength || {}, {
-        'default': 'The value length is not valid',
-        less: 'The value must be less than %s characters long',
-        more: 'The value must be more than %s characters long',
-        between: 'The value must be between %s and %s characters long',
+        'default': 'Please enter a value with valid length',
+        less: 'Please enter less than %s characters',
+        more: 'Please enter more than %s characters',
+        between: 'Please enter value between %s and %s characters long',
 
         getMessage: function(options) {
             switch (true) {

@@ -1,6 +1,6 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.ismn = $.extend($.fn.bootstrapValidator.i18n.ismn || {}, {
-        'default': 'The value is not a valid ISMN number'
+        'default': 'Please enter a valid ISMN number'
     });
 
     $.fn.bootstrapValidator.validators.ismn = {

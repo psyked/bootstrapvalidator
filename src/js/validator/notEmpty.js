@@ -1,6 +1,6 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.notEmpty = $.extend($.fn.bootstrapValidator.i18n.notEmpty || {}, {
-        'default': 'The value is required'
+        'default': 'Please enter a value'
     });
 
     $.fn.bootstrapValidator.validators.notEmpty = {

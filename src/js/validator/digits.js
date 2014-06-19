@@ -1,6 +1,6 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.digits = $.extend($.fn.bootstrapValidator.i18n.digits || {}, {
-        'default': 'The value can contain only digits'
+        'default': 'Please enter only digits'
     });
 
     $.fn.bootstrapValidator.validators.digits = {

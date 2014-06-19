@@ -1,7 +1,7 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.between = $.extend($.fn.bootstrapValidator.i18n.between || {}, {
-        'default': 'The value must be between %s and %s',
-        notInclusive: 'The value must be between %s and %s strictly',
+        'default': 'Please enter a value between %s and %s',
+        notInclusive: 'Please enter a value between %s and %s strictly',
 
         getMessage: function(options) {
             return (options.inclusive === true || options.inclusive == undefined)

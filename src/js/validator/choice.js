@@ -1,6 +1,6 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.choice = $.extend($.fn.bootstrapValidator.i18n.choice || {}, {
-        'default': 'The value is not valid',
+        'default': 'Please enter a valid value',
         less: 'Please choose %s options at minimum',
         more: 'Please choose %s options at maximum',
         between: 'Please choose %s - %s options',

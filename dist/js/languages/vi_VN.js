@@ -89,7 +89,7 @@
                 EE: 'Estonia',
                 ES: 'Tây Ban Nha',
                 FI: 'Phần Lan',
-                FO: 'đảo Faroe',
+                FO: 'Đảo Faroe',
                 FR: 'Pháp',
                 GB: 'Vương quốc Anh',
                 GE: 'Georgia',

@@ -1512,7 +1512,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.base64 = $.extend($.fn.bootstrapValidator.i18n.base64 || {}, {
-        'default': 'The value is not a valid base 64 encoded'
+        'default': 'Please enter a valid base 64 encoded'
     });
 
     $.fn.bootstrapValidator.validators.base64 = {
@@ -1537,8 +1537,8 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.between = $.extend($.fn.bootstrapValidator.i18n.between || {}, {
-        'default': 'The value must be between %s and %s',
-        notInclusive: 'The value must be between %s and %s strictly',
+        'default': 'Please enter a value between %s and %s',
+        notInclusive: 'Please enter a value between %s and %s strictly',
 
         getMessage: function(options) {
             return (options.inclusive === true || options.inclusive == undefined)
@@ -1593,7 +1593,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.callback = $.extend($.fn.bootstrapValidator.i18n.callback || {}, {
-        'default': 'The value is not valid'
+        'default': 'Please enter a valid value'
     });
 
     $.fn.bootstrapValidator.validators.callback = {
@@ -1626,7 +1626,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.choice = $.extend($.fn.bootstrapValidator.i18n.choice || {}, {
-        'default': 'The value is not valid',
+        'default': 'Please enter a valid value',
         less: 'Please choose %s options at minimum',
         more: 'Please choose %s options at maximum',
         between: 'Please choose %s - %s options',
@@ -1679,7 +1679,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.creditCard = $.extend($.fn.bootstrapValidator.i18n.creditCard || {}, {
-        'default': 'The value is not a valid credit card number'
+        'default': 'Please enter a valid credit card number'
     });
 
     $.fn.bootstrapValidator.validators.creditCard = {
@@ -1782,7 +1782,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.cusip = $.extend($.fn.bootstrapValidator.i18n.cusip || {}, {
-        'default': 'The value is not a valid CUSIP number'
+        'default': 'Please enter a valid CUSIP number'
     });
 
     $.fn.bootstrapValidator.validators.cusip = {
@@ -1837,7 +1837,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.cvv = $.extend($.fn.bootstrapValidator.i18n.cvv || {}, {
-        'default': 'The value is not a valid CVV number'
+        'default': 'Please enter a valid CVV number'
     });
 
     $.fn.bootstrapValidator.validators.cvv = {
@@ -1953,7 +1953,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.date = $.extend($.fn.bootstrapValidator.i18n.date || {}, {
-        'default': 'The value is not a valid date'
+        'default': 'Please enter a valid date'
     });
 
     $.fn.bootstrapValidator.validators.date = {
@@ -2108,7 +2108,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.digits = $.extend($.fn.bootstrapValidator.i18n.digits || {}, {
-        'default': 'The value can contain only digits'
+        'default': 'Please enter only digits'
     });
 
     $.fn.bootstrapValidator.validators.digits = {
@@ -2132,7 +2132,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.ean = $.extend($.fn.bootstrapValidator.i18n.ean || {}, {
-        'default': 'The value is not a valid EAN number'
+        'default': 'Please enter a valid EAN number'
     });
 
     $.fn.bootstrapValidator.validators.ean = {
@@ -2172,7 +2172,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.emailAddress = $.extend($.fn.bootstrapValidator.i18n.emailAddress || {}, {
-        'default': 'The value is not a valid email address'
+        'default': 'Please enter a valid email address'
     });
 
     $.fn.bootstrapValidator.validators.emailAddress = {
@@ -2203,7 +2203,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.file = $.extend($.fn.bootstrapValidator.i18n.file || {}, {
-        'default': 'The selected file is not valid'
+        'default': 'Please choose a valid file'
     });
 
     $.fn.bootstrapValidator.validators.file = {
@@ -2272,8 +2272,8 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.greaterThan = $.extend($.fn.bootstrapValidator.i18n.greaterThan || {}, {
-        'default': 'The value must be greater than or equal to %s',
-        notInclusive: 'The value must be greater than %s',
+        'default': 'Please enter a value greater than or equal to %s',
+        notInclusive: 'Please enter a value greater than %s',
 
         getMessage: function(options) {
             return (options.inclusive === true || options.inclusive == undefined)
@@ -2323,7 +2323,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.grid = $.extend($.fn.bootstrapValidator.i18n.grid || {}, {
-        'default': 'The value is not a valid GRId number'
+        'default': 'Please enter a valid GRId number'
     });
 
     $.fn.bootstrapValidator.validators.grid = {
@@ -2360,7 +2360,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.hex = $.extend($.fn.bootstrapValidator.i18n.hex || {}, {
-        'default': 'The value is not a valid hexadecimal number'
+        'default': 'Please enter a valid hexadecimal number'
     });
 
     $.fn.bootstrapValidator.validators.hex = {
@@ -2385,7 +2385,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.hexColor = $.extend($.fn.bootstrapValidator.i18n.hexColor || {}, {
-        'default': 'The value is not a valid hex color'
+        'default': 'Please enter a valid hex color'
     });
 
     $.fn.bootstrapValidator.validators.hexColor = {
@@ -2413,9 +2413,9 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.iban = $.extend($.fn.bootstrapValidator.i18n.iban || {}, {
-        'default': 'The value is not a valid IBAN number',
+        'default': 'Please enter a valid IBAN number',
         countryNotSupported: 'The country code %s is not supported',
-        country: 'The value is not a valid IBAN number in %s',
+        country: 'Please enter a valid IBAN number in %s',
         countries: {
             AD: 'Andorra',
             AE: 'United Arab Emirates',
@@ -2652,9 +2652,9 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.id = $.extend($.fn.bootstrapValidator.i18n.id || {}, {
-        'default': 'The value is not a valid identification number',
+        'default': 'Please enter a valid identification number',
         countryNotSupported: 'The country code %s is not supported',
-        country: 'The value is not a valid %s identification number',
+        country: 'Please enter a valid %s identification number',
         countries: {
             BA: 'Bosnia and Herzegovina',
             BG: 'Bulgarian',
@@ -3502,7 +3502,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.imei = $.extend($.fn.bootstrapValidator.i18n.imei || {}, {
-        'default': 'The value is not a valid IMEI number'
+        'default': 'Please enter a valid IMEI number'
     });
 
     $.fn.bootstrapValidator.validators.imei = {
@@ -3547,7 +3547,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.integer = $.extend($.fn.bootstrapValidator.i18n.integer || {}, {
-        'default': 'The value is not a valid number'
+        'default': 'Please enter a valid number'
     });
 
     $.fn.bootstrapValidator.validators.integer = {
@@ -3575,7 +3575,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.ip = $.extend($.fn.bootstrapValidator.i18n.ip || {}, {
-        'default': 'The value is not a valid IP address'
+        'default': 'Please enter a valid IP address'
     });
 
     $.fn.bootstrapValidator.validators.ip = {
@@ -3614,7 +3614,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.isbn = $.extend($.fn.bootstrapValidator.i18n.isbn || {}, {
-        'default': 'The value is not a valid ISBN number'
+        'default': 'Please enter a valid ISBN number'
     });
 
     $.fn.bootstrapValidator.validators.isbn = {
@@ -3699,7 +3699,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.isin = $.extend($.fn.bootstrapValidator.i18n.isin || {}, {
-        'default': 'The value is not a valid ISIN number'
+        'default': 'Please enter a valid ISIN number'
     });
 
     $.fn.bootstrapValidator.validators.isin = {
@@ -3758,7 +3758,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.ismn = $.extend($.fn.bootstrapValidator.i18n.ismn || {}, {
-        'default': 'The value is not a valid ISMN number'
+        'default': 'Please enter a valid ISMN number'
     });
 
     $.fn.bootstrapValidator.validators.ismn = {
@@ -3817,7 +3817,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.issn = $.extend($.fn.bootstrapValidator.i18n.issn || {}, {
-        'default': 'The value is not a valid ISSN number'
+        'default': 'Please enter a valid ISSN number'
     });
 
     $.fn.bootstrapValidator.validators.issn = {
@@ -3863,8 +3863,8 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.lessThan = $.extend($.fn.bootstrapValidator.i18n.lessThan || {}, {
-        'default': 'The value must be less than or equal to %s',
-        notInclusive: 'The value must be less than %s',
+        'default': 'Please enter a value less than or equal to %s',
+        notInclusive: 'Please enter a value less than %s',
 
         getMessage: function(options) {
             return (options.inclusive === true || options.inclusive == undefined)
@@ -3914,7 +3914,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.mac = $.extend($.fn.bootstrapValidator.i18n.mac || {}, {
-        'default': 'The value is not a valid MAC address'
+        'default': 'Please enter a valid MAC address'
     });
 
     $.fn.bootstrapValidator.validators.mac = {
@@ -3939,7 +3939,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.notEmpty = $.extend($.fn.bootstrapValidator.i18n.notEmpty || {}, {
-        'default': 'The value is required'
+        'default': 'Please enter a value'
     });
 
     $.fn.bootstrapValidator.validators.notEmpty = {
@@ -3971,7 +3971,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.numeric = $.extend($.fn.bootstrapValidator.i18n.numeric || {}, {
-        'default': 'The value is not a valid number'
+        'default': 'Please enter a valid float number'
     });
 
     $.fn.bootstrapValidator.validators.numeric = {
@@ -4006,9 +4006,9 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.phone = $.extend($.fn.bootstrapValidator.i18n.phone || {}, {
-        'default': 'The value is not a valid phone number',
+        'default': 'Please enter a valid phone number',
         countryNotSupported: 'The country code %s is not supported',
-        country: 'The value is not a valid phone number in %s',
+        country: 'Please enter a valid phone number in %s',
         countries: {
             GB: 'United Kingdom',
             US: 'USA'
@@ -4080,7 +4080,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.regexp = $.extend($.fn.bootstrapValidator.i18n.regexp || {}, {
-        'default': 'The value does not match the pattern'
+        'default': 'Please enter a value matching the pattern'
     });
 
     $.fn.bootstrapValidator.validators.regexp = {
@@ -4122,7 +4122,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.remote = $.extend($.fn.bootstrapValidator.i18n.remote || {}, {
-        'default': 'The value is not valid'
+        'default': 'Please enter a valid value'
     });
 
     $.fn.bootstrapValidator.validators.remote = {
@@ -4192,7 +4192,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.rtn = $.extend($.fn.bootstrapValidator.i18n.rtn || {}, {
-        'default': 'The value is not a valid RTN number'
+        'default': 'Please enter a valid RTN number'
     });
 
     $.fn.bootstrapValidator.validators.rtn = {
@@ -4230,7 +4230,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.sedol = $.extend($.fn.bootstrapValidator.i18n.sedol || {}, {
-        'default': 'The value is not a valid SEDOL number'
+        'default': 'Please enter a valid SEDOL number'
     });
 
     $.fn.bootstrapValidator.validators.sedol = {
@@ -4270,7 +4270,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.siren = $.extend($.fn.bootstrapValidator.i18n.siren || {}, {
-        'default': 'The value is not a valid siren number'
+        'default': 'Please enter a valid SIREN number'
     });
 
 	$.fn.bootstrapValidator.validators.siren = {
@@ -4298,7 +4298,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.siret = $.extend($.fn.bootstrapValidator.i18n.siret || {}, {
-        'default': 'The value is not a valid siret number'
+        'default': 'Please enter a valid SIRET number'
     });
 
 	$.fn.bootstrapValidator.validators.siret = {
@@ -4336,7 +4336,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.step = $.extend($.fn.bootstrapValidator.i18n.step || {}, {
-        'default': 'The value is not a valid step of %s',
+        'default': 'Please enter a valid step of %s',
 
         getMessage: function(options) {
             return $.fn.bootstrapValidator.helpers.format(this['default'], [options.step]);
@@ -4401,8 +4401,8 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.stringCase = $.extend($.fn.bootstrapValidator.i18n.stringCase || {}, {
-        'default': 'The value must be lowercase',
-        upper: 'The value must be uppercase',
+        'default': 'Please enter only lowercase characters',
+        upper: 'Please enter only uppercase characters',
 
         getMessage: function(options) {
             var stringCase = (options['case'] || 'lower').toLowerCase();
@@ -4451,10 +4451,10 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.stringLength = $.extend($.fn.bootstrapValidator.i18n.stringLength || {}, {
-        'default': 'The value length is not valid',
-        less: 'The value must be less than %s characters long',
-        more: 'The value must be more than %s characters long',
-        between: 'The value must be between %s and %s characters long',
+        'default': 'Please enter a value with valid length',
+        less: 'Please enter less than %s characters',
+        more: 'Please enter more than %s characters',
+        between: 'Please enter value between %s and %s characters long',
 
         getMessage: function(options) {
             switch (true) {
@@ -4518,7 +4518,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.uri = $.extend($.fn.bootstrapValidator.i18n.uri || {}, {
-        'default': 'The value is not a valid URI'
+        'default': 'Please enter a valid URI'
     });
 
     $.fn.bootstrapValidator.validators.uri = {
@@ -4619,8 +4619,8 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.uuid = $.extend($.fn.bootstrapValidator.i18n.uuid || {}, {
-        'default': 'The value is not a valid UUID',
-        version: 'The value is not a valid UUID version %s',
+        'default': 'Please enter a valid UUID number',
+        version: 'Please enter a valid UUID version %s number',
 
         getMessage: function(options) {
             return (options.version)
@@ -4666,9 +4666,9 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.vat = $.extend($.fn.bootstrapValidator.i18n.vat || {}, {
-        'default': 'The value is not a valid VAT number',
+        'default': 'Please enter a valid VAT number',
         countryNotSupported: 'The country code %s is not supported',
-        country: 'The value is not a valid %s VAT number',
+        country: 'Please enter a valid %s VAT number',
         countries: {
             AT: 'Austrian',
             BE: 'Belgian',
@@ -5880,7 +5880,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.vin = $.extend($.fn.bootstrapValidator.i18n.vin || {}, {
-        'default': 'The value is not a valid VIN number'
+        'default': 'Please enter a valid VIN number'
     });
 
     $.fn.bootstrapValidator.validators.vin = {
@@ -5929,9 +5929,9 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.zipCode = $.extend($.fn.bootstrapValidator.i18n.zipCode || {}, {
-        'default': 'The value is not a valid zip code',
+        'default': 'Please enter a valid zip code',
         countryNotSupported: 'The country code %s is not supported',
-        country: 'The value is not a valid %s',
+        country: 'Please enter a valid %s',
         countries: {
             'CA': 'Canadian postal code',
             'DK': 'Danish postal code',

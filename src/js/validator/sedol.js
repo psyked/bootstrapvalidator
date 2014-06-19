@@ -1,6 +1,6 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.sedol = $.extend($.fn.bootstrapValidator.i18n.sedol || {}, {
-        'default': 'The value is not a valid SEDOL number'
+        'default': 'Please enter a valid SEDOL number'
     });
 
     $.fn.bootstrapValidator.validators.sedol = {

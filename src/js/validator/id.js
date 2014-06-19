@@ -1,8 +1,8 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.id = $.extend($.fn.bootstrapValidator.i18n.id || {}, {
-        'default': 'The value is not a valid identification number',
+        'default': 'Please enter a valid identification number',
         countryNotSupported: 'The country code %s is not supported',
-        country: 'The value is not a valid %s identification number',
+        country: 'Please enter a valid %s identification number',
         countries: {
             BA: 'Bosnia and Herzegovina',
             BG: 'Bulgarian',
