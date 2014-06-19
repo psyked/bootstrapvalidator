@@ -27,7 +27,8 @@
                 return true;
             }
 
-            var name = $field.attr('data-bv-field'), data = options.data;
+            var name = $field.attr('data-bv-field'), data = options.data, url = options.url, type = options.type;
+            if (type == null || type != "GET") type = "POST";
             if (data == null) {
                 data = {};
             }
@@ -35,12 +36,16 @@
             if ('function' == typeof data) {
                 data = data.call(this, validator);
             }
+            // Support dynamic url
+            if ('function' == typeof url) {
+                url = url.call(this, validator);
+            }
             data[options.name || name] = value;
 
             var dfd = new $.Deferred();
             var xhr = $.ajax({
-                type: 'POST',
-                url: options.url,
+                type: type,
+                url: url,
                 dataType: 'json',
                 data: data
             });
