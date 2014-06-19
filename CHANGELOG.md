@@ -39,6 +39,7 @@ __Improvements__
 * [#366](https://github.com/nghuuphuoc/bootstrapvalidator/issues/366): Don't change the enable setting when the new one is the same
 * [#371](https://github.com/nghuuphuoc/bootstrapvalidator/pull/371): Add H character to the Canadian postcode, thanks to [@jzhang6](https://github.com/jzhang6)
 * [#388](https://github.com/nghuuphuoc/bootstrapvalidator/issues/388): Allow to override the default options. Useful for using multiple forms in the same page
+* [#393](https://github.com/nghuuphuoc/bootstrapvalidator/pull/393): The [remote validator](http://bootstrapvalidator.com/validators/remote/) adds support for dynamic ```url``` and method type (GET/POST), thanks to [@ericnakagawa](https://github.com/ericnakagawa)
 
 __Bug Fixes__
 * [#288](https://github.com/nghuuphuoc/bootstrapvalidator/issues/288): Fix [```date``` validator](http://bootstrapvalidator.com/validators/date/) issue on IE8

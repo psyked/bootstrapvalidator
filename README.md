@@ -101,6 +101,7 @@ Big thanks to the contributors:
 * [@alavers](https://github.com/alavers)
 * [@easonhan007](https://github.com/easonhan007)
 * [@emilchristensen](https://github.com/emilchristensen)
+* [@ericnakagawa](https://github.com/ericnakagawa)
 * [@evilchili](https://github.com/evilchili)
 * [@Francismori7](https://github.com/Francismori7)
 * [@gercheq](https://github.com/gercheq)
