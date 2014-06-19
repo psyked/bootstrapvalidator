@@ -20,7 +20,8 @@ module.exports = function(grunt) {
         copy: {
             main: {
                 files: [
-                    { cwd: 'src/css', src: '**', dest: '<%= buildDir %>/css', expand: true, flatten: true, filter: 'isFile' }
+                    { cwd: 'src/css', src: '**', dest: '<%= buildDir %>/css', expand: true, flatten: true, filter: 'isFile' },
+                    { cwd: 'src/js/languages', src: '**', dest: '<%= buildDir %>/js/languages', expand: true, flatten: true, filter: 'isFile' }
                 ]
             }
         },

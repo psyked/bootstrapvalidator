@@ -4,7 +4,7 @@
 
 __New Features__
 * [#2](https://github.com/nghuuphuoc/bootstrapvalidator/issues/2), [#387](https://github.com/nghuuphuoc/bootstrapvalidator/issues/387): Provide the default error messages
-* [#93](https://github.com/nghuuphuoc/bootstrapvalidator/issues/93), [#385](https://github.com/nghuuphuoc/bootstrapvalidator/issues/385): Support translating error messages
+* [#93](https://github.com/nghuuphuoc/bootstrapvalidator/issues/93), [#385](https://github.com/nghuuphuoc/bootstrapvalidator/issues/385): Support translating error messages. Provide the Vietnamese language file
 * [#121](https://github.com/nghuuphuoc/bootstrapvalidator/issues/121): Add events for form validate successfully or not
 * [#125](https://github.com/nghuuphuoc/bootstrapvalidator/issues/125): Support dynamic fields
 * [#130](https://github.com/nghuuphuoc/bootstrapvalidator/pull/130): Add ```addField()``` and ```removeField()``` methods for managing dynamic fields, thanks to [@jcnmulio](https://github.com/jcnmulio)

@@ -9,7 +9,6 @@
     <script type="text/javascript" src="../vendor/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../dist/js/bootstrapValidator.js"></script>
-    <script type="text/javascript" src="../dist/js/languages/vi_VN.js"></script>
 </head>
 <body>
     <div class="container">
@@ -215,6 +214,7 @@ $(document).ready(function() {
                 }
             },
             username: {
+                message: 'The username is not valid',
                 validators: {
                     notEmpty: {},
                     stringLength: {
@@ -226,7 +226,7 @@ $(document).ready(function() {
                     },
                     remote: {
                         url: 'remote.php',
-                        message: 'Tên tài khoản này đã được đăng ký'
+                        message: 'The username is not available'
                     },
                     different: {
                         field: 'password',
@@ -243,11 +243,12 @@ $(document).ready(function() {
                 validators: {
                     notEmpty: {},
                     identical: {
-                        field: 'confirmPassword'
+                        field: 'confirmPassword',
+                        message: 'The password and its confirm are not the same'
                     },
                     different: {
                         field: 'username',
-                        message: 'Mật khẩu và tên đăng nhập phải khác nhau'
+                        message: 'The password cannot be the same as username'
                     }
                 }
             },
@@ -259,7 +260,7 @@ $(document).ready(function() {
                     },
                     different: {
                         field: 'username',
-                        message: 'Mật khẩu và tên đăng nhập phải khác nhau'
+                        message: 'The password cannot be the same as username'
                     }
                 }
             },
