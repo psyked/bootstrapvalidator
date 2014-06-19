@@ -1,4 +1,12 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.step = $.extend($.fn.bootstrapValidator.i18n.step || {}, {
+        'default': 'The value is not a valid step of %s',
+
+        getMessage: function(options) {
+            return $.fn.bootstrapValidator.helpers.format(this['default'], [options.step]);
+        }
+    });
+
     $.fn.bootstrapValidator.validators.step = {
         html5Attributes: {
             message: 'message',

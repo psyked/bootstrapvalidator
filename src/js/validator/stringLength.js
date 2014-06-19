@@ -11,9 +11,11 @@
                     return $.fn.bootstrapValidator.helpers.format(this.between, [options.min, options.max]);
                     break;
                 case (!!options.min):
-                    return $.fn.bootstrapValidator.helpers.format(this.more, [options.min]);
+                    return $.fn.bootstrapValidator.helpers.format(this.more, options.min);
                 case (!!options.max):
-                    return $.fn.bootstrapValidator.helpers.format(this.less, [options.max]);
+                    return $.fn.bootstrapValidator.helpers.format(this.less, options.max);
+                default:
+                    return this['default'];
             }
         }
     });

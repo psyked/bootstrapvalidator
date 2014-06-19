@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.numeric = $.extend($.fn.bootstrapValidator.i18n.numeric || {}, {
+        'default': 'The value is not a valid number'
+    });
+
     $.fn.bootstrapValidator.validators.numeric = {
         html5Attributes: {
             message: 'message',

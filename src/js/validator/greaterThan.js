@@ -1,4 +1,15 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.greaterThan = $.extend($.fn.bootstrapValidator.i18n.greaterThan || {}, {
+        'default': 'The value must be greater than or equal to %s',
+        notInclusive: 'The value must be greater than %s',
+
+        getMessage: function(options) {
+            return (options.inclusive === true || options.inclusive == undefined)
+                    ? $.fn.bootstrapValidator.helpers.format(this['default'], options.value)
+                    : $.fn.bootstrapValidator.helpers.format(this.notInclusive, options.value);
+        }
+    });
+
     $.fn.bootstrapValidator.validators.greaterThan = {
         html5Attributes: {
             message: 'message',

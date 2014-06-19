@@ -1,9 +1,35 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.phone = $.extend($.fn.bootstrapValidator.i18n.phone || {}, {
+        'default': 'The value is not a valid phone number',
+        countryNotSupported: 'The country code %s is not supported',
+        country: 'The value is not a valid phone number in %s',
+        countries: {
+            GB: 'United Kingdom',
+            US: 'USA'
+        },
+
+        getMessage: function(options) {
+            var country = (options.country || 'US').toUpperCase();
+            if ($.inArray(country, $.fn.bootstrapValidator.validators.phone.COUNTRIES) == -1) {
+                return $.fn.bootstrapValidator.helpers.format(this.countryNotSupported, country);
+            }
+
+            if (this.countries[country]) {
+                return $.fn.bootstrapValidator.helpers.format(this.country, this.countries[country]);
+            }
+
+            return this['default'];
+        }
+    });
+
     $.fn.bootstrapValidator.validators.phone = {
         html5Attributes: {
             message: 'message',
             country: 'country'
         },
+
+        // The supported countries
+        COUNTRIES: ['GB', 'US'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -24,6 +50,10 @@
             }
 
             var country = (options.country || 'US').toUpperCase();
+            if ($.inArray(country, this.COUNTRIES) == -1) {
+                return false;
+            }
+
             switch (country) {
             	case 'GB':
             		// http://aa-asterisk.org.uk/index.php/Regular_Expressions_for_Validating_and_Formatting_GB_Telephone_Numbers#Match_GB_telephone_number_in_any_format

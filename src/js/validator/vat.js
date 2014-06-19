@@ -1,4 +1,62 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.vat = $.extend($.fn.bootstrapValidator.i18n.vat || {}, {
+        'default': 'The value is not a valid VAT number',
+        countryNotSupported: 'The country code %s is not supported',
+        country: 'The value is not a valid %s VAT number',
+        countries: {
+            AT: 'Austrian',
+            BE: 'Belgian',
+            BG: 'Bulgarian',
+            CH: 'Swiss',
+            CY: 'Cypriot',
+            CZ: 'Czech',
+            DE: 'German',
+            DK: 'Danish',
+            EE: 'Estonian',
+            ES: 'Spanish',
+            FI: 'Finnish',
+            FR: 'French',
+            GB: 'United Kingdom',
+            GR: 'Greek',
+            EL: 'Greek',
+            HU: 'Hungarian',
+            HR: 'Croatian',
+            IE: 'Irish',
+            IT: 'Italian',
+            LT: 'Lithuanian',
+            LU: 'Luxembourg',
+            LV: 'Latvian',
+            MT: 'Maltese',
+            NL: 'Dutch',
+            NO: 'Norwegian',
+            PL: 'Polish',
+            PT: 'Portuguese',
+            RO: 'Romanian',
+            RU: 'Russian',
+            RS: 'Serbian',
+            SE: 'Swedish',
+            SI: 'Slovenian',
+            SK: 'Slovak'
+        },
+
+        getMessage: function(options) {
+            if (options.country) {
+                var country = options.country,
+                    method  = ['_', country.toLowerCase()].join('');
+                if ($.fn.bootstrapValidator.validators.vat[method] == undefined) {
+                    return $.fn.bootstrapValidator.helpers.format(this.countryNotSupported, options.country);
+                }
+
+                country = country.toUpperCase();
+                if (this.countries[country]) {
+                    return $.fn.bootstrapValidator.helpers.format(this.country, this.countries[country]);
+                }
+            }
+
+            return this['default'];
+        }
+    });
+
     $.fn.bootstrapValidator.validators.vat = {
         html5Attributes: {
             message: 'message',

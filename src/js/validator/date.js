@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.date = $.extend($.fn.bootstrapValidator.i18n.date || {}, {
+        'default': 'The value is not a valid date'
+    });
+
     $.fn.bootstrapValidator.validators.date = {
         html5Attributes: {
             message: 'message',

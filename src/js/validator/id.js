@@ -1,4 +1,54 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.id = $.extend($.fn.bootstrapValidator.i18n.id || {}, {
+        'default': 'The value is not a valid identification number',
+        countryNotSupported: 'The country code %s is not supported',
+        country: 'The value is not a valid %s identification number',
+        countries: {
+            BA: 'Bosnia and Herzegovina',
+            BG: 'Bulgarian',
+            BR: 'Brazilian',
+            CH: 'Swiss',
+            CL: 'Chilean',
+            CZ: 'Czech',
+            DK: 'Danish',
+            EE: 'Estonian',
+            ES: 'Spanish',
+            FI: 'Finnish',
+            HR: 'Croatian',
+            IE: 'Irish',
+            IS: 'Iceland',
+            LT: 'Lithuanian',
+            LV: 'Latvian',
+            ME: 'Montenegro',
+            MK: 'Macedonian',
+            NL: 'Dutch',
+            RO: 'Romanian',
+            RS: 'Serbian',
+            SE: 'Swedish',
+            SI: 'Slovenian',
+            SK: 'Slovak',
+            SM: 'San Marino',
+            ZA: 'South African'
+        },
+
+        getMessage: function(options) {
+            if (options.country) {
+                var country = options.country.toLowerCase(),
+                    method  = ['_', country].join('');
+                if ($.fn.bootstrapValidator.validators.id[method] == undefined) {
+                    return $.fn.bootstrapValidator.helpers.format(this.countryNotSupported, country);
+                }
+
+                country = country.toUpperCase();
+                if (this.countries[country]) {
+                    return $.fn.bootstrapValidator.helpers.format(this.country, this.countries[country]);
+                }
+            }
+
+            return this['default'];
+        }
+    });
+
     $.fn.bootstrapValidator.validators.id = {
         html5Attributes: {
             message: 'message',

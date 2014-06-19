@@ -1,6 +1,13 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.uuid = $.extend($.fn.bootstrapValidator.i18n.uuid || {}, {
-        'default': 'The value is not a valid UUID'
+        'default': 'The value is not a valid UUID',
+        version: 'The value is not a valid UUID version %s',
+
+        getMessage: function(options) {
+            return (options.version)
+                    ? $.fn.bootstrapValidator.helpers.format(this.version, [options.version])
+                    : this['default'];
+        }
     });
 
     $.fn.bootstrapValidator.validators.uuid = {

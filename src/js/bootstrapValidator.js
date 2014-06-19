@@ -1398,6 +1398,10 @@
          * @returns {String}
          */
         format: function(message, parameters) {
+            if (!$.isArray(parameters)) {
+                parameters = [parameters];
+            }
+
             for (var i in parameters) {
                 message = message.replace('%s', parameters[i]);
             }

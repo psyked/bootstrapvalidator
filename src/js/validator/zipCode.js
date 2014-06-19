@@ -1,9 +1,40 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.zipCode = $.extend($.fn.bootstrapValidator.i18n.zipCode || {}, {
+        'default': 'The value is not a valid zip code',
+        countryNotSupported: 'The country code %s is not supported',
+        country: 'The value is not a valid %s',
+        countries: {
+            'CA': 'Canadian postal code',
+            'DK': 'Danish postal code',
+            'GB': 'United Kingdom postal code',
+            'IT': 'Italian postal code',
+            'NL': 'Dutch postal code',
+            'SE': 'Swiss postal code',
+            'SG': 'Singapore postal code',
+            'US': 'US zip code'
+        },
+
+        getMessage: function(options) {
+            var country = (options.country || 'US').toUpperCase();
+            if ($.inArray(country, $.fn.bootstrapValidator.validators.zipCode.COUNTRIES) == -1) {
+                return $.fn.bootstrapValidator.helpers.format(this.countryNotSupported, country);
+            }
+
+            if (this.countries[country]) {
+                return $.fn.bootstrapValidator.helpers.format(this.country, this.countries[country]);
+            }
+
+            return this['default'];
+        }
+    });
+
     $.fn.bootstrapValidator.validators.zipCode = {
         html5Attributes: {
             message: 'message',
             country: 'country'
         },
+
+        COUNTRIES: ['CA', 'DK', 'GB', 'IT', 'NL', 'SE', 'SG', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -32,6 +63,10 @@
             }
 
             var country = (options.country || 'US').toUpperCase();
+            if ($.inArray(country, this.COUNTRIES) == -1) {
+                return false;
+            }
+
             switch (country) {
                 case 'CA': return /^(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}\s?[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}$/i.test(value);
                 case 'DK': return /^(DK(-|\s)?)?\d{4}$/i.test(value);

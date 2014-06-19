@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.identical = $.extend($.fn.bootstrapValidator.i18n.identical || {}, {
+        'default': 'Please enter the same value'
+    });
+
     $.fn.bootstrapValidator.validators.identical = {
         html5Attributes: {
             message: 'message',

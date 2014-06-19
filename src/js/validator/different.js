@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.different = $.extend($.fn.bootstrapValidator.i18n.different || {}, {
+        'default': 'Please enter a different value'
+    });
+
     $.fn.bootstrapValidator.validators.different = {
         html5Attributes: {
             message: 'message',

@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.remote = $.extend($.fn.bootstrapValidator.i18n.remote || {}, {
+        'default': 'The value is not valid'
+    });
+
     $.fn.bootstrapValidator.validators.remote = {
         html5Attributes: {
             message: 'message',

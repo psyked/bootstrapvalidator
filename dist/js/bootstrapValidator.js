@@ -1399,6 +1399,10 @@
          * @returns {String}
          */
         format: function(message, parameters) {
+            if (!$.isArray(parameters)) {
+                parameters = [parameters];
+            }
+
             for (var i in parameters) {
                 message = message.replace('%s', parameters[i]);
             }
@@ -1533,13 +1537,12 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.between = $.extend($.fn.bootstrapValidator.i18n.between || {}, {
-        'default': 'The value is not valid',
-        inclusive: 'The value must be between %s and %s',
+        'default': 'The value must be between %s and %s',
         notInclusive: 'The value must be between %s and %s strictly',
 
         getMessage: function(options) {
             return (options.inclusive === true || options.inclusive == undefined)
-                    ? $.fn.bootstrapValidator.helpers.format(this.inclusive, [options.min, options.max])
+                    ? $.fn.bootstrapValidator.helpers.format(this['default'], [options.min, options.max])
                     : $.fn.bootstrapValidator.helpers.format(this.notInclusive, [options.min, options.max]);
         }
     });
@@ -1624,9 +1627,9 @@
 ;(function($) {
     $.fn.bootstrapValidator.i18n.choice = $.extend($.fn.bootstrapValidator.i18n.choice || {}, {
         'default': 'The value is not valid',
-        less: 'Choose %s options at minimum',
-        more: 'Choose %s options at maximum',
-        between: 'Choose %s - %s options',
+        less: 'Please choose %s options at minimum',
+        more: 'Please choose %s options at maximum',
+        between: 'Please choose %s - %s options',
 
         getMessage: function(options) {
             switch (true) {
@@ -1637,6 +1640,8 @@
                     return $.fn.bootstrapValidator.helpers.format(this.less, [options.min]);
                 case (!!options.max):
                     return $.fn.bootstrapValidator.helpers.format(this.more, [options.max]);
+                default:
+                    return this['default'];
             }
         }
     });
@@ -1947,6 +1952,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.date = $.extend($.fn.bootstrapValidator.i18n.date || {}, {
+        'default': 'The value is not a valid date'
+    });
+
     $.fn.bootstrapValidator.validators.date = {
         html5Attributes: {
             message: 'message',
@@ -2057,6 +2066,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.different = $.extend($.fn.bootstrapValidator.i18n.different || {}, {
+        'default': 'Please enter a different value'
+    });
+
     $.fn.bootstrapValidator.validators.different = {
         html5Attributes: {
             message: 'message',
@@ -2094,6 +2107,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.digits = $.extend($.fn.bootstrapValidator.i18n.digits || {}, {
+        'default': 'The value can contain only digits'
+    });
+
     $.fn.bootstrapValidator.validators.digits = {
         /**
          * Return true if the input value contains digits only
@@ -2185,6 +2202,10 @@
     }
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.file = $.extend($.fn.bootstrapValidator.i18n.file || {}, {
+        'default': 'The selected file is not valid'
+    });
+
     $.fn.bootstrapValidator.validators.file = {
         html5Attributes: {
             extension: 'extension',
@@ -2250,6 +2271,17 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.greaterThan = $.extend($.fn.bootstrapValidator.i18n.greaterThan || {}, {
+        'default': 'The value must be greater than or equal to %s',
+        notInclusive: 'The value must be greater than %s',
+
+        getMessage: function(options) {
+            return (options.inclusive === true || options.inclusive == undefined)
+                    ? $.fn.bootstrapValidator.helpers.format(this['default'], options.value)
+                    : $.fn.bootstrapValidator.helpers.format(this.notInclusive, options.value);
+        }
+    });
+
     $.fn.bootstrapValidator.validators.greaterThan = {
         html5Attributes: {
             message: 'message',
@@ -2381,13 +2413,195 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.iban = $.extend($.fn.bootstrapValidator.i18n.iban || {}, {
-        'default': 'The value is not a valid IBAN number'
+        'default': 'The value is not a valid IBAN number',
+        countryNotSupported: 'The country code %s is not supported',
+        country: 'The value is not a valid IBAN number in %s',
+        countries: {
+            AD: 'Andorra',
+            AE: 'United Arab Emirates',
+            AL: 'Albania',
+            AO: 'Angola',
+            AT: 'Austria',
+            AZ: 'Azerbaijan',
+            BA: 'Bosnia and Herzegovina',
+            BE: 'Belgium',
+            BF: 'Burkina Faso',
+            BG: 'Bulgaria',
+            BH: 'Bahrain',
+            BI: 'Burundi',
+            BJ: 'Benin',
+            BR: 'Brazil',
+            CH: 'Switzerland',
+            CI: 'Ivory Coast',
+            CM: 'Cameroon',
+            CR: 'Costa Rica',
+            CV: 'Cape Verde',
+            CY: 'Cyprus',
+            CZ: 'Czech Republic',
+            DE: 'Germany',
+            DK: 'Denmark',
+            DO: 'Dominican Republic',
+            DZ: 'Algeria',
+            EE: 'Estonia',
+            ES: 'Spain',
+            FI: 'Finland',
+            FO: 'Faroe Islands',
+            FR: 'France',
+            GB: 'United Kingdom',
+            GE: 'Georgia',
+            GI: 'Gibraltar',
+            GL: 'Greenland',
+            GR: 'Greece',
+            GT: 'Guatemala',
+            HR: 'Croatia',
+            HU: 'Hungary',
+            IE: 'Ireland',
+            IL: 'Israel',
+            IR: 'Iran',
+            IS: 'Iceland',
+            IT: 'Italy',
+            JO: 'Jordan',
+            KW: 'Kuwait',
+            KZ: 'Kazakhstan',
+            LB: 'Lebanon',
+            LI: 'Liechtenstein',
+            LT: 'Lithuania',
+            LU: 'Luxembourg',
+            LV: 'Latvia',
+            MC: 'Monaco',
+            MD: 'Moldova',
+            ME: 'Montenegro',
+            MG: 'Madagascar',
+            MK: 'Macedonia',
+            ML: 'Mali',
+            MR: 'Mauritania',
+            MT: 'Malta',
+            MU: 'Mauritius',
+            MZ: 'Mozambique',
+            NL: 'Netherlands',
+            NO: 'Norway',
+            PK: 'Pakistan',
+            PL: 'Poland',
+            PS: 'Palestinian',
+            PT: 'Portugal',
+            QA: 'Qatar',
+            RO: 'Romania',
+            RS: 'Serbia',
+            SA: 'Saudi Arabia',
+            SE: 'Sweden',
+            SI: 'Slovenia',
+            SK: 'Slovakia',
+            SM: 'San Marino',
+            SN: 'Senegal',
+            TN: 'Tunisia',
+            TR: 'Turkey',
+            VG: 'Virgin Islands, British'
+        },
+
+        getMessage: function(options) {
+            if (options.country) {
+                var country = options.country.toUpperCase();
+                if (!$.fn.bootstrapValidator.validators.iban.REGEX[country]) {
+                    return $.fn.bootstrapValidator.helpers.format(this.countryNotSupported, options.country);
+                }
+
+                if (this.countries[country]) {
+                    return $.fn.bootstrapValidator.helpers.format(this.country, this.countries[country]);
+                }
+            }
+
+            return this['default'];
+        }
     });
 
     $.fn.bootstrapValidator.validators.iban = {
         html5Attributes: {
             message: 'message',
             country: 'country'
+        },
+
+        // http://www.swift.com/dsp/resources/documents/IBAN_Registry.pdf
+        // http://en.wikipedia.org/wiki/International_Bank_Account_Number#IBAN_formats_by_country
+        REGEX: {
+            'AD': 'AD[0-9]{2}[0-9]{4}[0-9]{4}[A-Z0-9]{12}',                     // Andorra
+            'AE': 'AE[0-9]{2}[0-9]{3}[0-9]{16}',                                // United Arab Emirates
+            'AL': 'AL[0-9]{2}[0-9]{8}[A-Z0-9]{16}',                             // Albania
+            'AO': 'AO[0-9]{2}[0-9]{21}',                                        // Angola
+            'AT': 'AT[0-9]{2}[0-9]{5}[0-9]{11}',                                // Austria
+            'AZ': 'AZ[0-9]{2}[A-Z]{4}[A-Z0-9]{20}',                             // Azerbaijan
+            'BA': 'BA[0-9]{2}[0-9]{3}[0-9]{3}[0-9]{8}[0-9]{2}',                 // Bosnia and Herzegovina
+            'BE': 'BE[0-9]{2}[0-9]{3}[0-9]{7}[0-9]{2}',                         // Belgium
+            'BF': 'BF[0-9]{2}[0-9]{23}',                                        // Burkina Faso
+            'BG': 'BG[0-9]{2}[A-Z]{4}[0-9]{4}[0-9]{2}[A-Z0-9]{8}',              // Bulgaria
+            'BH': 'BH[0-9]{2}[A-Z]{4}[A-Z0-9]{14}',                             // Bahrain
+            'BI': 'BI[0-9]{2}[0-9]{12}',                                        // Burundi
+            'BJ': 'BJ[0-9]{2}[A-Z]{1}[0-9]{23}',                                // Benin
+            'BR': 'BR[0-9]{2}[0-9]{8}[0-9]{5}[0-9]{10}[A-Z][A-Z0-9]',           // Brazil
+            'CH': 'CH[0-9]{2}[0-9]{5}[A-Z0-9]{12}',                             // Switzerland
+            'CI': 'CI[0-9]{2}[A-Z]{1}[0-9]{23}',                                // Ivory Coast
+            'CM': 'CM[0-9]{2}[0-9]{23}',                                        // Cameroon
+            'CR': 'CR[0-9]{2}[0-9]{3}[0-9]{14}',                                // Costa Rica
+            'CV': 'CV[0-9]{2}[0-9]{21}',                                        // Cape Verde
+            'CY': 'CY[0-9]{2}[0-9]{3}[0-9]{5}[A-Z0-9]{16}',                     // Cyprus
+            'CZ': 'CZ[0-9]{2}[0-9]{20}',                                        // Czech Republic
+            'DE': 'DE[0-9]{2}[0-9]{8}[0-9]{10}',                                // Germany
+            'DK': 'DK[0-9]{2}[0-9]{14}',                                        // Denmark
+            'DO': 'DO[0-9]{2}[A-Z0-9]{4}[0-9]{20}',                             // Dominican Republic
+            'DZ': 'DZ[0-9]{2}[0-9]{20}',                                        // Algeria
+            'EE': 'EE[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{11}[0-9]{1}',                // Estonia
+            'ES': 'ES[0-9]{2}[0-9]{4}[0-9]{4}[0-9]{1}[0-9]{1}[0-9]{10}',        // Spain
+            'FI': 'FI[0-9]{2}[0-9]{6}[0-9]{7}[0-9]{1}',                         // Finland
+            'FO': 'FO[0-9]{2}[0-9]{4}[0-9]{9}[0-9]{1}',                         // Faroe Islands
+            'FR': 'FR[0-9]{2}[0-9]{5}[0-9]{5}[A-Z0-9]{11}[0-9]{2}',             // France
+            'GB': 'GB[0-9]{2}[A-Z]{4}[0-9]{6}[0-9]{8}',                         // United Kingdom
+            'GE': 'GE[0-9]{2}[A-Z]{2}[0-9]{16}',                                // Georgia
+            'GI': 'GI[0-9]{2}[A-Z]{4}[A-Z0-9]{15}',                             // Gibraltar
+            'GL': 'GL[0-9]{2}[0-9]{4}[0-9]{9}[0-9]{1}',                         // Greenland[
+            'GR': 'GR[0-9]{2}[0-9]{3}[0-9]{4}[A-Z0-9]{16}',                     // Greece
+            'GT': 'GT[0-9]{2}[A-Z0-9]{4}[A-Z0-9]{20}',                          // Guatemala
+            'HR': 'HR[0-9]{2}[0-9]{7}[0-9]{10}',                                // Croatia
+            'HU': 'HU[0-9]{2}[0-9]{3}[0-9]{4}[0-9]{1}[0-9]{15}[0-9]{1}',        // Hungary
+            'IE': 'IE[0-9]{2}[A-Z]{4}[0-9]{6}[0-9]{8}',                         // Ireland
+            'IL': 'IL[0-9]{2}[0-9]{3}[0-9]{3}[0-9]{13}',                        // Israel
+            'IR': 'IR[0-9]{2}[0-9]{22}',                                        // Iran
+            'IS': 'IS[0-9]{2}[0-9]{4}[0-9]{2}[0-9]{6}[0-9]{10}',                // Iceland
+            'IT': 'IT[0-9]{2}[A-Z]{1}[0-9]{5}[0-9]{5}[A-Z0-9]{12}',             // Italy
+            'JO': 'JO[0-9]{2}[A-Z]{4}[0-9]{4}[0]{8}[A-Z0-9]{10}',               // Jordan
+            'KW': 'KW[0-9]{2}[A-Z]{4}[0-9]{22}',                                // Kuwait
+            'KZ': 'KZ[0-9]{2}[0-9]{3}[A-Z0-9]{13}',                             // Kazakhstan
+            'LB': 'LB[0-9]{2}[0-9]{4}[A-Z0-9]{20}',                             // Lebanon
+            'LI': 'LI[0-9]{2}[0-9]{5}[A-Z0-9]{12}',                             // Liechtenstein
+            'LT': 'LT[0-9]{2}[0-9]{5}[0-9]{11}',                                // Lithuania
+            'LU': 'LU[0-9]{2}[0-9]{3}[A-Z0-9]{13}',                             // Luxembourg
+            'LV': 'LV[0-9]{2}[A-Z]{4}[A-Z0-9]{13}',                             // Latvia
+            'MC': 'MC[0-9]{2}[0-9]{5}[0-9]{5}[A-Z0-9]{11}[0-9]{2}',             // Monaco
+            'MD': 'MD[0-9]{2}[A-Z0-9]{20}',                                     // Moldova
+            'ME': 'ME[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}',                        // Montenegro
+            'MG': 'MG[0-9]{2}[0-9]{23}',                                        // Madagascar
+            'MK': 'MK[0-9]{2}[0-9]{3}[A-Z0-9]{10}[0-9]{2}',                     // Macedonia
+            'ML': 'ML[0-9]{2}[A-Z]{1}[0-9]{23}',                                // Mali
+            'MR': 'MR13[0-9]{5}[0-9]{5}[0-9]{11}[0-9]{2}',                      // Mauritania
+            'MT': 'MT[0-9]{2}[A-Z]{4}[0-9]{5}[A-Z0-9]{18}',                     // Malta
+            'MU': 'MU[0-9]{2}[A-Z]{4}[0-9]{2}[0-9]{2}[0-9]{12}[0-9]{3}[A-Z]{3}',// Mauritius
+            'MZ': 'MZ[0-9]{2}[0-9]{21}',                                        // Mozambique
+            'NL': 'NL[0-9]{2}[A-Z]{4}[0-9]{10}',                                // Netherlands
+            'NO': 'NO[0-9]{2}[0-9]{4}[0-9]{6}[0-9]{1}',                         // Norway
+            'PK': 'PK[0-9]{2}[A-Z]{4}[A-Z0-9]{16}',                             // Pakistan
+            'PL': 'PL[0-9]{2}[0-9]{8}[0-9]{16}',                                // Poland
+            'PS': 'PS[0-9]{2}[A-Z]{4}[A-Z0-9]{21}',                             // Palestinian
+            'PT': 'PT[0-9]{2}[0-9]{4}[0-9]{4}[0-9]{11}[0-9]{2}',                // Portugal
+            'QA': 'QA[0-9]{2}[A-Z]{4}[A-Z0-9]{21}',                             // Qatar
+            'RO': 'RO[0-9]{2}[A-Z]{4}[A-Z0-9]{16}',                             // Romania
+            'RS': 'RS[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}',                        // Serbia
+            'SA': 'SA[0-9]{2}[0-9]{2}[A-Z0-9]{18}',                             // Saudi Arabia
+            'SE': 'SE[0-9]{2}[0-9]{3}[0-9]{16}[0-9]{1}',                        // Sweden
+            'SI': 'SI[0-9]{2}[0-9]{5}[0-9]{8}[0-9]{2}',                         // Slovenia
+            'SK': 'SK[0-9]{2}[0-9]{4}[0-9]{6}[0-9]{10}',                        // Slovakia
+            'SM': 'SM[0-9]{2}[A-Z]{1}[0-9]{5}[0-9]{5}[A-Z0-9]{12}',             // San Marino
+            'SN': 'SN[0-9]{2}[A-Z]{1}[0-9]{23}',                                // Senegal
+            'TN': 'TN59[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}',                      // Tunisia
+            'TR': 'TR[0-9]{2}[0-9]{5}[A-Z0-9]{1}[A-Z0-9]{16}',                  // Turkey
+            'VG': 'VG[0-9]{2}[A-Z]{4}[0-9]{16}'                                 // Virgin Islands, British
         },
 
         /**
@@ -2408,96 +2622,12 @@
                 return true;
             }
 
-            // See
-            // http://www.swift.com/dsp/resources/documents/IBAN_Registry.pdf
-            // http://en.wikipedia.org/wiki/International_Bank_Account_Number#IBAN_formats_by_country
-            var ibanRegex = {
-                'AD': 'AD[0-9]{2}[0-9]{4}[0-9]{4}[A-Z0-9]{12}',                     // Andorra
-                'AE': 'AE[0-9]{2}[0-9]{3}[0-9]{16}',                                // United Arab Emirates
-                'AL': 'AL[0-9]{2}[0-9]{8}[A-Z0-9]{16}',                             // Albania
-                'AO': 'AO[0-9]{2}[0-9]{21}',                                        // Angola
-                'AT': 'AT[0-9]{2}[0-9]{5}[0-9]{11}',                                // Austria
-                'AZ': 'AZ[0-9]{2}[A-Z]{4}[A-Z0-9]{20}',                             // Azerbaijan
-                'BA': 'BA[0-9]{2}[0-9]{3}[0-9]{3}[0-9]{8}[0-9]{2}',                 // Bosnia and Herzegovina
-                'BE': 'BE[0-9]{2}[0-9]{3}[0-9]{7}[0-9]{2}',                         // Belgium
-                'BF': 'BF[0-9]{2}[0-9]{23}',                                        // Burkina Faso
-                'BG': 'BG[0-9]{2}[A-Z]{4}[0-9]{4}[0-9]{2}[A-Z0-9]{8}',              // Bulgaria
-                'BH': 'BH[0-9]{2}[A-Z]{4}[A-Z0-9]{14}',                             // Bahrain
-                'BI': 'BI[0-9]{2}[0-9]{12}',                                        // Burundi
-                'BJ': 'BJ[0-9]{2}[A-Z]{1}[0-9]{23}',                                // Benin
-                'BR': 'BR[0-9]{2}[0-9]{8}[0-9]{5}[0-9]{10}[A-Z][A-Z0-9]',           // Brazil
-                'CH': 'CH[0-9]{2}[0-9]{5}[A-Z0-9]{12}',                             // Switzerland
-                'CI': 'CI[0-9]{2}[A-Z]{1}[0-9]{23}',                                // Ivory Coast
-                'CM': 'CM[0-9]{2}[0-9]{23}',                                        // Cameroon
-                'CR': 'CR[0-9]{2}[0-9]{3}[0-9]{14}',                                // Costa Rica
-                'CV': 'CV[0-9]{2}[0-9]{21}',                                        // Cape Verde
-                'CY': 'CY[0-9]{2}[0-9]{3}[0-9]{5}[A-Z0-9]{16}',                     // Cyprus
-                'CZ': 'CZ[0-9]{2}[0-9]{20}',                                        // Czech Republic
-                'DE': 'DE[0-9]{2}[0-9]{8}[0-9]{10}',                                // Germany
-                'DK': 'DK[0-9]{2}[0-9]{14}',                                        // Denmark
-                'DO': 'DO[0-9]{2}[A-Z0-9]{4}[0-9]{20}',                             // Dominican Republic
-                'DZ': 'DZ[0-9]{2}[0-9]{20}',                                        // Algeria
-                'EE': 'EE[0-9]{2}[0-9]{2}[0-9]{2}[0-9]{11}[0-9]{1}',                // Estonia
-                'ES': 'ES[0-9]{2}[0-9]{4}[0-9]{4}[0-9]{1}[0-9]{1}[0-9]{10}',        // Spain
-                'FI': 'FI[0-9]{2}[0-9]{6}[0-9]{7}[0-9]{1}',                         // Finland
-                'FO': 'FO[0-9]{2}[0-9]{4}[0-9]{9}[0-9]{1}',                         // Faroe Islands
-                'FR': 'FR[0-9]{2}[0-9]{5}[0-9]{5}[A-Z0-9]{11}[0-9]{2}',             // France
-                'GB': 'GB[0-9]{2}[A-Z]{4}[0-9]{6}[0-9]{8}',                         // United Kingdom
-                'GE': 'GE[0-9]{2}[A-Z]{2}[0-9]{16}',                                // Georgia
-                'GI': 'GI[0-9]{2}[A-Z]{4}[A-Z0-9]{15}',                             // Gibraltar
-                'GL': 'GL[0-9]{2}[0-9]{4}[0-9]{9}[0-9]{1}',                         // Greenland[
-                'GR': 'GR[0-9]{2}[0-9]{3}[0-9]{4}[A-Z0-9]{16}',                     // Greece
-                'GT': 'GT[0-9]{2}[A-Z0-9]{4}[A-Z0-9]{20}',                          // Guatemala
-                'HR': 'HR[0-9]{2}[0-9]{7}[0-9]{10}',                                // Croatia
-                'HU': 'HU[0-9]{2}[0-9]{3}[0-9]{4}[0-9]{1}[0-9]{15}[0-9]{1}',        // Hungary
-                'IE': 'IE[0-9]{2}[A-Z]{4}[0-9]{6}[0-9]{8}',                         // Ireland
-                'IL': 'IL[0-9]{2}[0-9]{3}[0-9]{3}[0-9]{13}',                        // Israel
-                'IR': 'IR[0-9]{2}[0-9]{22}',                                        // Iran
-                'IS': 'IS[0-9]{2}[0-9]{4}[0-9]{2}[0-9]{6}[0-9]{10}',                // Iceland
-                'IT': 'IT[0-9]{2}[A-Z]{1}[0-9]{5}[0-9]{5}[A-Z0-9]{12}',             // Italy
-                'JO': 'JO[0-9]{2}[A-Z]{4}[0-9]{4}[0]{8}[A-Z0-9]{10}',               // Jordan
-                'KW': 'KW[0-9]{2}[A-Z]{4}[0-9]{22}',                                // Kuwait
-                'KZ': 'KZ[0-9]{2}[0-9]{3}[A-Z0-9]{13}',                             // Kazakhstan
-                'LB': 'LB[0-9]{2}[0-9]{4}[A-Z0-9]{20}',                             // Lebanon
-                'LI': 'LI[0-9]{2}[0-9]{5}[A-Z0-9]{12}',                             // Liechtenstein
-                'LT': 'LT[0-9]{2}[0-9]{5}[0-9]{11}',                                // Lithuania
-                'LU': 'LU[0-9]{2}[0-9]{3}[A-Z0-9]{13}',                             // Luxembourg
-                'LV': 'LV[0-9]{2}[A-Z]{4}[A-Z0-9]{13}',                             // Latvia
-                'MC': 'MC[0-9]{2}[0-9]{5}[0-9]{5}[A-Z0-9]{11}[0-9]{2}',             // Monaco
-                'MD': 'MD[0-9]{2}[A-Z0-9]{20}',                                     // Moldova
-                'ME': 'ME[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}',                        // Montenegro
-                'MG': 'MG[0-9]{2}[0-9]{23}',                                        // Madagascar
-                'MK': 'MK[0-9]{2}[0-9]{3}[A-Z0-9]{10}[0-9]{2}',                     // Macedonia
-                'ML': 'ML[0-9]{2}[A-Z]{1}[0-9]{23}',                                // Mali
-                'MR': 'MR13[0-9]{5}[0-9]{5}[0-9]{11}[0-9]{2}',                      // Mauritania
-                'MT': 'MT[0-9]{2}[A-Z]{4}[0-9]{5}[A-Z0-9]{18}',                     // Malta
-                'MU': 'MU[0-9]{2}[A-Z]{4}[0-9]{2}[0-9]{2}[0-9]{12}[0-9]{3}[A-Z]{3}',// Mauritius
-                'MZ': 'MZ[0-9]{2}[0-9]{21}',                                        // Mozambique
-                'NL': 'NL[0-9]{2}[A-Z]{4}[0-9]{10}',                                // Netherlands
-                'NO': 'NO[0-9]{2}[0-9]{4}[0-9]{6}[0-9]{1}',                         // Norway
-                'PK': 'PK[0-9]{2}[A-Z]{4}[A-Z0-9]{16}',                             // Pakistan
-                'PL': 'PL[0-9]{2}[0-9]{8}[0-9]{16}',                                // Poland
-                'PS': 'PS[0-9]{2}[A-Z]{4}[A-Z0-9]{21}',                             // Palestinian
-                'PT': 'PT[0-9]{2}[0-9]{4}[0-9]{4}[0-9]{11}[0-9]{2}',                // Portugal
-                'QA': 'QA[0-9]{2}[A-Z]{4}[A-Z0-9]{21}',                             // Qatar
-                'RO': 'RO[0-9]{2}[A-Z]{4}[A-Z0-9]{16}',                             // Romania
-                'RS': 'RS[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}',                        // Serbia
-                'SA': 'SA[0-9]{2}[0-9]{2}[A-Z0-9]{18}',                             // Saudi Arabia
-                'SE': 'SE[0-9]{2}[0-9]{3}[0-9]{16}[0-9]{1}',                        // Sweden
-                'SI': 'SI[0-9]{2}[0-9]{5}[0-9]{8}[0-9]{2}',                         // Slovenia
-                'SK': 'SK[0-9]{2}[0-9]{4}[0-9]{6}[0-9]{10}',                        // Slovakia
-                'SM': 'SM[0-9]{2}[A-Z]{1}[0-9]{5}[0-9]{5}[A-Z0-9]{12}',             // San Marino
-                'SN': 'SN[0-9]{2}[A-Z]{1}[0-9]{23}',                                // Senegal
-                'TN': 'TN59[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}',                      // Tunisia
-                'TR': 'TR[0-9]{2}[0-9]{5}[A-Z0-9]{1}[A-Z0-9]{16}',                  // Turkey
-                'VG': 'VG[0-9]{2}[A-Z]{4}[0-9]{16}'                                 // Virgin Islands, British
-            };
             value = value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
             var country = options.country || value.substr(0, 2);
-            if (!ibanRegex[country]) {
+            if (!this.REGEX[country]) {
                 return false;
             }
-            if (!(new RegExp('^' + ibanRegex[country] + '$')).test(value)) {
+            if (!(new RegExp('^' + this.REGEX[country] + '$')).test(value)) {
                 return false;
             }
 
@@ -2521,6 +2651,56 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.id = $.extend($.fn.bootstrapValidator.i18n.id || {}, {
+        'default': 'The value is not a valid identification number',
+        countryNotSupported: 'The country code %s is not supported',
+        country: 'The value is not a valid %s identification number',
+        countries: {
+            BA: 'Bosnia and Herzegovina',
+            BG: 'Bulgarian',
+            BR: 'Brazilian',
+            CH: 'Swiss',
+            CL: 'Chilean',
+            CZ: 'Czech',
+            DK: 'Danish',
+            EE: 'Estonian',
+            ES: 'Spanish',
+            FI: 'Finnish',
+            HR: 'Croatian',
+            IE: 'Irish',
+            IS: 'Iceland',
+            LT: 'Lithuanian',
+            LV: 'Latvian',
+            ME: 'Montenegro',
+            MK: 'Macedonian',
+            NL: 'Dutch',
+            RO: 'Romanian',
+            RS: 'Serbian',
+            SE: 'Swedish',
+            SI: 'Slovenian',
+            SK: 'Slovak',
+            SM: 'San Marino',
+            ZA: 'South African'
+        },
+
+        getMessage: function(options) {
+            if (options.country) {
+                var country = options.country.toLowerCase(),
+                    method  = ['_', country].join('');
+                if ($.fn.bootstrapValidator.validators.id[method] == undefined) {
+                    return $.fn.bootstrapValidator.helpers.format(this.countryNotSupported, country);
+                }
+
+                country = country.toUpperCase();
+                if (this.countries[country]) {
+                    return $.fn.bootstrapValidator.helpers.format(this.country, this.countries[country]);
+                }
+            }
+
+            return this['default'];
+        }
+    });
+
     $.fn.bootstrapValidator.validators.id = {
         html5Attributes: {
             message: 'message',
@@ -3281,6 +3461,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.identical = $.extend($.fn.bootstrapValidator.i18n.identical || {}, {
+        'default': 'Please enter the same value'
+    });
+
     $.fn.bootstrapValidator.validators.identical = {
         html5Attributes: {
             message: 'message',
@@ -3362,6 +3546,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.integer = $.extend($.fn.bootstrapValidator.i18n.integer || {}, {
+        'default': 'The value is not a valid number'
+    });
+
     $.fn.bootstrapValidator.validators.integer = {
         enableByHtml5: function($field) {
             return ('number' == $field.attr('type'));
@@ -3674,6 +3862,17 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.lessThan = $.extend($.fn.bootstrapValidator.i18n.lessThan || {}, {
+        'default': 'The value must be less than or equal to %s',
+        notInclusive: 'The value must be less than %s',
+
+        getMessage: function(options) {
+            return (options.inclusive === true || options.inclusive == undefined)
+                    ? $.fn.bootstrapValidator.helpers.format(this['default'], options.value)
+                    : $.fn.bootstrapValidator.helpers.format(this.notInclusive, options.value);
+        }
+    });
+
     $.fn.bootstrapValidator.validators.lessThan = {
         html5Attributes: {
             message: 'message',
@@ -3771,6 +3970,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.numeric = $.extend($.fn.bootstrapValidator.i18n.numeric || {}, {
+        'default': 'The value is not a valid number'
+    });
+
     $.fn.bootstrapValidator.validators.numeric = {
         html5Attributes: {
             message: 'message',
@@ -3802,11 +4005,37 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.phone = $.extend($.fn.bootstrapValidator.i18n.phone || {}, {
+        'default': 'The value is not a valid phone number',
+        countryNotSupported: 'The country code %s is not supported',
+        country: 'The value is not a valid phone number in %s',
+        countries: {
+            GB: 'United Kingdom',
+            US: 'USA'
+        },
+
+        getMessage: function(options) {
+            var country = (options.country || 'US').toUpperCase();
+            if ($.inArray(country, $.fn.bootstrapValidator.validators.phone.COUNTRIES) == -1) {
+                return $.fn.bootstrapValidator.helpers.format(this.countryNotSupported, country);
+            }
+
+            if (this.countries[country]) {
+                return $.fn.bootstrapValidator.helpers.format(this.country, this.countries[country]);
+            }
+
+            return this['default'];
+        }
+    });
+
     $.fn.bootstrapValidator.validators.phone = {
         html5Attributes: {
             message: 'message',
             country: 'country'
         },
+
+        // The supported countries
+        COUNTRIES: ['GB', 'US'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -3827,6 +4056,10 @@
             }
 
             var country = (options.country || 'US').toUpperCase();
+            if ($.inArray(country, this.COUNTRIES) == -1) {
+                return false;
+            }
+
             switch (country) {
             	case 'GB':
             		// http://aa-asterisk.org.uk/index.php/Regular_Expressions_for_Validating_and_Formatting_GB_Telephone_Numbers#Match_GB_telephone_number_in_any_format
@@ -3846,6 +4079,10 @@
     }
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.regexp = $.extend($.fn.bootstrapValidator.i18n.regexp || {}, {
+        'default': 'The value does not match the pattern'
+    });
+
     $.fn.bootstrapValidator.validators.regexp = {
         html5Attributes: {
             message: 'message',
@@ -3884,6 +4121,10 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.remote = $.extend($.fn.bootstrapValidator.i18n.remote || {}, {
+        'default': 'The value is not valid'
+    });
+
     $.fn.bootstrapValidator.validators.remote = {
         html5Attributes: {
             message: 'message',
@@ -4094,6 +4335,14 @@
 	};
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.step = $.extend($.fn.bootstrapValidator.i18n.step || {}, {
+        'default': 'The value is not a valid step of %s',
+
+        getMessage: function(options) {
+            return $.fn.bootstrapValidator.helpers.format(this['default'], [options.step]);
+        }
+    });
+
     $.fn.bootstrapValidator.validators.step = {
         html5Attributes: {
             message: 'message',
@@ -4151,6 +4400,22 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.stringCase = $.extend($.fn.bootstrapValidator.i18n.stringCase || {}, {
+        'default': 'The value must be lowercase',
+        upper: 'The value must be uppercase',
+
+        getMessage: function(options) {
+            var stringCase = (options['case'] || 'lower').toLowerCase();
+            switch (stringCase) {
+                case 'upper':
+                    return this.upper;
+                case 'lower':
+                default:
+                    return this['default'];
+            }
+        }
+    });
+
     $.fn.bootstrapValidator.validators.stringCase = {
         html5Attributes: {
             message: 'message',
@@ -4197,9 +4462,11 @@
                     return $.fn.bootstrapValidator.helpers.format(this.between, [options.min, options.max]);
                     break;
                 case (!!options.min):
-                    return $.fn.bootstrapValidator.helpers.format(this.more, [options.min]);
+                    return $.fn.bootstrapValidator.helpers.format(this.more, options.min);
                 case (!!options.max):
-                    return $.fn.bootstrapValidator.helpers.format(this.less, [options.max]);
+                    return $.fn.bootstrapValidator.helpers.format(this.less, options.max);
+                default:
+                    return this['default'];
             }
         }
     });
@@ -4352,7 +4619,14 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.uuid = $.extend($.fn.bootstrapValidator.i18n.uuid || {}, {
-        'default': 'The value is not a valid UUID'
+        'default': 'The value is not a valid UUID',
+        version: 'The value is not a valid UUID version %s',
+
+        getMessage: function(options) {
+            return (options.version)
+                    ? $.fn.bootstrapValidator.helpers.format(this.version, [options.version])
+                    : this['default'];
+        }
     });
 
     $.fn.bootstrapValidator.validators.uuid = {
@@ -4391,6 +4665,64 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.vat = $.extend($.fn.bootstrapValidator.i18n.vat || {}, {
+        'default': 'The value is not a valid VAT number',
+        countryNotSupported: 'The country code %s is not supported',
+        country: 'The value is not a valid %s VAT number',
+        countries: {
+            AT: 'Austrian',
+            BE: 'Belgian',
+            BG: 'Bulgarian',
+            CH: 'Swiss',
+            CY: 'Cypriot',
+            CZ: 'Czech',
+            DE: 'German',
+            DK: 'Danish',
+            EE: 'Estonian',
+            ES: 'Spanish',
+            FI: 'Finnish',
+            FR: 'French',
+            GB: 'United Kingdom',
+            GR: 'Greek',
+            EL: 'Greek',
+            HU: 'Hungarian',
+            HR: 'Croatian',
+            IE: 'Irish',
+            IT: 'Italian',
+            LT: 'Lithuanian',
+            LU: 'Luxembourg',
+            LV: 'Latvian',
+            MT: 'Maltese',
+            NL: 'Dutch',
+            NO: 'Norwegian',
+            PL: 'Polish',
+            PT: 'Portuguese',
+            RO: 'Romanian',
+            RU: 'Russian',
+            RS: 'Serbian',
+            SE: 'Swedish',
+            SI: 'Slovenian',
+            SK: 'Slovak'
+        },
+
+        getMessage: function(options) {
+            if (options.country) {
+                var country = options.country,
+                    method  = ['_', country.toLowerCase()].join('');
+                if ($.fn.bootstrapValidator.validators.vat[method] == undefined) {
+                    return $.fn.bootstrapValidator.helpers.format(this.countryNotSupported, options.country);
+                }
+
+                country = country.toUpperCase();
+                if (this.countries[country]) {
+                    return $.fn.bootstrapValidator.helpers.format(this.country, this.countries[country]);
+                }
+            }
+
+            return this['default'];
+        }
+    });
+
     $.fn.bootstrapValidator.validators.vat = {
         html5Attributes: {
             message: 'message',
@@ -5596,11 +5928,42 @@
     };
 }(window.jQuery));
 ;(function($) {
+    $.fn.bootstrapValidator.i18n.zipCode = $.extend($.fn.bootstrapValidator.i18n.zipCode || {}, {
+        'default': 'The value is not a valid zip code',
+        countryNotSupported: 'The country code %s is not supported',
+        country: 'The value is not a valid %s',
+        countries: {
+            'CA': 'Canadian postal code',
+            'DK': 'Danish postal code',
+            'GB': 'United Kingdom postal code',
+            'IT': 'Italian postal code',
+            'NL': 'Dutch postal code',
+            'SE': 'Swiss postal code',
+            'SG': 'Singapore postal code',
+            'US': 'US zip code'
+        },
+
+        getMessage: function(options) {
+            var country = (options.country || 'US').toUpperCase();
+            if ($.inArray(country, $.fn.bootstrapValidator.validators.zipCode.COUNTRIES) == -1) {
+                return $.fn.bootstrapValidator.helpers.format(this.countryNotSupported, country);
+            }
+
+            if (this.countries[country]) {
+                return $.fn.bootstrapValidator.helpers.format(this.country, this.countries[country]);
+            }
+
+            return this['default'];
+        }
+    });
+
     $.fn.bootstrapValidator.validators.zipCode = {
         html5Attributes: {
             message: 'message',
             country: 'country'
         },
+
+        COUNTRIES: ['CA', 'DK', 'GB', 'IT', 'NL', 'SE', 'SG', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -5629,6 +5992,10 @@
             }
 
             var country = (options.country || 'US').toUpperCase();
+            if ($.inArray(country, this.COUNTRIES) == -1) {
+                return false;
+            }
+
             switch (country) {
                 case 'CA': return /^(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}\s?[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}$/i.test(value);
                 case 'DK': return /^(DK(-|\s)?)?\d{4}$/i.test(value);

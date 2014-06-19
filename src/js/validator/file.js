@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.file = $.extend($.fn.bootstrapValidator.i18n.file || {}, {
+        'default': 'The selected file is not valid'
+    });
+
     $.fn.bootstrapValidator.validators.file = {
         html5Attributes: {
             extension: 'extension',
