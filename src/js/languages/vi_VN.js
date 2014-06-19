@@ -156,7 +156,7 @@
                 DK: 'Đan Mạch',
                 EE: 'Estonia',
                 ES: 'Tây Ban Nha',
-                FI: 'Phân Lan',
+                FI: 'Phần Lan',
                 HR: 'Croatia',
                 IE: 'Ireland',
                 IS: 'Iceland',
