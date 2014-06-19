@@ -4,7 +4,7 @@
 
 ![Screenshot](screenshots/screenshot.png)
 
-## Help the project
+## [Help the project](https://pledgie.com/campaigns/24885)
 
 I've been spending a lot of time to work on this plugin. If it is useful to you, please consider to help the project by making a small donation:
 
@@ -15,6 +15,20 @@ Also, you can make me feel happy by [tweeting](https://twitter.com/intent/tweet?
 ## Live demo
 
 http://bootstrapvalidator.com/examples/
+
+There are also many examples located in the [demo](demo) directory.
+
+## Next v0.5.0
+
+v0.5.0 is coming soon with the following highlights ([all v0.5.0 features](CHANGELOG.md), if you care about)
+
+* Add events for form ([#121](https://github.com/nghuuphuoc/bootstrapvalidator/issues/121)), field ([#195](https://github.com/nghuuphuoc/bootstrapvalidator/issues/195)), and given validator ([#324](https://github.com/nghuuphuoc/bootstrapvalidator/issues/324))
+* [#125](https://github.com/nghuuphuoc/bootstrapvalidator/issues/125): Support dynamic fields
+* [#175](https://github.com/nghuuphuoc/bootstrapvalidator/issues/175): Possible to show errors in tooltip or popover
+* [#385](https://github.com/nghuuphuoc/bootstrapvalidator/issues/385): Support translating error messages in other languages
+* [#387](https://github.com/nghuuphuoc/bootstrapvalidator/issues/387): Provide the default error messages
+
+Please help me by downloading the [latest code](https://github.com/nghuuphuoc/bootstrapvalidator/archive/master.zip) and testing the [v0.5.0 issues](https://github.com/nghuuphuoc/bootstrapvalidator/issues?labels=&milestone=7&page=1&state=open).
 
 ## Features
 
@@ -42,20 +56,17 @@ __Friendly__
 - [x] Support [Glyphicons](http://getbootstrap.com/components/#glyphicons) and [FontAwesome](http://fontawesome.io/icons) icons
 - [x] Focus on the first invalid field
 - [x] Don't validate the field if the field length is less than given number using [threshold](http://bootstrapvalidator.com/settings/#threshold) option
-- [ ] [#164](https://github.com/nghuuphuoc/bootstrapvalidator/issues/164): Possible to show all error messages in given container
-- [ ] [#175](https://github.com/nghuuphuoc/bootstrapvalidator/issues/175): Possible to use Bootstrap [tooltip](http://getbootstrap.com/javascript/#tooltips) and [popover](http://getbootstrap.com/javascript/#popovers) to show error messages
- 
+
 __Ajax__
 - [x] Support [validating via Ajax](http://bootstrapvalidator.com/validators/remote/)
 - [x] Support using Ajax for form submission
- 
+
 __Flexible__
 - [x] The elements can be defined by either ```name``` or [CSS selector](http://bootstrapvalidator.com/settings/#selector-example)
 - [x] Support multiple elements with the [same name](http://bootstrapvalidator.com/examples/#fields-with-same-name)
 - [x] Possible to indicate [excluded](http://bootstrapvalidator.com/settings/#excluded) fields
 - [x] Field validators can be enabled/disabled on the fly
-- [ ] [#125](https://github.com/nghuuphuoc/bootstrapvalidator/issues/125): Support dynamic field
- 
+
 __Compatibility__
 - [x] We [play nice](http://bootstrapvalidator.com/examples/#compatibility) with popular plugins such as
     - [x] [Bootstrap Button](http://getbootstrap.com/javascript/#buttons)
