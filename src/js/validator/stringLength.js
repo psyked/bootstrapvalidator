@@ -56,7 +56,7 @@
                 return true;
             }
 
-            var length = $.trim(value).length;
+            var length = value.length;
             if ((options.min && length < options.min) || (options.max && length > options.max)) {
                 return false;
             }

@@ -55,6 +55,7 @@ __Bug Fixes__
 * [#358](https://github.com/nghuuphuoc/bootstrapvalidator/issues/358): The [```zipCode``` validator](http://bootstrapvalidator.com/validators/zipCode/) doesn't work for Canadian zip code
 * [#377](https://github.com/nghuuphuoc/bootstrapvalidator/issues/377): The [id](http://bootstrapvalidator.com/validators/id/), [vat](http://bootstrapvalidator.com/validators/vat/) validators should return ```false``` if the country code is not supported
 * [#389](https://github.com/nghuuphuoc/bootstrapvalidator/issues/389): When using multiple forms with HTML attributes on the same page, the plugin options will be the same as the last one
+* [#401](https://github.com/nghuuphuoc/bootstrapvalidator/issues/401): [stringLength validator](http://bootstrapvalidator.com/validators/stringLength/) allows spaces after max length
 
 __Document__
 * [#259](https://github.com/nghuuphuoc/bootstrapvalidator/issues/259): Typo "Support almost Bootstrap forms", thanks to [@lloydde](https://github.com/lloydde)
