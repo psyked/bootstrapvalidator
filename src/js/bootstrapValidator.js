@@ -1189,6 +1189,20 @@
         },
 
         /**
+         * Revalidate given field
+         * It's used when you need to revalidate the field which its value is updated by other plugin
+         *
+         * @param {String|jQuery} field The field name of field element
+         * @returns {BootstrapValidator}
+         */
+        revalidateField: function(field) {
+            this.updateStatus(field, this.STATUS_NOT_VALIDATED)
+                .validateField(field);
+
+            return this;
+        },
+
+        /**
          * Enable/Disable all validators to given field
          *
          * @param {String} field The field name
@@ -1382,6 +1396,8 @@
 
     // Available validators
     $.fn.bootstrapValidator.validators = {};
+
+    // i18n
     $.fn.bootstrapValidator.i18n       = {};
 
     $.fn.bootstrapValidator.Constructor = BootstrapValidator;

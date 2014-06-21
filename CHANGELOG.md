@@ -23,6 +23,7 @@ __New Features__
 * [#336](https://github.com/nghuuphuoc/bootstrapvalidator/issues/336): Add ```$field``` instance to the [callback validator](http://bootstrapvalidator.com/validators/callback/)
 * [#356](https://github.com/nghuuphuoc/bootstrapvalidator/issues/356): Add ```group``` option
 * [#374](https://github.com/nghuuphuoc/bootstrapvalidator/pull/374): Add Singapore postal code to the [zipCode validator](http://bootstrapvalidator.com/validators/zipCode/), thanks to [@thisisclement](https://github.com/thisisclement)
+* [#406](https://github.com/nghuuphuoc/bootstrapvalidator/issues/406): Add ```revalidateField(field)``` method
 
 __Changes__
 * [#42](https://github.com/nghuuphuoc/bootstrapvalidator/issues/42): Remove the submit button from ```submitHandler()```. You can use new ```getSubmitButton()``` method to get the clicked submit button
