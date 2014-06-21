@@ -101,6 +101,10 @@ $(document).ready(function() {
         var isEmpty = $(this).val() == '';
         $('#signupForm').bootstrapValidator('enableFieldValidators', 'password', !isEmpty)
                         .bootstrapValidator('enableFieldValidators', 'confirm_password', !isEmpty);
+        if ($(this).val().length == 1) {
+            $('#signupForm').bootstrapValidator('validateField', 'password')
+                            .bootstrapValidator('validateField', 'confirm_password');
+        }
     });
 });
 </script>
