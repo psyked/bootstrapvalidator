@@ -2181,7 +2181,7 @@
             for (var i = 0; i < length - 1; i++) {
                 sum += parseInt(value.charAt(i)) * weight[i % 2];
             }
-            sum = 10 - sum % 10;
+            sum = (10 - sum % 10) % 10;
             return (sum == value.charAt(length - 1));
         }
     };
