@@ -127,6 +127,7 @@ Big thanks to the contributors:
 * [@khangvm53](https://github.com/khangvm53)
 * [@kristian-puccio](https://github.com/kristian-puccio)
 * [@lloydde](https://github.com/lloydde)
+* [@manish-in-java](https://github.com/manish-in-java)
 * [@MartinDevillers](https://github.com/MartinDevillers)
 * [@MrC0mm0n](https://github.com/MrC0mm0n)
 * [@mrpollo](https://github.com/mrpollo)
