@@ -13,13 +13,13 @@ __New Features__
 * [#195](https://github.com/nghuuphuoc/bootstrapvalidator/issues/195): Add events for field validation
 * [#211](https://github.com/nghuuphuoc/bootstrapvalidator/issues/211), [#235](https://github.com/nghuuphuoc/bootstrapvalidator/issues/235): Add new method ```getInvalidFields()``` that returns all invalid fields
 * [#275](https://github.com/nghuuphuoc/bootstrapvalidator/issues/275): Add ```destroy()``` method
-* [#282](https://github.com/nghuuphuoc/bootstrapvalidator/issues/282), [#347](https://github.com/nghuuphuoc/bootstrapvalidator/issues/347): Use error message that is returned from [```callback```](http://bootstrapvalidator.com/validators/callback/), [```remote```](http://bootstrapvalidator.com/validators/remote/) validators
+* [#282](https://github.com/nghuuphuoc/bootstrapvalidator/issues/282), [#347](https://github.com/nghuuphuoc/bootstrapvalidator/issues/347): Use error message that is returned from [callback](http://bootstrapvalidator.com/validators/callback/), [remote](http://bootstrapvalidator.com/validators/remote/) validators
 * Add ```status.field.bv``` event which is triggered after updating the field status. It can be used to solve [#300](https://github.com/nghuuphuoc/bootstrapvalidator/issues/300), [#301](https://github.com/nghuuphuoc/bootstrapvalidator/issues/301)
 * [#316](https://github.com/nghuuphuoc/bootstrapvalidator/issues/316): Add ```isValidContainer(container)``` method
-* [#320](https://github.com/nghuuphuoc/bootstrapvalidator/issues/320): Add ```separator``` option to the [```date``` validator](http://bootstrapvalidator.com/validators/date/)
+* [#320](https://github.com/nghuuphuoc/bootstrapvalidator/issues/320): Add ```separator``` option to the [date validator](http://bootstrapvalidator.com/validators/date/)
 * [#323](https://github.com/nghuuphuoc/bootstrapvalidator/issues/323): Add ```isValidField(field)``` method
 * [#324](https://github.com/nghuuphuoc/bootstrapvalidator/issues/324): Add ```success.validator.bv``` and ```error.validator.bv``` events triggered after a validator completes
-* [#332](https://github.com/nghuuphuoc/bootstrapvalidator/pull/332): Add UK phone number support for the [```phone``` validator](http://bootstrapvalidator.com/validators/phone/), thanks to [@aca02djr](https://github.com/aca02djr)
+* [#332](https://github.com/nghuuphuoc/bootstrapvalidator/pull/332): Add UK phone number support for the [phone validator](http://bootstrapvalidator.com/validators/phone/), thanks to [@aca02djr](https://github.com/aca02djr)
 * [#336](https://github.com/nghuuphuoc/bootstrapvalidator/issues/336): Add ```$field``` instance to the [callback validator](http://bootstrapvalidator.com/validators/callback/)
 * [#356](https://github.com/nghuuphuoc/bootstrapvalidator/issues/356): Add ```group``` option
 * [#374](https://github.com/nghuuphuoc/bootstrapvalidator/pull/374): Add Singapore postal code to the [zipCode validator](http://bootstrapvalidator.com/validators/zipCode/), thanks to [@thisisclement](https://github.com/thisisclement)
@@ -40,22 +40,22 @@ __Improvements__
 * [#364](https://github.com/nghuuphuoc/bootstrapvalidator/issues/364): Clicking the feedback icon also effect to the checkbox, radio fields
 * [#366](https://github.com/nghuuphuoc/bootstrapvalidator/issues/366): Don't change the enable setting when the new one is the same
 * [#371](https://github.com/nghuuphuoc/bootstrapvalidator/pull/371): Add H character to the Canadian postcode, thanks to [@jzhang6](https://github.com/jzhang6)
-* [#383](https://github.com/nghuuphuoc/bootstrapvalidator/issues/382): Add JSLint to Grunt build
+* [#382](https://github.com/nghuuphuoc/bootstrapvalidator/issues/382): Add JSHint to Grunt build
 * [#388](https://github.com/nghuuphuoc/bootstrapvalidator/issues/388): Allow to override the default options. Useful for using multiple forms in the same page
 * [#393](https://github.com/nghuuphuoc/bootstrapvalidator/pull/393): The [remote validator](http://bootstrapvalidator.com/validators/remote/) adds support for dynamic ```url``` and method type (GET/POST), thanks to [@ericnakagawa](https://github.com/ericnakagawa)
 
 __Bug Fixes__
-* [#288](https://github.com/nghuuphuoc/bootstrapvalidator/issues/288): Fix [```date``` validator](http://bootstrapvalidator.com/validators/date/) issue on IE8
+* [#288](https://github.com/nghuuphuoc/bootstrapvalidator/issues/288): Fix [date validator](http://bootstrapvalidator.com/validators/date/) issue on IE8
 * [#292](https://github.com/nghuuphuoc/bootstrapvalidator/pull/292): Fix identical validator issue with not clearing ```has-error``` class, thanks to [@alavers](https://github.com/alavers)
-* [#305](https://github.com/nghuuphuoc/bootstrapvalidator/pull/305), [#306](https://github.com/nghuuphuoc/bootstrapvalidator/pull/306), [#307](https://github.com/nghuuphuoc/bootstrapvalidator/pull/307): Fix ```inclusive``` option in the [```between```](http://bootstrapvalidator.com/validators/between/), [```greaterThan```](http://bootstrapvalidator.com/validators/greaterThan/) and [```lessThan```](http://bootstrapvalidator.com/validators/lessThan/) validators, thanks to [@johanronn77](https://github.com/johanronn77)
-* [#310](https://github.com/nghuuphuoc/bootstrapvalidator/issues/310): The [```date``` validator](http://bootstrapvalidator.com/validators/date/) still return valid if the value doesn't contain digits
+* [#305](https://github.com/nghuuphuoc/bootstrapvalidator/pull/305), [#306](https://github.com/nghuuphuoc/bootstrapvalidator/pull/306), [#307](https://github.com/nghuuphuoc/bootstrapvalidator/pull/307): Fix ```inclusive``` option in the [between](http://bootstrapvalidator.com/validators/between/), [greaterThan](http://bootstrapvalidator.com/validators/greaterThan/) and [lessThan](http://bootstrapvalidator.com/validators/lessThan/) validators, thanks to [@johanronn77](https://github.com/johanronn77)
+* [#310](https://github.com/nghuuphuoc/bootstrapvalidator/issues/310): The [date validator](http://bootstrapvalidator.com/validators/date/) still return valid if the value doesn't contain digits
 * [#311](https://github.com/nghuuphuoc/bootstrapvalidator/issues/311): file validation extension is case sensitive
-* [#312](https://github.com/nghuuphuoc/bootstrapvalidator/pull/312): Fix broacast typo in the [```uri``` validator](http://bootstrapvalidator.com/validators/uri/), thanks to [@mrpollo](https://github.com/mrpollo)
-* [#313](https://github.com/nghuuphuoc/bootstrapvalidator/issues/313): Fix the [```file``` validator](http://bootstrapvalidator.com/validators/file/) issue on IE 8
-* [#314](https://github.com/nghuuphuoc/bootstrapvalidator/issues/314): The [```creditCard``` validator](http://bootstrapvalidator.com/validators/creditCard/) doesn't work on IE 8
-* [#315](https://github.com/nghuuphuoc/bootstrapvalidator/issues/315): The [```cvv``` validator](http://bootstrapvalidator.com/validators/cvv/) doesn't work on IE 8
+* [#312](https://github.com/nghuuphuoc/bootstrapvalidator/pull/312): Fix broacast typo in the [uri validator](http://bootstrapvalidator.com/validators/uri/), thanks to [@mrpollo](https://github.com/mrpollo)
+* [#313](https://github.com/nghuuphuoc/bootstrapvalidator/issues/313): Fix the [file validator](http://bootstrapvalidator.com/validators/file/) issue on IE 8
+* [#314](https://github.com/nghuuphuoc/bootstrapvalidator/issues/314): The [creditCard validator](http://bootstrapvalidator.com/validators/creditCard/) doesn't work on IE 8
+* [#315](https://github.com/nghuuphuoc/bootstrapvalidator/issues/315): The [cvv validator](http://bootstrapvalidator.com/validators/cvv/) doesn't work on IE 8
 * [#325](https://github.com/nghuuphuoc/bootstrapvalidator/issues/325): The [```threshold``` option](http://bootstrapvalidator.com/settings/#threshold) doesn't work on IE 8
-* [#358](https://github.com/nghuuphuoc/bootstrapvalidator/issues/358): The [```zipCode``` validator](http://bootstrapvalidator.com/validators/zipCode/) doesn't work for Canadian zip code
+* [#358](https://github.com/nghuuphuoc/bootstrapvalidator/issues/358): The [zipCode validator](http://bootstrapvalidator.com/validators/zipCode/) doesn't work for Canadian zip code
 * [#377](https://github.com/nghuuphuoc/bootstrapvalidator/issues/377): The [id](http://bootstrapvalidator.com/validators/id/), [vat](http://bootstrapvalidator.com/validators/vat/) validators should return ```false``` if the country code is not supported
 * [#389](https://github.com/nghuuphuoc/bootstrapvalidator/issues/389): When using multiple forms with HTML attributes on the same page, the plugin options will be the same as the last one
 * [#401](https://github.com/nghuuphuoc/bootstrapvalidator/issues/401): [stringLength validator](http://bootstrapvalidator.com/validators/stringLength/) allows spaces after max length
@@ -65,26 +65,26 @@ __Bug Fixes__
 __Document__
 * [#259](https://github.com/nghuuphuoc/bootstrapvalidator/issues/259): Typo "Support almost Bootstrap forms", thanks to [@lloydde](https://github.com/lloydde)
 * [#261](https://github.com/nghuuphuoc/bootstrapvalidator/pull/261): English fix to 'amazing contributors' section, thanks to [@lloydde](https://github.com/lloydde)
-* [#278](https://github.com/nghuuphuoc/bootstrapvalidator/pull/278): Update [```choice``` validator](http://bootstrapvalidator.com/validators/choice/) document, thanks to [@MrC0mm0n](https://github.com/MrC0mm0n)
-* [#303](https://github.com/nghuuphuoc/bootstrapvalidator/pull/303): Fix typo in [```remote``` validator](http://bootstrapvalidator.com/validators/remote/) document, thanks to [@MartinDevillers](https://github.com/MartinDevillers)
+* [#278](https://github.com/nghuuphuoc/bootstrapvalidator/pull/278): Update the [choice validator](http://bootstrapvalidator.com/validators/choice/) document, thanks to [@MrC0mm0n](https://github.com/MrC0mm0n)
+* [#303](https://github.com/nghuuphuoc/bootstrapvalidator/pull/303): Fix typo in [remote validator](http://bootstrapvalidator.com/validators/remote/) document, thanks to [@MartinDevillers](https://github.com/MartinDevillers)
 * [#334](https://github.com/nghuuphuoc/bootstrapvalidator/pull/334): No ID is specified on the form object for registration, thanks to [@jjshoe](https://github.com/jjshoe)
 
 ## v0.4.5 (2014-05-15)
 
-* Add ```$.fn.bootstrapValidator.helpers.date``` for validating a date, re-used in [```date```](http://bootstrapvalidator.com/validators/date/), [```id```](http://bootstrapvalidator.com/validators/id/), [```vat```](http://bootstrapvalidator.com/validators/vat/) validators
+* Add ```$.fn.bootstrapValidator.helpers.date``` for validating a date, re-used in [date](http://bootstrapvalidator.com/validators/date/), [id](http://bootstrapvalidator.com/validators/id/), [vat](http://bootstrapvalidator.com/validators/vat/) validators
 * [#233](https://github.com/nghuuphuoc/bootstrapvalidator/issues/233): Add ```threshold``` option
-* [#232](https://github.com/nghuuphuoc/bootstrapvalidator/issues/232): Add [```id``` validator](http://bootstrapvalidator.com/validators/id/)
-* [#242](https://github.com/nghuuphuoc/bootstrapvalidator/issues/242): Add ```separator``` option to the [```numeric``` validator](http://bootstrapvalidator.com/validators/numeric/)
-* [#248](https://github.com/nghuuphuoc/bootstrapvalidator/issues/248): Add [```isin``` (International Securities Identification Number) validator](http://bootstrapvalidator.com/validators/issn/)
-* [#250](https://github.com/nghuuphuoc/bootstrapvalidator/issues/250): Add [```rtn``` (Routing transit number) validator](http://bootstrapvalidator.com/validators/rtn/)
-* [#251](https://github.com/nghuuphuoc/bootstrapvalidator/issues/251): Add [```cusip``` (North American Securities) validator](http://bootstrapvalidator.com/validators/cusip/)
-* [#252](https://github.com/nghuuphuoc/bootstrapvalidator/issues/252): Add [```sedol``` (Stock Exchange Daily Official List) validator](http://bootstrapvalidator.com/validators/sedol/)
-* The [```zipCode``` validator](http://bootstrapvalidator.com/validators/zipCode/) adds support for Italian, Dutch postcodes
-* [#245](https://github.com/nghuuphuoc/bootstrapvalidator/pull/245): The [```cvv``` validator](http://bootstrapvalidator.com/validators/cvv/) should support spaces in credit card, thanks to [@evilchili](https://github.com/evilchili)
+* [#232](https://github.com/nghuuphuoc/bootstrapvalidator/issues/232): Add [id validator](http://bootstrapvalidator.com/validators/id/)
+* [#242](https://github.com/nghuuphuoc/bootstrapvalidator/issues/242): Add ```separator``` option to the [numeric validator](http://bootstrapvalidator.com/validators/numeric/)
+* [#248](https://github.com/nghuuphuoc/bootstrapvalidator/issues/248): Add [isin (International Securities Identification Number) validator](http://bootstrapvalidator.com/validators/issn/)
+* [#250](https://github.com/nghuuphuoc/bootstrapvalidator/issues/250): Add [rtn (Routing transit number) validator](http://bootstrapvalidator.com/validators/rtn/)
+* [#251](https://github.com/nghuuphuoc/bootstrapvalidator/issues/251): Add [cusip (North American Securities) validator](http://bootstrapvalidator.com/validators/cusip/)
+* [#252](https://github.com/nghuuphuoc/bootstrapvalidator/issues/252): Add [sedol (Stock Exchange Daily Official List) validator](http://bootstrapvalidator.com/validators/sedol/)
+* The [zipCode validator](http://bootstrapvalidator.com/validators/zipCode/) adds support for Italian, Dutch postcodes
+* [#245](https://github.com/nghuuphuoc/bootstrapvalidator/pull/245): The [cvv validator](http://bootstrapvalidator.com/validators/cvv/) should support spaces in credit card, thanks to [@evilchili](https://github.com/evilchili)
 * Change default ```submitButtons``` to ```[type="submit"]``` to support ```input type="submit"```
 * [#226](https://github.com/nghuuphuoc/bootstrapvalidator/issues/226): Fix the conflict issue with MooTools
 * [#238](https://github.com/nghuuphuoc/bootstrapvalidator/issues/238): The submit buttons are not sent
-* [#253](https://github.com/nghuuphuoc/bootstrapvalidator/issues/253): The [```iban``` validator](http://bootstrapvalidator.com/validators/iban/) does not work on IE8
+* [#253](https://github.com/nghuuphuoc/bootstrapvalidator/issues/253): The [iban validator](http://bootstrapvalidator.com/validators/iban/) does not work on IE8
 * [#257](https://github.com/nghuuphuoc/bootstrapvalidator/issues/257): Plugin method invocation don't work
 * Fix the issue that the hidden fields generated by other plugins might not be validated
 * When parsing options from HTML attributes, don't add the field which hasn't validators. It improves fixes for [#191](https://github.com/nghuuphuoc/bootstrapvalidator/issues/191), [#223](https://github.com/nghuuphuoc/bootstrapvalidator/issues/223)
@@ -100,32 +100,32 @@ __Document__
 * [#217](https://github.com/nghuuphuoc/bootstrapvalidator/issues/217): Add [ISSN (International Standard Serial Number) validator](http://bootstrapvalidator.com/validators/issn/)
 * [#191](https://github.com/nghuuphuoc/bootstrapvalidator/issues/191), [#223](https://github.com/nghuuphuoc/bootstrapvalidator/issues/223): Support using both the ```name``` attribute and ```selector``` option for field
 * [#206](https://github.com/nghuuphuoc/bootstrapvalidator/issues/206): Indicate success/error tab
-* [#220](https://github.com/nghuuphuoc/bootstrapvalidator/issues/220): Add UK postcode support for the [```zipCode``` validator](http://bootstrapvalidator.com/validators/zipCode/)
-* [#229](https://github.com/nghuuphuoc/bootstrapvalidator/issues/229): The [```date``` validator](http://bootstrapvalidator.com/validators/date/) supports seconds
+* [#220](https://github.com/nghuuphuoc/bootstrapvalidator/issues/220): Add UK postcode support for the [zipCode validator](http://bootstrapvalidator.com/validators/zipCode/)
+* [#229](https://github.com/nghuuphuoc/bootstrapvalidator/issues/229): The [date validator](http://bootstrapvalidator.com/validators/date/) supports seconds
 * [#231](https://github.com/nghuuphuoc/bootstrapvalidator/issues/231): Wrong prefix of Laser [credit card](http://bootstrapvalidator.com/validators/creditCard/) number
 
 ## v0.4.3 (2014-04-26)
 
 * Add ```$.fn.bootstrapValidator.helpers.luhn``` method that implements the Luhn algorithm
-* [#77](https://github.com/nghuuphuoc/bootstrapvalidator/issues/77): Add [```file``` validator](http://bootstrapvalidator.com/validators/file/)
-* [#179](https://github.com/nghuuphuoc/bootstrapvalidator/issues/179): Add [```vat``` validator](http://bootstrapvalidator.com/validators/vat/), support 32 countries
-* [#198](https://github.com/nghuuphuoc/bootstrapvalidator/pull/198), [#199](https://github.com/nghuuphuoc/bootstrapvalidator/pull/199): Add Canadian Postal Code support for the [```zipCode``` validator](http://bootstrapvalidator.com/validators/zipCode/), thanks to [@Francismori7](https://github.com/Francismori7)
-* [#201](https://github.com/nghuuphuoc/bootstrapvalidator/issues/201): The [```choice``` validator](http://bootstrapvalidator.com/validators/choice/) supports ```select``` element
+* [#77](https://github.com/nghuuphuoc/bootstrapvalidator/issues/77): Add [file validator](http://bootstrapvalidator.com/validators/file/)
+* [#179](https://github.com/nghuuphuoc/bootstrapvalidator/issues/179): Add [vat validator](http://bootstrapvalidator.com/validators/vat/), support 32 countries
+* [#198](https://github.com/nghuuphuoc/bootstrapvalidator/pull/198), [#199](https://github.com/nghuuphuoc/bootstrapvalidator/pull/199): Add Canadian Postal Code support for the [zipCode validator](http://bootstrapvalidator.com/validators/zipCode/), thanks to [@Francismori7](https://github.com/Francismori7)
+* [#201](https://github.com/nghuuphuoc/bootstrapvalidator/issues/201): The [choice validator](http://bootstrapvalidator.com/validators/choice/) supports ```select``` element
 * [#202](https://github.com/nghuuphuoc/bootstrapvalidator/issues/202): Activate tab containing the first invalid field
 * [#205](https://github.com/nghuuphuoc/bootstrapvalidator/issues/205): Plugin method invocation
 * [#207](https://github.com/nghuuphuoc/bootstrapvalidator/issues/207): IE8 error. The field is only validated when its value is changed. It also fixes [#153](https://github.com/nghuuphuoc/bootstrapvalidator/issues/153), [#193](https://github.com/nghuuphuoc/bootstrapvalidator/issues/193), [#197](https://github.com/nghuuphuoc/bootstrapvalidator/issues/197)
 * [#209](https://github.com/nghuuphuoc/bootstrapvalidator/issues/209): The [```excluded: ':disabled'``` setting](http://bootstrapvalidator.com/settings/#excluded) does not work on IE 8, thanks to [@adgrafik](https://github.com/adgrafik)
-* [#210](https://github.com/nghuuphuoc/bootstrapvalidator/issues/210): The [```isbn``` validator](http://bootstrapvalidator.com/validators/isbn/) accepts letters and special characters
+* [#210](https://github.com/nghuuphuoc/bootstrapvalidator/issues/210): The [isbn validator](http://bootstrapvalidator.com/validators/isbn/) accepts letters and special characters
 
 ## v0.4.2 (2014-04-19)
 
 * [#168](https://github.com/nghuuphuoc/bootstrapvalidator/pull/168): Add [siren](http://bootstrapvalidator.com/validators/siren/) and [siret](http://bootstrapvalidator.com/validators/siret/) validators, thanks to [@jswale](https://github.com/jswale)
 * [#177](https://github.com/nghuuphuoc/bootstrapvalidator/issues/177): Add [Vehicle Identification Number (VIN) validator](http://bootstrapvalidator.com/validators/vin/)
 * [#184](https://github.com/nghuuphuoc/bootstrapvalidator/issues/184): Add [```excluded``` option](http://bootstrapvalidator.com/settings/#excluded)
-* [#171](https://github.com/nghuuphuoc/bootstrapvalidator/pull/171): The [```phone``` validator](http://bootstrapvalidator.com/validators/phone/) now supports +1 country code and area code for US phone number, thanks to [@tomByrer](https://github.com/tomByrer)
-* [#173](https://github.com/nghuuphuoc/bootstrapvalidator/pull/173): The [```remote``` validator](http://bootstrapvalidator.com/validators/remote/) allows to override ```name``` option, thanks to [@jswale](https://github.com/jswale)
+* [#171](https://github.com/nghuuphuoc/bootstrapvalidator/pull/171): The [phone validator](http://bootstrapvalidator.com/validators/phone/) now supports +1 country code and area code for US phone number, thanks to [@tomByrer](https://github.com/tomByrer)
+* [#173](https://github.com/nghuuphuoc/bootstrapvalidator/pull/173): The [remote validator](http://bootstrapvalidator.com/validators/remote/) allows to override ```name``` option, thanks to [@jswale](https://github.com/jswale)
 * [#178](https://github.com/nghuuphuoc/bootstrapvalidator/pull/178): Do not validate fields that ```enabled``` is set to ```false```, thanks to [@henningda](https://github.com/henningda)
-* [#182](https://github.com/nghuuphuoc/bootstrapvalidator/pull/182): Improve [```zipCode``` validator](http://bootstrapvalidator.com/validators/zipCode/), thanks to [@gercheq](https://github.com/gercheq)
+* [#182](https://github.com/nghuuphuoc/bootstrapvalidator/pull/182): Improve [zipCode validator](http://bootstrapvalidator.com/validators/zipCode/), thanks to [@gercheq](https://github.com/gercheq)
 * [#169](https://github.com/nghuuphuoc/bootstrapvalidator/pull/169): Better to say: ```{validatorname}``` and ```{validatoroption}``` must be lowercase, thanks to [@tomByrer](https://github.com/tomByrer)
 
 ## v0.4.1 (2014-04-12)
@@ -137,7 +137,7 @@ __Document__
 * [#157](https://github.com/nghuuphuoc/bootstrapvalidator/issues/157): Added support for element outside of form using the [```selector```](http://bootstrapvalidator.com/settings/#fields) option
 * [#159](https://github.com/nghuuphuoc/bootstrapvalidator/issues/159), [#163](https://github.com/nghuuphuoc/bootstrapvalidator/pull/163): User doesn't need to submit the form twice when remote validator complete, thanks to [@jswale](https://github.com/jswale)
 * [#162](https://github.com/nghuuphuoc/bootstrapvalidator/pull/162): Fix errors in IE 8, thanks to [@adgrafik](https://github.com/adgrafik)
-* [#166](https://github.com/nghuuphuoc/bootstrapvalidator/issues/166), [#167](https://github.com/nghuuphuoc/bootstrapvalidator/pull/167): The [```phone``` validator](http://bootstrapvalidator.com/validators/phone/) now also checks the length of US phone number, thanks to [@gercheq](https://github.com/gercheq)
+* [#166](https://github.com/nghuuphuoc/bootstrapvalidator/issues/166), [#167](https://github.com/nghuuphuoc/bootstrapvalidator/pull/167): The [phone validator](http://bootstrapvalidator.com/validators/phone/) now also checks the length of US phone number, thanks to [@gercheq](https://github.com/gercheq)
 
 ## v0.4.0 (2014-04-03)
 
@@ -170,15 +170,15 @@ Field attributes:
 
 HTML 5 attribute      | Validator
 ----------------------|----------
-```min="..."```       | [```greaterThan``` validator](http://bootstrapvalidator.com/validators/greaterThan/)
-```max="..."```       | [```lessThan``` validator](http://bootstrapvalidator.com/validators/lessThan/)
-```maxlength="..."``` | [```stringLength``` validator](http://bootstrapvalidator.com/validators/stringLength/)
-```pattern="..."```   | [```regexp``` validator](http://bootstrapvalidator.com/validators/regexp/)
-```required```        | [```notEmpty``` validator](http://bootstrapvalidator.com/validators/notEmpty/)
-```type="color"```    | [```hexColor``` validator](http://bootstrapvalidator.com/validators/hexColor/)
-```type="email"```    | [```emailAddress``` validator](http://bootstrapvalidator.com/validators/emailAddress/)
-```type="range"```    | [```between``` validator](http://bootstrapvalidator.com/validators/between/)
-```type="url"```      | [```uri``` validator](http://bootstrapvalidator.com/validators/uri/)
+```min="..."```       | [greaterThan validator](http://bootstrapvalidator.com/validators/greaterThan/)
+```max="..."```       | [lessThan validator](http://bootstrapvalidator.com/validators/lessThan/)
+```maxlength="..."``` | [stringLength validator](http://bootstrapvalidator.com/validators/stringLength/)
+```pattern="..."```   | [regexp validator](http://bootstrapvalidator.com/validators/regexp/)
+```required```        | [notEmpty validator](http://bootstrapvalidator.com/validators/notEmpty/)
+```type="color"```    | [hexColor validator](http://bootstrapvalidator.com/validators/hexColor/)
+```type="email"```    | [emailAddress validator](http://bootstrapvalidator.com/validators/emailAddress/)
+```type="range"```    | [between validator](http://bootstrapvalidator.com/validators/between/)
+```type="url"```      | [uri validator](http://bootstrapvalidator.com/validators/uri/)
 
 * [#74](https://github.com/nghuuphuoc/bootstrapvalidator/issues/74), [#103](https://github.com/nghuuphuoc/bootstrapvalidator/issues/103), [#122](https://github.com/nghuuphuoc/bootstrapvalidator/issues/122): Set the custom [trigger event](http://bootstrapvalidator.com/settings/#trigger)
 
@@ -231,14 +231,14 @@ $(form).bootstrapValidator({
 ```
 
 * [#109](https://github.com/nghuuphuoc/bootstrapvalidator/issues/109): Add [```setLiveMode()``` method](http://bootstrapvalidator.com/api/#set-live-mode) to turn on/off the live validating mode
-* [#114](https://github.com/nghuuphuoc/bootstrapvalidator/issues/114): Add [```iban``` validator](http://bootstrapvalidator.com/validators/iban/) for validating IBAN (International Bank Account Number)
-* [#116](https://github.com/nghuuphuoc/bootstrapvalidator/issues/116): Add [```uuid``` validator](http://bootstrapvalidator.com/validators/uuid/), support UUID v3, v4, v5
-* [#128](https://github.com/nghuuphuoc/bootstrapvalidator/issues/128): Add [```numeric``` validator](http://bootstrapvalidator.com/validators/numeric/)
-* [#135](https://github.com/nghuuphuoc/bootstrapvalidator/issues/135): Add [```integer``` validator](http://bootstrapvalidator.com/validators/integer/)
-* [#138](https://github.com/nghuuphuoc/bootstrapvalidator/issues/138): Add [```hex``` validator](http://bootstrapvalidator.com/validators/hex/)
-* [#139](https://github.com/nghuuphuoc/bootstrapvalidator/issues/139): Add [```stringCase``` validator](http://bootstrapvalidator.com/validators/stringCase/) to check a string is lower or upper case
+* [#114](https://github.com/nghuuphuoc/bootstrapvalidator/issues/114): Add [iban validator](http://bootstrapvalidator.com/validators/iban/) for validating IBAN (International Bank Account Number)
+* [#116](https://github.com/nghuuphuoc/bootstrapvalidator/issues/116): Add [uuid validator](http://bootstrapvalidator.com/validators/uuid/), support UUID v3, v4, v5
+* [#128](https://github.com/nghuuphuoc/bootstrapvalidator/issues/128): Add [numeric validator](http://bootstrapvalidator.com/validators/numeric/)
+* [#135](https://github.com/nghuuphuoc/bootstrapvalidator/issues/135): Add [integer validator](http://bootstrapvalidator.com/validators/integer/)
+* [#138](https://github.com/nghuuphuoc/bootstrapvalidator/issues/138): Add [hex validator](http://bootstrapvalidator.com/validators/hex/)
+* [#139](https://github.com/nghuuphuoc/bootstrapvalidator/issues/139): Add [stringCase validator](http://bootstrapvalidator.com/validators/stringCase/) to check a string is lower or upper case
 * [#137](https://github.com/nghuuphuoc/bootstrapvalidator/issues/137): Register the plugin with [jQuery plugins site](http://plugins.jquery.com/)
-* [#133](https://github.com/nghuuphuoc/bootstrapvalidator/issues/133): The [```regexp``` validator](http://bootstrapvalidator.com/validators/regexp/) allows to pass a string
+* [#133](https://github.com/nghuuphuoc/bootstrapvalidator/issues/133): The [regexp validator](http://bootstrapvalidator.com/validators/regexp/) allows to pass a string
 * [#140](https://github.com/nghuuphuoc/bootstrapvalidator/pull/140): Do not validate hidden (```type="hidden"```) and invisible element, thanks to [@easonhan007](https://github.com/easonhan007)
 * [```disableSubmitButtons()```](http://bootstrapvalidator.com/api/#disable-submit-buttons) is now marked as a public API
 * The first parameter of [```updateStatus()``` method](http://bootstrapvalidator.com/api/#update-status) now accepts the field name only
@@ -249,25 +249,25 @@ $(form).bootstrapValidator({
 
 * [#50](https://github.com/nghuuphuoc/bootstrapvalidator/issues/50): Don't validate disabled element
 * [#34](https://github.com/nghuuphuoc/bootstrapvalidator/issues/34), [#105](https://github.com/nghuuphuoc/bootstrapvalidator/issues/105): Cannot call ```form.submit()``` inside [```submitHandler```](http://bootstrapvalidator.com/settings/#submit-handler)
-* [#77](https://github.com/nghuuphuoc/bootstrapvalidator/issues/77), [#117](https://github.com/nghuuphuoc/bootstrapvalidator/issues/117): The [```notEmpty``` validator](http://bootstrapvalidator.com/validators/notEmpty/) doesn't work on file input
+* [#77](https://github.com/nghuuphuoc/bootstrapvalidator/issues/77), [#117](https://github.com/nghuuphuoc/bootstrapvalidator/issues/117): The [notEmpty validator](http://bootstrapvalidator.com/validators/notEmpty/) doesn't work on file input
 * [#120](https://github.com/nghuuphuoc/bootstrapvalidator/pull/120): Handle case where a field is removed after the bootstrap validation, thanks to [@patmoore](https://github.com/patmoore)
 
 ## v0.3.2 (2014-03-21)
 
 * [#56](https://github.com/nghuuphuoc/bootstrapvalidator/issues/56): Add [```selector``` option](http://bootstrapvalidator.com/settings/#fields) for each field. The field can be defined by CSS validator instead of the ```name``` attribute
 * [#107](https://github.com/nghuuphuoc/bootstrapvalidator/issues/107): Add [```container``` option](http://bootstrapvalidator.com/settings/#fields) for each field to indicate where the error messages are shown
-* [#5](https://github.com/nghuuphuoc/bootstrapvalidator/issues/5): Add [```ip``` validator](http://bootstrapvalidator.com/validators/ip/). Support both IPv4 and IPv6
-* [#6](https://github.com/nghuuphuoc/bootstrapvalidator/issues/6): Add [```isbn``` validator](http://bootstrapvalidator.com/validators/isbn/), support both ISBN 10 and ISBN 13
-* [#7](https://github.com/nghuuphuoc/bootstrapvalidator/issues/7): Add [```step``` validator](http://bootstrapvalidator.com/validators/step/)
-* [#95](https://github.com/nghuuphuoc/bootstrapvalidator/issues/95): Add [```mac``` validator](http://bootstrapvalidator.com/validators/mac/)
-* [#96](https://github.com/nghuuphuoc/bootstrapvalidator/issues/96): Add [```base64``` validator](http://bootstrapvalidator.com/validators/base64/)
-* [#97](https://github.com/nghuuphuoc/bootstrapvalidator/issues/97): Add [```cvv``` validator](http://bootstrapvalidator.com/validators/cvv/)
-* [#99](https://github.com/nghuuphuoc/bootstrapvalidator/issues/99), [#100](https://github.com/nghuuphuoc/bootstrapvalidator/pull/100): Add [```phone``` validator](http://bootstrapvalidator.com/validators/phone/). Support US phone number only, thanks to [@gercheq](https://github.com/gercheq)
-* [#112](https://github.com/nghuuphuoc/bootstrapvalidator/issues/112): [```creditCard``` validator](http://bootstrapvalidator.com/validators/creditCard/) now validates both IIN ranges and length
+* [#5](https://github.com/nghuuphuoc/bootstrapvalidator/issues/5): Add [ip validator](http://bootstrapvalidator.com/validators/ip/). Support both IPv4 and IPv6
+* [#6](https://github.com/nghuuphuoc/bootstrapvalidator/issues/6): Add [isbn validator](http://bootstrapvalidator.com/validators/isbn/), support both ISBN 10 and ISBN 13
+* [#7](https://github.com/nghuuphuoc/bootstrapvalidator/issues/7): Add [step validator](http://bootstrapvalidator.com/validators/step/)
+* [#95](https://github.com/nghuuphuoc/bootstrapvalidator/issues/95): Add [mac validator](http://bootstrapvalidator.com/validators/mac/)
+* [#96](https://github.com/nghuuphuoc/bootstrapvalidator/issues/96): Add [base64 validator](http://bootstrapvalidator.com/validators/base64/)
+* [#97](https://github.com/nghuuphuoc/bootstrapvalidator/issues/97): Add [cvv validator](http://bootstrapvalidator.com/validators/cvv/)
+* [#99](https://github.com/nghuuphuoc/bootstrapvalidator/issues/99), [#100](https://github.com/nghuuphuoc/bootstrapvalidator/pull/100): Add [phone validator](http://bootstrapvalidator.com/validators/phone/). Support US phone number only, thanks to [@gercheq](https://github.com/gercheq)
+* [#112](https://github.com/nghuuphuoc/bootstrapvalidator/issues/112): [creditCard validator](http://bootstrapvalidator.com/validators/creditCard/) now validates both IIN ranges and length
 
 ## v0.3.1 (2014-03-17)
 
-* [#4](https://github.com/nghuuphuoc/bootstrapvalidator/issues/4): Add [```date``` validator](http://bootstrapvalidator.com/validators/date/)
+* [#4](https://github.com/nghuuphuoc/bootstrapvalidator/issues/4): Add [date validator](http://bootstrapvalidator.com/validators/date/)
 * [#72](https://github.com/nghuuphuoc/bootstrapvalidator/issues/72), [#79](https://github.com/nghuuphuoc/bootstrapvalidator/issues/79): Improve [```updateStatus()``` method](http://bootstrapvalidator.com/api/#update-status) to make the plugin play well with another
 * [#80](https://github.com/nghuuphuoc/bootstrapvalidator/issues/80): Add [```enabled``` option](http://bootstrapvalidator.com/settings/#fields) and [```enableFieldValidators()``` method](http://bootstrapvalidator.com/api/#enable-field-validators) to enable/disable all validators to given field
 * [#90](https://github.com/nghuuphuoc/bootstrapvalidator/pull/90): Add ```bower.json``` file, thanks to [@ikanedo](https://github.com/ikanedo)
@@ -275,13 +275,13 @@ $(form).bootstrapValidator({
 * Remove the ```columns``` option. Now the plugin works normally no matter how many columns the form uses
 * [#102](https://github.com/nghuuphuoc/bootstrapvalidator/issues/102): The [```resetForm``` method](http://bootstrapvalidator.com/api/#reset-form) now only resets fields with validator rules
 * [#82](https://github.com/nghuuphuoc/bootstrapvalidator/issues/82), [#84](https://github.com/nghuuphuoc/bootstrapvalidator/issues/84): The error messages aren't shown if the form field doesn't have label
-* [#89](https://github.com/nghuuphuoc/bootstrapvalidator/issues/89): [```submitHandler```](http://bootstrapvalidator.com/settings/#submit-handler) or default submission isn't called after [```remote``` validation](http://bootstrapvalidator.com/validators/remote/) completes
+* [#89](https://github.com/nghuuphuoc/bootstrapvalidator/issues/89): [```submitHandler```](http://bootstrapvalidator.com/settings/#submit-handler) or default submission isn't called after [remote validation](http://bootstrapvalidator.com/validators/remote/) completes
 
 ## v0.3.0 (2014-03-10)
 
 * [#44](https://github.com/nghuuphuoc/bootstrapvalidator/issues/44): Rewrite entirely using Deferred
-* [#26](https://github.com/nghuuphuoc/bootstrapvalidator/issues/26), [#27](https://github.com/nghuuphuoc/bootstrapvalidator/issues/27), [#67](https://github.com/nghuuphuoc/bootstrapvalidator/pull/67): Add [```choice``` validator](http://bootstrapvalidator.com/validators/choice/), thanks to [@emilchristensen](https://github.com/emilchristensen)
-* [#31](https://github.com/nghuuphuoc/bootstrapvalidator/issues/31): The [```remote``` validator](http://bootstrapvalidator.com/validators/remote/) supports dynamic data
+* [#26](https://github.com/nghuuphuoc/bootstrapvalidator/issues/26), [#27](https://github.com/nghuuphuoc/bootstrapvalidator/issues/27), [#67](https://github.com/nghuuphuoc/bootstrapvalidator/pull/67): Add [choice validator](http://bootstrapvalidator.com/validators/choice/), thanks to [@emilchristensen](https://github.com/emilchristensen)
+* [#31](https://github.com/nghuuphuoc/bootstrapvalidator/issues/31): The [remote validator](http://bootstrapvalidator.com/validators/remote/) supports dynamic data
 * [#36](https://github.com/nghuuphuoc/bootstrapvalidator/issues/36), [#58](https://github.com/nghuuphuoc/bootstrapvalidator/issues/58): Add method to [validate form](http://bootstrapvalidator.com/api/#validate) manually
 * [#41](https://github.com/nghuuphuoc/bootstrapvalidator/issues/41): Disable submit button on successful form submit
 * [#42](https://github.com/nghuuphuoc/bootstrapvalidator/issues/42): Add submit button to [```submitHandler()```](http://bootstrapvalidator.com/settings/#submit-handler) parameter
@@ -293,9 +293,9 @@ $(form).bootstrapValidator({
 * [#76](https://github.com/nghuuphuoc/bootstrapvalidator/issues/76): Add [```resetForm()``` method](http://bootstrapvalidator.com/api/#reset-form)
 * [#50](https://github.com/nghuuphuoc/bootstrapvalidator/issues/50): Don't validate disabled element
 * [#51](https://github.com/nghuuphuoc/bootstrapvalidator/issues/51): Submit after submit doesn't work
-* [#53](https://github.com/nghuuphuoc/bootstrapvalidator/issues/53), [#54](https://github.com/nghuuphuoc/bootstrapvalidator/pull/54): Fix [```notEmpty``` validator](http://bootstrapvalidator.com/validators/notEmpty/) for radios and checkboxes, thanks to [@kristian-puccio](https://github.com/kristian-puccio)
-* [#55](https://github.com/nghuuphuoc/bootstrapvalidator/issues/55): The plugin doesn't validate other fields if the [```remote``` validator](http://bootstrapvalidator.com/validators/remote/) returns ```true```
-* [#62](https://github.com/nghuuphuoc/bootstrapvalidator/pull/62): The [```callback``` validator](http://bootstrapvalidator.com/validators/callback/) passes wrong parameter, thanks to [@iplus](https://github.com/iplus)
+* [#53](https://github.com/nghuuphuoc/bootstrapvalidator/issues/53), [#54](https://github.com/nghuuphuoc/bootstrapvalidator/pull/54): Fix [notEmpty validator](http://bootstrapvalidator.com/validators/notEmpty/) for radios and checkboxes, thanks to [@kristian-puccio](https://github.com/kristian-puccio)
+* [#55](https://github.com/nghuuphuoc/bootstrapvalidator/issues/55): The plugin doesn't validate other fields if the [remote validator](http://bootstrapvalidator.com/validators/remote/) returns ```true```
+* [#62](https://github.com/nghuuphuoc/bootstrapvalidator/pull/62): The [callback validator](http://bootstrapvalidator.com/validators/callback/) passes wrong parameter, thanks to [@iplus](https://github.com/iplus)
 * [#59](https://github.com/nghuuphuoc/bootstrapvalidator/pull/59): Add example for Rail field convention, thanks to [@narutosanjiv](https://github.com/narutosanjiv)
 * [#60](https://github.com/nghuuphuoc/bootstrapvalidator/pull/60): Update the installation guide, thanks to [@vaz](https://github.com/vaz)
 * [#73](https://github.com/nghuuphuoc/bootstrapvalidator/issues/73): Describe which version should be [included](http://bootstrapvalidator.com/getting-started/#including-library) in the Usage section
@@ -303,7 +303,7 @@ $(form).bootstrapValidator({
 ## v0.2.2 (2014-01-07)
 
 * [#15](https://github.com/nghuuphuoc/bootstrapvalidator/issues/15): Focus to the first invalid element
-* [#31](https://github.com/nghuuphuoc/bootstrapvalidator/issues/31): [```remote``` validator](http://bootstrapvalidator.com/validators/remote/): Allow to set additional data to remote URL
+* [#31](https://github.com/nghuuphuoc/bootstrapvalidator/issues/31): [remote validator](http://bootstrapvalidator.com/validators/remote/): Allow to set additional data to remote URL
 * [#32](https://github.com/nghuuphuoc/bootstrapvalidator/issues/32), [#43](https://github.com/nghuuphuoc/bootstrapvalidator/issues/43), [#47](https://github.com/nghuuphuoc/bootstrapvalidator/issues/47): Only validate not empty field
 * [#39](https://github.com/nghuuphuoc/bootstrapvalidator/issues/39): Validate existing fields only
 * [#34](https://github.com/nghuuphuoc/bootstrapvalidator/issues/34): Avoid from calling form submit recursively
@@ -318,11 +318,11 @@ $(form).bootstrapValidator({
 
 * [#24](https://github.com/nghuuphuoc/bootstrapvalidator/issues/24): Add [```live``` option](http://bootstrapvalidator.com/settings/#live)
 * [#20](https://github.com/nghuuphuoc/bootstrapvalidator/issues/20): Add custom submit handler using [```submitHandler``` option](http://bootstrapvalidator.com/settings/#submit-handler)
-* [#9](https://github.com/nghuuphuoc/bootstrapvalidator/issues/9): Add [```creditCard``` validator](http://bootstrapvalidator.com/validators/creditCard/)
-* [#18](https://github.com/nghuuphuoc/bootstrapvalidator/issues/18): Add [```different``` validator](http://bootstrapvalidator.com/validators/different/)
-* [#21](https://github.com/nghuuphuoc/bootstrapvalidator/issues/21): Add [```callback``` validator](http://bootstrapvalidator.com/validators/callback/)
+* [#9](https://github.com/nghuuphuoc/bootstrapvalidator/issues/9): Add [creditCard validator](http://bootstrapvalidator.com/validators/creditCard/)
+* [#18](https://github.com/nghuuphuoc/bootstrapvalidator/issues/18): Add [different validator](http://bootstrapvalidator.com/validators/different/)
+* [#21](https://github.com/nghuuphuoc/bootstrapvalidator/issues/21): Add [callback validator](http://bootstrapvalidator.com/validators/callback/)
 * [#22](https://github.com/nghuuphuoc/bootstrapvalidator/issues/22): Support form that labels are placed in extra small (```col-xs-```), small (```col-sm-```), medium (```col-md-```) elements
-* [#25](https://github.com/nghuuphuoc/bootstrapvalidator/issues/25): The [```regexp``` validator](http://bootstrapvalidator.com/validators/regexp/) does not work
+* [#25](https://github.com/nghuuphuoc/bootstrapvalidator/issues/25): The [regexp validator](http://bootstrapvalidator.com/validators/regexp/) does not work
 
 ## v0.1.1 (2013-10-17)
 
@@ -335,16 +335,16 @@ $(form).bootstrapValidator({
 
 * First release
 * Provide various validators:
-    - [```between``` validator](http://bootstrapvalidator.com/validators/between/)
-    - [```digits``` validator](http://bootstrapvalidator.com/validators/digits/)
-    - [```emailAddress``` validator](http://bootstrapvalidator.com/validators/emailAddress/)
-    - [```greaterThan``` validator](http://bootstrapvalidator.com/validators/greaterThan/)
-    - [```hexColor``` validator](http://bootstrapvalidator.com/validators/hexColor/)
-    - [```identical``` validator](http://bootstrapvalidator.com/validators/identical/)
-    - [```lessThan``` validator](http://bootstrapvalidator.com/validators/lessThan/)
-    - [```notEmpty``` validator](http://bootstrapvalidator.com/validators/notEmpty/)
-    - [```regexp``` validator](http://bootstrapvalidator.com/validators/regexp/)
-    - [```remote``` validator](http://bootstrapvalidator.com/validators/remote/)
-    - [```stringLength``` validator](http://bootstrapvalidator.com/validators/stringLength/)
-    - [```uri``` validator](http://bootstrapvalidator.com/validators/uri/)
-    - [```usZipCode``` validator](http://bootstrapvalidator.com/validators/zipCode/)
+    - [between validator](http://bootstrapvalidator.com/validators/between/)
+    - [digits validator](http://bootstrapvalidator.com/validators/digits/)
+    - [emailAddress validator](http://bootstrapvalidator.com/validators/emailAddress/)
+    - [greaterThan validator](http://bootstrapvalidator.com/validators/greaterThan/)
+    - [hexColor validator](http://bootstrapvalidator.com/validators/hexColor/)
+    - [identical validator](http://bootstrapvalidator.com/validators/identical/)
+    - [lessThan validator](http://bootstrapvalidator.com/validators/lessThan/)
+    - [notEmpty validator](http://bootstrapvalidator.com/validators/notEmpty/)
+    - [regexp validator](http://bootstrapvalidator.com/validators/regexp/)
+    - [remote validator](http://bootstrapvalidator.com/validators/remote/)
+    - [stringLength validator](http://bootstrapvalidator.com/validators/stringLength/)
+    - [uri validator](http://bootstrapvalidator.com/validators/uri/)
+    - [zipCode validator](http://bootstrapvalidator.com/validators/zipCode/)
