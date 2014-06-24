@@ -205,7 +205,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
@@ -233,7 +233,7 @@
             for (var i = 1; i < length; ++i) {
                 temp = (temp * 10 + parseInt(value.substr(i, 1), 10)) % 97;
             }
-            return (temp == 1);
+            return (temp === 1);
         }
     };
 }(window.jQuery));

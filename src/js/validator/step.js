@@ -27,7 +27,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
@@ -49,17 +49,17 @@
                     }
                 },
                 floatMod = function(x, y) {
-                    if (y == 0.0) {
+                    if (y === 0.0) {
                         return 1.0;
                     }
                     var dotX      = (x + '').split('.'),
                         dotY      = (y + '').split('.'),
-                        precision = ((dotX.length == 1) ? 0 : dotX[1].length) + ((dotY.length == 1) ? 0 : dotY[1].length);
+                        precision = ((dotX.length === 1) ? 0 : dotX[1].length) + ((dotY.length === 1) ? 0 : dotY[1].length);
                     return round(x - y * Math.floor(x / y), precision);
                 };
 
             var mod = floatMod(value - options.baseValue, options.step);
-            return (mod == 0.0 || mod == options.step);
+            return (mod === 0.0 || mod === options.step);
         }
     };
 }(window.jQuery));

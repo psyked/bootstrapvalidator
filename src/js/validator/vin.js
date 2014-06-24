@@ -15,7 +15,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
@@ -39,11 +39,11 @@
             }
 
             var reminder = sum % 11;
-            if (reminder == 10) {
+            if (reminder === 10) {
                 reminder = 'X';
             }
 
-            return reminder == value.charAt(8);
+            return (reminder + '') === value.charAt(8);
         }
     };
 }(window.jQuery));

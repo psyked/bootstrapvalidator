@@ -5,7 +5,7 @@
 
     $.fn.bootstrapValidator.validators.hexColor = {
         enableByHtml5: function($field) {
-            return ('color' == $field.attr('type'));
+            return ('color' === $field.attr('type'));
         },
 
         /**
@@ -19,7 +19,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
             return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(value);

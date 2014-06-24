@@ -244,7 +244,7 @@
             'default': 'Please enter a valid SIRET number'
         },
         step: {
-            'default': 'Please enter a valid step of %s',
+            'default': 'Please enter a valid step of %s'
         },
         stringCase: {
             'default': 'Please enter only lowercase characters',

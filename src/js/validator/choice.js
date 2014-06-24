@@ -9,7 +9,6 @@
             switch (true) {
                 case (!!options.min && !!options.max):
                     return $.fn.bootstrapValidator.helpers.format(this.between, [options.min, options.max]);
-                    break;
                 case (!!options.min):
                     return $.fn.bootstrapValidator.helpers.format(this.less, [options.min]);
                 case (!!options.max):

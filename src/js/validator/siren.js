@@ -15,7 +15,7 @@
 		 */
 		validate: function(validator, $field, options) {
 			var value = $field.val();
-			if (value == '') {
+			if (value === '') {
 				return true;
 			}
 

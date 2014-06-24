@@ -17,13 +17,13 @@
          * @see http://en.wikipedia.org/wiki/International_Standard_Book_Number
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
-         * @param {Object} options Can consist of the following keys:
+         * @param {Object} [options] Can consist of the following keys:
          * - message: The invalid message
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
@@ -32,13 +32,13 @@
             var type;
             switch (true) {
                 case /^\d{9}[\dX]$/.test(value):
-                case (value.length == 13 && /^(\d+)-(\d+)-(\d+)-([\dX])$/.test(value)):
-                case (value.length == 13 && /^(\d+)\s(\d+)\s(\d+)\s([\dX])$/.test(value)):
+                case (value.length === 13 && /^(\d+)-(\d+)-(\d+)-([\dX])$/.test(value)):
+                case (value.length === 13 && /^(\d+)\s(\d+)\s(\d+)\s([\dX])$/.test(value)):
                     type = 'ISBN10';
                     break;
                 case /^(978|979)\d{9}[\dX]$/.test(value):
-                case (value.length == 17 && /^(978|979)-(\d+)-(\d+)-(\d+)-([\dX])$/.test(value)):
-                case (value.length == 17 && /^(978|979)\s(\d+)\s(\d+)\s(\d+)\s([\dX])$/.test(value)):
+                case (value.length === 17 && /^(978|979)-(\d+)-(\d+)-(\d+)-([\dX])$/.test(value)):
+                case (value.length === 17 && /^(978|979)\s(\d+)\s(\d+)\s(\d+)\s([\dX])$/.test(value)):
                     type = 'ISBN13';
                     break;
                 default:
@@ -50,32 +50,33 @@
             var chars  = value.split(''),
                 length = chars.length,
                 sum    = 0,
+                i,
                 checksum;
 
             switch (type) {
                 case 'ISBN10':
                     sum = 0;
-                    for (var i = 0; i < length - 1; i++) {
-                        sum += ((10 - i) * parseInt(chars[i]));
+                    for (i = 0; i < length - 1; i++) {
+                        sum += parseInt(chars[i], 10) * (10 - i);
                     }
                     checksum = 11 - (sum % 11);
-                    if (checksum == 11) {
+                    if (checksum === 11) {
                         checksum = 0;
-                    } else if (checksum == 10) {
+                    } else if (checksum === 10) {
                         checksum = 'X';
                     }
-                    return (checksum + '' == chars[length - 1]);
+                    return (checksum + '' === chars[length - 1]);
 
                 case 'ISBN13':
                     sum = 0;
-                    for (var i = 0; i < length - 1; i++) {
-                        sum += ((i % 2 == 0) ? parseInt(chars[i]) : (parseInt(chars[i]) * 3));
+                    for (i = 0; i < length - 1; i++) {
+                        sum += ((i % 2 === 0) ? parseInt(chars[i], 10) : (parseInt(chars[i], 10) * 3));
                     }
                     checksum = 10 - (sum % 10);
-                    if (checksum == 10) {
+                    if (checksum === 10) {
                         checksum = '0';
                     }
-                    return (checksum + '' == chars[length - 1]);
+                    return (checksum + '' === chars[length - 1]);
 
                 default:
                     return false;

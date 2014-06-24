@@ -5,13 +5,7 @@
 
         getMessage: function(options) {
             var stringCase = (options['case'] || 'lower').toLowerCase();
-            switch (stringCase) {
-                case 'upper':
-                    return this.upper;
-                case 'lower':
-                default:
-                    return this['default'];
-            }
+            return ('upper' === stringCase) ? this.upper : this['default'];
         }
     });
 
@@ -33,18 +27,12 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
             var stringCase = (options['case'] || 'lower').toLowerCase();
-            switch (stringCase) {
-                case 'upper':
-                    return value === value.toUpperCase();
-                case 'lower':
-                default:
-                    return value === value.toLowerCase();
-            }
+            return ('upper' === stringCase) ? value === value.toUpperCase() : value === value.toLowerCase();
         }
     };
 }(window.jQuery));

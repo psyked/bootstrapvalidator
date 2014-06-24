@@ -14,7 +14,7 @@
             'default': 'Vui lòng nhập giá trị hợp lệ',
             less: 'Vui lòng chọn ít nhất %s lựa chọn',
             more: 'Vui lòng chọn nhiều nhất %s lựa chọn',
-            between: 'Vui lòng chọn %s - %s lựa chọn',
+            between: 'Vui lòng chọn %s - %s lựa chọn'
         },
         creditCard: {
             'default': 'Vui lòng nhập số thẻ tín dụng hợp lệ'

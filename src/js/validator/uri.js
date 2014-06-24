@@ -10,7 +10,7 @@
         },
 
         enableByHtml5: function($field) {
-            return ('url' == $field.attr('type'));
+            return ('url' === $field.attr('type'));
         },
 
         /**
@@ -25,7 +25,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
@@ -57,7 +57,7 @@
             //
             // - Added exclusion of private, reserved and/or local networks ranges
             //
-            var allowLocal = options.allowLocal == true || options.allowLocal == 'true',
+            var allowLocal = options.allowLocal === true || options.allowLocal === 'true',
                 urlExp     = new RegExp(
                     "^" +
                     // protocol identifier

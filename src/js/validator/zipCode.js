@@ -16,7 +16,7 @@
 
         getMessage: function(options) {
             var country = (options.country || 'US').toUpperCase();
-            if ($.inArray(country, $.fn.bootstrapValidator.validators.zipCode.COUNTRIES) == -1) {
+            if ($.inArray(country, $.fn.bootstrapValidator.validators.zipCode.COUNTRIES) === -1) {
                 return $.fn.bootstrapValidator.helpers.format(this.countryNotSupported, country);
             }
 
@@ -58,12 +58,12 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '' || !options.country) {
+            if (value === '' || !options.country) {
                 return true;
             }
 
             var country = (options.country || 'US').toUpperCase();
-            if ($.inArray(country, this.COUNTRIES) == -1) {
+            if ($.inArray(country, this.COUNTRIES) === -1) {
                 return false;
             }
 
@@ -81,6 +81,7 @@
                 case 'SE': return /^(S-)?\d{3}\s?\d{2}$/i.test(value);
                 case 'SG': return /^([0][1-9]|[1-6][0-9]|[7]([0-3]|[5-9])|[8][0-2])(\d{4})$/i.test(value);
                 case 'US':
+                /* falls through */
                 default: return /^\d{4,5}([\-]\d{4})?$/.test(value);
             }
         },

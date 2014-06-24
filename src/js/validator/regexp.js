@@ -31,11 +31,11 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
-            var regexp = ('string' == typeof options.regexp) ? new RegExp(options.regexp) : options.regexp;
+            var regexp = ('string' === typeof options.regexp) ? new RegExp(options.regexp) : options.regexp;
             return regexp.test(value);
         }
     };

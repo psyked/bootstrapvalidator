@@ -21,11 +21,11 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
             var separator = options.separator || '.';
-            if (separator != '.') {
+            if (separator !== '.') {
                 value = value.replace(separator, '.');
             }
 

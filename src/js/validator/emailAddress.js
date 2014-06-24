@@ -5,7 +5,7 @@
 
     $.fn.bootstrapValidator.validators.emailAddress = {
         enableByHtml5: function($field) {
-            return ('email' == $field.attr('type'));
+            return ('email' === $field.attr('type'));
         },
 
         /**
@@ -13,12 +13,12 @@
          *
          * @param {BootstrapValidator} validator Validate plugin instance
          * @param {jQuery} $field Field element
-         * @param {Object} options
+         * @param {Object} [options]
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
@@ -27,5 +27,5 @@
             var emailRegExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             return emailRegExp.test(value);
         }
-    }
+    };
 }(window.jQuery));

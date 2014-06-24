@@ -1,3 +1,5 @@
+/*jshint camelcase: true, expr: true, laxbreak: true, loopfunc: true */
+
 /**
  * BootstrapValidator (http://bootstrapvalidator.com)
  *
@@ -29,7 +31,7 @@
         // https://gist.github.com/padolsey/527683/#comment-7595
         var ieVersion = (function() {
             var v = 3, div = document.createElement('div'), a = div.all || [];
-            while (div.innerHTML = '<!--[if gt IE '+(++v)+']><br><![endif]-->', a[0]);
+            while (div.innerHTML = '<!--[if gt IE '+(++v)+']><br><![endif]-->', a[0]) {}
             return v > 4 ? v : !v;
         }());
 
@@ -130,22 +132,22 @@
             for (v in $.fn.bootstrapValidator.validators) {
                 validator    = $.fn.bootstrapValidator.validators[v];
                 enabled      = $field.attr('data-bv-' + v.toLowerCase()) + '';
-                html5AttrMap = ('function' == typeof validator.enableByHtml5) ? validator.enableByHtml5($field) : null;
+                html5AttrMap = ('function' === typeof validator.enableByHtml5) ? validator.enableByHtml5($field) : null;
 
-                if ((html5AttrMap && enabled != 'false')
-                    || (html5AttrMap !== true && ('' == enabled || 'true' == enabled)))
+                if ((html5AttrMap && enabled !== 'false')
+                    || (html5AttrMap !== true && ('' === enabled || 'true' === enabled)))
                 {
                     // Try to parse the options via attributes
                     validator.html5Attributes = validator.html5Attributes || { message: 'message' };
-                    validators[v] = $.extend({}, html5AttrMap == true ? {} : html5AttrMap, validators[v]);
+                    validators[v] = $.extend({}, html5AttrMap === true ? {} : html5AttrMap, validators[v]);
 
                     for (html5AttrName in validator.html5Attributes) {
                         optionName  = validator.html5Attributes[html5AttrName];
                         optionValue = $field.attr('data-bv-' + v.toLowerCase() + '-' + html5AttrName);
                         if (optionValue) {
-                            if ('true' == optionValue) {
+                            if ('true' === optionValue) {
                                 optionValue = true;
-                            } else if ('false' == optionValue) {
+                            } else if ('false' === optionValue) {
                                 optionValue = false;
                             }
                             validators[v][optionName] = optionValue;
@@ -195,28 +197,30 @@
                     break;
             }
 
-            if (this.options.fields[field] == null || this.options.fields[field].validators == null) {
+            if (this.options.fields[field] === null || this.options.fields[field].validators === null) {
                 return;
             }
 
             // We don't need to validate non-existing fields
-            if (fields.length == 0) {
+            if (fields.length === 0) {
                 delete this.options.fields[field];
                 return;
             }
-            for (var validatorName in this.options.fields[field].validators) {
+            var validatorName;
+            for (validatorName in this.options.fields[field].validators) {
                 if (!$.fn.bootstrapValidator.validators[validatorName]) {
                     delete this.options.fields[field].validators[validatorName];
                 }
             }
-            if (this.options.fields[field]['enabled'] == null) {
-                this.options.fields[field]['enabled'] = true;
+            if (this.options.fields[field].enabled === null) {
+                this.options.fields[field].enabled = true;
             }
 
             var that      = this,
                 total     = fields.length,
                 type      = fields.attr('type'),
-                updateAll = (total == 1) || ('radio' == type) || ('checkbox' == type);
+                updateAll = (total === 1) || ('radio' === type) || ('checkbox' === type),
+                event     = ('radio' === type || 'checkbox' === type || 'file' === type || 'SELECT' === fields.eq(0).get(0).tagName) ? 'change' : this._changeEvent;
 
             for (var i = 0; i < total; i++) {
                 var $field    = fields.eq(i),
@@ -224,9 +228,9 @@
                     $parent   = $field.parents(group),
                     // Allow user to indicate where the error messages are shown
                     container = this.options.fields[field].container || this.options.container,
-                    $message  = (container && container != 'tooltip' && container != 'popover') ? $(container) : this._getMessageContainer($field, group);
+                    $message  = (container && container !== 'tooltip' && container !== 'popover') ? $(container) : this._getMessageContainer($field, group);
 
-                if (container && container != 'tooltip' && container != 'popover') {
+                if (container && container !== 'tooltip' && container !== 'popover') {
                     $message.addClass('has-error');
                 }
 
@@ -235,7 +239,6 @@
                 $parent.find('i[data-bv-icon-for="' + field + '"]').remove();
 
                 // Whenever the user change the field value, mark it as not validated yet
-                var event = ('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == $field.get(0).tagName) ? 'change' : this._changeEvent;
                 $field.off(event + '.update.bv').on(event + '.update.bv', function() {
                     // Reset the flag
                     that._submitIfValid = false;
@@ -244,10 +247,10 @@
 
                 // Create help block elements for showing the error messages
                 $field.data('bv.messages', $message);
-                for (var validatorName in this.options.fields[field].validators) {
+                for (validatorName in this.options.fields[field].validators) {
                     $field.data('bv.result.' + validatorName, this.STATUS_NOT_VALIDATED);
 
-                    if (!updateAll || i == total - 1) {
+                    if (!updateAll || i === total - 1) {
                         $('<small/>')
                             .css('display', 'none')
                             .addClass('help-block')
@@ -264,7 +267,7 @@
                 if (this.options.fields[field].feedbackIcons !== false && this.options.fields[field].feedbackIcons !== 'false'
                     && this.options.feedbackIcons
                     && this.options.feedbackIcons.validating && this.options.feedbackIcons.invalid && this.options.feedbackIcons.valid
-                    && (!updateAll || i == total - 1))
+                    && (!updateAll || i === total - 1))
                 {
                     $parent.removeClass('has-success').removeClass('has-error').addClass('has-feedback');
                     var $icon = $('<i/>')
@@ -273,15 +276,15 @@
                                     .attr('data-bv-icon-for', field)
                                     // Place it after the label containing the checkbox/radio
                                     // so when clicking the icon, it doesn't effect to the checkbox/radio element
-                                    .insertAfter(('checkbox' == type || 'radio' == type) ? $field.parent() : $field);
+                                    .insertAfter(('checkbox' === type || 'radio' === type) ? $field.parent() : $field);
 
                     // The feedback icon does not render correctly if there is no label
                     // https://github.com/twbs/bootstrap/issues/12873
-                    if ($parent.find('label').length == 0) {
+                    if ($parent.find('label').length === 0) {
                         $icon.css('top', 0);
                     }
                     // Fix feedback icons in input-group
-                    if ($parent.find('.input-group-addon').length != 0) {
+                    if ($parent.find('.input-group-addon').length !== 0) {
                         $icon.css({
                             'top': 0,
                             'z-index': 100
@@ -302,6 +305,7 @@
                     fields.off(events);
                     break;
                 case 'enabled':
+                /* falls through */
                 default:
                     fields.off(events).on(events, function() {
                         if (that._exceedThreshold($(this))) {
@@ -336,7 +340,7 @@
                 case (!!options.message):
                     return options.message;
                 case (!!$.fn.bootstrapValidator.i18n[validatorName]):
-                    return ('function' == typeof $.fn.bootstrapValidator.i18n[validatorName].getMessage)
+                    return ('function' === typeof $.fn.bootstrapValidator.i18n[validatorName].getMessage)
                             ? $.fn.bootstrapValidator.i18n[validatorName].getMessage(options)
                             : $.fn.bootstrapValidator.i18n[validatorName]['default'];
                 case (!!this.options.fields[field].message):
@@ -402,7 +406,7 @@
         _isExcluded: function($field) {
             if (this.options.excluded) {
                 // Convert to array first
-                if ('string' == typeof this.options.excluded) {
+                if ('string' === typeof this.options.excluded) {
                     this.options.excluded = $.map(this.options.excluded.split(','), function(item) {
                         // Trim the spaces
                         return $.trim(item);
@@ -411,8 +415,8 @@
 
                 var length = this.options.excluded.length;
                 for (var i = 0; i < length; i++) {
-                    if (('string' == typeof this.options.excluded[i] && $field.is(this.options.excluded[i]))
-                        || ('function' == typeof this.options.excluded[i] && this.options.excluded[i].call(this, $field, this) == true))
+                    if (('string' === typeof this.options.excluded[i] && $field.is(this.options.excluded[i]))
+                        || ('function' === typeof this.options.excluded[i] && this.options.excluded[i].call(this, $field, this) === true))
                     {
                         return true;
                     }
@@ -434,7 +438,7 @@
             if (!threshold) {
                 return true;
             }
-            var cannotType = $.inArray($field.attr('type'), ['button', 'checkbox', 'file', 'hidden', 'image', 'radio', 'reset', 'submit']) != -1;
+            var cannotType = $.inArray($field.attr('type'), ['button', 'checkbox', 'file', 'hidden', 'image', 'radio', 'reset', 'submit']) !== -1;
             return (cannotType || $field.val().length >= threshold);
         },
         
@@ -451,7 +455,7 @@
                 return;
             }
 
-            if ('submitted' == this.options.live) {
+            if ('submitted' === this.options.live) {
                 // Enable live mode
                 this.options.live = 'enabled';
                 var that = this;
@@ -460,7 +464,7 @@
                         var fields  = that.getFieldElements(f);
                         if (fields.length) {
                             var type    = $(fields[0]).attr('type'),
-                                event   = ('radio' == type || 'checkbox' == type || 'file' == type || 'SELECT' == $(fields[0]).get(0).tagName) ? 'change' : that._changeEvent,
+                                event   = ('radio' === type || 'checkbox' === type || 'file' === type || 'SELECT' === $(fields[0]).get(0).tagName) ? 'change' : that._changeEvent,
                                 trigger = that.options.fields[field].trigger || that.options.trigger || event,
                                 events  = $.map(trigger.split(' '), function(item) {
                                     return item + '.live.bv';
@@ -501,7 +505,7 @@
             }
 
             // Call the custom submission if enabled
-            if (this.options.submitHandler && 'function' == typeof this.options.submitHandler) {
+            if (this.options.submitHandler && 'function' === typeof this.options.submitHandler) {
                 // If you want to submit the form inside your submit handler, please call defaultSubmit() method
                 this.options.submitHandler.call(this, this, this.$form);
             } else {
@@ -553,7 +557,7 @@
                 }
             }
 
-            if (counter[this.STATUS_VALID] == numValidators) {
+            if (counter[this.STATUS_VALID] === numValidators) {
                 // Remove from the list of invalid fields
                 this.$invalidFields = this.$invalidFields.not($field);
 
@@ -563,7 +567,7 @@
                 });
             }
             // If all validators are completed and there is at least one validator which doesn't pass
-            else if (counter[this.STATUS_NOT_VALIDATED] == 0 && counter[this.STATUS_VALIDATING] == 0 && counter[this.STATUS_INVALID] > 0) {
+            else if (counter[this.STATUS_NOT_VALIDATED] === 0 && counter[this.STATUS_VALIDATING] === 0 && counter[this.STATUS_INVALID] > 0) {
                 // Add to the list of invalid fields
                 this.$invalidFields = this.$invalidFields.add($field);
 
@@ -601,7 +605,7 @@
         disableSubmitButtons: function(disabled) {
             if (!disabled) {
                 this.$form.find(this.options.submitButtons).removeAttr('disabled');
-            } else if (this.options.live != 'disabled') {
+            } else if (this.options.live !== 'disabled') {
                 // Don't disable if the live validating mode is disabled
                 this.$form.find(this.options.submitButtons).attr('disabled', 'disabled');
             }
@@ -636,7 +640,7 @@
          * @returns {BootstrapValidator}
          */
         validateField: function(field) {
-            var fields = $([]), type;
+            var fields = $([]);
             switch (typeof field) {
                 case 'object':
                     fields = field;
@@ -649,14 +653,14 @@
                     break;
             }
 
-            if (this.options.fields[field] && this.options.fields[field]['enabled'] == false) {
+            if (this.options.fields[field] && this.options.fields[field].enabled === false) {
                 return this;
             }
 
             var that       = this,
                 type       = fields.attr('type'),
-                total      = ('radio' == type || 'checkbox' == type) ? 1 : fields.length,
-                updateAll  = ('radio' == type || 'checkbox' == type),
+                total      = ('radio' === type || 'checkbox' === type) ? 1 : fields.length,
+                updateAll  = ('radio' === type || 'checkbox' === type),
                 validators = this.options.fields[field].validators,
                 validatorName,
                 validateResult;
@@ -674,7 +678,7 @@
 
                     // Don't validate field if it is already done
                     var result = $field.data('bv.result.' + validatorName);
-                    if (result == this.STATUS_VALID || result == this.STATUS_INVALID) {
+                    if (result === this.STATUS_VALID || result === this.STATUS_INVALID) {
                         this._onFieldValidated($field, validatorName);
                         continue;
                     }
@@ -683,7 +687,7 @@
                     validateResult = $.fn.bootstrapValidator.validators[validatorName].validate(this, $field, validators[validatorName]);
 
                     // validateResult can be a $.Deferred object ...
-                    if ('object' == typeof validateResult) {
+                    if ('object' === typeof validateResult) {
                         this.updateStatus(updateAll ? field : $field, this.STATUS_VALIDATING, validatorName);
                         $field.data('bv.dfs.' + validatorName, validateResult);
 
@@ -697,14 +701,14 @@
 
                             that.updateStatus(updateAll ? $f.attr('data-bv-field') : $f, isValid ? that.STATUS_VALID : that.STATUS_INVALID, v);
 
-                            if (isValid && that._submitIfValid == true) {
+                            if (isValid && that._submitIfValid === true) {
                                 // If a remote validator returns true and the form is ready to submit, then do it
                                 that._submit();
                             }
                         });
                     }
                     // ... or a boolean value
-                    else if ('boolean' == typeof validateResult) {
+                    else if ('boolean' === typeof validateResult) {
                         this.updateStatus(updateAll ? field : $field, validateResult ? this.STATUS_VALID : this.STATUS_INVALID, validatorName);
                     }
                 }
@@ -722,7 +726,7 @@
          * @returns {BootstrapValidator}
          */
         updateStatus: function(field, status, validatorName) {
-            var fields = $([]), type;
+            var fields = $([]);
             switch (typeof field) {
                 case 'object':
                     fields = field;
@@ -738,7 +742,7 @@
             var that  = this,
                 type  = fields.attr('type'),
                 group = this.options.fields[field].group || this.options.group,
-                total = ('radio' == type || 'checkbox' == type) ? 1 : fields.length;
+                total = ('radio' === type || 'checkbox' === type) ? 1 : fields.length;
 
             for (var i = 0; i < total; i++) {
                 var $field       = fields.eq(i),
@@ -796,10 +800,10 @@
 
                     case this.STATUS_VALID:
                         // If the field is valid (passes all validators)
-                        isValidField = ($allErrors.filter('[data-bv-result="' + this.STATUS_NOT_VALIDATED +'"]').length == 0)
-                                     ? ($allErrors.filter('[data-bv-result="' + this.STATUS_VALID +'"]').length == $allErrors.length)   // All validators are completed
+                        isValidField = ($allErrors.filter('[data-bv-result="' + this.STATUS_NOT_VALIDATED +'"]').length === 0)
+                                     ? ($allErrors.filter('[data-bv-result="' + this.STATUS_VALID +'"]').length === $allErrors.length)  // All validators are completed
                                      : null;                                                                                            // There are some validators that have not done
-                        if (isValidField != null) {
+                        if (isValidField !== null) {
                             this.disableSubmitButtons(this.$submitButton ? !this.isValid() : !isValidField);
                             if ($icon) {
                                 $icon
@@ -816,6 +820,7 @@
                         break;
 
                     case this.STATUS_NOT_VALIDATED:
+                    /* falls through */
                     default:
                         isValidField = null;
                         this.disableSubmitButtons(false);
@@ -831,7 +836,7 @@
 
                 switch (true) {
                     // Only show the first error message if it is placed inside a tooltip ...
-                    case ($icon && 'tooltip' == container):
+                    case ($icon && 'tooltip' === container):
                         (isValidField === false)
                                 ? $icon.css('cursor', 'pointer').tooltip('destroy').tooltip({
                                     html: true,
@@ -841,7 +846,7 @@
                                 : $icon.css('cursor', '').tooltip('destroy');
                         break;
                     // ... or popover
-                    case ($icon && 'popover' == container):
+                    case ($icon && 'popover' === container):
                         (isValidField === false)
                                 ? $icon.css('cursor', 'pointer').popover('destroy').popover({
                                     content: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html(),
@@ -852,7 +857,7 @@
                                 : $icon.css('cursor', '').popover('destroy');
                         break;
                     default:
-                        (status == this.STATUS_INVALID) ? $errors.show() : $errors.hide();
+                        (status === this.STATUS_INVALID) ? $errors.show() : $errors.hide();
                         break;
                 }
 
@@ -902,12 +907,12 @@
                 default:
                     break;
             }
-            if (fields.length == 0 || this.options.fields[field] == null || this.options.fields[field]['enabled'] == false) {
+            if (fields.length === 0 || this.options.fields[field] === null || this.options.fields[field].enabled === false) {
                 return true;
             }
 
             var type  = fields.attr('type'),
-                total = ('radio' == type || 'checkbox' == type) ? 1 : fields.length,
+                total = ('radio' === type || 'checkbox' === type) ? 1 : fields.length,
                 $field, validatorName, status;
             for (var i = 0; i < total; i++) {
                 $field = fields.eq(i);
@@ -917,7 +922,7 @@
 
                 for (validatorName in this.options.fields[field].validators) {
                     status = $field.data('bv.result.' + validatorName);
-                    if (status != this.STATUS_VALID) {
+                    if (status !== this.STATUS_VALID) {
                         return false;
                     }
                 }
@@ -948,9 +953,9 @@
                       .find('.help-block[data-bv-validator][data-bv-for="' + field + '"]')
                       .filter(function() {
                           var v = $(this).attr('data-bv-validator');
-                          return ($f.data('bv.result.' + v) && $f.data('bv.result.' + v) != that.STATUS_VALID);
+                          return ($f.data('bv.result.' + v) && $f.data('bv.result.' + v) !== that.STATUS_VALID);
                       })
-                      .length != 0)
+                      .length !== 0)
                 {
                     // The field is not valid
                     return false;
@@ -1013,14 +1018,14 @@
                 $fields  = $([]);
 
             switch (true) {
-                case (field && 'object' == typeof field):
+                case (field && 'object' === typeof field):
                     $fields = field;
                     break;
-                case (field && 'string' == typeof field):
+                case (field && 'string' === typeof field):
                     var f = this.getFieldElements(field);
                     if (f.length > 0) {
                         var type = f.attr('type');
-                        $fields = ('radio' == type || 'checkbox' == type) ? f.eq(0) : f;
+                        $fields = ('radio' === type || 'checkbox' === type) ? f.eq(0) : f;
                     }
                     break;
                 default:
@@ -1034,7 +1039,7 @@
                         .data('bv.messages')
                         .find('.help-block[data-bv-for="' + $(this).attr('data-bv-field') + '"][data-bv-result="' + that.STATUS_INVALID + '"]')
                         .map(function() {
-                            return $(this).html()
+                            return $(this).html();
                         })
                         .get()
                 );
@@ -1068,14 +1073,14 @@
             fields.attr('data-bv-field', field);
 
             var type  = fields.attr('type'),
-                total = ('radio' == type || 'checkbox' == type) ? 1 : fields.length;
+                total = ('radio' === type || 'checkbox' === type) ? 1 : fields.length;
 
             for (var i = 0; i < total; i++) {
                 var $field = fields.eq(i);
 
                 // Try to parse the options from HTML attributes
                 var opts = this._parseOptions($field);
-                opts = (opts == null) ? options : $.extend(true, options, opts);
+                opts = (opts === null) ? options : $.extend(true, options, opts);
 
                 this.options.fields[field] = $.extend(true, this.options.fields[field], opts);
 
@@ -1083,7 +1088,7 @@
                 this._cacheFields[field] = this._cacheFields[field] ? this._cacheFields[field].add($field) : $field;
 
                 // Init the element
-                this._initField(('checkbox' == type || 'radio' == type) ? field : $field);
+                this._initField(('checkbox' === type || 'radio' === type) ? field : $field);
             }
 
             this.disableSubmitButtons(false);
@@ -1118,12 +1123,12 @@
                     break;
             }
 
-            if (fields.length == 0) {
+            if (fields.length === 0) {
                 return this;
             }
 
             var type  = fields.attr('type'),
-                total = ('radio' == type || 'checkbox' == type) ? 1 : fields.length;
+                total = ('radio' === type || 'checkbox' === type) ? 1 : fields.length;
 
             for (var i = 0; i < total; i++) {
                 var $field = fields.eq(i);
@@ -1135,10 +1140,10 @@
                 this._cacheFields[field] = this._cacheFields[field].not($field);
             }
 
-            if (!this._cacheFields[field] || this._cacheFields[field].length == 0) {
+            if (!this._cacheFields[field] || this._cacheFields[field].length === 0) {
                 delete this.options.fields[field];
             }
-            if ('checkbox' == type || 'radio' == type) {
+            if ('checkbox' === type || 'radio' === type) {
                 this._initField(field);
             }
 
@@ -1175,7 +1180,7 @@
 
                 if (resetFormData) {
                     type = fields.attr('type');
-                    ('radio' == type || 'checkbox' == type) ? fields.removeAttr('checked').removeAttr('selected') : fields.val('');
+                    ('radio' === type || 'checkbox' === type) ? fields.removeAttr('checked').removeAttr('selected') : fields.val('');
                 }
             }
 
@@ -1210,8 +1215,8 @@
          * @returns {BootstrapValidator}
          */
         enableFieldValidators: function(field, enabled) {
-            if (this.options.fields[field]['enabled'] != enabled) {
-                this.options.fields[field]['enabled'] = enabled;
+            if (this.options.fields[field].enabled !== enabled) {
+                this.options.fields[field].enabled = enabled;
                 this.updateStatus(field, this.STATUS_NOT_VALIDATED);
             }
 
@@ -1284,14 +1289,14 @@
         return this.each(function() {
             var $this   = $(this),
                 data    = $this.data('bootstrapValidator'),
-                options = 'object' == typeof option && option;
+                options = 'object' === typeof option && option;
             if (!data) {
                 data = new BootstrapValidator(this, options);
                 $this.data('bootstrapValidator', data);
             }
 
             // Allow to call plugin method
-            if ('string' == typeof option) {
+            if ('string' === typeof option) {
                 data[option].apply(data, Array.prototype.slice.call(params, 1));
             }
         });
@@ -1439,12 +1444,12 @@
                 return false;
             }
 
-            if (year < 1000 || year > 9999 || month == 0 || month > 12) {
+            if (year < 1000 || year > 9999 || month === 0 || month > 12) {
                 return false;
             }
             var numDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
             // Update the number of days in Feb of leap year
-            if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)) {
+            if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)) {
                 numDays[1] = 29;
             }
 
@@ -1459,8 +1464,8 @@
                     currentMonth = currentDate.getMonth(),
                     currentDay   = currentDate.getDate();
                 return (year < currentYear
-                        || (year == currentYear && month - 1 < currentMonth)
-                        || (year == currentYear && month - 1 == currentMonth && day < currentDay));
+                        || (year === currentYear && month - 1 < currentMonth)
+                        || (year === currentYear && month - 1 === currentMonth && day < currentDay));
             }
 
             return true;
@@ -1494,26 +1499,26 @@
          * @param {String} value
          * @returns {Boolean}
          */
-        mod_11_10: function(value) {
+        mod11And10: function(value) {
             var check  = 5,
                 length = value.length;
             for (var i = 0; i < length; i++) {
                 check = (((check || 10) * 2) % 11 + parseInt(value.charAt(i), 10)) % 10;
             }
-            return (check == 1);
+            return (check === 1);
         },
 
         /**
          * Implements Mod 37, 36 (ISO 7064) algorithm
          * Usages:
-         * mod_37_36('A12425GABC1234002M')
-         * mod_37_36('002006673085', '0123456789')
+         * mod37And36('A12425GABC1234002M')
+         * mod37And36('002006673085', '0123456789')
          *
          * @param {String} value
-         * @param {String} alphabet
+         * @param {String} [alphabet]
          * @returns {Boolean}
          */
-        mod_37_36: function(value, alphabet) {
+        mod37And36: function(value, alphabet) {
             alphabet = alphabet || '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             var modulus = alphabet.length,
                 length  = value.length,
@@ -1521,7 +1526,7 @@
             for (var i = 0; i < length; i++) {
                 check = (((check || modulus) * 2) % (modulus + 1) + alphabet.indexOf(value.charAt(i))) % modulus;
             }
-            return (check == 1);
+            return (check === 1);
         }
     };
 }(window.jQuery));

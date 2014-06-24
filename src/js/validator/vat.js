@@ -43,7 +43,7 @@
             if (options.country) {
                 var country = options.country,
                     method  = ['_', country.toLowerCase()].join('');
-                if ($.fn.bootstrapValidator.validators.vat[method] == undefined) {
+                if ($.fn.bootstrapValidator.validators.vat[method] === undefined) {
                     return $.fn.bootstrapValidator.helpers.format(this.countryNotSupported, options.country);
                 }
 
@@ -75,13 +75,13 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
             var country = options.country || value.substr(0, 2),
                 method  = ['_', country.toLowerCase()].join('');
-            if (this[method] && 'function' == typeof this[method]) {
+            if (this[method] && 'function' === typeof this[method]) {
                 return this[method](value);
             }
 
@@ -110,7 +110,7 @@
                 temp   = 0;
 
             for (var i = 0; i < 7; i++) {
-                temp = parseInt(value.charAt(i)) * weight[i];
+                temp = parseInt(value.charAt(i), 10) * weight[i];
                 if (temp > 9) {
                     temp = Math.floor(temp / 10) + temp % 10;
                 }
@@ -118,11 +118,11 @@
             }
 
             sum = 10 - (sum + 4) % 10;
-            if (sum == 10) {
+            if (sum === 10) {
                 sum = 0;
             }
 
-            return (sum == value.substr(7, 1));
+            return (sum + '' === value.substr(7, 1));
         },
 
         /**
@@ -140,16 +140,16 @@
             }
 
             value = value.substr(2);
-            if (value.length == 9) {
+            if (value.length === 9) {
                 value = '0' + value;
             }
 
-            if (value.substr(1, 1) == 0) {
+            if (value.substr(1, 1) === '0') {
                 return false;
             }
 
             var sum = parseInt(value.substr(0, 8), 10) + parseInt(value.substr(8, 2), 10);
-            return (sum % 97 == 0);
+            return (sum % 97 === 0);
         },
 
         /**
@@ -170,26 +170,25 @@
             }
 
             value = value.substr(2);
-
-            var total = 0, sum = 0, weight = [], i = 0;
+            var sum = 0, i = 0;
 
             // Legal entities
-            if (value.length == 9) {
+            if (value.length === 9) {
                 for (i = 0; i < 8; i++) {
-                    sum += parseInt(value.charAt(i)) * (i + 1);
+                    sum += parseInt(value.charAt(i), 10) * (i + 1);
                 }
                 sum = sum % 11;
-                if (sum == 10) {
+                if (sum === 10) {
                     sum = 0;
                     for (i = 0; i < 8; i++) {
-                        sum += parseInt(value.charAt(i)) * (i + 3);
+                        sum += parseInt(value.charAt(i), 10) * (i + 3);
                     }
                 }
                 sum = sum % 10;
-                return (sum == value.substr(8));
+                return (sum + '' === value.substr(8));
             }
             // Physical persons, foreigners and others
-            else if (value.length == 10) {
+            else if (value.length === 10) {
                 // Validate Bulgarian national identification numbers
                 var egn = function(value) {
                         // Check the birth date
@@ -211,36 +210,36 @@
                         var sum    = 0,
                             weight = [2, 4, 8, 5, 10, 9, 7, 3, 6];
                         for (var i = 0; i < 9; i++) {
-                            sum += parseInt(value.charAt(i)) * weight[i];
+                            sum += parseInt(value.charAt(i), 10) * weight[i];
                         }
                         sum = (sum % 11) % 10;
-                        return (sum == value.substr(9, 1));
+                        return (sum + '' === value.substr(9, 1));
                     },
                     // Validate Bulgarian personal number of a foreigner
                     pnf = function(value) {
                         var sum    = 0,
                             weight = [21, 19, 17, 13, 11, 9, 7, 3, 1];
                         for (var i = 0; i < 9; i++) {
-                            sum += parseInt(value.charAt(i)) * weight[i];
+                            sum += parseInt(value.charAt(i), 10) * weight[i];
                         }
                         sum = sum % 10;
-                        return (sum == value.substr(9, 1));
+                        return (sum + '' === value.substr(9, 1));
                     },
                     // Finally, consider it as a VAT number
                     vat = function(value) {
                         var sum    = 0,
                             weight = [4, 3, 2, 7, 6, 5, 4, 3, 2];
                         for (var i = 0; i < 9; i++) {
-                            sum += parseInt(value.charAt(i)) * weight[i];
+                            sum += parseInt(value.charAt(i), 10) * weight[i];
                         }
                         sum = 11 - sum % 11;
-                        if (sum == 10) {
+                        if (sum === 10) {
                             return false;
                         }
-                        if (sum == 11) {
+                        if (sum === 11) {
                             sum = 0;
                         }
-                        return (sum == value.substr(9, 1));
+                        return (sum + '' === value.substr(9, 1));
                     };
                 return (egn(value) || pnf(value) || vat(value));
             }
@@ -267,14 +266,14 @@
             }
 
             sum = 11 - sum % 11;
-            if (sum == 10) {
+            if (sum === 10) {
                 return false;
             }
-            if (sum == 11) {
+            if (sum === 11) {
                 sum = 0;
             }
 
-            return (sum == value.substr(8, 1));
+            return (sum + '' === value.substr(8, 1));
         },
 
         /**
@@ -294,7 +293,7 @@
             value = value.substr(2);
 
             // Do not allow to start with "12"
-            if (value.substr(0, 2) == '12') {
+            if (value.substr(0, 2) === '12') {
                 return false;
             }
 
@@ -306,14 +305,14 @@
                 };
             for (var i = 0; i < 8; i++) {
                 var temp = parseInt(value.charAt(i), 10);
-                if (i % 2 == 0) {
+                if (i % 2 === 0) {
                     temp = translation[temp + ''];
                 }
                 sum += temp;
             }
 
             sum = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'[sum % 26];
-            return (sum == value.substr(8, 1));
+            return (sum + '' === value.substr(8, 1));
         },
 
         /**
@@ -339,9 +338,9 @@
 
             var sum = 0,
                 i   = 0;
-            if (value.length == 8) {
+            if (value.length === 8) {
                 // Do not allow to start with '9'
-                if (value.charAt(0) + '' == '9') {
+                if (value.charAt(0) + '' === '9') {
                     return false;
                 }
 
@@ -350,35 +349,35 @@
                     sum += parseInt(value.charAt(i), 10) * (8 - i);
                 }
                 sum = 11 - sum % 11;
-                if (sum == 10) {
+                if (sum === 10) {
                     sum = 0;
                 }
-                if (sum == 11) {
+                if (sum === 11) {
                     sum = 1;
                 }
 
-                return (sum == value.substr(7, 1));
-            } else if (value.length == 9 && (value.charAt(0) + '' == '6')) {
+                return (sum + '' === value.substr(7, 1));
+            } else if (value.length === 9 && (value.charAt(0) + '' === '6')) {
                 sum = 0;
                 // Skip the first (which is 6)
                 for (i = 0; i < 7; i++) {
                     sum += parseInt(value.charAt(i + 1), 10) * (8 - i);
                 }
                 sum = 11 - sum % 11;
-                if (sum == 10) {
+                if (sum === 10) {
                     sum = 0;
                 }
-                if (sum == 11) {
+                if (sum === 11) {
                     sum = 1;
                 }
                 sum = [8, 7, 6, 5, 4, 3, 2, 1, 0, 9, 10][sum - 1];
-                return (sum == value.substr(8, 1));
-            } else if (value.length == 9 || value.length == 10) {
+                return (sum + '' === value.substr(8, 1));
+            } else if (value.length === 9 || value.length === 10) {
                 // Validate Czech birth number (Rodné číslo), which is also national identifier
-                var year  = 1900 + parseInt(value.substr(0, 2)),
-                    month = parseInt(value.substr(2, 2)) % 50 % 20,
-                    day   = parseInt(value.substr(4, 2));
-                if (value.length == 9) {
+                var year  = 1900 + parseInt(value.substr(0, 2), 10),
+                    month = parseInt(value.substr(2, 2), 10) % 50 % 20,
+                    day   = parseInt(value.substr(4, 2), 10);
+                if (value.length === 9) {
                     if (year >= 1980) {
                         year -= 100;
                     }
@@ -394,12 +393,12 @@
                 }
 
                 // Check that the birth date is not in the future
-                if (value.length == 10) {
+                if (value.length === 10) {
                     var check = parseInt(value.substr(0, 9), 10) % 11;
                     if (year < 1985) {
                         check = check % 10;
                     }
-                    return (check == value.substr(9, 1));
+                    return (check + '' === value.substr(9, 1));
                 }
 
                 return true;
@@ -423,7 +422,7 @@
             }
 
             value = value.substr(2);
-            return $.fn.bootstrapValidator.helpers.mod_11_10(value);
+            return $.fn.bootstrapValidator.helpers.mod11And10(value);
         },
 
         /**
@@ -447,7 +446,7 @@
                 sum += parseInt(value.charAt(i), 10) * weight[i];
             }
 
-            return (sum % 11 == 0);
+            return (sum % 11 === 0);
         },
 
         /**
@@ -469,10 +468,10 @@
                 weight = [3, 7, 1, 3, 7, 1, 3, 7, 1];
 
             for (var i = 0; i < 9; i++) {
-                sum += parseInt(value.charAt(i)) * weight[i];
+                sum += parseInt(value.charAt(i), 10) * weight[i];
             }
 
-            return (sum % 10 == 0);
+            return (sum % 10 === 0);
         },
 
         /**
@@ -498,37 +497,37 @@
             var dni = function(value) {
                     var check = parseInt(value.substr(0, 8), 10);
                     check = 'TRWAGMYFPDXBNJZSQVHLCKE'[check % 23];
-                    return (check == value.substr(8, 1));
+                    return (check + '' === value.substr(8, 1));
                 },
                 nie = function(value) {
                     var check = ['XYZ'.indexOf(value.charAt(0)), value.substr(1)].join('');
                     check = parseInt(check, 10);
                     check = 'TRWAGMYFPDXBNJZSQVHLCKE'[check % 23];
-                    return (check == value.substr(8, 1));
+                    return (check + '' === value.substr(8, 1));
                 },
                 cif = function(value) {
                     var first = value.charAt(0), check;
-                    if ('KLM'.indexOf(first) != -1) {
+                    if ('KLM'.indexOf(first) !== -1) {
                         // K: Spanish younger than 14 year old
                         // L: Spanish living outside Spain without DNI
                         // M: Granted the tax to foreigners who have no NIE
                         check = parseInt(value.substr(1, 8), 10);
                         check = 'TRWAGMYFPDXBNJZSQVHLCKE'[check % 23];
-                        return (check == value.substr(8, 1));
-                    } else if ('ABCDEFGHJNPQRSUVW'.indexOf(first) != -1) {
+                        return (check + '' === value.substr(8, 1));
+                    } else if ('ABCDEFGHJNPQRSUVW'.indexOf(first) !== -1) {
                         var sum    = 0,
                             weight = [2, 1, 2, 1, 2, 1, 2],
                             temp   = 0;
 
                         for (var i = 0; i < 7; i++) {
-                            temp = parseInt(value.charAt(i + 1)) * weight[i];
+                            temp = parseInt(value.charAt(i + 1), 10) * weight[i];
                             if (temp > 9) {
                                 temp = Math.floor(temp / 10) + temp % 10;
                             }
                             sum += temp;
                         }
                         sum = 10 - sum % 10;
-                        return (sum == value.substr(8, 1) || 'JABCDEFGHI'[sum] == value.substr(8, 1));
+                        return (sum + '' === value.substr(8, 1) || 'JABCDEFGHI'[sum] === value.substr(8, 1));
                     }
 
                     return false;
@@ -563,10 +562,10 @@
                 weight = [7, 9, 10, 5, 8, 4, 2, 1];
 
             for (var i = 0; i < 8; i++) {
-                sum += parseInt(value.charAt(i)) * weight[i];
+                sum += parseInt(value.charAt(i), 10) * weight[i];
             }
 
-            return (sum % 11 == 0);
+            return (sum % 11 === 0);
         },
 
         /**
@@ -593,7 +592,7 @@
 
             if (/^[0-9]{2}$/.test(value.substr(0, 2))) {
                 // First two characters are digits
-                return value.substr(0, 2) == (parseInt(value.substr(2) + '12', 10) % 97);
+                return value.substr(0, 2) === (parseInt(value.substr(2) + '12', 10) % 97 + '');
             } else {
                 // The first characters cann't be O and I
                 var alphabet = '0123456789ABCDEFGHJKLMNPQRSTUVWXYZ',
@@ -604,7 +603,7 @@
                 } else {
                     check = alphabet.indexOf(value.charAt(0)) * 34 + alphabet.indexOf(value.charAt(1)) - 100;
                 }
-                return ((parseInt(value.substr(2), 10) + 1 + Math.floor(check / 11)) % 11) == (check % 11);
+                return ((parseInt(value.substr(2), 10) + 1 + Math.floor(check / 11)) % 11) === (check % 11);
             }
         },
 
@@ -618,10 +617,10 @@
          * @returns {Boolean}
          */
         _gb: function(value) {
-            if (!/^GB[0-9]{9}$/.test(value)             // Standard
-                && !/^GB[0-9]{12}$/.test(value)         // Branches
-                && !/^GBGD[0-9]{3}$/.test(value)        // Government department
-                && !/^GBHA[0-9]{3}$/.test(value)        // Health authority
+            if (!/^GB[0-9]{9}$/.test(value)             /* Standard */
+                && !/^GB[0-9]{12}$/.test(value)         /* Branches */
+                && !/^GBGD[0-9]{3}$/.test(value)        /* Government department */
+                && !/^GBHA[0-9]{3}$/.test(value)        /* Health authority */
                 && !/^GB(GD|HA)8888[0-9]{5}$/.test(value))
             {
                 return false;
@@ -629,29 +628,29 @@
 
             value = value.substr(2);
             var length = value.length;
-            if (length == 5) {
+            if (length === 5) {
                 var firstTwo  = value.substr(0, 2),
-                    lastThree = parseInt(value.substr(2));
-                return ('GD' == firstTwo && lastThree < 500) || ('HA' == firstTwo && lastThree >= 500);
-            } else if (length == 11 && ('GD8888' == value.substr(0, 6) || 'HA8888' == value.substr(0, 6))) {
-                if (('GD' == value.substr(0, 2) && parseInt(value.substr(6, 3)) >= 500)
-                    || ('HA' == value.substr(0, 2) && parseInt(value.substr(6, 3)) < 500))
+                    lastThree = parseInt(value.substr(2), 10);
+                return ('GD' === firstTwo && lastThree < 500) || ('HA' === firstTwo && lastThree >= 500);
+            } else if (length === 11 && ('GD8888' === value.substr(0, 6) || 'HA8888' === value.substr(0, 6))) {
+                if (('GD' === value.substr(0, 2) && parseInt(value.substr(6, 3), 10) >= 500)
+                    || ('HA' === value.substr(0, 2) && parseInt(value.substr(6, 3), 10) < 500))
                 {
                     return false;
                 }
-                return (parseInt(value.substr(6, 3)) % 97 == parseInt(value.substr(9, 2)));
-            } else if (length == 9 || length == 12) {
+                return (parseInt(value.substr(6, 3), 10) % 97 === parseInt(value.substr(9, 2), 10));
+            } else if (length === 9 || length === 12) {
                 var sum    = 0,
                     weight = [8, 7, 6, 5, 4, 3, 2, 10, 1];
                 for (var i = 0; i < 9; i++) {
-                    sum += parseInt(value.charAt(i)) * weight[i];
+                    sum += parseInt(value.charAt(i), 10) * weight[i];
                 }
                 sum = sum % 97;
 
-                if (parseInt(value.substr(0, 3)) >= 100) {
-                    return (sum == 0 || sum == 42 || sum == 55);
+                if (parseInt(value.substr(0, 3), 10) >= 100) {
+                    return (sum === 0 || sum === 42 || sum === 55);
                 } else {
-                    return (sum == 0);
+                    return (sum === 0);
                 }
             }
 
@@ -673,18 +672,18 @@
             }
 
             value = value.substr(2);
-            if (value.length == 8) {
+            if (value.length === 8) {
                 value = '0' + value;
             }
 
             var sum    = 0,
                 weight = [256, 128, 64, 32, 16, 8, 4, 2];
             for (var i = 0; i < 8; i++) {
-                sum += parseInt(value.charAt(i)) * weight[i];
+                sum += parseInt(value.charAt(i), 10) * weight[i];
             }
             sum = (sum % 11) % 10;
 
-            return (sum == value.substr(8, 1));
+            return (sum + '' === value.substr(8, 1));
         },
 
         // EL is traditionally prefix of Greek VAT numbers
@@ -716,10 +715,10 @@
                 weight = [9, 7, 3, 1, 9, 7, 3, 1];
 
             for (var i = 0; i < 8; i++) {
-                sum += parseInt(value.charAt(i)) * weight[i];
+                sum += parseInt(value.charAt(i), 10) * weight[i];
             }
 
-            return (sum % 10 == 0);
+            return (sum % 10 === 0);
         },
 
         /**
@@ -737,7 +736,7 @@
             }
 
             value = value.substr(2);
-            return $.fn.bootstrapValidator.helpers.mod_11_10(value);
+            return $.fn.bootstrapValidator.helpers.mod11And10(value);
         },
 
         /**
@@ -762,7 +761,7 @@
                 var alphabet = 'WABCDEFGHIJKLMNOPQRSTUV',
                     sum      = 0;
                 for (var i = 0; i < 7; i++) {
-                    sum += parseInt(value.charAt(i)) * (8 - i);
+                    sum += parseInt(value.charAt(i), 10) * (8 - i);
                 }
                 sum += 9 * alphabet.indexOf(value.substr(7));
                 return alphabet[sum % 23];
@@ -771,10 +770,10 @@
             // The first 7 characters are digits
             if (/^[0-9]+$/.test(value.substr(0, 7))) {
                 // New system
-                return value.charAt(7) == getCheckDigit(value.substr(0, 7) + value.substr(8) + '');
-            } else if ('ABCDEFGHIJKLMNOPQRSTUVWXYZ+*'.indexOf(value.charAt(1)) != -1) {
+                return value.charAt(7) === getCheckDigit(value.substr(0, 7) + value.substr(8) + '');
+            } else if ('ABCDEFGHIJKLMNOPQRSTUVWXYZ+*'.indexOf(value.charAt(1)) !== -1) {
                 // Old system
-                return value.charAt(7) == getCheckDigit(value.substr(2, 5) + value.substr(0, 1) + '');
+                return value.charAt(7) === getCheckDigit(value.substr(2, 5) + value.substr(0, 1) + '');
             }
 
             return true;
@@ -799,12 +798,12 @@
             }
 
             value = value.substr(2);
-            if (parseInt(value.substr(0, 7)) == 0) {
+            if (parseInt(value.substr(0, 7), 10) === 0) {
                 return false;
             }
 
-            var lastThree = parseInt(value.substr(7, 3));
-            if ((lastThree < 1) || (lastThree > 201) && lastThree != 999 && lastThree != 888) {
+            var lastThree = parseInt(value.substr(7, 3), 10);
+            if ((lastThree < 1) || (lastThree > 201) && lastThree !== 999 && lastThree !== 888) {
                 return false;
             }
 
@@ -831,19 +830,20 @@
 
             value = value.substr(2);
             var length = value.length,
-                sum    = 0;
-            for (var i = 0; i < length - 1; i++) {
-                sum += parseInt(value.charAt(i)) * (1 + i % 9);
+                sum    = 0,
+                i;
+            for (i = 0; i < length - 1; i++) {
+                sum += parseInt(value.charAt(i), 10) * (1 + i % 9);
             }
             var check = sum % 11;
-            if (check == 10) {
+            if (check === 10) {
                 sum = 0;
-                for (var i = 0; i < length - 1; i++) {
-                    sum += parseInt(value.charAt(i)) * (1 + (i + 2) % 9);
+                for (i = 0; i < length - 1; i++) {
+                    sum += parseInt(value.charAt(i), 10) * (1 + (i + 2) % 9);
                 }
             }
             check = check % 11 % 10;
-            return (check == value.charAt(length - 1));
+            return (check + '' === value.charAt(length - 1));
         },
 
         /**
@@ -861,7 +861,7 @@
             }
 
             value = value.substr(2);
-            return (value.substr(0, 6) % 89 == value.substr(6, 2));
+            return ((parseInt(value.substr(0, 6), 10) % 89) + '' === value.substr(6, 2));
         },
 
         /**
@@ -879,26 +879,26 @@
             }
 
             value = value.substr(2);
-            var first  = parseInt(value.charAt(0)),
+            var first  = parseInt(value.charAt(0), 10),
                 sum    = 0,
                 weight = [],
-                i      = 0,
+                i,
                 length = value.length;
             if (first > 3) {
                 // Legal entity
                 sum    = 0;
                 weight = [9, 1, 4, 8, 3, 10, 2, 5, 7, 6, 1];
                 for (i = 0; i < length; i++) {
-                    sum += parseInt(value.charAt(i)) * weight[i];
+                    sum += parseInt(value.charAt(i), 10) * weight[i];
                 }
                 sum = sum % 11;
-                return (sum == 3);
+                return (sum === 3);
             } else {
                 // Check birth date
-                var day   = parseInt(value.substr(0, 2)),
-                    month = parseInt(value.substr(2, 2)),
-                    year  = parseInt(value.substr(4, 2));
-                year = year + 1800 + parseInt(value.charAt(6)) * 100;
+                var day   = parseInt(value.substr(0, 2), 10),
+                    month = parseInt(value.substr(2, 2), 10),
+                    year  = parseInt(value.substr(4, 2), 10);
+                year = year + 1800 + parseInt(value.charAt(6), 10) * 100;
 
                 if (!$.fn.bootstrapValidator.helpers.date(year, month, day)) {
                     return false;
@@ -908,13 +908,11 @@
                 sum    = 0;
                 weight = [10, 5, 8, 4, 2, 1, 6, 3, 7, 9];
                 for (i = 0; i < length - 1; i++) {
-                    sum += parseInt(value.charAt(i)) * weight[i];
+                    sum += parseInt(value.charAt(i), 10) * weight[i];
                 }
                 sum = (sum + 1) % 11 % 10;
-                return (sum == value.charAt(length - 1));
+                return (sum + '' === value.charAt(length - 1));
             }
-
-            return true;
         },
 
         /**
@@ -936,10 +934,10 @@
                 weight = [3, 4, 6, 7, 8, 9, 10, 1];
 
             for (var i = 0; i < 8; i++) {
-                sum += parseInt(value.charAt(i)) * weight[i];
+                sum += parseInt(value.charAt(i), 10) * weight[i];
             }
 
-            return (sum % 37 == 0);
+            return (sum % 37 === 0);
         },
 
         /**
@@ -959,14 +957,14 @@
             var sum    = 0,
                 weight = [9, 8, 7, 6, 5, 4, 3, 2];
             for (var i = 0; i < 8; i++) {
-                sum += parseInt(value.charAt(i)) * weight[i];
+                sum += parseInt(value.charAt(i), 10) * weight[i];
             }
 
             sum = sum % 11;
             if (sum > 9) {
                 sum = 0;
             }
-            return (sum == value.substr(8, 1));
+            return (sum + '' === value.substr(8, 1));
         },
 
         /**
@@ -984,14 +982,14 @@
             var sum    = 0,
                 weight = [3, 2, 7, 6, 5, 4, 3, 2];
             for (var i = 0; i < 8; i++) {
-                sum += parseInt(value.charAt(i)) * weight[i];
+                sum += parseInt(value.charAt(i), 10) * weight[i];
             }
 
             sum = 11 - sum % 11;
-            if (sum == 11) {
+            if (sum === 11) {
                 sum = 0;
             }
-            return (sum == value.substr(8, 1));
+            return (sum + '' === value.substr(8, 1));
         },
 
         /**
@@ -1013,10 +1011,10 @@
                 weight = [6, 5, 7, 2, 3, 4, 5, 6, 7, -1];
 
             for (var i = 0; i < 10; i++) {
-                sum += parseInt(value.charAt(i)) * weight[i];
+                sum += parseInt(value.charAt(i), 10) * weight[i];
             }
 
-            return (sum % 11 == 0);
+            return (sum % 11 === 0);
         },
 
         /**
@@ -1038,13 +1036,13 @@
                 weight = [9, 8, 7, 6, 5, 4, 3, 2];
 
             for (var i = 0; i < 8; i++) {
-                sum += parseInt(value.charAt(i)) * weight[i];
+                sum += parseInt(value.charAt(i), 10) * weight[i];
             }
             sum = 11 - sum % 11;
             if (sum > 9) {
                 sum = 0;
             }
-            return (sum == value.substr(8, 1));
+            return (sum + '' === value.substr(8, 1));
         },
 
         /**
@@ -1066,11 +1064,11 @@
                 weight = [7, 5, 3, 2, 1, 7, 5, 3, 2].slice(10 - length),
                 sum    = 0;
             for (var i = 0; i < length - 1; i++) {
-                sum += parseInt(value.charAt(i)) * weight[i];
+                sum += parseInt(value.charAt(i), 10) * weight[i];
             }
 
             sum = (10 * sum) % 11 % 10;
-            return (sum == value.substr(length - 1, 1));
+            return (sum + '' === value.substr(length - 1, 1));
         },
 
         /**
@@ -1085,27 +1083,28 @@
             }
 
             value = value.substr(2);
-            if (value.length == 10) {
+            var i = 0;
+            if (value.length === 10) {
                 var sum    = 0,
                     weight = [2, 4, 10, 3, 5, 9, 4, 6, 8, 0];
-                for (var i = 0; i < 10; i++) {
-                    sum += parseInt(value.charAt(i)) * weight[i];
+                for (i = 0; i < 10; i++) {
+                    sum += parseInt(value.charAt(i), 10) * weight[i];
                 }
                 sum = sum % 11;
                 if (sum > 9) {
                     sum = sum % 10;
                 }
 
-                return (sum == value.substr(9, 1));
-            } else if (value.length == 12) {
+                return (sum + '' === value.substr(9, 1));
+            } else if (value.length === 12) {
                 var sum1    = 0,
                     weight1 = [7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 0],
                     sum2    = 0,
                     weight2 = [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8, 0];
 
-                for (var i = 0; i < 11; i++) {
-                    sum1 += parseInt(value.charAt(i)) * weight1[i];
-                    sum2 += parseInt(value.charAt(i)) * weight2[i];
+                for (i = 0; i < 11; i++) {
+                    sum1 += parseInt(value.charAt(i), 10) * weight1[i];
+                    sum2 += parseInt(value.charAt(i), 10) * weight2[i];
                 }
                 sum1 = sum1 % 11;
                 if (sum1 > 9) {
@@ -1116,7 +1115,7 @@
                     sum2 = sum2 % 10;
                 }
 
-                return (sum1 == value.substr(10, 1) && sum2 == value.substr(11, 1));
+                return (sum1 + '' === value.substr(10, 1) && sum2 + '' === value.substr(11, 1));
             }
 
             return false;
@@ -1137,14 +1136,14 @@
             var sum  = 10,
                 temp = 0;
             for (var i = 0; i < 8; i++) {
-                temp = (parseInt(value.charAt(i)) + sum) % 10;
-                if (temp == 0) {
+                temp = (parseInt(value.charAt(i), 10) + sum) % 10;
+                if (temp === 0) {
                     temp = 10;
                 }
                 sum = (2 * temp) % 11;
             }
 
-            return ((sum + parseInt(value.substr(8, 1))) % 10 == 1);
+            return ((sum + parseInt(value.substr(8, 1), 10)) % 10 === 1);
         },
 
         /**
@@ -1184,13 +1183,13 @@
                 weight = [8, 7, 6, 5, 4, 3, 2];
 
             for (var i = 0; i < 7; i++) {
-                sum += parseInt(value.charAt(i)) * weight[i];
+                sum += parseInt(value.charAt(i), 10) * weight[i];
             }
             sum = 11 - sum % 11;
-            if (sum == 10) {
+            if (sum === 10) {
                 sum = 0;
             }
-            return (sum == value.substr(7, 1));
+            return (sum + '' === value.substr(7, 1));
         },
 
         /**
@@ -1207,8 +1206,7 @@
                 return false;
             }
 
-            value = value.substr(2);
-            return (value % 11 == 0);
+            return (parseInt(value.substr(2), 10) % 11 === 0);
         }
     };
 }(window.jQuery));

@@ -5,7 +5,7 @@
 
     $.fn.bootstrapValidator.validators.integer = {
         enableByHtml5: function($field) {
-            return ('number' == $field.attr('type'));
+            return ('number' === $field.attr('type'));
         },
 
         /**
@@ -19,7 +19,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
             return /^(?:-?(?:0|[1-9][0-9]*))$/.test(value);

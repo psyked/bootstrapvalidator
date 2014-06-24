@@ -28,6 +28,7 @@ __New Features__
 __Changes__
 * [#42](https://github.com/nghuuphuoc/bootstrapvalidator/issues/42): Remove the submit button from ```submitHandler()```. You can use new ```getSubmitButton()``` method to get the clicked submit button
 * [#109](https://github.com/nghuuphuoc/bootstrapvalidator/issues/109): Remove the ```setLiveMode()``` method
+* ```$.fn.bootstrapValidator.helpers``` renames ```mod_11_10``` to ```mod11And10```, ```mod_37_36``` to ```mod37And36```
 
 __Improvements__
 * [#244](https://github.com/nghuuphuoc/bootstrapvalidator/pull/244): Only enable the submit buttons if all fields are valid, thanks to [@smeagol74](https://github.com/smeagol74)
@@ -39,6 +40,7 @@ __Improvements__
 * [#364](https://github.com/nghuuphuoc/bootstrapvalidator/issues/364): Clicking the feedback icon also effect to the checkbox, radio fields
 * [#366](https://github.com/nghuuphuoc/bootstrapvalidator/issues/366): Don't change the enable setting when the new one is the same
 * [#371](https://github.com/nghuuphuoc/bootstrapvalidator/pull/371): Add H character to the Canadian postcode, thanks to [@jzhang6](https://github.com/jzhang6)
+* [#383](https://github.com/nghuuphuoc/bootstrapvalidator/issues/382): Add JSLint to Grunt build
 * [#388](https://github.com/nghuuphuoc/bootstrapvalidator/issues/388): Allow to override the default options. Useful for using multiple forms in the same page
 * [#393](https://github.com/nghuuphuoc/bootstrapvalidator/pull/393): The [remote validator](http://bootstrapvalidator.com/validators/remote/) adds support for dynamic ```url``` and method type (GET/POST), thanks to [@ericnakagawa](https://github.com/ericnakagawa)
 
@@ -58,6 +60,7 @@ __Bug Fixes__
 * [#389](https://github.com/nghuuphuoc/bootstrapvalidator/issues/389): When using multiple forms with HTML attributes on the same page, the plugin options will be the same as the last one
 * [#401](https://github.com/nghuuphuoc/bootstrapvalidator/issues/401): [stringLength validator](http://bootstrapvalidator.com/validators/stringLength/) allows spaces after max length
 * [#411](https://github.com/nghuuphuoc/bootstrapvalidator/pull/411): Fix the [ean validator](http://bootstrapvalidator.com/validators/ean/) when the check digit is zero, thanks to [@manish-in-java](https://github.com/manish-in-java)
+* [#417](https://github.com/nghuuphuoc/bootstrapvalidator/issues/417): IPv6 validator doesn't work
 
 __Document__
 * [#259](https://github.com/nghuuphuoc/bootstrapvalidator/issues/259): Typo "Support almost Bootstrap forms", thanks to [@lloydde](https://github.com/lloydde)

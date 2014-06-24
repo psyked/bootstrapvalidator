@@ -19,7 +19,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
@@ -40,7 +40,7 @@
                     return false;
             }
 
-            if ('ISMN10' == type) {
+            if ('ISMN10' === type) {
                 value = '9790' + value.substr(1);
             }
 
@@ -50,10 +50,10 @@
                 sum    = 0,
                 weight = [1, 3];
             for (var i = 0; i < length - 1; i++) {
-                sum += parseInt(value.charAt(i)) * weight[i % 2];
+                sum += parseInt(value.charAt(i), 10) * weight[i % 2];
             }
             sum = 10 - sum % 10;
-            return (sum == value.charAt(length - 1));
+            return (sum + '' === value.charAt(length - 1));
         }
     };
 }(window.jQuery));

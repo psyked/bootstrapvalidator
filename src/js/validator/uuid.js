@@ -29,7 +29,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
@@ -41,7 +41,7 @@
                     all: /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i
                 },
                 version = options.version ? (options.version + '') : 'all';
-            return (null == patterns[version]) ? true : patterns[version].test(value);
+            return (null === patterns[version]) ? true : patterns[version].test(value);
         }
     };
 }(window.jQuery));

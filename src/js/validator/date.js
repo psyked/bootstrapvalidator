@@ -30,7 +30,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
@@ -44,16 +44,16 @@
                 date       = sections[0],
                 time       = (sections.length > 1) ? sections[1] : null;
 
-            if (formats.length != sections.length) {
+            if (formats.length !== sections.length) {
                 return false;
             }
 
             // Determine the separator
             var separator = options.separator;
             if (!separator) {
-                separator = (date.indexOf('/') != -1) ? '/' : ((date.indexOf('-') != -1) ? '-' : null);
+                separator = (date.indexOf('/') !== -1) ? '/' : ((date.indexOf('-') !== -1) ? '-' : null);
             }
-            if (separator == null || date.indexOf(separator) == -1) {
+            if (separator === null || date.indexOf(separator) === -1) {
                 return false;
             }
 
@@ -67,10 +67,10 @@
             // Determine the time
             var minutes = null, hours = null, seconds = null;
             if (timeFormat) {
-                timeFormat = timeFormat.split(':'),
+                timeFormat = timeFormat.split(':');
                 time       = time.split(':');
 
-                if (timeFormat.length != time.length) {
+                if (timeFormat.length !== time.length) {
                     return false;
                 }
 

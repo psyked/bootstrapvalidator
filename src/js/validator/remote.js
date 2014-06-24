@@ -28,7 +28,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
@@ -38,12 +38,12 @@
                 type = options.type || 'POST';
 
             // Support dynamic data
-            if ('function' == typeof data) {
+            if ('function' === typeof data) {
                 data = data.call(this, validator);
             }
 
             // Support dynamic url
-            if ('function' == typeof url) {
+            if ('function' === typeof url) {
                 url = url.call(this, validator);
             }
 

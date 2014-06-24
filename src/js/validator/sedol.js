@@ -18,7 +18,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
@@ -34,7 +34,7 @@
 	            sum += weight[i] * parseInt(value.charAt(i), 36);
 	        }
 	        sum = (10 - sum % 10) % 10;
-            return sum == value.charAt(length - 1);
+            return sum + '' === value.charAt(length - 1);
         }
     };
 }(window.jQuery));

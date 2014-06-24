@@ -4,7 +4,7 @@
         notInclusive: 'Please enter a value greater than %s',
 
         getMessage: function(options) {
-            return (options.inclusive === true || options.inclusive == undefined)
+            return (options.inclusive === true || options.inclusive === undefined)
                     ? $.fn.bootstrapValidator.helpers.format(this['default'], options.value)
                     : $.fn.bootstrapValidator.helpers.format(this.notInclusive, options.value);
         }
@@ -41,11 +41,11 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
             value = parseFloat(value);
-			return (options.inclusive === true || options.inclusive == undefined) ? (value >= options.value) : (value > options.value);
+			return (options.inclusive === true || options.inclusive === undefined) ? (value >= options.value) : (value > options.value);
         }
-    }
+    };
 }(window.jQuery));

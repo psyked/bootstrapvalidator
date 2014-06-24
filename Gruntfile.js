@@ -60,6 +60,47 @@ module.exports = function(grunt) {
             }
         },
 
+        jshint: {
+            all: [
+                'src/js/**/*.js'
+            ],
+            options: {
+                browser: true,
+                camelcase: true,
+                curly: true,
+                eqeqeq: true,
+                eqnull: true,
+                es3: true,
+                expr: true,
+                laxbreak: true,   // Allow line breaking before && or ||
+                loopfunc: true,
+                newcap: true,
+                noarg: true,
+                onevar: true,
+                sub: true,
+                undef: true,
+                white: true
+
+                /*
+                'node': false,
+                'boss': false,
+                'debug': false,
+                'devel': false,
+                'evil': false,
+                'forin': false,
+                'immed': false,
+                'noempty': false,
+                'nonew': false,
+                'plusplus': false,
+                'regexp': false,
+                'strict': false,
+                'globals': {
+                    'define': false
+                }
+                */
+            }
+        },
+
         watch: {
             scripts: {
                 files: ['src/css/**', 'src/js/**'],
@@ -77,6 +118,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
 };

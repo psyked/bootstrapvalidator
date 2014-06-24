@@ -10,13 +10,13 @@
          *
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
-         * @param {Object} options Can consist of the following key:
+         * @param {Object} [options] Can consist of the following key:
          * - message: The invalid message
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
@@ -88,9 +88,9 @@
 
             var type, i;
             for (type in cards) {
-                for (i in cards[type]['prefix']) {
-                    if (value.substr(0, cards[type]['prefix'][i].length) == cards[type]['prefix'][i]    // Check the prefix
-                        && $.inArray(value.length, cards[type]['length']) != -1)                        // and length
+                for (i in cards[type].prefix) {
+                    if (value.substr(0, cards[type].prefix[i].length) === cards[type].prefix[i]     // Check the prefix
+                        && $.inArray(value.length, cards[type].length) !== -1)                      // and length
                     {
                         return true;
                     }

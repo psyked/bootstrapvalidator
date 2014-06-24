@@ -4,7 +4,7 @@
         notInclusive: 'Please enter a value between %s and %s strictly',
 
         getMessage: function(options) {
-            return (options.inclusive === true || options.inclusive == undefined)
+            return (options.inclusive === true || options.inclusive === undefined)
                     ? $.fn.bootstrapValidator.helpers.format(this['default'], [options.min, options.max])
                     : $.fn.bootstrapValidator.helpers.format(this.notInclusive, [options.min, options.max]);
         }
@@ -19,7 +19,7 @@
         },
 
         enableByHtml5: function($field) {
-            if ('range' == $field.attr('type')) {
+            if ('range' === $field.attr('type')) {
                 return {
                     min: $field.attr('min'),
                     max: $field.attr('max')
@@ -43,12 +43,12 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
             value = parseFloat(value);
-			return (options.inclusive === true || options.inclusive == undefined)
+			return (options.inclusive === true || options.inclusive === undefined)
 				    ? (value >= options.min && value <= options.max)
 				    : (value > options.min && value < options.max);
         }

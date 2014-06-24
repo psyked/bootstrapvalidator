@@ -13,13 +13,13 @@
          * @see http://en.wikipedia.org/wiki/CUSIP
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
-         * @param {Object} options Can consist of the following keys:
+         * @param {Object} [options] Can consist of the following keys:
          * - message: The invalid message
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
@@ -38,8 +38,8 @@
                 length    = converted.length,
                 sum       = 0;
             for (var i = 0; i < length - 1; i++) {
-                var num = parseInt(converted[i]);
-                if (i % 2 != 0) {
+                var num = parseInt(converted[i], 10);
+                if (i % 2 !== 0) {
                     num *= 2;
                 }
                 if (num > 9) {
@@ -49,7 +49,7 @@
             }
 
             sum = (10 - (sum % 10)) % 10;
-            return sum == converted[length - 1];
+            return sum === converted[length - 1];
         }
     };
 }(window.jQuery));

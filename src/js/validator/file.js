@@ -25,7 +25,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
@@ -40,25 +40,25 @@
                     total = files.length;
                 for (var i = 0; i < total; i++) {
                     // Check file size
-                    if (options.maxSize && files[i].size > parseInt(options.maxSize)) {
+                    if (options.maxSize && files[i].size > parseInt(options.maxSize, 10)) {
                         return false;
                     }
 
                     // Check file extension
                     ext = files[i].name.substr(files[i].name.lastIndexOf('.') + 1);
-                    if (extensions && $.inArray(ext.toLowerCase(), extensions) == -1) {
+                    if (extensions && $.inArray(ext.toLowerCase(), extensions) === -1) {
                         return false;
                     }
 
                     // Check file type
-                    if (types && $.inArray(files[i].type.toLowerCase(), types) == -1) {
+                    if (types && $.inArray(files[i].type.toLowerCase(), types) === -1) {
                         return false;
                     }
                 }
             } else {
                 // Check file extension
                 ext = value.substr(value.lastIndexOf('.') + 1);
-                if (extensions && $.inArray(ext.toLowerCase(), extensions) == -1) {
+                if (extensions && $.inArray(ext.toLowerCase(), extensions) === -1) {
                     return false;
                 }
             }
