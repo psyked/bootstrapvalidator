@@ -80,24 +80,6 @@ module.exports = function(grunt) {
                 sub: true,
                 undef: true,
                 white: true
-
-                /*
-                'node': false,
-                'boss': false,
-                'debug': false,
-                'devel': false,
-                'evil': false,
-                'forin': false,
-                'immed': false,
-                'noempty': false,
-                'nonew': false,
-                'plusplus': false,
-                'regexp': false,
-                'strict': false,
-                'globals': {
-                    'define': false
-                }
-                */
             }
         },
 
