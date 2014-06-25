@@ -69,6 +69,7 @@ __Document__
 * [#278](https://github.com/nghuuphuoc/bootstrapvalidator/pull/278): Update the [choice validator](http://bootstrapvalidator.com/validators/choice/) document, thanks to [@MrC0mm0n](https://github.com/MrC0mm0n)
 * [#303](https://github.com/nghuuphuoc/bootstrapvalidator/pull/303): Fix typo in [remote validator](http://bootstrapvalidator.com/validators/remote/) document, thanks to [@MartinDevillers](https://github.com/MartinDevillers)
 * [#334](https://github.com/nghuuphuoc/bootstrapvalidator/pull/334): No ID is specified on the form object for registration, thanks to [@jjshoe](https://github.com/jjshoe)
+* [#423](https://github.com/nghuuphuoc/bootstrapvalidator/pull/423): Add default column to settings table, thanks to [@MartinDevillers](https://github.com/MartinDevillers)
 
 ## v0.4.5 (2014-05-15)
 
