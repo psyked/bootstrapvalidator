@@ -166,6 +166,7 @@
             }
 
             var opts = {
+                    excluded:      $field.attr('data-bv-excluded'),
                     feedbackIcons: $field.attr('data-bv-feedbackicons'),
                     trigger:       $field.attr('data-bv-trigger'),
                     message:       $field.attr('data-bv-message'),
@@ -413,26 +414,41 @@
          * @returns {Boolean}
          */
         _isExcluded: function($field) {
-            if (this.options.excluded) {
-                // Convert to array first
-                if ('string' === typeof this.options.excluded) {
-                    this.options.excluded = $.map(this.options.excluded.split(','), function(item) {
-                        // Trim the spaces
-                        return $.trim(item);
-                    });
-                }
+            var excludedAttr = $field.attr('data-bv-excluded'),
+                // I still need to check the 'name' attribute while initializing the field
+                field        = $field.attr('data-bv-field') || $field.attr('name');
 
-                var length = this.options.excluded.length;
-                for (var i = 0; i < length; i++) {
-                    if (('string' === typeof this.options.excluded[i] && $field.is(this.options.excluded[i]))
-                        || ('function' === typeof this.options.excluded[i] && this.options.excluded[i].call(this, $field, this) === true))
-                    {
-                        return true;
+            switch (true) {
+                case (!!field && this.options.fields && this.options.fields[field] && (this.options.fields[field].excluded === 'true' || this.options.fields[field].excluded === true)):
+                case (excludedAttr === 'true'):
+                case (excludedAttr === ''):
+                    return true;
+
+                case (!!field && this.options.fields && this.options.fields[field] && (this.options.fields[field].excluded === 'false' || this.options.fields[field].excluded === false)):
+                case (excludedAttr === 'false'):
+                    return false;
+
+                default:
+                    if (this.options.excluded) {
+                        // Convert to array first
+                        if ('string' === typeof this.options.excluded) {
+                            this.options.excluded = $.map(this.options.excluded.split(','), function(item) {
+                                // Trim the spaces
+                                return $.trim(item);
+                            });
+                        }
+
+                        var length = this.options.excluded.length;
+                        for (var i = 0; i < length; i++) {
+                            if (('string' === typeof this.options.excluded[i] && $field.is(this.options.excluded[i]))
+                                || ('function' === typeof this.options.excluded[i] && this.options.excluded[i].call(this, $field, this) === true))
+                            {
+                                return true;
+                            }
+                        }
                     }
-                }
+                    return false;
             }
-
-            return false;
         },
 
         /**
@@ -451,7 +467,9 @@
             return (cannotType || $field.val().length >= threshold);
         },
         
-        // --- Events ---
+        // ---
+        // Events
+        // ---
 
         /**
          * The default handler of error.form.bv event.
@@ -587,7 +605,9 @@
             }
         },
 
-        // --- Public methods ---
+        // ---
+        // Public methods
+        // ---
 
         /**
          * Retrieve the field elements by given name
@@ -754,8 +774,12 @@
                 total = ('radio' === type || 'checkbox' === type) ? 1 : fields.length;
 
             for (var i = 0; i < total; i++) {
-                var $field       = fields.eq(i),
-                    $parent      = $field.parents(group),
+                var $field       = fields.eq(i);
+                if (this._isExcluded($field)) {
+                    continue;
+                }
+
+                var $parent      = $field.parents(group),
                     $message     = $field.data('bv.messages'),
                     $allErrors   = $message.find('.help-block[data-bv-validator][data-bv-for="' + field + '"]'),
                     $errors      = validatorName ? $allErrors.filter('[data-bv-validator="' + validatorName + '"]') : $allErrors,
@@ -950,9 +974,10 @@
         isValidContainer: function($container) {
             var that = this, map = {};
             $container.find('[data-bv-field]').each(function() {
-                var field = $(this).attr('data-bv-field');
-                if (!map[field]) {
-                    map[field] = $(this);
+                var $field = $(this),
+                    field  = $field.attr('data-bv-field');
+                if (!that._isExcluded($field) && !map[field]) {
+                    map[field] = $field;
                 }
             });
 
@@ -994,7 +1019,9 @@
             this.$form.off('submit.bv').submit();
         },
 
+        // ---
         // Useful APIs which aren't used internally
+        // ---
 
         /**
          * Get the list of invalid fields
