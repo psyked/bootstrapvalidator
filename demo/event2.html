@@ -24,7 +24,7 @@
                         <div class="col-lg-6">
                             <div class="input-group">
                                 <span class="input-group-addon">Singapore</span>
-                                <input type="text" class="form-control" name="postalCode" id="postalCode" placeholder="Postal Code" />
+                                <input type="text" class="form-control" name="postalCode" placeholder="Postal Code" />
                             </div>
                         </div>
                         <div class="col-lg-1">
@@ -73,13 +73,13 @@ $(document).ready(function() {
         .on('error.field.bv', function(e, data) {
             if (data.field == 'postalCode') {
                 // The postal code is not valid
-                $('#lookupBtn').prop('disabled', true).removeClass('btn-success btn-warning').addClass('btn-warning')
+                $('#lookupBtn').prop('disabled', true).removeClass('btn-success btn-warning').addClass('btn-warning');
             }
         })
         .on('success.field.bv', function(e, data) {
             if (data.field == 'postalCode') {
                 // The postal code is valid
-                $('#lookupBtn').prop('disabled', false).removeClass('btn-success btn-warning').addClass('btn-success')
+                $('#lookupBtn').prop('disabled', false).removeClass('btn-success btn-warning').addClass('btn-success');
             }
         });
 });

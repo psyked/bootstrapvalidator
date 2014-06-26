@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-06-26 9:18:04 AM
+ * @version     v0.5.0-dev, built on 2014-06-26 6:56:31 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -162,6 +162,8 @@
                     group:         $field.attr('data-bv-group'),
                     selector:      $field.attr('data-bv-selector'),
                     threshold:     $field.attr('data-bv-threshold'),
+                    onSuccess:     $field.attr('data-bv-onsuccess'),
+                    onError:       $field.attr('data-bv-onerror'),
                     validators:    validators
                 },
                 emptyOptions    = $.isEmptyObject(opts),        // Check if the field options are set using HTML attributes
@@ -289,6 +291,18 @@
                         });
                     }
                 }
+            }
+
+            // Prepare the events
+            if (this.options.fields[field].onSuccess) {
+                fields.on('success.field.bv', function(e, data) {
+                    $.fn.bootstrapValidator.helpers.call(that.options.fields[field].onSuccess, [e, data]);
+                });
+            }
+            if (this.options.fields[field].onError) {
+                fields.on('error.field.bv', function(e, data) {
+                    $.fn.bootstrapValidator.helpers.call(that.options.fields[field].onError, [e, data]);
+                });
             }
 
             // Set live mode
@@ -580,6 +594,11 @@
                     field: field,
                     element: $field
                 });
+                $field.trigger($.Event('success.field.bv'), {
+                    field: field,
+                    element: $field,
+                    validator: this
+                });
             }
             // If all validators are completed and there is at least one validator which doesn't pass
             else if (counter[this.STATUS_NOT_VALIDATED] === 0 && counter[this.STATUS_VALIDATING] === 0 && counter[this.STATUS_INVALID] > 0) {
@@ -589,6 +608,11 @@
                 this.$form.trigger($.Event('error.field.bv'), {
                     field: field,
                     element: $field
+                });
+                $field.trigger($.Event('error.field.bv'), {
+                    field: field,
+                    element: $field,
+                    validator: this
                 });
             }
         },
@@ -1433,6 +1457,36 @@
 
     // Helper methods, which can be used in validator class
     $.fn.bootstrapValidator.helpers = {
+        /**
+         * Execute a callback function
+         *
+         * @param {String|Function} functionName Can be
+         * - name of global function
+         * - name of namespace function (such as A.B.C)
+         * - a function
+         * @param {Array} args The callback arguments
+         */
+        call: function(functionName, args) {
+            switch (typeof functionName) {
+                case 'function':
+                    functionName.apply(this, args);
+                    break;
+
+                case 'string':
+                    var ns      = functionName.split('.'),
+                        func    = ns.pop(),
+                        context = window;
+                    for (var i = 0; i < ns.length; i++) {
+                        context = context[ns[i]];
+                    }
+                    context[func].apply(this, args);
+                    break;
+
+                default:
+                    break;
+            }
+        },
+
         /**
          * Format a string
          * It's used to format the error message
