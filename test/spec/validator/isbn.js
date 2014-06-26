@@ -13,7 +13,7 @@ describe('isbn', function() {
             '<div class="container">',
                 '<form class="form-horizontal" id="form">',
                     '<div class="form-group">',
-                        '<input type="text" name="isbn" id="isbn" data-bv-isbn />',
+                        '<input type="text" name="isbn" data-bv-isbn />',
                     '</div>',
                 '</form>',
             '</div>'
@@ -27,8 +27,7 @@ describe('isbn', function() {
     });
 
     afterEach(function() {
-        this._bs.destroy();
-        $('#form').remove();
+        $('#form').bootstrapValidator('destroy').remove();
     });
 
     it('isbn10 hyphen', function() {
