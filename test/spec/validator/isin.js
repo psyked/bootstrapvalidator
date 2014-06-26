@@ -1,4 +1,4 @@
-describe('ean', function() {
+describe('isin', function() {
     // Override the default options
     $.extend($.fn.bootstrapValidator.DEFAULT_OPTIONS, {
         feedbackIcons: {
@@ -13,7 +13,7 @@ describe('ean', function() {
             '<div class="container">',
                 '<form class="form-horizontal" id="form">',
                     '<div class="form-group">',
-                        '<input type="text" name="ean" data-bv-ean />',
+                        '<input type="text" name="isin" data-bv-isin />',
                     '</div>',
                 '</form>',
             '</div>'
@@ -23,7 +23,7 @@ describe('ean', function() {
         $('#form').bootstrapValidator();
 
         this._bs     = $('#form').data('bootstrapValidator');
-        this._$field = this._bs.getFieldElements('ean');
+        this._$field = this._bs.getFieldElements('isin');
     });
 
     afterEach(function() {
@@ -31,30 +31,36 @@ describe('ean', function() {
     });
 
     it('valid', function() {
-        var samples = ['73513537', '9780471117094', '4006381333931'];
+        var samples = ['US0378331005', 'AU0000XVGZA3', 'GB0002634946'];
 
         for (var i in samples) {
             this._$field.val(samples[i]);
             this._bs.validate();
-            expect(this._bs.isValidField('ean')).toBeTruthy();
+            expect(this._bs.isValidField('isin')).toBeTruthy();
         }
     });
 
-    it('contains only digits', function() {
-        this._$field.val('123abcDEF!@#');
+    it('invalid country code', function() {
+        this._$field.val('AA0000XVGZA3');
         this._bs.validate();
-        expect(this._bs.isValidField('ean')).toEqual(false);
+        expect(this._bs.isValidField('isin')).toEqual(false);
+    });
+
+    it('contains only digits and alphabet', function() {
+        this._$field.val('US12345ABC@#$');
+        this._bs.validate();
+        expect(this._bs.isValidField('isin')).toEqual(false);
     });
 
     it('invalid length', function() {
-        this._$field.val('1234567');
+        this._$field.val('US1234567');
         this._bs.validate();
-        expect(this._bs.isValidField('ean')).toEqual(false);
+        expect(this._bs.isValidField('isin')).toEqual(false);
     });
 
     it('invalid check digit', function() {
-        this._$field.val('73513536');
+        this._$field.val('US0378331004');
         this._bs.validate();
-        expect(this._bs.isValidField('ean')).toEqual(false);
+        expect(this._bs.isValidField('isin')).toEqual(false);
     });
 });
