@@ -13,9 +13,8 @@ module.exports = function(grunt) {
         },
 
         banner: [
-            '/**',
+            '/*!',
             ' * BootstrapValidator (<%= pkg.homepage %>)',
-            ' *',
             ' * <%= pkg.description %>',
             ' *',
             ' * @version     v<%= pkg.version %>, built on <%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>',
@@ -42,6 +41,7 @@ module.exports = function(grunt) {
             minify: { expand: true, cwd: '<%= dirs.src %>/css/', src: ['*.css'], dest: '<%= dirs.dist %>/css/', ext: '.min.css' },
             add_banner: {
                 options: {
+                    stripBanners: true,
                     banner: '<%= banner %>'
                 },
                 files: {
@@ -51,16 +51,14 @@ module.exports = function(grunt) {
         },
 
         concat: {
+            options: {
+                separator: ';',
+                stripBanners: true,
+                banner: '<%= banner %>'
+            },
             source: {
-                options: {
-                    separator: ';',
-                    stripBanners: true,
-                    banner: '<%= banner %>'
-                },
-                dist: {
-                    src: ['<%= dirs.src %>/js/bootstrapValidator.js', '<%= dirs.src %>/js/validator/*.js'],
-                    dest: '<%= dirs.dist %>/js/bootstrapValidator.js'
-                }
+                src: ['<%= dirs.src %>/js/bootstrapValidator.js', '<%= dirs.src %>/js/validator/*.js'],
+                dest: '<%= dirs.dist %>/js/bootstrapValidator.js'
             }
         },
 
@@ -109,7 +107,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', 'build');
-    grunt.registerTask('build',   ['copy', 'cssmin', 'concat', 'uglify']);
+    grunt.registerTask('build',   ['copy', 'cssmin', 'concat:source', 'uglify']);
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
