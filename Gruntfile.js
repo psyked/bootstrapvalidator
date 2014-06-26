@@ -51,14 +51,18 @@ module.exports = function(grunt) {
         },
 
         concat: {
-            options: {
-                separator: ';',
-                stripBanners: true,
-                banner: '<%= banner %>'
-            },
             source: {
+                options: {
+                    separator: ';',
+                    stripBanners: true,
+                    banner: '<%= banner %>'
+                },
                 src: ['<%= dirs.src %>/js/bootstrapValidator.js', '<%= dirs.src %>/js/validator/*.js'],
                 dest: '<%= dirs.dist %>/js/bootstrapValidator.js'
+            },
+            test: {
+                src: ['<%= dirs.test %>/spec/*.js', '<%= dirs.test %>/spec/validator/*.js'],
+                dest: '<%= dirs.test %>/spec.js'
             }
         },
 
@@ -102,6 +106,10 @@ module.exports = function(grunt) {
                 options: {
                     spawn: false
                 }
+            },
+            test: {
+                files: ['<%= dirs.test %>/spec/**'],
+                tasks: ['concat:test']
             }
         }
     });
