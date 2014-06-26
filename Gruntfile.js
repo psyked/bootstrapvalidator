@@ -1,8 +1,16 @@
 module.exports = function(grunt) {
     grunt.initConfig({
+        // ---
+        // Variables
+        // ---
+
         pkg: grunt.file.readJSON('package.json'),
 
-        buildDir: 'dist',
+        dirs: {
+            src: 'src',
+            dist: 'dist',
+            test: 'test'
+        },
 
         banner: [
             '/**',
@@ -10,43 +18,49 @@ module.exports = function(grunt) {
             ' *',
             ' * <%= pkg.description %>',
             ' *',
-            ' * @version     v<%= pkg.version %>',
+            ' * @version     v<%= pkg.version %>, built on <%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>',
             ' * @author      <%= pkg.author.url %>',
-            ' * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc',
+            ' * @copyright   (c) 2013 - <%= grunt.template.today("yyyy") %> Nguyen Huu Phuoc',
             ' * @license     MIT',
-            ' */\n\n'
+            ' */\n'
         ].join('\n'),
+
+        // ---
+        // Tasks
+        // ---
 
         copy: {
             main: {
                 files: [
-                    { cwd: 'src/css', src: '**', dest: '<%= buildDir %>/css', expand: true, flatten: true, filter: 'isFile' },
-                    { cwd: 'src/js/languages', src: '**', dest: '<%= buildDir %>/js/languages', expand: true, flatten: true, filter: 'isFile' }
+                    { cwd: '<%= dirs.src %>/css', src: '**', dest: '<%= dirs.dist %>/css', expand: true, flatten: true, filter: 'isFile' },
+                    { cwd: '<%= dirs.src %>/js/languages', src: '**', dest: '<%= dirs.dist %>/js/languages', expand: true, flatten: true, filter: 'isFile' }
                 ]
             }
         },
 
         cssmin: {
-            minify: { expand: true, cwd: 'src/css/', src: ['*.css'], dest: '<%= buildDir %>/css/', ext: '.min.css' },
+            minify: { expand: true, cwd: '<%= dirs.src %>/css/', src: ['*.css'], dest: '<%= dirs.dist %>/css/', ext: '.min.css' },
             add_banner: {
                 options: {
                     banner: '<%= banner %>'
                 },
                 files: {
-                    '<%= buildDir %>/css/bootstrapValidator.min.css': ['src/css/bootstrapValidator.css']
+                    '<%= dirs.dist %>/css/bootstrapValidator.min.css': ['<%= dirs.src %>/css/bootstrapValidator.css']
                 }
             }
         },
 
         concat: {
-            options: {
-                separator: ';',
-                stripBanners: true,
-                banner: '<%= banner %>'
-            },
-            dist: {
-                src: ['src/js/bootstrapValidator.js', 'src/js/validator/*.js'],
-                dest: '<%= buildDir %>/js/bootstrapValidator.js'
+            source: {
+                options: {
+                    separator: ';',
+                    stripBanners: true,
+                    banner: '<%= banner %>'
+                },
+                dist: {
+                    src: ['<%= dirs.src %>/js/bootstrapValidator.js', '<%= dirs.src %>/js/validator/*.js'],
+                    dest: '<%= dirs.dist %>/js/bootstrapValidator.js'
+                }
             }
         },
 
@@ -55,14 +69,14 @@ module.exports = function(grunt) {
                 banner: '<%= banner %>'
             },
             build: {
-                src: ['<%= buildDir %>/js/bootstrapValidator.js'],
-                dest: '<%= buildDir %>/js/bootstrapValidator.min.js'
+                src: ['<%= dirs.dist %>/js/bootstrapValidator.js'],
+                dest: '<%= dirs.dist %>/js/bootstrapValidator.min.js'
             }
         },
 
         jshint: {
             all: [
-                'src/js/**/*.js'
+                '<%= dirs.src %>/js/**/*.js'
             ],
             options: {
                 browser: true,
@@ -84,8 +98,8 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            scripts: {
-                files: ['src/css/**', 'src/js/**'],
+            source: {
+                files: ['<%= dirs.src %>/css/**', '<%= dirs.src %>/js/**'],
                 tasks: ['build'],
                 options: {
                     spawn: false
@@ -95,7 +109,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', 'build');
-    grunt.registerTask('build', ['copy', 'cssmin', 'concat', 'uglify']);
+    grunt.registerTask('build',   ['copy', 'cssmin', 'concat', 'uglify']);
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
