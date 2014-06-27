@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-06-27 9:50:43 AM
+ * @version     v0.5.0-dev, built on 2014-06-27 2:05:03 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -1500,23 +1500,16 @@
          * @param {Array} args The callback arguments
          */
         call: function(functionName, args) {
-            switch (typeof functionName) {
-                case 'function':
-                    functionName.apply(this, args);
-                    break;
-
-                case 'string':
-                    var ns      = functionName.split('.'),
-                        func    = ns.pop(),
-                        context = window;
-                    for (var i = 0; i < ns.length; i++) {
-                        context = context[ns[i]];
-                    }
-                    context[func].apply(this, args);
-                    break;
-
-                default:
-                    break;
+            if ('function' === typeof functionName) {
+                return functionName.apply(this, args);
+            } else if ('string' === typeof functionName) {
+                var ns      = functionName.split('.'),
+                    func    = ns.pop(),
+                    context = window;
+                for (var i = 0; i < ns.length; i++) {
+                    context = context[ns[i]];
+                }
+                return context[func].apply(this, args);
             }
         },
 
@@ -1728,6 +1721,11 @@
     });
 
     $.fn.bootstrapValidator.validators.callback = {
+        html5Attributes: {
+            message: 'message',
+            callback: 'callback'
+        },
+
         /**
          * Return result from the callback method
          *
@@ -1745,12 +1743,14 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (options.callback && 'function' === typeof options.callback) {
+
+            if (options.callback) {
                 var dfd      = new $.Deferred(),
-                    response = options.callback.call(this, value, validator, $field);
+                    response = $.fn.bootstrapValidator.helpers.call(options.callback, [value, validator, $field]);
                 dfd.resolve($field, 'callback', 'boolean' === typeof response ? response : response.valid, 'object' === typeof response && response.message ? response.message : null);
                 return dfd;
             }
+
             return true;
         }
     };

@@ -4,6 +4,11 @@
     });
 
     $.fn.bootstrapValidator.validators.callback = {
+        html5Attributes: {
+            message: 'message',
+            callback: 'callback'
+        },
+
         /**
          * Return result from the callback method
          *
@@ -21,12 +26,14 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (options.callback && 'function' === typeof options.callback) {
+
+            if (options.callback) {
                 var dfd      = new $.Deferred(),
-                    response = options.callback.call(this, value, validator, $field);
+                    response = $.fn.bootstrapValidator.helpers.call(options.callback, [value, validator, $field]);
                 dfd.resolve($field, 'callback', 'boolean' === typeof response ? response : response.valid, 'object' === typeof response && response.message ? response.message : null);
                 return dfd;
             }
+
             return true;
         }
     };

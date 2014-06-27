@@ -1499,23 +1499,16 @@
          * @param {Array} args The callback arguments
          */
         call: function(functionName, args) {
-            switch (typeof functionName) {
-                case 'function':
-                    functionName.apply(this, args);
-                    break;
-
-                case 'string':
-                    var ns      = functionName.split('.'),
-                        func    = ns.pop(),
-                        context = window;
-                    for (var i = 0; i < ns.length; i++) {
-                        context = context[ns[i]];
-                    }
-                    context[func].apply(this, args);
-                    break;
-
-                default:
-                    break;
+            if ('function' === typeof functionName) {
+                return functionName.apply(this, args);
+            } else if ('string' === typeof functionName) {
+                var ns      = functionName.split('.'),
+                    func    = ns.pop(),
+                    context = window;
+                for (var i = 0; i < ns.length; i++) {
+                    context = context[ns[i]];
+                }
+                return context[func].apply(this, args);
             }
         },
 

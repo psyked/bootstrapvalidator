@@ -47,6 +47,7 @@ __Improvements__
 * [#393](https://github.com/nghuuphuoc/bootstrapvalidator/pull/393): The [remote validator](http://bootstrapvalidator.com/validators/remote/) adds support for dynamic ```url``` and method type (GET/POST), thanks to [@ericnakagawa](https://github.com/ericnakagawa)
 * [#422](https://github.com/nghuuphuoc/bootstrapvalidator/issues/422): Exclude particular field by ```excluded``` option or ```data-bv-excluded``` attribute
 * [#431](https://github.com/nghuuphuoc/bootstrapvalidator/issues/431): Add built time to the build file
+* [#432](https://github.com/nghuuphuoc/bootstrapvalidator/issues/432): Define the callback via ```data-bv-callback-callback``` attribute
 
 __Bug Fixes__
 * [#288](https://github.com/nghuuphuoc/bootstrapvalidator/issues/288): Fix [date validator](http://bootstrapvalidator.com/validators/date/) issue on IE8
