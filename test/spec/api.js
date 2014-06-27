@@ -32,7 +32,17 @@ describe('api', function() {
         $('#apiForm').bootstrapValidator('destroy').parent().remove();
     });
 
-    it('destroy', function() {
+    it('call revalidateField()', function() {
+        this.$email.val('email@domain.com');
+        this.bv.validate();
+        expect(this.bv.isValidField('email')).toBeTruthy();
+
+        this.$email.val('invalid#email.address');
+        this.bv.revalidateField('email');
+        expect(this.bv.isValidField(this.$email)).toEqual(false);
+    });
+
+    it('call destroy()', function() {
         this.bv.destroy();
         expect($('#apiForm').data('bootstrapValidator')).toBeUndefined();
         expect($('#apiForm').find('i[data-bv-icon-for]').length).toEqual(0);
