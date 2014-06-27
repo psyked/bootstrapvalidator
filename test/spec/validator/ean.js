@@ -1,17 +1,8 @@
 describe('ean', function() {
-    // Override the default options
-    $.extend($.fn.bootstrapValidator.DEFAULT_OPTIONS, {
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        }
-    });
-
     beforeEach(function() {
         var html = [
             '<div class="container">',
-                '<form class="form-horizontal" id="form">',
+                '<form class="form-horizontal" id="eanForm">',
                     '<div class="form-group">',
                         '<input type="text" name="ean" data-bv-ean />',
                     '</div>',
@@ -20,41 +11,41 @@ describe('ean', function() {
         ].join('\n');
 
         $(html).appendTo('body');
-        $('#form').bootstrapValidator();
+        $('#eanForm').bootstrapValidator();
 
-        this._bs     = $('#form').data('bootstrapValidator');
-        this._$field = this._bs.getFieldElements('ean');
+        this.bv   = $('#eanForm').data('bootstrapValidator');
+        this.$ean = this.bv.getFieldElements('ean');
     });
 
     afterEach(function() {
-        $('#form').bootstrapValidator('destroy').remove();
+        $('#eanForm').bootstrapValidator('destroy').parent().remove();
     });
 
     it('valid', function() {
         var samples = ['73513537', '9780471117094', '4006381333931'];
 
         for (var i in samples) {
-            this._$field.val(samples[i]);
-            this._bs.validate();
-            expect(this._bs.isValidField('ean')).toBeTruthy();
+            this.$ean.val(samples[i]);
+            this.bv.validate();
+            expect(this.bv.isValidField('ean')).toBeTruthy();
         }
     });
 
     it('contains only digits', function() {
-        this._$field.val('123abcDEF!@#');
-        this._bs.validate();
-        expect(this._bs.isValidField('ean')).toEqual(false);
+        this.$ean.val('123abcDEF!@#');
+        this.bv.validate();
+        expect(this.bv.isValidField('ean')).toEqual(false);
     });
 
     it('invalid length', function() {
-        this._$field.val('1234567');
-        this._bs.validate();
-        expect(this._bs.isValidField('ean')).toEqual(false);
+        this.$ean.val('1234567');
+        this.bv.validate();
+        expect(this.bv.isValidField('ean')).toEqual(false);
     });
 
     it('invalid check digit', function() {
-        this._$field.val('73513536');
-        this._bs.validate();
-        expect(this._bs.isValidField('ean')).toEqual(false);
+        this.$ean.val('73513536');
+        this.bv.validate();
+        expect(this.bv.isValidField('ean')).toEqual(false);
     });
 });
