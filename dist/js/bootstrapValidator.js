@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-06-27 8:37:01 AM
+ * @version     v0.5.0-dev, built on 2014-06-27 8:58:08 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -736,8 +736,7 @@
                             // v is validator name
                             $f.removeData('bv.dfs.' + v);
                             if (message) {
-                                // Update the error message
-                                $field.data('bv.messages').find('.help-block[data-bv-validator="' + v + '"][data-bv-for="' + $f.attr('data-bv-field') + '"]').html(message);
+                                that.updateMessage($f, v, message);
                             }
 
                             that.updateStatus(updateAll ? $f.attr('data-bv-field') : $f, isValid ? that.STATUS_VALID : that.STATUS_INVALID, v);
@@ -1058,9 +1057,11 @@
          *
          * @param {String|jQuery} [field] The field name or field element
          * If the field is not defined, the method returns all error messages of all fields
+         * @param {String} [validator] The name of validator
+         * If the validator is not defined, the method returns error messages of all validators
          * @returns {String[]}
          */
-        getMessages: function(field) {
+        getMessages: function(field, validator) {
             var that     = this,
                 messages = [],
                 $fields  = $([]);
@@ -1081,11 +1082,12 @@
                     break;
             }
 
+            var filter = validator ? '[data-bv-validator="' + validator + '"]' : '';
             $fields.each(function() {
                 messages = messages.concat(
                     $(this)
                         .data('bv.messages')
-                        .find('.help-block[data-bv-for="' + $(this).attr('data-bv-field') + '"][data-bv-result="' + that.STATUS_INVALID + '"]')
+                        .find('.help-block[data-bv-for="' + $(this).attr('data-bv-field') + '"][data-bv-result="' + that.STATUS_INVALID + '"]' + filter)
                         .map(function() {
                             return $(this).html();
                         })
@@ -1094,6 +1096,22 @@
             });
 
             return messages;
+        },
+
+        /**
+         * Update the error message
+         *
+         * @param {String|jQuery} field The field name or field element
+         * @param {String} validator The validator name
+         * @param {String} message The message
+         * @returns {BootstrapValidator}
+         */
+        updateMessage: function(field, validator, message) {
+            var fields = ('string' === typeof field) ? this.getFieldElements(field) : field,
+                field  = ('object' === typeof field) ? field.attr('data-bv-field')  : field;
+            fields.each(function() {
+                $(this).data('bv.messages').find('.help-block[data-bv-validator="' + validator + '"][data-bv-for="' + field + '"]').html(message);
+            });
         },
 
         /**
