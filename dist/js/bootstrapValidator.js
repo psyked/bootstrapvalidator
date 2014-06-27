@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-06-26 6:56:31 PM
+ * @version     v0.5.0-dev, built on 2014-06-27 8:37:01 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -1060,7 +1060,7 @@
          * If the field is not defined, the method returns all error messages of all fields
          * @returns {String[]}
          */
-        getErrors: function(field) {
+        getMessages: function(field) {
             var that     = this,
                 messages = [],
                 $fields  = $([]);

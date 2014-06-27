@@ -165,7 +165,7 @@ $(document).ready(function() {
         })
         .on('error.field.bv', function(e, data) {
             var $form    = $(e.target),
-                messages = $form.data('bootstrapValidator').getErrors(data.element);
+                messages = $form.data('bootstrapValidator').getMessages(data.element);
             $('#errors').find('li[data-bv-for="' + data.field + '"]').remove();
             for (var i in messages) {
                 $('<li/>').attr('data-bv-for', data.field).html(messages[i]).appendTo('#errors');

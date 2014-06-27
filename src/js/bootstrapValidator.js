@@ -1059,7 +1059,7 @@
          * If the field is not defined, the method returns all error messages of all fields
          * @returns {String[]}
          */
-        getErrors: function(field) {
+        getMessages: function(field) {
             var that     = this,
                 messages = [],
                 $fields  = $([]);
