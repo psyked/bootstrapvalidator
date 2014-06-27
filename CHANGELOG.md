@@ -24,6 +24,7 @@ __New Features__
 * [#356](https://github.com/nghuuphuoc/bootstrapvalidator/issues/356): Add ```group``` option
 * [#374](https://github.com/nghuuphuoc/bootstrapvalidator/pull/374): Add Singapore postal code to the [zipCode validator](http://bootstrapvalidator.com/validators/zipCode/), thanks to [@thisisclement](https://github.com/thisisclement)
 * [#406](https://github.com/nghuuphuoc/bootstrapvalidator/issues/406): Add ```revalidateField(field)``` method
+* [#433](https://github.com/nghuuphuoc/bootstrapvalidator/issues/433): Add ```resetField(field, resetValue)``` method
 * [#434](https://github.com/nghuuphuoc/bootstrapvalidator/issues/434): Add ```updateMessage(field, validator, message)``` method
 
 __Changes__

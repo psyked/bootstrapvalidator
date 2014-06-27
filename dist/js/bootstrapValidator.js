@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-06-27 8:58:08 AM
+ * @version     v0.5.0-dev, built on 2014-06-27 9:50:43 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -758,6 +758,22 @@
         },
 
         /**
+         * Update the error message
+         *
+         * @param {String|jQuery} field The field name or field element
+         * @param {String} validator The validator name
+         * @param {String} message The message
+         * @returns {BootstrapValidator}
+         */
+        updateMessage: function(field, validator, message) {
+            var fields = ('string' === typeof field) ? this.getFieldElements(field) : field,
+                field  = ('object' === typeof field) ? field.attr('data-bv-field')  : field;
+            fields.each(function() {
+                $(this).data('bv.messages').find('.help-block[data-bv-validator="' + validator + '"][data-bv-for="' + field + '"]').html(message);
+            });
+        },
+
+        /**
          * Update all validating results of field
          *
          * @param {String|jQuery} field The field name or field element
@@ -1099,22 +1115,6 @@
         },
 
         /**
-         * Update the error message
-         *
-         * @param {String|jQuery} field The field name or field element
-         * @param {String} validator The validator name
-         * @param {String} message The message
-         * @returns {BootstrapValidator}
-         */
-        updateMessage: function(field, validator, message) {
-            var fields = ('string' === typeof field) ? this.getFieldElements(field) : field,
-                field  = ('object' === typeof field) ? field.attr('data-bv-field')  : field;
-            fields.each(function() {
-                $(this).data('bv.messages').find('.help-block[data-bv-validator="' + validator + '"][data-bv-for="' + field + '"]').html(message);
-            });
-        },
-
-        /**
          * Add a new field
          *
          * @param {String|jQuery} field The field name or field element
@@ -1224,30 +1224,45 @@
         },
 
         /**
-         * Reset the form
+         * Reset given field
          *
-         * @param {Boolean} [resetFormData] Reset current form data
+         * @param {String|jQuery} field The field name or field element
+         * @param {Boolean} [resetValue] If true, the method resets field value to empty or remove checked/selected attribute (for radio/checkbox)
          * @returns {BootstrapValidator}
          */
-        resetForm: function(resetFormData) {
-            var field, fields, total, type, validator;
-            for (field in this.options.fields) {
-                fields = this.getFieldElements(field);
+        resetField: function(field, resetValue) {
+            var fields = ('string' === typeof field) ? this.getFieldElements(field) : field,
+                field  = ('object' === typeof field) ? field.attr('data-bv-field')  : field,
                 total  = fields.length;
 
+            if (this.options.fields[field]) {
                 for (var i = 0; i < total; i++) {
-                    for (validator in this.options.fields[field].validators) {
+                    for (var validator in this.options.fields[field].validators) {
                         fields.eq(i).removeData('bv.dfs.' + validator);
                     }
                 }
+            }
 
-                // Mark field as not validated yet
-                this.updateStatus(field, this.STATUS_NOT_VALIDATED);
+            // Mark field as not validated yet
+            this.updateStatus(field, this.STATUS_NOT_VALIDATED);
 
-                if (resetFormData) {
-                    type = fields.attr('type');
-                    ('radio' === type || 'checkbox' === type) ? fields.removeAttr('checked').removeAttr('selected') : fields.val('');
-                }
+            if (resetValue) {
+                var type = fields.attr('type');
+                ('radio' === type || 'checkbox' === type) ? fields.removeAttr('checked').removeAttr('selected') : fields.val('');
+            }
+
+            return this;
+        },
+
+        /**
+         * Reset the form
+         *
+         * @param {Boolean} [resetValue] If true, the method resets field value to empty or remove checked/selected attribute (for radio/checkbox)
+         * @returns {BootstrapValidator}
+         */
+        resetForm: function(resetValue) {
+            for (var field in this.options.fields) {
+                this.resetField(field, resetValue);
             }
 
             this.$invalidFields = $([]);
