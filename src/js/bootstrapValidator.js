@@ -592,6 +592,10 @@
             counter[this.STATUS_VALID]         = 0;
 
             for (var v in validators) {
+                if (validators[v].enabled === false) {
+                    continue;
+                }
+
                 numValidators++;
                 var result = $field.data('bv.result.' + v);
                 if (result) {
@@ -732,7 +736,7 @@
 
                     // Don't validate field if it is already done
                     var result = $field.data('bv.result.' + validatorName);
-                    if (result === this.STATUS_VALID || result === this.STATUS_INVALID) {
+                    if (result === this.STATUS_VALID || result === this.STATUS_INVALID || validators[validatorName].enabled === false) {
                         this._onFieldValidated($field, validatorName);
                         continue;
                     }
@@ -994,6 +998,10 @@
                 }
 
                 for (validatorName in this.options.fields[field].validators) {
+                    if (this.options.fields[field].validators[validatorName].enabled === false) {
+                        continue;
+                    }
+
                     status = $field.data('bv.result.' + validatorName);
                     if (status !== this.STATUS_VALID) {
                         return false;
@@ -1026,8 +1034,10 @@
                 if ($f.data('bv.messages')
                       .find('.help-block[data-bv-validator][data-bv-for="' + field + '"]')
                       .filter(function() {
-                          var v = $(this).attr('data-bv-validator');
-                          return ($f.data('bv.result.' + v) && $f.data('bv.result.' + v) !== that.STATUS_VALID);
+                          var v = $(this).attr('data-bv-validator'),
+                              f = $(this).attr('data-bv-for');
+                          return (that.options.fields[f].validators[v].enabled !== false
+                                && $f.data('bv.result.' + v) && $f.data('bv.result.' + v) !== that.STATUS_VALID);
                       })
                       .length !== 0)
                 {
@@ -1055,6 +1065,7 @@
                     .val(this.$submitButton.val())
                     .appendTo(this.$form);
             }
+
             // Submit form
             this.$form.off('submit.bv').submit();
         },
@@ -1118,7 +1129,9 @@
                         .data('bv.messages')
                         .find('.help-block[data-bv-for="' + $(this).attr('data-bv-field') + '"][data-bv-result="' + that.STATUS_INVALID + '"]' + filter)
                         .map(function() {
-                            return $(this).html();
+                            var v = $(this).attr('data-bv-validator'),
+                                f = $(this).attr('data-bv-for');
+                            return (that.options.fields[f].validators[v].enabled === false) ? '' : $(this).html();
                         })
                         .get()
                 );
@@ -1306,12 +1319,26 @@
          *
          * @param {String} field The field name
          * @param {Boolean} enabled Enable/Disable field validators
+         * @param {String} [validatorName] The validator name. If null, all validators will be enabled/disabled
          * @returns {BootstrapValidator}
          */
-        enableFieldValidators: function(field, enabled) {
-            if (this.options.fields[field].enabled !== enabled) {
+        enableFieldValidators: function(field, enabled, validatorName) {
+            var validators = this.options.fields[field].validators;
+
+            // Enable/disable particular validator
+            if (validatorName
+                && validators
+                && validators[validatorName] && validators[validatorName].enabled !== enabled)
+            {
+                this.options.fields[field].validators[validatorName].enabled = enabled;
+                this.updateStatus(field, this.STATUS_NOT_VALIDATED, validatorName);
+            }
+            // Enable/disable all validators
+            else if (!validatorName && this.options.fields[field].enabled !== enabled) {
                 this.options.fields[field].enabled = enabled;
-                this.updateStatus(field, this.STATUS_NOT_VALIDATED);
+                for (var v in validators) {
+                    this.enableFieldValidators(field, enabled, v);
+                }
             }
 
             return this;
