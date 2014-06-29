@@ -60,6 +60,8 @@
                     submitButtons:  this.$form.attr('data-bv-submitbuttons'),
                     threshold:      this.$form.attr('data-bv-threshold'),
                     live:           this.$form.attr('data-bv-live'),
+                    onSuccess:      this.$form.attr('data-bv-onsuccess'),
+                    onError:        this.$form.attr('data-bv-onerror'),
                     fields:         {},
                     feedbackIcons: {
                         valid:      this.$form.attr('data-bv-feedbackicons-valid'),
@@ -106,6 +108,18 @@
             this.$form.trigger($.Event('init.form.bv'), {
                 options: this.options
             });
+
+            // Prepare the events
+            if (this.options.onSuccess) {
+                this.$form.on('success.form.bv', function(e) {
+                    $.fn.bootstrapValidator.helpers.call(that.options.onSuccess, [e]);
+                });
+            }
+            if (this.options.onError) {
+                this.$form.on('error.form.bv', function(e) {
+                    $.fn.bootstrapValidator.helpers.call(that.options.onError, [e]);
+                });
+            }
         },
 
         /**
