@@ -89,14 +89,17 @@ describe('group option', function() {
         this.$firstName.val('');
         this.bv.validate();
         expect(this.$firstName.parents('.firstNameGroup').hasClass('has-error')).toBeTruthy();
+        expect(this.$firstName.parents('.firstNameGroup').hasClass('has-success')).toEqual(false);
         expect(this.$firstName.parents('.form-group').hasClass('has-error')).toEqual(false);
     });
 
     it('group declarative', function() {
+        this.$firstName.val('First');
         this.$lastName.val('Last');
         this.bv.validate();
         expect(this.$lastName.parents('.lastNameGroup').hasClass('has-success')).toBeTruthy();
         expect(this.$lastName.parents('.lastNameGroup').hasClass('has-error')).toEqual(false);
+        expect(this.$lastName.parents('.form-group').hasClass('has-success')).toEqual(false);
         expect(this.$lastName.parents('.form-group').hasClass('has-error')).toEqual(false);
     });
 });
