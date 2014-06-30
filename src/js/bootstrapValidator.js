@@ -88,9 +88,9 @@
                 .find('[name], [data-bv-field]')
                     .each(function() {
                         var $field = $(this);
-                        if (that._isExcluded($field)) {
-                            return;
-                        }
+                        //if (that._isExcluded($field)) {
+                        //    return;
+                        //}
 
                         var field = $field.attr('name') || $field.attr('data-bv-field'),
                             opts  = that._parseOptions($field);
