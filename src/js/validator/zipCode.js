@@ -31,7 +31,8 @@
     $.fn.bootstrapValidator.validators.zipCode = {
         html5Attributes: {
             message: 'message',
-            country: 'country'
+            country: 'country',
+            countryfield: 'countryfield'
         },
 
         COUNTRIES: ['CA', 'DK', 'GB', 'IT', 'NL', 'SE', 'SG', 'US'],
@@ -44,6 +45,7 @@
          * @param {Object} options Consist of key:
          * - message: The invalid message
          * - country: The ISO 3166 country code
+         * - counryfield: Another field that contains the country code
          *
          * Currently it supports the following countries:
          * - US (United State)
@@ -58,11 +60,12 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value === '' || !options.country) {
+            if (value === '' || (!options.country && !options.countryfield)) {
                 return true;
             }
 
-            var country = (options.country || 'US').toUpperCase();
+            var cField = options.countryfield ? validator.getFieldElements(options.countryfield) : null;
+            var country = (cField ? cField.val() : null || options.country || 'US').toUpperCase();
             if ($.inArray(country, this.COUNTRIES) === -1) {
                 return false;
             }
