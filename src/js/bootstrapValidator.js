@@ -793,10 +793,18 @@
          * @param {String} validator The validator name
          * @param {String} option The option name
          * @param {String} value The value to set
+         * @returns {BootstrapValidator}
          */
         updateOption: function(field, validator, option, value) {
-            this.options.fields[field].validators[validator][option] = value;
-            this.updateStatus(field, 'NOT_VALIDATED', validator);
+            if ('object' === typeof field) {
+                field = field.attr('data-bv-field');
+            }
+            if (this.options.fields[field] && this.options.fields[field].validators[validator]) {
+                this.options.fields[field].validators[validator][option] = value;
+                this.updateStatus(field, this.STATUS_NOT_VALIDATED, validator);
+            }
+
+            return this;
         },
 
         /**
