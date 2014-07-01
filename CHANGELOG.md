@@ -48,6 +48,7 @@ __Improvements__
 * [#416](https://github.com/nghuuphuoc/bootstrapvalidator/issues/416), [#448](https://github.com/nghuuphuoc/bootstrapvalidator/pull/448): Add ```updateOption()``` method for updating the particular validator option, thanks to [@AlaskanShade](https://github.com/AlaskanShade)
 * [#420](https://github.com/nghuuphuoc/bootstrapvalidator/issues/420): Enable/disable particular validator
 * [#422](https://github.com/nghuuphuoc/bootstrapvalidator/issues/422): Exclude particular field by ```excluded``` option or ```data-bv-excluded``` attribute
+* [#426](https://github.com/nghuuphuoc/bootstrapvalidator/issues/426): Add test suite
 * [#431](https://github.com/nghuuphuoc/bootstrapvalidator/issues/431): Add built time to the build file
 * [#432](https://github.com/nghuuphuoc/bootstrapvalidator/issues/432): Define the callback via ```data-bv-callback-callback``` attribute
 * [#447](https://github.com/nghuuphuoc/bootstrapvalidator/pull/447): [zipCode validator](http://bootstrapvalidator.com/validators/zipCode/) allow to set the country code via another field or callback, thanks to [@AlaskanShade](https://github.com/AlaskanShade)
