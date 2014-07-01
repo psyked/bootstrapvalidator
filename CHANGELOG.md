@@ -49,6 +49,7 @@ __Improvements__
 * [#422](https://github.com/nghuuphuoc/bootstrapvalidator/issues/422): Exclude particular field by ```excluded``` option or ```data-bv-excluded``` attribute
 * [#431](https://github.com/nghuuphuoc/bootstrapvalidator/issues/431): Add built time to the build file
 * [#432](https://github.com/nghuuphuoc/bootstrapvalidator/issues/432): Define the callback via ```data-bv-callback-callback``` attribute
+* [#447](https://github.com/nghuuphuoc/bootstrapvalidator/pull/447): [zipCode validator](http://bootstrapvalidator.com/validators/zipCode/) allow to set the country code via another field or callback, thanks to [@AlaskanShade](https://github.com/AlaskanShade)
 
 __Bug Fixes__
 * [#288](https://github.com/nghuuphuoc/bootstrapvalidator/issues/288): Fix [date validator](http://bootstrapvalidator.com/validators/date/) issue on IE8
@@ -67,7 +68,7 @@ __Bug Fixes__
 * [#401](https://github.com/nghuuphuoc/bootstrapvalidator/issues/401): [stringLength validator](http://bootstrapvalidator.com/validators/stringLength/) allows spaces after max length
 * [#411](https://github.com/nghuuphuoc/bootstrapvalidator/pull/411): Fix the [ean validator](http://bootstrapvalidator.com/validators/ean/) when the check digit is zero, thanks to [@manish-in-java](https://github.com/manish-in-java)
 * [#417](https://github.com/nghuuphuoc/bootstrapvalidator/issues/417): IPv6 validator doesn't work
-* [#447](https://github.com/nghuuphuoc/bootstrapvalidator/pull/447): Skip the ```_isExcluded()``` when initializing the form. This fixes [#273](https://github.com/nghuuphuoc/bootstrapvalidator/issues/273). Thanks to [@AlaskanShade](https://github.com/AlaskanShade)
+* [#447](https://github.com/nghuuphuoc/bootstrapvalidator/pull/447): Skip the ```_isExcluded()``` when initializing the form. This fixes [#269](https://github.com/nghuuphuoc/bootstrapvalidator/issues/269), [#273](https://github.com/nghuuphuoc/bootstrapvalidator/issues/273). Thanks to [@AlaskanShade](https://github.com/AlaskanShade)
 
 __Document__
 * [#259](https://github.com/nghuuphuoc/bootstrapvalidator/issues/259): Typo "Support almost Bootstrap forms", thanks to [@lloydde](https://github.com/lloydde)

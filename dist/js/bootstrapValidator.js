@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-07-01 8:05:04 AM
+ * @version     v0.5.0-dev, built on 2014-07-01 8:44:14 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -6113,8 +6113,7 @@
     $.fn.bootstrapValidator.validators.zipCode = {
         html5Attributes: {
             message: 'message',
-            country: 'country',
-            countryfield: 'countryfield'
+            country: 'country'
         },
 
         COUNTRIES: ['CA', 'DK', 'GB', 'IT', 'NL', 'SE', 'SG', 'US'],
@@ -6126,28 +6125,62 @@
          * @param {jQuery} $field Field element
          * @param {Object} options Consist of key:
          * - message: The invalid message
-         * - country: The ISO 3166 country code
-         * - counryfield: Another field that contains the country code
+         * - country: The country
          *
+         * The country can be defined by:
+         * - An ISO 3166 country code
          * Currently it supports the following countries:
-         * - US (United State)
-         * - CA (Canada)
-         * - DK (Denmark)
-         * - GB (United Kingdom)
-         * - IT (Italy)
-         * - NL (Netherlands)
-         * - SE (Sweden)
-         * - SG (Singapore)
+         *      - US (United State)
+         *      - CA (Canada)
+         *      - DK (Denmark)
+         *      - GB (United Kingdom)
+         *      - IT (Italy)
+         *      - NL (Netherlands)
+         *      - SE (Sweden)
+         *      - SG (Singapore)
+         *
+         * - Name of field which its value defines the country code
+         * - Name of callback function that returns the country code
+         * - A callback function that returns the country code
+         *
+         * callback: function(value, validator, $field) {
+         *      // value is the value of field
+         *      // validator is the BootstrapValidator instance
+         *      // $field is jQuery element representing the field
+         * }
+         *
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value === '' || (!options.country && !options.countryfield)) {
+            if (value == '' || !options.country) {
                 return true;
             }
 
-            var cField = options.countryfield ? validator.getFieldElements(options.countryfield) : null;
-            var country = (cField ? cField.val() : null || options.country || 'US').toUpperCase();
+            var country = options.country;
+            switch (typeof country) {
+                case 'function':
+                    country = $.fn.bootstrapValidator.helpers.call(country, [value, validator, $field]);
+                    break;
+
+                case 'string':
+                /* falls through */
+                default:
+                    if ($.inArray(country, this.COUNTRIES) === -1) {
+                        // Try to indicate the field which its value define the country code
+                        var $countryField = validator.getFieldElements(country);
+                        if ($countryField && $countryField.length) {
+                            country = $countryField.val();
+                        }
+                        // Try to get the country code via a callback
+                        else {
+                            country = $.fn.bootstrapValidator.helpers.call(country, [value, validator, $field]);
+                        }
+                    }
+                    break;
+            }
+
+            country = country.toUpperCase();
             if ($.inArray(country, this.COUNTRIES) === -1) {
                 return false;
             }
