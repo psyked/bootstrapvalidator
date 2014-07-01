@@ -109,6 +109,7 @@ Big thanks to the contributors:
 
 * [@aca02djr](https://github.com/aca02djr)
 * [@adgrafik](https://github.com/adgrafik)
+* [@AlaskanShade](https://github.com/AlaskanShade)
 * [@alavers](https://github.com/alavers)
 * [@easonhan007](https://github.com/easonhan007)
 * [@emilchristensen](https://github.com/emilchristensen)

@@ -87,13 +87,9 @@
                 // Find all fields which have either "name" or "data-bv-field" attribute
                 .find('[name], [data-bv-field]')
                     .each(function() {
-                        var $field = $(this);
-                        //if (that._isExcluded($field)) {
-                        //    return;
-                        //}
-
-                        var field = $field.attr('name') || $field.attr('data-bv-field'),
-                            opts  = that._parseOptions($field);
+                        var $field = $(this),
+                            field  = $field.attr('name') || $field.attr('data-bv-field'),
+                            opts   = that._parseOptions($field);
                         if (opts) {
                             $field.attr('data-bv-field', field);
                             options.fields[field] = $.extend({}, opts, options.fields[field]);
