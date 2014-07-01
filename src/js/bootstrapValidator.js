@@ -785,6 +785,19 @@
                 $(this).data('bv.messages').find('.help-block[data-bv-validator="' + validator + '"][data-bv-for="' + field + '"]').html(message);
             });
         },
+        
+        /**
+         * Update the option of a specific validator
+         * 
+         * @param {String|jQuery} field The field name or field element
+         * @param {String} validator The validator name
+         * @param {String} option The option name
+         * @param {String} value The value to set
+         */
+        updateOption: function(field, validator, option, value) {
+            this.options.fields[field].validators[validator][option] = value;
+            this.updateStatus(field, 'NOT_VALIDATED', validator);
+        },
 
         /**
          * Update all validating results of field
