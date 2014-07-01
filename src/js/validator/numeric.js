@@ -4,6 +4,9 @@
     });
 
     $.fn.bootstrapValidator.validators.numeric = {
+        enableByHtml5: function($field) {
+            return ('number' == $field.attr('type') && ( typeof($field.prop('step')) !== 'undefined' && $field.prop('step') % 1 !== 0  ));
+        },
         html5Attributes: {
             message: 'message',
             separator: 'separator'
