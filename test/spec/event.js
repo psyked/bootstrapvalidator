@@ -1,22 +1,22 @@
-var My = {
-    NameSpace: {
+TestSuite = $.extend({}, TestSuite, {
+    Event: {
         onEmailValid: function(e, data) {
-            $('#msg').html('My.NameSpace.onEmailValid() called, ' + data.field + ' is valid');
+            $('#msg').html('TestSuite.Event.onEmailValid() called, ' + data.field + ' is valid');
         },
 
         onEmailInvalid: function(e, data) {
-            $('#msg').html('My.NameSpace.onEmailInvalid() called, ' + data.field + ' is invalid');
+            $('#msg').html('TestSuite.Event.onEmailInvalid() called, ' + data.field + ' is invalid');
         },
 
         onFormValid: function(e) {
-            $('#msg').html('My.NameSpace.onFormValid() called, form ' + $(e.target).attr('id') + ' is valid');
+            $('#msg').html('TestSuite.Event.onFormValid() called, form ' + $(e.target).attr('id') + ' is valid');
         },
 
         onFormInvalid: function(e) {
-            $('#msg').html('My.NameSpace.onFormInvalid() called, form ' + $(e.target).attr('id') + ' is invalid');
+            $('#msg').html('TestSuite.Event.onFormInvalid() called, form ' + $(e.target).attr('id') + ' is invalid');
         }
     }
-};
+});
 
 // ---
 // Form events
@@ -67,7 +67,7 @@ describe('event form attribute callback global', function() {
 describe('event form attribute callback namespace', function() {
     beforeEach(function() {
         $([
-            '<form class="form-horizontal" id="eventForm" data-bv-onsuccess="My.NameSpace.onFormValid" data-bv-onerror="My.NameSpace.onFormInvalid" >',
+            '<form class="form-horizontal" id="eventForm" data-bv-onsuccess="TestSuite.Event.onFormValid" data-bv-onerror="TestSuite.Event.onFormInvalid" >',
                 '<div id="msg"></div>',
                 '<div class="form-group">',
                     '<input type="text" name="email" required data-bv-emailaddress />',
@@ -88,13 +88,13 @@ describe('event form attribute callback namespace', function() {
     it('call data-bv-onsuccess', function() {
         this.$email.val('email@domain.com');
         this.bv.validate();
-        expect($('#msg').html()).toEqual('My.NameSpace.onFormValid() called, form eventForm is valid');
+        expect($('#msg').html()).toEqual('TestSuite.Event.onFormValid() called, form eventForm is valid');
     });
 
     it('call data-bv-onerror', function() {
         this.$email.val('email@domain');
         this.bv.validate();
-        expect($('#msg').html()).toEqual('My.NameSpace.onFormInvalid() called, form eventForm is invalid');
+        expect($('#msg').html()).toEqual('TestSuite.Event.onFormInvalid() called, form eventForm is invalid');
     });
 });
 
@@ -232,7 +232,7 @@ describe('event field attribute callback namespace', function() {
             '<form class="form-horizontal" id="eventForm">',
                 '<div id="msg"></div>',
                 '<div class="form-group">',
-                    '<input type="text" name="email" data-bv-emailaddress data-bv-onsuccess="My.NameSpace.onEmailValid" data-bv-onerror="My.NameSpace.onEmailInvalid" />',
+                    '<input type="text" name="email" data-bv-emailaddress data-bv-onsuccess="TestSuite.Event.onEmailValid" data-bv-onerror="TestSuite.Event.onEmailInvalid" />',
                 '</div>',
             '</form>'
         ].join('\n')).appendTo('body');
@@ -250,13 +250,13 @@ describe('event field attribute callback namespace', function() {
     it('call data-bv-onsuccess', function() {
         this.$email.val('email@domain.com');
         this.bv.validate();
-        expect($('#msg').html()).toEqual('My.NameSpace.onEmailValid() called, email is valid');
+        expect($('#msg').html()).toEqual('TestSuite.Event.onEmailValid() called, email is valid');
     });
 
     it('call data-bv-onerror', function() {
         this.$email.val('email@domain');
         this.bv.validate();
-        expect($('#msg').html()).toEqual('My.NameSpace.onEmailInvalid() called, email is invalid');
+        expect($('#msg').html()).toEqual('TestSuite.Event.onEmailInvalid() called, email is invalid');
     });
 });
 

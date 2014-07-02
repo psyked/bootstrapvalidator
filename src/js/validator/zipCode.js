@@ -1,7 +1,6 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.zipCode = $.extend($.fn.bootstrapValidator.i18n.zipCode || {}, {
         'default': 'Please enter a valid zip code',
-        countryNotSupported: 'The country code %s is not supported',
         country: 'Please enter a valid %s',
         countries: {
             'CA': 'Canadian postal code',
@@ -15,12 +14,8 @@
         },
 
         getMessage: function(options) {
-            var country = (options.country || 'US').toUpperCase();
-            if ($.inArray(country, $.fn.bootstrapValidator.validators.zipCode.COUNTRIES) === -1) {
-                return $.fn.bootstrapValidator.helpers.format(this.countryNotSupported, country);
-            }
-
-            if (this.countries[country]) {
+            var country = options.country;
+            if ('string' === typeof country && this.countries[country]) {
                 return $.fn.bootstrapValidator.helpers.format(this.country, this.countries[country]);
             }
 
@@ -48,7 +43,7 @@
          * The country can be defined by:
          * - An ISO 3166 country code
          * Currently it supports the following countries:
-         *      - US (United State)
+         *      - US (United States)
          *      - CA (Canada)
          *      - DK (Denmark)
          *      - GB (United Kingdom)
@@ -98,11 +93,14 @@
                     break;
             }
 
+            if (!country) {
+                return false;
+            }
+
             country = country.toUpperCase();
             if ($.inArray(country, this.COUNTRIES) === -1) {
                 return false;
             }
-
             switch (country) {
                 case 'CA': return /^(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}\s?[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}$/i.test(value);
                 case 'DK': return /^(DK(-|\s)?)?\d{4}$/i.test(value);

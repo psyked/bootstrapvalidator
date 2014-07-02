@@ -361,25 +361,25 @@ describe('enable validators', function() {
     });
 });
 
-var My = {
-    NameSpace: {
+TestSuite = $.extend({}, TestSuite, {
+    Event: {
         onEmailValid: function(e, data) {
-            $('#msg').html('My.NameSpace.onEmailValid() called, ' + data.field + ' is valid');
+            $('#msg').html('TestSuite.Event.onEmailValid() called, ' + data.field + ' is valid');
         },
 
         onEmailInvalid: function(e, data) {
-            $('#msg').html('My.NameSpace.onEmailInvalid() called, ' + data.field + ' is invalid');
+            $('#msg').html('TestSuite.Event.onEmailInvalid() called, ' + data.field + ' is invalid');
         },
 
         onFormValid: function(e) {
-            $('#msg').html('My.NameSpace.onFormValid() called, form ' + $(e.target).attr('id') + ' is valid');
+            $('#msg').html('TestSuite.Event.onFormValid() called, form ' + $(e.target).attr('id') + ' is valid');
         },
 
         onFormInvalid: function(e) {
-            $('#msg').html('My.NameSpace.onFormInvalid() called, form ' + $(e.target).attr('id') + ' is invalid');
+            $('#msg').html('TestSuite.Event.onFormInvalid() called, form ' + $(e.target).attr('id') + ' is invalid');
         }
     }
-};
+});
 
 // ---
 // Form events
@@ -430,7 +430,7 @@ describe('event form attribute callback global', function() {
 describe('event form attribute callback namespace', function() {
     beforeEach(function() {
         $([
-            '<form class="form-horizontal" id="eventForm" data-bv-onsuccess="My.NameSpace.onFormValid" data-bv-onerror="My.NameSpace.onFormInvalid" >',
+            '<form class="form-horizontal" id="eventForm" data-bv-onsuccess="TestSuite.Event.onFormValid" data-bv-onerror="TestSuite.Event.onFormInvalid" >',
                 '<div id="msg"></div>',
                 '<div class="form-group">',
                     '<input type="text" name="email" required data-bv-emailaddress />',
@@ -451,13 +451,13 @@ describe('event form attribute callback namespace', function() {
     it('call data-bv-onsuccess', function() {
         this.$email.val('email@domain.com');
         this.bv.validate();
-        expect($('#msg').html()).toEqual('My.NameSpace.onFormValid() called, form eventForm is valid');
+        expect($('#msg').html()).toEqual('TestSuite.Event.onFormValid() called, form eventForm is valid');
     });
 
     it('call data-bv-onerror', function() {
         this.$email.val('email@domain');
         this.bv.validate();
-        expect($('#msg').html()).toEqual('My.NameSpace.onFormInvalid() called, form eventForm is invalid');
+        expect($('#msg').html()).toEqual('TestSuite.Event.onFormInvalid() called, form eventForm is invalid');
     });
 });
 
@@ -595,7 +595,7 @@ describe('event field attribute callback namespace', function() {
             '<form class="form-horizontal" id="eventForm">',
                 '<div id="msg"></div>',
                 '<div class="form-group">',
-                    '<input type="text" name="email" data-bv-emailaddress data-bv-onsuccess="My.NameSpace.onEmailValid" data-bv-onerror="My.NameSpace.onEmailInvalid" />',
+                    '<input type="text" name="email" data-bv-emailaddress data-bv-onsuccess="TestSuite.Event.onEmailValid" data-bv-onerror="TestSuite.Event.onEmailInvalid" />',
                 '</div>',
             '</form>'
         ].join('\n')).appendTo('body');
@@ -613,13 +613,13 @@ describe('event field attribute callback namespace', function() {
     it('call data-bv-onsuccess', function() {
         this.$email.val('email@domain.com');
         this.bv.validate();
-        expect($('#msg').html()).toEqual('My.NameSpace.onEmailValid() called, email is valid');
+        expect($('#msg').html()).toEqual('TestSuite.Event.onEmailValid() called, email is valid');
     });
 
     it('call data-bv-onerror', function() {
         this.$email.val('email@domain');
         this.bv.validate();
-        expect($('#msg').html()).toEqual('My.NameSpace.onEmailInvalid() called, email is invalid');
+        expect($('#msg').html()).toEqual('TestSuite.Event.onEmailInvalid() called, email is invalid');
     });
 });
 
@@ -3369,5 +3369,197 @@ describe('vat', function() {
             this.bv.validate();
             expect(this.bv.isValid()).toEqual(false);
         }
+    });
+});
+
+function getCountryCode(value, validator, $field) {
+    $('#msg').html('getCountryCode() called');
+    return validator.getFieldElements('country').val();
+};
+
+TestSuite = $.extend({}, TestSuite, {
+    ZipCode: {
+        getCountryCode: function(value, validator, $field) {
+            $('#msg').html('TestSuite.ZipCode.getCountryCode() called');
+            return validator.getFieldElements('country').val();
+        }
+    }
+});
+
+describe('zipCode', function() {
+    beforeEach(function() {
+        $([
+            '<form class="form-horizontal" id="zipCodeForm">',
+                '<div id="msg"></div>',
+                '<div class="form-group">',
+                    '<label class="col-md-3 control-label">Country:</label>',
+                    '<div class="col-md-2">',
+                        '<select class="form-control" name="country">',
+                            '<option value="">Select a country</option>',
+                            '<option value="US">United States</option>',
+                            '<option value="CA">Canada</option>',
+                            '<option value="DK">Denmark</option>',
+                            '<option value="IT">Italy</option>',
+                            '<option value="NL">Netherlands</option>',
+                            '<option value="SE">Sweden</option>',
+                            '<option value="GB">United Kingdom</option>',
+                        '</select>',
+                    '</div>',
+                '</div>',
+                '<div class="form-group">',
+                    '<label class="col-md-3 control-label">Zipcode</label>',
+                    '<div class="col-md-2">',
+                        '<input type="text" class="form-control" name="zc" data-bv-zipcode data-bv-zipcode-country="US" />',
+                    '</div>',
+                '</div>',
+            '</form>'
+        ].join('\n')).appendTo('body');
+
+        $('#zipCodeForm').bootstrapValidator();
+
+        /**
+         * @type {BootstrapValidator}
+         */
+        this.bv       = $('#zipCodeForm').data('bootstrapValidator');
+
+        this.$country = this.bv.getFieldElements('country');
+        this.$zipCode = this.bv.getFieldElements('zc');
+    });
+
+    afterEach(function() {
+        $('#zipCodeForm').bootstrapValidator('destroy').remove();
+    });
+
+    it('country code US', function() {
+        this.$zipCode.val('12345');
+        this.bv.validate();
+        expect(this.bv.isValid()).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$zipCode.val('123');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+    });
+
+    it('country code updateOption()', function() {
+        // Check IT postal code
+        this.bv.updateOption('zc', 'zipCode', 'country', 'IT');
+        this.$zipCode.val('1234');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$zipCode.val('IT-12345');
+        this.bv.validate();
+        expect(this.bv.isValid()).toBeTruthy();
+
+        // Check United Kingdom postal code
+        this.bv.updateOption('zc', 'zipCode', 'country', 'GB');
+        var validUkSamples = ['EC1A 1BB', 'W1A 1HQ', 'M1 1AA', 'B33 8TH', 'CR2 6XH', 'DN55 1PT', 'AI-2640', 'ASCN 1ZZ', 'GIR 0AA'];
+
+        for (var i in validUkSamples) {
+            this.bv.resetForm();
+            this.$zipCode.val(validUkSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toBeTruthy();
+        }
+    });
+
+    it('country code other field declarative', function() {
+        this.$zipCode.attr('data-bv-zipcode-country', 'country');
+
+        // Need to destroy the plugin instance ...
+        $('#zipCodeForm').bootstrapValidator('destroy');
+
+        // ... and re-create it
+        this.bv = $('#zipCodeForm').bootstrapValidator().data('bootstrapValidator');
+        this.$country.val('IT');
+
+        this.bv.resetForm();
+        this.$zipCode.val('1234');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$zipCode.val('I-12345');
+        this.bv.validate();
+        expect(this.bv.isValid()).toBeTruthy();
+    });
+
+    it('country code callback declarative function', function() {
+        this.$zipCode.attr('data-bv-zipcode-country', 'getCountryCode');
+        $('#zipCodeForm').bootstrapValidator('destroy');
+        this.bv = $('#zipCodeForm').bootstrapValidator().data('bootstrapValidator');
+        this.$country.val('NL');
+        this.$zipCode.val('0123');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('getCountryCode() called');
+        expect(this.bv.isValid()).toEqual(false);
+    });
+
+    it('country code callback declarative function()', function() {
+        this.$zipCode.attr('data-bv-zipcode-country', 'getCountryCode()');
+        $('#zipCodeForm').bootstrapValidator('destroy');
+        this.bv = $('#zipCodeForm').bootstrapValidator().data('bootstrapValidator');
+        this.$country.val('NL');
+        this.$zipCode.val('1234 ab');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('getCountryCode() called');
+        expect(this.bv.isValid()).toBeTruthy();
+    });
+
+    it('country code callback declarative A.B.C', function() {
+        this.$zipCode.attr('data-bv-zipcode-country', 'TestSuite.ZipCode.getCountryCode');
+        $('#zipCodeForm').bootstrapValidator('destroy');
+        this.bv = $('#zipCodeForm').bootstrapValidator().data('bootstrapValidator');
+        this.$country.val('DK');
+        this.$zipCode.val('DK 123');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('TestSuite.ZipCode.getCountryCode() called');
+        expect(this.bv.isValid()).toEqual(false);
+    });
+
+    it('country code callback declarative A.B.C()', function() {
+        this.$zipCode.attr('data-bv-zipcode-country', 'TestSuite.ZipCode.getCountryCode()');
+        $('#zipCodeForm').bootstrapValidator('destroy');
+        this.bv = $('#zipCodeForm').bootstrapValidator().data('bootstrapValidator');
+        this.$country.val('DK');
+        this.$zipCode.val('DK-1234');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('TestSuite.ZipCode.getCountryCode() called');
+        expect(this.bv.isValid()).toBeTruthy();
+    });
+
+    it('country code callback programmatically', function() {
+        this.$zipCode.removeAttr('data-bv-zipcode-country');
+        $('#zipCodeForm').bootstrapValidator('destroy');
+        this.bv = $('#zipCodeForm')
+                        .bootstrapValidator({
+                            fields: {
+                                zc: {
+                                    validators: {
+                                        zipCode: {
+                                            country: function(value, validator, $field) {
+                                                return getCountryCode(value, validator, $field);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                        .data('bootstrapValidator');
+        this.$country.val('SE');
+
+        this.bv.resetForm();
+        this.$zipCode.val('S-567 8');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('getCountryCode() called');
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$zipCode.val('S-12345');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('getCountryCode() called');
+        expect(this.bv.isValid()).toBeTruthy();
     });
 });
