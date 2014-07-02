@@ -130,6 +130,7 @@ Big thanks to the contributors:
 * [@lloydde](https://github.com/lloydde)
 * [@manish-in-java](https://github.com/manish-in-java)
 * [@MartinDevillers](https://github.com/MartinDevillers)
+* [@mike1e](https://github.com/mike1e)
 * [@MrC0mm0n](https://github.com/MrC0mm0n)
 * [@mrpollo](https://github.com/mrpollo)
 * [@narutosanjiv](https://github.com/narutosanjiv)
