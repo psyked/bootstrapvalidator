@@ -25,17 +25,20 @@
                 return true;
             }
 
-            var compareWith = validator.getFieldElements(options.field);
-            if (compareWith === null) {
-                return true;
-            }
+            var spl = options.field.split(',');
+            var isValid = true;
+            for (i = 0; i < spl.length; i++) {
+                var compareWith = validator.getFieldElements(spl[i]);
+                if (compareWith == null) {
+                    continue;
+                }
 
-            if (value !== compareWith.val()) {
-                validator.updateStatus(options.field, validator.STATUS_VALID, 'different');
-                return true;
-            } else {
-                return false;
+                if (value == compareWith.val())
+                    isValid = false;
+                else
+                    validator.updateStatus(spl[i], validator.STATUS_VALID, 'different');
             }
+            return isValid;
         }
     };
 }(window.jQuery));
