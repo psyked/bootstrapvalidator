@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-06-29 9:46:23 PM
+ * @version     v0.5.0-dev, built on 2014-07-02 4:05:46 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -88,13 +88,9 @@
                 // Find all fields which have either "name" or "data-bv-field" attribute
                 .find('[name], [data-bv-field]')
                     .each(function() {
-                        var $field = $(this);
-                        if (that._isExcluded($field)) {
-                            return;
-                        }
-
-                        var field = $field.attr('name') || $field.attr('data-bv-field'),
-                            opts  = that._parseOptions($field);
+                        var $field = $(this),
+                            field  = $field.attr('name') || $field.attr('data-bv-field'),
+                            opts   = that._parseOptions($field);
                         if (opts) {
                             $field.attr('data-bv-field', field);
                             options.fields[field] = $.extend({}, opts, options.fields[field]);
@@ -367,7 +363,7 @@
                     return options.message;
                 case (!!$.fn.bootstrapValidator.i18n[validatorName]):
                     return ('function' === typeof $.fn.bootstrapValidator.i18n[validatorName].getMessage)
-                            ? $.fn.bootstrapValidator.i18n[validatorName].getMessage(options)
+                            ? $.fn.bootstrapValidator.i18n[validatorName].getMessage(options, this)
                             : $.fn.bootstrapValidator.i18n[validatorName]['default'];
                 case (!!this.options.fields[field].message):
                     return this.options.fields[field].message;
@@ -790,7 +786,7 @@
                 $(this).data('bv.messages').find('.help-block[data-bv-validator="' + validator + '"][data-bv-for="' + field + '"]').html(message);
             });
         },
-
+        
         /**
          * Update all validating results of field
          *
@@ -1142,6 +1138,27 @@
         },
 
         /**
+         * Update the option of a specific validator
+         *
+         * @param {String|jQuery} field The field name or field element
+         * @param {String} validator The validator name
+         * @param {String} option The option name
+         * @param {String} value The value to set
+         * @returns {BootstrapValidator}
+         */
+        updateOption: function(field, validator, option, value) {
+            if ('object' === typeof field) {
+                field = field.attr('data-bv-field');
+            }
+            if (this.options.fields[field] && this.options.fields[field].validators[validator]) {
+                this.options.fields[field].validators[validator][option] = value;
+                this.updateStatus(field, this.STATUS_NOT_VALIDATED, validator);
+            }
+
+            return this;
+        },
+
+        /**
          * Add a new field
          *
          * @param {String|jQuery} field The field name or field element
@@ -1388,6 +1405,9 @@
                     }
 
                     for (validator in this.options.fields[field].validators) {
+                        if ($field.data('bv.dfs.' + validator)) {
+                            $field.data('bv.dfs.' + validator).reject();
+                        }
                         $field.removeData('bv.result.' + validator).removeData('bv.dfs.' + validator);
                     }
                 }
@@ -1522,10 +1542,10 @@
     };
 
     // Available validators
-    $.fn.bootstrapValidator.validators = {};
+    $.fn.bootstrapValidator.validators  = {};
 
     // i18n
-    $.fn.bootstrapValidator.i18n       = {};
+    $.fn.bootstrapValidator.i18n        = {};
 
     $.fn.bootstrapValidator.Constructor = BootstrapValidator;
 
@@ -1544,6 +1564,9 @@
             if ('function' === typeof functionName) {
                 return functionName.apply(this, args);
             } else if ('string' === typeof functionName) {
+                if ('()' === functionName.substring(functionName.length - 2)) {
+                    functionName = functionName.substring(0, functionName.length - 2);
+                }
                 var ns      = functionName.split('.'),
                     func    = ns.pop(),
                     context = window;
@@ -6087,7 +6110,6 @@
 ;(function($) {
     $.fn.bootstrapValidator.i18n.zipCode = $.extend($.fn.bootstrapValidator.i18n.zipCode || {}, {
         'default': 'Please enter a valid zip code',
-        countryNotSupported: 'The country code %s is not supported',
         country: 'Please enter a valid %s',
         countries: {
             'CA': 'Canadian postal code',
@@ -6101,12 +6123,8 @@
         },
 
         getMessage: function(options) {
-            var country = (options.country || 'US').toUpperCase();
-            if ($.inArray(country, $.fn.bootstrapValidator.validators.zipCode.COUNTRIES) === -1) {
-                return $.fn.bootstrapValidator.helpers.format(this.countryNotSupported, country);
-            }
-
-            if (this.countries[country]) {
+            var country = options.country;
+            if ('string' === typeof country && this.countries[country]) {
                 return $.fn.bootstrapValidator.helpers.format(this.country, this.countries[country]);
             }
 
@@ -6129,30 +6147,69 @@
          * @param {jQuery} $field Field element
          * @param {Object} options Consist of key:
          * - message: The invalid message
-         * - country: The ISO 3166 country code
+         * - country: The country
          *
+         * The country can be defined by:
+         * - An ISO 3166 country code
          * Currently it supports the following countries:
-         * - US (United State)
-         * - CA (Canada)
-         * - DK (Denmark)
-         * - GB (United Kingdom)
-         * - IT (Italy)
-         * - NL (Netherlands)
-         * - SE (Sweden)
-         * - SG (Singapore)
+         *      - US (United States)
+         *      - CA (Canada)
+         *      - DK (Denmark)
+         *      - GB (United Kingdom)
+         *      - IT (Italy)
+         *      - NL (Netherlands)
+         *      - SE (Sweden)
+         *      - SG (Singapore)
+         *
+         * - Name of field which its value defines the country code
+         * - Name of callback function that returns the country code
+         * - A callback function that returns the country code
+         *
+         * callback: function(value, validator, $field) {
+         *      // value is the value of field
+         *      // validator is the BootstrapValidator instance
+         *      // $field is jQuery element representing the field
+         * }
+         *
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value === '' || !options.country) {
+            if (value == '' || !options.country) {
                 return true;
             }
 
-            var country = (options.country || 'US').toUpperCase();
-            if ($.inArray(country, this.COUNTRIES) === -1) {
+            var country = options.country;
+            switch (typeof country) {
+                case 'function':
+                    country = $.fn.bootstrapValidator.helpers.call(country, [value, validator, $field]);
+                    break;
+
+                case 'string':
+                /* falls through */
+                default:
+                    if ($.inArray(country, this.COUNTRIES) === -1) {
+                        // Try to indicate the field which its value define the country code
+                        var $countryField = validator.getFieldElements(country);
+                        if ($countryField && $countryField.length) {
+                            country = $countryField.val();
+                        }
+                        // Try to get the country code via a callback
+                        else {
+                            country = $.fn.bootstrapValidator.helpers.call(country, [value, validator, $field]);
+                        }
+                    }
+                    break;
+            }
+
+            if (!country) {
                 return false;
             }
 
+            country = country.toUpperCase();
+            if ($.inArray(country, this.COUNTRIES) === -1) {
+                return false;
+            }
             switch (country) {
                 case 'CA': return /^(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}\s?[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}$/i.test(value);
                 case 'DK': return /^(DK(-|\s)?)?\d{4}$/i.test(value);
@@ -6168,7 +6225,7 @@
                 case 'SG': return /^([0][1-9]|[1-6][0-9]|[7]([0-3]|[5-9])|[8][0-2])(\d{4})$/i.test(value);
                 case 'US':
                 /* falls through */
-                default: return /^\d{4,5}([\-]\d{4})?$/.test(value);
+                default: return /^\d{4,5}([\-]?\d{4})?$/.test(value);
             }
         },
 

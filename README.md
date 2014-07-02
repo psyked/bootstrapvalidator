@@ -109,6 +109,7 @@ Big thanks to the contributors:
 
 * [@aca02djr](https://github.com/aca02djr)
 * [@adgrafik](https://github.com/adgrafik)
+* [@AlaskanShade](https://github.com/AlaskanShade)
 * [@alavers](https://github.com/alavers)
 * [@easonhan007](https://github.com/easonhan007)
 * [@emilchristensen](https://github.com/emilchristensen)
@@ -129,6 +130,7 @@ Big thanks to the contributors:
 * [@lloydde](https://github.com/lloydde)
 * [@manish-in-java](https://github.com/manish-in-java)
 * [@MartinDevillers](https://github.com/MartinDevillers)
+* [@mike1e](https://github.com/mike1e)
 * [@MrC0mm0n](https://github.com/MrC0mm0n)
 * [@mrpollo](https://github.com/mrpollo)
 * [@narutosanjiv](https://github.com/narutosanjiv)

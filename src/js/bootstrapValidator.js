@@ -87,13 +87,9 @@
                 // Find all fields which have either "name" or "data-bv-field" attribute
                 .find('[name], [data-bv-field]')
                     .each(function() {
-                        var $field = $(this);
-                        //if (that._isExcluded($field)) {
-                        //    return;
-                        //}
-
-                        var field = $field.attr('name') || $field.attr('data-bv-field'),
-                            opts  = that._parseOptions($field);
+                        var $field = $(this),
+                            field  = $field.attr('name') || $field.attr('data-bv-field'),
+                            opts   = that._parseOptions($field);
                         if (opts) {
                             $field.attr('data-bv-field', field);
                             options.fields[field] = $.extend({}, opts, options.fields[field]);
@@ -366,7 +362,7 @@
                     return options.message;
                 case (!!$.fn.bootstrapValidator.i18n[validatorName]):
                     return ('function' === typeof $.fn.bootstrapValidator.i18n[validatorName].getMessage)
-                            ? $.fn.bootstrapValidator.i18n[validatorName].getMessage(options)
+                            ? $.fn.bootstrapValidator.i18n[validatorName].getMessage(options, this)
                             : $.fn.bootstrapValidator.i18n[validatorName]['default'];
                 case (!!this.options.fields[field].message):
                     return this.options.fields[field].message;
@@ -789,7 +785,7 @@
                 $(this).data('bv.messages').find('.help-block[data-bv-validator="' + validator + '"][data-bv-for="' + field + '"]').html(message);
             });
         },
-
+        
         /**
          * Update all validating results of field
          *
@@ -1141,6 +1137,27 @@
         },
 
         /**
+         * Update the option of a specific validator
+         *
+         * @param {String|jQuery} field The field name or field element
+         * @param {String} validator The validator name
+         * @param {String} option The option name
+         * @param {String} value The value to set
+         * @returns {BootstrapValidator}
+         */
+        updateOption: function(field, validator, option, value) {
+            if ('object' === typeof field) {
+                field = field.attr('data-bv-field');
+            }
+            if (this.options.fields[field] && this.options.fields[field].validators[validator]) {
+                this.options.fields[field].validators[validator][option] = value;
+                this.updateStatus(field, this.STATUS_NOT_VALIDATED, validator);
+            }
+
+            return this;
+        },
+
+        /**
          * Add a new field
          *
          * @param {String|jQuery} field The field name or field element
@@ -1387,6 +1404,9 @@
                     }
 
                     for (validator in this.options.fields[field].validators) {
+                        if ($field.data('bv.dfs.' + validator)) {
+                            $field.data('bv.dfs.' + validator).reject();
+                        }
                         $field.removeData('bv.result.' + validator).removeData('bv.dfs.' + validator);
                     }
                 }
@@ -1521,10 +1541,10 @@
     };
 
     // Available validators
-    $.fn.bootstrapValidator.validators = {};
+    $.fn.bootstrapValidator.validators  = {};
 
     // i18n
-    $.fn.bootstrapValidator.i18n       = {};
+    $.fn.bootstrapValidator.i18n        = {};
 
     $.fn.bootstrapValidator.Constructor = BootstrapValidator;
 
@@ -1543,6 +1563,9 @@
             if ('function' === typeof functionName) {
                 return functionName.apply(this, args);
             } else if ('string' === typeof functionName) {
+                if ('()' === functionName.substring(functionName.length - 2)) {
+                    functionName = functionName.substring(0, functionName.length - 2);
+                }
                 var ns      = functionName.split('.'),
                     func    = ns.pop(),
                     context = window;
