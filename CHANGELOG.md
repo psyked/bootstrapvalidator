@@ -52,6 +52,7 @@ __Improvements__
 * [#431](https://github.com/nghuuphuoc/bootstrapvalidator/issues/431): Add built time to the build file
 * [#432](https://github.com/nghuuphuoc/bootstrapvalidator/issues/432): Define the callback via ```data-bv-callback-callback``` attribute
 * [#447](https://github.com/nghuuphuoc/bootstrapvalidator/pull/447): [zipCode validator](http://bootstrapvalidator.com/validators/zipCode/) allow to set the country code via another field or callback, thanks to [@AlaskanShade](https://github.com/AlaskanShade)
+* [#456](https://github.com/nghuuphuoc/bootstrapvalidator/issues/456): Adjust the feedback icon position for ```.input-group``` element
 
 __Bug Fixes__
 * [#288](https://github.com/nghuuphuoc/bootstrapvalidator/issues/288): Fix [date validator](http://bootstrapvalidator.com/validators/date/) issue on IE8

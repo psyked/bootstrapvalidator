@@ -293,11 +293,11 @@
                         $icon.css('top', 0);
                     }
                     // Fix feedback icons in input-group
-                    if ($parent.find('.input-group-addon').length !== 0) {
+                    if ($parent.find('.input-group').length !== 0) {
                         $icon.css({
                             'top': 0,
                             'z-index': 100
-                        });
+                        }).insertAfter($parent.find('.input-group').eq(0));
                     }
                 }
             }
