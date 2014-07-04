@@ -74,7 +74,7 @@ __Compatibility__
     - [x] [Bootstrap Datetime Picker](http://eonasdan.github.io/bootstrap-datetimepicker/) as seen in [```date``` validator example](http://bootstrapvalidator.com/validators/date/#date-picker-example)
     - [x] [Bootstrap Multiselect](http://davidstutz.github.io/bootstrap-multiselect/)
     - [x] [Chosen](http://harvesthq.github.io/chosen/)
-    - [x] [iCheck](http://fronteed.com/iCheck/)
+    - [x] [iCheck](https://github.com/fronteed/iCheck/)
     - [x] [Mask](http://igorescobar.github.io/jQuery-Mask-Plugin/)
     - [x] [Raty](http://wbotelhos.com/raty)
 
