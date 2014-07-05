@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-07-03 9:37:21 AM
+ * @version     v0.5.0-dev, built on 2014-07-05 5:51:14 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -742,7 +742,7 @@
                     validateResult = $.fn.bootstrapValidator.validators[validatorName].validate(this, $field, validators[validatorName]);
 
                     // validateResult can be a $.Deferred object ...
-                    if ('object' === typeof validateResult) {
+                    if ('object' === typeof validateResult && validateResult.resolve) {
                         this.updateStatus(updateAll ? field : $field, this.STATUS_VALIDATING, validatorName);
                         $field.data('bv.dfs.' + validatorName, validateResult);
 
@@ -760,6 +760,11 @@
                                 that._submit();
                             }
                         });
+                    }
+                    // ... or object { valid: true/false, message: 'dynamic message' }
+                    else if ('object' === typeof validateResult && validateResult.valid !== undefined && validateResult.message !== undefined) {
+                        this.updateMessage(updateAll ? field : $field, validatorName, validateResult.message);
+                        this.updateStatus(updateAll ? field : $field, validateResult.valid ? this.STATUS_VALID : this.STATUS_INVALID, validatorName);
                     }
                     // ... or a boolean value
                     else if ('boolean' === typeof validateResult) {
@@ -2467,13 +2472,7 @@
 ;(function($) {
     $.fn.bootstrapValidator.i18n.greaterThan = $.extend($.fn.bootstrapValidator.i18n.greaterThan || {}, {
         'default': 'Please enter a value greater than or equal to %s',
-        notInclusive: 'Please enter a value greater than %s',
-
-        getMessage: function(options) {
-            return (options.inclusive === true || options.inclusive === undefined)
-                    ? $.fn.bootstrapValidator.helpers.format(this['default'], options.value)
-                    : $.fn.bootstrapValidator.helpers.format(this.notInclusive, options.value);
-        }
+        notInclusive: 'Please enter a value greater than %s'
     });
 
     $.fn.bootstrapValidator.validators.greaterThan = {
@@ -2500,18 +2499,38 @@
          * @param {BootstrapValidator} validator Validate plugin instance
          * @param {jQuery} $field Field element
          * @param {Object} options Can consist of the following keys:
-         * - value: The number used to compare to
+         * - value: Define the number to compare with. It can be
+         *      - A number
+         *      - Name of field which its value defines the number
+         *      - Name of callback function that returns the number
+         *      - A callback function that returns the number
+         *
          * - inclusive [optional]: Can be true or false. Default is true
          * - message: The invalid message
-         * @returns {Boolean}
+         * @returns {Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
             if (value === '') {
                 return true;
             }
+
+            var compareTo = options.value;
+            if ('function' === typeof compareTo) {
+                compareTo = $.fn.bootstrapValidator.helpers.call(compareTo, [value, validator, $field]);
+            } else if ('string' === typeof compareTo && !$.isNumeric(compareTo)) {
+                var $compareField = validator.getFieldElements(compareTo);
+                if ($compareField.length) {
+                    compareTo = $compareField.val();
+                } else {
+                    compareTo = $.fn.bootstrapValidator.helpers.call(compareTo, [value, validator, $field]);
+                }
+            }
+
             value = parseFloat(value);
-			return (options.inclusive === true || options.inclusive === undefined) ? (value >= options.value) : (value > options.value);
+			return (options.inclusive === true || options.inclusive === undefined)
+                    ? { valid: value >= compareTo, message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.greaterThan['default'],   compareTo) }
+                    : { valid: value > compareTo,  message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.greaterThan.notInclusive, compareTo) };
         }
     };
 }(window.jQuery));

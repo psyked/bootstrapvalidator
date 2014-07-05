@@ -49,10 +49,12 @@ __Improvements__
 * [#420](https://github.com/nghuuphuoc/bootstrapvalidator/issues/420): Enable/disable particular validator
 * [#422](https://github.com/nghuuphuoc/bootstrapvalidator/issues/422): Exclude particular field by ```excluded``` option or ```data-bv-excluded``` attribute
 * [#426](https://github.com/nghuuphuoc/bootstrapvalidator/issues/426): Add test suite
+* [#430](https://github.com/nghuuphuoc/bootstrapvalidator/issues/430): [greaterThan](http://bootstrapvalidator.com/validators/greaterThan/) adds support for comparing to other field, return value of a callback function
 * [#431](https://github.com/nghuuphuoc/bootstrapvalidator/issues/431): Add built time to the build file
 * [#432](https://github.com/nghuuphuoc/bootstrapvalidator/issues/432): Define the callback via ```data-bv-callback-callback``` attribute
 * [#447](https://github.com/nghuuphuoc/bootstrapvalidator/pull/447): [zipCode validator](http://bootstrapvalidator.com/validators/zipCode/) allow to set the country code via another field or callback, thanks to [@AlaskanShade](https://github.com/AlaskanShade)
 * [#456](https://github.com/nghuuphuoc/bootstrapvalidator/issues/456): Adjust the feedback icon position for ```.input-group``` element
+* [#465](https://github.com/nghuuphuoc/bootstrapvalidator/issues/465): Support dynamic message
 
 __Bug Fixes__
 * [#288](https://github.com/nghuuphuoc/bootstrapvalidator/issues/288): Fix [date validator](http://bootstrapvalidator.com/validators/date/) issue on IE8
