@@ -1286,12 +1286,12 @@ describe('i18n', function() {
         this.bv.resetForm();
         this.$program.eq(0).prop('checked', 'checked');
         this.bv.validate();
-        expect(this.bv.getMessages(this.$program, 'choice')[0]).toEqual(i18n.choice.getMessage({ min: 2, max: 4 }));
+        expect(this.bv.getMessages(this.$program, 'choice')[0]).toEqual(format(i18n.choice.between, [2, 4]));
 
         this.bv.resetForm();
         this.$program.prop('checked', 'checked');
         this.bv.validate();
-        expect(this.bv.getMessages('programs[]', 'choice')[0]).toEqual(i18n.choice.getMessage({ min: 2, max: 4 }));
+        expect(this.bv.getMessages('programs[]', 'choice')[0]).toEqual(format(i18n.choice.between, [2, 4]));
     });
 });
 

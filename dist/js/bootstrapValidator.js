@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-07-05 9:39:38 PM
+ * @version     v0.5.0-dev, built on 2014-07-05 9:58:21 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -1877,20 +1877,7 @@
         'default': 'Please enter a valid value',
         less: 'Please choose %s options at minimum',
         more: 'Please choose %s options at maximum',
-        between: 'Please choose %s - %s options',
-
-        getMessage: function(options) {
-            switch (true) {
-                case (!!options.min && !!options.max):
-                    return $.fn.bootstrapValidator.helpers.format(this.between, [options.min, options.max]);
-                case (!!options.min):
-                    return $.fn.bootstrapValidator.helpers.format(this.less, [options.min]);
-                case (!!options.max):
-                    return $.fn.bootstrapValidator.helpers.format(this.more, [options.max]);
-                default:
-                    return this['default'];
-            }
-        }
+        between: 'Please choose %s - %s options'
     });
 
     $.fn.bootstrapValidator.validators.choice = {
@@ -1908,19 +1895,48 @@
          * @param {Object} options Consists of following keys:
          * - min
          * - max
+         *
          * At least one of two keys is required
+         * The min, max keys define the number which the field value compares to. min, max can be
+         *      - A number
+         *      - Name of field which its value defines the number
+         *      - Name of callback function that returns the number
+         *      - A callback function that returns the number
+         *
          * - message: The invalid message
-         * @returns {Boolean}
+         * @returns {Object}
          */
         validate: function(validator, $field, options) {
             var numChoices = $field.is('select')
                             ? validator.getFieldElements($field.attr('data-bv-field')).find('option').filter(':selected').length
-                            : validator.getFieldElements($field.attr('data-bv-field')).filter(':checked').length;
-            if ((options.min && numChoices < options.min) || (options.max && numChoices > options.max)) {
-                return false;
+                            : validator.getFieldElements($field.attr('data-bv-field')).filter(':checked').length,
+                min        = options.min ? ($.isNumeric(options.min) ? options.min : validator.getDynamicOption(options.min, $field)) : null,
+                max        = options.max ? ($.isNumeric(options.max) ? options.max : validator.getDynamicOption(options.max, $field)) : null,
+                isValid    = true;
+
+            if ((min && numChoices < parseInt(min, 10)) || (max && numChoices > parseInt(max, 10))) {
+                isValid = false;
             }
 
-            return true;
+            var message = $.fn.bootstrapValidator.i18n.choice['default'];
+            switch (true) {
+                case (!!min && !!max):
+                    message = $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.choice.between, [parseInt(min, 10), parseInt(max, 10)]);
+                    break;
+
+                case (!!min):
+                    message = $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.choice.less, parseInt(min, 10));
+                    break;
+
+                case (!!max):
+                    message = $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.choice.more, parseInt(max, 10));
+                    break;
+
+                default:
+                    break;
+            }
+
+            return { valid: isValid, message: message };
         }
     };
 }(window.jQuery));
