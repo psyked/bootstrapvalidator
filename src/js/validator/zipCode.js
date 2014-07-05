@@ -1,6 +1,7 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.zipCode = $.extend($.fn.bootstrapValidator.i18n.zipCode || {}, {
         'default': 'Please enter a valid zip code',
+        countryNotSupported: 'The country code %s is not supported',
         country: 'Please enter a valid %s',
         countries: {
             'CA': 'Canadian postal code',
@@ -11,15 +12,6 @@
             'SE': 'Swiss postal code',
             'SG': 'Singapore postal code',
             'US': 'US zip code'
-        },
-
-        getMessage: function(options) {
-            var country = options.country;
-            if ('string' === typeof country && this.countries[country]) {
-                return $.fn.bootstrapValidator.helpers.format(this.country, this.countries[country]);
-            }
-
-            return this['default'];
         }
     });
 
@@ -62,7 +54,7 @@
          *      // $field is jQuery element representing the field
          * }
          *
-         * @returns {Boolean}
+         * @returns {Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -71,53 +63,56 @@
             }
 
             var country = options.country;
-            switch (typeof country) {
-                case 'function':
-                    country = $.fn.bootstrapValidator.helpers.call(country, [value, validator, $field]);
-                    break;
-
-                case 'string':
-                /* falls through */
-                default:
-                    if ($.inArray(country, this.COUNTRIES) === -1) {
-                        // Try to indicate the field which its value define the country code
-                        var $countryField = validator.getFieldElements(country);
-                        if ($countryField && $countryField.length) {
-                            country = $countryField.val();
-                        }
-                        // Try to get the country code via a callback
-                        else {
-                            country = $.fn.bootstrapValidator.helpers.call(country, [value, validator, $field]);
-                        }
-                    }
-                    break;
+            if (typeof country !== 'string' || $.inArray(country, this.COUNTRIES) === -1) {
+                // Try to determine the country
+                country = validator.getDynamicOption(country, $field);
             }
 
-            if (!country) {
-                return false;
+            if (!country || $.inArray(country.toUpperCase(), this.COUNTRIES) === -1) {
+                return { valid: false, message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.zipCode.countryNotSupported, country) };
             }
 
+            var isValid = false;
             country = country.toUpperCase();
-            if ($.inArray(country, this.COUNTRIES) === -1) {
-                return false;
-            }
             switch (country) {
-                case 'CA': return /^(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}\s?[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}$/i.test(value);
-                case 'DK': return /^(DK(-|\s)?)?\d{4}$/i.test(value);
-                case 'GB': return this._gb(value);
+                case 'CA':
+                    isValid = /^(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}\s?[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}$/i.test(value);
+                    break;
+
+                case 'DK':
+                    isValid = /^(DK(-|\s)?)?\d{4}$/i.test(value);
+                    break;
+
+                case 'GB':
+                    isValid = this._gb(value);
+                    break;
 
                 // http://en.wikipedia.org/wiki/List_of_postal_codes_in_Italy
-                case 'IT': return /^(I-|IT-)?\d{5}$/i.test(value);
+                case 'IT':
+                    isValid = /^(I-|IT-)?\d{5}$/i.test(value);
+                    break;
 
                 // http://en.wikipedia.org/wiki/Postal_codes_in_the_Netherlands
-                case 'NL': return /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i.test(value);
+                case 'NL':
+                    isValid = /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i.test(value);
+                    break;
 
-                case 'SE': return /^(S-)?\d{3}\s?\d{2}$/i.test(value);
-                case 'SG': return /^([0][1-9]|[1-6][0-9]|[7]([0-3]|[5-9])|[8][0-2])(\d{4})$/i.test(value);
+                case 'SE':
+                    isValid = /^(S-)?\d{3}\s?\d{2}$/i.test(value);
+                    break;
+
+                case 'SG':
+                    isValid = /^([0][1-9]|[1-6][0-9]|[7]([0-3]|[5-9])|[8][0-2])(\d{4})$/i.test(value);
+                    break;
+
                 case 'US':
                 /* falls through */
-                default: return /^\d{4,5}([\-]?\d{4})?$/.test(value);
+                default:
+                    isValid = /^\d{4,5}([\-]?\d{4})?$/.test(value);
+                    break;
             }
+
+            return { valid: isValid, message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.zipCode.country, $.fn.bootstrapValidator.i18n.zipCode.countries[country]) };
         },
 
         /**

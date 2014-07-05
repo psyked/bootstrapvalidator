@@ -1367,6 +1367,50 @@
         },
 
         /**
+         * Some other validators have option which its value is dynamic.
+         * For example, the zipCode validator which country is set by a select element.
+         *
+         * @param {String|Function} option The option which can be determined by:
+         * - a string
+         * - name of field which defines the value
+         * - name of function which returns the value
+         * - a function returns the value
+         *
+         * The callback function has the format of
+         *      callback: function(value, validator, $field) {
+         *          // value is the value of field
+         *          // validator is the BootstrapValidator instance
+         *          // $field is the field element
+         *      }
+         *
+         * @param {jQuery|String} field The field name or element
+         * @returns {String}
+         */
+        getDynamicOption: function(option, field) {
+            var $field = ('string' === typeof field) ? this.getFieldElements(field) : field,
+                value  = field.val();
+
+            // Option can be determined by
+            // ... a function
+            if ('function' === typeof option) {
+                return $.fn.bootstrapValidator.helpers.call(option, [value, this, $field]);
+            }
+            // ... value of other field
+            else if ('string' === typeof option) {
+                var $f = this.getFieldElements(option);
+                if ($f.length) {
+                    return $f.val();
+                }
+                // ... return value of callback
+                else {
+                    return $.fn.bootstrapValidator.helpers.call(option, [value, this, $field]);
+                }
+            }
+
+            return null;
+        },
+
+        /**
          * Destroy the plugin
          * It will remove all error messages, feedback icons and turn off the events
          */
