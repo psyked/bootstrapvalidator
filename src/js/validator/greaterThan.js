@@ -44,17 +44,7 @@
                 return true;
             }
 
-            var compareTo = options.value;
-            if ('function' === typeof compareTo) {
-                compareTo = $.fn.bootstrapValidator.helpers.call(compareTo, [value, validator, $field]);
-            } else if ('string' === typeof compareTo && !$.isNumeric(compareTo)) {
-                var $compareField = validator.getFieldElements(compareTo);
-                if ($compareField.length) {
-                    compareTo = $compareField.val();
-                } else {
-                    compareTo = $.fn.bootstrapValidator.helpers.call(compareTo, [value, validator, $field]);
-                }
-            }
+            var compareTo = $.isNumeric(options.value) ? options.value : validator.getDynamicOption(options.value, $field);
 
             value = parseFloat(value);
 			return (options.inclusive === true || options.inclusive === undefined)

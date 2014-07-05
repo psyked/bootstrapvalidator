@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-07-05 9:36:42 PM
+ * @version     v0.5.0-dev, built on 2014-07-05 9:39:38 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -2563,17 +2563,7 @@
                 return true;
             }
 
-            var compareTo = options.value;
-            if ('function' === typeof compareTo) {
-                compareTo = $.fn.bootstrapValidator.helpers.call(compareTo, [value, validator, $field]);
-            } else if ('string' === typeof compareTo && !$.isNumeric(compareTo)) {
-                var $compareField = validator.getFieldElements(compareTo);
-                if ($compareField.length) {
-                    compareTo = $compareField.val();
-                } else {
-                    compareTo = $.fn.bootstrapValidator.helpers.call(compareTo, [value, validator, $field]);
-                }
-            }
+            var compareTo = $.isNumeric(options.value) ? options.value : validator.getDynamicOption(options.value, $field);
 
             value = parseFloat(value);
 			return (options.inclusive === true || options.inclusive === undefined)
@@ -4168,17 +4158,7 @@
                 return true;
             }
 
-            var compareTo = options.value;
-            if ('function' === typeof compareTo) {
-                compareTo = $.fn.bootstrapValidator.helpers.call(compareTo, [value, validator, $field]);
-            } else if ('string' === typeof compareTo && !$.isNumeric(compareTo)) {
-                var $compareField = validator.getFieldElements(compareTo);
-                if ($compareField.length) {
-                    compareTo = $compareField.val();
-                } else {
-                    compareTo = $.fn.bootstrapValidator.helpers.call(compareTo, [value, validator, $field]);
-                }
-            }
+            var compareTo = $.isNumeric(options.value) ? options.value : validator.getDynamicOption(options.value, $field);
 
             value = parseFloat(value);
             return (options.inclusive === true || options.inclusive === undefined)
