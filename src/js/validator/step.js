@@ -1,10 +1,6 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.step = $.extend($.fn.bootstrapValidator.i18n.step || {}, {
-        'default': 'Please enter a valid step of %s',
-
-        getMessage: function(options) {
-            return $.fn.bootstrapValidator.helpers.format(this['default'], [options.step]);
-        }
+        'default': 'Please enter a valid step of %s'
     });
 
     $.fn.bootstrapValidator.validators.step = {
@@ -23,7 +19,7 @@
          * - baseValue: The base value
          * - step: The step
          * - message: The invalid message
-         * @returns {Boolean}
+         * @returns {Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -33,7 +29,7 @@
 
             options = $.extend({}, { baseValue: 0, step: 1 }, options);
             value   = parseFloat(value);
-            if (isNaN(value) || !isFinite(value)) {
+            if (!$.isNumeric(value)) {
                 return false;
             }
 
@@ -59,7 +55,10 @@
                 };
 
             var mod = floatMod(value - options.baseValue, options.step);
-            return (mod === 0.0 || mod === options.step);
+            return {
+                valid: mod === 0.0 || mod === options.step,
+                message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.step['default'], [options.step])
+            };
         }
     };
 }(window.jQuery));

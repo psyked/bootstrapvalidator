@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-07-05 9:58:21 PM
+ * @version     v0.5.0-dev, built on 2014-07-05 10:32:32 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -4608,11 +4608,7 @@
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.step = $.extend($.fn.bootstrapValidator.i18n.step || {}, {
-        'default': 'Please enter a valid step of %s',
-
-        getMessage: function(options) {
-            return $.fn.bootstrapValidator.helpers.format(this['default'], [options.step]);
-        }
+        'default': 'Please enter a valid step of %s'
     });
 
     $.fn.bootstrapValidator.validators.step = {
@@ -4631,7 +4627,7 @@
          * - baseValue: The base value
          * - step: The step
          * - message: The invalid message
-         * @returns {Boolean}
+         * @returns {Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -4641,7 +4637,7 @@
 
             options = $.extend({}, { baseValue: 0, step: 1 }, options);
             value   = parseFloat(value);
-            if (isNaN(value) || !isFinite(value)) {
+            if (!$.isNumeric(value)) {
                 return false;
             }
 
@@ -4667,19 +4663,17 @@
                 };
 
             var mod = floatMod(value - options.baseValue, options.step);
-            return (mod === 0.0 || mod === options.step);
+            return {
+                valid: mod === 0.0 || mod === options.step,
+                message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.step['default'], [options.step])
+            };
         }
     };
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.stringCase = $.extend($.fn.bootstrapValidator.i18n.stringCase || {}, {
         'default': 'Please enter only lowercase characters',
-        upper: 'Please enter only uppercase characters',
-
-        getMessage: function(options) {
-            var stringCase = (options['case'] || 'lower').toLowerCase();
-            return ('upper' === stringCase) ? this.upper : this['default'];
-        }
+        upper: 'Please enter only uppercase characters'
     });
 
     $.fn.bootstrapValidator.validators.stringCase = {
@@ -4696,7 +4690,7 @@
          * @param {Object} options Consist of key:
          * - message: The invalid message
          * - case: Can be 'lower' (default) or 'upper'
-         * @returns {Boolean}
+         * @returns {Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -4705,7 +4699,10 @@
             }
 
             var stringCase = (options['case'] || 'lower').toLowerCase();
-            return ('upper' === stringCase) ? value === value.toUpperCase() : value === value.toLowerCase();
+            return {
+                valid:   ('upper' === stringCase) ? value === value.toUpperCase() : value === value.toLowerCase(),
+                message: ('upper' === stringCase) ? $.fn.bootstrapValidator.i18n.stringCase.upper : $.fn.bootstrapValidator.i18n.stringCase['default']
+            };
         }
     };
 }(window.jQuery));
@@ -4879,13 +4876,7 @@
 ;(function($) {
     $.fn.bootstrapValidator.i18n.uuid = $.extend($.fn.bootstrapValidator.i18n.uuid || {}, {
         'default': 'Please enter a valid UUID number',
-        version: 'Please enter a valid UUID version %s number',
-
-        getMessage: function(options) {
-            return (options.version)
-                    ? $.fn.bootstrapValidator.helpers.format(this.version, [options.version])
-                    : this['default'];
-        }
+        version: 'Please enter a valid UUID version %s number'
     });
 
     $.fn.bootstrapValidator.validators.uuid = {
@@ -4903,7 +4894,7 @@
          * @param {Object} options Consist of key:
          * - message: The invalid message
          * - version: Can be 3, 4, 5, null
-         * @returns {Boolean}
+         * @returns {Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -4919,7 +4910,10 @@
                     all: /^[0-9A-F]{8}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{4}-[0-9A-F]{12}$/i
                 },
                 version = options.version ? (options.version + '') : 'all';
-            return (null === patterns[version]) ? true : patterns[version].test(value);
+            return {
+                valid: (null === patterns[version]) ? true : patterns[version].test(value),
+                message: options.version ? $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.uuid.version, [options.version]) : $.fn.bootstrapValidator.i18n.uuid['default']
+            };
         }
     };
 }(window.jQuery));

@@ -1,12 +1,7 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.stringCase = $.extend($.fn.bootstrapValidator.i18n.stringCase || {}, {
         'default': 'Please enter only lowercase characters',
-        upper: 'Please enter only uppercase characters',
-
-        getMessage: function(options) {
-            var stringCase = (options['case'] || 'lower').toLowerCase();
-            return ('upper' === stringCase) ? this.upper : this['default'];
-        }
+        upper: 'Please enter only uppercase characters'
     });
 
     $.fn.bootstrapValidator.validators.stringCase = {
@@ -23,7 +18,7 @@
          * @param {Object} options Consist of key:
          * - message: The invalid message
          * - case: Can be 'lower' (default) or 'upper'
-         * @returns {Boolean}
+         * @returns {Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -32,7 +27,10 @@
             }
 
             var stringCase = (options['case'] || 'lower').toLowerCase();
-            return ('upper' === stringCase) ? value === value.toUpperCase() : value === value.toLowerCase();
+            return {
+                valid:   ('upper' === stringCase) ? value === value.toUpperCase() : value === value.toLowerCase(),
+                message: ('upper' === stringCase) ? $.fn.bootstrapValidator.i18n.stringCase.upper : $.fn.bootstrapValidator.i18n.stringCase['default']
+            };
         }
     };
 }(window.jQuery));
