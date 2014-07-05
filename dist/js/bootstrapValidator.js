@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-07-05 9:27:24 PM
+ * @version     v0.5.0-dev, built on 2014-07-05 9:36:42 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -1389,7 +1389,7 @@
          */
         getDynamicOption: function(option, field) {
             var $field = ('string' === typeof field) ? this.getFieldElements(field) : field,
-                value  = field.val();
+                value  = $field.val();
 
             // Option can be determined by
             // ... a function
@@ -1822,23 +1822,8 @@
                 return true;
             }
 
-            var determineValue = function(compareTo) {
-                if ('function' === typeof compareTo) {
-                    compareTo = $.fn.bootstrapValidator.helpers.call(compareTo, [value, validator, $field]);
-                } else if ('string' === typeof compareTo && !$.isNumeric(compareTo)) {
-                    var $compareField = validator.getFieldElements(compareTo);
-                    if ($compareField.length) {
-                        compareTo = $compareField.val();
-                    } else {
-                        compareTo = $.fn.bootstrapValidator.helpers.call(compareTo, [value, validator, $field]);
-                    }
-                }
-
-                return compareTo;
-            };
-
-            var min = determineValue(options.min),
-                max = determineValue(options.max);
+            var min = $.isNumeric(options.min) ? options.min : validator.getDynamicOption(options.min, $field),
+                max = $.isNumeric(options.max) ? options.max : validator.getDynamicOption(options.max, $field);
 
             value = parseFloat(value);
 			return (options.inclusive === true || options.inclusive === undefined)

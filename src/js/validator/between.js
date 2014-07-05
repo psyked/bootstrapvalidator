@@ -48,23 +48,8 @@
                 return true;
             }
 
-            var determineValue = function(compareTo) {
-                if ('function' === typeof compareTo) {
-                    compareTo = $.fn.bootstrapValidator.helpers.call(compareTo, [value, validator, $field]);
-                } else if ('string' === typeof compareTo && !$.isNumeric(compareTo)) {
-                    var $compareField = validator.getFieldElements(compareTo);
-                    if ($compareField.length) {
-                        compareTo = $compareField.val();
-                    } else {
-                        compareTo = $.fn.bootstrapValidator.helpers.call(compareTo, [value, validator, $field]);
-                    }
-                }
-
-                return compareTo;
-            };
-
-            var min = determineValue(options.min),
-                max = determineValue(options.max);
+            var min = $.isNumeric(options.min) ? options.min : validator.getDynamicOption(options.min, $field),
+                max = $.isNumeric(options.max) ? options.max : validator.getDynamicOption(options.max, $field);
 
             value = parseFloat(value);
 			return (options.inclusive === true || options.inclusive === undefined)

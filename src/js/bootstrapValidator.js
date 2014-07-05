@@ -1388,7 +1388,7 @@
          */
         getDynamicOption: function(option, field) {
             var $field = ('string' === typeof field) ? this.getFieldElements(field) : field,
-                value  = field.val();
+                value  = $field.val();
 
             // Option can be determined by
             // ... a function
