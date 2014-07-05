@@ -741,7 +741,7 @@
                     validateResult = $.fn.bootstrapValidator.validators[validatorName].validate(this, $field, validators[validatorName]);
 
                     // validateResult can be a $.Deferred object ...
-                    if ('object' === typeof validateResult) {
+                    if ('object' === typeof validateResult && validateResult.resolve) {
                         this.updateStatus(updateAll ? field : $field, this.STATUS_VALIDATING, validatorName);
                         $field.data('bv.dfs.' + validatorName, validateResult);
 
@@ -759,6 +759,11 @@
                                 that._submit();
                             }
                         });
+                    }
+                    // ... or object { valid: true/false, message: 'dynamic message' }
+                    else if ('object' === typeof validateResult && validateResult.valid !== undefined && validateResult.message !== undefined) {
+                        this.updateMessage(updateAll ? field : $field, validatorName, validateResult.message);
+                        this.updateStatus(updateAll ? field : $field, validateResult.valid ? this.STATUS_VALID : this.STATUS_INVALID, validatorName);
                     }
                     // ... or a boolean value
                     else if ('boolean' === typeof validateResult) {
