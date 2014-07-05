@@ -50,7 +50,6 @@ describe('lessThan', function() {
         expect(this.bv.isValid()).toBeTruthy();
     });
 
-    // Compare to maxAge field
     it('compare to other field', function() {
         this.$age.attr('data-bv-lessthan-value', 'maxAge');
         this.bv.destroy();
