@@ -253,8 +253,6 @@
 
                 // Whenever the user change the field value, mark it as not validated yet
                 $field.off(events).on(events, function() {
-                    // Reset the flag
-                    that._submitIfValid = false;
                     that.updateStatus($(this), that.STATUS_NOT_VALIDATED);
                 });
 
@@ -825,6 +823,11 @@
                     break;
                 default:
                     break;
+            }
+
+            if (status === this.STATUS_NOT_VALIDATED) {
+                // Reset the flag
+                this._submitIfValid = false;
             }
 
             var that  = this,

@@ -68,6 +68,7 @@ __Bug Fixes__
 * [#315](https://github.com/nghuuphuoc/bootstrapvalidator/issues/315): The [cvv validator](http://bootstrapvalidator.com/validators/cvv/) doesn't work on IE 8
 * [#325](https://github.com/nghuuphuoc/bootstrapvalidator/issues/325): The [```threshold``` option](http://bootstrapvalidator.com/settings/#threshold) doesn't work on IE 8
 * [#358](https://github.com/nghuuphuoc/bootstrapvalidator/issues/358): The [zipCode validator](http://bootstrapvalidator.com/validators/zipCode/) doesn't work for Canadian zip code
+* [#375](https://github.com/nghuuphuoc/bootstrapvalidator/issues/375): Don't submit form when the [callback validator](http://bootstrapvalidator.com/validators/callback/) completes and the submit button isn't clicked
 * [#377](https://github.com/nghuuphuoc/bootstrapvalidator/issues/377): The [id](http://bootstrapvalidator.com/validators/id/), [vat](http://bootstrapvalidator.com/validators/vat/) validators should return ```false``` if the country code is not supported
 * [#389](https://github.com/nghuuphuoc/bootstrapvalidator/issues/389): When using multiple forms with HTML attributes on the same page, the plugin options will be the same as the last one
 * [#401](https://github.com/nghuuphuoc/bootstrapvalidator/issues/401): [stringLength validator](http://bootstrapvalidator.com/validators/stringLength/) allows spaces after max length
