@@ -36,7 +36,7 @@
          *
          * - inclusive [optional]: Can be true or false. Default is true
          * - message: The invalid message
-         * @returns {Object}
+         * @returns {Boolean|Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -48,8 +48,14 @@
 
             value = parseFloat(value);
 			return (options.inclusive === true || options.inclusive === undefined)
-                    ? { valid: value >= compareTo, message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.greaterThan['default'],   compareTo) }
-                    : { valid: value > compareTo,  message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.greaterThan.notInclusive, compareTo) };
+                    ? {
+                        valid: value >= compareTo,
+                        message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.greaterThan['default'], compareTo)
+                    }
+                    : {
+                        valid: value > compareTo,
+                        message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.greaterThan.notInclusive, compareTo)
+                    };
         }
     };
 }(window.jQuery));

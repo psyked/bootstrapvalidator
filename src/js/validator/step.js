@@ -19,7 +19,7 @@
          * - baseValue: The base value
          * - step: The step
          * - message: The invalid message
-         * @returns {Object}
+         * @returns {Boolean|Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -57,7 +57,7 @@
             var mod = floatMod(value - options.baseValue, options.step);
             return {
                 valid: mod === 0.0 || mod === options.step,
-                message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.step['default'], [options.step])
+                message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.step['default'], [options.step])
             };
         }
     };

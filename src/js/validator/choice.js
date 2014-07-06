@@ -38,24 +38,24 @@
                             : validator.getFieldElements($field.attr('data-bv-field')).filter(':checked').length,
                 min        = options.min ? ($.isNumeric(options.min) ? options.min : validator.getDynamicOption(options.min, $field)) : null,
                 max        = options.max ? ($.isNumeric(options.max) ? options.max : validator.getDynamicOption(options.max, $field)) : null,
-                isValid    = true;
+                isValid    = true,
+                message    = options.message || $.fn.bootstrapValidator.i18n.choice['default'];
 
             if ((min && numChoices < parseInt(min, 10)) || (max && numChoices > parseInt(max, 10))) {
                 isValid = false;
             }
 
-            var message = $.fn.bootstrapValidator.i18n.choice['default'];
             switch (true) {
                 case (!!min && !!max):
-                    message = $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.choice.between, [parseInt(min, 10), parseInt(max, 10)]);
+                    message = $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.choice.between, [parseInt(min, 10), parseInt(max, 10)]);
                     break;
 
                 case (!!min):
-                    message = $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.choice.less, parseInt(min, 10));
+                    message = $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.choice.less, parseInt(min, 10));
                     break;
 
                 case (!!max):
-                    message = $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.choice.more, parseInt(max, 10));
+                    message = $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.choice.more, parseInt(max, 10));
                     break;
 
                 default:

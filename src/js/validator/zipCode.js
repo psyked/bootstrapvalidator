@@ -54,7 +54,7 @@
          *      // $field is jQuery element representing the field
          * }
          *
-         * @returns {Object}
+         * @returns {Boolean|Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -112,7 +112,10 @@
                     break;
             }
 
-            return { valid: isValid, message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.zipCode.country, $.fn.bootstrapValidator.i18n.zipCode.countries[country]) };
+            return {
+                valid: isValid,
+                message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.zipCode.country, $.fn.bootstrapValidator.i18n.zipCode.countries[country])
+            };
         },
 
         /**

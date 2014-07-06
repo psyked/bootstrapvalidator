@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-07-06 9:34:22 AM
+ * @version     v0.5.0-dev, built on 2014-07-06 9:52:51 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -1814,7 +1814,7 @@
          *
          * - inclusive [optional]: Can be true or false. Default is true
          * - message: The invalid message
-         * @returns {Object}
+         * @returns {Boolean|Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -1827,8 +1827,14 @@
 
             value = parseFloat(value);
 			return (options.inclusive === true || options.inclusive === undefined)
-                    ? { valid: value >= min && value <= max, message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.between['default'],   [min, max]) }
-                    : { valid: value > min  && value <  max, message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.between.notInclusive, [min, max]) };
+                    ? {
+                        valid: value >= min && value <= max,
+                        message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.between['default'], [min, max])
+                    }
+                    : {
+                        valid: value > min  && value <  max,
+                        message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.between.notInclusive, [min, max])
+                    };
         }
     };
 }(window.jQuery));
@@ -1912,24 +1918,24 @@
                             : validator.getFieldElements($field.attr('data-bv-field')).filter(':checked').length,
                 min        = options.min ? ($.isNumeric(options.min) ? options.min : validator.getDynamicOption(options.min, $field)) : null,
                 max        = options.max ? ($.isNumeric(options.max) ? options.max : validator.getDynamicOption(options.max, $field)) : null,
-                isValid    = true;
+                isValid    = true,
+                message    = options.message || $.fn.bootstrapValidator.i18n.choice['default'];
 
             if ((min && numChoices < parseInt(min, 10)) || (max && numChoices > parseInt(max, 10))) {
                 isValid = false;
             }
 
-            var message = $.fn.bootstrapValidator.i18n.choice['default'];
             switch (true) {
                 case (!!min && !!max):
-                    message = $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.choice.between, [parseInt(min, 10), parseInt(max, 10)]);
+                    message = $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.choice.between, [parseInt(min, 10), parseInt(max, 10)]);
                     break;
 
                 case (!!min):
-                    message = $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.choice.less, parseInt(min, 10));
+                    message = $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.choice.less, parseInt(min, 10));
                     break;
 
                 case (!!max):
-                    message = $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.choice.more, parseInt(max, 10));
+                    message = $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.choice.more, parseInt(max, 10));
                     break;
 
                 default:
@@ -2571,7 +2577,7 @@
          *
          * - inclusive [optional]: Can be true or false. Default is true
          * - message: The invalid message
-         * @returns {Object}
+         * @returns {Boolean|Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -2583,8 +2589,14 @@
 
             value = parseFloat(value);
 			return (options.inclusive === true || options.inclusive === undefined)
-                    ? { valid: value >= compareTo, message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.greaterThan['default'],   compareTo) }
-                    : { valid: value > compareTo,  message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.greaterThan.notInclusive, compareTo) };
+                    ? {
+                        valid: value >= compareTo,
+                        message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.greaterThan['default'], compareTo)
+                    }
+                    : {
+                        valid: value > compareTo,
+                        message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.greaterThan.notInclusive, compareTo)
+                    };
         }
     };
 }(window.jQuery));
@@ -2870,7 +2882,7 @@
          *      - Name of field which its value defines the country code
          *      - Name of callback function that returns the country code
          *      - A callback function that returns the country code
-         * @returns {Object}
+         * @returns {Boolean|Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -2897,7 +2909,7 @@
             if (!(new RegExp('^' + this.REGEX[country] + '$')).test(value)) {
                 return {
                     valid: false,
-                    message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.iban.country, $.fn.bootstrapValidator.i18n.iban.countries[country])
+                    message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.iban.country, $.fn.bootstrapValidator.i18n.iban.countries[country])
                 };
             }
 
@@ -2916,9 +2928,10 @@
             for (var i = 1; i < length; ++i) {
                 temp = (temp * 10 + parseInt(value.substr(i, 1), 10)) % 97;
             }
+
             return {
                 valid: (temp === 1),
-                message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.iban.country, $.fn.bootstrapValidator.i18n.iban.countries[country])
+                message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.iban.country, $.fn.bootstrapValidator.i18n.iban.countries[country])
             };
         }
     };
@@ -3007,7 +3020,7 @@
                     ? true
                     : {
                         valid: false,
-                        message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.id.country, $.fn.bootstrapValidator.i18n.id.countries[country.toUpperCase()])
+                        message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.id.country, $.fn.bootstrapValidator.i18n.id.countries[country.toUpperCase()])
                     };
         },
 
@@ -4177,7 +4190,7 @@
          *
          * - inclusive [optional]: Can be true or false. Default is true
          * - message: The invalid message
-         * @returns {Object}
+         * @returns {Boolean|Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -4189,8 +4202,14 @@
 
             value = parseFloat(value);
             return (options.inclusive === true || options.inclusive === undefined)
-                    ? { valid: value <= compareTo, message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.lessThan['default'],   compareTo) }
-                    : { valid: value < compareTo,  message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.lessThan.notInclusive, compareTo) };
+                    ? {
+                        valid: value <= compareTo,
+                        message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.lessThan['default'], compareTo)
+                    }
+                    : {
+                        valid: value < compareTo,
+                        message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.lessThan.notInclusive, compareTo)
+                    };
         }
     };
 }(window.jQuery));
@@ -4647,7 +4666,7 @@
          * - baseValue: The base value
          * - step: The step
          * - message: The invalid message
-         * @returns {Object}
+         * @returns {Boolean|Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -4685,7 +4704,7 @@
             var mod = floatMod(value - options.baseValue, options.step);
             return {
                 valid: mod === 0.0 || mod === options.step,
-                message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.step['default'], [options.step])
+                message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.step['default'], [options.step])
             };
         }
     };
@@ -4720,8 +4739,8 @@
 
             var stringCase = (options['case'] || 'lower').toLowerCase();
             return {
-                valid:   ('upper' === stringCase) ? value === value.toUpperCase() : value === value.toLowerCase(),
-                message: ('upper' === stringCase) ? $.fn.bootstrapValidator.i18n.stringCase.upper : $.fn.bootstrapValidator.i18n.stringCase['default']
+                valid: ('upper' === stringCase) ? value === value.toUpperCase() : value === value.toLowerCase(),
+                message: options.message || (('upper' === stringCase) ? $.fn.bootstrapValidator.i18n.stringCase.upper : $.fn.bootstrapValidator.i18n.stringCase['default'])
             };
         }
     };
@@ -4929,7 +4948,7 @@
          * @param {Object} options Consist of key:
          * - message: The invalid message
          * - version: Can be 3, 4, 5, null
-         * @returns {Object}
+         * @returns {Boolean|Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -4947,7 +4966,9 @@
                 version = options.version ? (options.version + '') : 'all';
             return {
                 valid: (null === patterns[version]) ? true : patterns[version].test(value),
-                message: options.version ? $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.uuid.version, [options.version]) : $.fn.bootstrapValidator.i18n.uuid['default']
+                message: options.version
+                            ? $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.uuid.version, options.version)
+                            : (options.message || $.fn.bootstrapValidator.i18n.uuid['default'])
             };
         }
     };
@@ -5046,7 +5067,7 @@
                 ? true
                 : {
                     valid: false,
-                    message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.vat.country, $.fn.bootstrapValidator.i18n.vat.countries[country.toUpperCase()])
+                    message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.vat.country, $.fn.bootstrapValidator.i18n.vat.countries[country.toUpperCase()])
                 };
         },
 
@@ -6277,7 +6298,7 @@
          *      // $field is jQuery element representing the field
          * }
          *
-         * @returns {Object}
+         * @returns {Boolean|Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -6335,7 +6356,10 @@
                     break;
             }
 
-            return { valid: isValid, message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.zipCode.country, $.fn.bootstrapValidator.i18n.zipCode.countries[country]) };
+            return {
+                valid: isValid,
+                message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.zipCode.country, $.fn.bootstrapValidator.i18n.zipCode.countries[country])
+            };
         },
 
         /**

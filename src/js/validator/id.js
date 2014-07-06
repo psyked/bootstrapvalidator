@@ -82,7 +82,7 @@
                     ? true
                     : {
                         valid: false,
-                        message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.id.country, $.fn.bootstrapValidator.i18n.id.countries[country.toUpperCase()])
+                        message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.id.country, $.fn.bootstrapValidator.i18n.id.countries[country.toUpperCase()])
                     };
         },
 

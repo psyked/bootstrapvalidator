@@ -19,7 +19,7 @@
          * @param {Object} options Consist of key:
          * - message: The invalid message
          * - version: Can be 3, 4, 5, null
-         * @returns {Object}
+         * @returns {Boolean|Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -37,7 +37,9 @@
                 version = options.version ? (options.version + '') : 'all';
             return {
                 valid: (null === patterns[version]) ? true : patterns[version].test(value),
-                message: options.version ? $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.uuid.version, [options.version]) : $.fn.bootstrapValidator.i18n.uuid['default']
+                message: options.version
+                            ? $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.uuid.version, options.version)
+                            : (options.message || $.fn.bootstrapValidator.i18n.uuid['default'])
             };
         }
     };

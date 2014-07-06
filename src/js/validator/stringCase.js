@@ -28,8 +28,8 @@
 
             var stringCase = (options['case'] || 'lower').toLowerCase();
             return {
-                valid:   ('upper' === stringCase) ? value === value.toUpperCase() : value === value.toLowerCase(),
-                message: ('upper' === stringCase) ? $.fn.bootstrapValidator.i18n.stringCase.upper : $.fn.bootstrapValidator.i18n.stringCase['default']
+                valid: ('upper' === stringCase) ? value === value.toUpperCase() : value === value.toLowerCase(),
+                message: options.message || (('upper' === stringCase) ? $.fn.bootstrapValidator.i18n.stringCase.upper : $.fn.bootstrapValidator.i18n.stringCase['default'])
             };
         }
     };
