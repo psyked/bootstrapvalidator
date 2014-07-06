@@ -32,7 +32,7 @@ module.exports = function(grunt) {
             main: {
                 files: [
                     { cwd: '<%= dirs.src %>/css', src: '**', dest: '<%= dirs.dist %>/css', expand: true, flatten: true, filter: 'isFile' },
-                    { cwd: '<%= dirs.src %>/js/languages', src: '**', dest: '<%= dirs.dist %>/js/languages', expand: true, flatten: true, filter: 'isFile' }
+                    { cwd: '<%= dirs.src %>/js/language', src: '**', dest: '<%= dirs.dist %>/js/language', expand: true, flatten: true, filter: 'isFile' }
                 ]
             }
         },
