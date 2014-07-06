@@ -73,6 +73,7 @@ __Bug Fixes__
 * [#401](https://github.com/nghuuphuoc/bootstrapvalidator/issues/401): [stringLength validator](http://bootstrapvalidator.com/validators/stringLength/) allows spaces after max length
 * [#411](https://github.com/nghuuphuoc/bootstrapvalidator/pull/411): Fix the [ean validator](http://bootstrapvalidator.com/validators/ean/) when the check digit is zero, thanks to [@manish-in-java](https://github.com/manish-in-java)
 * [#417](https://github.com/nghuuphuoc/bootstrapvalidator/issues/417): IPv6 validator doesn't work
+* [#425](https://github.com/nghuuphuoc/bootstrapvalidator/issues/425): Custom trigger event is ignored by field validators
 * [#447](https://github.com/nghuuphuoc/bootstrapvalidator/pull/447): Skip the ```_isExcluded()``` when initializing the form. This fixes [#269](https://github.com/nghuuphuoc/bootstrapvalidator/issues/269), [#273](https://github.com/nghuuphuoc/bootstrapvalidator/issues/273). Thanks to [@AlaskanShade](https://github.com/AlaskanShade)
 
 __Document__

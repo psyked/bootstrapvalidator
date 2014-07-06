@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-07-06 10:11:03 AM
+ * @version     v0.5.0-dev, built on 2014-07-06 9:40:56 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -230,7 +230,11 @@
                 total     = fields.length,
                 type      = fields.attr('type'),
                 updateAll = (total === 1) || ('radio' === type) || ('checkbox' === type),
-                event     = ('radio' === type || 'checkbox' === type || 'file' === type || 'SELECT' === fields.eq(0).get(0).tagName) ? 'change' : this._changeEvent;
+                event     = ('radio' === type || 'checkbox' === type || 'file' === type || 'SELECT' === fields.eq(0).get(0).tagName) ? 'change' : this._changeEvent,
+                trigger   = (this.options.fields[field].trigger || this.options.trigger || event).split(' '),
+                events    = $.map(trigger, function(item) {
+                    return item + '.update.bv';
+                }).join(' ');
 
             for (var i = 0; i < total; i++) {
                 var $field    = fields.eq(i),
@@ -249,7 +253,7 @@
                 $parent.find('i[data-bv-icon-for="' + field + '"]').remove();
 
                 // Whenever the user change the field value, mark it as not validated yet
-                $field.off(event + '.update.bv').on(event + '.update.bv', function() {
+                $field.off(events).on(events, function() {
                     // Reset the flag
                     that._submitIfValid = false;
                     that.updateStatus($(this), that.STATUS_NOT_VALIDATED);
@@ -316,10 +320,9 @@
             }
 
             // Set live mode
-            var trigger = this.options.fields[field].trigger || this.options.trigger || event,
-                events  = $.map(trigger.split(' '), function(item) {
-                    return item + '.live.bv';
-                }).join(' ');
+            events = $.map(trigger, function(item) {
+                return item + '.live.bv';
+            }).join(' ');
             switch (this.options.live) {
                 case 'submitted':
                     break;
