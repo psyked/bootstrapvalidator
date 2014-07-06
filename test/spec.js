@@ -336,7 +336,6 @@ describe('enable validators', function() {
         expect(this.bv.isValid()).toEqual(false);
 
         var messages = this.bv.getMessages('fullName');
-        console.log(messages);
         expect($.inArray('The full name must be more than 8 and less than 40 characters long', messages)).toBeGreaterThan(-1);
         expect($.inArray('The full name can only consist of alphabetical, number, and space', messages)).toBeGreaterThan(-1);
     });
@@ -1282,7 +1281,7 @@ describe('i18n', function() {
         this.bv.resetForm();
         this.$phone.val('123456');
         this.bv.validate();
-        expect(this.bv.getMessages('phoneNumber', 'phone')[0]).toEqual(i18n.phone.getMessage({ country: 'US' }));
+        expect(this.bv.getMessages('phoneNumber', 'phone')[0]).toEqual(format(i18n.phone.country, i18n.phone.countries['US']));
 
         this.bv.resetForm();
         this.$program.eq(0).prop('checked', 'checked');

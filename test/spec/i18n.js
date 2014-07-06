@@ -308,7 +308,7 @@ describe('i18n', function() {
         this.bv.resetForm();
         this.$phone.val('123456');
         this.bv.validate();
-        expect(this.bv.getMessages('phoneNumber', 'phone')[0]).toEqual(i18n.phone.getMessage({ country: 'US' }));
+        expect(this.bv.getMessages('phoneNumber', 'phone')[0]).toEqual(format(i18n.phone.country, i18n.phone.countries['US']));
 
         this.bv.resetForm();
         this.$program.eq(0).prop('checked', 'checked');

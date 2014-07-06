@@ -21,7 +21,7 @@
             country: 'country'
         },
 
-        COUNTRIES: ['CA', 'DK', 'GB', 'IT', 'NL', 'SE', 'SG', 'US'],
+        COUNTRY_CODES: ['CA', 'DK', 'GB', 'IT', 'NL', 'SE', 'SG', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -63,12 +63,12 @@
             }
 
             var country = options.country;
-            if (typeof country !== 'string' || $.inArray(country, this.COUNTRIES) === -1) {
+            if (typeof country !== 'string' || $.inArray(country, this.COUNTRY_CODES) === -1) {
                 // Try to determine the country
                 country = validator.getDynamicOption(country, $field);
             }
 
-            if (!country || $.inArray(country.toUpperCase(), this.COUNTRIES) === -1) {
+            if (!country || $.inArray(country.toUpperCase(), this.COUNTRY_CODES) === -1) {
                 return { valid: false, message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.zipCode.countryNotSupported, country) };
             }
 
