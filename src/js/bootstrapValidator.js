@@ -362,9 +362,7 @@
                 case (!!options.message):
                     return options.message;
                 case (!!$.fn.bootstrapValidator.i18n[validatorName]):
-                    return ('function' === typeof $.fn.bootstrapValidator.i18n[validatorName].getMessage)
-                            ? $.fn.bootstrapValidator.i18n[validatorName].getMessage(options, this)
-                            : $.fn.bootstrapValidator.i18n[validatorName]['default'];
+                    return $.fn.bootstrapValidator.i18n[validatorName]['default'];
                 case (!!this.options.fields[field].message):
                     return this.options.fields[field].message;
                 default:
