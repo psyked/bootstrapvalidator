@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-07-06 8:06:34 AM
+ * @version     v0.5.0-dev, built on 2014-07-06 8:37:51 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -2763,21 +2763,6 @@
             TN: 'Tunisia',
             TR: 'Turkey',
             VG: 'Virgin Islands, British'
-        },
-
-        getMessage: function(options) {
-            if (options.country) {
-                var country = options.country.toUpperCase();
-                if (!$.fn.bootstrapValidator.validators.iban.REGEX[country]) {
-                    return $.fn.bootstrapValidator.helpers.format(this.countryNotSupported, options.country);
-                }
-
-                if (this.countries[country]) {
-                    return $.fn.bootstrapValidator.helpers.format(this.country, this.countries[country]);
-                }
-            }
-
-            return this['default'];
         }
     });
 
@@ -2823,7 +2808,7 @@
             'GB': 'GB[0-9]{2}[A-Z]{4}[0-9]{6}[0-9]{8}',                         // United Kingdom
             'GE': 'GE[0-9]{2}[A-Z]{2}[0-9]{16}',                                // Georgia
             'GI': 'GI[0-9]{2}[A-Z]{4}[A-Z0-9]{15}',                             // Gibraltar
-            'GL': 'GL[0-9]{2}[0-9]{4}[0-9]{9}[0-9]{1}',                         // Greenland[
+            'GL': 'GL[0-9]{2}[0-9]{4}[0-9]{9}[0-9]{1}',                         // Greenland
             'GR': 'GR[0-9]{2}[0-9]{3}[0-9]{4}[A-Z0-9]{16}',                     // Greece
             'GT': 'GT[0-9]{2}[A-Z0-9]{4}[A-Z0-9]{20}',                          // Guatemala
             'HR': 'HR[0-9]{2}[0-9]{7}[0-9]{10}',                                // Croatia
@@ -2880,8 +2865,12 @@
          * @param {jQuery} $field Field element
          * @param {Object} options Can consist of the following keys:
          * - message: The invalid message
-         * - country: The ISO 3166-1 country code
-         * @returns {Boolean}
+         * - country: The ISO 3166-1 country code. It can be
+         *      - A country code
+         *      - Name of field which its value defines the country code
+         *      - Name of callback function that returns the country code
+         *      - A callback function that returns the country code
+         * @returns {Boolean|Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -2890,12 +2879,26 @@
             }
 
             value = value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
-            var country = options.country || value.substr(0, 2);
-            if (!this.REGEX[country]) {
-                return false;
+            var country = options.country;
+            if (!country) {
+                country = value.substr(0, 2);
+            } else if (typeof country !== 'string' || !this.REGEX[country]) {
+                // Determine the country code
+                country = validator.getDynamicOption(country, $field);
             }
+
+            if (!this.REGEX[country]) {
+                return {
+                    valid: false,
+                    message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.iban.countryNotSupported, country)
+                };
+            }
+
             if (!(new RegExp('^' + this.REGEX[country] + '$')).test(value)) {
-                return false;
+                return {
+                    valid: false,
+                    message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.iban.country, $.fn.bootstrapValidator.i18n.iban.countries[country])
+                };
             }
 
             value = value.substr(4) + value.substr(0, 4);
@@ -2913,7 +2916,10 @@
             for (var i = 1; i < length; ++i) {
                 temp = (temp * 10 + parseInt(value.substr(i, 1), 10)) % 97;
             }
-            return (temp === 1);
+            return {
+                valid: (temp === 1),
+                message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.iban.country, $.fn.bootstrapValidator.i18n.iban.countries[country])
+            };
         }
     };
 }(window.jQuery));

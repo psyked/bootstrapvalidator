@@ -1901,31 +1901,128 @@ describe('greaterThan', function() {
 
 describe('iban', function() {
     beforeEach(function() {
-        var html = [
-            '<div class="container">',
-                '<form class="form-horizontal" id="ibanForm">',
-                    '<div class="form-group">',
-                        '<input type="text" name="iban" data-bv-iban />',
-                    '</div>',
-                '</form>',
-            '</div>'
-        ].join('\n');
+        $([
+            '<form class="form-horizontal" id="ibanForm">',
+                '<div class="form-group">',
+                    '<select class="form-control" name="country">',
+                        '<option value="AD">Andorra</option>',
+                        '<option value="AE">United Arab Emirates</option>',
+                        '<option value="AL">Albania</option>',
+                        '<option value="AO">Angola</option>',
+                        '<option value="AT">Austria</option>',
+                        '<option value="AZ">Azerbaijan</option>',
+                        '<option value="BA">Bosnia and Herzegovina</option>',
+                        '<option value="BE">Belgium</option>',
+                        '<option value="BF">Burkina Faso</option>',
+                        '<option value="BG">Bulgaria</option>',
+                        '<option value="BH">Bahrain</option>',
+                        '<option value="BI">Burundi</option>',
+                        '<option value="BJ">Benin</option>',
+                        '<option value="BR">Brazil</option>',
+                        '<option value="CH">Switzerland</option>',
+                        '<option value="CM">Cameroon</option>',
+                        '<option value="CR">Costa Rica</option>',
+                        '<option value="CV">Cape Verde</option>',
+                        '<option value="CY">Cyprus</option>',
+                        '<option value="CZ">Czech Republic</option>',
+                        '<option value="DE">Germany</option>',
+                        '<option value="DK">Denmark</option>',
+                        '<option value="DO">Dominican Republic</option>',
+                        '<option value="DZ">Algeria</option>',
+                        '<option value="EE">Estonia</option>',
+                        '<option value="ES">Spain</option>',
+                        '<option value="FI">Finland</option>',
+                        '<option value="FO">Faroe Islands</option>',
+                        '<option value="FR">France</option>',
+                        '<option value="GB">United Kingdom</option>',
+                        '<option value="GE">Georgia</option>',
+                        '<option value="GI">Gibraltar</option>',
+                        '<option value="GL">Greenland</option>',
+                        '<option value="GR">Greece</option>',
+                        '<option value="GT">Guatemala</option>',
+                        '<option value="HR">Croatia</option>',
+                        '<option value="HU">Hungary</option>',
+                        '<option value="IE">Ireland</option>',
+                        '<option value="IL">Israel</option>',
+                        '<option value="IR">Iran</option>',
+                        '<option value="IS">Iceland</option>',
+                        '<option value="IT">Italy</option>',
+                        '<option value="JO">Jordan</option>',
+                        '<option value="KW">Kuwait</option>',
+                        '<option value="KZ">Kazakhstan</option>',
+                        '<option value="LB">Lebanon</option>',
+                        '<option value="LI">Liechtenstein</option>',
+                        '<option value="LT">Lithuania</option>',
+                        '<option value="LU">Luxembourg</option>',
+                        '<option value="LV">Latvia</option>',
+                        '<option value="MC">Monaco</option>',
+                        '<option value="MD">Moldova</option>',
+                        '<option value="ME">Montenegro</option>',
+                        '<option value="MG">Madagascar</option>',
+                        '<option value="MK">Macedonia</option>',
+                        '<option value="ML">Mali</option>',
+                        '<option value="MR">Mauritania</option>',
+                        '<option value="MT">Malta</option>',
+                        '<option value="MU">Mauritius</option>',
+                        '<option value="MZ">Mozambique</option>',
+                        '<option value="NL">Netherlands</option>',
+                        '<option value="NO">Norway</option>',
+                        '<option value="PK">Pakistan</option>',
+                        '<option value="PL">Poland</option>',
+                        '<option value="PS">Palestinian</option>',
+                        '<option value="PT">Portugal</option>',
+                        '<option value="QA">Qatar</option>',
+                        '<option value="RO">Romania</option>',
+                        '<option value="RS">Serbia</option>',
+                        '<option value="SA">Saudi Arabia</option>',
+                        '<option value="SE">Sweden</option>',
+                        '<option value="SE">Slovenia</option>',
+                        '<option value="SK">Slovakia</option>',
+                        '<option value="SM">San Marino</option>',
+                        '<option value="SN">Senegal</option>',
+                        '<option value="TN">Tunisia</option>',
+                        '<option value="TR">Turkey</option>',
+                        '<option value="VG">Virgin Islands, British</option>',
+                    '</select>',
+                '</div>',
+                '<div class="form-group">',
+                    '<input type="text" name="iban" data-bv-iban />',
+                '</div>',
+            '</form>'
+        ].join('\n')).appendTo('body');
 
-        $(html).appendTo('body');
         $('#ibanForm').bootstrapValidator();
 
-        this.bv    = $('#ibanForm').data('bootstrapValidator');
-        this.$iban = this.bv.getFieldElements('iban');
+        this.bv       = $('#ibanForm').data('bootstrapValidator');
+        this.$country = this.bv.getFieldElements('country');
+        this.$iban    = this.bv.getFieldElements('iban');
     });
 
     afterEach(function() {
-        $('#ibanForm').bootstrapValidator('destroy').parent().remove();
+        $('#ibanForm').bootstrapValidator('destroy').remove();
     });
 
     it('not supported country', function() {
         this.$iban.val('US123456789');
         this.bv.validate();
         expect(this.bv.isValidField('iban')).toEqual(false);
+    });
+
+    it('dynamic country', function() {
+        this.$iban.attr('data-bv-iban-country', 'country');
+        this.bv.destroy();
+        this.bv = $('#ibanForm').bootstrapValidator().data('bootstrapValidator');
+
+        this.$country.val('AT');
+        this.$iban.val('AT611904300234573201');
+        this.bv.validate();
+        expect(this.bv.isValid()).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$country.val('BG');
+        this.$iban.val('HR1210010051863000160');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
     });
 
     it('Albania', function() {
