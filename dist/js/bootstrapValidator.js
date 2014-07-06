@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-07-06 10:03:32 AM
+ * @version     v0.5.0-dev, built on 2014-07-06 10:11:03 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -785,9 +785,20 @@
          * @returns {BootstrapValidator}
          */
         updateMessage: function(field, validator, message) {
-            var fields = ('string' === typeof field) ? this.getFieldElements(field) : field,
-                field  = ('object' === typeof field) ? field.attr('data-bv-field')  : field;
-            fields.each(function() {
+            var $fields = $([]);
+            switch (typeof field) {
+                case 'object':
+                    $fields = field;
+                    field   = field.attr('data-bv-field');
+                    break;
+                case 'string':
+                    $fields = this.getFieldElements(field);
+                    break;
+                default:
+                    break;
+            }
+
+            $fields.each(function() {
                 $(this).data('bv.messages').find('.help-block[data-bv-validator="' + validator + '"][data-bv-for="' + field + '"]').html(message);
             });
         },
@@ -1280,14 +1291,24 @@
          * @returns {BootstrapValidator}
          */
         resetField: function(field, resetValue) {
-            var fields = ('string' === typeof field) ? this.getFieldElements(field) : field,
-                field  = ('object' === typeof field) ? field.attr('data-bv-field')  : field,
-                total  = fields.length;
+            var $fields = $([]);
+            switch (typeof field) {
+                case 'object':
+                    $fields = field;
+                    field   = field.attr('data-bv-field');
+                    break;
+                case 'string':
+                    $fields = this.getFieldElements(field);
+                    break;
+                default:
+                    break;
+            }
 
+            var total = $fields.length;
             if (this.options.fields[field]) {
                 for (var i = 0; i < total; i++) {
                     for (var validator in this.options.fields[field].validators) {
-                        fields.eq(i).removeData('bv.dfs.' + validator);
+                        $fields.eq(i).removeData('bv.dfs.' + validator);
                     }
                 }
             }
@@ -1296,8 +1317,8 @@
             this.updateStatus(field, this.STATUS_NOT_VALIDATED);
 
             if (resetValue) {
-                var type = fields.attr('type');
-                ('radio' === type || 'checkbox' === type) ? fields.removeAttr('checked').removeAttr('selected') : fields.val('');
+                var type = $fields.attr('type');
+                ('radio' === type || 'checkbox' === type) ? $fields.removeAttr('checked').removeAttr('selected') : $fields.val('');
             }
 
             return this;
@@ -6311,7 +6332,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '' || !options.country) {
+            if (value === '' || !options.country) {
                 return true;
             }
 

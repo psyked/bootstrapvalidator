@@ -58,7 +58,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '' || !options.country) {
+            if (value === '' || !options.country) {
                 return true;
             }
 
