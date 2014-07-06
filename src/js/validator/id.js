@@ -29,23 +29,6 @@
             SK: 'Slovak',
             SM: 'San Marino',
             ZA: 'South African'
-        },
-
-        getMessage: function(options) {
-            if (options.country) {
-                var country = options.country.toLowerCase(),
-                    method  = ['_', country].join('');
-                if ($.fn.bootstrapValidator.validators.id[method] === undefined) {
-                    return $.fn.bootstrapValidator.helpers.format(this.countryNotSupported, country);
-                }
-
-                country = country.toUpperCase();
-                if (this.countries[country]) {
-                    return $.fn.bootstrapValidator.helpers.format(this.country, this.countries[country]);
-                }
-            }
-
-            return this['default'];
         }
     });
 
@@ -55,6 +38,11 @@
             country: 'country'
         },
 
+        COUNTRY_CODES: [
+            'BA', 'BG', 'BR', 'CH', 'CL', 'CZ', 'DK', 'EE', 'ES', 'FI', 'HR', 'IE', 'IS', 'LT', 'LV', 'ME', 'MK', 'NL',
+            'RO', 'RS', 'SE', 'SI', 'SK', 'SM', 'ZA'
+        ],
+
         /**
          * Validate identification number in different countries
          *
@@ -63,8 +51,12 @@
          * @param {jQuery} $field Field element
          * @param {Object} options Consist of key:
          * - message: The invalid message
-         * - country: The ISO 3166-1 country code
-         * @returns {Boolean}
+         * - country: The ISO 3166-1 country code. It can be
+         *      - One of country code defined in COUNTRY_CODES
+         *      - Name of field which its value defines the country code
+         *      - Name of callback function that returns the country code
+         *      - A callback function that returns the country code
+         * @returns {Boolean|Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -72,13 +64,25 @@
                 return true;
             }
 
-            var country = options.country || value.substr(0, 2),
-                method  = ['_', country.toLowerCase()].join('');
-            if (this[method] && 'function' === typeof this[method]) {
-                return this[method](value);
+            var country = options.country;
+            if (!country) {
+                country = value.substr(0, 2);
+            } else if (typeof country !== 'string' || $.inArray(country.toUpperCase(), this.COUNTRY_CODES) === -1) {
+                // Determine the country code
+                country = validator.getDynamicOption(country, $field);
             }
 
-            return false;
+            if ($.inArray(country, this.COUNTRY_CODES) === -1) {
+                return { valid: false, message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.id.countryNotSupported, country) };
+            }
+
+            var method  = ['_', country.toLowerCase()].join('');
+            return this[method](value)
+                    ? true
+                    : {
+                        valid: false,
+                        message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.id.country, $.fn.bootstrapValidator.i18n.id.countries[country.toUpperCase()])
+                    };
         },
 
         /**

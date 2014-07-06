@@ -1,25 +1,71 @@
 describe('id', function() {
     beforeEach(function () {
-        var html = [
+        $([
             '<form class="form-horizontal" id="idForm">',
                 '<div class="form-group">',
-                    '<input type="text" name="id" data-bv-id />',
+                    '<select class="form-control" name="country">',
+                        '<option value="BA">Bosnia and Herzegovina</option>',
+                        '<option value="BG">Bulgaria</option>',
+                        '<option value="BR">Brazil</option>',
+                        '<option value="CH">Switzerland</option>',
+                        '<option value="CL">Chile</option>',
+                        '<option value="CZ">Czech</option>',
+                        '<option value="DK">Denmark</option>',
+                        '<option value="EE">Estonia</option>',
+                        '<option value="ES">Spain</option>',
+                        '<option value="FI">Finland</option>',
+                        '<option value="HR">Croatia</option>',
+                        '<option value="IE">Ireland</option>',
+                        '<option value="IS">Iceland</option>',
+                        '<option value="LT">Lithuania</option>',
+                        '<option value="LV">Latvia</option>',
+                        '<option value="ME">Montenegro</option>',
+                        '<option value="MK">Macedonia</option>',
+                        '<option value="NL">Netherlands</option>',
+                        '<option value="RO">Romania</option>',
+                        '<option value="RS">Serbia</option>',
+                        '<option value="SE">Sweden</option>',
+                        '<option value="SI">Slovenia</option>',
+                        '<option value="SK">Slovakia</option>',
+                        '<option value="SM">San Marino</option>',
+                        '<option value="ZA">South Africa</option>',
+                    '</select>',
                 '</div>',
-            '</form>',
-        ].join('\n');
+                '<div class="form-group">',
+                    '<input class="form-control" type="text" name="id" data-bv-id />',
+                '</div>',
+            '</form>'
+        ].join('\n')).appendTo('body');
 
-        $(html).appendTo('body');
         $('#idForm').bootstrapValidator();
 
         /**
          * @type {BootstrapValidator}
          */
-        this.bv  = $('#idForm').data('bootstrapValidator');
-        this.$id = this.bv.getFieldElements('id');
+        this.bv       = $('#idForm').data('bootstrapValidator');
+        this.$country = this.bv.getFieldElements('country');
+        this.$id      = this.bv.getFieldElements('id');
     });
 
     afterEach(function () {
         $('#idForm').bootstrapValidator('destroy').remove();
+    });
+
+    it('dynamic country', function() {
+        this.$id.attr('data-bv-id-country', 'country');
+        this.bv.destroy();
+        this.bv = $('#idForm').bootstrapValidator().data('bootstrapValidator');
+
+        this.$country.val('BG');
+        this.$id.val('7552010005');
+        this.bv.validate();
+        expect(this.bv.isValid()).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$country.val('BR');
+        this.$id.val('231.002.999-00');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
     });
 
     it('Bulgarian national identification number (EGN)', function() {
