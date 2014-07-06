@@ -18,12 +18,12 @@ describe('enable validators', function() {
                         stringLength: {
                             min: 8,
                             max: 40,
-                            message: 'The full name must be more than 8 and less than 40 characters long'
+                            message: 'The full name must be more than %s and less than %s characters long'
                         },
                         regexp: {
                             enabled: false,
                             regexp: /^[a-zA-Z\s]+$/,
-                            message: 'The username can only consist of alphabetical, number, and space'
+                            message: 'The full name can only consist of alphabetical, number, and space'
                         }
                     }
                 }
@@ -77,8 +77,9 @@ describe('enable validators', function() {
         expect(this.bv.isValid()).toEqual(false);
 
         var messages = this.bv.getMessages('fullName');
+        console.log(messages);
         expect($.inArray('The full name must be more than 8 and less than 40 characters long', messages)).toBeGreaterThan(-1);
-        expect($.inArray('The username can only consist of alphabetical, number, and space', messages)).toBeGreaterThan(-1);
+        expect($.inArray('The full name can only consist of alphabetical, number, and space', messages)).toBeGreaterThan(-1);
     });
 
     it('disable particular validators', function() {
@@ -98,6 +99,6 @@ describe('enable validators', function() {
         expect(this.bv.isValid()).toBeTruthy();
 
         var messages = this.bv.getMessages('fullName');
-        expect($.inArray('The username can only consist of alphabetical, number, and space', messages)).toEqual(-1);
+        expect($.inArray('The full name can only consist of alphabetical, number, and space', messages)).toEqual(-1);
     });
 });

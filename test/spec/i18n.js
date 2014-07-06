@@ -261,7 +261,7 @@ describe('i18n', function() {
         this.bv.resetForm();
         this.$userName.val('123');
         this.bv.validate();
-        expect(this.bv.getMessages('username', 'stringLength')[0]).toEqual(i18n.stringLength.getMessage({ min: 6, max: 20 }));
+        expect(this.bv.getMessages('username', 'stringLength')[0]).toEqual(format(i18n.stringLength.between, [6, 20]));
 
         this.bv.resetForm();
         this.$userName.val('contain@#$');

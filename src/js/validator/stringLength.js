@@ -3,20 +3,7 @@
         'default': 'Please enter a value with valid length',
         less: 'Please enter less than %s characters',
         more: 'Please enter more than %s characters',
-        between: 'Please enter value between %s and %s characters long',
-
-        getMessage: function(options) {
-            switch (true) {
-                case (!!options.min && !!options.max):
-                    return $.fn.bootstrapValidator.helpers.format(this.between, [options.min, options.max]);
-                case (!!options.min):
-                    return $.fn.bootstrapValidator.helpers.format(this.more, options.min);
-                case (!!options.max):
-                    return $.fn.bootstrapValidator.helpers.format(this.less, options.max);
-                default:
-                    return this['default'];
-            }
-        }
+        between: 'Please enter value between %s and %s characters long'
     });
 
     $.fn.bootstrapValidator.validators.stringLength = {
@@ -46,8 +33,14 @@
          * - min
          * - max
          * At least one of two keys is required
+         * The min, max keys define the number which the field value compares to. min, max can be
+         *      - A number
+         *      - Name of field which its value defines the number
+         *      - Name of callback function that returns the number
+         *      - A callback function that returns the number
+         *
          * - message: The invalid message
-         * @returns {Boolean}
+         * @returns {Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -55,12 +48,34 @@
                 return true;
             }
 
-            var length = value.length;
-            if ((options.min && length < options.min) || (options.max && length > options.max)) {
-                return false;
+            var min     = $.isNumeric(options.min) ? options.min : validator.getDynamicOption(options.min, $field),
+                max     = $.isNumeric(options.max) ? options.max : validator.getDynamicOption(options.max, $field),
+                length  = value.length,
+                isValid = true,
+                message = options.message || $.fn.bootstrapValidator.i18n.stringLength['default'];
+
+            if ((min && length < parseInt(min, 10)) || (max && length > parseInt(max, 10))) {
+                isValid = false;
             }
 
-            return true;
+            switch (true) {
+                case (!!min && !!max):
+                    message = $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.stringLength.between, [parseInt(min, 10), parseInt(max, 10)]);
+                    break;
+
+                case (!!min):
+                    message = $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.stringLength.more, parseInt(min, 10));
+                    break;
+
+                case (!!max):
+                    message = $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.stringLength.less, parseInt(max, 10));
+                    break;
+
+                default:
+                    break;
+            }
+
+            return { valid: isValid, message: message };
         }
     };
 }(window.jQuery));

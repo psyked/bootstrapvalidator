@@ -190,7 +190,7 @@
          *      - Name of field which its value defines the country code
          *      - Name of callback function that returns the country code
          *      - A callback function that returns the country code
-         * @returns {Boolean|Object}
+         * @returns {Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
