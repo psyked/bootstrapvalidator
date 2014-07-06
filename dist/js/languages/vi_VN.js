@@ -184,7 +184,9 @@
             'default': 'Vui lòng nhập số hợp lệ'
         },
         ip: {
-            'default': 'Vui lòng nhập địa chỉ IP hợp lệ'
+            'default': 'Vui lòng nhập địa chỉ IP hợp lệ',
+            ipv4: 'Vui lòng nhập địa chỉ IPv4 hợp lệ',
+            ipv6: 'Vui lòng nhập địa chỉ IPv6 hợp lệ'
         },
         isbn: {
             'default': 'Vui lòng nhập số ISBN hợp lệ'

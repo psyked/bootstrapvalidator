@@ -189,7 +189,9 @@
             'default': 'Please enter a valid number'
         },
         ip: {
-            'default': 'Please enter a valid IP address'
+            'default': 'Please enter a valid IP address',
+            ipv4: 'Please enter a valid IPv4 address',
+            ipv6: 'Please enter a valid IPv6 address'
         },
         isbn: {
             'default': 'Please enter a valid ISBN number'
