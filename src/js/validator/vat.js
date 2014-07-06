@@ -37,23 +37,6 @@
             SE: 'Swedish',
             SI: 'Slovenian',
             SK: 'Slovak'
-        },
-
-        getMessage: function(options) {
-            if (options.country) {
-                var country = options.country,
-                    method  = ['_', country.toLowerCase()].join('');
-                if ($.fn.bootstrapValidator.validators.vat[method] === undefined) {
-                    return $.fn.bootstrapValidator.helpers.format(this.countryNotSupported, options.country);
-                }
-
-                country = country.toUpperCase();
-                if (this.countries[country]) {
-                    return $.fn.bootstrapValidator.helpers.format(this.country, this.countries[country]);
-                }
-            }
-
-            return this['default'];
         }
     });
 
@@ -63,6 +46,12 @@
             country: 'country'
         },
 
+        // Supported country codes
+        COUNTRY_CODES: [
+            'AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'EL', 'HU', 'IE', 'IT',
+            'LV', 'LT', 'LU', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RU', 'RS', 'SK', 'SI', 'ES', 'SE', 'CH', 'GB'
+        ],
+
         /**
          * Validate an European VAT number
          *
@@ -70,8 +59,12 @@
          * @param {jQuery} $field Field element
          * @param {Object} options Consist of key:
          * - message: The invalid message
-         * - country: The ISO 3166-1 country code
-         * @returns {Boolean}
+         * - country: The ISO 3166-1 country code. It can be
+         *      - One of country code defined in COUNTRY_CODES
+         *      - Name of field which its value defines the country code
+         *      - Name of callback function that returns the country code
+         *      - A callback function that returns the country code
+         * @returns {Boolean|Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -79,13 +72,28 @@
                 return true;
             }
 
-            var country = options.country || value.substr(0, 2),
-                method  = ['_', country.toLowerCase()].join('');
-            if (this[method] && 'function' === typeof this[method]) {
-                return this[method](value);
+            var country = options.country;
+            if (!country) {
+                country = value.substr(0, 2);
+            } else if (typeof country !== 'string' || $.inArray(country.toUpperCase(), this.COUNTRY_CODES) === -1) {
+                // Determine the country code
+                country = validator.getDynamicOption(country, $field);
             }
 
-            return false;
+            if ($.inArray(country, this.COUNTRY_CODES) === -1) {
+                return {
+                    valid: false,
+                    message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.vat.countryNotSupported, country)
+                };
+            }
+
+            var method  = ['_', country.toLowerCase()].join('');
+            return this[method](value)
+                ? true
+                : {
+                    valid: false,
+                    message: $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.vat.country, $.fn.bootstrapValidator.i18n.vat.countries[country.toUpperCase()])
+                };
         },
 
         // VAT validators

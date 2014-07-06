@@ -38,6 +38,7 @@
             country: 'country'
         },
 
+        // Supported country codes
         COUNTRY_CODES: [
             'BA', 'BG', 'BR', 'CH', 'CL', 'CZ', 'DK', 'EE', 'ES', 'FI', 'HR', 'IE', 'IS', 'LT', 'LV', 'ME', 'MK', 'NL',
             'RO', 'RS', 'SE', 'SI', 'SK', 'SM', 'ZA'

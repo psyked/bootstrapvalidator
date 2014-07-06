@@ -3,6 +3,42 @@ describe('vat', function() {
         $([
             '<form class="form-horizontal" id="vatForm">',
                 '<div class="form-group">',
+                    '<select class="form-control" name="country">',
+                        '<option value="AT">Austria</option>',
+                        '<option value="BE">Belgium</option>',
+                        '<option value="BG">Bulgaria</option>',
+                        '<option value="HR">Croatia</option>',
+                        '<option value="CY">Cyprus</option>',
+                        '<option value="CZ">Czech Republic</option>',
+                        '<option value="DK">Denmark</option>',
+                        '<option value="EE">Estonia</option>',
+                        '<option value="FI">Finland</option>',
+                        '<option value="FR">France</option>',
+                        '<option value="DE">Germany</option>',
+                        '<option value="GR">Greece</option>',
+                        '<option value="HU">Hungary</option>',
+                        '<option value="IE">Ireland</option>',
+                        '<option value="IT">Italy</option>',
+                        '<option value="LV">Latvia</option>',
+                        '<option value="LT">Lithuania</option>',
+                        '<option value="LU">Luxembourg</option>',
+                        '<option value="MT">Malta</option>',
+                        '<option value="NL">Netherlands</option>',
+                        '<option value="NO">Norway</option>',
+                        '<option value="PL">Poland</option>',
+                        '<option value="PT">Portugal</option>',
+                        '<option value="RO">Romania</option>',
+                        '<option value="RU">Russia</option>',
+                        '<option value="RS">Serbia</option>',
+                        '<option value="SK">Slovakia</option>',
+                        '<option value="SI">Slovenia</option>',
+                        '<option value="ES">Spain</option>',
+                        '<option value="SE">Sweden</option>',
+                        '<option value="CH">Switzerland</option>',
+                        '<option value="GB">United Kingdom</option>',
+                    '</select>',
+                '</div>',
+                '<div class="form-group">',
                     '<input type="text" name="vat" data-bv-vat />',
                 '</div>',
             '</form>',
@@ -13,12 +49,36 @@ describe('vat', function() {
         /**
          * @type {BootstrapValidator}
          */
-        this.bv   = $('#vatForm').data('bootstrapValidator');
-        this.$vat = this.bv.getFieldElements('vat');
+        this.bv       = $('#vatForm').data('bootstrapValidator');
+        this.$country = this.bv.getFieldElements('country');
+        this.$vat     = this.bv.getFieldElements('vat');
     });
 
     afterEach(function() {
         $('#vatForm').bootstrapValidator('destroy').remove();
+    });
+
+    it('dynamic country', function() {
+        this.$vat.attr('data-bv-vat-country', 'country');
+        this.bv.destroy();
+        this.bv = $('#vatForm').bootstrapValidator().data('bootstrapValidator');
+
+        this.$country.val('AT');
+        this.$vat.val('ATU13585627');
+        this.bv.validate();
+        expect(this.bv.isValid()).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$country.val('BG');
+        this.$vat.val('BE0428759497');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$country.val('BE');
+        this.$vat.val('BE431150351');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
     });
 
     it('Austrian VAT number', function () {
