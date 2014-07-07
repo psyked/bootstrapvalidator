@@ -361,10 +361,10 @@
             switch (true) {
                 case (!!options.message):
                     return options.message;
-                case (!!$.fn.bootstrapValidator.i18n[validatorName]):
-                    return $.fn.bootstrapValidator.i18n[validatorName]['default'];
                 case (!!this.options.fields[field].message):
                     return this.options.fields[field].message;
+                case (!!$.fn.bootstrapValidator.i18n[validatorName]):
+                    return $.fn.bootstrapValidator.i18n[validatorName]['default'];
                 default:
                     return this.options.message;
             }
@@ -1685,6 +1685,10 @@
                 return false;
             }
 
+            day   = parseInt(day, 10);
+            month = parseInt(month, 10);
+            year  = parseInt(year, 10);
+
             if (year < 1000 || year > 9999 || month === 0 || month > 12) {
                 return false;
             }
@@ -1695,7 +1699,7 @@
             }
 
             // Check the day
-            if (day < 0 || day > numDays[month - 1]) {
+            if (day <= 0 || day > numDays[month - 1]) {
                 return false;
             }
 

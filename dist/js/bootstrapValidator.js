@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-07-06 10:28:36 PM
+ * @version     v0.5.0-dev, built on 2014-07-07 6:50:25 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -362,10 +362,10 @@
             switch (true) {
                 case (!!options.message):
                     return options.message;
-                case (!!$.fn.bootstrapValidator.i18n[validatorName]):
-                    return $.fn.bootstrapValidator.i18n[validatorName]['default'];
                 case (!!this.options.fields[field].message):
                     return this.options.fields[field].message;
+                case (!!$.fn.bootstrapValidator.i18n[validatorName]):
+                    return $.fn.bootstrapValidator.i18n[validatorName]['default'];
                 default:
                     return this.options.message;
             }
@@ -1686,6 +1686,10 @@
                 return false;
             }
 
+            day   = parseInt(day, 10);
+            month = parseInt(month, 10);
+            year  = parseInt(year, 10);
+
             if (year < 1000 || year > 9999 || month === 0 || month > 12) {
                 return false;
             }
@@ -1696,7 +1700,7 @@
             }
 
             // Check the day
-            if (day < 0 || day > numDays[month - 1]) {
+            if (day <= 0 || day > numDays[month - 1]) {
                 return false;
             }
 
@@ -2351,10 +2355,6 @@
             }
 
             // Validate day, month, and year
-            day   = parseInt(day, 10);
-            month = parseInt(month, 10);
-            year  = parseInt(year, 10);
-
             return $.fn.bootstrapValidator.helpers.date(year, month, day);
         }
     };

@@ -104,10 +104,6 @@
             }
 
             // Validate day, month, and year
-            day   = parseInt(day, 10);
-            month = parseInt(month, 10);
-            year  = parseInt(year, 10);
-
             return $.fn.bootstrapValidator.helpers.date(year, month, day);
         }
     };
