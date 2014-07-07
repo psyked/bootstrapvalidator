@@ -1,0 +1,327 @@
+(function($) {
+    /**
+     * Default English package
+     * It's included in the dist, so you do NOT need to include it to your head tag
+     * The only reason I put it here is that you can clone it, and translate it into your language
+     */
+    $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
+        base64: {
+            'default': 'Kérlek, hogy érvényes base 64 karakter láncot adj meg'
+        },
+        between: {
+            'default': 'Kérlek, hogy %s és %s között adj meg értéket',
+            notInclusive: 'Kérlek, hogy %s és %s között adj meg értéket'
+        },
+        callback: {
+            'default': 'Kérlek, hogy érvényes értéket adj meg'
+        },
+        choice: {
+            'default': 'Kérlek, hogy érvényes értéket adj meg',
+            less: 'Kérlek, hogy legalább %s lehetőséget válassz ki',
+            more: 'Kérlek, hogy maximum %s lehetőséget válassz ki',
+            between: 'Kérlek, hogy válassz %s - %s lehetőséget'
+        },
+        creditCard: {
+            'default': 'Kérlek, hogy érvényes bankkártya számot adj meg'
+        },
+        cusip: {
+            'default': 'Please enter a valid CUSIP number'
+        },
+        cvv: {
+            'default': 'Please enter a valid CVV number'
+        },
+        date: {
+            'default': 'Please enter a valid date'
+        },
+        different: {
+            'default': 'Please enter a different value'
+        },
+        digits: {
+            'default': 'Please enter only digits'
+        },
+        ean: {
+            'default': 'Please enter a valid EAN number'
+        },
+        emailAddress: {
+            'default': 'Please enter a valid email address'
+        },
+        file: {
+            'default': 'Please choose a valid file'
+        },
+        greaterThan: {
+            'default': 'Please enter a value greater than or equal to %s',
+            notInclusive: 'Please enter a value greater than %s'
+        },
+        grid: {
+            'default': 'Please enter a valid GRId number'
+        },
+        hex: {
+            'default': 'Please enter a valid hexadecimal number'
+        },
+        hexColor: {
+            'default': 'Please enter a valid hex color'
+        },
+        iban: {
+            'default': 'Please enter a valid IBAN number',
+            countryNotSupported: 'The country code %s is not supported',
+            country: 'Please enter a valid IBAN number in %s',
+            countries: {
+                AD: 'Andorra',
+                AE: 'United Arab Emirates',
+                AL: 'Albania',
+                AO: 'Angola',
+                AT: 'Austria',
+                AZ: 'Azerbaijan',
+                BA: 'Bosnia and Herzegovina',
+                BE: 'Belgium',
+                BF: 'Burkina Faso',
+                BG: 'Bulgaria',
+                BH: 'Bahrain',
+                BI: 'Burundi',
+                BJ: 'Benin',
+                BR: 'Brazil',
+                CH: 'Switzerland',
+                CI: 'Ivory Coast',
+                CM: 'Cameroon',
+                CR: 'Costa Rica',
+                CV: 'Cape Verde',
+                CY: 'Cyprus',
+                CZ: 'Czech Republic',
+                DE: 'Germany',
+                DK: 'Denmark',
+                DO: 'Dominican Republic',
+                DZ: 'Algeria',
+                EE: 'Estonia',
+                ES: 'Spain',
+                FI: 'Finland',
+                FO: 'Faroe Islands',
+                FR: 'France',
+                GB: 'United Kingdom',
+                GE: 'Georgia',
+                GI: 'Gibraltar',
+                GL: 'Greenland',
+                GR: 'Greece',
+                GT: 'Guatemala',
+                HR: 'Croatia',
+                HU: 'Hungary',
+                IE: 'Ireland',
+                IL: 'Israel',
+                IR: 'Iran',
+                IS: 'Iceland',
+                IT: 'Italy',
+                JO: 'Jordan',
+                KW: 'Kuwait',
+                KZ: 'Kazakhstan',
+                LB: 'Lebanon',
+                LI: 'Liechtenstein',
+                LT: 'Lithuania',
+                LU: 'Luxembourg',
+                LV: 'Latvia',
+                MC: 'Monaco',
+                MD: 'Moldova',
+                ME: 'Montenegro',
+                MG: 'Madagascar',
+                MK: 'Macedonia',
+                ML: 'Mali',
+                MR: 'Mauritania',
+                MT: 'Malta',
+                MU: 'Mauritius',
+                MZ: 'Mozambique',
+                NL: 'Netherlands',
+                NO: 'Norway',
+                PK: 'Pakistan',
+                PL: 'Poland',
+                PS: 'Palestinian',
+                PT: 'Portugal',
+                QA: 'Qatar',
+                RO: 'Romania',
+                RS: 'Serbia',
+                SA: 'Saudi Arabia',
+                SE: 'Sweden',
+                SI: 'Slovenia',
+                SK: 'Slovakia',
+                SM: 'San Marino',
+                SN: 'Senegal',
+                TN: 'Tunisia',
+                TR: 'Turkey',
+                VG: 'Virgin Islands, British'
+            }
+        },
+        id: {
+            'default': 'Please enter a valid identification number',
+            countryNotSupported: 'The country code %s is not supported',
+            country: 'Please enter a valid %s identification number',
+            countries: {
+                BA: 'Bosnia and Herzegovina',
+                BG: 'Bulgarian',
+                BR: 'Brazilian',
+                CH: 'Swiss',
+                CL: 'Chilean',
+                CZ: 'Czech',
+                DK: 'Danish',
+                EE: 'Estonian',
+                ES: 'Spanish',
+                FI: 'Finnish',
+                HR: 'Croatian',
+                IE: 'Irish',
+                IS: 'Iceland',
+                LT: 'Lithuanian',
+                LV: 'Latvian',
+                ME: 'Montenegro',
+                MK: 'Macedonian',
+                NL: 'Dutch',
+                RO: 'Romanian',
+                RS: 'Serbian',
+                SE: 'Swedish',
+                SI: 'Slovenian',
+                SK: 'Slovak',
+                SM: 'San Marino',
+                ZA: 'South African'
+            }
+        },
+        identical: {
+            'default': 'Kérlek, hogy ugyan azt az értéket add meg'
+        },
+        imei: {
+            'default': 'Kérlek, hogy érvényes IMEI számot adj meg'
+        },
+        integer: {
+            'default': 'Kérlek, hogy számot adj meg'
+        },
+        ip: {
+            'default': 'Kérlek, hogy IP címet adj meg',
+            ipv4: 'Please enter a valid IPv4 address',
+            ipv6: 'Please enter a valid IPv6 address'
+        },
+        isbn: {
+            'default': 'Please enter a valid ISBN number'
+        },
+        isin: {
+            'default': 'Please enter a valid ISIN number'
+        },
+        ismn: {
+            'default': 'Please enter a valid ISMN number'
+        },
+        issn: {
+            'default': 'Please enter a valid ISSN number'
+        },
+        lessThan: {
+            'default': 'Please enter a value less than or equal to %s',
+            notInclusive: 'Please enter a value less than %s'
+        },
+        mac: {
+            'default': 'Please enter a valid MAC address'
+        },
+        notEmpty: {
+            'default': 'Please enter a value'
+        },
+        numeric: {
+            'default': 'Please enter a valid float number'
+        },
+        phone: {
+            'default': 'Please enter a valid phone number',
+            countryNotSupported: 'The country code %s is not supported',
+            country: 'Please enter a valid phone number in %s',
+            countries: {
+                GB: 'United Kingdom',
+                US: 'USA'
+            }
+        },
+        regexp: {
+            'default': 'Please enter a value matching the pattern'
+        },
+        remote: {
+            'default': 'Please enter a valid value'
+        },
+        rtn: {
+            'default': 'Please enter a valid RTN number'
+        },
+        sedol: {
+            'default': 'Please enter a valid SEDOL number'
+        },
+        siren: {
+            'default': 'Please enter a valid SIREN number'
+        },
+        siret: {
+            'default': 'Please enter a valid SIRET number'
+        },
+        step: {
+            'default': 'Please enter a valid step of %s'
+        },
+        stringCase: {
+            'default': 'Please enter only lowercase characters',
+            upper: 'Please enter only uppercase characters'
+        },
+        stringLength: {
+            'default': 'Please enter a value with valid length',
+            less: 'Please enter less than %s characters',
+            more: 'Please enter more than %s characters',
+            between: 'Please enter value between %s and %s characters long'
+        },
+        uri: {
+            'default': 'Kérlek, hogy helyes URI -t adj meg'
+        },
+        uuid: {
+            'default': 'Please enter a valid UUID number',
+            version: 'Please enter a valid UUID version %s number'
+        },
+        vat: {
+            'default': 'Kérlek, hogy helyes adó számot adj meg',
+            countryNotSupported: '%s - nem támogatott orszák',
+            country: 'Kérlek, hogy heles %s adószámot ajd meg',
+            countries: {
+                AT: 'Osztrák',
+                BE: 'Belga',
+                BG: 'Bulgár',
+                CH: 'svájci',
+                CY: 'ciprusi',
+                CZ: 'Cseh',
+                DE: 'Német',
+                DK: 'Dán',
+                EE: 'észt',
+                ES: 'Spanyol',
+                FI: 'Finn',
+                FR: 'Francia',
+                GB: 'Egyesült Királyság',
+                GR: 'Görög',
+                EL: 'Görög',
+                HU: 'Magyar',
+                HR: 'Horvát',
+                IE: 'Ír',
+                IT: 'Olasz',
+                LT: 'Litván',
+                LU: 'luxemburgi',
+                LV: 'latviai',
+                MT: 'máltai',
+                NL: 'Holland',
+                NO: 'Norvég',
+                PL: 'Lengyel',
+                PT: 'Portugál',
+                RO: 'Román',
+                RU: 'Orosz',
+                RS: 'Szerb',
+                SE: 'Svéd',
+                SI: 'Szlovén',
+                SK: 'Szlovák'
+            }
+        },
+        vin: {
+            'default': 'Kérlek, hogy érvényes VIN számot adj meg'
+        },
+        zipCode: {
+            'default': 'Kérlek, hogy érvényes irányítószámot adj meg',
+            countryNotSupported: '%s - nem támogatott ország',
+            country: 'Kérlek, hogy helyes %s irányítószámot adj meg',
+            countries: {
+                'CA': 'kanadai',
+                'DK': 'Dán',
+                'GB': 'Egyesült Királysági',
+                'IT': 'Olast',
+                'NL': 'Holland',
+                'SE': 'svájci',
+                'SG': 'singapori',
+                'US': 'Egyesült Államok beli'
+            }
+        }
+    });
+}(window.jQuery));
