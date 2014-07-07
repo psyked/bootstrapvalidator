@@ -228,29 +228,29 @@
             }
         },
         regexp: {
-            'default': 'Please enter a value matching the pattern'
+            'default': 'Kérlek, hogy a mintának megfelelő értéket adj meg'
         },
         remote: {
-            'default': 'Please enter a valid value'
+            'default': 'Kérlek, hogy érvényes értéket adj meg'
         },
         rtn: {
-            'default': 'Please enter a valid RTN number'
+            'default': 'Kérlek, hogy érvényes RTN számot adj meg'
         },
         sedol: {
-            'default': 'Please enter a valid SEDOL number'
+            'default': 'Kérlek, hogy érvényes SEDOL számot adj meg'
         },
         siren: {
-            'default': 'Please enter a valid SIREN number'
+            'default': 'Kérlek, hogy érvényes SIREN számot adj meg'
         },
         siret: {
-            'default': 'Please enter a valid SIRET number'
+            'default': 'Kérlek, hogy érvényes SIRET számot adj meg'
         },
         step: {
             'default': 'Please enter a valid step of %s'
         },
         stringCase: {
-            'default': 'Please enter only lowercase characters',
-            upper: 'Please enter only uppercase characters'
+            'default': 'Kérlek, hogy csak kisbetüket ajd meg',
+            upper: 'Kérlek, hogy csak nagy betüket adj meg'
         },
         stringLength: {
             'default': 'Please enter a value with valid length',
@@ -270,39 +270,39 @@
             countryNotSupported: '%s - nem támogatott orszák',
             country: 'Kérlek, hogy heles %s adószámot ajd meg',
             countries: {
-                AT: 'Osztrák',
-                BE: 'Belga',
-                BG: 'Bulgár',
+                AT: 'osztrák',
+                BE: 'belga',
+                BG: 'bulgár',
                 CH: 'svájci',
                 CY: 'ciprusi',
-                CZ: 'Cseh',
-                DE: 'Német',
-                DK: 'Dán',
+                CZ: 'cseh',
+                DE: 'német',
+                DK: 'dán',
                 EE: 'észt',
-                ES: 'Spanyol',
-                FI: 'Finn',
-                FR: 'Francia',
-                GB: 'Egyesült Királyság',
-                GR: 'Görög',
-                EL: 'Görög',
-                HU: 'Magyar',
-                HR: 'Horvát',
-                IE: 'Ír',
-                IT: 'Olasz',
-                LT: 'Litván',
+                ES: 'spanyol',
+                FI: 'finn',
+                FR: 'francia',
+                GB: 'egyesült királysági',
+                GR: 'görög',
+                EL: 'görög',
+                HU: 'magyar',
+                HR: 'horvát',
+                IE: 'ír',
+                IT: 'olasz',
+                LT: 'litván',
                 LU: 'luxemburgi',
                 LV: 'latviai',
                 MT: 'máltai',
-                NL: 'Holland',
-                NO: 'Norvég',
-                PL: 'Lengyel',
-                PT: 'Portugál',
-                RO: 'Román',
-                RU: 'Orosz',
-                RS: 'Szerb',
-                SE: 'Svéd',
-                SI: 'Szlovén',
-                SK: 'Szlovák'
+                NL: 'holland',
+                NO: 'norvég',
+                PL: 'lengyel',
+                PT: 'portugál',
+                RO: 'román',
+                RU: 'orosz',
+                RS: 'szerb',
+                SE: 'svéd',
+                SI: 'szlovén',
+                SK: 'szlovák'
             }
         },
         vin: {
@@ -314,13 +314,13 @@
             country: 'Kérlek, hogy helyes %s irányítószámot adj meg',
             countries: {
                 'CA': 'kanadai',
-                'DK': 'Dán',
+                'DK': 'dán',
                 'GB': 'Egyesült Királysági',
-                'IT': 'Olast',
-                'NL': 'Holland',
+                'IT': 'olasz',
+                'NL': 'holland',
                 'SE': 'svájci',
-                'SG': 'singapori',
-                'US': 'Egyesült Államok beli'
+                'SG': 'singaporei',
+                'US': 'egyesült államok beli'
             }
         }
     });
