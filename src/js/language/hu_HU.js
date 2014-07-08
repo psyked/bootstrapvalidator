@@ -25,158 +25,158 @@
             'default': 'Kérlek, hogy érvényes bankkártya számot adj meg'
         },
         cusip: {
-            'default': 'Please enter a valid CUSIP number'
+            'default': 'Kérlek, hogy érvényes CUSIP számot ajd meg'
         },
         cvv: {
-            'default': 'Please enter a valid CVV number'
+            'default': 'Kérlek, hogy érvényes CVV számot ajd meg'
         },
         date: {
-            'default': 'Please enter a valid date'
+            'default': 'Kérlek, hogy érvényes dátumot ajd meg'
         },
         different: {
-            'default': 'Please enter a different value'
+            'default': 'Kérlek, hogy egy másik értéket adj meg'
         },
         digits: {
-            'default': 'Please enter only digits'
+            'default': 'Kérlek, hogy csak számot adj meg'
         },
         ean: {
-            'default': 'Please enter a valid EAN number'
+            'default': 'Kérlek, hogy érvényes EAN számot ajd meg'
         },
         emailAddress: {
-            'default': 'Please enter a valid email address'
+            'default': 'Kérlek, hogy érvényes email címet ajd meg'
         },
         file: {
-            'default': 'Please choose a valid file'
+            'default': 'Kérlek, hogy érvényes fájlt válassz'
         },
         greaterThan: {
-            'default': 'Please enter a value greater than or equal to %s',
-            notInclusive: 'Please enter a value greater than %s'
+            'default': 'Kérlek, hogy ezzel (%s) egyenlő vagy nagyobb számot adj meg',
+            notInclusive: 'Kérlek, hogy ennél (%s) nagyobb számot adj meg'
         },
         grid: {
-            'default': 'Please enter a valid GRId number'
+            'default': 'Kérlek, hogy érvényes GRId számot ajd meg'
         },
         hex: {
-            'default': 'Please enter a valid hexadecimal number'
+            'default': 'Kérlek, hogy érvényes hexadecimális számot ajd meg'
         },
         hexColor: {
-            'default': 'Please enter a valid hex color'
+            'default': 'Kérlek, hogy érvényes hexadecimális színt ajd meg'
         },
         iban: {
-            'default': 'Please enter a valid IBAN number',
-            countryNotSupported: 'The country code %s is not supported',
-            country: 'Please enter a valid IBAN number in %s',
+            'default': 'Kérlek, hogy érvényes IBAN számot ajd meg',
+            countryNotSupported: 'A(z) %s országkód nem támogatott',
+            country: 'Kérlek, hogy helyes %s IBAN számot adj meg',
             countries: {
-                AD: 'Andorra',
-                AE: 'United Arab Emirates',
-                AL: 'Albania',
-                AO: 'Angola',
-                AT: 'Austria',
-                AZ: 'Azerbaijan',
-                BA: 'Bosnia and Herzegovina',
-                BE: 'Belgium',
-                BF: 'Burkina Faso',
-                BG: 'Bulgaria',
-                BH: 'Bahrain',
-                BI: 'Burundi',
-                BJ: 'Benin',
+                AD: 'andorrai',
+                AE: 'Egyesül Arab Emirátusok beli',
+                AL: 'albán',
+                AO: 'angolai',
+                AT: 'Osztrák',
+                AZ: 'azerbajdzsáni',
+                BA: 'Bosznia-Hercegovina beli',
+                BE: 'belga',
+                BF: 'Burkina Faso beli',
+                BG: 'bulgár',
+                BH: 'bahraini',
+                BI: 'burundi',
+                BJ: 'benini',
                 BR: 'Brazil',
-                CH: 'Switzerland',
-                CI: 'Ivory Coast',
-                CM: 'Cameroon',
-                CR: 'Costa Rica',
-                CV: 'Cape Verde',
-                CY: 'Cyprus',
-                CZ: 'Czech Republic',
-                DE: 'Germany',
-                DK: 'Denmark',
-                DO: 'Dominican Republic',
-                DZ: 'Algeria',
-                EE: 'Estonia',
-                ES: 'Spain',
-                FI: 'Finland',
-                FO: 'Faroe Islands',
-                FR: 'France',
-                GB: 'United Kingdom',
-                GE: 'Georgia',
-                GI: 'Gibraltar',
-                GL: 'Greenland',
-                GR: 'Greece',
-                GT: 'Guatemala',
-                HR: 'Croatia',
-                HU: 'Hungary',
-                IE: 'Ireland',
-                IL: 'Israel',
-                IR: 'Iran',
-                IS: 'Iceland',
-                IT: 'Italy',
-                JO: 'Jordan',
-                KW: 'Kuwait',
-                KZ: 'Kazakhstan',
-                LB: 'Lebanon',
-                LI: 'Liechtenstein',
-                LT: 'Lithuania',
-                LU: 'Luxembourg',
-                LV: 'Latvia',
-                MC: 'Monaco',
-                MD: 'Moldova',
-                ME: 'Montenegro',
-                MG: 'Madagascar',
-                MK: 'Macedonia',
-                ML: 'Mali',
-                MR: 'Mauritania',
-                MT: 'Malta',
-                MU: 'Mauritius',
-                MZ: 'Mozambique',
-                NL: 'Netherlands',
-                NO: 'Norway',
-                PK: 'Pakistan',
-                PL: 'Poland',
-                PS: 'Palestinian',
-                PT: 'Portugal',
-                QA: 'Qatar',
-                RO: 'Romania',
-                RS: 'Serbia',
-                SA: 'Saudi Arabia',
-                SE: 'Sweden',
-                SI: 'Slovenia',
-                SK: 'Slovakia',
-                SM: 'San Marino',
-                SN: 'Senegal',
-                TN: 'Tunisia',
-                TR: 'Turkey',
-                VG: 'Virgin Islands, British'
+                CH: 'svájci',
+                CI: 'elefántcsontparti',
+                CM: 'camerooni',
+                CR: 'Costa Rica-i',
+                CV: 'Zöld-foki Köztársaság beli',
+                CY: 'ciprusi',
+                CZ: 'cseh',
+                DE: 'Német',
+                DK: 'dán',
+                DO: 'Dominikai Köztársaság beli',
+                DZ: 'algériai',
+                EE: 'észtországi',
+                ES: 'spanyol',
+                FI: 'Finn',
+                FO: 'Feröer-szigetek-i',
+                FR: 'Francia',
+                GB: 'Egyesült Királyság beli',
+                GE: 'Grúz',
+                GI: 'gibraltári',
+                GL: 'grönlandi',
+                GR: 'Görög',
+                GT: 'guatemalai',
+                HR: 'Horvát',
+                HU: 'Magyar',
+                IE: 'ír',
+                IL: 'izraeli',
+                IR: 'iráni',
+                IS: 'izlandi',
+                IT: 'Olasz',
+                JO: 'Jordán',
+                KW: 'kuwaiti',
+                KZ: 'Kazah',
+                LB: 'libanoni',
+                LI: 'liechtensteini',
+                LT: 'Litván',
+                LU: 'luxembourgi',
+                LV: 'latviai',
+                MC: 'monacoi',
+                MD: 'Moldáv',
+                ME: 'montenegroi',
+                MG: 'Madagaszkári',
+                MK: 'macedón',
+                ML: 'Mali -i',
+                MR: 'Mauritánia -i',
+                MT: 'máltai',
+                MU: 'Mauritius -i',
+                MZ: 'Mozambik',
+                NL: 'Holland',
+                NO: 'Norvég',
+                PK: 'pakisztáni',
+                PL: 'Lengyel',
+                PS: 'Palesztín',
+                PT: 'Portugál',
+                QA: 'qatari',
+                RO: 'Román',
+                RS: 'Szerb',
+                SA: 'saudi',
+                SE: 'Svéd',
+                SI: 'Szlovén',
+                SK: 'Szlovák',
+                SM: 'San Marino beli',
+                SN: 'senegali',
+                TN: 'Tunéz',
+                TR: 'Török',
+                VG: 'Brit Virgin-szigetek beli'
             }
         },
         id: {
-            'default': 'Please enter a valid identification number',
-            countryNotSupported: 'The country code %s is not supported',
-            country: 'Please enter a valid %s identification number',
+            'default': 'Kérlek, hogy érvényes személy azonosító számot adj meg',
+            countryNotSupported: 'A(z) %s országkód nem támogatott',
+            country: 'Kérlek, hogy érvényes %s személy azonosító számot ajd meg',
             countries: {
                 BA: 'Bosnia and Herzegovina',
-                BG: 'Bulgarian',
-                BR: 'Brazilian',
-                CH: 'Swiss',
-                CL: 'Chilean',
-                CZ: 'Czech',
-                DK: 'Danish',
-                EE: 'Estonian',
-                ES: 'Spanish',
-                FI: 'Finnish',
-                HR: 'Croatian',
-                IE: 'Irish',
+                BG: 'bulgár',
+                BR: 'brazil',
+                CH: 'svájci',
+                CL: 'chilei',
+                CZ: 'cseh',
+                DK: 'dán',
+                EE: 'észt',
+                ES: 'spanyol',
+                FI: 'finn',
+                HR: 'horvát',
+                IE: 'ír',
                 IS: 'Iceland',
-                LT: 'Lithuanian',
-                LV: 'Latvian',
-                ME: 'Montenegro',
-                MK: 'Macedonian',
-                NL: 'Dutch',
-                RO: 'Romanian',
-                RS: 'Serbian',
-                SE: 'Swedish',
-                SI: 'Slovenian',
-                SK: 'Slovak',
-                SM: 'San Marino',
-                ZA: 'South African'
+                LT: 'litván',
+                LV: 'lett',
+                ME: 'montenegroi',
+                MK: 'macedón',
+                NL: 'holland',
+                RO: 'román',
+                RS: 'szerb',
+                SE: 'svéd',
+                SI: 'szlovén',
+                SK: 'szlovák',
+                SM: 'San Marino beli',
+                ZA: 'dél afrikai'
             }
         },
         identical: {
@@ -190,41 +190,41 @@
         },
         ip: {
             'default': 'Kérlek, hogy IP címet adj meg',
-            ipv4: 'Please enter a valid IPv4 address',
-            ipv6: 'Please enter a valid IPv6 address'
+            ipv4: 'Kérlek, hogy érvényes IPv4 címet ajd meg',
+            ipv6: 'Kérlek, hogy érvényes IPv6 címet ajd meg'
         },
         isbn: {
-            'default': 'Please enter a valid ISBN number'
+            'default': 'Kérlek, hogy érvényes ISBN számot ajd meg'
         },
         isin: {
-            'default': 'Please enter a valid ISIN number'
+            'default': 'Kérlek, hogy érvényes ISIN számot ajd meg'
         },
         ismn: {
-            'default': 'Please enter a valid ISMN number'
+            'default': 'Kérlek, hogy érvényes ISMN számot ajd meg'
         },
         issn: {
-            'default': 'Please enter a valid ISSN number'
+            'default': 'Kérlek, hogy érvényes ISSN számot ajd meg'
         },
         lessThan: {
-            'default': 'Please enter a value less than or equal to %s',
-            notInclusive: 'Please enter a value less than %s'
+            'default': 'Kérlek, hogy adj meg egy számot ami kisebb vagy egyenlő mint %s',
+            notInclusive: 'Kérlek, hogy adj meg egy számot ami kisebb mint %s'
         },
         mac: {
-            'default': 'Please enter a valid MAC address'
+            'default': 'Kérlek, hogy érvényes MAC címet ajd meg'
         },
         notEmpty: {
-            'default': 'Please enter a value'
+            'default': 'Kérlek, hogy adj értéket a mezőnek'
         },
         numeric: {
             'default': 'Please enter a valid float number'
         },
         phone: {
-            'default': 'Please enter a valid phone number',
-            countryNotSupported: 'The country code %s is not supported',
-            country: 'Please enter a valid phone number in %s',
+            'default': 'Kérlek, hogy érvényes telefonszámot adj meg',
+            countryNotSupported: 'A(z) %s országkód nem támogatott',
+            country: 'Kérlek, hogy érvényes %s telefonszámot adj meg',
             countries: {
-                GB: 'United Kingdom',
-                US: 'USA'
+                GB: 'Egyesült Királyság beli',
+                US: 'Egyesült Államok beli'
             }
         },
         regexp: {
@@ -246,28 +246,28 @@
             'default': 'Kérlek, hogy érvényes SIRET számot adj meg'
         },
         step: {
-            'default': 'Please enter a valid step of %s'
+            'default': 'Kérlek, hogy érvényes lépteket adj meg (%s)'
         },
         stringCase: {
             'default': 'Kérlek, hogy csak kisbetüket ajd meg',
             upper: 'Kérlek, hogy csak nagy betüket adj meg'
         },
         stringLength: {
-            'default': 'Please enter a value with valid length',
-            less: 'Please enter less than %s characters',
-            more: 'Please enter more than %s characters',
-            between: 'Please enter value between %s and %s characters long'
+            'default': 'Kérlek, hogy érvényes karakter hosszúsággal adj meg értéket',
+            less: 'Kérlek, hogy kevesebb mint %s karaktert adj meg',
+            more: 'Kérlek, hogy több mint %s karaktert adj meg',
+            between: 'Kérlek, hogy legalább %s, de maximum %s karaktert adj meg'
         },
         uri: {
             'default': 'Kérlek, hogy helyes URI -t adj meg'
         },
         uuid: {
-            'default': 'Please enter a valid UUID number',
-            version: 'Please enter a valid UUID version %s number'
+            'default': 'Kérlek, hogy érvényes UUID számot adj meg',
+            version: 'Kérlek, hogy érvényes UUID verzió %s számot adj meg'
         },
         vat: {
             'default': 'Kérlek, hogy helyes adó számot adj meg',
-            countryNotSupported: '%s - nem támogatott orszák',
+            countryNotSupported: '%s - nem támogatott ország',
             country: 'Kérlek, hogy heles %s adószámot ajd meg',
             countries: {
                 AT: 'osztrák',
@@ -282,7 +282,7 @@
                 ES: 'spanyol',
                 FI: 'finn',
                 FR: 'francia',
-                GB: 'egyesült királysági',
+                GB: 'Egyesült Királyság beli',
                 GR: 'görög',
                 EL: 'görög',
                 HU: 'magyar',
@@ -315,12 +315,12 @@
             countries: {
                 'CA': 'kanadai',
                 'DK': 'dán',
-                'GB': 'Egyesült Királysági',
+                'GB': 'Egyesült Királyság beli',
                 'IT': 'olasz',
                 'NL': 'holland',
                 'SE': 'svájci',
                 'SG': 'singaporei',
-                'US': 'egyesült államok beli'
+                'US': 'Egyesült Államok beli'
             }
         }
     });
