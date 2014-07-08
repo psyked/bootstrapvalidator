@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-07-07 6:50:25 PM
+ * @version     v0.5.0-dev, built on 2014-07-08 4:05:10 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -2311,9 +2311,17 @@
             // Determine the date
             date       = date.split(separator);
             dateFormat = dateFormat.split(separator);
+            if (date.length !== dateFormat.length) {
+                return false;
+            }
+
             var year  = date[$.inArray('YYYY', dateFormat)],
                 month = date[$.inArray('MM', dateFormat)],
                 day   = date[$.inArray('DD', dateFormat)];
+
+            if (!year || !month || !day) {
+                return false;
+            }
 
             // Determine the time
             var minutes = null, hours = null, seconds = null;

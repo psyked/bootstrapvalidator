@@ -60,9 +60,17 @@
             // Determine the date
             date       = date.split(separator);
             dateFormat = dateFormat.split(separator);
+            if (date.length !== dateFormat.length) {
+                return false;
+            }
+
             var year  = date[$.inArray('YYYY', dateFormat)],
                 month = date[$.inArray('MM', dateFormat)],
                 day   = date[$.inArray('DD', dateFormat)];
+
+            if (!year || !month || !day) {
+                return false;
+            }
 
             // Determine the time
             var minutes = null, hours = null, seconds = null;

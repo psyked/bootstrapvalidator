@@ -1803,6 +1803,45 @@ describe('date', function() {
         this.$date.val('2004df/1dd1/5ffg');
         this.bv.validate();
         expect(this.bv.isValid()).toEqual(false);
+
+        // #475
+        this.bv.resetForm();
+        this.$date.val('2014/09');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$date.val('2014/09/');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$date.val('2014//15');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$date.val('/09/15');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+    });
+
+    it('MM/DD/YYYY', function() {
+        this.bv.updateOption('date', 'date', 'format', 'MM/DD/YYYY');
+
+        this.$date.val('09/15/2020');
+        this.bv.validate();
+        expect(this.bv.isValid()).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$date.val('09/15');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$date.val('09/15/');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
     });
 
     it('number of days in February', function() {
