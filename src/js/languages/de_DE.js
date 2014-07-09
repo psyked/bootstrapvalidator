@@ -189,7 +189,9 @@
             'default': 'Bitte Zahl eingeben'
         },
         ip: {
-            'default': 'Bitte  gültige IP-Adresse eingeben'
+            'default': 'Bitte  gültige IP-Adresse eingeben',
+            ipv4: 'Bitte  gültige IPv4 Adresse eingeben',
+            ipv6: 'Bitte  gültige IPv6 Adresse eingeben'
         },
         isbn: {
             'default': 'Bitte gültige ISBN Nummer eingeben'
