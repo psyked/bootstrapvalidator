@@ -1,5 +1,6 @@
 # Contributors
-===
+
+I would like to give big thanks to the following contributors:
 
 * [@aca02djr](https://github.com/aca02djr)
 * [@adgrafik](https://github.com/adgrafik)
