@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-07-09 10:07:03 AM
+ * @version     v0.5.0-dev, built on 2014-07-09 8:39:15 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -1033,11 +1033,17 @@
          * Check if all fields inside a given container are valid.
          * It's useful when working with a wizard-like such as tab, collapse
          *
-         * @param {jQuery} $container The container element
+         * @param {String|jQuery} container The container selector or element
          * @returns {Boolean}
          */
-        isValidContainer: function($container) {
-            var that = this, map = {};
+        isValidContainer: function(container) {
+            var that       = this,
+                map        = {},
+                $container = ('string' === typeof container) ? $(container) : container;
+            if ($container.length === 0) {
+                return true;
+            }
+
             $container.find('[data-bv-field]').each(function() {
                 var $field = $(this),
                     field  = $field.attr('data-bv-field');
@@ -1423,9 +1429,10 @@
         },
 
         /**
-         * Some other validators have option which its value is dynamic.
-         * For example, the zipCode validator which country is set by a select element.
+         * Some validators have option which its value is dynamic.
+         * For example, the zipCode validator has the country option which might be changed dynamically by a select element.
          *
+         * @param {jQuery|String} field The field name or element
          * @param {String|Function} option The option which can be determined by:
          * - a string
          * - name of field which defines the value
@@ -1439,10 +1446,9 @@
          *          // $field is the field element
          *      }
          *
-         * @param {jQuery|String} field The field name or element
          * @returns {String}
          */
-        getDynamicOption: function(option, field) {
+        getDynamicOption: function(field, option) {
             var $field = ('string' === typeof field) ? this.getFieldElements(field) : field,
                 value  = $field.val();
 
@@ -1881,8 +1887,8 @@
                 return true;
             }
 
-            var min = $.isNumeric(options.min) ? options.min : validator.getDynamicOption(options.min, $field),
-                max = $.isNumeric(options.max) ? options.max : validator.getDynamicOption(options.max, $field);
+            var min = $.isNumeric(options.min) ? options.min : validator.getDynamicOption($field, options.min),
+                max = $.isNumeric(options.max) ? options.max : validator.getDynamicOption($field, options.max);
 
             value = parseFloat(value);
 			return (options.inclusive === true || options.inclusive === undefined)
@@ -1975,8 +1981,8 @@
             var numChoices = $field.is('select')
                             ? validator.getFieldElements($field.attr('data-bv-field')).find('option').filter(':selected').length
                             : validator.getFieldElements($field.attr('data-bv-field')).filter(':checked').length,
-                min        = options.min ? ($.isNumeric(options.min) ? options.min : validator.getDynamicOption(options.min, $field)) : null,
-                max        = options.max ? ($.isNumeric(options.max) ? options.max : validator.getDynamicOption(options.max, $field)) : null,
+                min        = options.min ? ($.isNumeric(options.min) ? options.min : validator.getDynamicOption($field, options.min)) : null,
+                max        = options.max ? ($.isNumeric(options.max) ? options.max : validator.getDynamicOption($field, options.max)) : null,
                 isValid    = true,
                 message    = options.message || $.fn.bootstrapValidator.i18n.choice['default'];
 
@@ -2648,7 +2654,7 @@
                 return true;
             }
 
-            var compareTo = $.isNumeric(options.value) ? options.value : validator.getDynamicOption(options.value, $field);
+            var compareTo = $.isNumeric(options.value) ? options.value : validator.getDynamicOption($field, options.value);
 
             value = parseFloat(value);
 			return (options.inclusive === true || options.inclusive === undefined)
@@ -2959,7 +2965,7 @@
                 country = value.substr(0, 2);
             } else if (typeof country !== 'string' || !this.REGEX[country]) {
                 // Determine the country code
-                country = validator.getDynamicOption(country, $field);
+                country = validator.getDynamicOption($field, country);
             }
 
             if (!this.REGEX[country]) {
@@ -3071,7 +3077,7 @@
                 country = value.substr(0, 2);
             } else if (typeof country !== 'string' || $.inArray(country.toUpperCase(), this.COUNTRY_CODES) === -1) {
                 // Determine the country code
-                country = validator.getDynamicOption(country, $field);
+                country = validator.getDynamicOption($field, country);
             }
 
             if ($.inArray(country, this.COUNTRY_CODES) === -1) {
@@ -4270,7 +4276,7 @@
                 return true;
             }
 
-            var compareTo = $.isNumeric(options.value) ? options.value : validator.getDynamicOption(options.value, $field);
+            var compareTo = $.isNumeric(options.value) ? options.value : validator.getDynamicOption($field, options.value);
 
             value = parseFloat(value);
             return (options.inclusive === true || options.inclusive === undefined)
@@ -4427,7 +4433,7 @@
             var country = options.country;
             if (typeof country !== 'string' || $.inArray(country, this.COUNTRY_CODES) === -1) {
                 // Try to determine the country
-                country = validator.getDynamicOption(country, $field);
+                country = validator.getDynamicOption($field, country);
             }
 
             if (!country || $.inArray(country.toUpperCase(), this.COUNTRY_CODES) === -1) {
@@ -4871,8 +4877,8 @@
                 return true;
             }
 
-            var min     = $.isNumeric(options.min) ? options.min : validator.getDynamicOption(options.min, $field),
-                max     = $.isNumeric(options.max) ? options.max : validator.getDynamicOption(options.max, $field),
+            var min     = $.isNumeric(options.min) ? options.min : validator.getDynamicOption($field, options.min),
+                max     = $.isNumeric(options.max) ? options.max : validator.getDynamicOption($field, options.max),
                 length  = value.length,
                 isValid = true,
                 message = options.message || $.fn.bootstrapValidator.i18n.stringLength['default'];
@@ -5128,7 +5134,7 @@
                 country = value.substr(0, 2);
             } else if (typeof country !== 'string' || $.inArray(country.toUpperCase(), this.COUNTRY_CODES) === -1) {
                 // Determine the country code
-                country = validator.getDynamicOption(country, $field);
+                country = validator.getDynamicOption($field, country);
             }
 
             if ($.inArray(country, this.COUNTRY_CODES) === -1) {
@@ -6385,7 +6391,7 @@
             var country = options.country;
             if (typeof country !== 'string' || $.inArray(country, this.COUNTRY_CODES) === -1) {
                 // Try to determine the country
-                country = validator.getDynamicOption(country, $field);
+                country = validator.getDynamicOption($field, country);
             }
 
             if (!country || $.inArray(country.toUpperCase(), this.COUNTRY_CODES) === -1) {

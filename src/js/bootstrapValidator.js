@@ -1032,11 +1032,17 @@
          * Check if all fields inside a given container are valid.
          * It's useful when working with a wizard-like such as tab, collapse
          *
-         * @param {jQuery} $container The container element
+         * @param {String|jQuery} container The container selector or element
          * @returns {Boolean}
          */
-        isValidContainer: function($container) {
-            var that = this, map = {};
+        isValidContainer: function(container) {
+            var that       = this,
+                map        = {},
+                $container = ('string' === typeof container) ? $(container) : container;
+            if ($container.length === 0) {
+                return true;
+            }
+
             $container.find('[data-bv-field]').each(function() {
                 var $field = $(this),
                     field  = $field.attr('data-bv-field');
