@@ -53,6 +53,7 @@ __Improvements__
 * [#431](https://github.com/nghuuphuoc/bootstrapvalidator/issues/431): Add built time to the build file
 * [#432](https://github.com/nghuuphuoc/bootstrapvalidator/issues/432): Define the callback via ```data-bv-callback-callback``` attribute
 * [#447](https://github.com/nghuuphuoc/bootstrapvalidator/pull/447): [zipCode validator](http://bootstrapvalidator.com/validators/zipCode/) allow to set the country code via another field or callback, thanks to [@AlaskanShade](https://github.com/AlaskanShade)
+* [#451](https://github.com/nghuuphuoc/bootstrapvalidator/pull/451): Validation of numeric fields with decimal steps, thanks to [@Azuka](https://github.com/Azuka)
 * [#456](https://github.com/nghuuphuoc/bootstrapvalidator/issues/456): Adjust the feedback icon position for ```.input-group``` element
 * [#465](https://github.com/nghuuphuoc/bootstrapvalidator/issues/465): Support dynamic message
 
