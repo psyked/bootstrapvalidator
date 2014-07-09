@@ -1648,14 +1648,14 @@
 
         // Map the field name with validator rules
         fields: null,
-		
-		// Whether to be verbose when validating a field or not.
-		// Possible values:
-		// - true:  when a field has multiple validators, all of them will be checked, and respectively - if errors occur in
-		//			multiple validators, all of them will be displayed to the user
-		// - false: when a field has multiple validators, validation for this field will be terminated upon the first encountered error.
-		// 			Thus, only the very first error message related to this field will be displayed to the user
-		verbose: true
+        
+        // Whether to be verbose when validating a field or not.
+        // Possible values:
+        // - true:  when a field has multiple validators, all of them will be checked, and respectively - if errors occur in
+        //          multiple validators, all of them will be displayed to the user
+        // - false: when a field has multiple validators, validation for this field will be terminated upon the first encountered error.
+        //          Thus, only the very first error message related to this field will be displayed to the user
+        verbose: true
     };
 
     // Available validators
