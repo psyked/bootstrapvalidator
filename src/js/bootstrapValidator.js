@@ -1392,9 +1392,10 @@
         },
 
         /**
-         * Some other validators have option which its value is dynamic.
-         * For example, the zipCode validator which country is set by a select element.
+         * Some validators have option which its value is dynamic.
+         * For example, the zipCode validator has the country option which might be changed dynamically by a select element.
          *
+         * @param {jQuery|String} field The field name or element
          * @param {String|Function} option The option which can be determined by:
          * - a string
          * - name of field which defines the value
@@ -1408,10 +1409,9 @@
          *          // $field is the field element
          *      }
          *
-         * @param {jQuery|String} field The field name or element
          * @returns {String}
          */
-        getDynamicOption: function(option, field) {
+        getDynamicOption: function(field, option) {
             var $field = ('string' === typeof field) ? this.getFieldElements(field) : field,
                 value  = $field.val();
 

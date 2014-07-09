@@ -48,8 +48,8 @@
                 return true;
             }
 
-            var min = $.isNumeric(options.min) ? options.min : validator.getDynamicOption(options.min, $field),
-                max = $.isNumeric(options.max) ? options.max : validator.getDynamicOption(options.max, $field);
+            var min = $.isNumeric(options.min) ? options.min : validator.getDynamicOption($field, options.min),
+                max = $.isNumeric(options.max) ? options.max : validator.getDynamicOption($field, options.max);
 
             value = parseFloat(value);
 			return (options.inclusive === true || options.inclusive === undefined)

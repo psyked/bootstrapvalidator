@@ -44,7 +44,7 @@
             var country = options.country;
             if (typeof country !== 'string' || $.inArray(country, this.COUNTRY_CODES) === -1) {
                 // Try to determine the country
-                country = validator.getDynamicOption(country, $field);
+                country = validator.getDynamicOption($field, country);
             }
 
             if (!country || $.inArray(country.toUpperCase(), this.COUNTRY_CODES) === -1) {

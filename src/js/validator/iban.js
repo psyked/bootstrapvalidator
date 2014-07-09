@@ -204,7 +204,7 @@
                 country = value.substr(0, 2);
             } else if (typeof country !== 'string' || !this.REGEX[country]) {
                 // Determine the country code
-                country = validator.getDynamicOption(country, $field);
+                country = validator.getDynamicOption($field, country);
             }
 
             if (!this.REGEX[country]) {

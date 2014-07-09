@@ -44,7 +44,7 @@
                 return true;
             }
 
-            var compareTo = $.isNumeric(options.value) ? options.value : validator.getDynamicOption(options.value, $field);
+            var compareTo = $.isNumeric(options.value) ? options.value : validator.getDynamicOption($field, options.value);
 
             value = parseFloat(value);
             return (options.inclusive === true || options.inclusive === undefined)
