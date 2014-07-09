@@ -1157,6 +1157,36 @@
         },
 
         /**
+         * Get the field options
+         *
+         * @param {String|jQuery} [field] The field name or field element. If it is not set, the method returns the form options
+         * @param {String} [validator] The name of validator. It null, the method returns form options
+         * @param {String} [option] The option name
+         * @return {String|Object}
+         */
+        getOptions: function(field, validator, option) {
+            if (!field) {
+                return this.options;
+            }
+            if ('object' === typeof field) {
+                field = field.attr('data-bv-field');
+            }
+            if (!this.options.fields[field]) {
+                return null;
+            }
+
+            var options = this.options.fields[field];
+            if (!validator) {
+                return options;
+            }
+            if (!options.validators || !options.validators[validator]) {
+                return null;
+            }
+
+            return option ? options.validators[validator][option] : options.validators[validator];
+        },
+
+        /**
          * Update the option of a specific validator
          *
          * @param {String|jQuery} field The field name or field element

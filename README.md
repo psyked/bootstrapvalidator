@@ -105,48 +105,7 @@ The __BootstrapValidator__ plugin is written by Nguyen Huu Phuoc, aka @nghuuphuo
 * [http://twitter.com/nghuuphuoc](http://twitter.com/nghuuphuoc)
 * [http://github.com/nghuuphuoc](http://github.com/nghuuphuoc)
 
-Big thanks to the contributors:
-
-* [@aca02djr](https://github.com/aca02djr)
-* [@adgrafik](https://github.com/adgrafik)
-* [@AlaskanShade](https://github.com/AlaskanShade)
-* [@alavers](https://github.com/alavers)
-* [@easonhan007](https://github.com/easonhan007)
-* [@emilchristensen](https://github.com/emilchristensen)
-* [@ericnakagawa](https://github.com/ericnakagawa)
-* [@evilchili](https://github.com/evilchili)
-* [@Francismori7](https://github.com/Francismori7)
-* [@gercheq](https://github.com/gercheq)
-* [@henningda](https://github.com/henningda)
-* [@ikanedo](https://github.com/ikanedo)
-* [@iplus](https://github.com/iplus)
-* [@jcnmulio](https://github.com/jcnmulio)
-* [@jjshoe](https://github.com/jjshoe)
-* [@johanronn77](https://github.com/johanronn77)
-* [@jswale](https://github.com/jswale)
-* [@jzhang6](https://github.com/jzhang6)
-* [@khangvm53](https://github.com/khangvm53)
-* [@kristian-puccio](https://github.com/kristian-puccio)
-* [@lloydde](https://github.com/lloydde)
-* [@manish-in-java](https://github.com/manish-in-java)
-* [@MartinDevillers](https://github.com/MartinDevillers)
-* [@mike1e](https://github.com/mike1e)
-* [@MrC0mm0n](https://github.com/MrC0mm0n)
-* [@mrpollo](https://github.com/mrpollo)
-* [@narutosanjiv](https://github.com/narutosanjiv)
-* [@nathanrosspowell](https://github.com/nathanrosspowell)
-* [@patmoore](https://github.com/patmoore)
-* [@phillprice](https://github.com/phillprice)
-* [@smeagol74](https://github.com/smeagol74)
-* [@thisisclement](https://github.com/thisisclement)
-* [@tiagofontella](https://github.com/tiagofontella)
-* [@tomByrer](https://github.com/tomByrer)
-* [@vaz](https://github.com/vaz)
-* ... might be you! Let's [fork](https://github.com/nghuuphuoc/bootstrapvalidator/fork) and pull a request!
-
-> If you submit new RegEx, please build it using [RegExr.com](http://regexr.com/), add several tests that pass and fail there,
-> and include the "share" link in your JS as a ```// ``` comment.
-> For example: ```// Test: http://regexr.com/38mqi```
+Big thanks to the [contributors](CONTRIBUTORS.md).
 
 ## License
 
