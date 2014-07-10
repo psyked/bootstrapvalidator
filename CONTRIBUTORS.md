@@ -7,6 +7,7 @@ I would like to give big thanks to the following contributors:
 * [@AlaskanShade](https://github.com/AlaskanShade)
 * [@alavers](https://github.com/alavers)
 * [@Azuka](https://github.com/Azuka)
+* [@blackfyre](https://github.com/blackfyre)
 * [@easonhan007](https://github.com/easonhan007)
 * [@emilchristensen](https://github.com/emilchristensen)
 * [@ericnakagawa](https://github.com/ericnakagawa)

@@ -87,7 +87,8 @@ __Document__
 * [#423](https://github.com/nghuuphuoc/bootstrapvalidator/pull/423): Add default column to settings table, thanks to [@MartinDevillers](https://github.com/MartinDevillers)
 * [#452](https://github.com/nghuuphuoc/bootstrapvalidator/pull/452): Update 'United State' to 'United States', thanks to [@mike1e](https://github.com/mike1e)
 
-__Language Packages_
+__Language Packages__
+* [#474](https://github.com/nghuuphuoc/bootstrapvalidator/pull/474): Hungarian package, thanks to [@blackfyre](https://github.com/blackfyre)
 * [#478](https://github.com/nghuuphuoc/bootstrapvalidator/pull/478): Simplified and traditional Chinese package, thanks to [@tureki](https://github.com/tureki)
 
 ## v0.4.5 (2014-05-15)
