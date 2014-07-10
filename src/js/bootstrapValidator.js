@@ -1725,7 +1725,7 @@
             month = parseInt(month, 10);
             year  = parseInt(year, 10);
 
-            if (year < 1000 || year > 9999 || month === 0 || month > 12) {
+            if (year < 1000 || year > 9999 || month <= 0 || month > 12) {
                 return false;
             }
             var numDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];

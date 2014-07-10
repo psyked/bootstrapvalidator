@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-07-09 8:39:15 PM
+ * @version     v0.5.0-dev, built on 2014-07-10 8:32:06 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -1726,7 +1726,7 @@
             month = parseInt(month, 10);
             year  = parseInt(year, 10);
 
-            if (year < 1000 || year > 9999 || month === 0 || month > 12) {
+            if (year < 1000 || year > 9999 || month <= 0 || month > 12) {
                 return false;
             }
             var numDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];

@@ -54,6 +54,22 @@ describe('date', function() {
         this.bv.validate();
         expect(this.bv.isValid()).toEqual(false);
 
+        // Negative number
+        this.bv.resetForm();
+        this.$date.val('-2000/10/20');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$date.val('2000/-10/20');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$date.val('2000/10/-20');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
         // Consist invalid characters
         // #310
         this.bv.resetForm();
