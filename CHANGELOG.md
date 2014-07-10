@@ -88,8 +88,9 @@ __Document__
 * [#452](https://github.com/nghuuphuoc/bootstrapvalidator/pull/452): Update 'United State' to 'United States', thanks to [@mike1e](https://github.com/mike1e)
 
 __Language Packages__
-* [#474](https://github.com/nghuuphuoc/bootstrapvalidator/pull/474): Hungarian package, thanks to [@blackfyre](https://github.com/blackfyre)
-* [#478](https://github.com/nghuuphuoc/bootstrapvalidator/pull/478): Simplified and traditional Chinese package, thanks to [@tureki](https://github.com/tureki)
+* [#396](https://github.com/nghuuphuoc/bootstrapvalidator/pull/396): German language package, thanks to [@logemann](https://github.com/logemann)
+* [#474](https://github.com/nghuuphuoc/bootstrapvalidator/pull/474): Hungarian language package, thanks to [@blackfyre](https://github.com/blackfyre)
+* [#478](https://github.com/nghuuphuoc/bootstrapvalidator/pull/478): Simplified and traditional Chinese language package, thanks to [@tureki](https://github.com/tureki)
 
 ## v0.4.5 (2014-05-15)
 

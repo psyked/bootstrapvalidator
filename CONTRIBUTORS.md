@@ -25,6 +25,7 @@ I would like to give big thanks to the following contributors:
 * [@khangvm53](https://github.com/khangvm53)
 * [@kristian-puccio](https://github.com/kristian-puccio)
 * [@lloydde](https://github.com/lloydde)
+* [@logemann](https://github.com/logemann)
 * [@manish-in-java](https://github.com/manish-in-java)
 * [@MartinDevillers](https://github.com/MartinDevillers)
 * [@mike1e](https://github.com/mike1e)
