@@ -87,6 +87,9 @@ __Document__
 * [#423](https://github.com/nghuuphuoc/bootstrapvalidator/pull/423): Add default column to settings table, thanks to [@MartinDevillers](https://github.com/MartinDevillers)
 * [#452](https://github.com/nghuuphuoc/bootstrapvalidator/pull/452): Update 'United State' to 'United States', thanks to [@mike1e](https://github.com/mike1e)
 
+__Language Packages_
+* [#478](https://github.com/nghuuphuoc/bootstrapvalidator/pull/478): Simplified and traditional Chinese package, thanks to [@tureki](https://github.com/tureki)
+
 ## v0.4.5 (2014-05-15)
 
 * Add ```$.fn.bootstrapValidator.helpers.date``` for validating a date, re-used in [date](http://bootstrapvalidator.com/validators/date/), [id](http://bootstrapvalidator.com/validators/id/), [vat](http://bootstrapvalidator.com/validators/vat/) validators

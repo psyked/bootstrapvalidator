@@ -1,7 +1,4 @@
 (function($) {
-    /**
-     * zh_CN Chinese package
-     */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
             'default': '请输入有效的Base64编码'
