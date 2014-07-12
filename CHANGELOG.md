@@ -77,6 +77,7 @@ __Bug Fixes__
 * [#417](https://github.com/nghuuphuoc/bootstrapvalidator/issues/417): IPv6 validator doesn't work
 * [#425](https://github.com/nghuuphuoc/bootstrapvalidator/issues/425): Custom trigger event is ignored by field validators
 * [#447](https://github.com/nghuuphuoc/bootstrapvalidator/pull/447): Skip the ```_isExcluded()``` when initializing the form. This fixes [#269](https://github.com/nghuuphuoc/bootstrapvalidator/issues/269), [#273](https://github.com/nghuuphuoc/bootstrapvalidator/issues/273). Thanks to [@AlaskanShade](https://github.com/AlaskanShade)
+* [#483](https://github.com/nghuuphuoc/bootstrapvalidator/issues/483), [#487](https://github.com/nghuuphuoc/bootstrapvalidator/pull/487): Added the letters 'W' and 'Z' in the second and third letter list for Canada postal code, thanks to [@jzhang6](https://github.com/jzhang6)
 
 __Document__
 * [#259](https://github.com/nghuuphuoc/bootstrapvalidator/issues/259): Typo "Support almost Bootstrap forms", thanks to [@lloydde](https://github.com/lloydde)
