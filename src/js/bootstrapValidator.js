@@ -171,6 +171,7 @@
                     group:         $field.attr('data-bv-group'),
                     selector:      $field.attr('data-bv-selector'),
                     threshold:     $field.attr('data-bv-threshold'),
+                    onStatus:      $field.attr('data-bv-onstatus'),
                     onSuccess:     $field.attr('data-bv-onsuccess'),
                     onError:       $field.attr('data-bv-onerror'),
                     validators:    validators
@@ -313,6 +314,11 @@
             if (this.options.fields[field].onError) {
                 fields.on('error.field.bv', function(e, data) {
                     $.fn.bootstrapValidator.helpers.call(that.options.fields[field].onError, [e, data]);
+                });
+            }
+            if (this.options.fields[field].onStatus) {
+                fields.on('status.field.bv', function(e, data) {
+                    $.fn.bootstrapValidator.helpers.call(that.options.fields[field].onStatus, [e, data]);
                 });
             }
 
@@ -955,7 +961,7 @@
                 }
 
                 // Trigger an event
-                this.$form.trigger($.Event('status.field.bv'), {
+                $field.trigger($.Event('status.field.bv'), {
                     field: field,
                     element: $field,
                     status: status

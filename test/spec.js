@@ -382,6 +382,10 @@ TestSuite = $.extend({}, TestSuite, {
             $('#msg').html('TestSuite.Event.onEmailInvalid() called, ' + data.field + ' is invalid');
         },
 
+        onEmailStatus: function(e, data) {
+            $('#status').html('TestSuite.Event.onEmailStatus() called; status = ' + data.status);
+        },
+
         onFormValid: function(e) {
             $('#msg').html('TestSuite.Event.onFormValid() called, form ' + $(e.target).attr('id') + ' is valid');
         },
@@ -566,13 +570,18 @@ function onEmailInvalid(e, data) {
     $('#msg').html(data.field + ' is invalid');
 };
 
+function onEmailStatus(e, data) {
+    $('#status').html(data.status);
+};
+
 describe('event field attribute callback global', function() {
     beforeEach(function() {
         $([
             '<form class="form-horizontal" id="eventForm">',
                 '<div id="msg"></div>',
+                '<div id="status"></div>',
                 '<div class="form-group">',
-                    '<input type="text" name="email" data-bv-emailaddress data-bv-onsuccess="onEmailValid" data-bv-onerror="onEmailInvalid" />',
+                    '<input type="text" name="email" data-bv-emailaddress data-bv-onsuccess="onEmailValid" data-bv-onerror="onEmailInvalid" data-bv-onstatus="onEmailStatus" />',
                 '</div>',
             '</form>'
         ].join('\n')).appendTo('body');
@@ -591,12 +600,14 @@ describe('event field attribute callback global', function() {
         this.$email.val('email@domain.com');
         this.bv.validate();
         expect($('#msg').html()).toEqual('email is valid');
+        expect($('#status').html()).toEqual(this.bv.STATUS_VALID);
     });
 
     it('call data-bv-onerror', function() {
         this.$email.val('email@domain');
         this.bv.validate();
         expect($('#msg').html()).toEqual('email is invalid');
+        expect($('#status').html()).toEqual(this.bv.STATUS_INVALID);
     });
 });
 
@@ -605,8 +616,9 @@ describe('event field attribute callback namespace', function() {
         $([
             '<form class="form-horizontal" id="eventForm">',
                 '<div id="msg"></div>',
+                '<div id="status"></div>',
                 '<div class="form-group">',
-                    '<input type="text" name="email" data-bv-emailaddress data-bv-onsuccess="TestSuite.Event.onEmailValid" data-bv-onerror="TestSuite.Event.onEmailInvalid" />',
+                    '<input type="text" name="email" data-bv-emailaddress data-bv-onsuccess="TestSuite.Event.onEmailValid" data-bv-onerror="TestSuite.Event.onEmailInvalid" data-bv-onstatus="TestSuite.Event.onEmailStatus" />',
                 '</div>',
             '</form>'
         ].join('\n')).appendTo('body');
@@ -625,12 +637,14 @@ describe('event field attribute callback namespace', function() {
         this.$email.val('email@domain.com');
         this.bv.validate();
         expect($('#msg').html()).toEqual('TestSuite.Event.onEmailValid() called, email is valid');
+        expect($('#status').html()).toEqual('TestSuite.Event.onEmailStatus() called; status = ' + this.bv.STATUS_VALID);
     });
 
     it('call data-bv-onerror', function() {
         this.$email.val('email@domain');
         this.bv.validate();
         expect($('#msg').html()).toEqual('TestSuite.Event.onEmailInvalid() called, email is invalid');
+        expect($('#status').html()).toEqual('TestSuite.Event.onEmailStatus() called; status = ' + this.bv.STATUS_INVALID);
     });
 });
 
@@ -2782,7 +2796,7 @@ describe('id', function() {
         this.bv.updateOption('id', 'id', 'country', 'CL');
 
         // Valid samples
-        var validSamples = ['76086428-5', '22060449-7', '12531909-2'];
+        var validSamples = ['76086428-5', '22060449-7', '12531909-2','12937893-K','12937893-k'];
         for (var i in validSamples) {
             this.bv.resetForm();
             this.$id.val(validSamples[i]);
