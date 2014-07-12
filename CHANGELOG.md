@@ -93,6 +93,7 @@ __Language Packages__
 * [#396](https://github.com/nghuuphuoc/bootstrapvalidator/pull/396): German language package, thanks to [@logemann](https://github.com/logemann)
 * [#474](https://github.com/nghuuphuoc/bootstrapvalidator/pull/474): Hungarian language package, thanks to [@blackfyre](https://github.com/blackfyre)
 * [#478](https://github.com/nghuuphuoc/bootstrapvalidator/pull/478): Simplified and traditional Chinese language package, thanks to [@tureki](https://github.com/tureki)
+* [#494](https://github.com/nghuuphuoc/bootstrapvalidator/pull/494): Chilean Spanish language package, thanks to [@marceloampuerop6](https://github.com/marceloampuerop6)
 
 ## v0.4.5 (2014-05-15)
 

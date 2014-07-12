@@ -1,5 +1,9 @@
 (function($) {
-    $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
+    /**
+     * Traditional Chinese language package
+     * Translated by @tureki
+     */
+    $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
             'default': '请输入有效的Base64编码'
         },

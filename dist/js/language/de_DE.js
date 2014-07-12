@@ -1,4 +1,8 @@
 (function($) {
+    /**
+     * German language package
+     * Translated by @logemann
+     */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
             'default': 'Bitte eine Base64 Kodierung eingeben'
