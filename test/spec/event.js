@@ -334,9 +334,6 @@ describe('event field programmatically', function() {
                     },
                     onError: function(e, data) {
                         $('#msg').html('onError() called');
-                    },
-                    validator: {
-                        emailAddress: {}
                     }
                 }
             }
@@ -360,5 +357,100 @@ describe('event field programmatically', function() {
         this.$email.val('email@domain');
         this.bv.validate();
         expect($('#msg').html()).toEqual('onError() called');
+    });
+});
+
+// ---
+// Validator events
+// ---
+function onEmailAddressValidatorSuccess(e, data) {
+    $('#msg').html(data.validator + ' validator passed');
+};
+
+function onEmailAddressValidatorError(e, data) {
+    $('#msg').html(data.validator + ' validator did not pass');
+};
+
+describe('event validator declarative', function() {
+    beforeEach(function() {
+        $([
+            '<form class="form-horizontal" id="eventForm">',
+                '<div id="msg"></div>',
+                '<div class="form-group">',
+                    '<input type="text" name="email" data-bv-emailaddress data-bv-emailaddress-onsuccess="onEmailAddressValidatorSuccess" data-bv-emailaddress-onerror="onEmailAddressValidatorError" />',
+                '</div>',
+            '</form>'
+        ].join('\n')).appendTo('body');
+
+        $('#eventForm').bootstrapValidator();
+
+        this.bv     = $('#eventForm').data('bootstrapValidator');
+        this.$email = this.bv.getFieldElements('email');
+    });
+
+    afterEach(function() {
+        $('#eventForm').bootstrapValidator('destroy').remove();
+    });
+
+    it('trigger data-bv-emailaddress-onsuccess', function() {
+        this.$email.val('email@domain.com');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('emailAddress validator passed');
+    });
+
+    it('trigger data-bv-emailaddress-onerror', function() {
+        this.$email.val('email@domain');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('emailAddress validator did not pass');
+    });
+});
+
+describe('event validator programmatically', function() {
+    beforeEach(function() {
+        $([
+            '<form class="form-horizontal" id="eventForm">',
+                '<div id="msg"></div>',
+                '<div class="form-group">',
+                    '<input type="text" name="email" data-bv-emailaddress />',
+                '</div>',
+            '</form>'
+        ].join('\n')).appendTo('body');
+
+        $('#eventForm').bootstrapValidator({
+            fields: {
+                email: {
+                    validators: {
+                        emailAddress: {
+                            onSuccess: function(e, data) {
+                                $('#msg').html('emailAddress validator: onSuccess() called');
+                            },
+                            onError: function(e, data) {
+                                $('#msg').html('emailAddress validator: onError() called');
+                            },
+                            message: 'The email address is not valid'
+                        }
+                    }
+                }
+            }
+        });
+
+        this.bv     = $('#eventForm').data('bootstrapValidator');
+        this.$email = this.bv.getFieldElements('email');
+    });
+
+    afterEach(function() {
+        $('#eventForm').bootstrapValidator('destroy').remove();
+    });
+
+    it('call onSuccess()', function() {
+        this.$email.val('email@domain.com');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('emailAddress validator: onSuccess() called');
+    });
+
+    it('call onError()', function() {
+        this.$email.val('email@domain');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('emailAddress validator: onError() called');
     });
 });

@@ -102,6 +102,7 @@
             }
 
             this.$form.trigger($.Event('init.form.bv'), {
+                bv: this,
                 options: this.options
             });
 
@@ -144,7 +145,7 @@
                     || (html5AttrMap !== true && ('' === enabled || 'true' === enabled)))
                 {
                     // Try to parse the options via attributes
-                    validator.html5Attributes = validator.html5Attributes || { message: 'message' };
+                    validator.html5Attributes = $.extend({}, { message: 'message', onerror: 'onError', onsuccess: 'onSuccess' }, validator.html5Attributes);
                     validators[v] = $.extend({}, html5AttrMap === true ? {} : html5AttrMap, validators[v]);
 
                     for (html5AttrName in validator.html5Attributes) {
@@ -272,6 +273,18 @@
                             .html(this._getMessage(field, validatorName))
                             .appendTo($message);
                     }
+
+                    // Prepare the validator events
+                    if (this.options.fields[field].validators[validatorName].onSuccess) {
+                        $field.on('success.validator.bv', function(e, data) {
+                             $.fn.bootstrapValidator.helpers.call(that.options.fields[field].validators[validatorName].onSuccess, [e, data]);
+                        });
+                    }
+                    if (this.options.fields[field].validators[validatorName].onError) {
+                        $field.on('error.validator.bv', function(e, data) {
+                             $.fn.bootstrapValidator.helpers.call(that.options.fields[field].validators[validatorName].onError, [e, data]);
+                        });
+                    }
                 }
 
                 // Prepare the feedback icons
@@ -344,6 +357,7 @@
             }
 
             this.$form.trigger($.Event('init.field.bv'), {
+                bv: this,
                 field: field,
                 element: fields
             });
@@ -566,21 +580,24 @@
             var field         = $field.attr('data-bv-field'),
                 validators    = this.options.fields[field].validators,
                 counter       = {},
-                numValidators = 0;
-
-            // Trigger an event after given validator completes
-            if (validatorName) {
-                var data = {
+                numValidators = 0,
+                data          = {
+                    bv: this,
                     field: field,
                     element: $field,
                     validator: validatorName
                 };
+
+            // Trigger an event after given validator completes
+            if (validatorName) {
                 switch ($field.data('bv.result.' + validatorName)) {
                     case this.STATUS_INVALID:
                         this.$form.trigger($.Event('error.validator.bv'), data);
+                        $field.trigger($.Event('error.validator.bv'), data);
                         break;
                     case this.STATUS_VALID:
                         this.$form.trigger($.Event('success.validator.bv'), data);
+                        $field.trigger($.Event('success.validator.bv'), data);
                         break;
                     default:
                         break;
@@ -608,30 +625,16 @@
                 // Remove from the list of invalid fields
                 this.$invalidFields = this.$invalidFields.not($field);
 
-                this.$form.trigger($.Event('success.field.bv'), {
-                    field: field,
-                    element: $field
-                });
-                $field.trigger($.Event('success.field.bv'), {
-                    field: field,
-                    element: $field,
-                    validator: this
-                });
+                this.$form.trigger($.Event('success.field.bv'), data);
+                $field.trigger($.Event('success.field.bv'), data);
             }
             // If all validators are completed and there is at least one validator which doesn't pass
             else if (counter[this.STATUS_NOT_VALIDATED] === 0 && counter[this.STATUS_VALIDATING] === 0 && counter[this.STATUS_INVALID] > 0) {
                 // Add to the list of invalid fields
                 this.$invalidFields = this.$invalidFields.add($field);
 
-                this.$form.trigger($.Event('error.field.bv'), {
-                    field: field,
-                    element: $field
-                });
-                $field.trigger($.Event('error.field.bv'), {
-                    field: field,
-                    element: $field,
-                    validator: this
-                });
+                this.$form.trigger($.Event('error.field.bv'), data);
+                $field.trigger($.Event('error.field.bv'), data);
             }
         },
 
