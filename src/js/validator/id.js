@@ -293,10 +293,10 @@
          * @returns {Boolean}
          */
         _cl: function(value) {
-            if (!/^\d{7,8}[-]{0,1}[0-9K]$/.test(value)) {
+            if (!/^\d{7,8}[-]{0,1}[0-9K]$/i.test(value)) {
                 return false;
             }
-            value = value.replace(/\D/g, '');
+            value = value.replace(/\-/g, '');
             while (value.length < 9) {
                 value = '0' + value;
             }
@@ -311,7 +311,7 @@
             } else if (sum === 10) {
                 sum = 'K';
             }
-            return sum + '' === value.charAt(8);
+            return sum + '' === value.charAt(8).toUpperCase();
         },
 
         /**
