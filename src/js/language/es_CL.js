@@ -146,9 +146,9 @@
             }
         },
         id: {
-            'default': 'Por favor ingrese un número de identificación válido.',
+            'default': 'Por favor ingrese un número de identificación válido',
             countryNotSupported: 'El código del país %s no esta soportado',
-            country: 'Por favor ingrese un número de identificación %s válida',
+            country: 'Por favor ingrese un número de identificación %s válido',
             countries: {
                 BA: 'Bosnioherzegovino',
                 BG: 'Búlgaro',
@@ -291,7 +291,7 @@
                 LU: 'Luxemburgués',
                 LV: 'Letón',
                 MT: 'Maltés',
-                NL: 'Neerlandés',
+                NL: 'Holandés',
                 NO: 'Noruego',
                 PL: 'Polaco',
                 PT: 'Portugués',
