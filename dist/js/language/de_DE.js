@@ -241,7 +241,7 @@
             'default': 'Bitte gültige SIRET Nummer eingeben'
         },
         step: {
-            'default': 'Bitte einen gültigen Schritt von %s eingeben',
+            'default': 'Bitte einen gültigen Schritt von %s eingeben'
         },
         stringCase: {
             'default': 'Bitte nur Kleinbuchstaben eingeben',

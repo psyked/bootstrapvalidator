@@ -27,6 +27,7 @@ I would like to give big thanks to the following contributors:
 * [@lloydde](https://github.com/lloydde)
 * [@logemann](https://github.com/logemann)
 * [@manish-in-java](https://github.com/manish-in-java)
+* [@marceloampuerop6](https://github.com/marceloampuerop6)
 * [@MartinDevillers](https://github.com/MartinDevillers)
 * [@mike1e](https://github.com/mike1e)
 * [@MrC0mm0n](https://github.com/MrC0mm0n)
