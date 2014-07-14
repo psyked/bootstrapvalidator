@@ -956,6 +956,7 @@
 
                 // Trigger an event
                 $field.trigger($.Event('status.field.bv'), {
+                    bv: this,
                     field: field,
                     element: $field,
                     status: status

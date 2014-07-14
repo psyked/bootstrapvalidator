@@ -44,7 +44,6 @@
                             </div>
                         </div>
 
-                        <!--
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Password</label>
                             <div class="col-lg-5">
@@ -156,7 +155,6 @@
                                 </div>
                             </div>
                         </div>
-                        -->
 
                         <div class="form-group">
                             <div class="col-lg-9 col-lg-offset-3">
@@ -211,10 +209,10 @@ $(document).ready(function() {
                             regexp: /^[a-zA-Z0-9_\.]+$/,
                             message: 'The username can only consist of alphabetical, number, dot and underscore'
                         },
-                        remote: {
-                            url: 'remote.php',
-                            message: 'The username is not available'
-                        },
+//                        remote: {
+//                            url: 'remote.php',
+//                            message: 'The username is not available'
+//                        },
                         different: {
                             field: 'password',
                             message: 'The username and password cannot be the same as each other'
@@ -306,12 +304,11 @@ $(document).ready(function() {
             console.log('success.field.bv -->', data);
         })
         .on('status.field.bv', function(e, data) {
-            var $form = $(e.target);
             // I don't want to add has-success class to valid field container
             data.element.parents('.form-group').removeClass('has-success');
 
             // I want to enable the submit button all the time
-            $form.data('bootstrapValidator').disableSubmitButtons(false);
+            data.bv.disableSubmitButtons(false);
         });
 
     // Validate the form manually
