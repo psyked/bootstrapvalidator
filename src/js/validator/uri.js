@@ -86,7 +86,7 @@
                     // domain name
                     "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*" +
                     // TLD identifier
-                    "(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))" +
+                    "(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))?" +
                     ")" +
                     // port number
                     "(?::\\d{2,5})?" +
