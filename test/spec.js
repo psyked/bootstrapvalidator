@@ -1663,21 +1663,20 @@ function validateCaptcha(value, validator, $field) {
 
 describe('callback', function() {
     beforeEach(function() {
-        $(['<div class="container">',
-                '<form class="form-horizontal" id="callbackForm">',
-                    '<div class="form-group">',
-                        '<label class="col-md-3 control-label" id="captchaOperation"></label>',
-                        '<div class="col-md-2">',
-                            '<input type="text" class="form-control" name="captcha" />',
-                        '</div>',
+        $([
+            '<form class="form-horizontal" id="callbackForm">',
+                '<div class="form-group">',
+                    '<label class="col-md-3 control-label" id="captchaOperation"></label>',
+                    '<div class="col-md-2">',
+                        '<input type="text" class="form-control" name="captcha" />',
                     '</div>',
-                    '<div class="form-group">',
-                        '<div class="col-md-2 col-md-offset-3">',
-                            '<input type="text" class="form-control" name="declarativeCaptcha" data-bv-callback data-bv-callback-callback="validateCaptcha" />',
-                        '</div>',
+                '</div>',
+                '<div class="form-group">',
+                    '<div class="col-md-2 col-md-offset-3">',
+                        '<input type="text" class="form-control" name="declarativeCaptcha" data-bv-callback data-bv-callback-callback="validateCaptcha" />',
                     '</div>',
-                '</form>',
-            '</div>'
+                '</div>',
+            '</form>'
         ].join('\n')).appendTo('body');
 
         $('#callbackForm').bootstrapValidator({
@@ -1701,7 +1700,7 @@ describe('callback', function() {
     });
 
     afterEach(function() {
-        $('#callbackForm').bootstrapValidator('destroy').parent().remove();
+        $('#callbackForm').bootstrapValidator('destroy').remove();
     });
 
     it('execute the callback', function() {

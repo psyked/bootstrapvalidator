@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.0-dev, built on 2014-07-12 10:38:50 AM
+ * @version     v0.5.0-dev, built on 2014-07-14 8:29:15 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -562,13 +562,8 @@
                 return;
             }
 
-            // Call the custom submission if enabled
-            if (this.options.submitHandler && 'function' === typeof this.options.submitHandler) {
-                // If you want to submit the form inside your submit handler, please call defaultSubmit() method
-                this.options.submitHandler.call(this, this, this.$form);
-            } else {
-                this.disableSubmitButtons(true).defaultSubmit();
-            }
+            // Submit the form
+            this.disableSubmitButtons(true).defaultSubmit();
         },
 
         /**
@@ -1084,8 +1079,6 @@
         /**
          * Submit the form using default submission.
          * It also does not perform any validations when submitting the form
-         *
-         * It might be used when you want to submit the form right inside the submitHandler()
          */
         defaultSubmit: function() {
             if (this.$submitButton) {
@@ -1639,15 +1632,6 @@
         // The submit buttons selector
         // These buttons will be disabled to prevent the valid form from multiple submissions
         submitButtons: '[type="submit"]',
-
-        // The custom submit handler
-        // It will prevent the form from the default submission
-        //
-        //  submitHandler: function(validator, form) {
-        //      - validator is the BootstrapValidator instance
-        //      - form is the jQuery object presenting the current form
-        //  }
-        submitHandler: null,
 
         // Live validating option
         // Can be one of 3 values:

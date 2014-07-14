@@ -84,13 +84,54 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('#defaultForm').bootstrapValidator({
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        submitHandler: function(validator, form, submitButton) {
+    $('#defaultForm')
+        .bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                firstName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The first name is required and cannot be empty'
+                        }
+                    }
+                },
+                lastName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The last name is required and cannot be empty'
+                        }
+                    }
+                },
+                email: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The email address is required and cannot be empty'
+                        },
+                        emailAddress: {
+                            message: 'The input is not a valid email address'
+                        }
+                    }
+                },
+                gender: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The gender is required'
+                        }
+                    }
+                }
+            }
+        })
+        .on('success.form.bv', function(e) {
+            // Prevent submit form
+            e.preventDefault();
+
+            var $form     = $(e.target),
+                validator = $form.data('bootstrapValidator');
+
             // Show the modal
             var fullName = [validator.getFieldElements('firstName').val(),
                             validator.getFieldElements('lastName').val()].join(' ');
@@ -98,45 +139,13 @@ $(document).ready(function() {
                 .find('.welcome').html('Hello ' + fullName).end()
                 .modal('show');
 
-            $('#defaultForm')
+            $form
                 .bootstrapValidator('disableSubmitButtons', false)  // Enable the submit buttons
                 .bootstrapValidator('resetForm', true);             // Reset the form
-        },
-        fields: {
-            firstName: {
-                validators: {
-                    notEmpty: {
-                        message: 'The first name is required and cannot be empty'
-                    }
-                }
-            },
-            lastName: {
-                validators: {
-                    notEmpty: {
-                        message: 'The last name is required and cannot be empty'
-                    }
-                }
-            },
-            email: {
-                validators: {
-                    notEmpty: {
-                        message: 'The email address is required and cannot be empty'
-                    },
-                    emailAddress: {
-                        message: 'The input is not a valid email address'
-                    }
-                }
-            },
-            gender: {
-                validators: {
-                    notEmpty: {
-                        message: 'The gender is required'
-                    }
-                }
-            }
-        }
-    });
+        });
 });
+
+
 </script>
 </body>
 </html>

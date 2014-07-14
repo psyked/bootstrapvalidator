@@ -31,6 +31,34 @@ __Changes__
 * [#42](https://github.com/nghuuphuoc/bootstrapvalidator/issues/42): Remove the submit button from ```submitHandler()```. You can use new ```getSubmitButton()``` method to get the clicked submit button
 * [#109](https://github.com/nghuuphuoc/bootstrapvalidator/issues/109): Remove the ```setLiveMode()``` method
 * ```$.fn.bootstrapValidator.helpers``` renames ```mod_11_10``` to ```mod11And10```, ```mod_37_36``` to ```mod37And36```
+* Remove ```submitHandler()``` option. Use ```success.form.bv``` event instead:
+
+_v0.4.5 and earlier versions_
+```javascript
+$(form).bootstrapValidator({
+    submitHandler: function(form, validator, submitButton) {
+        ...
+    }
+});
+```
+
+_v0.5.0_
+Using ```success.form.bv``` event:
+
+```javascript
+$(form)
+    .bootstrapValidator(options)
+    .on('success.form.bv', function(e) {
+        // Prevent form submission
+        e.preventDefault();
+
+        var $form        = $(e.target),
+            validator    = $form.data('bootstrapValidator'),
+            submitButton = validator.getSubmitButton();
+
+        // Do whatever you want here ...
+    });
+```
 
 __Improvements__
 * [#244](https://github.com/nghuuphuoc/bootstrapvalidator/pull/244): Only enable the submit buttons if all fields are valid, thanks to [@smeagol74](https://github.com/smeagol74)
