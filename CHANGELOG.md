@@ -1,6 +1,6 @@
 # Change Log
 
-## v0.5.0 (not released yet) - It will be the big release
+## v0.5.0 (2015-07-14)
 
 __New Features__
 * [#2](https://github.com/nghuuphuoc/bootstrapvalidator/issues/2), [#387](https://github.com/nghuuphuoc/bootstrapvalidator/issues/387): Provide the default error messages
