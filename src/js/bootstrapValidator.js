@@ -356,7 +356,7 @@
                     break;
             }
 
-            this.$form.trigger($.Event('init.field.bv'), {
+            fields.trigger($.Event('init.field.bv'), {
                 bv: this,
                 field: field,
                 element: fields
@@ -587,11 +587,9 @@
             if (validatorName) {
                 switch ($field.data('bv.result.' + validatorName)) {
                     case this.STATUS_INVALID:
-                        this.$form.trigger($.Event('error.validator.bv'), data);
                         $field.trigger($.Event('error.validator.bv'), data);
                         break;
                     case this.STATUS_VALID:
-                        this.$form.trigger($.Event('success.validator.bv'), data);
                         $field.trigger($.Event('success.validator.bv'), data);
                         break;
                     default:
@@ -620,7 +618,6 @@
                 // Remove from the list of invalid fields
                 this.$invalidFields = this.$invalidFields.not($field);
 
-                this.$form.trigger($.Event('success.field.bv'), data);
                 $field.trigger($.Event('success.field.bv'), data);
             }
             // If all validators are completed and there is at least one validator which doesn't pass
@@ -628,7 +625,6 @@
                 // Add to the list of invalid fields
                 this.$invalidFields = this.$invalidFields.add($field);
 
-                this.$form.trigger($.Event('error.field.bv'), data);
                 $field.trigger($.Event('error.field.bv'), data);
             }
         },
