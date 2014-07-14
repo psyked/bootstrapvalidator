@@ -20,7 +20,7 @@ There are also many examples located in the [demo](demo) directory.
 
 ## Features
 
-See [official website[(http://bootstrapvalidator.com) for the full list of features
+See [official website](http://bootstrapvalidator.com) for the full list of features
 
 ## Required
 
