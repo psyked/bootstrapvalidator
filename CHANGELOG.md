@@ -6,6 +6,7 @@ __Language Packages__
 
 * [#503](https://github.com/nghuuphuoc/bootstrapvalidator/pull/503): French language package, thanks to [@dlucazeau](https://github.com/dlucazeau)
 * [#505](https://github.com/nghuuphuoc/bootstrapvalidator/pull/505): Czech language package, thanks to [@AdwinTrave](https://github.com/AdwinTrave)
+* [#507](https://github.com/nghuuphuoc/bootstrapvalidator/pull/507): Polish language package, thanks to [@grzesiek](https://github.com/grzesiek)
 
 ## v0.5.0 (2015-07-14)
 

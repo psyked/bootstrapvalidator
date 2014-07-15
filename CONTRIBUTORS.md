@@ -16,6 +16,7 @@ I would like to give big thanks to the following contributors:
 * [@evilchili](https://github.com/evilchili)
 * [@Francismori7](https://github.com/Francismori7)
 * [@gercheq](https://github.com/gercheq)
+* [@grzesiek](https://github.com/grzesiek)
 * [@henningda](https://github.com/henningda)
 * [@ikanedo](https://github.com/ikanedo)
 * [@iplus](https://github.com/iplus)
