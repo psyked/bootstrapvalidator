@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.1-dev, built on 2014-07-15 1:16:59 PM
+ * @version     v0.5.1-dev, built on 2014-07-16 5:28:05 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -4946,7 +4946,7 @@
             // Notes on possible differences from a standard/generic validation:
             //
             // - utf-8 char class take in consideration the full Unicode range
-            // - TLDs have been made mandatory so single names like "localhost" fails
+            // - TLDs are mandatory unless `allowLocal` is true
             // - protocols have been restricted to ftp, http and https only as requested
             //
             // Changes:
@@ -4956,6 +4956,7 @@
             //   (since they are broadcast/network addresses)
             //
             // - Added exclusion of private, reserved and/or local networks ranges
+            //   unless `allowLocal` is true
             //
             var allowLocal = options.allowLocal === true || options.allowLocal === 'true',
                 urlExp     = new RegExp(
@@ -4987,6 +4988,8 @@
                     "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*" +
                     // TLD identifier
                     "(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))" +
+                    // Allow intranet sites (no TLD) if `allowLocal` is true
+                    (allowLocal ? '?' : '') +
                     ")" +
                     // port number
                     "(?::\\d{2,5})?" +

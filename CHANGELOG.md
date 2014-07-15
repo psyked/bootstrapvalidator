@@ -2,6 +2,10 @@
 
 ## v0.5.1 (not released yet)
 
+__Improvements__
+
+* [#502](https://github.com/nghuuphuoc/bootstrapvalidator/pull/502): Allowing sites without TLD to pass URI validation, thanks to [@troymccabe](https://github.com/troymccabe)
+
 __Language Packages__
 
 * [#503](https://github.com/nghuuphuoc/bootstrapvalidator/pull/503): French language package, thanks to [@dlucazeau](https://github.com/dlucazeau)

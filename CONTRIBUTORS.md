@@ -43,6 +43,7 @@ I would like to give big thanks to the following contributors:
 * [@thisisclement](https://github.com/thisisclement)
 * [@tiagofontella](https://github.com/tiagofontella)
 * [@tomByrer](https://github.com/tomByrer)
+* [@troymccabe](https://github.com/troymccabe)
 * [@tureki](https://github.com/tureki)
 * [@vaz](https://github.com/vaz)
 * ... might be you! Let's [fork](https://github.com/nghuuphuoc/bootstrapvalidator/fork) and pull a request!

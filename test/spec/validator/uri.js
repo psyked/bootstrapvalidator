@@ -2,16 +2,16 @@ describe('uri', function() {
     beforeEach(function () {
         $([
             '<form class="form-horizontal" id="uriForm">',
-            '<div id="msg"></div>',
-            '<div class="form-group">',
-            '<input type="text" name="uri" data-bv-uri />',
-            '</div>',
+                '<div id="msg"></div>',
+                '<div class="form-group">',
+                    '<input type="text" name="uri" data-bv-uri />',
+                '</div>',
             '</form>'
         ].join('\n')).appendTo('body');
 
         $('#uriForm').bootstrapValidator();
 
-        this.bv    = $('#uriForm').data('bootstrapValidator');
+        this.bv   = $('#uriForm').data('bootstrapValidator');
         this.$uri = this.bv.getFieldElements('uri');
     });
 
