@@ -144,7 +144,7 @@
                 SN: 'Senegal',
                 TN: 'Tunisia',
                 TR: 'Turchia',
-                VG: 'Virgin Islands, British'
+                VG: 'Isole Vergini, Inghilterra'
             }
         },
         id: {
@@ -189,7 +189,9 @@
             'default': 'Si prega di inserire un numero valido'
         },
         ip: {
-            'default': 'Si prega di inserire un indirizzo IP valido'
+            'default': 'Please enter a valid IP address',
+            ipv4: 'Si prega di inserire un indirizzo IPv4 valido',
+            ipv6: 'Si prega di inserire un indirizzo IPv6 valido'
         },
         isbn: {
             'default': 'Si prega di inserire un numero ISBN valido'
