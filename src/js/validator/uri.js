@@ -56,7 +56,7 @@
             //   (since they are broadcast/network addresses)
             //
             // - Added exclusion of private, reserved and/or local networks ranges
-			//   unless `allowLocal` is true
+            //   unless `allowLocal` is true
             //
             var allowLocal = options.allowLocal === true || options.allowLocal === 'true',
                 urlExp     = new RegExp(
@@ -88,8 +88,8 @@
                     "(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-?)*[a-z\\u00a1-\\uffff0-9]+)*" +
                     // TLD identifier
                     "(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))" +
-					// Allow intranet sites (no TLD) if `allowLocal` is true
-					(allowLocal ? '?' : '') +
+                    // Allow intranet sites (no TLD) if `allowLocal` is true
+                    (allowLocal ? '?' : '') +
                     ")" +
                     // port number
                     "(?::\\d{2,5})?" +
