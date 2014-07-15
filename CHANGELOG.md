@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.5.1 (not released yet)
+
+__Language Packages__
+
+* [#505](https://github.com/nghuuphuoc/bootstrapvalidator/pull/505): Czech language package, thanks to [@AdwinTrave](https://github.com/AdwinTrave)
+
 ## v0.5.0 (2015-07-14)
 
 __New Features__
