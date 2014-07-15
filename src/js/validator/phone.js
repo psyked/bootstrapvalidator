@@ -5,7 +5,7 @@
         country: 'Please enter a valid phone number in %s',
         countries: {
             GB: 'United Kingdom',
-            FR: 'FR',
+            FR: 'France',
             US: 'USA'
         }
     });
