@@ -223,7 +223,7 @@
             country: 'Veuillez fournir un numéro de téléphone valide pour %s',
             countries: {
                 GB: 'le Royaume Uni',
-                US: 'les USA'
+                US: 'les USA',
             }
         },
         regexp: {
