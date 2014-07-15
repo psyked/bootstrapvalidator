@@ -67,7 +67,7 @@
                 case 'FR':
                     // http://regexr.com/395dq
                     value = $.trim(value);
-                    isValid = (/^(?:(?:(?:\+|00)33\D?(?:\(0\))?)|0){1}[1-9]{1}(?:\D?\d{2}){4}$/).test(value);
+                    isValid = (/^(?:(?:(?:\+|00)33\D?(?:\D?\(0\)\D?)?)|0){1}[1-9]{1}(?:\D?\d{2}){4}$/).test(value);
                     break;
 
                 case 'US':
