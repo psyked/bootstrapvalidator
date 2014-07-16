@@ -53,6 +53,13 @@
                         </div>
 
                         <div class="form-group">
+                            <label class="col-lg-3 control-label">YYYY.MM.DD</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" name="yearMonthDay" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <label class="col-lg-3 control-label">MM/DD/YYYY h:m A</label>
                             <div class="col-lg-5">
                                 <input type="text" class="form-control" name="monthDayYearTime" />
@@ -115,6 +122,14 @@ $(document).ready(function() {
                     }
                 }
             },
+            yearMonthDay: {
+                validators: {
+                    date: {
+                        format: 'YYYY.MM.DD',
+                        separator: '.'
+                    }
+                }
+            },
             monthDayYearTime: {
                 validators: {
                     date: {
@@ -145,10 +160,9 @@ $(document).ready(function() {
     $('#datetimePicker')
         .on('dp.change dp.show', function(e) {
             // Validate the date when user change it
-            $('#defaultForm')
-                .data('bootstrapValidator')                                 // Get the bootstrapValidator instance
-                .updateStatus('datetimePicker', 'NOT_VALIDATED', null)      // Mark the field as not validated, so it'll be re-validated when the user change date
-                .validateField('datetimePicker');                           // Validate the field
+            $('#defaultForm').data('bootstrapValidator').revalidateField('datetimePicker');
+            // You also can call it as following:
+            // $('#defaultForm').bootstrapValidator('revalidateField', 'datetimePicker');
         });
 });
 </script>

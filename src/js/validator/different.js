@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.different = $.extend($.fn.bootstrapValidator.i18n.different || {}, {
+        'default': 'Please enter a different value'
+    });
+
     $.fn.bootstrapValidator.validators.different = {
         html5Attributes: {
             message: 'message',
@@ -17,16 +21,16 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
             var compareWith = validator.getFieldElements(options.field);
-            if (compareWith == null) {
+            if (compareWith === null) {
                 return true;
             }
 
-            if (value != compareWith.val()) {
+            if (value !== compareWith.val()) {
                 validator.updateStatus(options.field, validator.STATUS_VALID, 'different');
                 return true;
             } else {

@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.cvv = $.extend($.fn.bootstrapValidator.i18n.cvv || {}, {
+        'default': 'Please enter a valid CVV number'
+    });
+
     $.fn.bootstrapValidator.validators.cvv = {
         html5Attributes: {
             message: 'message',
@@ -17,7 +21,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
@@ -31,7 +35,7 @@
 
             // Get the credit card number
             var creditCard = validator.getFieldElements(options.creditCardField).val();
-            if (creditCard == '') {
+            if (creditCard === '') {
                 return true;
             }
             
@@ -94,9 +98,9 @@
             };
             var type, i, creditCardType = null;
             for (type in cards) {
-                for (i in cards[type]['prefix']) {
-                    if (creditCard.substr(0, cards[type]['prefix'][i].length) == cards[type]['prefix'][i]   // Check the prefix
-                        && cards[type]['length'].indexOf(creditCard.length) != -1)                          // and length
+                for (i in cards[type].prefix) {
+                    if (creditCard.substr(0, cards[type].prefix[i].length) === cards[type].prefix[i]    // Check the prefix
+                        && $.inArray(creditCard.length, cards[type].length) !== -1)                     // and length
                     {
                         creditCardType = type;
                         break;
@@ -104,9 +108,9 @@
                 }
             }
 
-            return (creditCardType == null)
+            return (creditCardType === null)
                         ? false
-                        : (('AMERICAN_EXPRESS' == creditCardType) ? (value.length == 4) : (value.length == 3));
+                        : (('AMERICAN_EXPRESS' === creditCardType) ? (value.length === 4) : (value.length === 3));
         }
     };
 }(window.jQuery));

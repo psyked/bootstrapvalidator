@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.siren = $.extend($.fn.bootstrapValidator.i18n.siren || {}, {
+        'default': 'Please enter a valid SIREN number'
+    });
+
 	$.fn.bootstrapValidator.validators.siren = {
 		/**
 		 * Check if a string is a siren number
@@ -11,7 +15,7 @@
 		 */
 		validate: function(validator, $field, options) {
 			var value = $field.val();
-			if (value == '') {
+			if (value === '') {
 				return true;
 			}
 

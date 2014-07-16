@@ -57,19 +57,15 @@
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#defaultForm').bootstrapValidator({
+$(document).ready(function() {
+    $('#defaultForm')
+        .bootstrapValidator({
             message: 'This value is not valid',
-            live: 'disabled',
+            //live: 'submitted',
             feedbackIcons: {
                 valid: 'glyphicon glyphicon-ok',
                 invalid: 'glyphicon glyphicon-remove',
                 validating: 'glyphicon glyphicon-refresh'
-            },
-            submitHandler: function(validator, form, submitButton) {
-                // validator is the BootstrapValidator instance
-                // form is the jQuery object present the current form
-                form.find('.alert').html('Thanks for signing up. Now you can sign in as ' + validator.getFieldElements('username').val()).show();
             },
             fields: {
                 username: {
@@ -83,10 +79,10 @@
                             max: 30,
                             message: 'The username must be more than 6 and less than 30 characters long'
                         },
-                        remote: {
+                        /*remote: {
                             url: 'remote.php',
                             message: 'The username is not available'
-                        },
+                        },*/
                         regexp: {
                             regexp: /^[a-zA-Z0-9_\.]+$/,
                             message: 'The username can only consist of alphabetical, number, dot and underscore'
@@ -111,8 +107,16 @@
                     }
                 }
             }
+        })
+        .on('success.form.bv', function(e) {
+            // Prevent submit form
+            e.preventDefault();
+
+            var $form     = $(e.target),
+                validator = $form.data('bootstrapValidator');
+            $form.find('.alert').html('Thanks for signing up. Now you can sign in as ' + validator.getFieldElements('username').val()).show();
         });
-    });
+});
 </script>
 </body>
 </html>

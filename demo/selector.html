@@ -107,8 +107,22 @@ $(document).ready(function() {
                         message: 'Expired',
                         callback: function(value, validator) {
                             value = parseInt(value, 10);
-                            var currentMonth = new Date().getMonth() + 1;
-                            return (value <= 12 && value >= currentMonth);
+                            var year         = validator.getFieldElements('expYear').val(),
+                                currentMonth = new Date().getMonth() + 1,
+                                currentYear  = new Date().getFullYear();
+                            if (value < 0 || value > 12) {
+                                return false;
+                            }
+                            if (year == '') {
+                                return true;
+                            }
+                            year = parseInt(year, 10);
+                            if (year > currentYear || (year == currentYear && value > currentMonth)) {
+                                validator.updateStatus('expYear', 'VALID');
+                                return true;
+                            } else {
+                                return false;
+                            }
                         }
                     }
                 }
@@ -126,8 +140,22 @@ $(document).ready(function() {
                         message: 'Expired',
                         callback: function(value, validator) {
                             value = parseInt(value, 10);
-                            var currentYear = new Date().getFullYear();
-                            return (value >= currentYear && value <= currentYear + 100);
+                            var month        = validator.getFieldElements('expMonth').val(),
+                                currentMonth = new Date().getMonth() + 1,
+                                currentYear  = new Date().getFullYear();
+                            if (value < currentYear || value > currentYear + 10) {
+                                return false;
+                            }
+                            if (month == '') {
+                                return false;
+                            }
+                            month = parseInt(month, 10);
+                            if (value > currentYear || (value == currentYear && month > currentMonth)) {
+                                validator.updateStatus('expMonth', 'VALID');
+                                return true;
+                            } else {
+                                return false;
+                            }
                         }
                     }
                 }

@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.file = $.extend($.fn.bootstrapValidator.i18n.file || {}, {
+        'default': 'Please choose a valid file'
+    });
+
     $.fn.bootstrapValidator.validators.file = {
         html5Attributes: {
             extension: 'extension',
@@ -21,13 +25,13 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
             var ext,
-                extensions = options.extension ? options.extension.split(',') : null,
-                types      = options.type      ? options.type.split(',')      : null,
+                extensions = options.extension ? options.extension.toLowerCase().split(',') : null,
+                types      = options.type      ? options.type.toLowerCase().split(',')      : null,
                 html5      = (window.File && window.FileList && window.FileReader);
 
             if (html5) {
@@ -36,25 +40,25 @@
                     total = files.length;
                 for (var i = 0; i < total; i++) {
                     // Check file size
-                    if (options.maxSize && files[i].size > parseInt(options.maxSize)) {
+                    if (options.maxSize && files[i].size > parseInt(options.maxSize, 10)) {
                         return false;
                     }
 
                     // Check file extension
                     ext = files[i].name.substr(files[i].name.lastIndexOf('.') + 1);
-                    if (extensions && extensions.indexOf(ext) == -1) {
+                    if (extensions && $.inArray(ext.toLowerCase(), extensions) === -1) {
                         return false;
                     }
 
                     // Check file type
-                    if (types && types.indexOf(files[i].type) == -1) {
+                    if (types && $.inArray(files[i].type.toLowerCase(), types) === -1) {
                         return false;
                     }
                 }
             } else {
                 // Check file extension
                 ext = value.substr(value.lastIndexOf('.') + 1);
-                if (extensions && extensions.indexOf(ext) == -1) {
+                if (extensions && $.inArray(ext.toLowerCase(), extensions) === -1) {
                     return false;
                 }
             }

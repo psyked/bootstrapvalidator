@@ -114,37 +114,51 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#defaultForm').bootstrapValidator({
-            message: 'This value is not valid',
-            feedbackIcons: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                gender: {
-                    validators: {
-                        notEmpty: {
-                            message: 'The gender is required'
-                        }
-                    }
+        $('#defaultForm')
+            .bootstrapValidator({
+                message: 'This value is not valid',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
                 },
-                'browsers[]': {
-                    validators: {
-                        notEmpty: {
-                            message: 'Please specify at least one browser you use daily for development'
+                fields: {
+                    gender: {
+                        validators: {
+                            notEmpty: {
+                                message: 'The gender is required'
+                            }
                         }
-                    }
-                },
-                'editors[]': {
-                    validators: {
-                        notEmpty: {
-                            message: 'The editor names are required'
+                    },
+                    'browsers[]': {
+                        validators: {
+                            notEmpty: {
+                                message: 'Please specify at least one browser you use daily for development'
+                            }
+                        }
+                    },
+                    'editors[]': {
+                        validators: {
+                            notEmpty: {
+                                message: 'The editor names are required'
+                            }
                         }
                     }
                 }
-            }
-        });
+            })
+            .on('error.field.bv', function(e, data) {
+                console.log('error.field.bv -->', data);
+            })
+            .on('status.field.bv', function(e, data) {
+                console.log('status.field.bv -->', data);
+
+                var $form = $(e.target);
+                // I don't want to add has-success class to valid field container
+                data.element.parents('.form-group').removeClass('has-success');
+
+                // I want to enable the submit button all the time
+                $form.data('bootstrapValidator').disableSubmitButtons(false);
+            });
     });
 </script>
 </body>

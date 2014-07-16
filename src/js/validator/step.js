@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.step = $.extend($.fn.bootstrapValidator.i18n.step || {}, {
+        'default': 'Please enter a valid step of %s'
+    });
+
     $.fn.bootstrapValidator.validators.step = {
         html5Attributes: {
             message: 'message',
@@ -15,17 +19,17 @@
          * - baseValue: The base value
          * - step: The step
          * - message: The invalid message
-         * @returns {Boolean}
+         * @returns {Boolean|Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
             options = $.extend({}, { baseValue: 0, step: 1 }, options);
             value   = parseFloat(value);
-            if (isNaN(value) || !isFinite(value)) {
+            if (!$.isNumeric(value)) {
                 return false;
             }
 
@@ -41,17 +45,20 @@
                     }
                 },
                 floatMod = function(x, y) {
-                    if (y == 0.0) {
+                    if (y === 0.0) {
                         return 1.0;
                     }
                     var dotX      = (x + '').split('.'),
                         dotY      = (y + '').split('.'),
-                        precision = ((dotX.length == 1) ? 0 : dotX[1].length) + ((dotY.length == 1) ? 0 : dotY[1].length);
+                        precision = ((dotX.length === 1) ? 0 : dotX[1].length) + ((dotY.length === 1) ? 0 : dotY[1].length);
                     return round(x - y * Math.floor(x / y), precision);
                 };
 
             var mod = floatMod(value - options.baseValue, options.step);
-            return (mod == 0.0 || mod == options.step);
+            return {
+                valid: mod === 0.0 || mod === options.step,
+                message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.step['default'], [options.step])
+            };
         }
     };
 }(window.jQuery));

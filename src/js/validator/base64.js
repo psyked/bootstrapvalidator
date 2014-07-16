@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.base64 = $.extend($.fn.bootstrapValidator.i18n.base64 || {}, {
+        'default': 'Please enter a valid base 64 encoded'
+    });
+
     $.fn.bootstrapValidator.validators.base64 = {
         /**
          * Return true if the input value is a base 64 encoded string.
@@ -11,7 +15,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 

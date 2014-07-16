@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.siret = $.extend($.fn.bootstrapValidator.i18n.siret || {}, {
+        'default': 'Please enter a valid SIRET number'
+    });
+
 	$.fn.bootstrapValidator.validators.siret = {
         /**
          * Check if a string is a siret number
@@ -11,7 +15,7 @@
          */
 		validate: function(validator, $field, options) {
 			var value = $field.val();
-			if (value == '') {
+			if (value === '') {
 				return true;
 			}
 
@@ -20,7 +24,7 @@
                 tmp;
 			for (var i = 0; i < length; i++) {
                 tmp = parseInt(value.charAt(i), 10);
-				if ((i % 2) == 0) {
+				if ((i % 2) === 0) {
 					tmp = tmp * 2;
 					if (tmp > 9) {
 						tmp -= 9;
@@ -28,7 +32,7 @@
 				}
 				sum += tmp;
 			}
-			return (sum % 10 == 0);
+			return (sum % 10 === 0);
 		}
 	};
 }(window.jQuery));

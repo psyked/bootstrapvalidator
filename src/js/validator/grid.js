@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.grid = $.extend($.fn.bootstrapValidator.i18n.grid || {}, {
+        'default': 'Please enter a valid GRId number'
+    });
+
     $.fn.bootstrapValidator.validators.grid = {
         /**
          * Validate GRId (Global Release Identifier)
@@ -15,7 +19,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
@@ -24,10 +28,10 @@
                 return false;
             }
             value = value.replace(/\s/g, '').replace(/-/g, '');
-            if ('GRID:' == value.substr(0, 5)) {
+            if ('GRID:' === value.substr(0, 5)) {
                 value = value.substr(5);
             }
-            return $.fn.bootstrapValidator.helpers.mod_37_36(value);
+            return $.fn.bootstrapValidator.helpers.mod37And36(value);
         }
     };
 }(window.jQuery));

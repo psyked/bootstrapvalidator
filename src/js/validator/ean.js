@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.ean = $.extend($.fn.bootstrapValidator.i18n.ean || {}, {
+        'default': 'Please enter a valid EAN number'
+    });
+
     $.fn.bootstrapValidator.validators.ean = {
         /**
          * Validate EAN (International Article Number)
@@ -15,7 +19,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
@@ -25,12 +29,12 @@
 
             var length = value.length,
                 sum    = 0,
-                weight = (length == 8) ? [3, 1] : [1, 3];
+                weight = (length === 8) ? [3, 1] : [1, 3];
             for (var i = 0; i < length - 1; i++) {
-                sum += parseInt(value.charAt(i)) * weight[i % 2];
+                sum += parseInt(value.charAt(i), 10) * weight[i % 2];
             }
-            sum = 10 - sum % 10;
-            return (sum == value.charAt(length - 1));
+            sum = (10 - sum % 10) % 10;
+            return (sum + '' === value.charAt(length - 1));
         }
     };
 }(window.jQuery));

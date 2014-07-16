@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.hex = $.extend($.fn.bootstrapValidator.i18n.hex || {}, {
+        'default': 'Please enter a valid hexadecimal number'
+    });
+
     $.fn.bootstrapValidator.validators.hex = {
         /**
          * Return true if and only if the input value is a valid hexadecimal number
@@ -11,7 +15,7 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 

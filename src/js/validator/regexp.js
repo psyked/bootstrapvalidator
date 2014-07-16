@@ -1,4 +1,8 @@
 (function($) {
+    $.fn.bootstrapValidator.i18n.regexp = $.extend($.fn.bootstrapValidator.i18n.regexp || {}, {
+        'default': 'Please enter a value matching the pattern'
+    });
+
     $.fn.bootstrapValidator.validators.regexp = {
         html5Attributes: {
             message: 'message',
@@ -27,11 +31,11 @@
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
-            if (value == '') {
+            if (value === '') {
                 return true;
             }
 
-            var regexp = ('string' == typeof options.regexp) ? new RegExp(options.regexp) : options.regexp;
+            var regexp = ('string' === typeof options.regexp) ? new RegExp(options.regexp) : options.regexp;
             return regexp.test(value);
         }
     };
