@@ -211,6 +211,9 @@
         mac: {
             'default': 'Bitte gültige MAC Adresse eingeben'
         },
+        meid: {
+            'default': 'Bitte gültige MEID Nummer eingeben'
+        },
         notEmpty: {
             'default': 'Bitte Wert eingeben'
         },

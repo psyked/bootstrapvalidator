@@ -32,41 +32,38 @@
                 case /^\d{19}$/.test(value):
                 // 18 digit decimal representation + dashes or spaces (no check digit)
                 case /^\d{5}[- ]\d{5}[- ]\d{4}[- ]\d{4}[- ]\d$/.test(value):
-                    // grab the check digit
-                    var cd = value[value.length - 1];
+                    // Grab the check digit
+                    var cd = value.charAt(value.length - 1);
 
-                    // strip any non-hex chars
+                    // Strip any non-hex chars
                     value = value.replace(/[- ]/g, '');
 
-                    // if it's all digits, luhn base 10 is used
+                    // If it's all digits, luhn base 10 is used
                     if (value.match(/^\d*$/i)) {
                         return $.fn.bootstrapValidator.helpers.luhn(value);
                     }
 
-                    // strip the check digit
+                    // Strip the check digit
                     value = value.slice(0, -1);
 
-                    // get every other char, and double it
+                    // Get every other char, and double it
                     var cdCalc = '';
                     for (var i = 1; i <= 13; i += 2) {
                         cdCalc += (parseInt(value.charAt(i), 16) * 2).toString(16);
                     }
 
-                    // get the sum of each char in the string
+                    // Get the sum of each char in the string
                     var sum = 0;
                     for (i = 0; i < cdCalc.length; i++) {
                         sum += parseInt(cdCalc.charAt(i), 16);
                     }
 
-                    // if the last digit of the calc is 0, the check digit is 0
-                    if (sum % 10 == 0) {
-                        return cd == 0;
-                    } else {
-                        // subtract it from the next highest 10s number (64 goes to 70)
-                        // and subtract the sum
-                        // double it and turn it into a hex char
-                        return cd == ((Math.floor((sum + 10) / 10) * 10 - sum) * 2).toString(16);
-                    }
+                    // If the last digit of the calc is 0, the check digit is 0
+                    return (sum % 10 === 0)
+                            ? (cd === '0')
+                            // Subtract it from the next highest 10s number (64 goes to 70) and subtract the sum
+                            // Double it and turn it into a hex char
+                            : (cd === ((Math.floor((sum + 10) / 10) * 10 - sum) * 2).toString(16));
 
                 // 14 digit hex representation (no check digit)
                 case /^[0-9A-F]{14}$/i.test(value):

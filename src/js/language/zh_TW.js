@@ -211,6 +211,9 @@
         mac: {
             'default': '請輸入有效的MAC位址'
         },
+        meid: {
+            'default': '請輸入有效的MEID'
+        },
         notEmpty: {
             'default': '欄位不能為空'
         },

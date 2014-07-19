@@ -11,7 +11,7 @@ describe('meid', function() {
 
         $('#meidForm').bootstrapValidator();
 
-        this.bv   = $('#meidForm').data('bootstrapValidator');
+        this.bv    = $('#meidForm').data('bootstrapValidator');
         this.$meid = this.bv.getFieldElements('meid');
     });
 

@@ -211,6 +211,9 @@
         mac: {
             'default': 'Kérlek, hogy érvényes MAC címet ajd meg'
         },
+        meid: {
+            'default': 'Kérlek, hogy érvényes MEID számot ajd meg'
+        },
         notEmpty: {
             'default': 'Kérlek, hogy adj értéket a mezőnek'
         },
