@@ -308,14 +308,14 @@
             countryNotSupported: 'Mã quốc gia %s không được hỗ trợ',
             country: 'Vui lòng nhập %s',
             countries: {
-                'CA': 'mã bưu điện của Canada',
-                'DK': 'mã bưu điện của Đan Mạch',
-                'GB': 'mã bưu điện của Vương quốc Anh',
-                'IT': 'mã bưu điện của Ý',
-                'NL': 'mã bưu điện của Hà Lan',
-                'SE': 'mã bưu điện của Thuỵ Sĩ',
-                'SG': 'mã bưu điện của Singapore',
-                'US': 'mã bưu điện của Mỹ'
+                CA: 'mã bưu điện của Canada',
+                DK: 'mã bưu điện của Đan Mạch',
+                GB: 'mã bưu điện của Vương quốc Anh',
+                IT: 'mã bưu điện của Ý',
+                NL: 'mã bưu điện của Hà Lan',
+                SE: 'mã bưu điện của Thuỵ Sĩ',
+                SG: 'mã bưu điện của Singapore',
+                US: 'mã bưu điện của Mỹ'
             }
         }
     });

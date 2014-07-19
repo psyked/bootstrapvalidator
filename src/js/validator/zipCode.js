@@ -4,14 +4,14 @@
         countryNotSupported: 'The country code %s is not supported',
         country: 'Please enter a valid %s',
         countries: {
-            'CA': 'Canadian postal code',
-            'DK': 'Danish postal code',
-            'GB': 'United Kingdom postal code',
-            'IT': 'Italian postal code',
-            'NL': 'Dutch postal code',
-            'SE': 'Swiss postal code',
-            'SG': 'Singapore postal code',
-            'US': 'US zip code'
+            CA: 'Canadian postal code',
+            DK: 'Danish postal code',
+            GB: 'United Kingdom postal code',
+            IT: 'Italian postal code',
+            NL: 'Dutch postal code',
+            SE: 'Swiss postal code',
+            SG: 'Singapore postal code',
+            US: 'US zip code'
         }
     });
 

@@ -312,14 +312,14 @@
             countryNotSupported: '%s - nem támogatott ország',
             country: 'Kérlek, hogy helyes %s irányítószámot adj meg',
             countries: {
-                'CA': 'kanadai',
-                'DK': 'dán',
-                'GB': 'Egyesült Királyság beli',
-                'IT': 'olasz',
-                'NL': 'holland',
-                'SE': 'svájci',
-                'SG': 'singaporei',
-                'US': 'Egyesült Államok beli'
+                CA: 'kanadai',
+                DK: 'dán',
+                GB: 'Egyesült Királyság beli',
+                IT: 'olasz',
+                NL: 'holland',
+                SE: 'svájci',
+                SG: 'singaporei',
+                US: 'Egyesült Államok beli'
             }
         }
     });
