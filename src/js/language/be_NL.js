@@ -312,14 +312,14 @@
             countryNotSupported: 'De land code %s is niet ondersteund',
             country: 'Please enter a valid %s',
             countries: {
-                'CA': 'Canadeese postcode',
-                'DK': 'Deense postcode',
-                'GB': 'Engelse postcode',
-                'IT': 'Italiaanse postcode',
-                'NL': 'Nederlandse postcode',
-                'SE': 'Zwitserse postcode',
-                'SG': 'postcode van Signapore',
-                'US': 'VS postcode'
+                CA: 'Canadeese postcode',
+                DK: 'Deense postcode',
+                GB: 'Engelse postcode',
+                IT: 'Italiaanse postcode',
+                NL: 'Nederlandse postcode',
+                SE: 'Zwitserse postcode',
+                SG: 'postcode van Signapore',
+                US: 'VS postcode'
             }
         }
     });

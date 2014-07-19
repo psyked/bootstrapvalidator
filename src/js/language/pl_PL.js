@@ -312,14 +312,14 @@
             countryNotSupported: 'Kod kraju %s nie jest obsługiwany',
             country: 'Wprowadź poprawny %s kod pocztowy',
             countries: {
-                'CA': 'kanadyski',
-                'DK': 'duński',
-                'GB': 'brytyjski',
-                'IT': 'włoski',
-                'NL': 'holenderski',
-                'SE': 'szwecki',
-                'SG': 'singapurski',
-                'US': 'w USA'
+                CA: 'kanadyski',
+                DK: 'duński',
+                GB: 'brytyjski',
+                IT: 'włoski',
+                NL: 'holenderski',
+                SE: 'szwecki',
+                SG: 'singapurski',
+                US: 'w USA'
             }
         }
     });

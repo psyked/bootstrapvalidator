@@ -312,14 +312,14 @@
             countryNotSupported: 'El código del país %s no está soportado',
             country: 'Por favor ingrese un %s válido',
             countries: {
-                'CA': 'código postal Canadiense',
-                'DK': 'código postal Danés',
-                'GB': 'código postal Británico',
-                'IT': 'código postal Italiano',
-                'NL': 'código postal Holandés',
-                'SE': 'código postal Suizo',
-                'SG': 'código postal Singapurense',
-                'US': 'código postal de EE.UU.'
+                CA: 'código postal Canadiense',
+                DK: 'código postal Danés',
+                GB: 'código postal Británico',
+                IT: 'código postal Italiano',
+                NL: 'código postal Holandés',
+                SE: 'código postal Suizo',
+                SG: 'código postal Singapurense',
+                US: 'código postal de EE.UU.'
             }
         }
     });

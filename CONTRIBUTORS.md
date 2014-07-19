@@ -34,6 +34,7 @@ I would like to give big thanks to the following contributors:
 * [@marceloampuerop6](https://github.com/marceloampuerop6)
 * [@MartinDevillers](https://github.com/MartinDevillers)
 * [@mike1e](https://github.com/mike1e)
+* [@mraiur](https://github.com/mraiur)
 * [@MrC0mm0n](https://github.com/MrC0mm0n)
 * [@mrpollo](https://github.com/mrpollo)
 * [@narutosanjiv](https://github.com/narutosanjiv)

@@ -12,6 +12,7 @@ __Language Packages__
 * [#505](https://github.com/nghuuphuoc/bootstrapvalidator/pull/505): Czech language package, thanks to [@AdwinTrave](https://github.com/AdwinTrave)
 * [#507](https://github.com/nghuuphuoc/bootstrapvalidator/pull/507): Polish language package, thanks to [@grzesiek](https://github.com/grzesiek)
 * [#517](https://github.com/nghuuphuoc/bootstrapvalidator/pull/517): Belgium (Dutch) language package, thanks to [@dokterpasta](https://github.com/dokterpasta)
+* [#527](https://github.com/nghuuphuoc/bootstrapvalidator/pull/527): Bulgarian language package, thanks to [@mraiur](https://github.com/mraiur)
 
 ## v0.5.0 (2015-07-14)
 

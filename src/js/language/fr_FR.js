@@ -312,14 +312,14 @@
             countryNotSupported: 'Le code de pays %s n\'est pas accepté',
             country: 'Veuillez fournir un %s valide',
             countries: {
-                'CA': 'code postal canadien',
-                'DK': 'code postal dannois',
-                'GB': 'code postal anglais',
-                'IT': 'code postal italien',
-                'NL': 'code postal hollandais',
-                'SE': 'code postal suisse',
-                'SG': 'code postal de Singapour',
-                'US': 'code zip US'
+                CA: 'code postal canadien',
+                DK: 'code postal dannois',
+                GB: 'code postal anglais',
+                IT: 'code postal italien',
+                NL: 'code postal hollandais',
+                SE: 'code postal suisse',
+                SG: 'code postal de Singapour',
+                US: 'code zip US'
             }
         }
     });

@@ -312,14 +312,14 @@
             countryNotSupported: 'Der Ländercode %s wird nicht unterstützt',
             country: 'Bitte gültigen Code %s eingeben',
             countries: {
-                'CA': 'Kanadische Postleitzahl',
-                'DK': 'Dänische Postleitzahl',
-                'GB': 'Englische Postleitzahl',
-                'IT': 'Italienische Postleitzahl',
-                'NL': 'Niederländische Postleitzahl',
-                'SE': 'Schweizerische Postleitzahl',
-                'SG': 'Singapurische Postleitzahl',
-                'US': 'Vereinigte Staaten Postleitzahl'
+                CA: 'Kanadische Postleitzahl',
+                DK: 'Dänische Postleitzahl',
+                GB: 'Englische Postleitzahl',
+                IT: 'Italienische Postleitzahl',
+                NL: 'Niederländische Postleitzahl',
+                SE: 'Schweizerische Postleitzahl',
+                SG: 'Singapurische Postleitzahl',
+                US: 'Vereinigte Staaten Postleitzahl'
             }
         }
     });

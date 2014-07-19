@@ -312,14 +312,14 @@
             countryNotSupported: '%s není podporované',
             country: 'Prosím zadejte správné %s',
             countries: {
-                'CA': 'Kanadské PSČ',
-                'DK': 'Dánské PSČ',
-                'GB': 'PSČ Velké Británie',
-                'IT': 'Italské PSČ',
-                'NL': 'Holandské PSČ',
-                'SE': 'Švýcarské PSČ',
-                'SG': 'Singapurské PSČ',
-                'US': 'Americké PSČ'
+                CA: 'Kanadské PSČ',
+                DK: 'Dánské PSČ',
+                GB: 'PSČ Velké Británie',
+                IT: 'Italské PSČ',
+                NL: 'Holandské PSČ',
+                SE: 'Švýcarské PSČ',
+                SG: 'Singapurské PSČ',
+                US: 'Americké PSČ'
             }
         }
     });
