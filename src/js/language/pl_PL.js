@@ -184,6 +184,9 @@
         imei: {
             'default': 'Wprowadź poprawnu numer IMEI'
         },
+        imo: {
+            'default': 'Wprowadź poprawnu numer IMO'
+        },
         integer: {
             'default': 'Wprowadź poprawną liczbę całkowitą'
         },

@@ -22,27 +22,24 @@
             if (value === '') {
                 return true;
             }
-            
-            // if we fail the regexp, fail out
+
             if (!/^IMO \d{7}$/i.test(value)) {
                 return false;
             }
             
-            // grab just the digits
-            var sum = 0;
-            var digits = value.replace(/^.*(\d{7})$/, '$1');
+            // Grab just the digits
+            var sum    = 0,
+                digits = value.replace(/^.*(\d{7})$/, '$1');
             
-            // go over each char, multiplying by the inverse of it's position
+            // Go over each char, multiplying by the inverse of it's position
             // IMO 9176187
             // (9 * 7) + (1 * 6) + (7 * 5) + (6 * 4) + (1 * 3) + (8 * 2) = 147
-            // take the last digit of that, that's the check digit (7)
+            // Take the last digit of that, that's the check digit (7)
             for (var i = 6; i >= 1; i--) {
                 sum += (digits.slice((6 - i), -i) * (i + 1));
             }
-            var checkDigit = sum % 10;
-            
-            // verify the checkdigit
-            return parseInt(digits.charAt(6)) === checkDigit;
+
+            return sum % 10 === parseInt(digits.charAt(6), 10);
         }
     };
 }(window.jQuery));

@@ -1,8 +1,7 @@
 describe('meid', function() {
-    beforeEach(function () {
+    beforeEach(function() {
         $([
             '<form class="form-horizontal" id="meidForm">',
-                '<div id="msg"></div>',
                 '<div class="form-group">',
                     '<input type="text" name="meid" data-bv-meid />',
                 '</div>',
@@ -15,7 +14,7 @@ describe('meid', function() {
         this.$meid = this.bv.getFieldElements('meid');
     });
 
-    afterEach(function () {
+    afterEach(function() {
         $('#meidForm').bootstrapValidator('destroy').remove();
     });
 

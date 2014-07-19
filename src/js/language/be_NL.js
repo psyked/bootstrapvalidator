@@ -184,6 +184,9 @@
         imei: {
             'default': 'Geef een geldig IMEI nummer'
         },
+        imo: {
+            'default': 'Geef een geldig IMO nummer'
+        },
         integer: {
             'default': 'Geef een geldig nummer'
         },

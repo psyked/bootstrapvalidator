@@ -184,6 +184,9 @@
         imei: {
             'default': 'Prosím zadejte správné IMEI číslo'
         },
+        imo: {
+            'default': 'Prosím zadejte správné IMO číslo'
+        },
         integer: {
             'default': 'Prosím zadejte celé číslo'
         },

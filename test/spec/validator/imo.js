@@ -1,8 +1,7 @@
 describe('imo', function() {
-    beforeEach(function () {
+    beforeEach(function() {
         $([
             '<form class="form-horizontal" id="imoForm">',
-                '<div id="msg"></div>',
                 '<div class="form-group">',
                     '<input type="text" name="imo" data-bv-imo />',
                 '</div>',
@@ -15,7 +14,7 @@ describe('imo', function() {
         this.$imo = this.bv.getFieldElements('imo');
     });
 
-    afterEach(function () {
+    afterEach(function() {
         $('#imoForm').bootstrapValidator('destroy').remove();
     });
 
