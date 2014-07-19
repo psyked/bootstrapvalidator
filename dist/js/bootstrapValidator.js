@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.1-dev, built on 2014-07-19 9:08:03 AM
+ * @version     v0.5.1-dev, built on 2014-07-19 9:22:12 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -4512,6 +4512,7 @@
         country: 'Please enter a valid phone number in %s',
         countries: {
             GB: 'United Kingdom',
+            FR: 'France',
             US: 'USA'
         }
     });
@@ -4523,7 +4524,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['GB', 'US'],
+        COUNTRY_CODES: ['GB', 'FR', 'US'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -4568,6 +4569,12 @@
             		// Test: http://regexr.com/38uhv
             		value   = $.trim(value);
             		isValid = (/^\(?(?:(?:0(?:0|11)\)?[\s-]?\(?|\+)44\)?[\s-]?\(?(?:0\)?[\s-]?\(?)?|0)(?:\d{2}\)?[\s-]?\d{4}[\s-]?\d{4}|\d{3}\)?[\s-]?\d{3}[\s-]?\d{3,4}|\d{4}\)?[\s-]?(?:\d{5}|\d{3}[\s-]?\d{3})|\d{5}\)?[\s-]?\d{4,5}|8(?:00[\s-]?11[\s-]?11|45[\s-]?46[\s-]?4\d))(?:(?:[\s-]?(?:x|ext\.?\s?|\#)\d+)?)$/).test(value);
+                    break;
+
+                case 'FR':
+                    // http://regexr.com/395dq
+                    value   = $.trim(value);
+                    isValid = (/^(?:(?:(?:\+|00)33\D?(?:\D?\(0\)\D?)?)|0){1}[1-9]{1}(?:\D?\d{2}){4}$/).test(value);
                     break;
 
                 case 'US':

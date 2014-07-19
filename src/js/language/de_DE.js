@@ -228,8 +228,9 @@
             countryNotSupported: 'Der Ländercode %s wird nicht unterstützt',
             country: 'Bitte valide Telefonnummer für %s eingeben',
             countries: {
-                GB: 'United Kingdom',
-                US: 'USA'
+                GB: 'Vereinigtes Königreich',
+                FR: 'Frankreich',
+                US: 'Vereinigte Staaten'
             }
         },
         regexp: {

@@ -229,6 +229,7 @@
             country: 'Prosím zadejte správné telefoní číslo pro %s',
             countries: {
                 GB: 'Velkou Británii',
+                FR: 'Francii',
                 US: 'Spojené Státy Americké'
             }
         },

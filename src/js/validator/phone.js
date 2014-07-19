@@ -17,7 +17,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['GB', 'FR', US'],
+        COUNTRY_CODES: ['GB', 'FR', 'US'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -66,7 +66,7 @@
 
                 case 'FR':
                     // http://regexr.com/395dq
-                    value = $.trim(value);
+                    value   = $.trim(value);
                     isValid = (/^(?:(?:(?:\+|00)33\D?(?:\D?\(0\)\D?)?)|0){1}[1-9]{1}(?:\D?\d{2}){4}$/).test(value);
                     break;
 

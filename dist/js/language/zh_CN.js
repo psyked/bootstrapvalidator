@@ -229,7 +229,8 @@
             country: '请输入有效的 %s 电话号码',
             countries: {
                 GB: '英国',
-                US: '美国'
+                FR: '法国',
+                US: '美国'
             }
         },
         regexp: {

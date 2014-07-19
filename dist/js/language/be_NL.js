@@ -229,6 +229,7 @@
             country: 'Geef een geldig telefoon nummer van %s',
             countries: {
                 GB: 'Verenigd Koninkrijk',
+                FR: 'Frankrijk',
                 US: 'VS'
             }
         },

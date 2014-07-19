@@ -229,6 +229,7 @@
             country: 'Veuillez fournir un numéro de téléphone valide pour %s',
             countries: {
                 GB: 'le Royaume Uni',
+                FR: 'la France',
                 US: 'les USA'
             }
         },
