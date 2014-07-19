@@ -62,7 +62,7 @@
         },
         iban: {
             'default': 'Lütfen geçerli bir IBAN numarası giriniz',
-            countryNotSupported: '%s ülke kodu desteklenmemektedir.',
+            countryNotSupported: '%s ülke kodu desteklenmemektedir',
             country: '%s içine lütfen geçerli bir IBAN numarası giriniz',
             countries: {
                 AD: 'Andorra',
@@ -225,7 +225,7 @@
         },
         phone: {
             'default': 'Lütfen geçerli bir telefon numarası giriniz',
-            countryNotSupported: '%s ülke kodu desteklenmemektedir.',
+            countryNotSupported: '%s ülke kodu desteklenmemektedir',
             country: '%s de geçerli bir telefon numarası giriniz',
             countries: {
                 GB: 'İngiltere',
@@ -265,14 +265,14 @@
             between: 'Lütfen %s ile %s arası uzunlukta bir değer giriniz'
         },
         uri: {
-            'default': 'Lütfen geçerli bir URL giriniz.'
+            'default': 'Lütfen geçerli bir URL giriniz'
         },
         uuid: {
             'default': 'Lütfen geçerli bir UUID numarası giriniz',
             version: 'Lütfen geçerli bir UUID versiyon %s numarası giriniz'
         },
         vat: {
-            'default': 'Lütfen geçerli bir VAT kodu giriniz.',
+            'default': 'Lütfen geçerli bir VAT kodu giriniz',
             countryNotSupported: '%s ülke kodu desteklenmiyor',
             country: 'Lütfen geçerli bir %s KDV kodu giriniz',
             countries: {
