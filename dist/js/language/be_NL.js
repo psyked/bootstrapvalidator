@@ -211,6 +211,9 @@
         mac: {
             'default': 'Geef een geldig MAC adres'
         },
+        meid: {
+            'default': 'Geef een geldig MEID nummer'
+        },
         notEmpty: {
             'default': 'Geef een waarde'
         },

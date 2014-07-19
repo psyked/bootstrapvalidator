@@ -211,7 +211,10 @@
         mac: {
             'default': '请输入有效的MAC位址'
         },
-        notEmpty: {
+        meid: {
+            'default': '请输入有效的MEID'
+        },
+        notEmpty: {
             'default': '栏位不能为空'
         },
         numeric: {

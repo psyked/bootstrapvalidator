@@ -211,6 +211,9 @@
         mac: {
             'default': 'Prosím zadejte správnou MAC adresu'
         },
+        meid: {
+            'default': 'Prosím zadejte správné MEID číslo'
+        },
         notEmpty: {
             'default': 'Toto pole nesmí být prázdné'
         },

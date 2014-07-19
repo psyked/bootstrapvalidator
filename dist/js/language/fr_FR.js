@@ -211,6 +211,9 @@
         mac: {
             'default': 'Veuillez fournir une adresse MAC valide'
         },
+        meid: {
+            'default': 'Veuillez fournir un code MEID valide'
+        },
         notEmpty: {
             'default': 'Veuillez fournir une valeur'
         },

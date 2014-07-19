@@ -1,4 +1,8 @@
 (function($) {
+    /**
+     * Vietnamese language package
+     * Translated by @nghuuphuoc
+     */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
             'default': 'Vui lòng nhập chuỗi mã hoá base64 hợp lệ'
@@ -206,6 +210,9 @@
         },
         mac: {
             'default': 'Vui lòng nhập địa chỉ MAC hợp lệ'
+        },
+        meid: {
+            'default': 'Vui lòng nhập số MEID hợp lệ'
         },
         notEmpty: {
             'default': 'Vui lòng nhập giá trị'
