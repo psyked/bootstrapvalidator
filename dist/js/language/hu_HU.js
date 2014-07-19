@@ -184,6 +184,9 @@
         imei: {
             'default': 'Kérlek, hogy érvényes IMEI számot adj meg'
         },
+        imo: {
+            'default': 'Kérlek, hogy érvényes IMO számot adj meg'
+        },
         integer: {
             'default': 'Kérlek, hogy számot adj meg'
         },

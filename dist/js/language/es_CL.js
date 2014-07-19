@@ -184,6 +184,9 @@
         imei: {
             'default': 'Por favor ingrese un número IMEI válido'
         },
+        imo: {
+            'default': 'Por favor ingrese un número IMO válido'
+        },
         integer: {
             'default': 'Por favor ingrese un número válido'
         },

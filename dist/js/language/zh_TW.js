@@ -184,6 +184,9 @@
         imei: {
             'default': '請輸入有效的IMEI'
         },
+        imo: {
+            'default': '請輸入有效的IMO'
+        },
         integer: {
             'default': '請輸入有效的整數'
         },

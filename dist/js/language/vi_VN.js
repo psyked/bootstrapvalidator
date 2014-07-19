@@ -184,6 +184,9 @@
         imei: {
             'default': 'Vui lòng nhập số IMEI hợp lệ'
         },
+        imo: {
+            'default': 'Vui lòng nhập số IMO hợp lệ'
+        },
         integer: {
             'default': 'Vui lòng nhập số hợp lệ'
         },
