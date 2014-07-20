@@ -228,8 +228,9 @@
             countryNotSupported: 'A(z) %s országkód nem támogatott',
             country: 'Kérlek, hogy érvényes %s telefonszámot adj meg',
             countries: {
-                GB: 'Egyesült Királyság beli',
+                ES: 'spanyol',
                 FR: 'francia',
+                GB: 'Egyesült Királyság beli',
                 US: 'Egyesült Államok beli'
             }
         },

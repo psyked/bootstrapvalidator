@@ -1,6 +1,6 @@
 (function($) {
     /**
-     * Chilean Spanish package
+     * Chilean Spanish language package
      * Translated by @marceloampuerop6
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
@@ -228,8 +228,9 @@
             countryNotSupported: 'El código del país %s no está soportado',
             country: 'Por favor ingrese un número válido de teléfono en %s',
             countries: {
-                GB: 'Reino Unido',
+                ES: 'España',
                 FR: 'Francia',
+                GB: 'Reino Unido',
                 US: 'EE.UU.'
             }
         },

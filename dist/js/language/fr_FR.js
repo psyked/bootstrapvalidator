@@ -228,8 +228,9 @@
             countryNotSupported: 'Le code de pays %s n\'est pas accepté',
             country: 'Veuillez fournir un numéro de téléphone valide pour %s',
             countries: {
-                GB: 'le Royaume Uni',
+                ES: 'las Espagne',
                 FR: 'la France',
+                GB: 'le Royaume Uni',
                 US: 'les USA'
             }
         },

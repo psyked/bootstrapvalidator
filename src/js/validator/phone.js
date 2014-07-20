@@ -34,7 +34,6 @@
          *      - Name of callback function that returns the country code
          *      - A callback function that returns the country code
          *
-         * Currently it only supports United State (US) or United Kingdom (GB) countries
          * @returns {Boolean|Object}
          */
         validate: function(validator, $field, options) {
@@ -58,7 +57,6 @@
 
             var isValid = true;
             switch (country.toUpperCase()) {
-                
                 case 'ES':
                     // http://regex101.com/r/rB9mA9/1
                     value   = $.trim(value);

@@ -228,8 +228,9 @@
             countryNotSupported: 'Der Ländercode %s wird nicht unterstützt',
             country: 'Bitte valide Telefonnummer für %s eingeben',
             countries: {
-                GB: 'Vereinigtes Königreich',
+                ES: 'Spanien',
                 FR: 'Frankreich',
+                GB: 'Vereinigtes Königreich',
                 US: 'Vereinigte Staaten'
             }
         },

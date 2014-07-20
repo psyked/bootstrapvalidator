@@ -6,7 +6,7 @@ __New features__
 
 * [#218](https://github.com/nghuuphuoc/bootstrapvalidator/issues/218), [#531](https://github.com/nghuuphuoc/bootstrapvalidator/pull/531): Add meid validator, thanks to [@troymccabe](https://github.com/troymccabe)
 * [#267](https://github.com/nghuuphuoc/bootstrapvalidator/issues/267), [#532](https://github.com/nghuuphuoc/bootstrapvalidator/pull/532): Add imo validator, thanks to [@troymccabe](https://github.com/troymccabe)
-* [#510](https://github.com/nghuuphuoc/bootstrapvalidator/pull/510): The [phone](http://bootstrapvalidator.com/validators/phone/) validator now supports French phone number, thanks to [@dlucazeau](https://github.com/dlucazeau)
+* [#510](https://github.com/nghuuphuoc/bootstrapvalidator/pull/510), [#536](https://github.com/nghuuphuoc/bootstrapvalidator/pull/536): The [phone](http://bootstrapvalidator.com/validators/phone/) validator now supports French, Spanish phone number, thanks to [@dlucazeau](https://github.com/dlucazeau) and [@vadail](https://github.com/vadail)
 
 __Improvements__
 
@@ -20,6 +20,7 @@ __Language Packages__
 * [#517](https://github.com/nghuuphuoc/bootstrapvalidator/pull/517): Belgium (Dutch) language package, thanks to [@dokterpasta](https://github.com/dokterpasta)
 * [#527](https://github.com/nghuuphuoc/bootstrapvalidator/pull/527): Bulgarian language package, thanks to [@mraiur](https://github.com/mraiur)
 * [#534](https://github.com/nghuuphuoc/bootstrapvalidator/pull/534): Turkish language package, thanks to [@CeRBeR666](https://github.com/CeRBeR666)
+* [#536](https://github.com/nghuuphuoc/bootstrapvalidator/pull/536): Spanish language package, thanks to [@vadail](https://github.com/vadail)
 
 ## v0.5.0 (2015-07-14)
 

@@ -228,8 +228,9 @@
             countryNotSupported: 'Mã quốc gia %s không được hỗ trợ',
             country: 'Vui lòng nhập số điện thoại hợp lệ của %s',
             countries: {
-                GB: 'Vương quốc Anh',
+                ES: 'Tây Ban Nha',
                 FR: 'Pháp',
+                GB: 'Vương quốc Anh',
                 US: 'Mỹ'
             }
         },
