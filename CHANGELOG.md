@@ -21,6 +21,7 @@ __Language Packages__
 * [#527](https://github.com/nghuuphuoc/bootstrapvalidator/pull/527): Bulgarian language package, thanks to [@mraiur](https://github.com/mraiur)
 * [#534](https://github.com/nghuuphuoc/bootstrapvalidator/pull/534): Turkish language package, thanks to [@CeRBeR666](https://github.com/CeRBeR666)
 * [#536](https://github.com/nghuuphuoc/bootstrapvalidator/pull/536): Spanish language package, thanks to [@vadail](https://github.com/vadail)
+* [#544](https://github.com/nghuuphuoc/bootstrapvalidator/pull/544): Greek language package, thanks to [@pRieStaKos](https://github.com/pRieStaKos)
 
 ## v0.5.0 (2015-07-14)
 
