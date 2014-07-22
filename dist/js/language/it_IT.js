@@ -1,8 +1,7 @@
-(function($) {
+(function ($) {
     /**
-     * Default Italian package
-     * It's included in the dist, so you do NOT need to include it to your head tag
-     * The only reason I put it here is that you can clone it, and translate it into your language
+     * Italian language package
+     * Translated by @maramazza
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
@@ -17,9 +16,9 @@
         },
         choice: {
             'default': 'Si prega di inserire un valore valido',
-            less: 'Si prega di scegliere come minimo l/'opzione %s',
-            more: 'Si prega di scegliere al massimo l/'opzione %s',
-            between: 'Si prega di scegliere l/'opzione tra %s e %s'
+            less: 'Si prega di scegliere come minimo l\'opzione %s',
+            more: 'Si prega di scegliere al massimo l\'opzione %s',
+            between: 'Si prega di scegliere l\'opzione tra %s e %s'
         },
         creditCard: {
             'default': 'Si prega di inserire un numero di carta di credito valido'
@@ -37,7 +36,7 @@
             'default': 'Si prega di inserire un valore differente'
         },
         digits: {
-             'default': 'Si prega di inserire solo numeri'
+            'default': 'Si prega di inserire solo numeri'
         },
         ean: {
             'default': 'Si prega di inserire un numero EAN valido'
@@ -72,7 +71,7 @@
                 AO: 'Angola',
                 AT: 'Austria',
                 AZ: 'Azerbaijan',
-                BA: 'Bosnia and Herzegovina',
+                BA: 'Bosnia-Erzegovina',
                 BE: 'Belgio',
                 BF: 'Burkina Faso',
                 BG: 'Bulgaria',
@@ -81,7 +80,7 @@
                 BJ: 'Benin',
                 BR: 'Brasile',
                 CH: 'Svizzera',
-                CI: 'Costa d/'Avorio',
+                CI: 'Costa d\'Avorio',
                 CM: 'Cameron',
                 CR: 'Costa Rica',
                 CV: 'Capo Verde',
@@ -152,7 +151,7 @@
             countryNotSupported: 'Il codice nazione %s non e supportato',
             country: 'Si prega di inserire un numero di identificazione %s valido',
             countries: {
-                BA: 'Bosnia and Herzegovina',
+                BA: 'Bosnia-Erzegovina',
                 BG: 'Bulgaria',
                 BR: 'Brasiliano',
                 CH: 'Svizzero',
@@ -185,6 +184,9 @@
         imei: {
             'default': 'Si prega di inserire un numero IMEI valido'
         },
+        imo: {
+            'default': 'Si prega di inserire un numero IMO valido'
+        },
         integer: {
             'default': 'Si prega di inserire un numero valido'
         },
@@ -212,6 +214,9 @@
         mac: {
             'default': 'Si prega di inserire un valido MAC address'
         },
+        meid: {
+            'default': 'Si prega di inserire un numero MEID valido'
+        },
         notEmpty: {
             'default': 'Si prega di non lasciare il campo vuoto'
         },
@@ -223,8 +228,10 @@
             countryNotSupported: 'Il codice nazione %s non e supportato',
             country: 'Si prega di inserire un numero di telefono valido in %s',
             countries: {
+                ES: 'Spagna',
+                FR: 'Francia',
                 GB: 'Regno Unito',
-                US: 'USA'
+                US: 'Stati Uniti d\'America'
             }
         },
         regexp: {
@@ -246,7 +253,7 @@
             'default': 'Si prega di inserire un numero SIRET valido'
         },
         step: {
-            'default': 'Si prega di inserire uno step valido di %s',
+            'default': 'Si prega di inserire uno step valido di %s'
         },
         stringCase: {
             'default': 'Si prega di inserire solo caratteri minuscoli',
