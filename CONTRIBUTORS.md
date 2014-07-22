@@ -8,6 +8,7 @@ I would like to give big thanks to the following contributors:
 * [@AlaskanShade](https://github.com/AlaskanShade)
 * [@alavers](https://github.com/alavers)
 * [@Azuka](https://github.com/Azuka)
+* [@beeglebug](https://github.com/beeglebug)
 * [@blackfyre](https://github.com/blackfyre)
 * [@CeRBeR666](https://github.com/CeRBeR666)
 * [@dlucazeau](https://github.com/dlucazeau)

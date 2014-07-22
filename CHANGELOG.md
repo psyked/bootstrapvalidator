@@ -12,6 +12,10 @@ __Improvements__
 
 * [#502](https://github.com/nghuuphuoc/bootstrapvalidator/pull/502): Allowing sites without TLD to pass URI validation, thanks to [@troymccabe](https://github.com/troymccabe)
 
+__Bug Fixes__
+
+* [#550](https://github.com/nghuuphuoc/bootstrapvalidator/issues/550), [#551](https://github.com/nghuuphuoc/bootstrapvalidator/pull/551): Cannot validate against both ipv4 and ipv6 at the same time, thanks to [@beeglebug](https://github.com/beeglebug)
+
 __Language Packages__
 
 * [#400](https://github.com/nghuuphuoc/bootstrapvalidator/pull/400): Italian language package, thanks to [@maramazza](https://github.com/maramazza)
