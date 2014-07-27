@@ -4,151 +4,151 @@
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
-            'default': 'Venligst indtast en gyldig base 64 kodet'
+            'default': 'Indtast venligst en gyldig basen 64 kodet'
         },
         between: {
-            'default': 'Venligst indtast en værdi mellem %s og %s',
-            notInclusive: 'Venligst indtast en værdi mellem %s and %s (strictly ?!)'
+            'default': 'Indtast venligst en værdi mellem %s og %s',
+            notInclusive: 'Venligst kun indtast en værdi mellem %s og %s'
         },
         callback: {
-            'default': 'Venligst indtast en gyldig værdi'
+            'default': 'Indtast venligst en gyldig værdi'
         },
         choice: {
-            'default': 'Venligst indtast en gyldig værdi',
+            'default': 'Indtast venligst en gyldig værdi',
             less: 'Venligst vælg %s valgmuligheder som minimum',
             more: 'Venligst vælg %s valgmuligheder som maximum',
             between: 'Venligst vælg %s - %s valgmuligheder'
         },
         creditCard: {
-            'default': 'Venligst indtast et gyldigt kreditkort nummer'
+            'default': 'Indtast venligst et gyldigt kreditkort-nummer'
         },
         cusip: {
-            'default': 'Venligst indtast et gyldigt CUSIP nummer'
+            'default': 'Indtast venligst et gyldigt CUSIP-nummer'
         },
         cvv: {
-            'default': 'Venligst indtast et gyldigt CVV nummer'
+            'default': 'Indtast venligst et gyldigt CVV-nummer'
         },
         date: {
-            'default': 'Venligst indtast en gyldig dato'
+            'default': 'Indtast venligst en gyldig dato'
         },
         different: {
-            'default': 'Venligst indtast en anden værdi'
+            'default': 'Indtast venligst en anden værdi'
         },
         digits: {
              'default': 'Venligst kun indtast cifre'
         },
         ean: {
-            'default': 'Venligst indtast er gyldigt EAN nummer'
+            'default': 'Indtast venligst et gyldigt EAN-nummer'
         },
         emailAddress: {
-            'default': 'Venligst indtast en gyldig e-mail adresse'
+            'default': 'Indtast venligst en gyldig e-mail-adresse'
         },
         file: {
             'default': 'Venligst vælg en gyldig fil'
         },
         greaterThan: {
-            'default': 'Venligst indtast en værdi større eller lig med %s',
-            notInclusive: 'Venligst indtast en værdi større end %s'
+            'default': 'Indtast venligst en værdi større eller lig med %s',
+            notInclusive: 'Indtast venligst en værdi større end %s'
         },
         grid: {
-            'default': 'Venlig indtast et gyldigt GRId nummer'
+            'default': 'Indtast venligst et gyldigt GRId-nummer'
         },
         hex: {
-            'default': 'Venlig indtast et gyldigt hexadecimal nummer'
+            'default': 'Indtast venligst et gyldigt hexadecimal-nummer'
         },
         hexColor: {
-            'default': 'Venlig indtast en gyldig hex farve'
+            'default': 'Indtast venligst en gyldig hex-farve'
         },
         iban: {
-            'default': 'Venlig indtast et gyldigt IBAN nummer',
+            'default': 'Indtast venligst et gyldigt IBAN-nummer',
             countryNotSupported: 'Lande koden %s understøttes ikke',
-            country: 'Venlig indtast et gyldigt IBAN nummer i in %s',
+            country: 'Indtast venligst et gyldigt IBAN-nummer i in %s',
             countries: {
                 AD: 'Andorra',
-                AE: 'United Arab Emirates',
-                AL: 'Albania',
+                AE: 'De Forenede Arabiske Emirater',
+                AL: 'Albanien',
                 AO: 'Angola',
-                AT: 'Austria',
-                AZ: 'Azerbaijan',
-                BA: 'Bosnia and Herzegovina',
-                BE: 'Belgium',
+                AT: 'Østrig',
+                AZ: 'Aserbajdsjan',
+                BA: 'Bosnien-Hercegovina',
+                BE: 'Belgien',
                 BF: 'Burkina Faso',
                 BG: 'Bulgaria',
                 BH: 'Bahrain',
                 BI: 'Burundi',
                 BJ: 'Benin',
-                BR: 'Brazil',
-                CH: 'Switzerland',
-                CI: 'Ivory Coast',
-                CM: 'Cameroon',
+                BR: 'Brasilien',
+                CH: 'Schweiz',
+                CI: 'Elfenbenskysten',
+                CM: 'Cameroun',
                 CR: 'Costa Rica',
-                CV: 'Cape Verde',
-                CY: 'Cyprus',
-                CZ: 'Czech Republic',
-                DE: 'Germany',
-                DK: 'Denmark',
-                DO: 'Dominican Republic',
-                DZ: 'Algeria',
-                EE: 'Estonia',
-                ES: 'Spain',
+                CV: 'Kap Verde',
+                CY: 'Cypern',
+                CZ: 'Tjekkiet',
+                DE: 'Tyskland',
+                DK: 'Danmark',
+                DO: 'Den Dominikanske Republik',
+                DZ: 'Algeriet',
+                EE: 'Estland',
+                ES: 'Spanien',
                 FI: 'Finland',
-                FO: 'Faroe Islands',
-                FR: 'France',
-                GB: 'United Kingdom',
-                GE: 'Georgia',
+                FO: 'Færøerne',
+                FR: 'Frankrig',
+                GB: 'Storbritannien',
+                GE: 'Georgien',
                 GI: 'Gibraltar',
-                GL: 'Greenland',
-                GR: 'Greece',
+                GL: 'Grønland',
+                GR: 'Grækenland',
                 GT: 'Guatemala',
-                HR: 'Croatia',
-                HU: 'Hungary',
-                IE: 'Ireland',
+                HR: 'Kroatien',
+                HU: 'Ungarn',
+                IE: 'Irland',
                 IL: 'Israel',
                 IR: 'Iran',
-                IS: 'Iceland',
-                IT: 'Italy',
+                IS: 'Island',
+                IT: 'Italien',
                 JO: 'Jordan',
                 KW: 'Kuwait',
-                KZ: 'Kazakhstan',
-                LB: 'Lebanon',
+                KZ: 'Kasakhstan',
+                LB: 'Libanon',
                 LI: 'Liechtenstein',
-                LT: 'Lithuania',
+                LT: 'Litauen',
                 LU: 'Luxembourg',
-                LV: 'Latvia',
+                LV: 'Letland',
                 MC: 'Monaco',
                 MD: 'Moldova',
                 ME: 'Montenegro',
-                MG: 'Madagascar',
-                MK: 'Macedonia',
+                MG: 'Madagaskar',
+                MK: 'Makedonien',
                 ML: 'Mali',
-                MR: 'Mauritania',
+                MR: 'Mauretanien',
                 MT: 'Malta',
                 MU: 'Mauritius',
                 MZ: 'Mozambique',
-                NL: 'Netherlands',
-                NO: 'Norway',
+                NL: 'Holland',
+                NO: 'Norge',
                 PK: 'Pakistan',
-                PL: 'Poland',
-                PS: 'Palestinian',
+                PL: 'Polen',
+                PS: 'Palestina',
                 PT: 'Portugal',
                 QA: 'Qatar',
-                RO: 'Romania',
-                RS: 'Serbia',
-                SA: 'Saudi Arabia',
-                SE: 'Sweden',
-                SI: 'Slovenia',
-                SK: 'Slovakia',
+                RO: 'Rumænien',
+                RS: 'Serbien',
+                SA: 'Saudi-Arabien',
+                SE: 'Sverige',
+                SI: 'Slovenien',
+                SK: 'Slovakiet',
                 SM: 'San Marino',
                 SN: 'Senegal',
-                TN: 'Tunisia',
-                TR: 'Turkey',
-                VG: 'Virgin Islands, British'
+                TN: 'Tunesien',
+                TR: 'Tyrkiet',
+                VG: 'Britiske Jomfruøer'
             }
         },
         id: {
-            'default': 'Venlig indtast et gyldigt identifikations nummer',
+            'default': 'Indtast venligst et gyldigt identifikations-nummer',
             countryNotSupported: 'Landekoden %s understøttes ikke',
-            country: 'Venlig indtast et gyldigt %s identifikations nummer',
+            country: 'Indtast venligst et gyldigt %s identifikations-nummer',
             countries: {
                 BA: 'Bosnien-Hercegovinask',
                 BG: 'bulgarsk',
@@ -178,54 +178,54 @@
             }
         },
         identical: {
-            'default': 'Venligst indtast den samme værdi'
+            'default': 'Indtast venligst den samme værdi'
         },
         imei: {
-            'default': 'Venlig indtast et gyldigt IMEI nummer'
+            'default': 'Indtast venligst et gyldigt IMEI-nummer'
         },
         imo: {
-            'default': 'Venlig indtast et gyldigt IMO nummer'
+            'default': 'Indtast venligst et gyldigt IMO-nummer'
         },
         integer: {
-            'default': 'Venlig indtast et gyldigt tal'
+            'default': 'Indtast venligst et gyldigt tal'
         },
         ip: {
-            'default': 'Venlig indtast en gyldig IP adresse',
-            ipv4: 'Venligst indtast en gyldig IPv4 adresse',
-            ipv6: 'Venlig indtast en gyldig IPv6 adresse'
+            'default': 'Indtast venligst en gyldig IP adresse',
+            ipv4: 'Indtast venligst en gyldig IPv4 adresse',
+            ipv6: 'Indtast venligst en gyldig IPv6 adresse'
         },
         isbn: {
-            'default': 'Venlig indtast et gyldigt ISBN nummer'
+            'default': 'Indtast venligst et gyldigt ISBN-nummer'
         },
         isin: {
-            'default': 'Venlig indtast et gyldigt ISIN nummer'
+            'default': 'Indtast venligst et gyldigt ISIN-nummer'
         },
         ismn: {
-            'default': 'Venlig indtast et gyldigt ISMN nummer'
+            'default': 'Indtast venligst et gyldigt ISMN-nummer'
         },
         issn: {
-            'default': 'Venlig indtast et gyldigt ISSN nummer'
+            'default': 'Indtast venligst et gyldigt ISSN-nummer'
         },
         lessThan: {
-            'default': 'Venligst indtast en værdi mindre eller lig med %s',
-            notInclusive: 'Venligst indtast en værdi mindre end %s'
+            'default': 'Indtast venligst en værdi mindre eller lig med %s',
+            notInclusive: 'Indtast venligst en værdi mindre end %s'
         },
         mac: {
-            'default': 'Venlig indtast en gyldig MAC adresse'
+            'default': 'Indtast venligst en gyldig MAC adresse'
         },
         meid: {
-            'default': 'Venlig indtast et gyldigt MEID nummer'
+            'default': 'Indtast venligst et gyldigt MEID-nummer'
         },
         notEmpty: {
-            'default': 'Venligst indtast en værdi'
+            'default': 'Indtast venligst en værdi'
         },
         numeric: {
-            'default': 'Venligst indtast et gyldigt float nummer'
+            'default': 'Indtast venligst et gyldigt float-nummer'
         },
         phone: {
-            'default': 'Venlig indtast et gyldigt telefonnummer',
+            'default': 'Indtast venligst et gyldigt telefonnummer',
             countryNotSupported: 'Landekoden %s understøttes ikke',
-            country: 'Venlig indtast et gyldigt telefonnummer i %s',
+            country: 'Indtast venligst et gyldigt telefonnummer i %s',
             countries: {
                 ES: 'Spanien',
                 FR: 'Frankrig',
@@ -234,47 +234,47 @@
             }
         },
         regexp: {
-            'default': 'Venlig indtast en værdi der matcher mønsteret'
+            'default': 'Indtast venligst en værdi der matcher mønsteret'
         },
         remote: {
-            'default': 'Venlig indtast en gyldig værdi'
+            'default': 'Indtast venligst en gyldig værdi'
         },
         rtn: {
-            'default': 'Venlig indtast et gyldigt RTN nummer'
+            'default': 'Indtast venligst et gyldigt RTN-nummer'
         },
         sedol: {
-            'default': 'Venlig indtast et gyldigt SEDOL nummer'
+            'default': 'Indtast venligst et gyldigt SEDOL-nummer'
         },
         siren: {
-            'default': 'Venlig indtast et gyldigt SIREN nummer'
+            'default': 'Indtast venligst et gyldigt SIREN-nummer'
         },
         siret: {
-            'default': 'Venlig indtast et gyldigt SIRET nummer'
+            'default': 'Indtast venligst et gyldigt SIRET-nummer'
         },
         step: {
-            'default': 'Venlig indtast et gyldigt trin af %s'
+            'default': 'Indtast venligst et gyldigt trin af %s'
         },
         stringCase: {
             'default': 'Venligst kun indtast små bogstaver',
             upper: 'Venligst kun indtast store bogstaver'
         },
         stringLength: {
-            'default': 'Venlig indtast en værdig af gyldig længde',
-            less: 'Venligst indtast mindre end %s tegn',
-            more: 'Venligst indtast mere end %s tegn',
-            between: 'Venligst indtast en værdi mellem %s og %s tegn'
+            'default': 'Indtast venligst en værdig af gyldig længde',
+            less: 'Indtast venligst mindre end %s tegn',
+            more: 'Indtast venligst mere end %s tegn',
+            between: 'Indtast venligst en værdi mellem %s og %s tegn'
         },
         uri: {
-            'default': 'Venligst indtast en gyldig URI'
+            'default': 'Indtast venligst en gyldig URI'
         },
         uuid: {
-            'default': 'Venligst indtast et gyldigt UUID nummer',
-            version: 'Venligst indtast en gyldig UUID version %s nummer'
+            'default': 'Indtast venligst et gyldigt UUID-nummer',
+            version: 'Indtast venligst en gyldig UUID version %s-nummer'
         },
         vat: {
-            'default': 'Venligst indtast et gyldig moms nummer',
+            'default': 'Indtast venligst et gyldig moms-nummer',
             countryNotSupported: 'Landekoden %s understøttes ikke',
-            country: 'Venligst indtast et gyldigt %s moms nummer',
+            country: 'Indtast venligst et gyldigt %s moms-nummer',
             countries: {
                 AT: 'østrisk',
                 BE: 'belgisk',
@@ -312,12 +312,12 @@
             }
         },
         vin: {
-            'default': 'Venlig indtast et gyldigt VIN nummer'
+            'default': 'Indtast venligst et gyldigt VIN-nummer'
         },
         zipCode: {
-            'default': 'Venlig indtast et gyldigt postnummer',
+            'default': 'Indtast venligst et gyldigt postnummer',
             countryNotSupported: 'Landekoden %s understøttes ikke',
-            country: 'Venlig indtast et gyldigt %s',
+            country: 'Indtast venligst et gyldigt %s',
             countries: {
                 CA: 'canadisk postnummer',
                 DK: 'dansk postnummer',
