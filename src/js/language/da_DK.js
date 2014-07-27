@@ -166,7 +166,7 @@
                 IS: 'islandsk',
                 LT: 'litauisk',
                 LV: 'lettisk',
-                ME: 'montenegro',
+                ME: 'montenegroiansk',
                 MK: 'makedonsk',
                 NL: 'hollandsk',
                 RO: 'romænsk',
@@ -326,7 +326,7 @@
                 IT: 'italiensk postnummer',
                 NL: 'hollandsk postnummer',
                 SE: 'svensk postnummer',
-                SG: 'singaporiansk postnummer',
+                SG: 'singaporeansk postnummer',
                 US: 'amerikansk postnummer'
             }
         }
