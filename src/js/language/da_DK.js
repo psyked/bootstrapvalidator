@@ -16,9 +16,9 @@
         },
         choice: {
             'default': 'Indtast venligst en gyldig værdi',
-            less: 'Venligst vælg %s valgmuligheder som minimum',
-            more: 'Venligst vælg %s valgmuligheder som maximum',
-            between: 'Venligst vælg %s - %s valgmuligheder'
+            less: 'Vælg venligst %s valgmuligheder som minimum',
+            more: 'Vælg venligst %s valgmuligheder som maximum',
+            between: 'Vælg venligst %s - %s valgmuligheder'
         },
         creditCard: {
             'default': 'Indtast venligst et gyldigt kreditkort-nummer'
@@ -45,7 +45,7 @@
             'default': 'Indtast venligst en gyldig e-mail-adresse'
         },
         file: {
-            'default': 'Venligst vælg en gyldig fil'
+            'default': 'Vælg venligst en gyldig fil'
         },
         greaterThan: {
             'default': 'Indtast venligst en værdi større eller lig med %s',
@@ -62,7 +62,7 @@
         },
         iban: {
             'default': 'Indtast venligst et gyldigt IBAN-nummer',
-            countryNotSupported: 'Lande koden %s understøttes ikke',
+            countryNotSupported: 'Landekoden %s understøttes desværre ikke',
             country: 'Indtast venligst et gyldigt IBAN-nummer i in %s',
             countries: {
                 AD: 'Andorra',
@@ -148,10 +148,10 @@
         },
         id: {
             'default': 'Indtast venligst et gyldigt identifikations-nummer',
-            countryNotSupported: 'Landekoden %s understøttes ikke',
+            countryNotSupported: 'Landekoden %s understøttes desværre ikke',
             country: 'Indtast venligst et gyldigt %s identifikations-nummer',
             countries: {
-                BA: 'Bosnien-Hercegovinask',
+                BA: 'Bosnien-Hercegovinsk',
                 BG: 'bulgarsk',
                 BR: 'brasiliansk',
                 CH: 'schweizisk',
@@ -174,7 +174,7 @@
                 SE: 'svensk',
                 SI: 'slovensk',
                 SK: 'slovakisk',
-                SM: 'San Marinosk',
+                SM: 'sammarinesisk',
                 ZA: 'sydafrikansk'
             }
         },
@@ -225,7 +225,7 @@
         },
         phone: {
             'default': 'Indtast venligst et gyldigt telefonnummer',
-            countryNotSupported: 'Landekoden %s understøttes ikke',
+            countryNotSupported: 'Landekoden %s understøttes desværre ikke',
             country: 'Indtast venligst et gyldigt telefonnummer i %s',
             countries: {
                 ES: 'Spanien',
@@ -274,7 +274,7 @@
         },
         vat: {
             'default': 'Indtast venligst et gyldig moms-nummer',
-            countryNotSupported: 'Landekoden %s understøttes ikke',
+            countryNotSupported: 'Landekoden %s understøttes desværre ikke',
             country: 'Indtast venligst et gyldigt %s moms-nummer',
             countries: {
                 AT: 'østrisk',
@@ -317,7 +317,7 @@
         },
         zipCode: {
             'default': 'Indtast venligst et gyldigt postnummer',
-            countryNotSupported: 'Landekoden %s understøttes ikke',
+            countryNotSupported: 'Landekoden %s understøttes desværre ikke',
             country: 'Indtast venligst et gyldigt %s',
             countries: {
                 CA: 'canadisk postnummer',
