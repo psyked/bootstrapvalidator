@@ -9,7 +9,7 @@
         },
         between: {
             'default': 'Udfyld venligst dette felt med en værdi mellem %s og %s',
-            notInclusive: 'Venligst kun indtast en værdi mellem %s og %s'
+            notInclusive: 'Indtast venligst kun en værdi mellem %s og %s'
         },
         callback: {
             'default': 'Udfyld venligst dette felt med en gyldig værdi'
@@ -36,7 +36,7 @@
             'default': 'Udfyld venligst dette felt med en anden værdi'
         },
         digits: {
-             'default': 'Venligst kun indtast cifre'
+             'default': 'Indtast venligst kun cifre'
         },
         ean: {
             'default': 'Udfyld venligst dette felt med et gyldigt EAN-nummer'
