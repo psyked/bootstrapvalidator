@@ -5,65 +5,65 @@
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
-            'default': 'Indtast venligst en gyldig basen 64 kodet'
+            'default': 'Udfyld venligst dette felt med en gyldig base64-kodet værdi'
         },
         between: {
-            'default': 'Indtast venligst en værdi mellem %s og %s',
+            'default': 'Udfyld venligst dette felt med en værdi mellem %s og %s',
             notInclusive: 'Venligst kun indtast en værdi mellem %s og %s'
         },
         callback: {
-            'default': 'Indtast venligst en gyldig værdi'
+            'default': 'Udfyld venligst dette felt med en gyldig værdi'
         },
         choice: {
-            'default': 'Indtast venligst en gyldig værdi',
-            less: 'Vælg venligst %s valgmuligheder som minimum',
-            more: 'Vælg venligst %s valgmuligheder som maximum',
+            'default': 'Udfyld venligst dette felt med en gyldig værdi',
+            less: 'Vælg venligst mindst %s valgmuligheder',
+            more: 'Vælg venligst højst %s valgmuligheder',
             between: 'Vælg venligst %s - %s valgmuligheder'
         },
         creditCard: {
-            'default': 'Indtast venligst et gyldigt kreditkort-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt kreditkort-nummer'
         },
         cusip: {
-            'default': 'Indtast venligst et gyldigt CUSIP-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt CUSIP-nummer'
         },
         cvv: {
-            'default': 'Indtast venligst et gyldigt CVV-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt CVV-nummer'
         },
         date: {
-            'default': 'Indtast venligst en gyldig dato'
+            'default': 'Udfyld venligst dette felt med en gyldig dato'
         },
         different: {
-            'default': 'Indtast venligst en anden værdi'
+            'default': 'Udfyld venligst dette felt med en anden værdi'
         },
         digits: {
              'default': 'Venligst kun indtast cifre'
         },
         ean: {
-            'default': 'Indtast venligst et gyldigt EAN-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt EAN-nummer'
         },
         emailAddress: {
-            'default': 'Indtast venligst en gyldig e-mail-adresse'
+            'default': 'Udfyld venligst dette felt med en gyldig e-mail-adresse'
         },
         file: {
             'default': 'Vælg venligst en gyldig fil'
         },
         greaterThan: {
-            'default': 'Indtast venligst en værdi større eller lig med %s',
-            notInclusive: 'Indtast venligst en værdi større end %s'
+            'default': 'Udfyld venligst dette felt med en værdi større eller lig med %s',
+            notInclusive: 'Udfyld venligst dette felt med en værdi større end %s'
         },
         grid: {
-            'default': 'Indtast venligst et gyldigt GRId-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt GRId-nummer'
         },
         hex: {
-            'default': 'Indtast venligst et gyldigt hexadecimal-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt hexadecimal-nummer'
         },
         hexColor: {
-            'default': 'Indtast venligst en gyldig hex-farve'
+            'default': 'Udfyld venligst dette felt med en gyldig hex-farve'
         },
         iban: {
-            'default': 'Indtast venligst et gyldigt IBAN-nummer',
+            'default': 'Udfyld venligst dette felt med et gyldigt IBAN-nummer',
             countryNotSupported: 'Landekoden %s understøttes desværre ikke',
-            country: 'Indtast venligst et gyldigt IBAN-nummer i in %s',
+            country: 'Udfyld venligst dette felt med et gyldigt IBAN-nummer i %s',
             countries: {
                 AD: 'Andorra',
                 AE: 'De Forenede Arabiske Emirater',
@@ -130,7 +130,7 @@
                 NO: 'Norge',
                 PK: 'Pakistan',
                 PL: 'Polen',
-                PS: 'Palestina',
+                PS: 'Palæstina',
                 PT: 'Portugal',
                 QA: 'Qatar',
                 RO: 'Rumænien',
@@ -147,9 +147,9 @@
             }
         },
         id: {
-            'default': 'Indtast venligst et gyldigt identifikations-nummer',
+            'default': 'Udfyld venligst dette felt med et gyldigt identifikations-nummer',
             countryNotSupported: 'Landekoden %s understøttes desværre ikke',
-            country: 'Indtast venligst et gyldigt %s identifikations-nummer',
+            country: 'Udfyld venligst dette felt med et gyldigt %s identifikations-nummer',
             countries: {
                 BA: 'Bosnien-Hercegovinsk',
                 BG: 'bulgarsk',
@@ -179,54 +179,54 @@
             }
         },
         identical: {
-            'default': 'Indtast venligst den samme værdi'
+            'default': 'Udfyld venligst dette felt med den samme værdi'
         },
         imei: {
-            'default': 'Indtast venligst et gyldigt IMEI-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt IMEI-nummer'
         },
         imo: {
-            'default': 'Indtast venligst et gyldigt IMO-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt IMO-nummer'
         },
         integer: {
-            'default': 'Indtast venligst et gyldigt tal'
+            'default': 'Udfyld venligst dette felt med et gyldigt tal'
         },
         ip: {
-            'default': 'Indtast venligst en gyldig IP adresse',
-            ipv4: 'Indtast venligst en gyldig IPv4 adresse',
-            ipv6: 'Indtast venligst en gyldig IPv6 adresse'
+            'default': 'Udfyld venligst dette felt med en gyldig IP adresse',
+            ipv4: 'Udfyld venligst dette felt med en gyldig IPv4 adresse',
+            ipv6: 'Udfyld venligst dette felt med en gyldig IPv6 adresse'
         },
         isbn: {
-            'default': 'Indtast venligst et gyldigt ISBN-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt ISBN-nummer'
         },
         isin: {
-            'default': 'Indtast venligst et gyldigt ISIN-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt ISIN-nummer'
         },
         ismn: {
-            'default': 'Indtast venligst et gyldigt ISMN-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt ISMN-nummer'
         },
         issn: {
-            'default': 'Indtast venligst et gyldigt ISSN-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt ISSN-nummer'
         },
         lessThan: {
-            'default': 'Indtast venligst en værdi mindre eller lig med %s',
-            notInclusive: 'Indtast venligst en værdi mindre end %s'
+            'default': 'Udfyld venligst dette felt med en værdi mindre eller lig med %s',
+            notInclusive: 'Udfyld venligst dette felt med en værdi mindre end %s'
         },
         mac: {
-            'default': 'Indtast venligst en gyldig MAC adresse'
+            'default': 'Udfyld venligst dette felt med en gyldig MAC adresse'
         },
         meid: {
-            'default': 'Indtast venligst et gyldigt MEID-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt MEID-nummer'
         },
         notEmpty: {
-            'default': 'Indtast venligst en værdi'
+            'default': 'Udfyld venligst dette felt'
         },
         numeric: {
-            'default': 'Indtast venligst et gyldigt float-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt flydende decimaltal'
         },
         phone: {
-            'default': 'Indtast venligst et gyldigt telefonnummer',
+            'default': 'Udfyld venligst dette felt med et gyldigt telefonnummer',
             countryNotSupported: 'Landekoden %s understøttes desværre ikke',
-            country: 'Indtast venligst et gyldigt telefonnummer i %s',
+            country: 'Udfyld venligst dette felt med et gyldigt telefonnummer i %s',
             countries: {
                 ES: 'Spanien',
                 FR: 'Frankrig',
@@ -235,49 +235,49 @@
             }
         },
         regexp: {
-            'default': 'Indtast venligst en værdi der matcher mønsteret'
+            'default': 'Udfyld venligst dette felt med en værdi der matcher mønsteret'
         },
         remote: {
-            'default': 'Indtast venligst en gyldig værdi'
+            'default': 'Udfyld venligst dette felt med en gyldig værdi'
         },
         rtn: {
-            'default': 'Indtast venligst et gyldigt RTN-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt RTN-nummer'
         },
         sedol: {
-            'default': 'Indtast venligst et gyldigt SEDOL-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt SEDOL-nummer'
         },
         siren: {
-            'default': 'Indtast venligst et gyldigt SIREN-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt SIREN-nummer'
         },
         siret: {
-            'default': 'Indtast venligst et gyldigt SIRET-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt SIRET-nummer'
         },
         step: {
-            'default': 'Indtast venligst et gyldigt trin af %s'
+            'default': 'Udfyld venligst dette felt med et gyldigt trin af %s'
         },
         stringCase: {
-            'default': 'Venligst kun indtast små bogstaver',
-            upper: 'Venligst kun indtast store bogstaver'
+            'default': 'Udfyld venligst kun dette felt med små bogstaver',
+            upper: 'Udfyld venligst kun dette felt med store bogstaver'
         },
         stringLength: {
-            'default': 'Indtast venligst en værdig af gyldig længde',
-            less: 'Indtast venligst mindre end %s tegn',
-            more: 'Indtast venligst mere end %s tegn',
-            between: 'Indtast venligst en værdi mellem %s og %s tegn'
+            'default': 'Udfyld venligst dette felt med en værdi af gyldig længde',
+            less: 'Udfyld venligst dette felt med mindre end %s tegn',
+            more: 'Udfyld venligst dette felt med mere end %s tegn',
+            between: 'Udfyld venligst dette felt med en værdi mellem %s og %s tegn'
         },
         uri: {
-            'default': 'Indtast venligst en gyldig URI'
+            'default': 'Udfyld venligst dette felt med en gyldig URI'
         },
         uuid: {
-            'default': 'Indtast venligst et gyldigt UUID-nummer',
-            version: 'Indtast venligst en gyldig UUID version %s-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt UUID-nummer',
+            version: 'Udfyld venligst dette felt med en gyldig UUID version %s-nummer'
         },
         vat: {
-            'default': 'Indtast venligst et gyldig moms-nummer',
+            'default': 'Udfyld venligst dette felt med et gyldig moms-nummer',
             countryNotSupported: 'Landekoden %s understøttes desværre ikke',
-            country: 'Indtast venligst et gyldigt %s moms-nummer',
+            country: 'Udfyld venligst dette felt med et gyldigt %s moms-nummer',
             countries: {
-                AT: 'østrisk',
+                AT: 'østrigsk',
                 BE: 'belgisk',
                 BG: 'bulgarsk',
                 CH: 'schweizisk',
@@ -313,12 +313,12 @@
             }
         },
         vin: {
-            'default': 'Indtast venligst et gyldigt VIN-nummer'
+            'default': 'Udfyld venligst dette felt med et gyldigt VIN-nummer'
         },
         zipCode: {
-            'default': 'Indtast venligst et gyldigt postnummer',
+            'default': 'Udfyld venligst dette felt med et gyldigt postnummer',
             countryNotSupported: 'Landekoden %s understøttes desværre ikke',
-            country: 'Indtast venligst et gyldigt %s',
+            country: 'Udfyld venligst dette felt med et gyldigt %s',
             countries: {
                 CA: 'canadisk postnummer',
                 DK: 'dansk postnummer',
