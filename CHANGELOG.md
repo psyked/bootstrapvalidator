@@ -28,6 +28,7 @@ __Language Packages__
 * [#536](https://github.com/nghuuphuoc/bootstrapvalidator/pull/536): Spanish language package, thanks to [@vadail](https://github.com/vadail)
 * [#544](https://github.com/nghuuphuoc/bootstrapvalidator/pull/544): Greek language package, thanks to [@pRieStaKos](https://github.com/pRieStaKos)
 * [#545](https://github.com/nghuuphuoc/bootstrapvalidator/pull/545): Portuguese (Brazil) language package, thanks to [@marcuscarvalho6](https://github.com/marcuscarvalho6)
+* [#598](https://github.com/nghuuphuoc/bootstrapvalidator/pull/598): Danish language package, thanks to [@Djarnis](https://github.com/Djarnis)
 
 ## v0.5.0 (2015-07-14)
 

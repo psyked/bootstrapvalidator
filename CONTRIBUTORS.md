@@ -11,6 +11,7 @@ I would like to give big thanks to the following contributors:
 * [@beeglebug](https://github.com/beeglebug)
 * [@blackfyre](https://github.com/blackfyre)
 * [@CeRBeR666](https://github.com/CeRBeR666)
+* [@Djarnis](https://github.com/Djarnis)
 * [@dlucazeau](https://github.com/dlucazeau)
 * [@dokterpasta](https://github.com/dokterpasta)
 * [@easonhan007](https://github.com/easonhan007)
