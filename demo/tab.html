@@ -5,7 +5,7 @@
 
     <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
     <link rel="stylesheet" href="../dist/css/bootstrapValidator.css"/>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" />
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" />
 
     <script type="text/javascript" src="../vendor/jquery/jquery-1.10.2.min.js"></script>
     <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
@@ -114,6 +114,13 @@ $(document).ready(function() {
                         }
                     }
                 },
+                jobTitle: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The company name is required'
+                        }
+                    }
+                },
                 address: {
                     validators: {
                         notEmpty: {
@@ -127,14 +134,22 @@ $(document).ready(function() {
                             message: 'The city is required'
                         }
                     }
+                },
+                country: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The city is required'
+                        }
+                    }
                 }
             }
         })
         .on('status.field.bv', function(e, data) {
             var $form     = $(e.target),
-                validator = $form.data('bootstrapValidator'),
+                validator = data.bv,
                 $tabPane  = data.element.parents('.tab-pane'),
                 tabId     = $tabPane.attr('id');
+            
             if (tabId) {
                 var $icon = $('a[href="#' + tabId + '"][data-toggle="tab"]').parent().find('i');
 

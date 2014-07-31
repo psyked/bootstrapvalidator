@@ -11,9 +11,9 @@
     <script type="text/javascript" src="../dist/js/bootstrapValidator.js"></script>
 
     <!-- Support datetime picker plugin: http://eonasdan.github.io/bootstrap-datetimepicker/ -->
-    <link rel="stylesheet" href="//eonasdan.github.io/bootstrap-datetimepicker/content/bootstrap-datetimepicker.css"/>
-    <script type="text/javascript" src="//eonasdan.github.io/bootstrap-datetimepicker/scripts/moment.js"></script>
-    <script type="text/javascript" src="//eonasdan.github.io/bootstrap-datetimepicker/scripts/bootstrap-datetimepicker.js"></script>
+    <link rel="stylesheet" href="http://eonasdan.github.io/bootstrap-datetimepicker/content/bootstrap-datetimepicker.css"/>
+    <script type="text/javascript" src="http://eonasdan.github.io/bootstrap-datetimepicker/scripts/moment.js"></script>
+    <script type="text/javascript" src="http://eonasdan.github.io/bootstrap-datetimepicker/scripts/bootstrap-datetimepicker.js"></script>
 
     <style type="text/css">
     /* Override to make the feedback icons shown properly */
@@ -110,6 +110,9 @@ $(document).ready(function() {
         fields: {
             monthDayYear: {
                 validators: {
+                    notEmpty: {
+                        message: 'The date is required and cannot be empty'
+                    },
                     date: {
                         format: 'MM/DD/YYYY'
                     }
@@ -117,6 +120,9 @@ $(document).ready(function() {
             },
             yearDayMonth: {
                 validators: {
+                    notEmpty: {
+                        message: 'The date is required and cannot be empty'
+                    },
                     date: {
                         format: 'YYYY-DD-MM'
                     }
@@ -124,6 +130,9 @@ $(document).ready(function() {
             },
             yearMonthDay: {
                 validators: {
+                    notEmpty: {
+                        message: 'The date is required and cannot be empty'
+                    },
                     date: {
                         format: 'YYYY.MM.DD',
                         separator: '.'
@@ -132,6 +141,9 @@ $(document).ready(function() {
             },
             monthDayYearTime: {
                 validators: {
+                    notEmpty: {
+                        message: 'The date is required and cannot be empty'
+                    },
                     date: {
                         format: 'MM/DD/YYYY h:m A'
                     }
@@ -139,6 +151,9 @@ $(document).ready(function() {
             },
             yearDayMonthTime: {
                 validators: {
+                    notEmpty: {
+                        message: 'The date is required and cannot be empty'
+                    },
                     date: {
                         format: 'YYYY-DD-MM h:m A'
                     }
