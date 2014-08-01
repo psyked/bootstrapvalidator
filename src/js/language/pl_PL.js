@@ -309,7 +309,8 @@
                 RS: 'serbski',
                 SE: 'szwedzki',
                 SI: 'słoweński',
-                SK: 'słowacki'
+                SK: 'słowacki',
+                ZA: 'południowo Afrykański'
             }
         },
         vin: {

@@ -661,6 +661,4 @@ describe('vat', function() {
             expect(this.bv.isValid()).toEqual(false);
         }
     });
-
-
 });

@@ -309,7 +309,8 @@
                 RS: 'Serbian',
                 SE: 'Swedish',
                 SI: 'Slovenian',
-                SK: 'Slovak'
+                SK: 'Slovak',
+                ZA: 'South African'
             }
         },
         vin: {

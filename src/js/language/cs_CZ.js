@@ -309,7 +309,8 @@
                 RS: 'Srbsko',
                 SE: 'Švédsko',
                 SI: 'Slovinsko',
-                SK: 'Slovensko'
+                SK: 'Slovensko',
+                ZA: 'Jižní Afriku'
             }
         },
         vin: {

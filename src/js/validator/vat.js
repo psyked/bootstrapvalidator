@@ -37,7 +37,7 @@
             SE: 'Swedish',
             SI: 'Slovenian',
             SK: 'Slovak',
-            ZA: 'South African',
+            ZA: 'South African'
         }
     });
 
@@ -49,8 +49,8 @@
 
         // Supported country codes
         COUNTRY_CODES: [
-            'AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'EL', 'HU', 'IE', 'IT',
-            'LV', 'LT', 'LU', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RU', 'RS', 'SK', 'SI', 'ES', 'SE', 'CH', 'GB', 'ZA'
+            'AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI', 'FR', 'GB', 'GR', 'HR', 'HU',
+            'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RU', 'RS', 'SE', 'SK', 'SI', 'ZA'
         ],
 
         /**
@@ -1228,10 +1228,7 @@
          * @returns {Boolean}
          */
          _za: function(value) {
-            if (!/^4\d{9}$/.test(value)) {
-                return false;
-            }
-            return true;
+            return /^4\d{9}$/.test(value);
         }
     };
 }(window.jQuery));

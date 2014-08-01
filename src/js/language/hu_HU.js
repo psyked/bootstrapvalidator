@@ -309,7 +309,8 @@
                 RS: 'szerb',
                 SE: 'svéd',
                 SI: 'szlovén',
-                SK: 'szlovák'
+                SK: 'szlovák',
+                ZA: 'dél afrikai'
             }
         },
         vin: {

@@ -309,7 +309,8 @@
                 RS: 'Servisch',
                 SE: 'Zweeds',
                 SI: 'Sloveens',
-                SK: 'Slovaaks'
+                SK: 'Slovaaks',
+                ZA: 'Zuid-Afrikaans'
             }
         },
         vin: {

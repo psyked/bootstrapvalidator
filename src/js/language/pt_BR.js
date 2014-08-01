@@ -309,7 +309,8 @@
                 RS: 'Sérvia',
                 SE: 'Sueco',
                 SI: 'esloveno',
-                SK: 'Eslovaca'
+                SK: 'Eslovaca',
+                ZA: 'Sul-Africano'
             }
         },
         vin: {
