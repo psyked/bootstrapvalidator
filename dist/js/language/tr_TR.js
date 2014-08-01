@@ -309,7 +309,8 @@
                 RS: 'Sırp',
                 SE: 'İsveç',
                 SI: 'Sloven',
-                SK: 'Slovak'
+                SK: 'Slovak',
+                ZA: 'Kuzey Afrikalı'
             }
         },
         vin: {

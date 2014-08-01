@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.1-dev, built on 2014-07-30 6:32:56 AM
+ * @version     v0.5.1-dev, built on 2014-08-01 8:30:45 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -5241,7 +5241,8 @@
             RS: 'Serbian',
             SE: 'Swedish',
             SI: 'Slovenian',
-            SK: 'Slovak'
+            SK: 'Slovak',
+            ZA: 'South African'
         }
     });
 
@@ -5253,8 +5254,8 @@
 
         // Supported country codes
         COUNTRY_CODES: [
-            'AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'EL', 'HU', 'IE', 'IT',
-            'LV', 'LT', 'LU', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RU', 'RS', 'SK', 'SI', 'ES', 'SE', 'CH', 'GB'
+            'AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI', 'FR', 'GB', 'GR', 'HR', 'HU',
+            'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RU', 'RS', 'SE', 'SK', 'SI', 'ZA'
         ],
 
         /**
@@ -5799,7 +5800,7 @@
 
             value = value.substr(2);
 
-			if (!$.fn.bootstrapValidator.helpers.luhn(value.substr(2))) {
+            if (!$.fn.bootstrapValidator.helpers.luhn(value.substr(2))) {
                 return false;
             }
 
@@ -6420,6 +6421,19 @@
             }
 
             return (parseInt(value.substr(2), 10) % 11 === 0);
+        },
+
+        /**
+         * Validate South African VAT number
+         * Examples:
+         * - Valid: 4012345678
+         * - Invalid: 40123456789, 3012345678
+         *
+         * @params {String} value VAT number
+         * @returns {Boolean}
+         */
+         _za: function(value) {
+            return /^4\d{9}$/.test(value);
         }
     };
 }(window.jQuery));

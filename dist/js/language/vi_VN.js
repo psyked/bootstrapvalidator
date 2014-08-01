@@ -309,7 +309,8 @@
                 RS: 'Serbi',
                 SE: 'Thuỵ Điển',
                 SI: 'Slovenia',
-                SK: 'Slovakia'
+                SK: 'Slovakia',
+                ZA: 'Nam Phi'
             }
         },
         vin: {
