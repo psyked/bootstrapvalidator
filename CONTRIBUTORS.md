@@ -18,6 +18,7 @@ I would like to give big thanks to the following contributors:
 * [@easonhan007](https://github.com/easonhan007)
 * [@emilchristensen](https://github.com/emilchristensen)
 * [@ericnakagawa](https://github.com/ericnakagawa)
+* [@etorres](https://github.com/etorres)
 * [@evilchili](https://github.com/evilchili)
 * [@Francismori7](https://github.com/Francismori7)
 * [@gercheq](https://github.com/gercheq)
