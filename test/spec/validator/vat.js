@@ -36,6 +36,7 @@ describe('vat', function() {
                         '<option value="SE">Sweden</option>',
                         '<option value="CH">Switzerland</option>',
                         '<option value="GB">United Kingdom</option>',
+                        '<option value="ZA">South Africa</option>',
                     '</select>',
                 '</div>',
                 '<div class="form-group">',
@@ -640,4 +641,26 @@ describe('vat', function() {
             expect(this.bv.isValid()).toEqual(false);
         }
     });
+
+    it('South African VAT number', function () {
+        // Valid samples
+        var validSamples = ['4012345678']
+        for (var i in validSamples) {
+            this.bv.resetForm();
+            this.$vat.val(validSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toBeTruthy();
+        }
+
+        // Invalid samples
+        var invalidSamples = ['40123456789', '0123456789']
+        for (i in invalidSamples) {
+            this.bv.resetForm();
+            this.$vat.val(invalidSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toEqual(false);
+        }
+    });
+
+
 });

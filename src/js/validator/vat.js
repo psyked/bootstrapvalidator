@@ -36,7 +36,8 @@
             RS: 'Serbian',
             SE: 'Swedish',
             SI: 'Slovenian',
-            SK: 'Slovak'
+            SK: 'Slovak',
+            ZA: 'South African',
         }
     });
 
@@ -49,7 +50,7 @@
         // Supported country codes
         COUNTRY_CODES: [
             'AT', 'BE', 'BG', 'HR', 'CY', 'CZ', 'DK', 'EE', 'FI', 'FR', 'DE', 'GR', 'EL', 'HU', 'IE', 'IT',
-            'LV', 'LT', 'LU', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RU', 'RS', 'SK', 'SI', 'ES', 'SE', 'CH', 'GB'
+            'LV', 'LT', 'LU', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RU', 'RS', 'SK', 'SI', 'ES', 'SE', 'CH', 'GB', 'ZA'
         ],
 
         /**
@@ -594,7 +595,7 @@
 
             value = value.substr(2);
 
-			if (!$.fn.bootstrapValidator.helpers.luhn(value.substr(2))) {
+            if (!$.fn.bootstrapValidator.helpers.luhn(value.substr(2))) {
                 return false;
             }
 
@@ -1215,6 +1216,22 @@
             }
 
             return (parseInt(value.substr(2), 10) % 11 === 0);
+        },
+
+        /**
+         * Validate South African VAT number
+         * Examples:
+         * - Valid: 4012345678
+         * - Invalid: 40123456789, 3012345678
+         *
+         * @params {String} value VAT number
+         * @returns {Boolean}
+         */
+         _za: function(value) {
+            if (!/^4\d{9}$/.test(value)) {
+                return false;
+            }
+            return true;
         }
     };
 }(window.jQuery));
