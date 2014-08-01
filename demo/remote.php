@@ -4,6 +4,8 @@
 // and open the remote.html file:
 // http://domain.com/demo/remote.html
 
+header('Content-type: application/json');
+
 //sleep(5);
 
 $valid = true;
