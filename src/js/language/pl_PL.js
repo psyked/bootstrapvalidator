@@ -147,7 +147,7 @@
             }
         },
         id: {
-            'default': 'Wprowadź poprawnu numer identyfikacyjny',
+            'default': 'Wprowadź poprawny numer identyfikacyjny',
             countryNotSupported: 'Kod kraju %s nie jest obsługiwany',
             country: 'Wprowadź poprawny %s numer identyfikacyjny',
             countries: {
@@ -182,10 +182,10 @@
             'default': 'Wprowadź taką samą wartość'
         },
         imei: {
-            'default': 'Wprowadź poprawnu numer IMEI'
+            'default': 'Wprowadź poprawny numer IMEI'
         },
         imo: {
-            'default': 'Wprowadź poprawnu numer IMO'
+            'default': 'Wprowadź poprawny numer IMO'
         },
         integer: {
             'default': 'Wprowadź poprawną liczbę całkowitą'
@@ -196,7 +196,7 @@
             ipv6: 'Wprowadź poprawny adres IPv6'
         },
         isbn: {
-            'default': 'Wprowadź porpawny numer ISBN'
+            'default': 'Wprowadź poprawny numer ISBN'
         },
         isin: {
             'default': 'Wprowadź poprawny numer ISIN'
@@ -215,7 +215,7 @@
             'default': 'Wprowadź poprawny adres MAC'
         },
         meid: {
-            'default': 'Wprowadź porpawny numer MEID'
+            'default': 'Wprowadź poprawny numer MEID'
         },
         notEmpty: {
             'default': 'Wprowadź wartość, pole nie może być puste'
