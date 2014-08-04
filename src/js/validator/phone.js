@@ -8,6 +8,7 @@
             FR: 'France',
             GB: 'United Kingdom',
             US: 'USA'
+            PK: 'Pakistan'
         }
     });
 
@@ -18,7 +19,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['ES', 'FR', 'GB', 'US'],
+        COUNTRY_CODES: ['ES', 'FR', 'GB', 'US', 'PK'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -75,7 +76,12 @@
             		value   = $.trim(value);
             		isValid = (/^\(?(?:(?:0(?:0|11)\)?[\s-]?\(?|\+)44\)?[\s-]?\(?(?:0\)?[\s-]?\(?)?|0)(?:\d{2}\)?[\s-]?\d{4}[\s-]?\d{4}|\d{3}\)?[\s-]?\d{3}[\s-]?\d{3,4}|\d{4}\)?[\s-]?(?:\d{5}|\d{3}[\s-]?\d{3})|\d{5}\)?[\s-]?\d{4,5}|8(?:00[\s-]?11[\s-]?11|45[\s-]?46[\s-]?4\d))(?:(?:[\s-]?(?:x|ext\.?\s?|\#)\d+)?)$/).test(value);
                     break;
+                case 'PK':
+                    // http://regex101.com/r/yH8aV9/2
+                    value   = $.trim(value);
+                    isValid = (/^0?3[0-9]{2}[0-9]{7}$/).test(value);
 
+                    break;
                 case 'US':
                 /* falls through */
                 default:
