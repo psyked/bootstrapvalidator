@@ -25,7 +25,8 @@ __Language Packages__
 * [#400](https://github.com/nghuuphuoc/bootstrapvalidator/pull/400): Italian language package, thanks to [@maramazza](https://github.com/maramazza)
 * [#503](https://github.com/nghuuphuoc/bootstrapvalidator/pull/503): French language package, thanks to [@dlucazeau](https://github.com/dlucazeau)
 * [#505](https://github.com/nghuuphuoc/bootstrapvalidator/pull/505): Czech language package, thanks to [@AdwinTrave](https://github.com/AdwinTrave)
-* [#507](https://github.com/nghuuphuoc/bootstrapvalidator/pull/507): Polish language package, thanks to [@grzesiek](https://github.com/grzesiek)
+* [#507](https://github.com/nghuuphuoc/bootstrapvalidator/pull/507): Polish language package, thanks to [@grzesiek](https://github.com/grzesiek).
+  [#624](https://github.com/nghuuphuoc/bootstrapvalidator/pull/624): Typos fixed by [@lukaszbanasiak](https://github.com/lukaszbanasiak)
 * [#517](https://github.com/nghuuphuoc/bootstrapvalidator/pull/517): Belgium (Dutch) language package, thanks to [@dokterpasta](https://github.com/dokterpasta)
 * [#527](https://github.com/nghuuphuoc/bootstrapvalidator/pull/527): Bulgarian language package, thanks to [@mraiur](https://github.com/mraiur)
 * [#534](https://github.com/nghuuphuoc/bootstrapvalidator/pull/534): Turkish language package, thanks to [@CeRBeR666](https://github.com/CeRBeR666)
