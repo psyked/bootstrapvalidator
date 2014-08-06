@@ -257,7 +257,21 @@
                 $field.off(events).on(events, function() {
                     that.updateStatus($(this), that.STATUS_NOT_VALIDATED);
                 });
-
+                //Dorian: show message when get focus
+                $field.off("focus.showmsg.bv").on("focus.showmsg.bv", function() {
+                    var $icon =$parent.find('.form-control-feedback[data-bv-icon-for="' + field + '"]');
+                    if($icon.length>0 && container){
+                        switch(container){
+                            case "tooltip":
+                                $icon.tooltip('show');
+                                break;
+                            case "popover":
+                                $icon.popover('show');
+                                break;
+                        }
+                    }
+                });
+                
                 // Create help block elements for showing the error messages
                 $field.data('bv.messages', $message);
                 for (validatorName in this.options.fields[field].validators) {
@@ -294,7 +308,9 @@
                     && this.options.feedbackIcons.validating && this.options.feedbackIcons.invalid && this.options.feedbackIcons.valid
                     && (!updateAll || i === total - 1))
                 {
-                    $parent.removeClass('has-success').removeClass('has-error').addClass('has-feedback');
+                    //$parent.removeClass('has-success').removeClass('has-error').addClass('has-feedback');
+                    //Dorian: keep error message populated from back end
+                    $parent.addClass('has-feedback');
                     var $icon = $('<i/>')
                                     .css('display', 'none')
                                     .addClass('form-control-feedback')
@@ -306,12 +322,14 @@
                     // The feedback icon does not render correctly if there is no label
                     // https://github.com/twbs/bootstrap/issues/12873
                     if ($parent.find('label').length === 0) {
-                        $icon.css('top', 0);
+                        //Dorian: feedback icon's position can't be adjusted when there is no label or it's in input-group
+                        //$icon.css('top', 0);
                     }
                     // Fix feedback icons in input-group
                     if ($parent.find('.input-group').length !== 0) {
                         $icon.css({
-                            'top': 0,
+                            //Dorian: feedback icon's position can't be adjusted when there is no label or it's in input-group
+                            //'top': 0,
                             'z-index': 100
                         }).insertAfter($parent.find('.input-group').eq(0));
                     }
@@ -944,6 +962,8 @@
                                 ? $icon.css('cursor', 'pointer').popover('destroy').popover({
                                     content: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html(),
                                     html: true,
+                                    //Dorian:
+                                    container:'body',
                                     placement: 'top',
                                     trigger: 'hover click'
                                 })
