@@ -11,7 +11,8 @@
             NL: 'Dutch postal code',
             SE: 'Swiss postal code',
             SG: 'Singapore postal code',
-            US: 'US zip code'
+            US: 'US zip code',
+            BR: 'Brazilian postal code'
         }
     });
 
@@ -21,7 +22,7 @@
             country: 'country'
         },
 
-        COUNTRY_CODES: ['CA', 'DK', 'GB', 'IT', 'NL', 'SE', 'SG', 'US'],
+        COUNTRY_CODES: ['CA', 'DK', 'GB', 'IT', 'NL', 'SE', 'SG', 'US', 'BR'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -103,6 +104,10 @@
 
                 case 'SG':
                     isValid = /^([0][1-9]|[1-6][0-9]|[7]([0-3]|[5-9])|[8][0-2])(\d{4})$/i.test(value);
+                    break;
+                    
+                case 'SG':
+                    isValid = /^(\d{2})([\.]?)(\d{3})([\-]?)(\d{3})$/.test(value);
                     break;
 
                 case 'US':
