@@ -106,7 +106,7 @@
                     isValid = /^([0][1-9]|[1-6][0-9]|[7]([0-3]|[5-9])|[8][0-2])(\d{4})$/i.test(value);
                     break;
                     
-                case 'SG':
+                case 'BR':
                     isValid = /^(\d{2})([\.]?)(\d{3})([\-]?)(\d{3})$/.test(value);
                     break;
 
