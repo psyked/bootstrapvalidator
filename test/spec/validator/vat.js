@@ -661,4 +661,24 @@ describe('vat', function() {
             expect(this.bv.isValid()).toEqual(false);
         }
     });
+
+    is('Icelandic VAT (VSK) number', function () {
+        // Valid samples
+        var validSamples = ['11111', '111111']
+        for (var i in validSamples) {
+            this.bv.resetForm();
+            this.$vat.val(validSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toBeTruthy();
+        }
+
+        // Invalid samples
+        var invalidSamples = ['1234567', '123456ABC']
+        for (i in invalidSamples) {
+            this.bv.resetForm();
+            this.$vat.val(invalidSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toEqual(false);
+        }
+    });
 });
