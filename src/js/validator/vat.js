@@ -22,6 +22,7 @@
             HU: 'Hungarian',
             HR: 'Croatian',
             IE: 'Irish',
+            IS: 'Iceland',
             IT: 'Italian',
             LT: 'Lithuanian',
             LU: 'Luxembourg',
@@ -50,7 +51,7 @@
         // Supported country codes
         COUNTRY_CODES: [
             'AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI', 'FR', 'GB', 'GR', 'HR', 'HU',
-            'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RU', 'RS', 'SE', 'SK', 'SI', 'ZA'
+            'IE', 'IS', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RU', 'RS', 'SE', 'SK', 'SI', 'ZA'
         ],
 
         /**
@@ -1230,5 +1231,20 @@
          _za: function(value) {
             return /^4\d{9}$/.test(value);
         }
+
+        /**
+         * Validate Icelandic VAT (VSK) number
+         * Examples:
+         * - Valid: 12345, 123456
+         * - Invalid: 1234567
+         *
+         * @params {String} value VAT number
+         * @returns {Boolean}
+         */
+         _is: function(value) {
+            return /^\d{5,6}$/.test(value);
+        }
+
+
     };
 }(window.jQuery));
