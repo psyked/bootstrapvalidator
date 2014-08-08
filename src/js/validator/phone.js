@@ -4,11 +4,11 @@
         countryNotSupported: 'The country code %s is not supported',
         country: 'Please enter a valid phone number in %s',
         countries: {
+            BR: 'Brazil',
             ES: 'Spain',
             FR: 'France',
             GB: 'United Kingdom',
-            US: 'USA',
-            BR: 'Brazil'
+            US: 'USA'
         }
     });
 
@@ -19,7 +19,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['ES', 'FR', 'GB', 'US', 'BR'],
+        COUNTRY_CODES: ['BR', 'ES', 'FR', 'GB', 'US'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -58,6 +58,12 @@
 
             var isValid = true;
             switch (country.toUpperCase()) {
+                case 'BR':
+                    // Test: http://regexr.com/399m1
+                    value   = $.trim(value);
+                    isValid = (/^(([\d]{4}[-.\s]{1}[\d]{3}[-.\s]{1}[\d]{4})|((\(?\+?[0-9]{2}\)?\s?)?(\(?\d{2}\)?\s?)?\d{4,5}[-.\s]?\d{4}))$/).test(value);
+                    break;
+
                 case 'ES':
                     // http://regex101.com/r/rB9mA9/1
                     value   = $.trim(value);
@@ -77,33 +83,6 @@
             		isValid = (/^\(?(?:(?:0(?:0|11)\)?[\s-]?\(?|\+)44\)?[\s-]?\(?(?:0\)?[\s-]?\(?)?|0)(?:\d{2}\)?[\s-]?\d{4}[\s-]?\d{4}|\d{3}\)?[\s-]?\d{3}[\s-]?\d{3,4}|\d{4}\)?[\s-]?(?:\d{5}|\d{3}[\s-]?\d{3})|\d{5}\)?[\s-]?\d{4,5}|8(?:00[\s-]?11[\s-]?11|45[\s-]?46[\s-]?4\d))(?:(?:[\s-]?(?:x|ext\.?\s?|\#)\d+)?)$/).test(value);
                     break;
                 
-                case 'BR':
-                    // Test: http://regexr.com/399m1
-                    /*
-                     *  0800-000-0000
-                     *  0800 000 0000
-                     *  0800.000.0000
-                     *  08000000000
-                     *  1692089-4635
-                     *  16920894635
-                     *  16992089-4635
-                     *  16 99202-4635
-                     *  (16)99202-4635
-                     *  (16)92089-4635
-                     *  (16) 92089-4635
-                     *  (15) 4343-4343
-                     *  +55 15 3702-7523
-                     *  (+55) 15 3702-7523
-                     *  (+55)1537027523
-                     *  (+55)(15)3702-7523
-                     *  (+55) 15 3702-7523
-                     *  (+55) 15 99202-7523
-                     *  99202-4635
-                     */
-                    value   = $.trim(value);
-                    isValid = (/^(([\d]{4}[-.\s]{1}[\d]{3}[-.\s]{1}[\d]{4})|((\(?\+?[0-9]{2}\)?\s?)?(\(?\d{2}\)?\s?)?\d{4,5}[-.\s]?\d{4}))$/).test(value);
-                    break;
-
                 case 'US':
                 /* falls through */
                 default:

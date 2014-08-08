@@ -228,6 +228,7 @@
             countryNotSupported: 'Telefoní číslo pro %s není podporované',
             country: 'Prosím zadejte správné telefoní číslo pro %s',
             countries: {
+                BR: 'Brazílii',
                 ES: 'Španělsko',
                 FR: 'Francii',
                 GB: 'Velkou Británii',

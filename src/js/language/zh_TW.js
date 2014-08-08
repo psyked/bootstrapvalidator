@@ -228,6 +228,7 @@
             countryNotSupported: '不支援該國家代碼 %s',
             country: '請輸入有效的 %s 電話號碼',
             countries: {
+                BR: '巴西',
                 ES: '西班牙',
                 FR: '法國',
                 GB: '英國',

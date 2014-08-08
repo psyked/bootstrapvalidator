@@ -20,6 +20,7 @@ I would like to give big thanks to the following contributors:
 * [@ericnakagawa](https://github.com/ericnakagawa)
 * [@etorres](https://github.com/etorres)
 * [@evilchili](https://github.com/evilchili)
+* [@fhferreira](https://github.com/fhferreira)
 * [@Francismori7](https://github.com/Francismori7)
 * [@gercheq](https://github.com/gercheq)
 * [@grzesiek](https://github.com/grzesiek)

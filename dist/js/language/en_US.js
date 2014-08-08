@@ -228,6 +228,7 @@
             countryNotSupported: 'The country code %s is not supported',
             country: 'Please enter a valid phone number in %s',
             countries: {
+                BR: 'Brazil',
                 ES: 'Spain',
                 FR: 'France',
                 GB: 'United Kingdom',
@@ -295,6 +296,7 @@
                 HU: 'Hungarian',
                 HR: 'Croatian',
                 IE: 'Irish',
+                IS: 'Iceland',
                 IT: 'Italian',
                 LT: 'Lithuanian',
                 LU: 'Luxembourg',

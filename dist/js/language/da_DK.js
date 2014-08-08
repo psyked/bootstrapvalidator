@@ -228,6 +228,7 @@
             countryNotSupported: 'Landekoden %s understøttes desværre ikke',
             country: 'Udfyld venligst dette felt med et gyldigt telefonnummer i %s',
             countries: {
+                BR: 'Brasilien',
                 ES: 'Spanien',
                 FR: 'Frankrig',
                 GB: 'England',
@@ -295,6 +296,7 @@
                 HU: 'ungarnsk',
                 HR: 'kroatisk',
                 IE: 'irsk',
+                IS: 'island',
                 IT: 'italiensk',
                 LT: 'litauisk',
                 LU: 'luxembourgsk',

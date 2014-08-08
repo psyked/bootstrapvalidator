@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.1-dev, built on 2014-08-05 6:09:00 AM
+ * @version     v0.5.1-dev, built on 2014-08-08 7:01:35 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -4525,6 +4525,7 @@
         countryNotSupported: 'The country code %s is not supported',
         country: 'Please enter a valid phone number in %s',
         countries: {
+            BR: 'Brazil',
             ES: 'Spain',
             FR: 'France',
             GB: 'United Kingdom',
@@ -4539,7 +4540,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['ES', 'FR', 'GB', 'US'],
+        COUNTRY_CODES: ['BR', 'ES', 'FR', 'GB', 'US'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -4578,6 +4579,12 @@
 
             var isValid = true;
             switch (country.toUpperCase()) {
+                case 'BR':
+                    // Test: http://regexr.com/399m1
+                    value   = $.trim(value);
+                    isValid = (/^(([\d]{4}[-.\s]{1}[\d]{3}[-.\s]{1}[\d]{4})|((\(?\+?[0-9]{2}\)?\s?)?(\(?\d{2}\)?\s?)?\d{4,5}[-.\s]?\d{4}))$/).test(value);
+                    break;
+
                 case 'ES':
                     // http://regex101.com/r/rB9mA9/1
                     value   = $.trim(value);
@@ -4596,7 +4603,7 @@
             		value   = $.trim(value);
             		isValid = (/^\(?(?:(?:0(?:0|11)\)?[\s-]?\(?|\+)44\)?[\s-]?\(?(?:0\)?[\s-]?\(?)?|0)(?:\d{2}\)?[\s-]?\d{4}[\s-]?\d{4}|\d{3}\)?[\s-]?\d{3}[\s-]?\d{3,4}|\d{4}\)?[\s-]?(?:\d{5}|\d{3}[\s-]?\d{3})|\d{5}\)?[\s-]?\d{4,5}|8(?:00[\s-]?11[\s-]?11|45[\s-]?46[\s-]?4\d))(?:(?:[\s-]?(?:x|ext\.?\s?|\#)\d+)?)$/).test(value);
                     break;
-
+                
                 case 'US':
                 /* falls through */
                 default:
@@ -5227,6 +5234,7 @@
             HU: 'Hungarian',
             HR: 'Croatian',
             IE: 'Irish',
+            IS: 'Iceland',
             IT: 'Italian',
             LT: 'Lithuanian',
             LU: 'Luxembourg',
@@ -5255,7 +5263,7 @@
         // Supported country codes
         COUNTRY_CODES: [
             'AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI', 'FR', 'GB', 'GR', 'HR', 'HU',
-            'IE', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RU', 'RS', 'SE', 'SK', 'SI', 'ZA'
+            'IE', 'IS', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RU', 'RS', 'SE', 'SK', 'SI', 'ZA'
         ],
 
         /**
@@ -5994,6 +6002,19 @@
         },
 
         /**
+         * Validate Icelandic VAT (VSK) number
+         * Examples:
+         * - Valid: 12345, 123456
+         * - Invalid: 1234567
+         *
+         * @params {String} value VAT number
+         * @returns {Boolean}
+         */
+        _is: function(value) {
+            return /^IS\d{5,6}$/.test(value);
+        },
+
+        /**
          * Validate Italian VAT number, which consists of 11 digits.
          * - First 7 digits are a company identifier
          * - Next 3 are the province of residence
@@ -6433,7 +6454,7 @@
          * @returns {Boolean}
          */
          _za: function(value) {
-            return /^4\d{9}$/.test(value);
+            return /^ZA4\d{9}$/.test(value);
         }
     };
 }(window.jQuery));
@@ -6499,7 +6520,8 @@
             NL: 'Dutch postal code',
             SE: 'Swiss postal code',
             SG: 'Singapore postal code',
-            US: 'US zip code'
+            US: 'US zip code',
+            BR: 'Brazilian postal code'
         }
     });
 
@@ -6509,7 +6531,7 @@
             country: 'country'
         },
 
-        COUNTRY_CODES: ['CA', 'DK', 'GB', 'IT', 'NL', 'SE', 'SG', 'US'],
+        COUNTRY_CODES: ['CA', 'DK', 'GB', 'IT', 'NL', 'SE', 'SG', 'US', 'BR'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -6591,6 +6613,10 @@
 
                 case 'SG':
                     isValid = /^([0][1-9]|[1-6][0-9]|[7]([0-3]|[5-9])|[8][0-2])(\d{4})$/i.test(value);
+                    break;
+                    
+                case 'BR':
+                    isValid = /^(\d{2})([\.]?)(\d{3})([\-]?)(\d{3})$/.test(value);
                     break;
 
                 case 'US':

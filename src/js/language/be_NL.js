@@ -228,6 +228,7 @@
             countryNotSupported: 'De land code %s is niet ondersteund',
             country: 'Geef een geldig telefoon nummer van %s',
             countries: {
+                BR: 'Brazilië',
                 ES: 'Spanje',
                 FR: 'Frankrijk',
                 GB: 'Verenigd Koninkrijk',

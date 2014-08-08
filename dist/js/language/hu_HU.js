@@ -228,6 +228,7 @@
             countryNotSupported: 'A(z) %s országkód nem támogatott',
             country: 'Kérlek, hogy érvényes %s telefonszámot adj meg',
             countries: {
+                BR: 'brazil',
                 ES: 'spanyol',
                 FR: 'francia',
                 GB: 'Egyesült Királyság beli',
@@ -295,6 +296,7 @@
                 HU: 'magyar',
                 HR: 'horvát',
                 IE: 'ír',
+                IS: 'izlandi',
                 IT: 'olasz',
                 LT: 'litván',
                 LU: 'luxemburgi',

@@ -228,6 +228,7 @@
             countryNotSupported: '%s ülke kodu desteklenmemektedir',
             country: '%s de geçerli bir telefon numarası giriniz',
             countries: {
+                BR: 'Brezilya',
                 ES: 'İspanya',
                 FR: 'Fransa',
                 GB: 'İngiltere',
