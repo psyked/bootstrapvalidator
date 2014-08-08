@@ -295,6 +295,7 @@
                 HU: 'magyar',
                 HR: 'horvát',
                 IE: 'ír',
+                IS: 'izlandi',
                 IT: 'olasz',
                 LT: 'litván',
                 LU: 'luxemburgi',

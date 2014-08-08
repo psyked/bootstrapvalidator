@@ -295,6 +295,7 @@
                 HU: 'Macar',
                 HR: 'Hırvat',
                 IE: 'Irlandalı',
+                IS: 'İzlanda',
                 IT: 'Italyan',
                 LT: 'Litvanyalı',
                 LU: 'Lüksemburglu',

@@ -295,6 +295,7 @@
                 HU: 'ungarnsk',
                 HR: 'kroatisk',
                 IE: 'irsk',
+                IS: 'island',
                 IT: 'italiensk',
                 LT: 'litauisk',
                 LU: 'luxembourgsk',

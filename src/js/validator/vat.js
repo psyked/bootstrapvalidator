@@ -790,6 +790,19 @@
         },
 
         /**
+         * Validate Icelandic VAT (VSK) number
+         * Examples:
+         * - Valid: 12345, 123456
+         * - Invalid: 1234567
+         *
+         * @params {String} value VAT number
+         * @returns {Boolean}
+         */
+        _is: function(value) {
+            return /^IS\d{5,6}$/.test(value);
+        },
+
+        /**
          * Validate Italian VAT number, which consists of 11 digits.
          * - First 7 digits are a company identifier
          * - Next 3 are the province of residence
@@ -1229,22 +1242,7 @@
          * @returns {Boolean}
          */
          _za: function(value) {
-            return /^4\d{9}$/.test(value);
+            return /^ZA4\d{9}$/.test(value);
         }
-
-        /**
-         * Validate Icelandic VAT (VSK) number
-         * Examples:
-         * - Valid: 12345, 123456
-         * - Invalid: 1234567
-         *
-         * @params {String} value VAT number
-         * @returns {Boolean}
-         */
-         _is: function(value) {
-            return /^\d{5,6}$/.test(value);
-        }
-
-
     };
 }(window.jQuery));

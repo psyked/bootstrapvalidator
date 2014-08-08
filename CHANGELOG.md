@@ -7,7 +7,7 @@ __New features__
 * [#218](https://github.com/nghuuphuoc/bootstrapvalidator/issues/218), [#531](https://github.com/nghuuphuoc/bootstrapvalidator/pull/531): Add meid validator, thanks to [@troymccabe](https://github.com/troymccabe)
 * [#267](https://github.com/nghuuphuoc/bootstrapvalidator/issues/267), [#532](https://github.com/nghuuphuoc/bootstrapvalidator/pull/532): Add imo validator, thanks to [@troymccabe](https://github.com/troymccabe)
 * [#510](https://github.com/nghuuphuoc/bootstrapvalidator/pull/510), [#536](https://github.com/nghuuphuoc/bootstrapvalidator/pull/536): The [phone](http://bootstrapvalidator.com/validators/phone/) validator now supports French, Spanish phone number, thanks to [@dlucazeau](https://github.com/dlucazeau) and [@vadail](https://github.com/vadail)
-* [#519](https://github.com/nghuuphuoc/bootstrapvalidator/pull/519): Add validator for South African [VAT](http://bootstrapvalidator.com/validators/vat/) numbers, thanks to [@evilchili](https://github.com/evilchili)
+* [#519](https://github.com/nghuuphuoc/bootstrapvalidator/pull/519), [#637](https://github.com/nghuuphuoc/bootstrapvalidator/pull/637): Add validator for Iceland and South African [VAT](http://bootstrapvalidator.com/validators/vat/) numbers, thanks to [@evilchili](https://github.com/evilchili)
 
 __Improvements__
 

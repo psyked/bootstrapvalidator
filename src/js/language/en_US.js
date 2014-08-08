@@ -295,6 +295,7 @@
                 HU: 'Hungarian',
                 HR: 'Croatian',
                 IE: 'Irish',
+                IS: 'Iceland',
                 IT: 'Italian',
                 LT: 'Lithuanian',
                 LU: 'Luxembourg',

@@ -295,6 +295,7 @@
                 HU: 'Maďarsko',
                 HR: 'Chorvatsko',
                 IE: 'Irsko',
+                IS: 'Island',
                 IT: 'Itálie',
                 LT: 'Litvu',
                 LU: 'Lucembursko',
