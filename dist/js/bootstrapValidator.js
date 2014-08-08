@@ -3155,10 +3155,10 @@
             var dfd = new $.Deferred();
 
             if (options.debounceDelay) {
-                if(this._timer[name]) {
-                    clearTimeout(this._timer[name]);
+                if(this._timer[$field]) {
+                    clearTimeout(this._timer[$field]);
                 }
-                this._timer[name] = setTimeout(runCallback, options.debounceDelay);
+                this._timer[$field] = setTimeout(runCallback, options.debounceDelay);
                 return dfd;
             }
             else
