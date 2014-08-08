@@ -116,6 +116,7 @@
                 LT: 'Litvanya',
                 LU: 'Lüksemburg',
                 LV: 'Letonya',
+                MA: 'Fas',
                 MC: 'Monako',
                 MD: 'Moldova',
                 ME: 'Karadağ',
@@ -232,6 +233,7 @@
                 ES: 'İspanya',
                 FR: 'Fransa',
                 GB: 'İngiltere',
+                MA: 'Fas',
                 US: 'Amerika'
             }
         },
@@ -327,6 +329,7 @@
                 DK: 'Danimarka posta kodu',
                 GB: 'İngiltere posta kodu',
                 IT: 'İtalya posta kodu',
+                MA: 'Fas posta kodu',
                 NL: 'Almanya posta kodu',
                 SE: 'İsveç posta kodu',
                 SG: 'Singapur posta kodu',

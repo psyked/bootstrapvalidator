@@ -116,6 +116,7 @@
                 LT: 'Lithuania',
                 LU: 'Luxembourg',
                 LV: 'Latvia',
+                MA: 'Maroc',
                 MC: 'Monaco',
                 MD: 'Moldova',
                 ME: 'Montenegro',
@@ -232,6 +233,7 @@
                 ES: 'Tây Ban Nha',
                 FR: 'Pháp',
                 GB: 'Vương quốc Anh',
+                MA: 'Maroc',
                 US: 'Mỹ'
             }
         },
@@ -327,6 +329,7 @@
                 DK: 'mã bưu điện của Đan Mạch',
                 GB: 'mã bưu điện của Vương quốc Anh',
                 IT: 'mã bưu điện của Ý',
+                Ma: 'mã bưu điện của Maroc',
                 NL: 'mã bưu điện của Hà Lan',
                 SE: 'mã bưu điện của Thuỵ Sĩ',
                 SG: 'mã bưu điện của Singapore',

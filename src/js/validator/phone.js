@@ -8,6 +8,7 @@
             ES: 'Spain',
             FR: 'France',
             GB: 'United Kingdom',
+            MA: 'Morocco',
             US: 'USA'
         }
     });
@@ -19,7 +20,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['BR', 'ES', 'FR', 'GB', 'US'],
+        COUNTRY_CODES: ['BR', 'ES', 'FR', 'GB', 'MA', 'US'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -81,6 +82,13 @@
             		// Test: http://regexr.com/38uhv
             		value   = $.trim(value);
             		isValid = (/^\(?(?:(?:0(?:0|11)\)?[\s-]?\(?|\+)44\)?[\s-]?\(?(?:0\)?[\s-]?\(?)?|0)(?:\d{2}\)?[\s-]?\d{4}[\s-]?\d{4}|\d{3}\)?[\s-]?\d{3}[\s-]?\d{3,4}|\d{4}\)?[\s-]?(?:\d{5}|\d{3}[\s-]?\d{3})|\d{5}\)?[\s-]?\d{4,5}|8(?:00[\s-]?11[\s-]?11|45[\s-]?46[\s-]?4\d))(?:(?:[\s-]?(?:x|ext\.?\s?|\#)\d+)?)$/).test(value);
+                    break;
+
+                case 'MA':
+                    // http://en.wikipedia.org/wiki/Telephone_numbers_in_Morocco
+                    // Test: http://regexr.com/399n8
+                    value   = $.trim(value);
+                    isValid = (/^(?:(?:(?:\+|00)212[\s]?(?:[\s]?\(0\)[\s]?)?)|0){1}(?:5[\s.-]?[2-3]|6[\s.-]?[13-9]){1}[0-9]{1}(?:[\s.-]?\d{2}){3}$/).test(value);
                     break;
                 
                 case 'US':

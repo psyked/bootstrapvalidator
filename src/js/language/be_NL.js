@@ -116,6 +116,7 @@
                 LT: 'Litouwen',
                 LU: 'Luxemburg',
                 LV: 'Letland',
+                MA: 'Marokko',
                 MC: 'Monaco',
                 MD: 'Moldavië',
                 ME: 'Montenegro',
@@ -232,6 +233,7 @@
                 ES: 'Spanje',
                 FR: 'Frankrijk',
                 GB: 'Verenigd Koninkrijk',
+                MA: 'Marokko',
                 US: 'VS'
             }
         },
@@ -327,6 +329,7 @@
                 DK: 'Deense postcode',
                 GB: 'Engelse postcode',
                 IT: 'Italiaanse postcode',
+                MA: 'Marokko postcode',
                 NL: 'Nederlandse postcode',
                 SE: 'Zwitserse postcode',
                 SG: 'postcode van Signapore',

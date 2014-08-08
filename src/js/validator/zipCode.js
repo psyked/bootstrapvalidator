@@ -8,6 +8,7 @@
             DK: 'Danish postal code',
             GB: 'United Kingdom postal code',
             IT: 'Italian postal code',
+            MA: 'Moroccan postal code',
             NL: 'Dutch postal code',
             SE: 'Swiss postal code',
             SG: 'Singapore postal code',
@@ -22,7 +23,7 @@
             country: 'country'
         },
 
-        COUNTRY_CODES: ['CA', 'DK', 'GB', 'IT', 'NL', 'SE', 'SG', 'US', 'BR'],
+        COUNTRY_CODES: ['CA', 'DK', 'GB', 'IT', 'MA', 'NL', 'SE', 'SG', 'US', 'BR'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -41,6 +42,7 @@
          *      - DK (Denmark)
          *      - GB (United Kingdom)
          *      - IT (Italy)
+         *      - MA (Morocco)
          *      - NL (Netherlands)
          *      - SE (Sweden)
          *      - SG (Singapore)
@@ -91,6 +93,11 @@
                 // http://en.wikipedia.org/wiki/List_of_postal_codes_in_Italy
                 case 'IT':
                     isValid = /^(I-|IT-)?\d{5}$/i.test(value);
+                    break;
+
+                // http://en.wikipedia.org/wiki/List_of_postal_codes_in_Morocco
+                case 'MA':
+                    isValid = /^[1-9][0-9]{4}$/i.test(value);
                     break;
 
                 // http://en.wikipedia.org/wiki/Postal_codes_in_the_Netherlands
