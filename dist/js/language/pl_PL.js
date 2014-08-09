@@ -116,6 +116,7 @@
                 LT: 'Litwa',
                 LU: 'Luksemburg',
                 LV: 'Łotwa',
+                MA: 'Maroko',
                 MC: 'Monako',
                 MD: 'Mołdawia',
                 ME: 'Czarnogóra',
@@ -232,6 +233,7 @@
                 ES: 'Hiszpania',
                 FR: 'Francja',
                 GB: 'Wielka Brytania',
+                MA: 'Maroko',
                 US: 'USA'
             }
         },
@@ -328,6 +330,7 @@
                 DK: 'duński',
                 GB: 'brytyjski',
                 IT: 'włoski',
+                MA: 'Maroko',
                 NL: 'holenderski',
                 SE: 'szwecki',
                 SG: 'singapurski',

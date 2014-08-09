@@ -116,6 +116,7 @@
                 LT: 'Litvu',
                 LU: 'Lucembursko',
                 LV: 'Lotyšsko',
+                MA: 'Maroko',
                 MC: 'Monaco',
                 MD: 'Moldavsko',
                 ME: 'Černou Horu',
@@ -232,6 +233,7 @@
                 ES: 'Španělsko',
                 FR: 'Francii',
                 GB: 'Velkou Británii',
+                MA: 'Maroko',
                 US: 'Spojené Státy Americké'
             }
         },
@@ -328,6 +330,7 @@
                 DK: 'Dánské PSČ',
                 GB: 'PSČ Velké Británie',
                 IT: 'Italské PSČ',
+                MA: 'Maroko PSČ',
                 NL: 'Holandské PSČ',
                 SE: 'Švýcarské PSČ',
                 SG: 'Singapurské PSČ',

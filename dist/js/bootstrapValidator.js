@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.1-dev, built on 2014-08-09 8:04:27 AM
+ * @version     v0.5.1-dev, built on 2014-08-09 8:30:11 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -2806,6 +2806,7 @@
             LT: 'Lithuania',
             LU: 'Luxembourg',
             LV: 'Latvia',
+            MA: 'Morocco',
             MC: 'Monaco',
             MD: 'Moldova',
             ME: 'Montenegro',
@@ -2897,6 +2898,7 @@
             LT: 'LT[0-9]{2}[0-9]{5}[0-9]{11}',                                  // Lithuania
             LU: 'LU[0-9]{2}[0-9]{3}[A-Z0-9]{13}',                               // Luxembourg
             LV: 'LV[0-9]{2}[A-Z]{4}[A-Z0-9]{13}',                               // Latvia
+            MA: 'MA[0-9]{3}[0-9]{3}[0-9]{5}[0-9]{11}[0-9]{2}',                  // Morocco (example MA 157 570 21111 22334455006 85)
             MC: 'MC[0-9]{2}[0-9]{5}[0-9]{5}[A-Z0-9]{11}[0-9]{2}',               // Monaco
             MD: 'MD[0-9]{2}[A-Z0-9]{20}',                                       // Moldova
             ME: 'ME[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}',                          // Montenegro
@@ -4529,6 +4531,7 @@
             ES: 'Spain',
             FR: 'France',
             GB: 'United Kingdom',
+            MA: 'Morocco',
             US: 'USA'
         }
     });
@@ -4540,7 +4543,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['BR', 'ES', 'FR', 'GB', 'US'],
+        COUNTRY_CODES: ['BR', 'ES', 'FR', 'GB', 'MA', 'US'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -4602,6 +4605,13 @@
             		// Test: http://regexr.com/38uhv
             		value   = $.trim(value);
             		isValid = (/^\(?(?:(?:0(?:0|11)\)?[\s-]?\(?|\+)44\)?[\s-]?\(?(?:0\)?[\s-]?\(?)?|0)(?:\d{2}\)?[\s-]?\d{4}[\s-]?\d{4}|\d{3}\)?[\s-]?\d{3}[\s-]?\d{3,4}|\d{4}\)?[\s-]?(?:\d{5}|\d{3}[\s-]?\d{3})|\d{5}\)?[\s-]?\d{4,5}|8(?:00[\s-]?11[\s-]?11|45[\s-]?46[\s-]?4\d))(?:(?:[\s-]?(?:x|ext\.?\s?|\#)\d+)?)$/).test(value);
+                    break;
+
+                case 'MA':
+                    // http://en.wikipedia.org/wiki/Telephone_numbers_in_Morocco
+                    // Test: http://regexr.com/399n8
+                    value   = $.trim(value);
+                    isValid = (/^(?:(?:(?:\+|00)212[\s]?(?:[\s]?\(0\)[\s]?)?)|0){1}(?:5[\s.-]?[2-3]|6[\s.-]?[13-9]){1}[0-9]{1}(?:[\s.-]?\d{2}){3}$/).test(value);
                     break;
                 
                 case 'US':
@@ -6518,6 +6528,7 @@
             DK: 'Danish postal code',
             GB: 'United Kingdom postal code',
             IT: 'Italian postal code',
+            MA: 'Moroccan postal code',
             NL: 'Dutch postal code',
             SE: 'Swiss postal code',
             SG: 'Singapore postal code',
@@ -6531,7 +6542,7 @@
             country: 'country'
         },
 
-        COUNTRY_CODES: ['BR', 'CA', 'DK', 'GB', 'IT', 'NL', 'SE', 'SG', 'US'],
+        COUNTRY_CODES: ['BR', 'CA', 'DK', 'GB', 'IT', 'MA', 'NL', 'SE', 'SG', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -6596,6 +6607,11 @@
                     isValid = /^(I-|IT-)?\d{5}$/i.test(value);
                     break;
 
+                // http://en.wikipedia.org/wiki/List_of_postal_codes_in_Morocco
+                case 'MA':
+                    isValid = /^[1-9][0-9]{4}$/i.test(value);
+                    break;
+
                 // http://en.wikipedia.org/wiki/Postal_codes_in_the_Netherlands
                 case 'NL':
                     isValid = /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i.test(value);
@@ -6607,8 +6623,8 @@
 
                 case 'SG':
                     isValid = /^([0][1-9]|[1-6][0-9]|[7]([0-3]|[5-9])|[8][0-2])(\d{4})$/i.test(value);
-                    break;
-                    
+                    break;                
+                
                 case 'US':
                 /* falls through */
                 default:
