@@ -323,6 +323,7 @@
             countryNotSupported: 'Kod kraju %s nie jest obsługiwany',
             country: 'Wprowadź poprawny %s kod pocztowy',
             countries: {
+                BR: 'brazylijski',
                 CA: 'kanadyski',
                 DK: 'duński',
                 GB: 'brytyjski',

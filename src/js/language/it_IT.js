@@ -323,14 +323,15 @@
             countryNotSupported: 'Il codice nazione %s non e supportato',
             country: 'Si prega di inserire un valido  %s',
             countries: {
-                'CA': 'Codice postale Canadese',
-                'DK': 'Codice postale Danese',
-                'GB': 'Codice postale del Regno Unito',
-                'IT': 'Codice postale Italiano',
-                'NL': 'Codice postale Olandese',
-                'SE': 'Codice postale Svizzero',
-                'SG': 'Codice postale di Singapore',
-                'US': 'Codice postale US'
+                BR: 'Codice postale Brasiliano',
+                CA: 'Codice postale Canadese',
+                DK: 'Codice postale Danese',
+                GB: 'Codice postale del Regno Unito',
+                IT: 'Codice postale Italiano',
+                NL: 'Codice postale Olandese',
+                SE: 'Codice postale Svizzero',
+                SG: 'Codice postale di Singapore',
+                US: 'Codice postale US'
             }
         }
     });

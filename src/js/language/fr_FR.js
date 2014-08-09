@@ -323,6 +323,7 @@
             countryNotSupported: 'Le code de pays %s n\'est pas accepté',
             country: 'Veuillez fournir un %s valide',
             countries: {
+                BR: 'code postal brésilien',
                 CA: 'code postal canadien',
                 DK: 'code postal dannois',
                 GB: 'code postal anglais',

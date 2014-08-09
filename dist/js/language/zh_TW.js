@@ -323,6 +323,7 @@
             countryNotSupported: '不支援該國家代碼 %s',
             country: '請輸入有效的 %s',
             countries: {
+                BR: '巴西 郵政編碼',
                 CA: '加拿大 郵政編碼',
                 DK: '丹麥 郵政編碼',
                 GB: '英國 郵政編碼',

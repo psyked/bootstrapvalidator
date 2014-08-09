@@ -323,6 +323,7 @@
             countryNotSupported: '%s ülke kodu desteklenmemektedir',
             country: 'Lütfen geçerli bir %s',
             countries: {
+                BR: 'Brezilyalı posta kodu',
                 CA: 'Kanada posta kodu',
                 DK: 'Danimarka posta kodu',
                 GB: 'İngiltere posta kodu',

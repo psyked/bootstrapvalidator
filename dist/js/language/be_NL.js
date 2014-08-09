@@ -323,6 +323,7 @@
             countryNotSupported: 'De land code %s is niet ondersteund',
             country: 'Please enter a valid %s',
             countries: {
+                BR: 'Braziliaans postcode',
                 CA: 'Canadeese postcode',
                 DK: 'Deense postcode',
                 GB: 'Engelse postcode',

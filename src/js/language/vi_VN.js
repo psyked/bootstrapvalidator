@@ -323,6 +323,7 @@
             countryNotSupported: 'Mã quốc gia %s không được hỗ trợ',
             country: 'Vui lòng nhập %s',
             countries: {
+                BR: 'mã bưu điện của Brazil',
                 CA: 'mã bưu điện của Canada',
                 DK: 'mã bưu điện của Đan Mạch',
                 GB: 'mã bưu điện của Vương quốc Anh',

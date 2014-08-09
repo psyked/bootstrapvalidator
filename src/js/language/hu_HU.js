@@ -323,6 +323,7 @@
             countryNotSupported: '%s - nem támogatott ország',
             country: 'Kérlek, hogy helyes %s irányítószámot adj meg',
             countries: {
+                BR: 'brazil',
                 CA: 'kanadai',
                 DK: 'dán',
                 GB: 'Egyesült Királyság beli',

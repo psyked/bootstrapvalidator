@@ -4,6 +4,7 @@
         countryNotSupported: 'The country code %s is not supported',
         country: 'Please enter a valid %s',
         countries: {
+            BR: 'Brazilian postal code',
             CA: 'Canadian postal code',
             DK: 'Danish postal code',
             GB: 'United Kingdom postal code',
@@ -11,8 +12,7 @@
             NL: 'Dutch postal code',
             SE: 'Swiss postal code',
             SG: 'Singapore postal code',
-            US: 'US zip code',
-            BR: 'Brazilian postal code'
+            US: 'US zip code'
         }
     });
 
@@ -22,7 +22,7 @@
             country: 'country'
         },
 
-        COUNTRY_CODES: ['CA', 'DK', 'GB', 'IT', 'NL', 'SE', 'SG', 'US', 'BR'],
+        COUNTRY_CODES: ['BR', 'CA', 'DK', 'GB', 'IT', 'NL', 'SE', 'SG', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -35,16 +35,6 @@
          *
          * The country can be defined by:
          * - An ISO 3166 country code
-         * Currently it supports the following countries:
-         *      - US (United States)
-         *      - CA (Canada)
-         *      - DK (Denmark)
-         *      - GB (United Kingdom)
-         *      - IT (Italy)
-         *      - NL (Netherlands)
-         *      - SE (Sweden)
-         *      - SG (Singapore)
-         *
          * - Name of field which its value defines the country code
          * - Name of callback function that returns the country code
          * - A callback function that returns the country code
@@ -76,6 +66,10 @@
             var isValid = false;
             country = country.toUpperCase();
             switch (country) {
+                case 'BR':
+                    isValid = /^(\d{2})([\.]?)(\d{3})([\-]?)(\d{3})$/.test(value);
+                    break;
+
                 case 'CA':
                     isValid = /^(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|W|X|Y|Z){1}\s?[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|W|X|Y|Z){1}[0-9]{1}$/i.test(value);
                     break;
@@ -106,10 +100,6 @@
                     isValid = /^([0][1-9]|[1-6][0-9]|[7]([0-3]|[5-9])|[8][0-2])(\d{4})$/i.test(value);
                     break;
                     
-                case 'BR':
-                    isValid = /^(\d{2})([\.]?)(\d{3})([\-]?)(\d{3})$/.test(value);
-                    break;
-
                 case 'US':
                 /* falls through */
                 default:

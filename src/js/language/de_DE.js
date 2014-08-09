@@ -323,6 +323,7 @@
             countryNotSupported: 'Der Ländercode %s wird nicht unterstützt',
             country: 'Bitte gültigen Code %s eingeben',
             countries: {
+                BR: 'Brasilianisch Postleitzahl',
                 CA: 'Kanadische Postleitzahl',
                 DK: 'Dänische Postleitzahl',
                 GB: 'Englische Postleitzahl',

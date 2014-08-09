@@ -8,6 +8,7 @@ __New features__
 * [#267](https://github.com/nghuuphuoc/bootstrapvalidator/issues/267), [#532](https://github.com/nghuuphuoc/bootstrapvalidator/pull/532): Add imo validator, thanks to [@troymccabe](https://github.com/troymccabe)
 * The [phone](http://bootstrapvalidator.com/validators/phone/) validator now supports Brazil ([#638](https://github.com/nghuuphuoc/bootstrapvalidator/pull/638)), French ([#510](https://github.com/nghuuphuoc/bootstrapvalidator/pull/510)), Spanish ([#536](https://github.com/nghuuphuoc/bootstrapvalidator/pull/536)) phone number, thanks to [@fhferreira](https://github.com/fhferreira), [@dlucazeau](https://github.com/dlucazeau) and [@vadail](https://github.com/vadail)
 * [#519](https://github.com/nghuuphuoc/bootstrapvalidator/pull/519), [#637](https://github.com/nghuuphuoc/bootstrapvalidator/pull/637): Add validator for Iceland and South African [VAT](http://bootstrapvalidator.com/validators/vat/) numbers, thanks to [@evilchili](https://github.com/evilchili)
+* [#638](https://github.com/nghuuphuoc/bootstrapvalidator/pull/638): Add Brazilian [post code](http://bootstrapvalidator.com/validators/zipCode/) validator, thanks to [@fhferreira](https://github.com/fhferreira)
 
 __Improvements__
 

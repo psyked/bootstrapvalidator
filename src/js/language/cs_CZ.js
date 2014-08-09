@@ -323,6 +323,7 @@
             countryNotSupported: '%s není podporované',
             country: 'Prosím zadejte správné %s',
             countries: {
+                BR: 'Brazílii PSČ',
                 CA: 'Kanadské PSČ',
                 DK: 'Dánské PSČ',
                 GB: 'PSČ Velké Británie',

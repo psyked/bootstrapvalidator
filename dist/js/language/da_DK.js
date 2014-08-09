@@ -323,6 +323,7 @@
             countryNotSupported: 'Landekoden %s understøttes desværre ikke',
             country: 'Udfyld venligst dette felt med et gyldigt %s',
             countries: {
+                BR: 'brasiliansk postnummer',
                 CA: 'canadisk postnummer',
                 DK: 'dansk postnummer',
                 GB: 'engelsk postnummer',
