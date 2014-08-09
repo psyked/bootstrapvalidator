@@ -116,6 +116,7 @@
                 LT: 'Litauen',
                 LU: 'Luxembourg',
                 LV: 'Letland',
+                MA: 'Marokko',
                 MC: 'Monaco',
                 MD: 'Moldova',
                 ME: 'Montenegro',
@@ -232,6 +233,7 @@
                 ES: 'Spanien',
                 FR: 'Frankrig',
                 GB: 'England',
+                MA: 'Marokko',
                 US: 'USA'
             }
         },
@@ -328,6 +330,7 @@
                 DK: 'dansk postnummer',
                 GB: 'engelsk postnummer',
                 IT: 'italiensk postnummer',
+                MA: 'Marokko postnummer',
                 NL: 'hollandsk postnummer',
                 SE: 'svensk postnummer',
                 SG: 'singaporeansk postnummer',

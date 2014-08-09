@@ -9,6 +9,7 @@
             DK: 'Danish postal code',
             GB: 'United Kingdom postal code',
             IT: 'Italian postal code',
+            MA: 'Moroccan postal code',
             NL: 'Dutch postal code',
             SE: 'Swiss postal code',
             SG: 'Singapore postal code',
@@ -22,7 +23,7 @@
             country: 'country'
         },
 
-        COUNTRY_CODES: ['BR', 'CA', 'DK', 'GB', 'IT', 'NL', 'SE', 'SG', 'US'],
+        COUNTRY_CODES: ['BR', 'CA', 'DK', 'GB', 'IT', 'MA', 'NL', 'SE', 'SG', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -87,6 +88,11 @@
                     isValid = /^(I-|IT-)?\d{5}$/i.test(value);
                     break;
 
+                // http://en.wikipedia.org/wiki/List_of_postal_codes_in_Morocco
+                case 'MA':
+                    isValid = /^[1-9][0-9]{4}$/i.test(value);
+                    break;
+
                 // http://en.wikipedia.org/wiki/Postal_codes_in_the_Netherlands
                 case 'NL':
                     isValid = /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i.test(value);
@@ -98,8 +104,8 @@
 
                 case 'SG':
                     isValid = /^([0][1-9]|[1-6][0-9]|[7]([0-3]|[5-9])|[8][0-2])(\d{4})$/i.test(value);
-                    break;
-                    
+                    break;                
+                
                 case 'US':
                 /* falls through */
                 default:

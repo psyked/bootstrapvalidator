@@ -116,6 +116,7 @@
                 LT: 'Lithuania',
                 LU: 'Luxembourg',
                 LV: 'Latvia',
+                MA: 'Morocco',
                 MC: 'Monaco',
                 MD: 'Moldova',
                 ME: 'Montenegro',
@@ -232,6 +233,7 @@
                 ES: 'Spain',
                 FR: 'France',
                 GB: 'United Kingdom',
+                MA: 'Morocco',
                 US: 'USA'
             }
         },
@@ -328,6 +330,7 @@
                 DK: 'Danish postal code',
                 GB: 'United Kingdom postal code',
                 IT: 'Italian postal code',
+                MA: 'Moroccan postal code',
                 NL: 'Dutch postal code',
                 SE: 'Swiss postal code',
                 SG: 'Singapore postal code',
