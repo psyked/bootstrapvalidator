@@ -1640,6 +1640,8 @@
         // Map the field name with validator rules
         fields: null,
 
+        // Use custom event name to avoid window.onerror being invoked by jQuery
+        // See https://github.com/nghuuphuoc/bootstrapvalidator/issues/630
         events: {
             formInit: 'init.form.bv',
             formError: 'error.form.bv',
