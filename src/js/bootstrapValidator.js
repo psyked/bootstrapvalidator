@@ -1,8 +1,9 @@
-/**
+/*!
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @author      http://twitter.com/nghuuphuoc
+ * @version     v0.5.0, built on 2014-07-14 4:31:02 PM
+ * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
  */
@@ -101,19 +102,19 @@
                 this._initField(field);
             }
 
-            this.$form.trigger($.Event('init.form.bv'), {
+            this.$form.trigger($.Event(this.options.events.formInit), {
                 bv: this,
                 options: this.options
             });
 
             // Prepare the events
             if (this.options.onSuccess) {
-                this.$form.on('success.form.bv', function(e) {
+                this.$form.on(this.options.events.formSuccess, function(e) {
                     $.fn.bootstrapValidator.helpers.call(that.options.onSuccess, [e]);
                 });
             }
             if (this.options.onError) {
-                this.$form.on('error.form.bv', function(e) {
+                this.$form.on(this.options.events.formError, function(e) {
                     $.fn.bootstrapValidator.helpers.call(that.options.onError, [e]);
                 });
             }
@@ -276,12 +277,12 @@
 
                     // Prepare the validator events
                     if (this.options.fields[field].validators[validatorName].onSuccess) {
-                        $field.on('success.validator.bv', function(e, data) {
+                        $field.on(this.options.events.validatorSuccess, function(e, data) {
                              $.fn.bootstrapValidator.helpers.call(that.options.fields[field].validators[validatorName].onSuccess, [e, data]);
                         });
                     }
                     if (this.options.fields[field].validators[validatorName].onError) {
-                        $field.on('error.validator.bv', function(e, data) {
+                        $field.on(this.options.events.validatorError, function(e, data) {
                              $.fn.bootstrapValidator.helpers.call(that.options.fields[field].validators[validatorName].onError, [e, data]);
                         });
                     }
@@ -320,17 +321,17 @@
 
             // Prepare the events
             if (this.options.fields[field].onSuccess) {
-                fields.on('success.field.bv', function(e, data) {
+                fields.on(this.options.events.fieldSuccess, function(e, data) {
                     $.fn.bootstrapValidator.helpers.call(that.options.fields[field].onSuccess, [e, data]);
                 });
             }
             if (this.options.fields[field].onError) {
-                fields.on('error.field.bv', function(e, data) {
+                fields.on(this.options.events.fieldError, function(e, data) {
                     $.fn.bootstrapValidator.helpers.call(that.options.fields[field].onError, [e, data]);
                 });
             }
             if (this.options.fields[field].onStatus) {
-                fields.on('status.field.bv', function(e, data) {
+                fields.on(this.options.events.fieldStatus, function(e, data) {
                     $.fn.bootstrapValidator.helpers.call(that.options.fields[field].onStatus, [e, data]);
                 });
             }
@@ -356,7 +357,7 @@
                     break;
             }
 
-            fields.trigger($.Event('init.field.bv'), {
+            fields.trigger($.Event(this.options.events.fieldInit), {
                 bv: this,
                 field: field,
                 element: fields
@@ -424,7 +425,7 @@
          */
         _submit: function() {
             var isValid   = this.isValid(),
-                eventType = isValid ? 'success.form.bv' : 'error.form.bv',
+                eventType = isValid ? this.options.events.formSuccess : this.options.events.formError,
                 e         = $.Event(eventType);
 
             this.$form.trigger(e);
@@ -587,10 +588,10 @@
             if (validatorName) {
                 switch ($field.data('bv.result.' + validatorName)) {
                     case this.STATUS_INVALID:
-                        $field.trigger($.Event('error.validator.bv'), data);
+                        $field.trigger($.Event(this.options.events.validatorError), data);
                         break;
                     case this.STATUS_VALID:
-                        $field.trigger($.Event('success.validator.bv'), data);
+                        $field.trigger($.Event(this.options.events.validatorSuccess), data);
                         break;
                     default:
                         break;
@@ -618,14 +619,14 @@
                 // Remove from the list of invalid fields
                 this.$invalidFields = this.$invalidFields.not($field);
 
-                $field.trigger($.Event('success.field.bv'), data);
+                $field.trigger($.Event(this.options.events.fieldSuccess), data);
             }
             // If all validators are completed and there is at least one validator which doesn't pass
             else if (counter[this.STATUS_NOT_VALIDATED] === 0 && counter[this.STATUS_VALIDATING] === 0 && counter[this.STATUS_INVALID] > 0) {
                 // Add to the list of invalid fields
                 this.$invalidFields = this.$invalidFields.add($field);
 
-                $field.trigger($.Event('error.field.bv'), data);
+                $field.trigger($.Event(this.options.events.fieldError), data);
             }
         },
 
@@ -955,7 +956,7 @@
                 }
 
                 // Trigger an event
-                $field.trigger($.Event('status.field.bv'), {
+                $field.trigger($.Event(this.options.events.fieldStatus), {
                     bv: this,
                     field: field,
                     element: $field,
@@ -1257,7 +1258,7 @@
 
             this.disableSubmitButtons(false);
             // Trigger an event
-            this.$form.trigger($.Event('added.field.bv'), {
+            this.$form.trigger($.Event(this.options.events.fieldAdded), {
                 field: field,
                 element: fields,
                 options: this.options.fields[field]
@@ -1313,7 +1314,7 @@
 
             this.disableSubmitButtons(false);
             // Trigger an event
-            this.$form.trigger($.Event('removed.field.bv'), {
+            this.$form.trigger($.Event(this.options.events.fieldRemoved), {
                 field: field,
                 element: fields
             });
@@ -1637,7 +1638,21 @@
         live: 'enabled',
 
         // Map the field name with validator rules
-        fields: null
+        fields: null,
+
+        events: {
+            formInit: 'init.form.bv',
+            formError: 'error.form.bv',
+            formSuccess: 'success.form.bv',
+            fieldAdded: 'added.field.bv',
+            fieldRemoved: 'removed.field.bv',
+            fieldInit: 'init.field.bv',
+            fieldError: 'error.field.bv',
+            fieldSuccess: 'success.field.bv',
+            fieldStatus: 'status.field.bv',
+            validatorError: 'error.validator.bv',
+            validatorSuccess: 'success.validator.bv'
+        }
     };
 
     // Available validators
