@@ -234,6 +234,7 @@
                 FR: 'Pháp',
                 GB: 'Vương quốc Anh',
                 MA: 'Maroc',
+                PK: 'Pakistan',
                 US: 'Mỹ'
             }
         },

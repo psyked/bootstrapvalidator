@@ -234,6 +234,7 @@
                 FR: 'francia',
                 GB: 'Egyesült Királyság beli',
                 MA: 'Marokkó',
+                PK: 'Pakisztán',
                 US: 'Egyesült Államok beli'
             }
         },

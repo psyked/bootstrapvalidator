@@ -234,6 +234,7 @@
                 FR: 'Francii',
                 GB: 'Velkou Británii',
                 MA: 'Maroko',
+                PK: 'Pákistán',
                 US: 'Spojené Státy Americké'
             }
         },

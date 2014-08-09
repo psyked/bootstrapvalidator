@@ -234,6 +234,7 @@
                 FR: 'Francia',
                 GB: 'Regno Unito',
                 MA: 'Marocco',
+                PK: 'Pakistan',
                 US: 'Stati Uniti d\'America'
             }
         },
