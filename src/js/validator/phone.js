@@ -73,9 +73,9 @@
                     break;
 
                 case 'FR':
-                    // http://regexr.com/395dq
+                    // http://regexr.com/39a2p
                     value   = $.trim(value);
-                    isValid = (/^(?:(?:(?:\+|00)33\D?(?:\D?\(0\)\D?)?)|0){1}[1-9]{1}(?:\D?\d{2}){4}$/).test(value);
+                    isValid = (/^(?:(?:(?:\+|00)33[ ]?(?:\(0\)[ ]?)?)|0){1}[1-9]{1}([ .-]?)(?:\d{2}\1?){3}\d{2}$/).test(value);
                     break;
 
             	case 'GB':
