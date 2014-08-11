@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.1-dev, built on 2014-08-11 8:39:16 PM
+ * @version     v0.5.1-dev, built on 2014-08-11 10:00:10 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -5252,6 +5252,7 @@
             AT: 'Austrian',
             BE: 'Belgian',
             BG: 'Bulgarian',
+            BR: 'Brazilian',
             CH: 'Swiss',
             CY: 'Cypriot',
             CZ: 'Czech',
@@ -5295,7 +5296,7 @@
 
         // Supported country codes
         COUNTRY_CODES: [
-            'AT', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI', 'FR', 'GB', 'GR', 'HR', 'HU',
+            'AT', 'BE', 'BG', 'BR', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI', 'FR', 'GB', 'GR', 'HR', 'HU',
             'IE', 'IS', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RU', 'RS', 'SE', 'SK', 'SI', 'ZA'
         ],
 
@@ -5500,6 +5501,64 @@
             }
 
             return false;
+        },
+        
+        /**
+         * Validate Brazilian VAT number (CNPJ)
+         *
+         * @param {String} value VAT number
+         * @returns {Boolean}
+         */
+        _br: function(value) {
+            if (value === '') {
+                return true;
+            }
+            var cnpj = value.replace(/[^\d]+/g, '');
+            if (cnpj === '' || cnpj.length !== 14) {
+                return false;
+            }
+
+            // Remove invalids CNPJs
+            if (cnpj === '00000000000000' || cnpj === '11111111111111' || cnpj === '22222222222222' ||
+                cnpj === '33333333333333' || cnpj === '44444444444444' || cnpj === '55555555555555' ||
+                cnpj === '66666666666666' || cnpj === '77777777777777' || cnpj === '88888888888888' ||
+                cnpj === '99999999999999')
+            {
+                return false;
+            }
+
+            // Validate verification digits
+            var length  = cnpj.length - 2,
+                numbers = cnpj.substring(0, length),
+                digits  = cnpj.substring(length),
+                sum     = 0,
+                pos     = length - 7;
+
+            for (var i = length; i >= 1; i--) {
+                sum += parseInt(numbers.charAt(length - i), 10) * pos--;
+                if (pos < 2) {
+                    pos = 9;
+                }
+            }
+
+            var result = sum % 11 < 2 ? 0 : 11 - sum % 11;
+            if (result !== parseInt(digits.charAt(0), 10)) {
+                return false;
+            }
+
+            length  = length + 1;
+            numbers = cnpj.substring(0, length);
+            sum     = 0;
+            pos     = length - 7;
+            for (i = length; i >= 1; i--) {
+                sum += parseInt(numbers.charAt(length - i), 10) * pos--;
+                if (pos < 2) {
+                    pos = 9;
+                }
+            }
+
+            result = sum % 11 < 2 ? 0 : 11 - sum % 11;
+            return (result === parseInt(digits.charAt(1), 10));
         },
 
         /**

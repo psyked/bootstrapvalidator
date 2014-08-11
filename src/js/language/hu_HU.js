@@ -284,6 +284,7 @@
                 AT: 'osztrák',
                 BE: 'belga',
                 BG: 'bulgár',
+                BR: 'brazil',
                 CH: 'svájci',
                 CY: 'ciprusi',
                 CZ: 'cseh',

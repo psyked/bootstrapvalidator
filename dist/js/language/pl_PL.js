@@ -284,6 +284,7 @@
                 AT: 'austryjacki',
                 BE: 'belgijski',
                 BG: 'bułgarski',
+                BR: 'brazylijski',
                 CH: 'szwecki',
                 CY: 'cypryjski',
                 CZ: 'czeski',

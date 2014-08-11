@@ -284,6 +284,7 @@
                 AT: 'Avustralyalı',
                 BE: 'Belçikalı',
                 BG: 'Bulgar',
+                BR: 'Brezilyalı',
                 CH: 'İsviçreli',
                 CY: 'Kıbrıslı',
                 CZ: 'Çek',

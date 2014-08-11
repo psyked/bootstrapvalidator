@@ -284,6 +284,7 @@
                 AT: 'Austriaco',
                 BE: 'Belga',
                 BG: 'Búlgaro',
+                BR: 'Brasileño',
                 CH: 'Suizo',
                 CY: 'Chipriota',
                 CZ: 'Checo',

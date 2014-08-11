@@ -284,6 +284,7 @@
                 AT: 'Oostenrijks',
                 BE: 'Belgisch',
                 BG: 'Bulgaars',
+                BR: 'Braziliaans',
                 CH: 'Zwitsers',
                 CY: 'Cypriotisch',
                 CZ: 'Tsjechisch',

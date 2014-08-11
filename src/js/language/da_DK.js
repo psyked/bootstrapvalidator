@@ -284,6 +284,7 @@
                 AT: 'østrigsk',
                 BE: 'belgisk',
                 BG: 'bulgarsk',
+                BR: 'brasiliansk',
                 CH: 'schweizisk',
                 CY: 'cypriotisk',
                 CZ: 'tjekkisk',

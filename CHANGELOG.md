@@ -14,6 +14,7 @@ __New features__
 * [#637](https://github.com/nghuuphuoc/bootstrapvalidator/pull/637): Add South African [VAT](http://bootstrapvalidator.com/validators/vat/) number validator, thanks to [@evilchili](https://github.com/evilchili)
 * [#638](https://github.com/nghuuphuoc/bootstrapvalidator/pull/638), [#647](https://github.com/nghuuphuoc/bootstrapvalidator/pull/647): Add Brazilian [phone number](http://bootstrapvalidator.com/validators/phone/) and [postal code](http://bootstrapvalidator.com/validators/zipCode/) validator, thanks to [@fhferreira](https://github.com/fhferreira)
 * [#643](https://github.com/nghuuphuoc/bootstrapvalidator/pull/643): Add [zipCode](http://bootstrapvalidator.com/validators/zipCode/), [iban](http://bootstrapvalidator.com/validators/iban/) and [phone number](http://bootstrapvalidator.com/validators/phone/) validators for Morocco, thanks to [@Arkni](https://github.com/Arkni)
+* [#650](https://github.com/nghuuphuoc/bootstrapvalidator/pull/650): Add Brazilian [VAT](http://bootstrapvalidator.com/validators/vat/) number validator, thanks to [@fhferreira](https://github.com/fhferreira)
 
 __Improvements__
 

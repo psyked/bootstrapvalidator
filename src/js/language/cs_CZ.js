@@ -284,6 +284,7 @@
                 AT: 'Rakousko',
                 BE: 'Belgii',
                 BG: 'Bulharsko',
+                BR: 'Brazílii',
                 CH: 'Švýcarsko',
                 CY: 'Kypr',
                 CZ: 'Čechy',

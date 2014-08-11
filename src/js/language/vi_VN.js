@@ -284,6 +284,7 @@
                 AT: 'Áo',
                 BE: 'Bỉ',
                 BG: 'Bulgari',
+                BR: 'Brazil',
                 CH: 'Thuỵ Sĩ',
                 CY: 'Síp',
                 CZ: 'Séc',
