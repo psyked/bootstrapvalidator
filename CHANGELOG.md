@@ -12,7 +12,7 @@ __New features__
 * [#621](https://github.com/nghuuphuoc/bootstrapvalidator/pull/621): Add Pakistan [phone number](http://bootstrapvalidator.com/validators/phone/) validator, thanks to [@abuzer](https://github.com/abuzer)
 * [#630](https://github.com/nghuuphuoc/bootstrapvalidator/issues/630), [#640](https://github.com/nghuuphuoc/bootstrapvalidator/pull/640): Add event name options to avoid window.onerror being invoked by jQuery, thanks to [@roryprimrose](https://github.com/roryprimrose)
 * [#637](https://github.com/nghuuphuoc/bootstrapvalidator/pull/637): Add South African [VAT](http://bootstrapvalidator.com/validators/vat/) number validator, thanks to [@evilchili](https://github.com/evilchili)
-* [#638](https://github.com/nghuuphuoc/bootstrapvalidator/pull/638): Add Brazilian [phone number](http://bootstrapvalidator.com/validators/phone/) and [postal code](http://bootstrapvalidator.com/validators/zipCode/) validator, thanks to [@fhferreira](https://github.com/fhferreira)
+* [#638](https://github.com/nghuuphuoc/bootstrapvalidator/pull/638), [#647](https://github.com/nghuuphuoc/bootstrapvalidator/pull/647): Add Brazilian [phone number](http://bootstrapvalidator.com/validators/phone/) and [postal code](http://bootstrapvalidator.com/validators/zipCode/) validator, thanks to [@fhferreira](https://github.com/fhferreira)
 * [#643](https://github.com/nghuuphuoc/bootstrapvalidator/pull/643): Add [zipCode](http://bootstrapvalidator.com/validators/zipCode/), [iban](http://bootstrapvalidator.com/validators/iban/) and [phone number](http://bootstrapvalidator.com/validators/phone/) validators for Morocco, thanks to [@Arkni](https://github.com/Arkni)
 
 __Improvements__
@@ -31,8 +31,7 @@ __Language Packages__
 * [#400](https://github.com/nghuuphuoc/bootstrapvalidator/pull/400): Italian language package, thanks to [@maramazza](https://github.com/maramazza)
 * [#503](https://github.com/nghuuphuoc/bootstrapvalidator/pull/503): French language package, thanks to [@dlucazeau](https://github.com/dlucazeau)
 * [#505](https://github.com/nghuuphuoc/bootstrapvalidator/pull/505): Czech language package, thanks to [@AdwinTrave](https://github.com/AdwinTrave)
-* [#507](https://github.com/nghuuphuoc/bootstrapvalidator/pull/507): Polish language package, thanks to [@grzesiek](https://github.com/grzesiek).
-  [#624](https://github.com/nghuuphuoc/bootstrapvalidator/pull/624): Typos fixed by [@lukaszbanasiak](https://github.com/lukaszbanasiak)
+* [#507](https://github.com/nghuuphuoc/bootstrapvalidator/pull/507): Polish language package, thanks to [@grzesiek](https://github.com/grzesiek). [#624](https://github.com/nghuuphuoc/bootstrapvalidator/pull/624): Typos fixed by [@lukaszbanasiak](https://github.com/lukaszbanasiak)
 * [#517](https://github.com/nghuuphuoc/bootstrapvalidator/pull/517): Belgium (Dutch) language package, thanks to [@dokterpasta](https://github.com/dokterpasta)
 * [#527](https://github.com/nghuuphuoc/bootstrapvalidator/pull/527): Bulgarian language package, thanks to [@mraiur](https://github.com/mraiur)
 * [#534](https://github.com/nghuuphuoc/bootstrapvalidator/pull/534): Turkish language package, thanks to [@CeRBeR666](https://github.com/CeRBeR666)
