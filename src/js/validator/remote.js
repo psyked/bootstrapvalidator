@@ -35,7 +35,8 @@
             var name = $field.attr('data-bv-field'),
                 data = options.data || {},
                 url  = options.url,
-                type = options.type || 'POST';
+                type = options.type || 'POST',
+                headers = options.headers || {};
 
             // Support dynamic data
             if ('function' === typeof data) {
@@ -52,6 +53,7 @@
             var dfd = new $.Deferred();
             var xhr = $.ajax({
                 type: type,
+                headers: headers,
                 url: url,
                 dataType: 'json',
                 data: data
