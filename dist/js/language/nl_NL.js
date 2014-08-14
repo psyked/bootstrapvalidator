@@ -21,7 +21,7 @@
             between: 'Kies tussen de %s - %s opties'
         },
         creditCard: {
-            'default': 'Voeer een geldig creditcard nummer in'
+            'default': 'Voer een geldig creditcard nummer in'
         },
         cusip: {
             'default': 'Voer een geldig CUSIP nummer in'
@@ -58,7 +58,7 @@
             'default': 'Voer een geldig hexadecimaal nummer in'
         },
         hexColor: {
-            'default': 'Voer een geldige hexadecimale kleur in'
+            'default': 'Voer een geldige hexadecimale kleurcode in'
         },
         iban: {
             'default': 'Voer een geldig IBAN nummer in',

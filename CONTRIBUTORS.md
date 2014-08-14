@@ -32,7 +32,7 @@ I would like to give big thanks to the following contributors:
 * [@jjshoe](https://github.com/jjshoe)
 * [@johanronn77](https://github.com/johanronn77)
 * [@jswale](https://github.com/jswale)
-* [@jvanderheide](https://github.com/jvanderheide)
+* [@Jvanderheide](https://github.com/Jvanderheide)
 * [@jzhang6](https://github.com/jzhang6)
 * [@khangvm53](https://github.com/khangvm53)
 * [@kristian-puccio](https://github.com/kristian-puccio)
