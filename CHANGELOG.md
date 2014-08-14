@@ -22,6 +22,7 @@ __Improvements__
 * [#549](https://github.com/nghuuphuoc/bootstrapvalidator/pull/549), [#600](https://github.com/nghuuphuoc/bootstrapvalidator/pull/600): Change the CSS/JS path in ```demo/remote.html``` and ```demo/message.html```, thanks to [@leegtang](https://github.com/leegtang), [@Arkni](https://github.com/Arkni)
 * [#604](https://github.com/nghuuphuoc/bootstrapvalidator/pull/604): Fix the ```demo/date.html``` and ```demo/tab.html``` examples, thanks to [@Arkni](https://github.com/Arkni)
 * [#609](https://github.com/nghuuphuoc/bootstrapvalidator/pull/609): Add content-type header for ```demo/remote.php```, thanks to [@etorres](https://github.com/etorres)
+* [#661](https://github.com/nghuuphuoc/bootstrapvalidator/pull/661): Add ```headers``` option to the [remote](http://bootstrapvalidator.com/validators/remote/) validator, thanks to [@ryan2049](https://github.com/ryan2049)
 
 __Bug Fixes__
 

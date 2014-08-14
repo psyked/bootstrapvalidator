@@ -54,6 +54,7 @@ I would like to give big thanks to the following contributors:
 * [@phillprice](https://github.com/phillprice)
 * [@pRieStaKos](https://github.com/pRieStaKos)
 * [@roryprimrose](https://github.com/roryprimrose)
+* [@ryan2049](https://github.com/ryan2049)
 * [@smeagol74](https://github.com/smeagol74)
 * [@thisisclement](https://github.com/thisisclement)
 * [@tiagofontella](https://github.com/tiagofontella)

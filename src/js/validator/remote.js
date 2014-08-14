@@ -24,6 +24,7 @@
          *  }
          * - name {String} [optional]: Override the field name for the request.
          * - message: The invalid message
+         * - headers: Additional headers
          * @returns {Boolean|Deferred}
          */
         validate: function(validator, $field, options) {
@@ -32,10 +33,10 @@
                 return true;
             }
 
-            var name = $field.attr('data-bv-field'),
-                data = options.data || {},
-                url  = options.url,
-                type = options.type || 'POST',
+            var name    = $field.attr('data-bv-field'),
+                data    = options.data || {},
+                url     = options.url,
+                type    = options.type || 'POST',
                 headers = options.headers || {};
 
             // Support dynamic data
