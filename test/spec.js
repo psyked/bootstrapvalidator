@@ -2328,7 +2328,7 @@ describe('emailAddress', function() {
             '<form class="form-horizontal" id="emailAddressForm">',
                 '<div id="msg"></div>',
                 '<div class="form-group">',
-                    '<input type="text" name="email-address" data-bv-emailaddress />',
+                    '<input type="text" name="email-address-or-addresses" data-bv-emailaddress />',
                 '</div>',
             '</form>'
         ].join('\n')).appendTo('body');
@@ -2336,7 +2336,7 @@ describe('emailAddress', function() {
         $('#emailAddressForm').bootstrapValidator();
 
         this.bv = $('#emailAddressForm').data('bootstrapValidator');
-        this.$emailAddress = this.bv.getFieldElements('email-address');
+        this.$emailAddressOrAddresses = this.bv.getFieldElements('email-address-or-addresses');
     });
 
     afterEach(function () {
@@ -2368,21 +2368,53 @@ describe('emailAddress', function() {
         'this\ still\"not\\allowed@example.com'
     ];
 
-    it('Valid email addresses', function() {
+    var validMultipleEmailAddresses = [
+        'niceandsimple@example.com,very.common@example.com',
+        'niceandsimple@example.com;very.common@example.com'
+    ];
+
+    var invalidMultipleEmailAddresses = [
+        'niceandsimple@example.com+very.common@example.com',
+        'niceandsimple@example.com|very.common@example.com'
+    ];
+
+    it('Valid email addresses (allowMultiple=false)', function() {
         var me = this;
         $.each(validEmailAddresses, function(index, emailAddress) {
             me.bv.resetForm();
-            me.$emailAddress.val(emailAddress);
+            me.$emailAddressOrAddresses.val(emailAddress);
             me.bv.validate();
             expect(me.bv.isValid()).toBeTruthy();
         });
     });
 
-    it('Invalid email addresses', function() {
+    it('Invalid email addresses (allowMultiple=false)', function() {
         var me = this;
-        $.each(invalidEmailAddresses, function(index, emailAddress) {
+        $.each(invalidEmailAddresses.concat(validMultipleEmailAddresses), function(index, emailAddress) {
             me.bv.resetForm();
-            me.$emailAddress.val(emailAddress);
+            me.$emailAddressOrAddresses.val(emailAddress);
+            me.bv.validate();
+            expect(me.bv.isValid()).toEqual(false);
+        });
+    });
+
+    it('Valid email addresses (allowMultiple=true)', function() {
+        var me = this;
+        me.bv.updateOption('email-address-or-addresses', 'emailAddress', 'allowMultiple', true);
+        $.each(validEmailAddresses.concat(validMultipleEmailAddresses), function(index, emailAddress) {
+            me.bv.resetForm();
+            me.$emailAddressOrAddresses.val(emailAddress);
+            me.bv.validate();
+            expect(me.bv.isValid()).toBeTruthy();
+        });
+    });
+
+    it('Invalid email addresses (allowMultiple=true)', function() {
+        var me = this;
+        me.bv.updateOption('email-address-or-addresses', 'emailAddress', 'allowMultiple', true);
+        $.each(invalidEmailAddresses.concat(invalidMultipleEmailAddresses), function(index, emailAddress) {
+            me.bv.resetForm();
+            me.$emailAddressOrAddresses.val(emailAddress);
             me.bv.validate();
             expect(me.bv.isValid()).toEqual(false);
         });
