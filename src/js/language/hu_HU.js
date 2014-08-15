@@ -116,7 +116,6 @@
                 LT: 'litván',
                 LU: 'luxembourgi',
                 LV: 'latviai',
-                MA: 'Marokkó',
                 MC: 'monacoi',
                 MD: 'moldáv',
                 ME: 'montenegroi',

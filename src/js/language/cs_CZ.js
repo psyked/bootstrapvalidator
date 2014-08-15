@@ -116,7 +116,6 @@
                 LT: 'Litvu',
                 LU: 'Lucembursko',
                 LV: 'Lotyšsko',
-                MA: 'Maroko',
                 MC: 'Monaco',
                 MD: 'Moldavsko',
                 ME: 'Černou Horu',
