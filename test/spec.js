@@ -735,8 +735,283 @@ describe('event field programmatically', function() {
 });
 
 // ---
+// Modifying default events
+// ---
+
+describe('event form trigger with default events', function() {
+    beforeEach(function() {
+        $([
+            '<form class="form-horizontal" id="eventForm1">',
+                '<div id="msg"></div>',
+                '<div class="form-group">',
+                    '<input type="text" name="email" data-bv-emailaddress />',
+                '</div>',
+            '</form>'
+        ].join('\n')).appendTo('body');
+
+        $('#eventForm1')
+            .bootstrapValidator()
+            .on('bv.form.success', function(e) {
+                $('#msg').html('form ' + $(e.target).attr('id') + ' triggered bv.form.success event');
+            })
+            .on('success.form.bv', function(e) {
+                $('#msg').html('form ' + $(e.target).attr('id') + ' triggered success.form.bv event');
+            })
+            .on('bv.form.error', function(e) {
+                $('#msg').html('form ' + $(e.target).attr('id') + ' triggered bv.form.error event');
+            })
+            .on('error.form.bv', function(e) {
+                $('#msg').html('form ' + $(e.target).attr('id') + ' triggered error.form.bv event');
+            });
+
+        this.bv     = $('#eventForm1').data('bootstrapValidator');
+        this.$email = this.bv.getFieldElements('email');
+    });
+
+    afterEach(function() {
+        $('#eventForm1').bootstrapValidator('destroy').remove();
+    });
+
+    it('does not trigger bv.form.success', function() {
+        this.$email.val('email@domain.com');
+        this.bv.validate();
+        expect($('#msg').html()).not.toEqual('form eventForm1 triggered bv.form.success event');
+    });
+
+    it('triggers success.form.bv', function() {
+        this.$email.val('email@domain.com');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('form eventForm1 triggered success.form.bv event');
+    });
+
+    it('does not trigger bv.form.error', function() {
+        this.$email.val('email@domain');
+        this.bv.validate();
+        expect($('#msg').html()).not.toEqual('form eventForm1 triggered bv.form.error event');
+    });
+
+    it('triggers error.form.bv', function() {
+        this.$email.val('email@domain');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('form eventForm1 triggered error.form.bv event');
+    });
+});
+
+describe('event field trigger with default events', function() {
+    beforeEach(function() {
+        $([
+            '<form class="form-horizontal" id="eventForm3">',
+                '<div id="msg"></div>',
+                '<div class="form-group">',
+                    '<input type="text" name="email" data-bv-emailaddress />',
+                '</div>',
+            '</form>'
+        ].join('\n')).appendTo('body');
+
+        $('#eventForm3')
+            .bootstrapValidator()
+            .on('success.field.bv', '[name="email"]', function(e, data) {
+                $('#msg').html('triggered success.field.bv on ' + data.field);
+            })
+            .on('error.field.bv', '[name="email"]', function(e, data) {
+                $('#msg').html('triggered error.field.bv on ' + data.field);
+            })
+            .on('bv.field.success', '[name="email"]', function(e, data) {
+                $('#msg').html('triggered bv.field.success on ' + data.field);
+            })
+            .on('bv.field.error', '[name="email"]', function(e, data) {
+                $('#msg').html('triggered bv.field.error on ' + data.field);
+            });
+
+        this.bv     = $('#eventForm3').data('bootstrapValidator');
+        this.$email = this.bv.getFieldElements('email');
+    });
+
+    afterEach(function() {
+        $('#eventForm3').bootstrapValidator('destroy').remove();
+    });
+
+    it('triggers success.field.bv', function() {
+        this.$email.val('email@domain.com');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('triggered success.field.bv on email');
+    });
+
+    it('does not trigger bv.field.success', function() {
+        this.$email.val('email@domain.com');
+        this.bv.validate();
+        expect($('#msg').html()).not.toEqual('triggered bv.field.success on email');
+    });
+
+    it('does not trigger error.field.bv', function() {
+        this.$email.val('email@domain');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('triggered error.field.bv on email');
+    });
+
+    it('triggers bv.field.error', function() {
+        this.$email.val('email@domain');
+        this.bv.validate();
+        expect($('#msg').html()).not.toEqual('triggered bv.field.error on email');
+    });
+});
+
+describe('event form trigger with events changed', function() {
+    beforeEach(function() {
+        $.fn.bootstrapValidator.DEFAULT_OPTIONS = $.extend({}, $.fn.bootstrapValidator.DEFAULT_OPTIONS, {
+            events: {
+                formInit: 'init.form.bv',
+                formError: 'bv.form.error',
+                formSuccess: 'bv.form.success',
+                fieldAdded: 'added.field.bv',
+                fieldRemoved: 'removed.field.bv',
+                fieldInit: 'init.field.bv',
+                fieldError: 'bv.field.error',
+                fieldSuccess: 'bv.field.success',
+                fieldStatus: 'status.field.bv',
+                validatorError: 'bv.validator.error',
+                validatorSuccess: 'success.validator.bv'
+            }
+        });
+
+        $([
+            '<form class="form-horizontal" id="eventForm2">',
+                '<div id="msg"></div>',
+                '<div class="form-group">',
+                    '<input type="text" name="email" data-bv-emailaddress />',
+                '</div>',
+            '</form>'
+        ].join('\n')).appendTo('body');
+
+        $('#eventForm2')
+            .bootstrapValidator()
+            .on('bv.form.success', function(e) {
+                $('#msg').html('form ' + $(e.target).attr('id') + ' triggered bv.form.success event');
+            })
+            .on('success.form.bv', function(e) {
+                $('#msg').html('form ' + $(e.target).attr('id') + ' triggered success.form.bv event');
+            })
+            .on('bv.form.error', function(e) {
+                $('#msg').html('form ' + $(e.target).attr('id') + ' triggered bv.form.error event');
+            })
+            .on('error.form.bv', function(e) {
+                $('#msg').html('form ' + $(e.target).attr('id') + ' triggered error.form.bv event');
+            });
+
+        this.bv     = $('#eventForm2').data('bootstrapValidator');
+        this.$email = this.bv.getFieldElements('email');
+    });
+
+    afterEach(function() {
+        $('#eventForm2').bootstrapValidator('destroy').remove();
+    });
+
+    it('triggers bv.form.success', function() {
+        this.$email.val('email@domain.com');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('form eventForm2 triggered bv.form.success event');
+    });
+
+    it('does not trigger success.form.bv', function() {
+        this.$email.val('email@domain.com');
+        this.bv.validate();
+        expect($('#msg').html()).not.toEqual('form eventForm2 triggered success.form.bv event');
+    });
+
+    it('triggers bv.form.error', function() {
+        spyOn(window, 'onerror');
+
+        this.$email.val('email@domain');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('form eventForm2 triggered bv.form.error event');
+
+        expect(window.onerror).not.toHaveBeenCalled();
+    });
+});
+
+describe('event field trigger with events changed', function() {
+    beforeEach(function () {
+        $.fn.bootstrapValidator.DEFAULT_OPTIONS = $.extend({}, $.fn.bootstrapValidator.DEFAULT_OPTIONS, {
+            events: {
+                formInit: 'init.form.bv',
+                formError: 'bv.form.error',
+                formSuccess: 'bv.form.success',
+                fieldAdded: 'added.field.bv',
+                fieldRemoved: 'removed.field.bv',
+                fieldInit: 'init.field.bv',
+                fieldError: 'bv.field.error',
+                fieldSuccess: 'bv.field.success',
+                fieldStatus: 'status.field.bv',
+                validatorError: 'bv.validator.error',
+                validatorSuccess: 'success.validator.bv'
+            }
+        });
+
+        $([
+            '<form class="form-horizontal" id="eventForm4">',
+                '<div id="msg"></div>',
+                '<div class="form-group">',
+                    '<input type="text" name="email" data-bv-emailaddress />',
+                '</div>',
+            '</form>'
+        ].join('\n')).appendTo('body');
+
+        $('#eventForm4')
+            .bootstrapValidator()
+            .on('success.field.bv', '[name="email"]', function(e, data) {
+                $('#msg').html('triggered success.field.bv on ' + data.field);
+            })
+            .on('error.field.bv', '[name="email"]', function(e, data) {
+                $('#msg').html('triggered error.field.bv on ' + data.field);
+            })
+            .on('bv.field.success', '[name="email"]', function(e, data) {
+                $('#msg').html('triggered bv.field.success on ' + data.field);
+            })
+            .on('bv.field.error', '[name="email"]', function(e, data) {
+                $('#msg').html('triggered bv.field.error on ' + data.field);
+            });
+
+        this.bv     = $('#eventForm4').data('bootstrapValidator');
+        this.$email = this.bv.getFieldElements('email');
+    });
+
+    afterEach(function() {
+        $('#eventForm4').bootstrapValidator('destroy').remove();
+    });
+
+    it('triggers success.field.bv', function() {
+        this.$email.val('email@domain.com');
+        this.bv.validate();
+        expect($('#msg').html()).not.toEqual('triggered success.field.bv on email');
+    });
+
+    it('does not trigger bv.field.success', function() {
+        this.$email.val('email@domain.com');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('triggered bv.field.success on email');
+    });
+
+    it('does not trigger error.field.bv', function() {
+        this.$email.val('email@domain');
+        this.bv.validate();
+        expect($('#msg').html()).not.toEqual('triggered error.field.bv on email');
+    });
+
+    it('triggers bv.field.error', function() {
+        spyOn(window, 'onerror');
+
+        this.$email.val('email@domain');
+        this.bv.validate();
+        expect($('#msg').html()).toEqual('triggered bv.field.error on email');
+
+        expect(window.onerror).not.toHaveBeenCalled();
+    });
+});
+
+// ---
 // Validator events
 // ---
+
 function onEmailAddressValidatorSuccess(e, data) {
     $('#msg').html(data.validator + ' validator passed');
 };
