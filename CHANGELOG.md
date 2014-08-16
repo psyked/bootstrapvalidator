@@ -9,7 +9,7 @@ __New features__
 * [#510](https://github.com/nghuuphuoc/bootstrapvalidator/pull/510), [#646](https://github.com/nghuuphuoc/bootstrapvalidator/pull/646): Add French [phone number](http://bootstrapvalidator.com/validators/phone/) validator, thanks to [@dlucazeau](https://github.com/dlucazeau)
 * [#536](https://github.com/nghuuphuoc/bootstrapvalidator/pull/536): Add Spanish [phone number](http://bootstrapvalidator.com/validators/phone/) validator, thanks to [@vadail](https://github.com/vadail)
 * [#519](https://github.com/nghuuphuoc/bootstrapvalidator/pull/519): Add Iceland [VAT](http://bootstrapvalidator.com/validators/vat/) number validator, thanks to [@evilchili](https://github.com/evilchili)
-* [#621](https://github.com/nghuuphuoc/bootstrapvalidator/pull/621): Add Pakistan [phone number](http://bootstrapvalidator.com/validators/phone/) validator, thanks to [@abuzer](https://github.com/abuzer)
+* [#620](https://github.com/nghuuphuoc/bootstrapvalidator/issues/620), [#621](https://github.com/nghuuphuoc/bootstrapvalidator/pull/621): Add Pakistan [phone number](http://bootstrapvalidator.com/validators/phone/) validator, thanks to [@abuzer](https://github.com/abuzer)
 * [#630](https://github.com/nghuuphuoc/bootstrapvalidator/issues/630), [#640](https://github.com/nghuuphuoc/bootstrapvalidator/pull/640): Add event name options to avoid window.onerror being invoked by jQuery, thanks to [@roryprimrose](https://github.com/roryprimrose). Thanks to [@stephengreentree](https://github.com/stephengreentree) for creating the test suite ([#657](https://github.com/nghuuphuoc/bootstrapvalidator/pull/657))
 * [#637](https://github.com/nghuuphuoc/bootstrapvalidator/pull/637): Add South African [VAT](http://bootstrapvalidator.com/validators/vat/) number validator, thanks to [@evilchili](https://github.com/evilchili)
 * [#638](https://github.com/nghuuphuoc/bootstrapvalidator/pull/638), [#647](https://github.com/nghuuphuoc/bootstrapvalidator/pull/647): Add Brazilian [phone number](http://bootstrapvalidator.com/validators/phone/) and [postal code](http://bootstrapvalidator.com/validators/zipCode/) validator, thanks to [@fhferreira](https://github.com/fhferreira)
@@ -28,7 +28,8 @@ __Improvements__
 __Bug Fixes__
 
 * [#550](https://github.com/nghuuphuoc/bootstrapvalidator/issues/550), [#551](https://github.com/nghuuphuoc/bootstrapvalidator/pull/551): Cannot validate against both ipv4 and ipv6 at the same time, thanks to [@beeglebug](https://github.com/beeglebug)
-* [#672](https://github.com/nghuuphuoc/bootstrapvalidator/issues/672): The zipCode validator throw an exception when passing not supported country code
+* [#665](https://github.com/nghuuphuoc/bootstrapvalidator/issues/665): The [submitButtons](http://bootstrapvalidator.com/settings/#form-submit-buttons) option doesn't work correctly
+* [#672](https://github.com/nghuuphuoc/bootstrapvalidator/issues/672): The [zipCode](http://bootstrapvalidator.com/validators/zipCode/) validator throw an exception when passing not supported country code
 
 __Language Packages__
 

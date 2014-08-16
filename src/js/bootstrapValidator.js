@@ -13,6 +13,7 @@
 
         this.$invalidFields = $([]);    // Array of invalid fields
         this.$submitButton  = null;     // The submit button which is clicked to submit form
+        this.$hiddenButton  = null;
 
         // Validating status
         this.STATUS_NOT_VALIDATED = 'NOT_VALIDATED';
@@ -110,6 +111,26 @@
                     });
 
             this.options = $.extend(true, this.options, options);
+
+            // When pressing Enter on any field in the form, the first submit button will do its job.
+            // The form then will be submitted.
+            // I create a first hidden submit button
+            this.$hiddenButton = $('<button/>')
+                                    .attr('type', 'submit')
+                                    .prependTo(this.$form)
+                                    .addClass('bv-hidden-submit')
+                                    .css({ display: 'none', width: 0, height: 0 });
+
+            this.$form
+                .on('click.bv', '[type="submit"]', function(e) {
+                    // Don't perform validation when clicking on the submit button/input
+                    // which aren't defined by the 'submitButtons' option
+                    var $button = $(e.target).eq(0);
+                    if (that.options.submitButtons && !$button.is(that.options.submitButtons) && !$button.is(that.$hiddenButton)) {
+                        that.$form.off('submit.bv').submit();
+                    }
+                });
+
             for (var field in this.options.fields) {
                 this._initField(field);
             }
@@ -1543,15 +1564,16 @@
                 }
             }
 
-            // Enable submit buttons
-            this.disableSubmitButtons(false);
+            this.disableSubmitButtons(false);   // Enable submit buttons
+            this.$hiddenButton.remove();        // Remove the hidden button
 
             this.$form
                 .removeClass(this.options.elementClass)
                 .off('.bv')
                 .removeData('bootstrapValidator')
                 // Remove generated hidden elements
-                .find('[data-bv-submit-hidden]').remove();
+                .find('[data-bv-submit-hidden]').remove().end()
+                .find('[type="submit"]').off('click.bv');
         }
     };
 
