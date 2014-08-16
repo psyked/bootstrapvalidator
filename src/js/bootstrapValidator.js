@@ -312,9 +312,18 @@
                                     .css('display', 'none')
                                     .addClass('form-control-feedback')
                                     .attr('data-bv-icon-for', field)
-                                    // Place it after the label containing the checkbox/radio
-                                    // so when clicking the icon, it doesn't effect to the checkbox/radio element
-                                    .insertAfter(('checkbox' === type || 'radio' === type) ? $field.parent() : $field);
+                                    .insertAfter($field);
+
+                    // Place it after the container of checkbox/radio
+                    // so when clicking the icon, it doesn't effect to the checkbox/radio element
+                    if ('checkbox' === type || 'radio' === type) {
+                        var $fieldParent = $field.parent();
+                        if ($fieldParent.hasClass(type)) {
+                            $icon.insertAfter($fieldParent);
+                        } else if ($fieldParent.parent().hasClass(type)) {
+                            $icon.insertAfter($fieldParent.parent());
+                        }
+                    }
 
                     // The feedback icon does not render correctly if there is no label
                     // https://github.com/twbs/bootstrap/issues/12873

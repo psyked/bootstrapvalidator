@@ -23,6 +23,7 @@ __Improvements__
 * [#604](https://github.com/nghuuphuoc/bootstrapvalidator/pull/604): Fix the ```demo/date.html``` and ```demo/tab.html``` examples, thanks to [@Arkni](https://github.com/Arkni)
 * [#609](https://github.com/nghuuphuoc/bootstrapvalidator/pull/609): Add content-type header for ```demo/remote.php```, thanks to [@etorres](https://github.com/etorres)
 * [#661](https://github.com/nghuuphuoc/bootstrapvalidator/pull/661): Add ```headers``` option to the [remote](http://bootstrapvalidator.com/validators/remote/) validator, thanks to [@ryan2049](https://github.com/ryan2049)
+* [#664](https://github.com/nghuuphuoc/bootstrapvalidator/issues/664): Fix the feedback icon position for Bootstrap 3.2
 
 __Bug Fixes__
 
