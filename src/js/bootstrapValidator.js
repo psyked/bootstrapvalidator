@@ -1463,7 +1463,7 @@
                 }
                 // ... return value of callback
                 else {
-                    return $.fn.bootstrapValidator.helpers.call(option, [value, this, $field]);
+                    return $.fn.bootstrapValidator.helpers.call(option, [value, this, $field]) || option;
                 }
             }
 
@@ -1688,7 +1688,8 @@
                 for (var i = 0; i < ns.length; i++) {
                     context = context[ns[i]];
                 }
-                return context[func].apply(this, args);
+
+                return (typeof context[func] === 'undefined') ? null : context[func].apply(this, args);
             }
         },
 

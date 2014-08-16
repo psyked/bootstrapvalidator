@@ -188,4 +188,18 @@ describe('zipCode', function() {
         expect($('#msg').html()).toEqual('getCountryCode() called');
         expect(this.bv.isValid()).toBeTruthy();
     });
+
+    it('not supported country code', function() {
+        this.$zipCode.attr('data-bv-zipcode-country', 'NOT_SUPPORTED');
+
+        $('#zipCodeForm').bootstrapValidator('destroy');
+
+        this.bv = $('#zipCodeForm').bootstrapValidator().data('bootstrapValidator');
+
+        this.bv.resetForm();
+        this.$zipCode.val('1234');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+        expect(this.bv.getMessages(this.$zipCode, 'zipCode')[0]).toEqual($.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.zipCode.countryNotSupported, 'NOT_SUPPORTED'));
+    });
 });

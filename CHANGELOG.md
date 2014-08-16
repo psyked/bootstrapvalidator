@@ -27,6 +27,7 @@ __Improvements__
 __Bug Fixes__
 
 * [#550](https://github.com/nghuuphuoc/bootstrapvalidator/issues/550), [#551](https://github.com/nghuuphuoc/bootstrapvalidator/pull/551): Cannot validate against both ipv4 and ipv6 at the same time, thanks to [@beeglebug](https://github.com/beeglebug)
+* [#672](https://github.com/nghuuphuoc/bootstrapvalidator/issues/672): The zipCode validator throw an exception when passing not supported country code
 
 __Language Packages__
 
