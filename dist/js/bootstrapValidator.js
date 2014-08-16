@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.1-dev, built on 2014-08-16 10:03:02 AM
+ * @version     v0.5.1-dev, built on 2014-08-16 10:18:11 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -68,6 +68,19 @@
                         valid:      this.$form.attr('data-bv-feedbackicons-valid'),
                         invalid:    this.$form.attr('data-bv-feedbackicons-invalid'),
                         validating: this.$form.attr('data-bv-feedbackicons-validating')
+                    },
+                    events: {
+                        formInit:         this.$form.attr('data-bv-events-form-init'),
+                        formError:        this.$form.attr('data-bv-events-form-error'),
+                        formSuccess:      this.$form.attr('data-bv-events-form-success'),
+                        fieldAdded:       this.$form.attr('data-bv-events-field-added'),
+                        fieldRemoved:     this.$form.attr('data-bv-events-field-removed'),
+                        fieldInit:        this.$form.attr('data-bv-events-field-init'),
+                        fieldError:       this.$form.attr('data-bv-events-field-error'),
+                        fieldSuccess:     this.$form.attr('data-bv-events-field-success'),
+                        fieldStatus:      this.$form.attr('data-bv-events-field-status'),
+                        validatorError:   this.$form.attr('data-bv-events-validator-error'),
+                        validatorSuccess: this.$form.attr('data-bv-events-validator-success')
                     }
                 };
 
