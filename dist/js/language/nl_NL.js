@@ -21,13 +21,13 @@
             between: 'Kies tussen de %s - %s opties'
         },
         creditCard: {
-            'default': 'Voer een geldig creditcard nummer in'
+            'default': 'Voer een geldig creditcardnummer in'
         },
         cusip: {
-            'default': 'Voer een geldig CUSIP nummer in'
+            'default': 'Voer een geldig CUSIP-nummer in'
         },
         cvv: {
-            'default': 'Voer een geldig CVV nummer in'
+            'default': 'Voer een geldig CVV-nummer in'
         },
         date: {
             'default': 'Voer een geldige datum in'
@@ -39,7 +39,7 @@
              'default': 'Voer enkel cijfers in'
         },
         ean: {
-            'default': 'Voer een geldig EAN nummer in'
+            'default': 'Voer een geldige EAN-code in'
         },
         emailAddress: {
             'default': 'Voer een geldig e-mailadres in'
@@ -52,7 +52,7 @@
             notInclusive: 'Voer een waarde in die is groter dan %s'
         },
         grid: {
-            'default': 'Voer een geldig GRId nummer in'
+            'default': 'Voer een geldig GRId-nummer in'
         },
         hex: {
             'default': 'Voer een geldig hexadecimaal nummer in'
@@ -182,10 +182,10 @@
             'default': 'Voer dezelfde waarde in'
         },
         imei: {
-            'default': 'Voer een geldig IMEI nummer in'
+            'default': 'Voer een geldig IMEI-nummer in'
         },
         imo: {
-            'default': 'Voer een geldig IMO nummer in'
+            'default': 'Voer een geldig IMO-nummer in'
         },
         integer: {
             'default': 'Voer een geldig getal in'
@@ -196,16 +196,16 @@
             ipv6: 'Voer een geldig IPv6 adres in'
         },
         isbn: {
-            'default': 'Voer een geldig ISBN in'
+            'default': 'Voer een geldig ISBN-nummer in'
         },
         isin: {
-            'default': 'Voer een geldig ISIN in'
+            'default': 'Voer een geldig ISIN-nummer in'
         },
         ismn: {
-            'default': 'Voer een geldig ISMN in'
+            'default': 'Voer een geldig ISMN-nummer in'
         },
         issn: {
-            'default': 'Voer een geldig ISSN in'
+            'default': 'Voer een geldig ISSN-nummer in'
         },
         lessThan: {
             'default': 'Voer een waarde in gelijk aan of kleiner dan %s',
@@ -215,7 +215,7 @@
             'default': 'Voer een geldig MAC adres in'
         },
         meid: {
-            'default': 'Voer een geldig MEID nummer in'
+            'default': 'Voer een geldig MEID-nummer in'
         },
         notEmpty: {
             'default': 'Voer een waarde in'
@@ -226,7 +226,7 @@
         phone: {
             'default': 'Voer een geldig telefoonnummer in',
             countryNotSupported: 'De land code %s wordt niet ondersteund',
-            country: 'Voer een geldig telefoon nummer in uit %s',
+            country: 'Voer een geldig telefoonnummer in uit %s',
             countries: {
                 BR: 'Brazilië',
                 ES: 'Spanje',
@@ -244,16 +244,16 @@
             'default': 'Voer een geldige waarde in'
         },
         rtn: {
-            'default': 'Voer een geldig RTN in'
+            'default': 'Voer een geldig RTN-nummer in'
         },
         sedol: {
-            'default': 'Voer een geldig SEDOL nummer in'
+            'default': 'Voer een geldig SEDOL-nummer in'
         },
         siren: {
-            'default': 'Voer een geldig SIREN in'
+            'default': 'Voer een geldig SIREN-nummer in'
         },
         siret: {
-            'default': 'Voer een geldig SIRET nummer in'
+            'default': 'Voer een geldig SIRET-nummer in'
         },
         step: {
             'default': 'Voer een meervoud van %s in'
@@ -272,13 +272,13 @@
             'default': 'Voer een geldige link in'
         },
         uuid: {
-            'default': 'Voer een geldig UUID nummer in',
-            version: 'Voer een geldig UUID (versie %s) nummer in'
+            'default': 'Voer een geldige UUID in',
+            version: 'Voer een geldige UUID (versie %s) in'
         },
         vat: {
-            'default': 'Voer een geldig BTW nummer in',
+            'default': 'Voer een geldig BTW-nummer in',
             countryNotSupported: 'De land code %s wordt niet ondersteund',
-            country: 'Voer een geldig %s BTW nummer in',
+            country: 'Voer een geldig %s BTW-nummer in',
             countries: {
                 AT: 'Oostenrijks',
                 BE: 'Belgisch',
@@ -319,7 +319,7 @@
             }
         },
         vin: {
-            'default': 'Voer een geldig VIN nummer in'
+            'default': 'Voer een geldig VIN-nummer in'
         },
         zipCode: {
             'default': 'Voer een geldige postcode in',
