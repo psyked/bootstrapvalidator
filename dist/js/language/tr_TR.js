@@ -116,7 +116,6 @@
                 LT: 'Litvanya',
                 LU: 'Lüksemburg',
                 LV: 'Letonya',
-                MA: 'Fas',
                 MC: 'Monako',
                 MD: 'Moldova',
                 ME: 'Karadağ',

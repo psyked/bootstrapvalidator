@@ -55,7 +55,6 @@
             LT: 'Lithuania',
             LU: 'Luxembourg',
             LV: 'Latvia',
-            MA: 'Morocco',
             MC: 'Monaco',
             MD: 'Moldova',
             ME: 'Montenegro',

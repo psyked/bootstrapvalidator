@@ -116,7 +116,6 @@
                 LT: 'Litwa',
                 LU: 'Luksemburg',
                 LV: 'Łotwa',
-                MA: 'Maroko',
                 MC: 'Monako',
                 MD: 'Mołdawia',
                 ME: 'Czarnogóra',

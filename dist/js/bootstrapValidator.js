@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.1-dev, built on 2014-08-15 6:13:26 AM
+ * @version     v0.5.1-dev, built on 2014-08-16 8:25:45 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -2822,7 +2822,6 @@
             LT: 'Lithuania',
             LU: 'Luxembourg',
             LV: 'Latvia',
-            MA: 'Morocco',
             MC: 'Monaco',
             MD: 'Moldova',
             ME: 'Montenegro',
@@ -2914,7 +2913,6 @@
             LT: 'LT[0-9]{2}[0-9]{5}[0-9]{11}',                                  // Lithuania
             LU: 'LU[0-9]{2}[0-9]{3}[A-Z0-9]{13}',                               // Luxembourg
             LV: 'LV[0-9]{2}[A-Z]{4}[A-Z0-9]{13}',                               // Latvia
-            MA: 'MA[0-9]{3}[0-9]{3}[0-9]{5}[0-9]{11}[0-9]{2}',                  // Morocco (example MA 157 570 21111 22334455006 85)
             MC: 'MC[0-9]{2}[0-9]{5}[0-9]{5}[A-Z0-9]{11}[0-9]{2}',               // Monaco
             MD: 'MD[0-9]{2}[A-Z0-9]{20}',                                       // Moldova
             ME: 'ME[0-9]{2}[0-9]{3}[0-9]{13}[0-9]{2}',                          // Montenegro

@@ -13,7 +13,7 @@ __New features__
 * [#630](https://github.com/nghuuphuoc/bootstrapvalidator/issues/630), [#640](https://github.com/nghuuphuoc/bootstrapvalidator/pull/640): Add event name options to avoid window.onerror being invoked by jQuery, thanks to [@roryprimrose](https://github.com/roryprimrose). Thanks to [@stephengreentree](https://github.com/stephengreentree) for creating the test suite ([#657](https://github.com/nghuuphuoc/bootstrapvalidator/pull/657))
 * [#637](https://github.com/nghuuphuoc/bootstrapvalidator/pull/637): Add South African [VAT](http://bootstrapvalidator.com/validators/vat/) number validator, thanks to [@evilchili](https://github.com/evilchili)
 * [#638](https://github.com/nghuuphuoc/bootstrapvalidator/pull/638), [#647](https://github.com/nghuuphuoc/bootstrapvalidator/pull/647): Add Brazilian [phone number](http://bootstrapvalidator.com/validators/phone/) and [postal code](http://bootstrapvalidator.com/validators/zipCode/) validator, thanks to [@fhferreira](https://github.com/fhferreira)
-* [#643](https://github.com/nghuuphuoc/bootstrapvalidator/pull/643): Add [zipCode](http://bootstrapvalidator.com/validators/zipCode/), [iban](http://bootstrapvalidator.com/validators/iban/) and [phone number](http://bootstrapvalidator.com/validators/phone/) validators for Morocco, thanks to [@Arkni](https://github.com/Arkni)
+* [#643](https://github.com/nghuuphuoc/bootstrapvalidator/pull/643): Add [zipCode](http://bootstrapvalidator.com/validators/zipCode/) and [phone number](http://bootstrapvalidator.com/validators/phone/) validators for Morocco, thanks to [@Arkni](https://github.com/Arkni)
 * [#650](https://github.com/nghuuphuoc/bootstrapvalidator/pull/650): Add Brazilian [VAT](http://bootstrapvalidator.com/validators/vat/) number validator, thanks to [@fhferreira](https://github.com/fhferreira)
 
 __Improvements__
@@ -42,6 +42,7 @@ __Language Packages__
 * [#545](https://github.com/nghuuphuoc/bootstrapvalidator/pull/545): Portuguese (Brazil) language package, thanks to [@marcuscarvalho6](https://github.com/marcuscarvalho6)
 * [#598](https://github.com/nghuuphuoc/bootstrapvalidator/pull/598): Danish language package, thanks to [@Djarnis](https://github.com/Djarnis)
 * [#674](https://github.com/nghuuphuoc/bootstrapvalidator/pull/674), [#677](https://github.com/nghuuphuoc/bootstrapvalidator/pull/677): Dutch language package, thanks to [@jvanderheide](https://github.com/jvanderheide)
+* [#679](https://github.com/nghuuphuoc/bootstrapvalidator/pull/679): Add Arabic language package, thanks to [@Arkni](https://github.com/Arkni)
 
 ## v0.5.0 (2015-07-14)
 
