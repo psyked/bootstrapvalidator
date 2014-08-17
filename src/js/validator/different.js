@@ -26,7 +26,7 @@
             }
 
             var compareWith = validator.getFieldElements(options.field);
-            if (compareWith === null) {
+            if (compareWith === null || compareWith.length === 0) {
                 return true;
             }
 
