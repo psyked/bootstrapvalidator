@@ -68,7 +68,7 @@
                 month = date[$.inArray('MM', dateFormat)],
                 day   = date[$.inArray('DD', dateFormat)];
 
-            if (!year || !month || !day) {
+            if (!year || !month || !day || year.length !== 4) {
                 return false;
             }
 
