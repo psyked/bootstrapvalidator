@@ -18,6 +18,10 @@
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
+            if (this.enableByHtml5($field) && $field.get(0).validity && $field.get(0).validity.badInput === true) {
+                return false;
+            }
+
             var value = $field.val();
             if (value === '') {
                 return true;
