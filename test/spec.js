@@ -2128,7 +2128,7 @@ describe('creditCard', function() {
 });
 
 describe('date', function() {
-    beforeEach(function () {
+    beforeEach(function() {
         $([
             '<form class="form-horizontal" id="dateForm">',
                 '<div id="msg"></div>',
@@ -2144,7 +2144,7 @@ describe('date', function() {
         this.$date = this.bv.getFieldElements('date');
     });
 
-    afterEach(function () {
+    afterEach(function() {
         $('#dateForm').bootstrapValidator('destroy').remove();
     });
 
@@ -2200,7 +2200,7 @@ describe('date', function() {
         expect(this.bv.isValid()).toEqual(false);
 
         // Consist invalid characters
-        // #310
+        // Issue #310
         this.bv.resetForm();
         this.$date.val('aaaa/');
         this.bv.validate();
@@ -2211,7 +2211,7 @@ describe('date', function() {
         this.bv.validate();
         expect(this.bv.isValid()).toEqual(false);
 
-        // #475
+        // Issue #475
         this.bv.resetForm();
         this.$date.val('2014/09');
         this.bv.validate();
@@ -2267,6 +2267,53 @@ describe('date', function() {
         this.$date.val('2001/02/29');
         this.bv.validate();
         expect(this.bv.isValid()).toEqual(false);
+    });
+
+    // Issue #681
+    it('date, month, year are prefixed by zero', function() {
+        this.bv.updateOption('date', 'date', 'format', 'MM/DD/YYYY');
+
+        this.$date.val('0012/08/2014');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$date.val('12/0008/2014');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$date.val('12/08/002014');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$date.val('12/08/2014');
+        this.bv.validate();
+        expect(this.bv.isValid()).toBeTruthy();
+    });
+
+    it('hours, minutes, seconds are prefixed by zero', function() {
+        this.bv.updateOption('date', 'date', 'format', 'YYYY/MM/DD h:m:s');
+
+        this.$date.val('2014/08/17 0007:30:00');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$date.val('2014/08/17 07:030:00');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$date.val('2014/08/17 07:30:0000');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$date.val('2014/08/17 07:30:00');
+        this.bv.validate();
+        expect(this.bv.isValid()).toBeTruthy();
     });
 });
 

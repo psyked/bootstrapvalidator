@@ -1771,6 +1771,9 @@
             if (isNaN(year) || isNaN(month) || isNaN(day)) {
                 return false;
             }
+            if (day.length > 2 || month.length > 2 || year.length !== 4) {
+                return false;
+            }
 
             day   = parseInt(day, 10);
             month = parseInt(month, 10);

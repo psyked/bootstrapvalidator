@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.1-dev, built on 2014-08-16 5:21:21 PM
+ * @version     v0.5.1-dev, built on 2014-08-17 7:49:08 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -1772,6 +1772,9 @@
             if (isNaN(year) || isNaN(month) || isNaN(day)) {
                 return false;
             }
+            if (day.length > 2 || month.length > 2 || year.length !== 4) {
+                return false;
+            }
 
             day   = parseInt(day, 10);
             month = parseInt(month, 10);
@@ -2426,24 +2429,33 @@
 
                 // Validate seconds
                 if (seconds) {
+                    if (isNaN(seconds) || seconds.length > 2) {
+                        return false;
+                    }
                     seconds = parseInt(seconds, 10);
-                    if (isNaN(seconds) || seconds < 0 || seconds > 60) {
+                    if (seconds < 0 || seconds > 60) {
                         return false;
                     }
                 }
 
                 // Validate hours
                 if (hours) {
+                    if (isNaN(hours) || hours.length > 2) {
+                        return false;
+                    }
                     hours = parseInt(hours, 10);
-                    if (isNaN(hours) || hours < 0 || hours >= 24 || (amOrPm && hours > 12)) {
+                    if (hours < 0 || hours >= 24 || (amOrPm && hours > 12)) {
                         return false;
                     }
                 }
 
                 // Validate minutes
                 if (minutes) {
+                    if (isNaN(minutes) || minutes.length > 2) {
+                        return false;
+                    }
                     minutes = parseInt(minutes, 10);
-                    if (isNaN(minutes) || minutes < 0 || minutes > 59) {
+                    if (minutes < 0 || minutes > 59) {
                         return false;
                     }
                 }

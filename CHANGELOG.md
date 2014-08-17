@@ -30,6 +30,7 @@ __Bug Fixes__
 * [#550](https://github.com/nghuuphuoc/bootstrapvalidator/issues/550), [#551](https://github.com/nghuuphuoc/bootstrapvalidator/pull/551): Cannot validate against both ipv4 and ipv6 at the same time, thanks to [@beeglebug](https://github.com/beeglebug)
 * [#665](https://github.com/nghuuphuoc/bootstrapvalidator/issues/665): The [submitButtons](http://bootstrapvalidator.com/settings/#form-submit-buttons) option doesn't work correctly
 * [#672](https://github.com/nghuuphuoc/bootstrapvalidator/issues/672): The [zipCode](http://bootstrapvalidator.com/validators/zipCode/) validator throw an exception when passing not supported country code
+* [#681](https://github.com/nghuuphuoc/bootstrapvalidator/issues/681): Fix the [date](http://bootstrapvalidator.com/validators/date/) validator issue where one of date/month/year or hours/minutes/seconds is prefixed by zero
 
 __Language Packages__
 
