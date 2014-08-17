@@ -12,8 +12,9 @@
         },
 
         enableByHtml5: function($field) {
-            var min = $field.attr('min');
-            if (min) {
+            var type = $field.attr('type'),
+                min  = $field.attr('min');
+            if (min && type !== 'date') {
                 return {
                     value: min
                 };

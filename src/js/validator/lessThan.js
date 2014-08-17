@@ -12,8 +12,9 @@
         },
 
         enableByHtml5: function($field) {
-            var max = $field.attr('max');
-            if (max) {
+            var type = $field.attr('type'),
+                max  = $field.attr('max');
+            if (max && type !== 'date') {
                 return {
                     value: max
                 };

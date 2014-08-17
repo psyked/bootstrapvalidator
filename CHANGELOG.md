@@ -27,8 +27,9 @@ __Improvements__
 
 __Bug Fixes__
 
-* [#284](https://github.com/nghuuphuoc/bootstrapvalidator/issues/284), [#294](https://github.com/nghuuphuoc/bootstrapvalidator/issues/294): The HTML 5 ```<input type="number" />``` input allows to input non-digits characters
+* [#284](https://github.com/nghuuphuoc/bootstrapvalidator/issues/284), [#294](https://github.com/nghuuphuoc/bootstrapvalidator/issues/294), [#441](https://github.com/nghuuphuoc/bootstrapvalidator/issues/441), [#516](https://github.com/nghuuphuoc/bootstrapvalidator/issues/516): The HTML 5 ```<input type="number" />``` input allows to input non-digits characters
 * [#550](https://github.com/nghuuphuoc/bootstrapvalidator/issues/550), [#551](https://github.com/nghuuphuoc/bootstrapvalidator/pull/551): Cannot validate against both ipv4 and ipv6 at the same time, thanks to [@beeglebug](https://github.com/beeglebug)
+* [#588](https://github.com/nghuuphuoc/bootstrapvalidator/issues/588): Don't use min, max attributes (greaterThan, lessThan validators) for ```<input type="date" />```
 * [#665](https://github.com/nghuuphuoc/bootstrapvalidator/issues/665): The [submitButtons](http://bootstrapvalidator.com/settings/#form-submit-buttons) option doesn't work correctly
 * [#672](https://github.com/nghuuphuoc/bootstrapvalidator/issues/672): The [zipCode](http://bootstrapvalidator.com/validators/zipCode/) validator throw an exception when passing not supported country code
 * [#681](https://github.com/nghuuphuoc/bootstrapvalidator/issues/681): Fix the [date](http://bootstrapvalidator.com/validators/date/) validator issue where one of date/month/year or hours/minutes/seconds is prefixed by zero
