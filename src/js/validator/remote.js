@@ -6,8 +6,9 @@
     $.fn.bootstrapValidator.validators.remote = {
         html5Attributes: {
             message: 'message',
-            url: 'url',
-            name: 'name'
+            name: 'name',
+            type: 'type',
+            url: 'url'
         },
 
         /**

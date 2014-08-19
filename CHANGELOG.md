@@ -34,6 +34,7 @@ __Bug Fixes__
 * [#665](https://github.com/nghuuphuoc/bootstrapvalidator/issues/665): The [submitButtons](http://bootstrapvalidator.com/settings/#form-submit-buttons) option doesn't work correctly
 * [#672](https://github.com/nghuuphuoc/bootstrapvalidator/issues/672): The [zipCode](http://bootstrapvalidator.com/validators/zipCode/) validator throw an exception when passing not supported country code
 * [#681](https://github.com/nghuuphuoc/bootstrapvalidator/issues/681): Fix the [date](http://bootstrapvalidator.com/validators/date/) validator issue where one of date/month/year or hours/minutes/seconds is prefixed by zero
+* [#692](https://github.com/nghuuphuoc/bootstrapvalidator/issues/692): The [remote](http://bootstrapvalidator.com/validators/remote/) validator can't set the type option via HTML attribute
 
 __Language Packages__
 
