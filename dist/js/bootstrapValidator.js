@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.1-dev, built on 2014-08-19 10:33:05 PM
+ * @version     v0.5.1-dev, built on 2014-08-19 10:49:12 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -2376,6 +2376,11 @@
             }
 
             options.format = options.format || 'MM/DD/YYYY';
+
+            // #683: Force the format to YYYY-MM-DD as the default browser behaviour when using type="date" attribute
+            if ($field.attr('type') === 'date') {
+                options.format = 'YYYY-MM-DD';
+            }
 
             var formats    = options.format.split(' '),
                 dateFormat = formats[0],

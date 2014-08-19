@@ -36,6 +36,11 @@
 
             options.format = options.format || 'MM/DD/YYYY';
 
+            // #683: Force the format to YYYY-MM-DD as the default browser behaviour when using type="date" attribute
+            if ($field.attr('type') === 'date') {
+                options.format = 'YYYY-MM-DD';
+            }
+
             var formats    = options.format.split(' '),
                 dateFormat = formats[0],
                 timeFormat = (formats.length > 1) ? formats[1] : null,
