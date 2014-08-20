@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.1-dev, built on 2014-08-14 3:52:46 PM
+ * @version     v0.5.1-dev, built on 2014-08-20 9:57:29 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -2531,6 +2531,7 @@
          * @param {jQuery} $field Field element
          * @param {Object} [options]
          * - allowMultiple: Allow multiple email addresses, separated by a comma or semicolon; default is false.
+         * - separatorRegex: Regex for character or characters expected as separator between addresses; default is comma /[,;]/, i.e. comma or semicolon.
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
@@ -2546,10 +2547,15 @@
             var allowMultiple = options.allowMultiple === true || options.allowMultiple === 'true';
 
             if (allowMultiple) {
-                return splitEmailAddresses(value).reduce( function(previousValue, currentValue, index, array) {
-                    return previousValue && emailRegExp.test(currentValue);
-                },
-                true);
+                var separatorRegex = options.separatorRegex || /[,;]/;
+                var areValid = true;
+                var addresses = splitEmailAddresses(value, separatorRegex);
+
+                for (var i = 0; i < addresses.length; i++) {
+                    areValid = areValid && emailRegExp.test(addresses[i]);
+                }
+
+                return areValid;
             }
             else {
                 return emailRegExp.test(value);
@@ -2557,7 +2563,7 @@
         }
     };
 
-    function splitEmailAddresses(emailAddresses) {
+    function splitEmailAddresses(emailAddresses, separatorRegex) {
         var quotedFragments = emailAddresses.split(/"/),
             quotedFragmentCount = quotedFragments.length,
             emailAddressArray = [],
@@ -2565,7 +2571,7 @@
 
         for (var i = 0; i < quotedFragmentCount; i++) {
             if (i % 2 === 0) {
-                var splitEmailAddressFragments = quotedFragments[i].split(/[,;]/);
+                var splitEmailAddressFragments = quotedFragments[i].split(separatorRegex);
                 var splitEmailAddressFragmentCount = splitEmailAddressFragments.length;
 
                 if (splitEmailAddressFragmentCount === 1){
