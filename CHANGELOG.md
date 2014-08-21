@@ -25,6 +25,7 @@ __Improvements__
 * [#661](https://github.com/nghuuphuoc/bootstrapvalidator/pull/661): Add ```headers``` option to the [remote](http://bootstrapvalidator.com/validators/remote/) validator, thanks to [@ryan2049](https://github.com/ryan2049)
 * [#664](https://github.com/nghuuphuoc/bootstrapvalidator/issues/664): Fix the feedback icon position for Bootstrap 3.2
 * [#683](https://github.com/nghuuphuoc/bootstrapvalidator/issues/683): Force the format option to be ```YYYY-MM-DD``` when using ```<input type="date" />```
+* [#698](https://github.com/nghuuphuoc/bootstrapvalidator/issues/698): Ignore type checking if the file type is empty
 
 __Bug Fixes__
 
