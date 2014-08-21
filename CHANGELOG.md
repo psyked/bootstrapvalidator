@@ -36,6 +36,7 @@ __Bug Fixes__
 * [#672](https://github.com/nghuuphuoc/bootstrapvalidator/issues/672): The [zipCode](http://bootstrapvalidator.com/validators/zipCode/) validator throw an exception when passing not supported country code
 * [#681](https://github.com/nghuuphuoc/bootstrapvalidator/issues/681): Fix the [date](http://bootstrapvalidator.com/validators/date/) validator issue where one of date/month/year or hours/minutes/seconds is prefixed by zero
 * [#692](https://github.com/nghuuphuoc/bootstrapvalidator/issues/692): The [remote](http://bootstrapvalidator.com/validators/remote/) validator can't set the type option via HTML attribute
+* [#700](https://github.com/nghuuphuoc/bootstrapvalidator/issues/700): The [between](http://bootstrapvalidator.com/validators/between/), [greaterThan](http://bootstrapvalidator.com/validators/greaterThan/), [lessThan](http://bootstrapvalidator.com/validators/lessThan/) validators accept param which isn't number
 
 __Language Packages__
 

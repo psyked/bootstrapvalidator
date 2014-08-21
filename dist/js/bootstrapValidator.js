@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.1-dev, built on 2014-08-19 10:49:12 PM
+ * @version     v0.5.1-dev, built on 2014-08-21 1:54:13 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -1940,10 +1940,12 @@
             if (value === '') {
                 return true;
             }
+            if (!$.isNumeric(value)) {
+                return false;
+            }
 
             var min = $.isNumeric(options.min) ? options.min : validator.getDynamicOption($field, options.min),
                 max = $.isNumeric(options.max) ? options.max : validator.getDynamicOption($field, options.max);
-
             value = parseFloat(value);
 			return (options.inclusive === true || options.inclusive === undefined)
                     ? {
@@ -2722,9 +2724,11 @@
             if (value === '') {
                 return true;
             }
+            if (!$.isNumeric(value)) {
+                return false;
+            }
 
             var compareTo = $.isNumeric(options.value) ? options.value : validator.getDynamicOption($field, options.value);
-
             value = parseFloat(value);
 			return (options.inclusive === true || options.inclusive === undefined)
                     ? {
@@ -4408,9 +4412,11 @@
             if (value === '') {
                 return true;
             }
+            if (!$.isNumeric(value)) {
+                return false;
+            }
 
             var compareTo = $.isNumeric(options.value) ? options.value : validator.getDynamicOption($field, options.value);
-
             value = parseFloat(value);
             return (options.inclusive === true || options.inclusive === undefined)
                     ? {

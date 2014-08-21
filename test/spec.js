@@ -1843,6 +1843,12 @@ describe('between', function() {
         $('#betweenForm').bootstrapValidator('destroy').remove();
     });
 
+    it('not a number', function() {
+        this.$age.val('50abc');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+    });
+
     it('compare to value', function() {
         this.$age.val(10);
         this.bv.validate();
@@ -2408,6 +2414,12 @@ describe('greaterThan', function() {
 
     afterEach(function() {
         $('#greaterThanForm').bootstrapValidator('destroy').remove();
+    });
+
+    it('not a number', function() {
+        this.$age.val('20abc');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
     });
 
     it('compare to value', function() {
@@ -3860,6 +3872,12 @@ describe('lessThan', function() {
 
     afterEach(function() {
         $('#lessThanForm').bootstrapValidator('destroy').remove();
+    });
+
+    it('not a number', function() {
+        this.$age.val('20abc');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
     });
 
     it('compare to value', function() {

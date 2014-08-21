@@ -47,10 +47,12 @@
             if (value === '') {
                 return true;
             }
+            if (!$.isNumeric(value)) {
+                return false;
+            }
 
             var min = $.isNumeric(options.min) ? options.min : validator.getDynamicOption($field, options.min),
                 max = $.isNumeric(options.max) ? options.max : validator.getDynamicOption($field, options.max);
-
             value = parseFloat(value);
 			return (options.inclusive === true || options.inclusive === undefined)
                     ? {
