@@ -1,6 +1,6 @@
 # Change Log
 
-## v0.5.1 (not released yet)
+## v0.5.1 (2014-08-22)
 
 __New features__
 

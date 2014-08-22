@@ -1,4 +1,4 @@
-# BootstrapValidator - [v0.5.0](http://bootstrapvalidator.com/getting-started/#download)
+# BootstrapValidator - [v0.5.1](http://bootstrapvalidator.com/getting-started/#download)
 
 [http://bootstrapvalidator.com](http://bootstrapvalidator.com) - The best jQuery plugin to validate form fields. Designed to use with [Bootstrap 3](http://getbootstrap.com)
 
@@ -29,7 +29,7 @@ See [official website](http://bootstrapvalidator.com) for the full list of featu
  
 ## Download
 
-Latest version: [v0.5.0](http://bootstrapvalidator.com/getting-started/#download), released on 2014-07-14.
+Latest version: [v0.5.1](http://bootstrapvalidator.com/getting-started/#download), released on 2014-08-22.
 
 For older versions, look at the [Releases](https://github.com/nghuuphuoc/bootstrapvalidator/releases) page.
 
