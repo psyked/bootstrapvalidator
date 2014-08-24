@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-08-24 11:55:54 AM
+ * @version     v0.5.2-dev, built on 2014-08-24 3:49:20 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -1956,6 +1956,35 @@
                         valid: value > min  && value <  max,
                         message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.between.notInclusive, [min, max])
                     };
+        }
+    };
+}(window.jQuery));
+;(function($) {
+    $.fn.bootstrapValidator.validators.blank = {
+        /**
+         * Placeholder validator that can be used to display a custom validation message
+         * returned from the server
+         * Example:
+         *
+         * (1) a "blank" validator is applied to an input field.
+         * (2) data is entered via the UI that is unable to be validated client-side.
+         * (3) server returns a 400 with JSON data that contains the field that failed
+         *     validation and an associated message.
+         * (4) ajax 400 call handler does the following:
+         *
+         *      bv.updateMessage(field, 'blank', errorMessage);
+         *      bv.updateStatus(field, 'INVALID');
+         *
+         * @see https://github.com/nghuuphuoc/bootstrapvalidator/issues/542
+         * @see https://github.com/nghuuphuoc/bootstrapvalidator/pull/666
+         * @param {BootstrapValidator} validator The validator plugin instance
+         * @param {jQuery} $field Field element
+         * @param {Object} options Can consist of the following keys:
+         * - message: The invalid message
+         * @returns {Boolean}
+         */
+        validate: function(validator, $field, options) {
+            return true;
         }
     };
 }(window.jQuery));

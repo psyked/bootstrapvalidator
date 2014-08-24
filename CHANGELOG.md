@@ -2,6 +2,9 @@
 
 ## v0.5.2 (not released yet)
 
+__New features__
+* [#542](https://github.com/nghuuphuoc/bootstrapvalidator/issues/542), [#666](https://github.com/nghuuphuoc/bootstrapvalidator/pull/666): Add blank validator, thanks to [@bermo](https://github.com/bermo)
+
 __Improvements__
 
 * [#345](https://github.com/nghuuphuoc/bootstrapvalidator/issues/345), [#454](https://github.com/nghuuphuoc/bootstrapvalidator/pull/454): The [different](http://bootstrapvalidator.com/validators/different/) validator allows more than a 2-way comparison, thanks to [@AlaskanShade](https://github.com/AlaskanShade)
