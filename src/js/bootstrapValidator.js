@@ -308,6 +308,11 @@
                             .appendTo($message);
                     }
 
+                    // Init the validator
+                    if ('function' === typeof $.fn.bootstrapValidator.validators[validatorName].init) {
+                        $.fn.bootstrapValidator.validators[validatorName].init(this, $field);
+                    }
+
                     // Prepare the validator events
                     if (this.options.fields[field].validators[validatorName].onSuccess) {
                         $field.on(this.options.events.validatorSuccess, function(e, data) {
@@ -1563,6 +1568,11 @@
                             $field.data('bv.dfs.' + validator).reject();
                         }
                         $field.removeData('bv.result.' + validator).removeData('bv.dfs.' + validator);
+
+                        // Destroy the validator
+                        if ('function' === typeof $.fn.bootstrapValidator.validators[validator].destroy) {
+                            $.fn.bootstrapValidator.validators[validator].destroy(this, $field);
+                        }
                     }
                 }
             }

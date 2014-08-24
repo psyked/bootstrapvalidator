@@ -4,6 +4,7 @@
 
 __New features__
 * [#542](https://github.com/nghuuphuoc/bootstrapvalidator/issues/542), [#666](https://github.com/nghuuphuoc/bootstrapvalidator/pull/666): Add blank validator, thanks to [@bermo](https://github.com/bermo)
+* [#617](https://github.com/nghuuphuoc/bootstrapvalidator/issues/617): Add ```init``` and ```destroy``` methods to validator
 
 __Improvements__
 
