@@ -61,6 +61,7 @@ I would like to give big thanks to the following contributors:
 * [@ryan2049](https://github.com/ryan2049)
 * [@smeagol74](https://github.com/smeagol74)
 * [@stephengreentree](https://github.com/stephengreentree)
+* [@talberti](https://github.com/talberti)
 * [@thisisclement](https://github.com/thisisclement)
 * [@tiagofontella](https://github.com/tiagofontella)
 * [@tomByrer](https://github.com/tomByrer)

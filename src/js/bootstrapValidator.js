@@ -777,9 +777,9 @@
                     if (result === this.STATUS_VALID || result === this.STATUS_INVALID) {
                         this._onFieldValidated($field, validatorName);
                         continue;
-                    }else if (validators[validatorName].enabled === false) {
+                    } else if (validators[validatorName].enabled === false) {
                         this.updateStatus(updateAll ? field : $field, this.STATUS_VALID, validatorName);
-                        continue;                        
+                        continue;
                     }
 
                     $field.data('bv.result.' + validatorName, this.STATUS_VALIDATING);
