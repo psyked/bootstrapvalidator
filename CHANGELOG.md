@@ -2,6 +2,10 @@
 
 ## v0.5.2 (not released yet)
 
+__Improvements__
+
+* [#345](https://github.com/nghuuphuoc/bootstrapvalidator/issues/345), [#454](https://github.com/nghuuphuoc/bootstrapvalidator/pull/454): The [different](http://bootstrapvalidator.com/validators/different/) validator allows more than a 2-way comparison, thanks to [@AlaskanShade](https://github.com/AlaskanShade)
+
 __Language Packages__
 
 * [#712](https://github.com/nghuuphuoc/bootstrapvalidator/pull/712): Swedish language package, thanks to [@ulsa](https://github.com/ulsa)
