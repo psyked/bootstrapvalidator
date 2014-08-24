@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.5.2 (not released yet)
+
+__Language Packages__
+
+* [#712](https://github.com/nghuuphuoc/bootstrapvalidator/pull/712): Swedish language package, thanks to [@ulsa](https://github.com/ulsa)
+
 ## v0.5.1 (2014-08-22)
 
 __New features__
