@@ -2,28 +2,28 @@
 
 ## v0.5.2 (not released yet)
 
-__New features__
+__New Features__
 * [#542](https://github.com/nghuuphuoc/bootstrapvalidator/issues/542), [#666](https://github.com/nghuuphuoc/bootstrapvalidator/pull/666): Add blank validator, thanks to [@bermo](https://github.com/bermo)
 * [#617](https://github.com/nghuuphuoc/bootstrapvalidator/issues/617): Add ```init``` and ```destroy``` methods to validator
 
 __Improvements__
-
 * [#345](https://github.com/nghuuphuoc/bootstrapvalidator/issues/345), [#454](https://github.com/nghuuphuoc/bootstrapvalidator/pull/454): The [different](http://bootstrapvalidator.com/validators/different/) validator allows more than a 2-way comparison, thanks to [@AlaskanShade](https://github.com/AlaskanShade)
 * [#557](https://github.com/nghuuphuoc/bootstrapvalidator/issues/557), [#569](https://github.com/nghuuphuoc/bootstrapvalidator/pull/569): The [container](http://bootstrapvalidator.com/settings/#form-container) option can be defined by a callback, thanks to [@mattrick](https://github.com/mattrick)
 * [#675](https://github.com/nghuuphuoc/bootstrapvalidator/pull/675): The [emailAddress](http://bootstrapvalidator.com/validators/emailAddress/) validator accepts multiple email addresses, thanks to [@kenny-evitt](https://github.com/kenny-evitt)
 
 __Bug Fixes__
-
 * [#687](https://github.com/nghuuphuoc/bootstrapvalidator/issues/687), [#711](https://github.com/nghuuphuoc/bootstrapvalidator/pull/711): Keep disabled validators VALID, thanks to [@talberti](https://github.com/talberti)
 
-__Language Packages__
+__Document__
+* [#709](https://github.com/nghuuphuoc/bootstrapvalidator/issues/709), [#715](https://github.com/nghuuphuoc/bootstrapvalidator/pull/715): Add [Bootstrap Select](http://bootstrapvalidator.com/examples/bootstrap-select/) and [Select2](http://bootstrapvalidator.com/examples/select2/) examples, thanks to [@Arkni](https://github.com/Arkni)
 
+__Language Packages__
+* [#706](https://github.com/nghuuphuoc/bootstrapvalidator/pull/706): Japanese language package, thanks to [@tsuyoshifujii](https://github.com/tsuyoshifujii)
 * [#712](https://github.com/nghuuphuoc/bootstrapvalidator/pull/712): Swedish language package, thanks to [@ulsa](https://github.com/ulsa)
 
 ## v0.5.1 (2014-08-22)
 
-__New features__
-
+__New Features__
 * [#218](https://github.com/nghuuphuoc/bootstrapvalidator/issues/218), [#531](https://github.com/nghuuphuoc/bootstrapvalidator/pull/531): Add meid validator, thanks to [@troymccabe](https://github.com/troymccabe)
 * [#267](https://github.com/nghuuphuoc/bootstrapvalidator/issues/267), [#532](https://github.com/nghuuphuoc/bootstrapvalidator/pull/532): Add imo validator, thanks to [@troymccabe](https://github.com/troymccabe)
 * [#510](https://github.com/nghuuphuoc/bootstrapvalidator/pull/510), [#646](https://github.com/nghuuphuoc/bootstrapvalidator/pull/646): Add French [phone number](http://bootstrapvalidator.com/validators/phone/) validator, thanks to [@dlucazeau](https://github.com/dlucazeau)
@@ -37,7 +37,6 @@ __New features__
 * [#650](https://github.com/nghuuphuoc/bootstrapvalidator/pull/650): Add Brazilian [VAT](http://bootstrapvalidator.com/validators/vat/) number validator, thanks to [@fhferreira](https://github.com/fhferreira)
 
 __Improvements__
-
 * [#502](https://github.com/nghuuphuoc/bootstrapvalidator/pull/502): Allowing sites without TLD to pass URI validation, thanks to [@troymccabe](https://github.com/troymccabe)
 * [#549](https://github.com/nghuuphuoc/bootstrapvalidator/pull/549), [#600](https://github.com/nghuuphuoc/bootstrapvalidator/pull/600): Change the CSS/JS path in ```demo/remote.html``` and ```demo/message.html```, thanks to [@leegtang](https://github.com/leegtang), [@Arkni](https://github.com/Arkni)
 * [#604](https://github.com/nghuuphuoc/bootstrapvalidator/pull/604): Fix the ```demo/date.html``` and ```demo/tab.html``` examples, thanks to [@Arkni](https://github.com/Arkni)
@@ -48,7 +47,6 @@ __Improvements__
 * [#698](https://github.com/nghuuphuoc/bootstrapvalidator/issues/698): Ignore type checking if the file type is empty
 
 __Bug Fixes__
-
 * [#284](https://github.com/nghuuphuoc/bootstrapvalidator/issues/284), [#294](https://github.com/nghuuphuoc/bootstrapvalidator/issues/294), [#441](https://github.com/nghuuphuoc/bootstrapvalidator/issues/441), [#516](https://github.com/nghuuphuoc/bootstrapvalidator/issues/516): The HTML 5 ```<input type="number" />``` input allows to input non-digits characters
 * [#548](https://github.com/nghuuphuoc/bootstrapvalidator/issues/548): Fix the issue when using [different](http://bootstrapvalidator.com/validators/different/) validator to compare with not existing field
 * [#550](https://github.com/nghuuphuoc/bootstrapvalidator/issues/550), [#551](https://github.com/nghuuphuoc/bootstrapvalidator/pull/551): Cannot validate against both ipv4 and ipv6 at the same time, thanks to [@beeglebug](https://github.com/beeglebug)
@@ -60,7 +58,6 @@ __Bug Fixes__
 * [#700](https://github.com/nghuuphuoc/bootstrapvalidator/issues/700): The [between](http://bootstrapvalidator.com/validators/between/), [greaterThan](http://bootstrapvalidator.com/validators/greaterThan/), [lessThan](http://bootstrapvalidator.com/validators/lessThan/) validators accept param which isn't number
 
 __Language Packages__
-
 * [#400](https://github.com/nghuuphuoc/bootstrapvalidator/pull/400): Italian language package, thanks to [@maramazza](https://github.com/maramazza)
 * [#503](https://github.com/nghuuphuoc/bootstrapvalidator/pull/503): French language package, thanks to [@dlucazeau](https://github.com/dlucazeau)
 * [#505](https://github.com/nghuuphuoc/bootstrapvalidator/pull/505): Czech language package, thanks to [@AdwinTrave](https://github.com/AdwinTrave)

@@ -66,6 +66,7 @@ I would like to give big thanks to the following contributors:
 * [@tiagofontella](https://github.com/tiagofontella)
 * [@tomByrer](https://github.com/tomByrer)
 * [@troymccabe](https://github.com/troymccabe)
+* [@tsuyoshifujii](https://github.com/tsuyoshifujii)
 * [@tureki](https://github.com/tureki)
 * [@ulsa](https://github.com/ulsa)
 * [@vadail](https://github.com/vadail)
