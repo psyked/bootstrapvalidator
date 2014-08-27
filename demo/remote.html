@@ -110,7 +110,8 @@ $(document).ready(function() {
                     },
                     remote: {
                         url: 'remote.php',
-                        message: 'The username is not available'
+                        message: 'The username is not available',
+                        debounceDelay: 1000
                     },
                     different: {
                         field: 'password',
@@ -128,7 +129,8 @@ $(document).ready(function() {
                     },
                     remote: {
                         url: 'remote.php',
-                        message: 'The email is not available'
+                        message: 'The email is not available',
+                        debounceDelay: 1000
                     }
                 }
             },

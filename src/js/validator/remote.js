@@ -8,8 +8,11 @@
             message: 'message',
             name: 'name',
             type: 'type',
-            url: 'url'
+            url: 'url',
+            debounceDelay: 'debounceDelay'
         },
+
+        _timer: [],
 
         /**
          * Request a remote server to check the input value
@@ -53,22 +56,35 @@
             data[options.name || name] = value;
 
             var dfd = new $.Deferred();
-            var xhr = $.ajax({
-                type: type,
-                headers: headers,
-                url: url,
-                dataType: 'json',
-                data: data
-            });
-            xhr.then(function(response) {
-                dfd.resolve($field, 'remote', response.valid === true || response.valid === 'true', response.message ? response.message : null);
-            });
+            
+            if (options.debounceDelay) {
+                if(this._timer[name]) {
+                    clearTimeout(this._timer[name]);
+                }
+                this._timer[name] = setTimeout(runCallback, options.debounceDelay);
+                return dfd;
+            }
+            else
+                return runCallback();
 
-            dfd.fail(function() {
-                xhr.abort();
-            });
+            function runCallback() {
+                var xhr = $.ajax({
+                    type: type,
+                    headers: headers,
+                    url: url,
+                    dataType: 'json',
+                    data: data
+                });
+                xhr.then(function (response) {
+                    dfd.resolve($field, 'remote', response.valid === true || response.valid === 'true', response.message ? response.message : null);
+                });
 
-            return dfd;
+                dfd.fail(function () {
+                    xhr.abort();
+                });
+
+                return dfd;
+            }
         }
     };
 }(window.jQuery));
