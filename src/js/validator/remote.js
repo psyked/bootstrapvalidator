@@ -9,10 +9,18 @@
             name: 'name',
             type: 'type',
             url: 'url',
-            debounceDelay: 'debounceDelay'
+            delay: 'delay'
         },
 
-        _timer: [],
+        /**
+         * Destroy the timer when destroying the bootstrapValidator (using validator.destroy() method)
+         */
+        destroy: function(validator, $field, options) {
+            if ($field.data('bv.remote.timer')) {
+                clearTimeout($field.data('bv.remote.timer'));
+                $field.removeData('bv.remote.timer');
+            }
+        },
 
         /**
          * Request a remote server to check the input value
@@ -56,16 +64,6 @@
             data[options.name || name] = value;
 
             var dfd = new $.Deferred();
-            
-            if (options.debounceDelay) {
-                if(this._timer[name]) {
-                    clearTimeout(this._timer[name]);
-                }
-                this._timer[name] = setTimeout(runCallback, options.debounceDelay);
-                return dfd;
-            }
-            else
-                return runCallback();
 
             function runCallback() {
                 var xhr = $.ajax({
@@ -75,15 +73,28 @@
                     dataType: 'json',
                     data: data
                 });
-                xhr.then(function (response) {
+                xhr.then(function(response) {
                     dfd.resolve($field, 'remote', response.valid === true || response.valid === 'true', response.message ? response.message : null);
                 });
 
-                dfd.fail(function () {
+                dfd.fail(function() {
                     xhr.abort();
                 });
 
                 return dfd;
+            }
+            
+            if (options.delay) {
+                // Since the form might have multiple fields with the same name
+                // I have to attach the timer to the field element
+                if ($field.data('bv.remote.timer')) {
+                    clearTimeout($field.data('bv.remote.timer'));
+                }
+
+                $field.data('bv.remote.timer', setTimeout(runCallback, options.delay));
+                return dfd;
+            } else {
+                return runCallback();
             }
         }
     };

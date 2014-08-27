@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-08-25 12:41:21 PM
+ * @version     v0.5.2-dev, built on 2014-08-27 11:42:29 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -4888,7 +4888,18 @@
             message: 'message',
             name: 'name',
             type: 'type',
-            url: 'url'
+            url: 'url',
+            delay: 'delay'
+        },
+
+        /**
+         * Destroy the timer when destroying the bootstrapValidator (using validator.destroy() method)
+         */
+        destroy: function(validator, $field, options) {
+            if ($field.data('bv.remote.timer')) {
+                clearTimeout($field.data('bv.remote.timer'));
+                $field.removeData('bv.remote.timer');
+            }
         },
 
         /**
@@ -4933,22 +4944,38 @@
             data[options.name || name] = value;
 
             var dfd = new $.Deferred();
-            var xhr = $.ajax({
-                type: type,
-                headers: headers,
-                url: url,
-                dataType: 'json',
-                data: data
-            });
-            xhr.then(function(response) {
-                dfd.resolve($field, 'remote', response.valid === true || response.valid === 'true', response.message ? response.message : null);
-            });
 
-            dfd.fail(function() {
-                xhr.abort();
-            });
+            function runCallback() {
+                var xhr = $.ajax({
+                    type: type,
+                    headers: headers,
+                    url: url,
+                    dataType: 'json',
+                    data: data
+                });
+                xhr.then(function(response) {
+                    dfd.resolve($field, 'remote', response.valid === true || response.valid === 'true', response.message ? response.message : null);
+                });
 
-            return dfd;
+                dfd.fail(function() {
+                    xhr.abort();
+                });
+
+                return dfd;
+            }
+            
+            if (options.delay) {
+                // Since the form might have multiple fields with the same name
+                // I have to attach the timer to the field element
+                if ($field.data('bv.remote.timer')) {
+                    clearTimeout($field.data('bv.remote.timer'));
+                }
+
+                $field.data('bv.remote.timer', setTimeout(runCallback, options.delay));
+                return dfd;
+            } else {
+                return runCallback();
+            }
         }
     };
 }(window.jQuery));

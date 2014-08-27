@@ -7,6 +7,7 @@ __New Features__
 * [#617](https://github.com/nghuuphuoc/bootstrapvalidator/issues/617): Add ```init``` and ```destroy``` methods to validator
 
 __Improvements__
+* [#249](https://github.com/nghuuphuoc/bootstrapvalidator/pull/249): Add ```delay``` option to the [remote](http://bootstrapvalidator.com/validators/remote/) validator, thanks to [@q-state](https://github.com/q-state)
 * [#345](https://github.com/nghuuphuoc/bootstrapvalidator/issues/345), [#454](https://github.com/nghuuphuoc/bootstrapvalidator/pull/454): The [different](http://bootstrapvalidator.com/validators/different/) validator allows more than a 2-way comparison, thanks to [@AlaskanShade](https://github.com/AlaskanShade)
 * [#557](https://github.com/nghuuphuoc/bootstrapvalidator/issues/557), [#569](https://github.com/nghuuphuoc/bootstrapvalidator/pull/569): The [container](http://bootstrapvalidator.com/settings/#form-container) option can be defined by a callback, thanks to [@mattrick](https://github.com/mattrick)
 * [#675](https://github.com/nghuuphuoc/bootstrapvalidator/pull/675): The [emailAddress](http://bootstrapvalidator.com/validators/emailAddress/) validator accepts multiple email addresses, thanks to [@kenny-evitt](https://github.com/kenny-evitt)
