@@ -22,6 +22,7 @@ __Language Packages__
 * [#706](https://github.com/nghuuphuoc/bootstrapvalidator/pull/706): Japanese language package, thanks to [@tsuyoshifujii](https://github.com/tsuyoshifujii)
 * [#712](https://github.com/nghuuphuoc/bootstrapvalidator/pull/712): Swedish language package, thanks to [@ulsa](https://github.com/ulsa)
 * [#727](https://github.com/nghuuphuoc/bootstrapvalidator/pull/727): Belgium (French) language package, thanks to [@neilime](https://github.com/neilime)
+* [#729](https://github.com/nghuuphuoc/bootstrapvalidator/pull/729): Persian (Farsi) language package, thanks to [@i0](https://github.com/i0)
 
 ## v0.5.1 (2014-08-22)
 
