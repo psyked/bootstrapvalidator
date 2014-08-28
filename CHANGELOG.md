@@ -14,6 +14,7 @@ __Improvements__
 
 __Bug Fixes__
 * [#687](https://github.com/nghuuphuoc/bootstrapvalidator/issues/687), [#711](https://github.com/nghuuphuoc/bootstrapvalidator/pull/711): Keep disabled validators VALID, thanks to [@talberti](https://github.com/talberti)
+* [#732](https://github.com/nghuuphuoc/bootstrapvalidator/issues/732): Fix the issue when removing the radio or checkbox field
 
 __Document__
 * [#709](https://github.com/nghuuphuoc/bootstrapvalidator/issues/709), [#715](https://github.com/nghuuphuoc/bootstrapvalidator/pull/715): Add [Bootstrap Select](http://bootstrapvalidator.com/examples/bootstrap-select/) and [Select2](http://bootstrapvalidator.com/examples/select2/) examples, thanks to [@Arkni](https://github.com/Arkni)

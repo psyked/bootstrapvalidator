@@ -242,15 +242,16 @@
                     break;
             }
 
-            if (this.options.fields[field] === null || this.options.fields[field].validators === null) {
-                return;
-            }
-
             // We don't need to validate non-existing fields
             if (fields.length === 0) {
                 delete this.options.fields[field];
                 return;
             }
+
+            if (this.options.fields[field] === null || this.options.fields[field].validators === null) {
+                return;
+            }
+
             var validatorName;
             for (validatorName in this.options.fields[field].validators) {
                 if (!$.fn.bootstrapValidator.validators[validatorName]) {

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BootstrapValidator demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+    <link rel="stylesheet" href="../dist/css/bootstrapValidator.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/bootstrapValidator.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <!-- form: -->
+        <section>
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="page-header">
+                    <h2>Dynamic fields</h2>
+                </div>
+
+                <div class="form-group hide" id="radioTemplate">
+                    <div class="col-md-offset-3 col-md-5">
+                        <label>
+                            <input type="radio" name="elementName" />
+                            Yes
+                        </label>
+                        <label>
+                            <input type="radio" name="elementName" />
+                            No
+                        </label>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-default removeButton">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group hide" id="textTemplate">
+                    <div class="col-md-offset-3 col-md-5">
+                        <input type="text" name="elementName" class="form-control" />
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-default removeButton">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                        <select id="addType" class="form-control">
+                            <option value="#textTemplate">Add input[type='text']</option>
+                            <option value="#radioTemplate">Add input[type='radio']</option>
+                        </select>
+
+                        <button type="button" class="btn btn-default addButton" id="addNewElement">
+                                <i class="fa fa-plus"></i>
+                            </button>
+
+                <form id="surveyForm" method="post" class="form-horizontal">
+
+                    <div class="form-group" id="submitFormGroup">
+                        <div class="col-md-5 col-md-offset-3">
+                            <button type="submit" class="btn btn-default">Validate</button>
+                        </div>
+                    </div>
+                </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- :form -->
+    </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    // The maximum number of options
+    var MAX_OPTIONS = 5;
+    var ind = 0;
+
+    $('#addNewElement').click(function () {
+
+        // determine which template to add
+        var $template = $($('#addType').val()),
+            $clone    = $template
+                            .clone()
+                            .removeClass('hide')
+                            .removeAttr('id')
+                            .attr('data-index', ind),
+            $option   = $clone.find('[name="elementName"]').attr('name', 'field' + ind);
+
+            $clone.insertBefore($('#submitFormGroup'));
+
+            // Add new field
+            $('#surveyForm').bootstrapValidator('addField', $option);
+
+        ind++;
+
+    });
+
+    $('#surveyForm')
+        .bootstrapValidator({
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                question: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The question required and cannot be empty'
+                        }
+                    }
+                },
+                'option[]': {
+                    validators: {
+                        notEmpty: {
+                            message: 'The option required and cannot be empty'
+                        },
+                        stringLength: {
+                            max: 100,
+                            message: 'The option must be less than 100 characters long'
+                        }
+                    }
+                }
+            }
+        })
+
+        // Remove button click handler
+        .on('click', '.removeButton', function() {
+
+            var $row    = $(this).parents('.form-group'),
+                $ind = $row.attr('data-index'),
+                $option = $row.find('[name="field' + $ind + '"]');
+
+            $('#surveyForm').bootstrapValidator('removeField', $option.eq(0).attr('name'));
+
+            // Remove element containing the option
+            $row.remove();
+
+            // Remove field
+
+            ind--;
+
+        })
+
+        // Called after adding new field
+        .on('added.field.bv', function(e, data) {
+            // data.field   --> The field name
+            // data.element --> The new field element
+            // data.options --> The new field options
+
+            if (data.field === 'option[]') {
+                if ($('#surveyForm').find(':visible[name="option[]"]').length >= MAX_OPTIONS) {
+                    $('#surveyForm').find('.addButton').attr('disabled', 'disabled');
+                }
+            }
+        })
+
+        // Called after removing the field
+        .on('removed.field.bv', function(e, data) {
+           if (data.field === 'option[]') {
+                if ($('#surveyForm').find(':visible[name="option[]"]').length < MAX_OPTIONS) {
+                    $('#surveyForm').find('.addButton').removeAttr('disabled');
+                }
+            }
+        });
+});
+</script>
+</body>
+</html>
