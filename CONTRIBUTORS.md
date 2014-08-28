@@ -27,6 +27,7 @@ I would like to give big thanks to the following contributors:
 * [@gercheq](https://github.com/gercheq)
 * [@grzesiek](https://github.com/grzesiek)
 * [@henningda](https://github.com/henningda)
+* [@i0](https://github.com/i0)
 * [@ikanedo](https://github.com/ikanedo)
 * [@iplus](https://github.com/iplus)
 * [@jcnmulio](https://github.com/jcnmulio)
