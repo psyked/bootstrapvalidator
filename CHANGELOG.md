@@ -7,7 +7,7 @@ __New Features__
 * [#617](https://github.com/nghuuphuoc/bootstrapvalidator/issues/617): Add ```init``` and ```destroy``` methods to validator
 
 __Improvements__
-* [#249](https://github.com/nghuuphuoc/bootstrapvalidator/pull/249): Add ```delay``` option to the [remote](http://bootstrapvalidator.com/validators/remote/) validator, thanks to [@q-state](https://github.com/q-state)
+* [#249](https://github.com/nghuuphuoc/bootstrapvalidator/pull/249), [#574](https://github.com/nghuuphuoc/bootstrapvalidator/issues/574), [#669](https://github.com/nghuuphuoc/bootstrapvalidator/issues/669): Add ```delay``` option to the [remote](http://bootstrapvalidator.com/validators/remote/) validator, thanks to [@q-state](https://github.com/q-state)
 * [#345](https://github.com/nghuuphuoc/bootstrapvalidator/issues/345), [#454](https://github.com/nghuuphuoc/bootstrapvalidator/pull/454): The [different](http://bootstrapvalidator.com/validators/different/) validator allows more than a 2-way comparison, thanks to [@AlaskanShade](https://github.com/AlaskanShade)
 * [#557](https://github.com/nghuuphuoc/bootstrapvalidator/issues/557), [#569](https://github.com/nghuuphuoc/bootstrapvalidator/pull/569): The [container](http://bootstrapvalidator.com/settings/#form-container) option can be defined by a callback, thanks to [@mattrick](https://github.com/mattrick)
 * [#675](https://github.com/nghuuphuoc/bootstrapvalidator/pull/675): The [emailAddress](http://bootstrapvalidator.com/validators/emailAddress/) validator accepts multiple email addresses, thanks to [@kenny-evitt](https://github.com/kenny-evitt)
@@ -52,7 +52,7 @@ __Improvements__
 * [#698](https://github.com/nghuuphuoc/bootstrapvalidator/issues/698): Ignore type checking if the file type is empty
 
 __Bug Fixes__
-* [#284](https://github.com/nghuuphuoc/bootstrapvalidator/issues/284), [#294](https://github.com/nghuuphuoc/bootstrapvalidator/issues/294), [#441](https://github.com/nghuuphuoc/bootstrapvalidator/issues/441), [#516](https://github.com/nghuuphuoc/bootstrapvalidator/issues/516): The HTML 5 ```<input type="number" />``` input allows to input non-digits characters
+* [#284](https://github.com/nghuuphuoc/bootstrapvalidator/issues/284), [#294](https://github.com/nghuuphuoc/bootstrapvalidator/issues/294), [#441](https://github.com/nghuuphuoc/bootstrapvalidator/issues/441), [#516](https://github.com/nghuuphuoc/bootstrapvalidator/issues/516), [#580](https://github.com/nghuuphuoc/bootstrapvalidator/issues/580): The HTML 5 ```<input type="number" />``` input allows to input non-digits characters
 * [#548](https://github.com/nghuuphuoc/bootstrapvalidator/issues/548): Fix the issue when using [different](http://bootstrapvalidator.com/validators/different/) validator to compare with not existing field
 * [#550](https://github.com/nghuuphuoc/bootstrapvalidator/issues/550), [#551](https://github.com/nghuuphuoc/bootstrapvalidator/pull/551): Cannot validate against both ipv4 and ipv6 at the same time, thanks to [@beeglebug](https://github.com/beeglebug)
 * [#588](https://github.com/nghuuphuoc/bootstrapvalidator/issues/588): Don't use min, max attributes (greaterThan, lessThan validators) for ```<input type="date" />```
