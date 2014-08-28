@@ -1107,15 +1107,9 @@
                 var $f = map[field];
                 if ($f.data('bv.messages')
                       .find('.help-block[data-bv-validator][data-bv-for="' + field + '"]')
-                      .filter(function() {
-                          var v = $(this).attr('data-bv-validator'),
-                              f = $(this).attr('data-bv-for');
-                          return (that.options.fields[f].validators[v].enabled !== false
-                                && $f.data('bv.result.' + v) && $f.data('bv.result.' + v) !== that.STATUS_VALID);
-                      })
-                      .length !== 0)
+                      .filter('[data-bv-result="' + this.STATUS_INVALID +'"]')
+                      .length > 0)
                 {
-                    // The field is not valid
                     return false;
                 }
             }
