@@ -244,7 +244,6 @@
 
             // We don't need to validate non-existing fields
             if (fields.length === 0) {
-                delete this.options.fields[field];
                 return;
             }
 
@@ -755,7 +754,7 @@
                     break;
             }
 
-            if (this.options.fields[field] && this.options.fields[field].enabled === false) {
+            if (fields.length === 0 || (this.options.fields[field] && this.options.fields[field].enabled === false)) {
                 return this;
             }
 
