@@ -10,6 +10,7 @@
             GB: 'United Kingdom',
             MA: 'Morocco',
             PK: 'Pakistan',
+            VE: 'Venezuelan',
             US: 'USA'
         }
     });
@@ -21,7 +22,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['BR', 'ES', 'FR', 'GB', 'MA', 'PK', 'US'],
+        COUNTRY_CODES: ['BR', 'ES', 'FR', 'GB', 'MA', 'PK', 'VE', 'US'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -97,7 +98,13 @@
                     value   = $.trim(value);
                     isValid = (/^0?3[0-9]{2}[0-9]{7}$/).test(value);
                     break;
-                
+
+                case 'VE':
+                    // http://regex101.com/r/lR6hT5/1
+                    value   = $.trim(value);
+                    isValid = (/^0[0-9]{10}$/).test(value);
+                    break;
+
                 case 'US':
                 /* falls through */
                 default:
