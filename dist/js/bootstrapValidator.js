@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-08-29 11:08:35 AM
+ * @version     v0.5.2-dev, built on 2014-08-29 11:38:36 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -5306,7 +5306,8 @@
     $.fn.bootstrapValidator.validators.uri = {
         html5Attributes: {
             message: 'message',
-            allowlocal: 'allowLocal'
+            allowlocal: 'allowLocal',
+            protocol: 'protocol'
         },
 
         enableByHtml5: function($field) {
@@ -5321,6 +5322,7 @@
          * @param {Object} options
          * - message: The error message
          * - allowLocal: Allow the private and local network IP. Default to false
+         * - protocol: The protocols, separated by a comma. Default to "http, https, ftp"
          * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
@@ -5358,11 +5360,14 @@
             // - Added exclusion of private, reserved and/or local networks ranges
             //   unless `allowLocal` is true
             //
+            // - Added possibility of choosing a custom protocol
+            //
             var allowLocal = options.allowLocal === true || options.allowLocal === 'true',
+                protocol   = (options.protocol || 'http, https, ftp').split(',').join('|').replace(/\s/g, ''),
                 urlExp     = new RegExp(
                     "^" +
                     // protocol identifier
-                    "(?:(?:https?|ftp)://)" +
+                    "(?:(?:" + protocol + ")://)" +
                     // user:pass authentication
                     "(?:\\S+(?::\\S*)?@)?" +
                     "(?:" +
@@ -5396,7 +5401,7 @@
                     // resource path
                     "(?:/[^\\s]*)?" +
                     "$", "i"
-                );
+            );
 
             return urlExp.test(value);
         }

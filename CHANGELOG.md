@@ -12,6 +12,7 @@ __Improvements__
 * [#345](https://github.com/nghuuphuoc/bootstrapvalidator/issues/345), [#454](https://github.com/nghuuphuoc/bootstrapvalidator/pull/454): The [different](http://bootstrapvalidator.com/validators/different/) validator allows more than a 2-way comparison, thanks to [@AlaskanShade](https://github.com/AlaskanShade)
 * [#557](https://github.com/nghuuphuoc/bootstrapvalidator/issues/557), [#569](https://github.com/nghuuphuoc/bootstrapvalidator/pull/569): The [container](http://bootstrapvalidator.com/settings/#form-container) option can be defined by a callback, thanks to [@mattrick](https://github.com/mattrick)
 * [#675](https://github.com/nghuuphuoc/bootstrapvalidator/pull/675): The [emailAddress](http://bootstrapvalidator.com/validators/emailAddress/) validator accepts multiple email addresses, thanks to [@kenny-evitt](https://github.com/kenny-evitt)
+* [#734](https://github.com/nghuuphuoc/bootstrapvalidator/pull/734): The [uri](http://bootstrapvalidator.com/validators/uri/) validator adds support for custom protocol, thanks to [@bcamarneiro](https://github.com/bcamarneiro)
 * [#737](https://github.com/nghuuphuoc/bootstrapvalidator/issues/737): Support VAT number without prefixing by country code
 
 __Bug Fixes__
@@ -80,7 +81,7 @@ __Language Packages__
 * [#674](https://github.com/nghuuphuoc/bootstrapvalidator/pull/674), [#677](https://github.com/nghuuphuoc/bootstrapvalidator/pull/677): Dutch language package, thanks to [@jvanderheide](https://github.com/jvanderheide)
 * [#679](https://github.com/nghuuphuoc/bootstrapvalidator/pull/679): Add Arabic language package, thanks to [@Arkni](https://github.com/Arkni)
 
-## v0.5.0 (2015-07-14)
+## v0.5.0 (2014-07-14)
 
 __New Features__
 * [#2](https://github.com/nghuuphuoc/bootstrapvalidator/issues/2), [#387](https://github.com/nghuuphuoc/bootstrapvalidator/issues/387): Provide the default error messages

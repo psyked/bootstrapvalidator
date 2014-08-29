@@ -10,6 +10,7 @@ I would like to give big thanks to the following contributors:
 * [@alavers](https://github.com/alavers)
 * [@Arkni](https://github.com/Arkni)
 * [@Azuka](https://github.com/Azuka)
+* [@bcamarneiro](https://github.com/bcamarneiro)
 * [@beeglebug](https://github.com/beeglebug)
 * [@bermo](https://github.com/bermo)
 * [@blackfyre](https://github.com/blackfyre)
