@@ -21,7 +21,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['BR', 'ES', 'FR', 'GB', 'MA', 'PK', 'US'],
+        COUNTRY_CODES: ['BR', 'ES', 'FR', 'GB', 'MA', 'PK', 'US', 'CN'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -97,7 +97,10 @@
                     value   = $.trim(value);
                     isValid = (/^0?3[0-9]{2}[0-9]{7}$/).test(value);
                     break;
-                
+                case 'CN':
+                    value   = $.trim(value);
+                    isValid = (/^((\+86)|(86))?((\d{11})|^((\d{7,8})|(\d{4}|\d{3})-(\d{7,8})|(\d{4}|\d{3})-(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1})|(\d{7,8})-(\d{4}|\d{3}|\d{2}|\d{1}))$)/).test(value);
+                    break;
                 case 'US':
                 /* falls through */
                 default:
