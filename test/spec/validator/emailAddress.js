@@ -20,6 +20,7 @@ describe('emailAddress', function() {
     });
 
     var validEmailAddresses = [
+        'admin@mailserver1',
         'niceandsimple@example.com',
         'very.common@example.com',
         'a.little.lengthy.but.fine@dept.example.com',
@@ -33,7 +34,6 @@ describe('emailAddress', function() {
     ];
 
     var invalidEmailAddresses = [
-        'admin@mailserver1',
         // "!#$%&'*+-/=?^_`{}|~@example.org",   // This is actually passing validation; see https://github.com/nghuuphuoc/bootstrapvalidator/issues/673
         'üñîçøðé@üñîçøðé.com',
         'Abc.example.com',
