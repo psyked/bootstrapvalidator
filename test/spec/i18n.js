@@ -275,7 +275,7 @@ describe('i18n', function() {
         expect(this.bv.getMessages('username', 'different')[0]).toEqual(i18n.different['default']);
 
         this.bv.resetForm();
-        this.$email.val('invalid#email@address');
+        this.$email.val('A@b@c@example.com');
         this.bv.validate();
         expect(this.bv.getMessages(this.$email, 'emailAddress')[0]).toEqual(i18n.emailAddress['default']);
 

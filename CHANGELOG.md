@@ -18,6 +18,7 @@ __Improvements__
 
 __Bug Fixes__
 * [#611](https://github.com/nghuuphuoc/bootstrapvalidator/issues/611), [#703](https://github.com/nghuuphuoc/bootstrapvalidator/issues/703): Tabs get red even form is valid
+* [#612](https://github.com/nghuuphuoc/bootstrapvalidator/issues/612), [#740](https://github.com/nghuuphuoc/bootstrapvalidator/pull/740), [#741](https://github.com/nghuuphuoc/bootstrapvalidator/pull/741): Fix the [emailAddress](http://bootstrapvalidator.com/validators/emailAddress/) issue which email@server is not valid email address, thanks to [@kromit](https://github.com/kromit)
 * [#687](https://github.com/nghuuphuoc/bootstrapvalidator/issues/687), [#711](https://github.com/nghuuphuoc/bootstrapvalidator/pull/711): Keep disabled validators VALID, thanks to [@talberti](https://github.com/talberti)
 * [#725](https://github.com/nghuuphuoc/bootstrapvalidator/pull/725): Fix the issue when adding field which does not exist but is already set in "fields" option
 * [#732](https://github.com/nghuuphuoc/bootstrapvalidator/issues/732): Fix the issue when removing the radio or checkbox field
