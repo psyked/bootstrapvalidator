@@ -53,22 +53,7 @@
         _init: function() {
             var that    = this,
                 options = {
-                    excluded:       this.$form.attr('data-bv-excluded'),
-                    trigger:        this.$form.attr('data-bv-trigger'),
-                    message:        this.$form.attr('data-bv-message'),
                     container:      this.$form.attr('data-bv-container'),
-                    group:          this.$form.attr('data-bv-group'),
-                    submitButtons:  this.$form.attr('data-bv-submitbuttons'),
-                    threshold:      this.$form.attr('data-bv-threshold'),
-                    live:           this.$form.attr('data-bv-live'),
-                    onSuccess:      this.$form.attr('data-bv-onsuccess'),
-                    onError:        this.$form.attr('data-bv-onerror'),
-                    fields:         {},
-                    feedbackIcons: {
-                        valid:      this.$form.attr('data-bv-feedbackicons-valid'),
-                        invalid:    this.$form.attr('data-bv-feedbackicons-invalid'),
-                        validating: this.$form.attr('data-bv-feedbackicons-validating')
-                    },
                     events: {
                         formInit:         this.$form.attr('data-bv-events-form-init'),
                         formError:        this.$form.attr('data-bv-events-form-error'),
@@ -81,7 +66,23 @@
                         fieldStatus:      this.$form.attr('data-bv-events-field-status'),
                         validatorError:   this.$form.attr('data-bv-events-validator-error'),
                         validatorSuccess: this.$form.attr('data-bv-events-validator-success')
-                    }
+                    },
+                    excluded:       this.$form.attr('data-bv-excluded'),
+                    feedbackIcons: {
+                        valid:      this.$form.attr('data-bv-feedbackicons-valid'),
+                        invalid:    this.$form.attr('data-bv-feedbackicons-invalid'),
+                        validating: this.$form.attr('data-bv-feedbackicons-validating')
+                    },
+                    group:          this.$form.attr('data-bv-group'),
+                    live:           this.$form.attr('data-bv-live'),
+                    message:        this.$form.attr('data-bv-message'),
+                    onError:        this.$form.attr('data-bv-onerror'),
+                    onSuccess:      this.$form.attr('data-bv-onsuccess'),
+                    submitButtons:  this.$form.attr('data-bv-submitbuttons'),
+                    threshold:      this.$form.attr('data-bv-threshold'),
+                    trigger:        this.$form.attr('data-bv-trigger'),
+                    verbose:        this.$form.attr('data-bv-verbose'),
+                    fields:         {}
                 };
 
             this.$form
@@ -198,17 +199,18 @@
             }
 
             var opts = {
+                    container:     $field.attr('data-bv-container'),
                     excluded:      $field.attr('data-bv-excluded'),
                     feedbackIcons: $field.attr('data-bv-feedbackicons'),
-                    trigger:       $field.attr('data-bv-trigger'),
-                    message:       $field.attr('data-bv-message'),
-                    container:     $field.attr('data-bv-container'),
                     group:         $field.attr('data-bv-group'),
-                    selector:      $field.attr('data-bv-selector'),
-                    threshold:     $field.attr('data-bv-threshold'),
+                    message:       $field.attr('data-bv-message'),
+                    onError:       $field.attr('data-bv-onerror'),
                     onStatus:      $field.attr('data-bv-onstatus'),
                     onSuccess:     $field.attr('data-bv-onsuccess'),
-                    onError:       $field.attr('data-bv-onerror'),
+                    selector:      $field.attr('data-bv-selector'),
+                    threshold:     $field.attr('data-bv-threshold'),
+                    trigger:       $field.attr('data-bv-trigger'),
+                    verbose:       $field.attr('data-bv-verbose'),
                     validators:    validators
                 },
                 emptyOptions    = $.isEmptyObject(opts),        // Check if the field options are set using HTML attributes
@@ -763,6 +765,7 @@
                 total      = ('radio' === type || 'checkbox' === type) ? 1 : fields.length,
                 updateAll  = ('radio' === type || 'checkbox' === type),
                 validators = this.options.fields[field].validators,
+                verbose    = this.options.fields[field].verbose === 'true' || this.options.fields[field].verbose === true || this.options.verbose === 'true' || this.options.verbose === true,
                 validatorName,
                 validateResult;
 
@@ -772,9 +775,13 @@
                     continue;
                 }
 
+                var stop = false;
                 for (validatorName in validators) {
                     if ($field.data('bv.dfs.' + validatorName)) {
                         $field.data('bv.dfs.' + validatorName).reject();
+                    }
+                    if (stop) {
+                        break;
                     }
 
                     // Don't validate field if it is already done
@@ -807,6 +814,8 @@
                             if (isValid && that._submitIfValid === true) {
                                 // If a remote validator returns true and the form is ready to submit, then do it
                                 that._submit();
+                            } else if (!isValid && !verbose) {
+                                stop = true;
                             }
                         });
                     }
@@ -814,14 +823,14 @@
                     else if ('object' === typeof validateResult && validateResult.valid !== undefined && validateResult.message !== undefined) {
                         this.updateMessage(updateAll ? field : $field, validatorName, validateResult.message);
                         this.updateStatus(updateAll ? field : $field, validateResult.valid ? this.STATUS_VALID : this.STATUS_INVALID, validatorName);
-                        if (!validateResult.valid && !this.options.verbose) {
+                        if (!validateResult.valid && !verbose) {
                             break;
                         }
                     }
                     // ... or a boolean value
                     else if ('boolean' === typeof validateResult) {
                         this.updateStatus(updateAll ? field : $field, validateResult ? this.STATUS_VALID : this.STATUS_INVALID, validatorName);
-                        if (!validateResult && !this.options.verbose) {
+                        if (!validateResult && !verbose) {
                             break;
                         }
                     }
