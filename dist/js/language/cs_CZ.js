@@ -315,6 +315,7 @@
                 SE: 'Švédsko',
                 SI: 'Slovinsko',
                 SK: 'Slovensko',
+                VE: 'Venezuelský',
                 ZA: 'Jižní Afriku'
             }
         },

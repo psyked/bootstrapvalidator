@@ -315,6 +315,7 @@
                 SE: 'svensk',
                 SI: 'slovensk',
                 SK: 'slovakisk',
+                VE: 'venezuelansk',
                 ZA: 'sydafrikansk'
             }
         },

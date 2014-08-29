@@ -315,6 +315,7 @@
                 SE: 'Sueco',
                 SI: 'Esloveno',
                 SK: 'Eslovaco',
+                VE: 'Venezolano',
                 ZA: 'Sudafricano'
             }
         },

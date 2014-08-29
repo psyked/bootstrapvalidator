@@ -246,9 +246,6 @@
         rtn: {
             'default': 'Por favor introduce un número RTN válido'
         },
-        rif: {
-            'default': 'Por favor introduce un número RIF válido'
-        },
         sedol: {
             'default': 'Por favor introduce un número SEDOL válido'
         },
@@ -318,6 +315,7 @@
                 SE: 'Sueco',
                 SI: 'Esloveno',
                 SK: 'Eslovaco',
+                VE: 'Venezolano',
                 ZA: 'Sudafricano'
             }
         },

@@ -37,6 +37,7 @@ describe('vat', function() {
                         '<option value="SE">Sweden</option>',
                         '<option value="CH">Switzerland</option>',
                         '<option value="GB">United Kingdom</option>',
+                        '<option value="VE">Venezuela</option>',
                         '<option value="ZA">South Africa</option>',
                     '</select>',
                 '</div>',
@@ -735,6 +736,28 @@ describe('vat', function() {
 
         // Invalid samples
         var invalidSamples = ['ZA40123456789', 'ZA0123456789', '40123456789', '0123456789'];
+        for (i in invalidSamples) {
+            this.bv.resetForm();
+            this.$vat.val(invalidSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toEqual(false);
+        }
+    });
+
+    it('Venezuelan VAT number (RIF)', function() {
+        this.bv.updateOption('vat', 'vat', 'country', 'VE');
+
+        // Valid samples
+        var validSamples = ['VEJ309272292', 'VEV242818101', 'VEJ000126518', 'VEJ000458324', 'J309272292', 'V242818101', 'J000126518', 'J000458324'];
+        for (var i in validSamples) {
+            this.bv.resetForm();
+            this.$vat.val(validSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toBeTruthy();
+        }
+
+        // Invalid samples
+        var invalidSamples = ['VEJ309272293', 'VEV242818100', 'J000126519', 'J000458323'];
         for (i in invalidSamples) {
             this.bv.resetForm();
             this.$vat.val(invalidSamples[i]);

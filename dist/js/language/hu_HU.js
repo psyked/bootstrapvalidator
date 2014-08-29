@@ -315,6 +315,7 @@
                 SE: 'svéd',
                 SI: 'szlovén',
                 SK: 'szlovák',
+                VE: 'venezuelai',
                 ZA: 'dél afrikai'
             }
         },

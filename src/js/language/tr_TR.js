@@ -315,6 +315,7 @@
                 SE: 'İsveç',
                 SI: 'Sloven',
                 SK: 'Slovak',
+                VE: 'Venezüella',
                 ZA: 'Kuzey Afrikalı'
             }
         },

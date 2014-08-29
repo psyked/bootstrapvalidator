@@ -315,6 +315,7 @@
                 SE: 'szwedzki',
                 SI: 'słoweński',
                 SK: 'słowacki',
+                VE: 'wenezuelski',
                 ZA: 'południowo Afrykański'
             }
         },

@@ -315,6 +315,7 @@
                 SE: 'Thuỵ Điển',
                 SI: 'Slovenia',
                 SK: 'Slovakia',
+                VE: 'Venezuela',
                 ZA: 'Nam Phi'
             }
         },

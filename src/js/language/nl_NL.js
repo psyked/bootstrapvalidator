@@ -315,6 +315,7 @@
                 SE: 'Zweeds',
                 SI: 'Sloveens',
                 SK: 'Slovaaks',
+                VE: 'Venezolaans',
                 ZA: 'Zuid-Afrikaans'
             }
         },

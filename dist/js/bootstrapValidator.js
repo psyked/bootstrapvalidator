@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-08-29 10:24:34 AM
+ * @version     v0.5.2-dev, built on 2014-08-29 11:08:35 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -5489,6 +5489,7 @@
             SE: 'Swedish',
             SI: 'Slovenian',
             SK: 'Slovak',
+            VE: 'Venezuelan',
             ZA: 'South African'
         }
     });
@@ -5502,7 +5503,8 @@
         // Supported country codes
         COUNTRY_CODES: [
             'AT', 'BE', 'BG', 'BR', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES', 'FI', 'FR', 'GB', 'GR', 'HR', 'HU',
-            'IE', 'IS', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RU', 'RS', 'SE', 'SK', 'SI', 'ZA'
+            'IE', 'IS', 'IT', 'LT', 'LU', 'LV', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RU', 'RS', 'SE', 'SK', 'SI', 'VE',
+            'ZA'
         ],
 
         /**
@@ -6805,6 +6807,44 @@
             }
 
             return (parseInt(value, 10) % 11 === 0);
+        },
+
+        /**
+         * Validate Venezuelan VAT number (RIF)
+         * Examples:
+         * - Valid: VEJ309272292, VEV242818101, VEJ000126518, VEJ000458324, J309272292, V242818101, J000126518, J000458324
+         * - Invalid: VEJ309272293, VEV242818100, J000126519, J000458323
+         *
+         * @param {String} value VAT number
+         * @returns {Boolean}
+         */
+        _ve: function(value) {
+            if (/^VE[VEJPG][0-9]{9}$/.test(value)) {
+                value = value.substr(2);
+            }
+            if (!/^[VEJPG][0-9]{9}$/.test(value)) {
+                return false;
+            }
+
+            var types  = {
+                    'V': 4,
+                    'E': 8,
+                    'J': 12,
+                    'P': 16,
+                    'G': 20
+                },
+                sum    = types[value.charAt(0)],
+                weight = [3, 2, 7, 6, 5, 4, 3, 2];
+
+            for (var i = 0; i < 8; i++) {
+                sum += parseInt(value.charAt(i + 1), 10) * weight[i];
+            }
+
+            sum = 11 - sum % 11;
+            if (sum === 11 || sum === 10) {
+                sum = 0;
+            }
+            return (sum + '' === value.substr(9, 1));
         },
 
         /**
