@@ -998,6 +998,7 @@
                     case ($icon && 'tooltip' === container):
                         (isValidField === false)
                                 ? $icon.css('cursor', 'pointer').tooltip('destroy').tooltip({
+                                    container: 'body',
                                     html: true,
                                     placement: 'top',
                                     title: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html()
@@ -1008,6 +1009,7 @@
                     case ($icon && 'popover' === container):
                         (isValidField === false)
                                 ? $icon.css('cursor', 'pointer').popover('destroy').popover({
+                                    container: 'body',
                                     content: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html(),
                                     html: true,
                                     placement: 'top',

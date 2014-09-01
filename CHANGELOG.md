@@ -18,6 +18,7 @@ __Improvements__
 * [#675](https://github.com/nghuuphuoc/bootstrapvalidator/pull/675): The [emailAddress](http://bootstrapvalidator.com/validators/emailAddress/) validator accepts multiple email addresses, thanks to [@kenny-evitt](https://github.com/kenny-evitt)
 * [#734](https://github.com/nghuuphuoc/bootstrapvalidator/pull/734): The [uri](http://bootstrapvalidator.com/validators/uri/) validator adds support for custom protocol, thanks to [@bcamarneiro](https://github.com/bcamarneiro)
 * [#737](https://github.com/nghuuphuoc/bootstrapvalidator/issues/737): Support VAT number without prefixing by country code
+* [#754](https://github.com/nghuuphuoc/bootstrapvalidator/issues/754): Support latest Bootstrap when using tooltip/popover to show the message
 
 __Bug Fixes__
 * [#611](https://github.com/nghuuphuoc/bootstrapvalidator/issues/611), [#703](https://github.com/nghuuphuoc/bootstrapvalidator/issues/703): Tabs get red even form is valid
