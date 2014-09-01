@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-08-29 7:03:30 PM
+ * @version     v0.5.2-dev, built on 2014-09-01 8:46:35 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -4931,6 +4931,7 @@
          *  {
          *      <fieldName>: <fieldValue>
          *  }
+         * - delay
          * - name {String} [optional]: Override the field name for the request.
          * - message: The invalid message
          * - headers: Additional headers
@@ -4945,7 +4946,7 @@
             var name    = $field.attr('data-bv-field'),
                 data    = options.data || {},
                 url     = options.url,
-                type    = options.type || 'POST',
+                type    = options.type || 'GET',
                 headers = options.headers || {};
 
             // Support dynamic data

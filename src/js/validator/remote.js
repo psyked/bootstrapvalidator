@@ -34,6 +34,7 @@
          *  {
          *      <fieldName>: <fieldValue>
          *  }
+         * - delay
          * - name {String} [optional]: Override the field name for the request.
          * - message: The invalid message
          * - headers: Additional headers
@@ -48,7 +49,7 @@
             var name    = $field.attr('data-bv-field'),
                 data    = options.data || {},
                 url     = options.url,
-                type    = options.type || 'POST',
+                type    = options.type || 'GET',
                 headers = options.headers || {};
 
             // Support dynamic data
