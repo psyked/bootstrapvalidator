@@ -327,19 +327,19 @@
         zipCode: {
             'default': 'Vui lòng nhập mã bưu điện hợp lệ',
             countryNotSupported: 'Mã quốc gia %s không được hỗ trợ',
-            country: 'Vui lòng nhập %s',
+            country: 'Vui lòng nhập mã bưu điện của %s',
             countries: {
-                BR: 'mã bưu điện của Brazil',
-                CA: 'mã bưu điện của Canada',
-                DK: 'mã bưu điện của Đan Mạch',
-                GB: 'mã bưu điện của Vương quốc Anh',
-                IT: 'mã bưu điện của Ý',
-                MA: 'mã bưu điện của Maroc',
-                NL: 'mã bưu điện của Hà Lan',
-                RO: 'mã bưu điện của Romania',
-                SE: 'mã bưu điện của Thuỵ Sĩ',
-                SG: 'mã bưu điện của Singapore',
-                US: 'mã bưu điện của Mỹ'
+                BR: 'Brazil',
+                CA: 'Canada',
+                DK: 'Đan Mạch',
+                GB: 'Vương quốc Anh',
+                IT: 'Ý',
+                MA: 'Maroc',
+                NL: 'Hà Lan',
+                RO: 'Romania',
+                SE: 'Thuỵ Sĩ',
+                SG: 'Singapore',
+                US: 'Mỹ'
             }
         }
     });

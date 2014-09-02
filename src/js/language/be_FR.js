@@ -327,19 +327,19 @@
         zipCode: {
             'default': 'Veuillez fournir un code postal valide',
             countryNotSupported: 'Le code de pays %s n\'est pas accepté',
-            country: 'Veuillez fournir un %s valide',
+            country: 'Veuillez fournir un code postal valide pour %s',
             countries: {
-                BR: 'code postal brésilien',
-                CA: 'code postal canadien',
-                DK: 'code postal dannois',
-                GB: 'code postal anglais',
-                IT: 'code postal italien',
-                MA: 'code postal marocain',
-                NL: 'code postal hollandais',
-                RO: 'code postal roumanie',
-                SE: 'code postal suisse',
-                SG: 'code postal de Singapour',
-                US: 'code zip US'
+                BR: 'Brésil',
+                CA: 'Canada',
+                DK: 'Danemark',
+                GB: 'Royaume-Uni',
+                IT: 'Italie',
+                MA: 'Maroc',
+                NL: 'Pays-Bas',
+                RO: 'Roumanie',
+                SE: 'Suède',
+                SG: 'Singapour',
+                US: 'USA'
             }
         }
     });

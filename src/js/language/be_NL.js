@@ -327,7 +327,7 @@
         zipCode: {
             'default': 'Geef een geldige postcode',
             countryNotSupported: 'De land code %s is niet ondersteund',
-            country: 'Please enter a valid %s',
+            country: 'Geef een geldige postcode van %s',
             countries: {
                 BR: 'Braziliaans postcode',
                 CA: 'Canadeese postcode',

@@ -1,20 +1,20 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.zipCode = $.extend($.fn.bootstrapValidator.i18n.zipCode || {}, {
-        'default': 'Please enter a valid zip code',
+        'default': 'Please enter a valid postal code',
         countryNotSupported: 'The country code %s is not supported',
-        country: 'Please enter a valid %s',
+        country: 'Please enter a valid postal code in %s',
         countries: {
-            BR: 'Brazilian postal code',
-            CA: 'Canadian postal code',
-            DK: 'Danish postal code',
-            GB: 'United Kingdom postal code',
-            IT: 'Italian postal code',
-            MA: 'Moroccan postal code',
-            NL: 'Dutch postal code',
-            RO: 'Romanian postal code',
-            SE: 'Swiss postal code',
-            SG: 'Singapore postal code',
-            US: 'US zip code'
+            BR: 'Brazil',
+            CA: 'Canada',
+            DK: 'Denmark',
+            GB: 'United Kingdom',
+            IT: 'Italy',
+            MA: 'Morocco',
+            NL: 'Netherlands',
+            RO: 'Romania',
+            SE: 'Sweden',
+            SG: 'Singapore',
+            US: 'USA'
         }
     });
 
