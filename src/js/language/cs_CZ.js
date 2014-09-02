@@ -235,6 +235,7 @@
                 GB: 'Velkou Británii',
                 MA: 'Maroko',
                 PK: 'Pákistán',
+                RO: 'Rumunsko',
                 US: 'Spojené Státy Americké'
             }
         },

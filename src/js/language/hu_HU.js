@@ -235,6 +235,7 @@
                 GB: 'Egyesült Királyság beli',
                 MA: 'Marokkó',
                 PK: 'Pakisztán',
+                RO: 'Románia',
                 US: 'Egyesült Államok beli'
             }
         },

@@ -235,6 +235,7 @@
                 GB: 'İngiltere',
                 MA: 'Fas',
                 PK: 'Pakistan',
+                RO: 'Romanya',
                 US: 'Amerika'
             }
         },

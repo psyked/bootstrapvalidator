@@ -235,6 +235,7 @@
                 GB: 'Vương quốc Anh',
                 MA: 'Maroc',
                 PK: 'Pakistan',
+                RO: 'Romania',
                 US: 'Mỹ'
             }
         },

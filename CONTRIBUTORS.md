@@ -5,6 +5,7 @@ I would like to give big thanks to the following contributors:
 * [@abuzer](https://github.com/abuzer)
 * [@aca02djr](https://github.com/aca02djr)
 * [@adgrafik](https://github.com/adgrafik)
+* [@adrian-dks](https://github.com/adrian-dks)
 * [@AdwinTrave](https://github.com/AdwinTrave)
 * [@AlaskanShade](https://github.com/AlaskanShade)
 * [@alavers](https://github.com/alavers)

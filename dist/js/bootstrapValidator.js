@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-09-02 9:57:41 PM
+ * @version     v0.5.2-dev, built on 2014-09-02 10:16:58 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -4753,6 +4753,7 @@
             GB: 'United Kingdom',
             MA: 'Morocco',
             PK: 'Pakistan',
+            RO: 'Romania',
             US: 'USA'
         }
     });
@@ -4764,7 +4765,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['BR', 'CN', 'ES', 'FR', 'GB', 'MA', 'PK', 'US'],
+        COUNTRY_CODES: ['BR', 'CN', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'US'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -4845,6 +4846,11 @@
                     // http://regex101.com/r/yH8aV9/2
                     value   = $.trim(value);
                     isValid = (/^0?3[0-9]{2}[0-9]{7}$/).test(value);
+                    break;
+                    
+        		case 'RO':
+        		    // All mobile network and land line
+        		    isValid = (/^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|\-)?([0-9]{3}(\s|\.|\-|)){2}$/g).test(value);
                     break;
 
                 case 'US':

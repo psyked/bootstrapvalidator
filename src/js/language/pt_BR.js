@@ -235,6 +235,7 @@
                 GB: 'Reino Unido',
                 MA: 'Marrocos',
                 PK: 'Paquistão',
+                RO: 'Roménia',
                 US: 'Estados Unidos'
             }
         },
