@@ -11,6 +11,7 @@
             GB: 'United Kingdom',
             MA: 'Morocco',
             PK: 'Pakistan',
+            RO: 'Romania',
             US: 'USA'
         }
     });
@@ -22,7 +23,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['BR', 'CN', 'ES', 'FR', 'GB', 'MA', 'PK', 'US'],
+        COUNTRY_CODES: ['BR', 'CN', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'US'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -103,6 +104,12 @@
                     // http://regex101.com/r/yH8aV9/2
                     value   = $.trim(value);
                     isValid = (/^0?3[0-9]{2}[0-9]{7}$/).test(value);
+                    break;
+                    
+        		case 'RO':
+        		    // Phone intl/national
+        		    // All mobile network and land line.
+        		    isValid = (/^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|\-)?([0-9]{3}(\s|\.|\-|)){2}$/g).test(value);
                     break;
 
                 case 'US':
