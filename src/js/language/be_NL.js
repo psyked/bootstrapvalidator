@@ -336,6 +336,7 @@
                 IT: 'Italiaanse postcode',
                 MA: 'Marokko postcode',
                 NL: 'Nederlandse postcode',
+                RO: 'Roemenië postcode',
                 SE: 'Zwitserse postcode',
                 SG: 'postcode van Signapore',
                 US: 'VS postcode'

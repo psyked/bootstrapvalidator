@@ -334,8 +334,9 @@
                 DK: 'duński',
                 GB: 'brytyjski',
                 IT: 'włoski',
-                MA: 'Maroko',
+                MA: 'maroko',
                 NL: 'holenderski',
+                RO: 'rumunia',
                 SE: 'szwecki',
                 SG: 'singapurski',
                 US: 'w USA'

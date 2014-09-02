@@ -336,6 +336,7 @@
                 IT: 'İtalya posta kodu',
                 MA: 'Fas posta kodu',
                 NL: 'Almanya posta kodu',
+                RO: 'Romanya posta kodu',
                 SE: 'İsveç posta kodu',
                 SG: 'Singapur posta kodu',
                 US: 'Amerika posta kodu'

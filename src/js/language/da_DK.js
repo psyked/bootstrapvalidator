@@ -334,8 +334,9 @@
                 DK: 'dansk postnummer',
                 GB: 'engelsk postnummer',
                 IT: 'italiensk postnummer',
-                MA: 'Marokko postnummer',
+                MA: 'marokko postnummer',
                 NL: 'hollandsk postnummer',
+                RO: 'rumænien postnummer',
                 SE: 'svensk postnummer',
                 SG: 'singaporeansk postnummer',
                 US: 'amerikansk postnummer'

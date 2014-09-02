@@ -332,10 +332,11 @@
                 BR: 'Brasilianskt',
                 CA: 'Kanadensiskt',
                 DK: 'Danskt',
-                GB: 'United Kingdom',
+                GB: 'Förenade kungariket',
                 IT: 'Italienskt',
                 MA: 'Marockanskt',
                 NL: 'Holländskt',
+                RO: 'Rumänien',
                 SE: 'Schweiziskt',
                 SG: 'Singaporianskt',
                 US: 'Amerikanskt'

@@ -336,6 +336,7 @@
                 IT: 'mã bưu điện của Ý',
                 MA: 'mã bưu điện của Maroc',
                 NL: 'mã bưu điện của Hà Lan',
+                RO: 'mã bưu điện của Romania',
                 SE: 'mã bưu điện của Thuỵ Sĩ',
                 SG: 'mã bưu điện của Singapore',
                 US: 'mã bưu điện của Mỹ'

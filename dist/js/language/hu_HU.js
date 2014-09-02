@@ -334,8 +334,9 @@
                 DK: 'dán',
                 GB: 'Egyesült Királyság beli',
                 IT: 'olasz',
-                MA: 'Marokkó',
+                MA: 'marokkó',
                 NL: 'holland',
+                RO: 'románia',
                 SE: 'svájci',
                 SG: 'singaporei',
                 US: 'Egyesült Államok beli'

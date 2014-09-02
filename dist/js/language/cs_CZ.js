@@ -336,6 +336,7 @@
                 IT: 'Italské PSČ',
                 MA: 'Maroko PSČ',
                 NL: 'Holandské PSČ',
+                RO: 'Rumunsko PSČ',
                 SE: 'Švýcarské PSČ',
                 SG: 'Singapurské PSČ',
                 US: 'Americké PSČ'

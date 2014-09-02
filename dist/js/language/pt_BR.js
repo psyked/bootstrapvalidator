@@ -336,6 +336,7 @@
                 IT: 'Código postal Italiano',
                 MA: 'Código postal Marroquino',
                 NL: 'Código postal Holandês',
+                RO: 'Código postal Roménia',
                 SE: 'Código postal Suíço',
                 SG: 'Código postal Cingapura',
                 US: 'Código postal dos EUA'

@@ -336,6 +336,7 @@
                 IT: 'Italienische Postleitzahl',
                 MA: 'Marokkanisch Postleitzahl',
                 NL: 'Niederländische Postleitzahl',
+                RO: 'Rumänien Postleitzahl',
                 SE: 'Schweizerische Postleitzahl',
                 SG: 'Singapurische Postleitzahl',
                 US: 'Vereinigte Staaten Postleitzahl'

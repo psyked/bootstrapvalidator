@@ -336,6 +336,7 @@
                 IT: 'code postal italien',
                 MA: 'code postal marocain',
                 NL: 'code postal hollandais',
+                RO: 'code postal roumanie',
                 SE: 'code postal suisse',
                 SG: 'code postal de Singapour',
                 US: 'code zip US'
