@@ -229,6 +229,7 @@
             country: '%s de geçerli bir telefon numarası giriniz',
             countries: {
                 BR: 'Brezilya',
+                CN: 'Çin',
                 ES: 'İspanya',
                 FR: 'Fransa',
                 GB: 'İngiltere',

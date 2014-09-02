@@ -229,6 +229,7 @@
             country: 'Kérlek, hogy érvényes %s telefonszámot adj meg',
             countries: {
                 BR: 'brazil',
+                CN: 'kína',
                 ES: 'spanyol',
                 FR: 'francia',
                 GB: 'Egyesült Királyság beli',

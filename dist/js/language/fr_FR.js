@@ -151,7 +151,7 @@
             countryNotSupported: 'Le code de pays %s n\'est pas accepté',
             country: 'Veuillez fournir un numéro d\'identification %s valide',
             countries: {
-                BA: 'Bosnia and Herzegovina',
+                BA: 'bosnie-herzégovine',
                 BG: 'bulgare',
                 BR: 'brésilien',
                 CH: 'suisse',
@@ -229,6 +229,7 @@
             country: 'Veuillez fournir un numéro de téléphone valide pour %s',
             countries: {
                 BR: 'Brésil',
+                CN: 'Chine',
                 ES: 'las Espagne',
                 FR: 'la France',
                 GB: 'le Royaume Uni',

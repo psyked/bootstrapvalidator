@@ -229,6 +229,7 @@
             country: 'Por favor ingrese un número válido de teléfono en %s',
             countries: {
                 BR: 'Brasil',
+                CN: 'China',
                 ES: 'España',
                 FR: 'Francia',
                 GB: 'Reino Unido',

@@ -229,6 +229,7 @@
             country: 'Voer een geldig telefoonnummer in uit %s',
             countries: {
                 BR: 'Brazilië',
+                CN: 'China',
                 ES: 'Spanje',
                 FR: 'Frankrijk',
                 GB: 'het Verenigd Koninkrijk',

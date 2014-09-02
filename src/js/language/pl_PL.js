@@ -229,6 +229,7 @@
             country: 'Wprowadź poprawny numer telefonu w kraju %s',
             countries: {
                 BR: 'Brazylia',
+                CN: 'Chiny',
                 ES: 'Hiszpania',
                 FR: 'Francja',
                 GB: 'Wielka Brytania',

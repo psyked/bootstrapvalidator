@@ -229,6 +229,7 @@
             country: 'Vui lòng nhập số điện thoại hợp lệ của %s',
             countries: {
                 BR: 'Brazil',
+                CN: 'Trung Quốc',
                 ES: 'Tây Ban Nha',
                 FR: 'Pháp',
                 GB: 'Vương quốc Anh',

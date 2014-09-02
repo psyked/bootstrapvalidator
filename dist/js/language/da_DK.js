@@ -1,6 +1,6 @@
 (function($) {
     /**
-     * Danish language package (No, it ain't cake!)
+     * Danish language package
      * Translated by @Djarnis
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
@@ -229,6 +229,7 @@
             country: 'Udfyld venligst dette felt med et gyldigt telefonnummer i %s',
             countries: {
                 BR: 'Brasilien',
+                CN: 'Kina',
                 ES: 'Spanien',
                 FR: 'Frankrig',
                 GB: 'England',

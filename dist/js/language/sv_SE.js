@@ -229,6 +229,7 @@
             country: 'Vänligen mata in ett giltigt telefonnummer i %s',
             countries: {
                 BR: 'Brasilien',
+                CN: 'Kina',
                 ES: 'Spanien',
                 FR: 'Frankrike',
                 GB: 'Storbritannien',

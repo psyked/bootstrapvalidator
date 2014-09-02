@@ -229,6 +229,7 @@
             country: 'Prosím zadejte správné telefoní číslo pro %s',
             countries: {
                 BR: 'Brazílii',
+                CN: 'Čína',
                 ES: 'Španělsko',
                 FR: 'Francii',
                 GB: 'Velkou Británii',
