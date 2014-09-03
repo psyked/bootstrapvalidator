@@ -228,9 +228,14 @@
             countryNotSupported: 'O código de país %s não é suportado',
             country: 'Por favor insira um número de telefone válido %s',
             countries: {
+                BR: 'Brasil',
+                CN: 'China',
                 ES: 'Espanha',
                 FR: 'França',
                 GB: 'Reino Unido',
+                MA: 'Marrocos',
+                PK: 'Paquistão',
+                RO: 'Roménia',
                 US: 'Estados Unidos'
             }
         },
@@ -280,6 +285,7 @@
                 AT: 'Austríaco',
                 BE: 'Belga',
                 BG: 'Búlgaro',
+                BR: 'Brasileiro',
                 CH: 'Suíça',
                 CY: 'cipriota',
                 CZ: 'Checa',
@@ -295,7 +301,8 @@
                 HU: 'Húngaro',
                 HR: 'Croata',
                 IE: 'irlandês',
-                TI: 'Italiano',
+                IS: 'Islândia',
+                IT: 'Italiano',
                 LT: 'Lituânia',
                 LU: 'Luxemburgo',
                 LV: 'Letão',
@@ -310,6 +317,7 @@
                 SE: 'Sueco',
                 SI: 'esloveno',
                 SK: 'Eslovaca',
+                VE: 'Venezuelano',
                 ZA: 'Sul-Africano'
             }
         },
@@ -321,11 +329,14 @@
             countryNotSupported: 'O código postal do país %s não é suportado',
             country: 'Por favor insira um código postal %s válido',
             countries: {
+                BR: 'Código postal Brasileiro',
                 CA: 'Código postal Canadense',
                 DK: 'Código postal Dinamarquês',
                 GB: 'Código postal do Reino Unido',
                 IT: 'Código postal Italiano',
+                MA: 'Código postal Marroquino',
                 NL: 'Código postal Holandês',
+                RO: 'Código postal Roménia',
                 SE: 'Código postal Suíço',
                 SG: 'Código postal Cingapura',
                 US: 'Código postal dos EUA'

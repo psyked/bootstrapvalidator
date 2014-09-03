@@ -115,7 +115,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('default', 'build');
-    grunt.registerTask('build',   ['copy', 'cssmin', 'concat:source', 'uglify']);
+    grunt.registerTask('build',   ['copy', 'cssmin', 'concat', 'uglify']);
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');

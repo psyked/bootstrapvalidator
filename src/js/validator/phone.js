@@ -4,9 +4,14 @@
         countryNotSupported: 'The country code %s is not supported',
         country: 'Please enter a valid phone number in %s',
         countries: {
+            BR: 'Brazil',
+            CN: 'China',
             ES: 'Spain',
             FR: 'France',
             GB: 'United Kingdom',
+            MA: 'Morocco',
+            PK: 'Pakistan',
+            RO: 'Romania',
             US: 'USA'
         }
     });
@@ -18,7 +23,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['ES', 'FR', 'GB', 'US'],
+        COUNTRY_CODES: ['BR', 'CN', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'US'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -57,6 +62,18 @@
 
             var isValid = true;
             switch (country.toUpperCase()) {
+                case 'BR':
+                    // Test: http://regexr.com/399m1
+                    value   = $.trim(value);
+                    isValid = (/^(([\d]{4}[-.\s]{1}[\d]{2,3}[-.\s]{1}[\d]{2}[-.\s]{1}[\d]{2})|([\d]{4}[-.\s]{1}[\d]{3}[-.\s]{1}[\d]{4})|((\(?\+?[0-9]{2}\)?\s?)?(\(?\d{2}\)?\s?)?\d{4,5}[-.\s]?\d{4}))$/).test(value);
+                    break;
+
+                case 'CN':
+                    // http://regexr.com/39dq4
+                    value   = $.trim(value);
+                    isValid = (/^((00|\+)?(86(?:-| )))?((\d{11})|(\d{3}[- ]{1}\d{4}[- ]{1}\d{4})|((\d{2,4}[- ]){1}(\d{7,8}|(\d{3,4}[- ]{1}\d{4}))([- ]{1}\d{1,4})?))$/).test(value);
+                    break;
+
                 case 'ES':
                     // http://regex101.com/r/rB9mA9/1
                     value   = $.trim(value);
@@ -64,9 +81,9 @@
                     break;
 
                 case 'FR':
-                    // http://regexr.com/395dq
+                    // http://regexr.com/39a2p
                     value   = $.trim(value);
-                    isValid = (/^(?:(?:(?:\+|00)33\D?(?:\D?\(0\)\D?)?)|0){1}[1-9]{1}(?:\D?\d{2}){4}$/).test(value);
+                    isValid = (/^(?:(?:(?:\+|00)33[ ]?(?:\(0\)[ ]?)?)|0){1}[1-9]{1}([ .-]?)(?:\d{2}\1?){3}\d{2}$/).test(value);
                     break;
 
             	case 'GB':
@@ -74,6 +91,24 @@
             		// Test: http://regexr.com/38uhv
             		value   = $.trim(value);
             		isValid = (/^\(?(?:(?:0(?:0|11)\)?[\s-]?\(?|\+)44\)?[\s-]?\(?(?:0\)?[\s-]?\(?)?|0)(?:\d{2}\)?[\s-]?\d{4}[\s-]?\d{4}|\d{3}\)?[\s-]?\d{3}[\s-]?\d{3,4}|\d{4}\)?[\s-]?(?:\d{5}|\d{3}[\s-]?\d{3})|\d{5}\)?[\s-]?\d{4,5}|8(?:00[\s-]?11[\s-]?11|45[\s-]?46[\s-]?4\d))(?:(?:[\s-]?(?:x|ext\.?\s?|\#)\d+)?)$/).test(value);
+                    break;
+
+                case 'MA':
+                    // http://en.wikipedia.org/wiki/Telephone_numbers_in_Morocco
+                    // Test: http://regexr.com/399n8
+                    value   = $.trim(value);
+                    isValid = (/^(?:(?:(?:\+|00)212[\s]?(?:[\s]?\(0\)[\s]?)?)|0){1}(?:5[\s.-]?[2-3]|6[\s.-]?[13-9]){1}[0-9]{1}(?:[\s.-]?\d{2}){3}$/).test(value);
+                    break;
+                
+                case 'PK':
+                    // http://regex101.com/r/yH8aV9/2
+                    value   = $.trim(value);
+                    isValid = (/^0?3[0-9]{2}[0-9]{7}$/).test(value);
+                    break;
+                    
+        		case 'RO':
+        		    // All mobile network and land line
+        		    isValid = (/^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|\-)?([0-9]{3}(\s|\.|\-|)){2}$/g).test(value);
                     break;
 
                 case 'US':

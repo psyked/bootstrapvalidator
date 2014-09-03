@@ -228,9 +228,14 @@
             countryNotSupported: 'Il codice nazione %s non e supportato',
             country: 'Si prega di inserire un numero di telefono valido in %s',
             countries: {
+                BR: 'Brasile',
+                CN: 'Porcellana',
                 ES: 'Spagna',
                 FR: 'Francia',
                 GB: 'Regno Unito',
+                MA: 'Marocco',
+                PK: 'Pakistan',
+                RO: 'Romania',
                 US: 'Stati Uniti d\'America'
             }
         },
@@ -280,6 +285,7 @@
                 AT: 'Austria',
                 BE: 'Belgio',
                 BG: 'Bulgaria',
+                BR: 'Brasiliano',
                 CH: 'Svizzera',
                 CY: 'Cipro',
                 CZ: 'Repubblica Ceca',
@@ -295,6 +301,7 @@
                 HU: 'Ungheria',
                 HR: 'Croazia',
                 IE: 'Irlanda',
+                IS: 'Islanda',
                 IT: 'Italia',
                 LT: 'Lituania',
                 LU: 'Lussemburgo',
@@ -310,6 +317,7 @@
                 SE: 'Svezia',
                 SI: 'Slovenia',
                 SK: 'Slovacchia',
+                VE: 'Venezuelano',
                 ZA: 'Sud Africano'
             }
         },
@@ -321,14 +329,17 @@
             countryNotSupported: 'Il codice nazione %s non e supportato',
             country: 'Si prega di inserire un valido  %s',
             countries: {
-                'CA': 'Codice postale Canadese',
-                'DK': 'Codice postale Danese',
-                'GB': 'Codice postale del Regno Unito',
-                'IT': 'Codice postale Italiano',
-                'NL': 'Codice postale Olandese',
-                'SE': 'Codice postale Svizzero',
-                'SG': 'Codice postale di Singapore',
-                'US': 'Codice postale US'
+                BR: 'Codice postale Brasiliano',
+                CA: 'Codice postale Canadese',
+                DK: 'Codice postale Danese',
+                GB: 'Codice postale del Regno Unito',
+                IT: 'Codice postale Italiano',
+                MA: 'Codice postale Marocco',
+                NL: 'Codice postale Olandese',
+                RO: 'Codice postale Romania',
+                SE: 'Codice postale Svizzero',
+                SG: 'Codice postale di Singapore',
+                US: 'Codice postale US'
             }
         }
     });

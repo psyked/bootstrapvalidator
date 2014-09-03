@@ -19,7 +19,7 @@ $users = array(
 if (isset($_POST['username']) && array_key_exists($_POST['username'], $users)) {
     $valid = false;
 } else if (isset($_POST['email'])) {
-    $email = $_POST['email'];
+    $email = $_POST['email'][0];
     foreach ($users as $k => $v) {
         if ($email == $v) {
             $valid = false;

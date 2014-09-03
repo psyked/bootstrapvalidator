@@ -151,7 +151,7 @@
             countryNotSupported: 'Le code de pays %s n\'est pas accepté',
             country: 'Veuillez fournir un numéro d\'identification %s valide',
             countries: {
-                BA: 'Bosnia and Herzegovina',
+                BA: 'bosnie-herzégovine',
                 BG: 'bulgare',
                 BR: 'brésilien',
                 CH: 'suisse',
@@ -228,9 +228,14 @@
             countryNotSupported: 'Le code de pays %s n\'est pas accepté',
             country: 'Veuillez fournir un numéro de téléphone valide pour %s',
             countries: {
+                BR: 'Brésil',
+                CN: 'Chine',
                 ES: 'las Espagne',
                 FR: 'la France',
                 GB: 'le Royaume Uni',
+                MA: 'Maroc',
+                PK: 'le Pakistan',
+                RO: 'Roumanie',
                 US: 'les USA'
             }
         },
@@ -280,6 +285,7 @@
                 AT: 'autrichien',
                 BE: 'belge',
                 BG: 'bulgare',
+                BR: 'brésilien',
                 CH: 'suisse',
                 CY: 'chypriote',
                 CZ: 'tchèque',
@@ -295,6 +301,7 @@
                 HU: 'hongrois',
                 HR: 'croate',
                 IE: 'irlandais',
+                IS: 'Islande',
                 IT: 'italien',
                 LT: 'lithuanien',
                 LU: 'luxembourgeois',
@@ -310,6 +317,7 @@
                 SE: 'suédois',
                 SI: 'slovène',
                 SK: 'slovaque',
+                VE: 'vénézuélien',
                 ZA: 'sud-africain'
             }
         },
@@ -321,11 +329,14 @@
             countryNotSupported: 'Le code de pays %s n\'est pas accepté',
             country: 'Veuillez fournir un %s valide',
             countries: {
+                BR: 'code postal brésilien',
                 CA: 'code postal canadien',
                 DK: 'code postal dannois',
                 GB: 'code postal anglais',
                 IT: 'code postal italien',
+                MA: 'code postal marocain',
                 NL: 'code postal hollandais',
+                RO: 'code postal roumanie',
                 SE: 'code postal suisse',
                 SG: 'code postal de Singapour',
                 US: 'code zip US'

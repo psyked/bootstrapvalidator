@@ -26,6 +26,10 @@
                             .length > 0;
             }
 
+            if ('number' === type && $field.get(0).validity && $field.get(0).validity.badInput === true) {
+                return true;
+            }
+
             return $.trim($field.val()) !== '';
         }
     };

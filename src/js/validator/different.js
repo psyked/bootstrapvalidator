@@ -25,17 +25,23 @@
                 return true;
             }
 
-            var compareWith = validator.getFieldElements(options.field);
-            if (compareWith === null) {
-                return true;
+            var fields  = options.field.split(','),
+                isValid = true;
+
+            for (var i = 0; i < fields.length; i++) {
+                var compareWith = validator.getFieldElements(fields[i]);
+                if (compareWith == null || compareWith.length === 0) {
+                    continue;
+                }
+
+                if (value === compareWith.val()) {
+                    isValid = false;
+                } else {
+                    validator.updateStatus(fields[i], validator.STATUS_VALID, 'different');
+                }
             }
 
-            if (value !== compareWith.val()) {
-                validator.updateStatus(options.field, validator.STATUS_VALID, 'different');
-                return true;
-            } else {
-                return false;
-            }
+            return isValid;
         }
     };
 }(window.jQuery));

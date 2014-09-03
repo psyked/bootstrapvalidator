@@ -228,9 +228,14 @@
             countryNotSupported: 'Der Ländercode %s wird nicht unterstützt',
             country: 'Bitte valide Telefonnummer für %s eingeben',
             countries: {
+                BR: 'Brasilien',
+                CN: 'China',
                 ES: 'Spanien',
                 FR: 'Frankreich',
                 GB: 'Vereinigtes Königreich',
+                MA: 'Marokko',
+                PK: 'Pakistan',
+                RO: 'Rumänien',
                 US: 'Vereinigte Staaten'
             }
         },
@@ -280,6 +285,7 @@
                 AT: 'Österreich',
                 BE: 'Belgisch',
                 BG: 'Bulgarisch',
+                BR: 'Brasilianisch',
                 CH: 'Schweiz',
                 CY: 'Zypriotisch',
                 CZ: 'Tschechisch',
@@ -295,6 +301,7 @@
                 HU: 'Ungarisch',
                 HR: 'Kroatisch',
                 IE: 'Irisch',
+                IS: 'Island',
                 IT: 'Italienisch',
                 LT: 'Lithauisch',
                 LU: 'Luxemburgerisch',
@@ -310,6 +317,7 @@
                 SE: 'Schwedisch',
                 SI: 'Slowenisch',
                 SK: 'Slowakisch',
+                VE: 'Venezolanisch',
                 ZA: 'Süd Afrikanisch'
             }
         },
@@ -321,11 +329,14 @@
             countryNotSupported: 'Der Ländercode %s wird nicht unterstützt',
             country: 'Bitte gültigen Code %s eingeben',
             countries: {
+                BR: 'Brasilianisch Postleitzahl',
                 CA: 'Kanadische Postleitzahl',
                 DK: 'Dänische Postleitzahl',
                 GB: 'Englische Postleitzahl',
                 IT: 'Italienische Postleitzahl',
+                MA: 'Marokkanisch Postleitzahl',
                 NL: 'Niederländische Postleitzahl',
+                RO: 'Rumänien Postleitzahl',
                 SE: 'Schweizerische Postleitzahl',
                 SG: 'Singapurische Postleitzahl',
                 US: 'Vereinigte Staaten Postleitzahl'

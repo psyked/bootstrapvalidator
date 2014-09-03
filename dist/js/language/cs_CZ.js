@@ -228,9 +228,14 @@
             countryNotSupported: 'Telefoní číslo pro %s není podporované',
             country: 'Prosím zadejte správné telefoní číslo pro %s',
             countries: {
+                BR: 'Brazílii',
+                CN: 'Čína',
                 ES: 'Španělsko',
                 FR: 'Francii',
                 GB: 'Velkou Británii',
+                MA: 'Maroko',
+                PK: 'Pákistán',
+                RO: 'Rumunsko',
                 US: 'Spojené Státy Americké'
             }
         },
@@ -280,6 +285,7 @@
                 AT: 'Rakousko',
                 BE: 'Belgii',
                 BG: 'Bulharsko',
+                BR: 'Brazílii',
                 CH: 'Švýcarsko',
                 CY: 'Kypr',
                 CZ: 'Čechy',
@@ -295,6 +301,7 @@
                 HU: 'Maďarsko',
                 HR: 'Chorvatsko',
                 IE: 'Irsko',
+                IS: 'Island',
                 IT: 'Itálie',
                 LT: 'Litvu',
                 LU: 'Lucembursko',
@@ -310,6 +317,7 @@
                 SE: 'Švédsko',
                 SI: 'Slovinsko',
                 SK: 'Slovensko',
+                VE: 'Venezuelský',
                 ZA: 'Jižní Afriku'
             }
         },
@@ -321,11 +329,14 @@
             countryNotSupported: '%s není podporované',
             country: 'Prosím zadejte správné %s',
             countries: {
+                BR: 'Brazílii PSČ',
                 CA: 'Kanadské PSČ',
                 DK: 'Dánské PSČ',
                 GB: 'PSČ Velké Británie',
                 IT: 'Italské PSČ',
+                MA: 'Maroko PSČ',
                 NL: 'Holandské PSČ',
+                RO: 'Rumunsko PSČ',
                 SE: 'Švýcarské PSČ',
                 SG: 'Singapurské PSČ',
                 US: 'Americké PSČ'

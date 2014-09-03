@@ -228,9 +228,14 @@
             countryNotSupported: '%s ülke kodu desteklenmemektedir',
             country: '%s de geçerli bir telefon numarası giriniz',
             countries: {
+                BR: 'Brezilya',
+                CN: 'Çin',
                 ES: 'İspanya',
                 FR: 'Fransa',
                 GB: 'İngiltere',
+                MA: 'Fas',
+                PK: 'Pakistan',
+                RO: 'Romanya',
                 US: 'Amerika'
             }
         },
@@ -280,6 +285,7 @@
                 AT: 'Avustralyalı',
                 BE: 'Belçikalı',
                 BG: 'Bulgar',
+                BR: 'Brezilyalı',
                 CH: 'İsviçreli',
                 CY: 'Kıbrıslı',
                 CZ: 'Çek',
@@ -295,6 +301,7 @@
                 HU: 'Macar',
                 HR: 'Hırvat',
                 IE: 'Irlandalı',
+                IS: 'İzlanda',
                 IT: 'Italyan',
                 LT: 'Litvanyalı',
                 LU: 'Lüksemburglu',
@@ -310,6 +317,7 @@
                 SE: 'İsveç',
                 SI: 'Sloven',
                 SK: 'Slovak',
+                VE: 'Venezüella',
                 ZA: 'Kuzey Afrikalı'
             }
         },
@@ -321,11 +329,14 @@
             countryNotSupported: '%s ülke kodu desteklenmemektedir',
             country: 'Lütfen geçerli bir %s',
             countries: {
+                BR: 'Brezilyalı posta kodu',
                 CA: 'Kanada posta kodu',
                 DK: 'Danimarka posta kodu',
                 GB: 'İngiltere posta kodu',
                 IT: 'İtalya posta kodu',
+                MA: 'Fas posta kodu',
                 NL: 'Almanya posta kodu',
+                RO: 'Romanya posta kodu',
                 SE: 'İsveç posta kodu',
                 SG: 'Singapur posta kodu',
                 US: 'Amerika posta kodu'

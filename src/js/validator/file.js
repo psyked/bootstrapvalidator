@@ -51,7 +51,7 @@
                     }
 
                     // Check file type
-                    if (types && $.inArray(files[i].type.toLowerCase(), types) === -1) {
+                    if (files[i].type && types && $.inArray(files[i].type.toLowerCase(), types) === -1) {
                         return false;
                     }
                 }

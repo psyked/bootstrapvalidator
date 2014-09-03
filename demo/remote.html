@@ -31,7 +31,14 @@
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Email address</label>
                             <div class="col-lg-5">
-                                <input type="text" class="form-control" name="email" autocomplete="off" />
+                                <input type="text" class="form-control" name="email[]" autocomplete="off" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Other email address</label>
+                            <div class="col-lg-5">
+                                <input type="text" class="form-control" name="email[]" autocomplete="off" />
                             </div>
                         </div>
 
@@ -110,7 +117,8 @@ $(document).ready(function() {
                     },
                     remote: {
                         url: 'remote.php',
-                        message: 'The username is not available'
+                        message: 'The username is not available',
+                        delay: 1000
                     },
                     different: {
                         field: 'password',
@@ -118,7 +126,7 @@ $(document).ready(function() {
                     }
                 }
             },
-            email: {
+            'email[]': {
                 validators: {
                     notEmpty: {
                         message: 'The email address is required and can\'t be empty'
@@ -128,7 +136,8 @@ $(document).ready(function() {
                     },
                     remote: {
                         url: 'remote.php',
-                        message: 'The email is not available'
+                        message: 'The email is not available',
+                        delay: 2000
                     }
                 }
             },

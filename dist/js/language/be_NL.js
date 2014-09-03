@@ -228,9 +228,14 @@
             countryNotSupported: 'De land code %s is niet ondersteund',
             country: 'Geef een geldig telefoon nummer van %s',
             countries: {
+                BR: 'Brazilië',
+                CN: 'China',
                 ES: 'Spanje',
                 FR: 'Frankrijk',
                 GB: 'Verenigd Koninkrijk',
+                MA: 'Marokko',
+                PK: 'Pakistan',
+                RO: 'Roemenië',
                 US: 'VS'
             }
         },
@@ -280,6 +285,7 @@
                 AT: 'Oostenrijks',
                 BE: 'Belgisch',
                 BG: 'Bulgaars',
+                BR: 'Braziliaans',
                 CH: 'Zwitsers',
                 CY: 'Cypriotisch',
                 CZ: 'Tsjechisch',
@@ -295,6 +301,7 @@
                 HU: 'Hongaars',
                 HR: 'Kroatisch',
                 IE: 'Iers',
+                IS: 'IJsland',
                 IT: 'Italiaans',
                 LT: 'Litouwse',
                 LU: 'Luxemburgs',
@@ -310,6 +317,7 @@
                 SE: 'Zweeds',
                 SI: 'Sloveens',
                 SK: 'Slovaaks',
+                VE: 'Venezolaans',
                 ZA: 'Zuid-Afrikaans'
             }
         },
@@ -319,13 +327,16 @@
         zipCode: {
             'default': 'Geef een geldige postcode',
             countryNotSupported: 'De land code %s is niet ondersteund',
-            country: 'Please enter a valid %s',
+            country: 'Geef een geldige postcode van %s',
             countries: {
+                BR: 'Braziliaans postcode',
                 CA: 'Canadeese postcode',
                 DK: 'Deense postcode',
                 GB: 'Engelse postcode',
                 IT: 'Italiaanse postcode',
+                MA: 'Marokko postcode',
                 NL: 'Nederlandse postcode',
+                RO: 'Roemenië postcode',
                 SE: 'Zwitserse postcode',
                 SG: 'postcode van Signapore',
                 US: 'VS postcode'

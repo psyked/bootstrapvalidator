@@ -228,9 +228,14 @@
             countryNotSupported: 'Kod kraju %s nie jest wspierany',
             country: 'Wprowadź poprawny numer telefonu w kraju %s',
             countries: {
+                BR: 'Brazylia',
+                CN: 'Chiny',
                 ES: 'Hiszpania',
                 FR: 'Francja',
                 GB: 'Wielka Brytania',
+                MA: 'Maroko',
+                PK: 'Pakistan',
+                RO: 'Rumunia',
                 US: 'USA'
             }
         },
@@ -280,6 +285,7 @@
                 AT: 'austryjacki',
                 BE: 'belgijski',
                 BG: 'bułgarski',
+                BR: 'brazylijski',
                 CH: 'szwecki',
                 CY: 'cypryjski',
                 CZ: 'czeski',
@@ -295,6 +301,7 @@
                 HU: 'węgierski',
                 HR: 'chorwacki',
                 IE: 'irlandzki',
+                IS: 'Islandia',
                 IT: 'włoski',
                 LT: 'litewski',
                 LU: 'luksemburski',
@@ -310,6 +317,7 @@
                 SE: 'szwedzki',
                 SI: 'słoweński',
                 SK: 'słowacki',
+                VE: 'wenezuelski',
                 ZA: 'południowo Afrykański'
             }
         },
@@ -321,11 +329,14 @@
             countryNotSupported: 'Kod kraju %s nie jest obsługiwany',
             country: 'Wprowadź poprawny %s kod pocztowy',
             countries: {
+                BR: 'brazylijski',
                 CA: 'kanadyski',
                 DK: 'duński',
                 GB: 'brytyjski',
                 IT: 'włoski',
+                MA: 'maroko',
                 NL: 'holenderski',
+                RO: 'rumunia',
                 SE: 'szwecki',
                 SG: 'singapurski',
                 US: 'w USA'

@@ -36,6 +36,11 @@
 
             options.format = options.format || 'MM/DD/YYYY';
 
+            // #683: Force the format to YYYY-MM-DD as the default browser behaviour when using type="date" attribute
+            if ($field.attr('type') === 'date') {
+                options.format = 'YYYY-MM-DD';
+            }
+
             var formats    = options.format.split(' '),
                 dateFormat = formats[0],
                 timeFormat = (formats.length > 1) ? formats[1] : null,
@@ -68,7 +73,7 @@
                 month = date[$.inArray('MM', dateFormat)],
                 day   = date[$.inArray('DD', dateFormat)];
 
-            if (!year || !month || !day) {
+            if (!year || !month || !day || year.length !== 4) {
                 return false;
             }
 
@@ -88,24 +93,33 @@
 
                 // Validate seconds
                 if (seconds) {
+                    if (isNaN(seconds) || seconds.length > 2) {
+                        return false;
+                    }
                     seconds = parseInt(seconds, 10);
-                    if (isNaN(seconds) || seconds < 0 || seconds > 60) {
+                    if (seconds < 0 || seconds > 60) {
                         return false;
                     }
                 }
 
                 // Validate hours
                 if (hours) {
+                    if (isNaN(hours) || hours.length > 2) {
+                        return false;
+                    }
                     hours = parseInt(hours, 10);
-                    if (isNaN(hours) || hours < 0 || hours >= 24 || (amOrPm && hours > 12)) {
+                    if (hours < 0 || hours >= 24 || (amOrPm && hours > 12)) {
                         return false;
                     }
                 }
 
                 // Validate minutes
                 if (minutes) {
+                    if (isNaN(minutes) || minutes.length > 2) {
+                        return false;
+                    }
                     minutes = parseInt(minutes, 10);
-                    if (isNaN(minutes) || minutes < 0 || minutes > 59) {
+                    if (minutes < 0 || minutes > 59) {
                         return false;
                     }
                 }

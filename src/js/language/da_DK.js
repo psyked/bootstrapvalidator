@@ -1,6 +1,6 @@
 (function($) {
     /**
-     * Danish language package (No, it ain't cake!)
+     * Danish language package
      * Translated by @Djarnis
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
@@ -228,9 +228,14 @@
             countryNotSupported: 'Landekoden %s understøttes desværre ikke',
             country: 'Udfyld venligst dette felt med et gyldigt telefonnummer i %s',
             countries: {
+                BR: 'Brasilien',
+                CN: 'Kina',
                 ES: 'Spanien',
                 FR: 'Frankrig',
                 GB: 'England',
+                MA: 'Marokko',
+                PK: 'Pakistan',
+                RO: 'Rumænien',
                 US: 'USA'
             }
         },
@@ -280,6 +285,7 @@
                 AT: 'østrigsk',
                 BE: 'belgisk',
                 BG: 'bulgarsk',
+                BR: 'brasiliansk',
                 CH: 'schweizisk',
                 CY: 'cypriotisk',
                 CZ: 'tjekkisk',
@@ -295,6 +301,7 @@
                 HU: 'ungarnsk',
                 HR: 'kroatisk',
                 IE: 'irsk',
+                IS: 'island',
                 IT: 'italiensk',
                 LT: 'litauisk',
                 LU: 'luxembourgsk',
@@ -310,6 +317,7 @@
                 SE: 'svensk',
                 SI: 'slovensk',
                 SK: 'slovakisk',
+                VE: 'venezuelansk',
                 ZA: 'sydafrikansk'
             }
         },
@@ -321,11 +329,14 @@
             countryNotSupported: 'Landekoden %s understøttes desværre ikke',
             country: 'Udfyld venligst dette felt med et gyldigt %s',
             countries: {
+                BR: 'brasiliansk postnummer',
                 CA: 'canadisk postnummer',
                 DK: 'dansk postnummer',
                 GB: 'engelsk postnummer',
                 IT: 'italiensk postnummer',
+                MA: 'marokko postnummer',
                 NL: 'hollandsk postnummer',
+                RO: 'rumænien postnummer',
                 SE: 'svensk postnummer',
                 SG: 'singaporeansk postnummer',
                 US: 'amerikansk postnummer'

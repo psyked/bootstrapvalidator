@@ -12,8 +12,9 @@
         },
 
         enableByHtml5: function($field) {
-            var max = $field.attr('max');
-            if (max) {
+            var type = $field.attr('type'),
+                max  = $field.attr('max');
+            if (max && type !== 'date') {
                 return {
                     value: max
                 };
@@ -43,9 +44,11 @@
             if (value === '') {
                 return true;
             }
+            if (!$.isNumeric(value)) {
+                return false;
+            }
 
             var compareTo = $.isNumeric(options.value) ? options.value : validator.getDynamicOption($field, options.value);
-
             value = parseFloat(value);
             return (options.inclusive === true || options.inclusive === undefined)
                     ? {
