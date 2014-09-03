@@ -149,7 +149,7 @@
         id: {
             'default': 'Por favor ingrese un número de identificación válido',
             countryNotSupported: 'El código del país %s no esta soportado',
-            country: 'Por favor ingrese un número válido de identificación en %s',
+            country: 'Por favor ingrese un número de identificación válido en %s',
             countries: {
                 BA: 'Bosnia Herzegovina',
                 BG: 'Bulgaria',
@@ -280,7 +280,7 @@
         vat: {
             'default': 'Por favor ingrese un número VAT válido',
             countryNotSupported: 'El código del país %s no está soportado',
-            country: 'Por favor ingrese un número válido de IVA en %s',
+            country: 'Por favor ingrese un número VAT válido en %s',
             countries: {
                 AT: 'Austria',
                 BE: 'Bélgica',
