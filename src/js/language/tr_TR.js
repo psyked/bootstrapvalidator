@@ -63,7 +63,7 @@
         iban: {
             'default': 'Lütfen geçerli bir IBAN numarası giriniz',
             countryNotSupported: '%s ülke kodu desteklenmemektedir',
-            country: 'Lütfen geçerli bir IBAN numarası girin %s',
+            country: 'Lütfen geçerli bir IBAN numarası giriniz içinde %s',
             countries: {
                 AD: 'Andorra',
                 AE: 'Birleşik Arap Emirlikleri',
@@ -149,7 +149,7 @@
         id: {
             'default': 'Lütfen geçerli bir tanımlama numarası giriniz',
             countryNotSupported: '%s ülke kodu desteklenmiyor',
-            country: 'Lütfen geçerli bir kimlik numarası girin %s',
+            country: 'Lütfen geçerli bir kimlik numarası giriniz içinde %s',
             countries: {
                 BA: 'Bosna Hersek',
                 BG: 'Bulgaristan',
@@ -226,7 +226,7 @@
         phone: {
             'default': 'Lütfen geçerli bir telefon numarası giriniz',
             countryNotSupported: '%s ülke kodu desteklenmemektedir',
-            country: '%s de geçerli bir telefon numarası giriniz',
+            country: 'Lütfen geçerli bir telefon numarası giriniz içinde %s',
             countries: {
                 BR: 'Brezilya',
                 CN: 'Çin',
@@ -280,7 +280,7 @@
         vat: {
             'default': 'Lütfen geçerli bir VAT kodu giriniz',
             countryNotSupported: '%s ülke kodu desteklenmiyor',
-            country: 'Lütfen geçerli bir vergi numarası girin %s',
+            country: 'Lütfen geçerli bir vergi numarası giriniz içinde %s',
             countries: {
                 AT: 'Avustralya',
                 BE: 'Belçika',
@@ -325,9 +325,9 @@
             'default': 'Lütfen geçerli bir VIN numarası giriniz'
         },
         zipCode: {
-            'default': 'Lütfen geçerli bir ZIP kodu giriniz',
+            'default': 'Lütfen geçerli bir posta kodu giriniz',
             countryNotSupported: '%s ülke kodu desteklenmemektedir',
-            country: 'Lütfen geçerli bir posta kodu girin %s',
+            country: 'Lütfen geçerli bir posta kodu giriniz içinde %s',
             countries: {
                 BR: 'Brezilya',
                 CA: 'Kanada',
