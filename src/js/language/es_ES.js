@@ -280,7 +280,7 @@
         vat: {
             'default': 'Por favor introduce un número IVA válido',
             countryNotSupported: 'El código del país %s no está soportado',
-            country: 'Por favor introduce un número válido de IVA en %s',
+            country: 'Por favor introduce un número IVA válido en %s',
             countries: {
                 AT: 'Austria',
                 BE: 'Bélgica',
