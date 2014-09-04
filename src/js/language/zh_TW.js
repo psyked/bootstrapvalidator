@@ -61,9 +61,9 @@
             'default': '請輸入有效的16位色碼'
         },
         iban: {
-            'default': '請輸入有效的IBAN ',
+            'default': '請輸入有效的IBAN',
             countryNotSupported: '不支援該國家代碼 %s',
-            country: '請輸入有效的 %s IBAN編號 ',
+            country: '請輸入有效的 %s IBAN編號',
             countries: {
                 AD: '安道​​爾',
                 AE: '阿聯酋',
@@ -327,19 +327,19 @@
         zipCode: {
             'default': '請輸入有效的郵政編碼',
             countryNotSupported: '不支援該國家代碼 %s',
-            country: '請輸入有效的 %s',
+            country: '請輸入有效的 %s 郵政編碼',
             countries: {
-                BR: '巴西 郵政編碼',
-                CA: '加拿大 郵政編碼',
-                DK: '丹麥 郵政編碼',
-                GB: '英國 郵政編碼',
-                IT: '意大利 郵政編碼',
-                MA: '摩洛哥 郵政編碼',
-                NL: '荷蘭 郵政編碼',
-                RO: '罗马尼亚 郵政編碼',
-                SE: '瑞士 郵政編碼',
-                SG: '新加坡 郵政編碼',
-                US: '美國 郵政編碼'
+                BR: '巴西',
+                CA: '加拿大',
+                DK: '丹麥',
+                GB: '英國',
+                IT: '意大利',
+                MA: '摩洛哥',
+                NL: '荷蘭',
+                RO: '罗马尼亚',
+                SE: '瑞士',
+                SG: '新加坡',
+                US: '美國'
             }
         }
     });
