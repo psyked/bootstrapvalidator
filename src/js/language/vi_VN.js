@@ -327,7 +327,7 @@
         zipCode: {
             'default': 'Vui lòng nhập mã bưu điện hợp lệ',
             countryNotSupported: 'Mã quốc gia %s không được hỗ trợ',
-            country: 'Vui lòng nhập mã bưu điện của %s',
+            country: 'Vui lòng nhập mã bưu điện hợp lệ của %s',
             countries: {
                 BR: 'Brazil',
                 CA: 'Canada',
