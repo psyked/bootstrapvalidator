@@ -294,7 +294,7 @@
                 EE: 'Estland',
                 ES: 'Spanje',
                 FI: 'Finland',
-                FR: 'Frans',
+                FR: 'Frankrijk',
                 GB: 'Verenigd Koninkrijk',
                 GR: 'Griekenland',
                 EL: 'Griekenland',
