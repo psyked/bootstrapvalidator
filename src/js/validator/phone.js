@@ -23,7 +23,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['BR', 'CN', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'US'],
+        COUNTRY_CODES: ['BR', 'CN', 'ES', 'FR', 'GB', 'MA', 'PK', 'TH', 'RO', 'US'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -105,6 +105,11 @@
                     value   = $.trim(value);
                     isValid = (/^0?3[0-9]{2}[0-9]{7}$/).test(value);
                     break;
+                    
+        		case 'TH':
+        		    //http://regex101.com/r/vM5mZ4/2
+        		    isValid = (/^0\(?([8-9]{2})*-([0-9]{3})*-([0-9]{4}))$/g).test(value);
+                    break;                     
                     
         		case 'RO':
         		    // All mobile network and land line
