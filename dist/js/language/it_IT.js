@@ -230,6 +230,7 @@
             countries: {
                 BR: 'Brasile',
                 CN: 'Porcellana',
+                DK: 'Danimarca',
                 ES: 'Spagna',
                 FR: 'Francia',
                 GB: 'Regno Unito',

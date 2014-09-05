@@ -9,7 +9,8 @@ __New Features__
 * [#724](https://github.com/nghuuphuoc/bootstrapvalidator/pull/724): Add Venezuelan VAT number (RIF) validator, thanks to [@paquitodev](https://github.com/paquitodev)
 * [#739](https://github.com/nghuuphuoc/bootstrapvalidator/pull/739): Add China phone number validator, thanks to [@caijh](https://github.com/caijh)
 * [#760](https://github.com/nghuuphuoc/bootstrapvalidator/pull/760): Add Romania phone number validator, thanks to [@adrian-dks](https://github.com/adrian-dks)
-* [#761](https://github.com/nghuuphuoc/bootstrapvalidator/pull/761): Add Romanian postal code validator, thanks to [@adrian-dks](https://github.com/adrian-dks)
+* [#761](https://github.com/nghuuphuoc/bootstrapvalidator/pull/761): Add Romania postal code validator, thanks to [@adrian-dks](https://github.com/adrian-dks)
+* [#785](https://github.com/nghuuphuoc/bootstrapvalidator/pull/785): Add Denmark phone number validator, thanks to [@emilchristensen](https://github.com/emilchristensen)
 
 __Changes__
 * [#753](https://github.com/nghuuphuoc/bootstrapvalidator/issues/753): Change the default type of [remote](http://bootstrapvalidator.com/validators/remote/) validator to GET

@@ -230,6 +230,7 @@
             countries: {
                 BR: 'Brazil',
                 CN: 'Trung Quốc',
+                DK: 'Đan Mạch',
                 ES: 'Tây Ban Nha',
                 FR: 'Pháp',
                 GB: 'Vương quốc Anh',

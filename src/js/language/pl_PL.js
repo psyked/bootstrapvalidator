@@ -230,6 +230,7 @@
             countries: {
                 BR: 'Brazylia',
                 CN: 'Chiny',
+                DK: 'Dania',
                 ES: 'Hiszpania',
                 FR: 'Francja',
                 GB: 'Wielka Brytania',
