@@ -63,7 +63,7 @@
         iban: {
             'default': 'Si prega di inserire un numero IBAN valido',
             countryNotSupported: 'Il codice del paese %s non e supportato',
-            country: 'Si prega di inserire un numero IBAN valido in %s',
+            country: 'Si prega di inserire un numero IBAN valido per %s',
             countries: {
                 AD: 'Andorra',
                 AE: 'Emirati Arabi Uniti',
@@ -149,33 +149,33 @@
         id: {
             'default': 'Si prega di inserire un numero di identificazione valido',
             countryNotSupported: 'Il codice nazione %s non e supportato',
-            country: 'Si prega di inserire un numero di identificazione %s valido',
+            country: 'Si prega di inserire un numero di identificazione valido per %s',
             countries: {
                 BA: 'Bosnia-Erzegovina',
                 BG: 'Bulgaria',
-                BR: 'Brasiliano',
-                CH: 'Svizzero',
-                CL: 'Cileno',
+                BR: 'Brasile',
+                CH: 'Svizzera',
+                CL: 'Chile',
                 CZ: 'Ceco',
-                DK: 'Danese',
-                EE: 'Estonian',
-                ES: 'Spagnolo',
-                FI: 'Finlandese',
-                HR: 'Croato',
-                IE: 'Irlandese',
-                IS: 'Islandese',
-                LT: 'Lituano',
-                LV: 'Lettone',
+                DK: 'Danimarca',
+                EE: 'Estonia',
+                ES: 'Spagna',
+                FI: 'Finlandia',
+                HR: 'Croazia',
+                IE: 'Irlanda',
+                IS: 'Islanda',
+                LT: 'Lituania',
+                LV: 'Lettonia',
                 ME: 'Montenegro',
-                MK: 'Macedone',
-                NL: 'Olandese',
-                RO: 'Rumeno',
-                RS: 'Serbo',
-                SE: 'Svedese',
-                SI: 'Sloveno',
-                SK: 'Slovacco',
+                MK: 'Macedonia',
+                NL: 'Paesi Bassi',
+                RO: 'Romania',
+                RS: 'Serbia',
+                SE: 'Svezia',
+                SI: 'Slovenia',
+                SK: 'Slovacchia',
                 SM: 'San Marino',
-                ZA: 'Sud Africano'
+                ZA: 'Sudafrica'
             }
         },
         identical: {
@@ -226,7 +226,7 @@
         phone: {
             'default': 'Si prega di inserire un numero di telefono valido',
             countryNotSupported: 'Il codice nazione %s non e supportato',
-            country: 'Si prega di inserire un numero di telefono valido in %s',
+            country: 'Si prega di inserire un numero di telefono valido per %s',
             countries: {
                 BR: 'Brasile',
                 CN: 'Porcellana',
@@ -325,21 +325,21 @@
             'default': 'Si prega di inserire un numero VIN valido'
         },
         zipCode: {
-            'default': 'Si prega di inserire un CAP valido',
+            'default': 'Si prega di inserire un codice postale valido',
             countryNotSupported: 'Il codice nazione %s non e supportato',
-            country: 'Si prega di inserire un valido  %s',
+            country: 'Si prega di inserire un codice postale valido per %s',
             countries: {
-                BR: 'Codice postale Brasiliano',
-                CA: 'Codice postale Canadese',
-                DK: 'Codice postale Danese',
-                GB: 'Codice postale del Regno Unito',
-                IT: 'Codice postale Italiano',
-                MA: 'Codice postale Marocco',
-                NL: 'Codice postale Olandese',
-                RO: 'Codice postale Romania',
-                SE: 'Codice postale Svizzero',
-                SG: 'Codice postale di Singapore',
-                US: 'Codice postale US'
+                BR: 'Brasile',
+                CA: 'Canada',
+                DK: 'Danimarca',
+                GB: 'Regno Unito',
+                IT: 'Italia',
+                MA: 'Marocco',
+                NL: 'Paesi Bassi',
+                RO: 'Romania',
+                SE: 'Svezia',
+                SG: 'Singapore',
+                US: 'Stati Uniti d\'America'
             }
         }
     });

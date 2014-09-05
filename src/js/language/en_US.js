@@ -294,7 +294,7 @@
                 EE: 'Estonia',
                 ES: 'Spain',
                 FI: 'Finland',
-                FR: 'French',
+                FR: 'France',
                 GB: 'United Kingdom',
                 GR: 'Greece',
                 EL: 'Greece',

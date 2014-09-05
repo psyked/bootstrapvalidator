@@ -16,7 +16,7 @@
             EE: 'Estonia',
             ES: 'Spain',
             FI: 'Finland',
-            FR: 'French',
+            FR: 'France',
             GB: 'United Kingdom',
             GR: 'Greek',
             EL: 'Greek',
