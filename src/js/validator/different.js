@@ -34,10 +34,11 @@
                     continue;
                 }
 
-                if (value === compareWith.val()) {
+                var compareValue = compareWith.val();
+                if (value === compareValue) {
                     isValid = false;
-                } else {
-                    validator.updateStatus(fields[i], validator.STATUS_VALID, 'different');
+                } else if (compareValue !== '') {
+                    validator.updateStatus(compareWith, validator.STATUS_VALID, 'different');
                 }
             }
 
