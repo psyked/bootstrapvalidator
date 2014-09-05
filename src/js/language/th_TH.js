@@ -16,8 +16,8 @@
         },
         choice: {
             'default': 'กรุณาระบุค่าให้ถูกต้อง',
-            less: 'Please choose %s options at minimum',
-            more: 'Please choose %s options at maximum',
+            less: 'โปรดเลือกตัวเลือก %s ที่ต่ำสุด',
+            more: 'โปรดเลือกตัวเลือก %s ที่สูงสุด',
             between: 'กรุณาเลือก %s - %s ที่มีอยู่'
         },
         creditCard: {
@@ -62,284 +62,285 @@
         },
         iban: {
             'default': 'กรุณาระบุหมายเลข IBAN ให้ถูกต้อง',
-            countryNotSupported: 'ไม่รองรับค่า %s รหัสประเทศที่ระบุ',
+            countryNotSupported: 'ประเทศ %s ไม่รองรับ',
             country: 'กรุณาระบุหมายเลข IBAN ใน %s',
             countries: {
-                AD: 'Andorra',
-                AE: 'United Arab Emirates',
-                AL: 'Albania',
-                AO: 'Angola',
-                AT: 'Austria',
-                AZ: 'Azerbaijan',
-                BA: 'Bosnia and Herzegovina',
-                BE: 'Belgium',
-                BF: 'Burkina Faso',
-                BG: 'Bulgaria',
-                BH: 'Bahrain',
-                BI: 'Burundi',
-                BJ: 'Benin',
-                BR: 'Brazil',
-                CH: 'Switzerland',
-                CI: 'Ivory Coast',
-                CM: 'Cameroon',
-                CR: 'Costa Rica',
-                CV: 'Cape Verde',
-                CY: 'Cyprus',
-                CZ: 'Czech',
-                DE: 'Germany',
-                DK: 'Denmark',
-                DO: 'Dominica',
-                DZ: 'Algeria',
-                EE: 'Estonia',
-                ES: 'Spain',
-                FI: 'Finland',
-                FO: 'Faroe Islands',
-                FR: 'France',
-                GB: 'United Kingdom',
-                GE: 'Georgia',
-                GI: 'Gibraltar',
-                GL: 'Greenland',
-                GR: 'Greece',
-                GT: 'Guatemala',
-                HR: 'Croatia',
-                HU: 'Hungary',
-                IE: 'Ireland',
-                IL: 'Israel',
-                IR: 'Iran',
-                IS: 'Iceland',
-                IT: 'Italy',
-                JO: 'Jordan',
-                KW: 'Kuwait',
-                KZ: 'Kazakhstan',
-                LB: 'Lebanon',
+                AD: 'อันดอร์รา',
+                AE: 'สหรัฐอาหรับเอมิเรตส์',
+                AL: 'แอลเบเนีย',
+                AO: 'แองโกลา',
+                AT: 'ออสเตรีย',
+                AZ: 'อาเซอร์ไบจาน',
+                BA: 'บอสเนียและเฮอร์เซโก',
+                BE: 'ประเทศเบลเยียม',
+                BF: 'บูร์กินาฟาโซ',
+                BG: 'บัลแกเรีย',
+                BH: 'บาห์เรน',
+                BI: 'บุรุนดี',
+                BJ: 'เบนิน',
+                BR: 'บราซิล',
+                CH: 'สวิตเซอร์แลนด์',
+                CI: 'ไอวอรี่โคสต์',
+                CM: 'แคเมอรูน',
+                CR: 'คอสตาริกา',
+                CV: 'เคปเวิร์ด',
+                CY: 'ไซปรัส',
+                CZ: 'สาธารณรัฐเชค',
+                DE: 'เยอรมนี',
+                DK: 'เดนมาร์ก',
+                DO: 'โดมินิกา',
+                DZ: 'แอลจีเรีย',
+                EE: 'เอสโตเนีย',
+                ES: 'สเปน',
+                FI: 'ฟินแลนด์',
+                FO: 'หมู่เกาะแฟโร',
+                FR: 'ฝรั่งเศส',
+                GB: 'สหราชอาณาจักร',
+                GE: 'จอร์เจีย',
+                GI: 'ยิบรอลตา',
+                GL: 'กรีนแลนด์',
+                GR: 'กรีซ',
+                GT: 'กัวเตมาลา',
+                HR: 'โครเอเชีย',
+                HU: 'ฮังการี',
+                IE: 'ไอร์แลนด์',
+                IL: 'อิสราเอล',
+                IR: 'อิหร่าน',
+                IS: 'ไอซ์',
+                IT: 'อิตาลี',
+                JO: 'จอร์แดน',
+                KW: 'คูเวต',
+                KZ: 'คาซัคสถาน',
+                LB: 'เลบานอน',
                 LI: 'Liechtenstein',
-                LT: 'Lithuania',
-                LU: 'Luxembourg',
-                LV: 'Latvia',
-                MC: 'Monaco',
-                MD: 'Moldova',
-                ME: 'Montenegro',
-                MG: 'Madagascar',
-                MK: 'Macedonia',
-                ML: 'Mali',
-                MR: 'Mauritania',
-                MT: 'Malta',
-                MU: 'Mauritius',
-                MZ: 'Mozambique',
-                NL: 'Netherlands',
-                NO: 'Norway',
-                PK: 'Pakistan',
-                PL: 'Poland',
-                PS: 'Palestine',
-                PT: 'Portugal',
-                QA: 'Qatar',
-                RO: 'Romania',
-                RS: 'Serbia',
-                SA: 'Saudi Arabia',
-                SE: 'Sweden',
-                SI: 'Slovenia',
-                SK: 'Slovakia',
-                SM: 'San Marino',
-                SN: 'Senegal',
-                TN: 'Tunisia',
-                TR: 'Turkey',
-                VG: 'Virgin Islands, British'
+                LT: 'ลิทัวเนีย',
+                LU: 'ลักเซมเบิร์ก',
+                LV: 'ลัตเวีย',
+                MC: 'โมนาโก',
+                MD: 'มอลโดวา',
+                ME: 'มอนเตเนโก',
+                MG: 'มาดากัสการ์',
+                MK: 'มาซิโดเนีย',
+                ML: 'มาลี',
+                MR: 'มอริเตเนีย',
+                MT: 'มอลตา',
+                MU: 'มอริเชียส',
+                MZ: 'โมซัมบิก',
+                NL: 'เนเธอร์แลนด์',
+                NO: 'นอร์เวย์',
+                PK: 'ปากีสถาน',
+                PL: 'โปแลนด์',
+                PS: 'ปาเลสไตน์',
+                PT: 'โปรตุเกส',
+                QA: 'กาตาร์',
+                RO: 'โรมาเนีย',
+                RS: 'เซอร์เบีย',
+                SA: 'ซาอุดิอารเบีย',
+                SE: 'สวีเดน',
+                SI: 'สโลวีเนีย',
+                SK: 'สโลวาเกีย',
+                SM: 'ซานมาริโน',
+                SN: 'เซเนกัล',
+                TH: 'ไทย',
+                TN: 'ตูนิเซีย',
+                TR: 'ตุรกี',
+                VG: 'หมู่เกาะบริติชเวอร์จิน'
             }
         },
         id: {
-            'default': 'Please enter a valid identification number',
-            countryNotSupported: 'The country code %s is not supported',
-            country: 'Please enter a valid identification number in %s',
+            'default': 'โปรดระบุเลขบัตรประจำตัวประชาชนให้ถูกต้อง',
+            countryNotSupported: 'ประเทศ %s ไม่รองรับ',
+            country: 'โปรดระบุเลขบัตรประจำตัวประชาชนใน %s ให้ถูกต้อง',
             countries: {
-                BA: 'Bosnia and Herzegovina',
-                BG: 'Bulgaria',
-                BR: 'Brazil',
-                CH: 'Switzerland',
-                CL: 'Chile',
-                CZ: 'Czech',
-                DK: 'Denmark',
-                EE: 'Estonia',
-                ES: 'Spain',
-                FI: 'Finland',
-                HR: 'Croatia',
-                IE: 'Ireland',
-                IS: 'Iceland',
-                LT: 'Lithuania',
-                LV: 'Latvia',
-                ME: 'Montenegro',
-                MK: 'Macedonia',
-                NL: 'Netherlands',
-                RO: 'Romania',
-                RS: 'Serbia',
-                SE: 'Sweden',
-                SI: 'Slovenia',
-                SK: 'Slovakia',
-                SM: 'San Marino',
-                ZA: 'South Africa'
+                BA: 'บอสเนียและเฮอร์เซโก',
+                BG: 'บัลแกเรีย',
+                BR: 'บราซิล',
+                CH: 'วิตเซอร์แลนด์',
+                CL: 'ชิลี',
+                CZ: 'เช็ก',
+                DK: 'เดนมาร์ก',
+                EE: 'เอสโตเนีย',
+                ES: 'สเปน',
+                FI: 'ฟินแลนด์',
+                HR: 'โครเอเชีย',
+                IE: 'ไอร์แลนด์',
+                IS: 'ไอซ์',
+                LT: 'ลิทัวเนีย',
+                LV: 'ลัตเวีย',
+                ME: 'มอนเตเนโก',
+                MK: 'มาซิโดเนีย',
+                NL: 'เนเธอร์แลนด์',
+                RO: 'โรมาเนีย',
+                RS: 'เซอร์เบีย',
+                SE: 'สวีเดน',
+                SI: 'สโลวีเนีย',
+                SK: 'สโลวาเกีย',
+                SM: 'ซานมาริโน',
+                ZA: 'แอฟริกาใต้'
             }
         },
         identical: {
-            'default': 'Please enter the same value'
+            'default': 'โปรดระบุค่าให้ตรง'
         },
         imei: {
-            'default': 'Please enter a valid IMEI number'
+            'default': 'โปรดระบุหมายเลข IMEI ให้ถูกต้อง'
         },
         imo: {
-            'default': 'Please enter a valid IMO number'
+            'default': 'โปรดระบุหมายเลข IMO ให้ถูกต้อง'
         },
         integer: {
-            'default': 'Please enter a valid number'
+            'default': 'โปรดระบุตัวเลขให้ถูกต้อง'
         },
         ip: {
-            'default': 'Please enter a valid IP address',
-            ipv4: 'Please enter a valid IPv4 address',
-            ipv6: 'Please enter a valid IPv6 address'
+            'default': 'โปรดระบุ IP address ให้ถูกต้อง',
+            ipv4: 'โปรดระบุ IPv4 address ให้ถูกต้อง',
+            ipv6: 'โปรดระบุ IPv6 address ให้ถูกต้อง'
         },
         isbn: {
-            'default': 'Please enter a valid ISBN number'
+            'default': 'โปรดระบุหมายเลข ISBN ให้ถูกต้อง'
         },
         isin: {
-            'default': 'Please enter a valid ISIN number'
+            'default': 'โปรดระบุหมายเลข ISIN ให้ถูกต้อง'
         },
         ismn: {
-            'default': 'Please enter a valid ISMN number'
+            'default': 'โปรดระบุหมายเลข ISMN ให้ถูกต้อง'
         },
         issn: {
-            'default': 'Please enter a valid ISSN number'
+            'default': 'โปรดระบุหมายเลข ISSN ให้ถูกต้อง'
         },
         lessThan: {
-            'default': 'Please enter a value less than or equal to %s',
-            notInclusive: 'Please enter a value less than %s'
+            'default': 'โปรดระบุค่าน้อยกว่าหรือเท่ากับ %s',
+            notInclusive: 'โปรดระบุค่าน้อยกว่า %s'
         },
         mac: {
-            'default': 'Please enter a valid MAC address'
+            'default': 'โปรดระบุหมายเลข MAC address ให้ถูกต้อง'
         },
         meid: {
-            'default': 'Please enter a valid MEID number'
+            'default': 'โปรดระบุหมายเลข MEID ให้ถูกต้อง'
         },
         notEmpty: {
-            'default': 'Please enter a value'
+            'default': 'โปรดระบุค่า'
         },
         numeric: {
-            'default': 'Please enter a valid float number'
+            'default': 'โปรดระบุเลขหน่วยหรือจำนวนทศนิยม ให้ถูกต้อง'
         },
         phone: {
-            'default': 'Please enter a valid phone number',
-            countryNotSupported: 'The country code %s is not supported',
-            country: 'Please enter a valid phone number in %s',
+            'default': 'โปรดระบุหมายเลขโทรศัพท์ให้ถูกต้อง',
+            countryNotSupported: 'ประเทศ %s ไม่รองรับ',
+            country: 'โปรดระบุหมายเลขโทรศัพท์ใน %s ให้ถูกต้อง',
             countries: {
-                BR: 'Brazil',
-                CN: 'China',
-                ES: 'Spain',
-                FR: 'France',
-                GB: 'United Kingdom',
-                MA: 'Morocco',
-                PK: 'Pakistan',
-                RO: 'Romania',
-                US: 'USA'
+                BR: 'บราซิล',
+                CN: 'จีน',
+                ES: 'สเปน',
+                FR: 'ฝรั่งเศส',
+                GB: 'สหราชอาณาจักร',
+                MA: 'โมร็อกโก',
+                PK: 'ปากีสถาน',
+                RO: 'โรมาเนีย',
+                US: 'สหรัฐอเมริกา'
             }
         },
         regexp: {
-            'default': 'Please enter a value matching the pattern'
+            'default': 'โปรดระบุค่าให้ตรงกับรูปแบบที่กำหนด'
         },
         remote: {
-            'default': 'Please enter a valid value'
+            'default': 'โปรดระบุค่าให้ถูกต้อง'
         },
         rtn: {
-            'default': 'Please enter a valid RTN number'
+            'default': 'โปรดระบุหมายเลข RTN ให้ถูกต้อง'
         },
         sedol: {
-            'default': 'Please enter a valid SEDOL number'
+            'default': 'โปรดระบุหมายเลข SEDOL ให้ถูกต้อง'
         },
         siren: {
-            'default': 'Please enter a valid SIREN number'
+            'default': 'โปรดระบุหมายเลข SIREN ให้ถูกต้อง'
         },
         siret: {
-            'default': 'Please enter a valid SIRET number'
+            'default': 'โปรดระบุหมายเลข SIRET ให้ถูกต้อง'
         },
         step: {
-            'default': 'Please enter a valid step of %s'
+            'default': 'โปรดระบุลำดับของ %s'
         },
         stringCase: {
-            'default': 'Please enter only lowercase characters',
-            upper: 'Please enter only uppercase characters'
+            'default': 'โปรดระบุตัวอักษรพิมพ์เล็กเท่านั้น',
+            upper: 'โปรดระบุตัวอักษรพิมพ์ใหญ่เท่านั้น'
         },
         stringLength: {
-            'default': 'Please enter a value with valid length',
-            less: 'Please enter less than %s characters',
-            more: 'Please enter more than %s characters',
-            between: 'Please enter value between %s and %s characters long'
+            'default': 'ค่าที่ระบุยังไม่ครบตามจำนวนที่กำหนด',
+            less: 'โปรดระบุค่าตัวอักษรน้อยกว่า %s ตัว',
+            more: 'โปรดระบุค่าตัวอักษรมากกว่า %s ตัว',
+            between: 'โปรดระบุค่าตัวอักษรระหว่าง %s ถึง %s ตัวอักษร'
         },
         uri: {
-            'default': 'Please enter a valid URI'
+            'default': 'โปรดระบุค่า URI ให้ถูกต้อง'
         },
         uuid: {
-            'default': 'Please enter a valid UUID number',
-            version: 'Please enter a valid UUID version %s number'
+            'default': 'โปรดระบุหมายเลข UUID ให้ถูกต้อง',
+            version: 'โปรดระบุหมายเลข UUID ในเวอร์ชั่น %s'
         },
         vat: {
-            'default': 'Please enter a valid VAT number',
-            countryNotSupported: 'The country code %s is not supported',
-            country: 'Please enter a valid VAT number in %s',
+            'default': 'โปรดระบุจำนวนภาษีมูลค่าเพิ่ม',
+            countryNotSupported: 'ประเทศ %s ไม่รองรับ',
+            country: 'โปรดระบุจำนวนภาษีมูลค่าเพิ่มใน %s',
             countries: {
-                AT: 'Austria',
-                BE: 'Belgium',
-                BG: 'Bulgaria',
-                BR: 'Brazil',
-                CH: 'Switzerland',
-                CY: 'Cyprus',
-                CZ: 'Czech',
-                DE: 'Germany',
-                DK: 'Denmark',
-                EE: 'Estonia',
-                ES: 'Spain',
-                FI: 'Finland',
-                FR: 'French',
-                GB: 'United Kingdom',
-                GR: 'Greece',
-                EL: 'Greece',
-                HU: 'Hungary',
-                HR: 'Croatia',
-                IE: 'Ireland',
-                IS: 'Iceland',
-                IT: 'Italy',
-                LT: 'Lithuania',
-                LU: 'Luxembourg',
-                LV: 'Latvia',
-                MT: 'Malta',
-                NL: 'Netherlands',
-                NO: 'Norway',
-                PL: 'Poland',
-                PT: 'Portugal',
-                RO: 'Romania',
-                RU: 'Russia',
-                RS: 'Serbia',
-                SE: 'Sweden',
-                SI: 'Slovenia',
-                SK: 'Slovakia',
-                VE: 'Venezuela',
-                ZA: 'South Africa'
+                AT: 'ออสเตรีย',
+                BE : 'เบลเยี่ยม',
+                BG: 'บัลแกเรีย',
+                BR: 'บราซิล',
+                CH: 'วิตเซอร์แลนด์',
+                CY: 'ไซปรัส',
+                CZ: 'เช็ก',
+                DE: 'เยอรมัน',
+                DK: 'เดนมาร์ก',
+                EE: 'เอสโตเนีย',
+                ES: 'สเปน',
+                FI: 'ฟินแลนด์',
+                FR: 'ฝรั่งเศส',
+                GB: 'สหราชอาณาจักร',
+                GR: 'กรีซ',
+                EL: 'กรีซ',
+                HU: 'ฮังการี',
+                HR: 'โครเอเชีย',
+                IE: 'ไอร์แลนด์',
+                IS: 'ไอซ์',
+                IT: 'อิตาลี',
+                LT: 'ลิทัวเนีย',
+                LU: 'ลักเซมเบิร์ก',
+                LV: 'ลัตเวีย',
+                MT: 'มอลตา',
+                NL: 'เนเธอร์แลนด์',
+                NO: 'นอร์เวย์',
+                PL: 'โปแลนด์',
+                PT: 'โปรตุเกส',
+                RO: 'โรมาเนีย',
+                RU: 'รัสเซีย',
+                RS: 'เซอร์เบีย',
+                SE: 'สวีเดน',
+                SI: 'สโลวีเนีย',
+                SK: 'สโลวาเกีย',
+                VE: 'เวเนซูเอลา',
+                ZA: 'แอฟริกาใต้'
             }
         },
         vin: {
-            'default': 'Please enter a valid VIN number'
+            'default': 'โปรดระบุหมายเลข VIN ให้ถูกต้อง'
         },
         zipCode: {
-            'default': 'Please enter a valid postal code',
-            countryNotSupported: 'The country code %s is not supported',
-            country: 'Please enter a valid postal code in %s',
+            'default': 'โปรดระบุรหัสไปรษณีย์ให้ถูกต้อง',
+            countryNotSupported: 'ประเทศ %s ไม่รองรับ',
+            country: 'โปรดระบุรหัสไปรษณีย์ให้ถูกต้องใน %s',
             countries: {
-                BR: 'Brazil',
-                CA: 'Canada',
-                DK: 'Denmark',
-                GB: 'United Kingdom',
-                IT: 'Italy',
-                MA: 'Morocco',
-                NL: 'Netherlands',
-                RO: 'Romania',
-                SE: 'Sweden',
-                SG: 'Singapore',
-                US: 'USA'
+                BR: 'บราซิล',
+                CA: 'แคนาดา',
+                DK: 'เดนมาร์ก',
+                GB: 'สหราชอาณาจักร',
+                IT: 'อิตาลี',
+                MA: 'โมร็อกโก',
+                NL: 'เนเธอร์แลนด์',
+                RO: 'โรมาเนีย',
+                SE: 'สวีเดน',
+                SG: 'สิงคโปร์',
+                US: 'สหรัฐอเมริกา'
             }
         }
     });
