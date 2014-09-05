@@ -6,6 +6,7 @@
         countries: {
             BR: 'Brazil',
             CN: 'China',
+            DK: 'Denmark',
             ES: 'Spain',
             FR: 'France',
             GB: 'United Kingdom',
@@ -23,7 +24,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['BR', 'CN', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'US'],
+        COUNTRY_CODES: ['BR', 'CN', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'US'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -72,6 +73,15 @@
                     // http://regexr.com/39dq4
                     value   = $.trim(value);
                     isValid = (/^((00|\+)?(86(?:-| )))?((\d{11})|(\d{3}[- ]{1}\d{4}[- ]{1}\d{4})|((\d{2,4}[- ]){1}(\d{7,8}|(\d{3,4}[- ]{1}\d{4}))([- ]{1}\d{1,4})?))$/).test(value);
+                    break;
+
+                case 'DK':
+                    // Mathing DK phone numbers with country code in 1 of 3 formats and an
+                    // 8 digit phone number not starting with a 0 or 1. Can have 1 space
+                    // between each character except inside the country code.
+                    // Test: http://regex101.com/r/sS8fO4/1
+                    value   = $.trim(value);
+                    isValid = (/^(\+45|0045|\(45\))?\s?[2-9](\s?\d){7}$/).test(value);
                     break;
 
                 case 'ES':
