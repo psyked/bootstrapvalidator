@@ -41,7 +41,7 @@
         // Supported country codes
         COUNTRY_CODES: [
             'BA', 'BG', 'BR', 'CH', 'CL', 'CZ', 'DK', 'EE', 'ES', 'FI', 'HR', 'IE', 'IS', 'LT', 'LV', 'ME', 'MK', 'NL',
-            'RO', 'RS', 'SE', 'SI', 'SK', 'SM', 'ZA'
+            'RO', 'RS', 'SE', 'SI', 'SK', 'SM', 'TH', 'ZA'
         ],
 
         /**
@@ -782,6 +782,26 @@
          */
         _sm: function(value) {
             return /^\d{5}$/.test(value);
+        },
+
+        /**
+         * Validate Thailand citizen number
+         * Examples:
+         * - Valid: 7145620509547, 3688699975685, 2368719339716
+         * - Invalid: 1100800092310
+         *
+         * @see http://en.wikipedia.org/wiki/National_identification_number#Thailand
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _th: function (value) {
+            if (value.length != 13) return false;
+
+            for (i = 0, sum = 0; i < 12; i++) {
+                sum += parseInt(value.charAt(i)) * (13 - i);
+            }
+
+            return !((11 - sum % 11) % 10 != parseInt(value.charAt(12)));
         },
 
         /**
