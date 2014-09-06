@@ -15,7 +15,7 @@
             RO: 'Romania',
             TH: 'Thailand',
             US: 'USA',
-            VE: 'Venezuelan'
+            VE: 'Venezuela'
         }
     });
 

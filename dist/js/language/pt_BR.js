@@ -239,7 +239,8 @@
                 PK: 'Paquistão',
                 RO: 'Roménia',
                 TH: 'Tailândia',
-                US: 'EUA'
+                US: 'EUA',
+                VE: 'Venezuela'
             }
         },
         regexp: {

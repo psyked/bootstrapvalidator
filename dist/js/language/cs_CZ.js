@@ -239,7 +239,8 @@
                 PK: 'Pákistán',
                 RO: 'Rumunsko',
                 TH: 'Thajsko',
-                US: 'Spojené Státy Americké'
+                US: 'Spojené Státy Americké',
+                VE: 'Venezuelský'
             }
         },
         regexp: {
