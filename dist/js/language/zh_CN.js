@@ -1,69 +1,69 @@
 (function ($) {
     /**
-     * Traditional Chinese language package
-     * Translated by @tureki
+     * Simplified Chinese language package
+     * Translated by @shamiao
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
             'default': '请输入有效的Base64编码'
         },
         between: {
-            'default': '请输入不小于%s 且不大于%s 的值',
-            notInclusive: '请输入不小于等于%s 且不大于等于%s 的值'
+            'default': '请输入在 %s 和 %s 之间的数值',
+            notInclusive: '请输入在 %s 和 %s 之间(不含两端)的数值'
         },
         callback: {
             'default': '请输入有效的值'
         },
         choice: {
             'default': '请输入有效的值',
-            less: '最少选择 %s 个选项',
-            more: '最多选择 %s 个选项',
+            less: '请至少选中 %s 个选项',
+            more: '最多只能选中 %s 个选项',
             between: '请选择 %s 至 %s 个选项'
         },
         creditCard: {
             'default': '请输入有效的信用卡号码'
         },
         cusip: {
-            'default': '请输入有效的CUSIP'
+            'default': '请输入有效的美国CUSIP代码'
         },
         cvv: {
-            'default': '请输入有效的CVV'
+            'default': '请输入有效的CVV代码'
         },
         date: {
             'default': '请输入有效的日期'
         },
         different: {
-            'default': '请输入不一样的值'
+            'default': '请输入不同的值'
         },
         digits: {
-            'default': '只能输入数字'
+            'default': '请输入有效的数字'
         },
         ean: {
-            'default': '请输入有效的EAN'
+            'default': '请输入有效的EAN商品编码'
         },
         emailAddress: {
-            'default': '请输入有效的EMAIL'
+            'default': '请输入有效的邮件地址'
         },
         file: {
-            'default': '请选择有效的档案'
+            'default': '请选择有效的文件'
         },
         greaterThan: {
-            'default': '请输入大于或等于 %s 的值',
-            notInclusive: '请输入大于 %s 的值'
+            'default': '请输入大于等于 %s 的数值',
+            notInclusive: '请输入大于 %s 的数值'
         },
         grid: {
-            'default': '请输入有效的GRId'
+            'default': '请输入有效的GRId编码'
         },
         hex: {
-            'default': '请输入有效的16位元码'
+            'default': '请输入有效的16进制数'
         },
         hexColor: {
-            'default': '请输入有效的16位色码'
+            'default': '请输入有效的16进制颜色值'
         },
         iban: {
-            'default': '请输入有效的IBAN',
-            countryNotSupported: '不支援该国家代码%s',
-            country: '请输入有效的 %s IBAN编号',
+            'default': '请输入有效的IBAN(国际银行账户)号码',
+            countryNotSupported: '不支持 %s 国家或地区',
+            country: '请输入有效的 %s 国家或地区的IBAN(国际银行账户)号码',
             countries: {
                 AD: '安道​​尔',
                 AE: '阿联酋',
@@ -80,7 +80,7 @@
                 BJ: '贝宁',
                 BR: '巴西',
                 CH: '瑞士',
-                CI: '象牙海岸',
+                CI: '科特迪瓦',
                 CM: '喀麦隆',
                 CR: '哥斯达黎加',
                 CV: '佛得角',
@@ -88,7 +88,7 @@
                 CZ: '捷克共和国',
                 DE: '德国',
                 DK: '丹麦',
-                DO: '多明尼加共和国',
+                DO: '多米尼加共和国',
                 DZ: '阿尔及利亚',
                 EE: '爱沙尼亚',
                 ES: '西班牙',
@@ -108,7 +108,7 @@
                 IR: '伊朗',
                 IS: '冰岛',
                 IT: '意大利',
-                JO: '乔丹',
+                JO: '约旦',
                 KW: '科威特',
                 KZ: '哈萨克斯坦',
                 LB: '黎巴嫩',
@@ -118,7 +118,7 @@
                 LV: '拉脱维亚',
                 MC: '摩纳哥',
                 MD: '摩尔多瓦',
-                ME: '黑山共和国',
+                ME: '黑山',
                 MG: '马达加斯加',
                 MK: '马其顿',
                 ML: '马里',
@@ -147,11 +147,11 @@
             }
         },
         id: {
-            'default': '请输入有效的身份证字号码',
-            countryNotSupported: '不支援该国家代码%s',
-            country: '请输入有效的%s 身份证字号码',
+            'default': '请输入有效的身份证件号码',
+            countryNotSupported: '不支持 %s 国家或地区',
+            country: '请输入有效的 %s 国家或地区的身份证件号码',
             countries: {
-                BA: '波斯尼亚和黑塞哥维那',
+                BA: '波黑',
                 BG: '保加利亚',
                 BR: '巴西',
                 CH: '瑞士',
@@ -159,14 +159,14 @@
                 CZ: '捷克',
                 DK: '丹麦',
                 EE: '爱沙尼亚',
-                ES: '西班牙语',
+                ES: '西班牙',
                 FI: '芬兰',
                 HR: '克罗地亚',
                 IE: '爱尔兰',
                 IS: '冰岛',
                 LT: '立陶宛',
-                LV: '拉脱维亚语',
-                ME: '黑山共和国',
+                LV: '拉脱维亚',
+                ME: '黑山',
                 MK: '马其顿',
                 NL: '荷兰',
                 RO: '罗马尼亚',
@@ -179,109 +179,109 @@
             }
         },
         identical: {
-            'default': '请输入一样的值'
+            'default': '请输入相同的值'
         },
         imei: {
-            'default': '请输入有效的IMEI'
+            'default': '请输入有效的IMEI(手机串号)'
         },
         imo: {
-            'default': '请输入有效的IMO'
+            'default': '请输入有效的国际海事组织(IMO)号码'
         },
         integer: {
-            'default': '请输入有效的整数'
+            'default': '请输入有效的整数值'
         },
         ip: {
-            'default': '请输入有效的IP位址',
-            ipv4: '请输入有效的IPv4位址',
-            ipv6: '请输入有效的IPv6位址'
+            'default': '请输入有效的IP地址',
+            ipv4: '请输入有效的IPv4地址',
+            ipv6: '请输入有效的IPv6地址'
         },
         isbn: {
-            'default': '请输入有效的ISBN'
+            'default': '请输入有效的ISBN(国际标准书号)'
         },
         isin: {
-            'default': '请输入有效的ISIN'
+            'default': '请输入有效的ISIN(国际证券编码)'
         },
         ismn: {
-            'default': '请输入有效的ISMN'
+            'default': '请输入有效的ISMN(印刷音乐作品编码)'
         },
         issn: {
-            'default': '请输入有效的ISSN'
+            'default': '请输入有效的ISSN(国际标准杂志书号)'
         },
         lessThan: {
-            'default': '请输入小于或等于 %s 的值',
-            notInclusive: '请输入小于 %s 的值'
+            'default': '请输入小于等于 %s 的数值',
+            notInclusive: '请输入小于 %s 的数值'
         },
         mac: {
-            'default': '请输入有效的MAC位址'
+            'default': '请输入有效的MAC物理地址'
         },
         meid: {
-            'default': '请输入有效的MEID'
+            'default': '请输入有效的MEID(移动设备识别码)'
         },
         notEmpty: {
-            'default': '栏位不能为空'
+            'default': '请填写必填项目'
         },
         numeric: {
-            'default': '请输入有效的浮点数'
+            'default': '请输入有效的数值，允许小数'
         },
         phone: {
             'default': '请输入有效的电话号码',
-            countryNotSupported: '不支援该国家代码%s',
-            country: '请输入有效的 %s 电话号码',
+            countryNotSupported: '不支持 %s 国家或地区',
+            country: '请输入有效的 %s 国家或地区的电话号码',
             countries: {
                 BR: '巴西',
-                CN: '中國',
+                CN: '中国',
                 DK: '丹麦',
                 ES: '西班牙',
                 FR: '法国',
                 GB: '英国',
                 MA: '摩洛哥',
                 PK: '巴基斯坦',
-                RO: '羅馬尼亞',
+                RO: '罗马尼亚',
                 US: '美国'
             }
         },
         regexp: {
-            'default': '请输入有效的值'
+            'default': '请输入符合正则表达式限制的值'
         },
         remote: {
             'default': '请输入有效的值'
         },
         rtn: {
-            'default': '请输入有效的RTN'
+            'default': '请输入有效的RTN号码'
         },
         sedol: {
-            'default': '请输入有效的SEDOL'
+            'default': '请输入有效的SEDOL代码'
         },
         siren: {
-            'default': '请输入有效的SIREN'
+            'default': '请输入有效的SIREN号码'
         },
         siret: {
-            'default': '请输入有效的SIRET'
+            'default': '请输入有效的SIRET号码'
         },
         step: {
-            'default': '请输入 %s 个有效步骤'
+            'default': '请输入在基础值上，增加 %s 的整数倍的数值'
         },
         stringCase: {
-            'default': '只能输入小写的值',
-            upper: '只能输入大写的值'
+            'default': '只能输入小写字母',
+            upper: '只能输入大写字母'
         },
         stringLength: {
             'default': '请输入符合长度限制的值',
-            less: '请输入小于 %s 个字',
-            more: '请输入大于 %s 个字',
-            between: '请输入介于 %s 至 %s 个字'
+            less: '最多只能输入 %s 个字符',
+            more: '需要输入至少 %s 个字符',
+            between: '请输入 %s 至 %s 个字符'
         },
         uri: {
-            'default': '请输入一个有效的链接'
+            'default': '请输入一个有效的URL地址'
         },
         uuid: {
             'default': '请输入有效的UUID',
-            version: '请输入符合版本 %s 的UUID'
+            version: '请输入版本 %s 的UUID'
         },
         vat: {
-            'default': '请输入有效的VAT',
-            countryNotSupported: '不支援该国家代码%s',
-            country: '请输入有效的 %s VAT',
+            'default': '请输入有效的VAT(税号)',
+            countryNotSupported: '不支持 %s 国家或地区',
+            country: '请输入有效的 %s 国家或地区的VAT(税号)',
             countries: {
                 AT: '奥地利',
                 BE: '比利时',
@@ -290,7 +290,7 @@
                 CH: '瑞士',
                 CY: '塞浦路斯',
                 CZ: '捷克',
-                DE: '德语',
+                DE: '德国',
                 DK: '丹麦',
                 EE: '爱沙尼亚',
                 ES: '西班牙',
@@ -306,7 +306,7 @@
                 IT: '意大利',
                 LT: '立陶宛',
                 LU: '卢森堡',
-                LV: '拉脱维亚语',
+                LV: '拉脱维亚',
                 MT: '马耳他',
                 NL: '荷兰',
                 NO: '挪威',
@@ -318,17 +318,17 @@
                 SE: '瑞典',
                 SI: '斯洛文尼亚',
                 SK: '斯洛伐克',
-                VE: '委內瑞',
+                VE: '委内瑞拉',
                 ZA: '南非'
             }
         },
         vin: {
-            'default': '请输入有效的VIN'
+            'default': '请输入有效的VIN(美国车辆识别号码)'
         },
         zipCode: {
             'default': '请输入有效的邮政编码',
-            countryNotSupported: '不支援该国家代码%s',
-            country: '请输入有效的 %s 邮政编码',
+            countryNotSupported: '不支持 %s 国家或地区',
+            country: '请输入有效的 %s 国家或地区的邮政编码',
             countries: {
                 BR: '巴西',
                 CA: '加拿大',
@@ -337,8 +337,8 @@
                 IT: '意大利',
                 MA: '摩洛哥',
                 NL: '荷兰',
-                RO: '羅馬尼亞',
-                SE: '瑞士',
+                RO: '罗马尼亚',
+                SE: '瑞典',
                 SG: '新加坡',
                 US: '美国'
             }

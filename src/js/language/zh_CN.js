@@ -1,9 +1,7 @@
 (function ($) {
     /**
      * Simplified Chinese language package
-     * Retranslated by @shamiao, 
-     * and referenced previous traditional-to-simplified conversion by @tureki
-     * (it was just a conversion, not a proper translation, really. )
+     * Translated by @shamiao
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
