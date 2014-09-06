@@ -6,6 +6,12 @@
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
  */
+
+// jquery warning
+if (typeof jQuery === 'undefined') {
+    throw new Error('BootstrapValidator\'s JavaScript requires jQuery')
+}
+
 (function($) {
     var BootstrapValidator = function(form, options) {
         this.$form   = $(form);
