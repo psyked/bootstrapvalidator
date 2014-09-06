@@ -356,14 +356,12 @@
                     // The feedback icon does not render correctly if there is no label
                     // https://github.com/twbs/bootstrap/issues/12873
                     if ($parent.find('label').length === 0) {
-                        $icon.css('top', 0);
+                        $icon.addClass('bv-no-label');
                     }
                     // Fix feedback icons in input-group
                     if ($parent.find('.input-group').length !== 0) {
-                        $icon.css({
-                            'top': 0,
-                            'z-index': 100
-                        }).insertAfter($parent.find('.input-group').eq(0));
+                        $icon.addClass('bv-input-group-icon')
+                        .insertAfter($parent.find('.input-group').eq(0));
                     }
                 }
             }
