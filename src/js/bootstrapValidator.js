@@ -366,20 +366,36 @@
                              .insertAfter($parent.find('.input-group').eq(0));
                     }
                     
-                    // Show tooltip or popover message when focusing on the field
                     if (container) {
-                        $field.off('focus.bv').on('focus.bv', function() {
-                            switch (container) {
-                                case 'tooltip':
-                                    $icon.tooltip('show');
-                                    break;
-                                case 'popover':
-                                    $icon.popover('show');
-                                    break;
-                                default:
-                                    break;
-                            }
-                        });
+                        $field
+                            // Show tooltip/popover message when field gets focus
+                            .off('focus.bv')
+                            .on('focus.bv', function() {
+                                switch (container) {
+                                    case 'tooltip':
+                                        $icon.tooltip('show');
+                                        break;
+                                    case 'popover':
+                                        $icon.popover('show');
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            })
+                            // and hide them when losing focus
+                            .off('blur.bv')
+                            .on('blur.bv', function() {
+                                switch (container) {
+                                    case 'tooltip':
+                                        $icon.tooltip('hide');
+                                        break;
+                                    case 'popover':
+                                        $icon.popover('hide');
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            });
                     }
                 }
             }

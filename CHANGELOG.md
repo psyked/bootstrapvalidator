@@ -35,6 +35,8 @@ __Bug Fixes__
 * [#725](https://github.com/nghuuphuoc/bootstrapvalidator/pull/725): Fix the issue when adding field which does not exist but is already set in "fields" option
 * [#732](https://github.com/nghuuphuoc/bootstrapvalidator/issues/732): Fix the issue when removing the radio or checkbox field
 * [#758](https://github.com/nghuuphuoc/bootstrapvalidator/issues/758): Using [notEmpty](http://bootstrapvalidator.com/validators/notEmpty/) validator with ```type="number"```
+* [#759](https://github.com/nghuuphuoc/bootstrapvalidator/issues/759), [#764](https://github.com/nghuuphuoc/bootstrapvalidator/pull/764): The tooltip/popover isn't shown if there is disabled validator.
+The tooltip/popover is shown automatically when the field gets the focus, thanks to [@leedorian](https://github.com/leedorian)
 
 __Document__
 * [#709](https://github.com/nghuuphuoc/bootstrapvalidator/issues/709), [#715](https://github.com/nghuuphuoc/bootstrapvalidator/pull/715): Add [Bootstrap Select](http://bootstrapvalidator.com/examples/bootstrap-select/) and [Select2](http://bootstrapvalidator.com/examples/select2/) examples, thanks to [@Arkni](https://github.com/Arkni)

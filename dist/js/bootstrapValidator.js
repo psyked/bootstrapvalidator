@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-09-06 1:37:36 PM
+ * @version     v0.5.2-dev, built on 2014-09-06 2:31:23 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -294,7 +294,7 @@
                 $field.off(events).on(events, function() {
                     that.updateStatus($(this), that.STATUS_NOT_VALIDATED);
                 });
-
+                
                 // Create help block elements for showing the error messages
                 $field.data('bv.messages', $message);
                 for (validatorName in this.options.fields[field].validators) {
@@ -336,7 +336,9 @@
                     && this.options.feedbackIcons.validating && this.options.feedbackIcons.invalid && this.options.feedbackIcons.valid
                     && (!updateAll || i === total - 1))
                 {
-                    $parent.removeClass('has-success').removeClass('has-error').addClass('has-feedback');
+                    // $parent.removeClass('has-success').removeClass('has-error').addClass('has-feedback');
+                    // Keep error messages which are populated from back-end
+                    $parent.addClass('has-feedback');
                     var $icon = $('<i/>')
                                     .css('display', 'none')
                                     .addClass('form-control-feedback')
@@ -363,6 +365,38 @@
                     if ($parent.find('.input-group').length !== 0) {
                         $icon.addClass('bv-icon-input-group')
                              .insertAfter($parent.find('.input-group').eq(0));
+                    }
+                    
+                    if (container) {
+                        $field
+                            // Show tooltip/popover message when field gets focus
+                            .off('focus.bv')
+                            .on('focus.bv', function() {
+                                switch (container) {
+                                    case 'tooltip':
+                                        $icon.tooltip('show');
+                                        break;
+                                    case 'popover':
+                                        $icon.popover('show');
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            })
+                            // and hide them when losing focus
+                            .off('blur.bv')
+                            .on('blur.bv', function() {
+                                switch (container) {
+                                    case 'tooltip':
+                                        $icon.tooltip('hide');
+                                        break;
+                                    case 'popover':
+                                        $icon.popover('hide');
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            });
                     }
                 }
             }
@@ -1002,7 +1036,7 @@
                                     placement: 'top',
                                     title: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html()
                                 })
-                                : $icon.css('cursor', '').tooltip('destroy');
+                                : $icon.tooltip('hide');
                         break;
                     // ... or popover
                     case ($icon && 'popover' === container):
@@ -1014,7 +1048,7 @@
                                     placement: 'top',
                                     trigger: 'hover click'
                                 })
-                                : $icon.css('cursor', '').popover('destroy');
+                                : $icon.popover('hide');
                         break;
                     default:
                         (status === this.STATUS_INVALID) ? $errors.show() : $errors.hide();

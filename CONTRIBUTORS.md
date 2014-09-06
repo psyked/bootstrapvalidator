@@ -46,6 +46,7 @@ I would like to give big thanks to the following contributors:
 * [@khangvm53](https://github.com/khangvm53)
 * [@kristian-puccio](https://github.com/kristian-puccio)
 * [@kromit](https://github.com/kromit)
+* [@leedorian](https://github.com/leedorian)
 * [@leegtang](https://github.com/leegtang)
 * [@lloydde](https://github.com/lloydde)
 * [@logemann](https://github.com/logemann)

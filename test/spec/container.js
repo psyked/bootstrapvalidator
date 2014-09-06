@@ -168,8 +168,8 @@ describe('container tooltip/popover', function() {
         this.$firstName.val('First');
         this.$lastName.val('Last');
         this.bv.validate();
-        expect(this.$firstName.parent().find('i').data('bs.tooltip')).toBeUndefined();
-        expect(this.$lastName.parent().find('i').data('bs.popover')).toBeUndefined();
+        expect(this.$firstName.parent().find('i').data('bs.tooltip')).toBeDefined();
+        expect(this.$lastName.parent().find('i').data('bs.popover')).toBeDefined();
     });
 
     it('container programmatically', function() {
@@ -196,7 +196,7 @@ describe('container tooltip/popover', function() {
         this.$firstName.val('First');
         this.$lastName.val('Last');
         this.bv.validate();
-        expect(this.$firstName.parent().find('i').data('bs.tooltip')).toBeUndefined();
-        expect(this.$lastName.parent().find('i').data('bs.popover')).toBeUndefined();
+        expect(this.$firstName.parent().find('i').data('bs.tooltip')).toBeDefined();
+        expect(this.$lastName.parent().find('i').data('bs.popover')).toBeDefined();
     });
 });
