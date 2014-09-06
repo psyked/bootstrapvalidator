@@ -360,8 +360,8 @@
                     }
                     // Fix feedback icons in input-group
                     if ($parent.find('.input-group').length !== 0) {
-                        $icon.addClass('bv-input-group-icon')
-                        .insertAfter($parent.find('.input-group').eq(0));
+                        $icon.addClass('bv-icon-input-group')
+                             .insertAfter($parent.find('.input-group').eq(0));
                     }
                 }
             }

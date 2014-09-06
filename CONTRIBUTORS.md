@@ -18,6 +18,7 @@ I would like to give big thanks to the following contributors:
 * [@caijh](https://github.com/caijh)
 * [@CeRBeR666](https://github.com/CeRBeR666)
 * [@Djarnis](https://github.com/Djarnis)
+* [@dlcrush](https://github.com/dlcrush)
 * [@dlucazeau](https://github.com/dlucazeau)
 * [@dokterpasta](https://github.com/dokterpasta)
 * [@easonhan007](https://github.com/easonhan007)

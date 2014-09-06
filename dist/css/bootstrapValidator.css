@@ -20,11 +20,11 @@
     color: #a94442;
 }
 
-.bv-form .bv-no-label {
-	top: 0px;
+.bv-form .bv-icon-no-label {
+	top: 0;
 }
 
-.bv-form .bv-input-group-icon {
-	top: 0px;
+.bv-form .bv-icon-input-group {
+	top: 0;
 	z-index: 100;
 }
