@@ -175,6 +175,7 @@
                 SI: 'Slovenia',
                 SK: 'Slovacia',
                 SM: 'San Marino',
+                TH: 'Thailanda',
                 ZA: 'Africa de Sud'
             }
         },
@@ -237,6 +238,7 @@
                 MA: 'Maroc',
                 PK: 'Pakistan',
                 RO: 'Romania',
+                TH: 'Thailanda',
                 US: 'SUA'
             }
         },

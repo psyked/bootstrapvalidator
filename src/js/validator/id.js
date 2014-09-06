@@ -28,6 +28,7 @@
             SI: 'Slovenia',
             SK: 'Slovakia',
             SM: 'San Marino',
+            TH: 'Thailand',
             ZA: 'South Africa'
         }
     });
@@ -794,14 +795,17 @@
          * @param {String} value The ID
          * @returns {Boolean}
          */
-        _th: function (value) {
-            if (value.length != 13) return false;
-
-            for (i = 0, sum = 0; i < 12; i++) {
-                sum += parseInt(value.charAt(i)) * (13 - i);
+        _th: function(value) {
+            if (value.length !== 13) {
+                return false;
             }
 
-            return !((11 - sum % 11) % 10 != parseInt(value.charAt(12)));
+            var sum = 0;
+            for (var i = 0; i < 12; i++) {
+                sum += parseInt(value.charAt(i), 10) * (13 - i);
+            }
+
+            return (11 - sum % 11) % 10 === parseInt(value.charAt(12), 10);
         },
 
         /**

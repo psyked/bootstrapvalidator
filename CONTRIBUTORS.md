@@ -26,6 +26,7 @@ I would like to give big thanks to the following contributors:
 * [@etorres](https://github.com/etorres)
 * [@evilchili](https://github.com/evilchili)
 * [@fhferreira](https://github.com/fhferreira)
+* [@figgaro](https://github.com/figgaro)
 * [@filipac](https://github.com/filipac)
 * [@Francismori7](https://github.com/Francismori7)
 * [@gercheq](https://github.com/gercheq)

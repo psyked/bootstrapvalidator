@@ -124,7 +124,7 @@
         		    
                 case 'TH':
         		    // http://regex101.com/r/vM5mZ4/2
-        		    isValid = (/^0\(?([6|8-9]{2})*-([0-9]{3})*-([0-9]{4}))$/).test(value);
+        		    isValid = (/^0\(?([6|8-9]{2})*-([0-9]{3})*-([0-9]{4})$/).test(value);
         		    break;
 
                 case 'US':

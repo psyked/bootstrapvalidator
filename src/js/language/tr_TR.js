@@ -175,6 +175,7 @@
                 SI: 'Slovenya',
                 SK: 'Slovakya',
                 SM: 'San Marino',
+                TH: 'Tayland',
                 ZA: 'Güney Afrika'
             }
         },
@@ -237,6 +238,7 @@
                 MA: 'Fas',
                 PK: 'Pakistan',
                 RO: 'Romanya',
+                TH: 'Tayland',
                 US: 'Amerika'
             }
         },

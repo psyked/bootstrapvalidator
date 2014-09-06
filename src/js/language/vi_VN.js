@@ -175,6 +175,7 @@
                 SI: 'Slovenia',
                 SK: 'Slovakia',
                 SM: 'San Marino',
+                TH: 'Thái Lan',
                 ZA: 'Nam Phi'
             }
         },
@@ -237,6 +238,7 @@
                 MA: 'Maroc',
                 PK: 'Pakistan',
                 RO: 'Romania',
+                TH: 'Thái Lan',
                 US: 'Mỹ'
             }
         },

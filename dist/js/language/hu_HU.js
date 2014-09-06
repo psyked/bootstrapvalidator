@@ -175,6 +175,7 @@
                 SI: 'szlovén',
                 SK: 'szlovák',
                 SM: 'San Marino beli',
+                TH: 'thaiföld',
                 ZA: 'dél afrikai'
             }
         },
@@ -237,6 +238,7 @@
                 MA: 'Marokkó',
                 PK: 'Pakisztán',
                 RO: 'Románia',
+                TH: 'thaiföld',
                 US: 'Egyesült Államok beli'
             }
         },

@@ -11,6 +11,7 @@ __New Features__
 * [#760](https://github.com/nghuuphuoc/bootstrapvalidator/pull/760): Add Romania phone number validator, thanks to [@adrian-dks](https://github.com/adrian-dks)
 * [#761](https://github.com/nghuuphuoc/bootstrapvalidator/pull/761): Add Romania postal code validator, thanks to [@adrian-dks](https://github.com/adrian-dks)
 * [#785](https://github.com/nghuuphuoc/bootstrapvalidator/pull/785): Add Denmark phone number validator, thanks to [@emilchristensen](https://github.com/emilchristensen)
+* [#787](https://github.com/nghuuphuoc/bootstrapvalidator/pull/787): Add Thailand phone number and ID validator, thanks to [@emilchristensen](https://github.com/emilchristensen)
 
 __Changes__
 * [#753](https://github.com/nghuuphuoc/bootstrapvalidator/issues/753): Change the default type of [remote](http://bootstrapvalidator.com/validators/remote/) validator to GET
@@ -43,6 +44,7 @@ __Language Packages__
 * [#729](https://github.com/nghuuphuoc/bootstrapvalidator/pull/729): Persian (Farsi) language package, thanks to [@i0](https://github.com/i0)
 * [#779](https://github.com/nghuuphuoc/bootstrapvalidator/pull/779): Romanian language package, thanks to [@filipac](https://github.com/filipac)
 * [#788](https://github.com/nghuuphuoc/bootstrapvalidator/pull/788): Fully re-translated Simplified Chinese language package, thanks to [@shamiao](https://github.com/shamiao)
+* [#787](https://github.com/nghuuphuoc/bootstrapvalidator/pull/787): Thai language package, thanks to [@figgaro](https://github.com/figgaro)
 
 ## v0.5.1 (2014-08-22)
 

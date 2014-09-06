@@ -1,6 +1,6 @@
 (function($) {
     /**
-     * Simplified Chinese language package
+     * Traditional Chinese language package
      * Translated by @tureki
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
@@ -175,6 +175,7 @@
                 SI: '斯洛文尼亞',
                 SK: '斯洛伐克',
                 SM: '聖馬力諾',
+                TH: '泰國',
                 ZA: '南非'
             }
         },
@@ -237,6 +238,7 @@
                 MA: '摩洛哥',
                 PK: '巴基斯坦',
                 RO: '罗马尼亚',
+                TH: '泰國',
                 US: '美國'
             }
         },

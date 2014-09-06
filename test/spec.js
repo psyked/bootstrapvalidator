@@ -3514,6 +3514,7 @@ describe('id', function() {
                         '<option value="SI">Slovenia</option>',
                         '<option value="SK">Slovakia</option>',
                         '<option value="SM">San Marino</option>',
+                        '<option value="TH">Thailand</option>',
                         '<option value="ZA">South Africa</option>',
                     '</select>',
                 '</div>',
@@ -3928,6 +3929,28 @@ describe('id', function() {
 
         // Invalid samples
         var invalidSamples = ['8001015009287', '8001015009086'];
+        for (i in invalidSamples) {
+            this.bv.resetForm();
+            this.$id.val(invalidSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toEqual(false);
+        }
+    });
+
+    it('Thailand citizen number', function() {
+        this.bv.updateOption('id', 'id', 'country', 'TH');
+
+        // Valid samples
+        var validSamples = ['7145620509547', '3688699975685', '2368719339716'];
+        for (var i in validSamples) {
+            this.bv.resetForm();
+            this.$id.val(validSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toBeTruthy();
+        }
+
+        // Invalid samples
+        var invalidSamples = ['1100800092310'];
         for (i in invalidSamples) {
             this.bv.resetForm();
             this.$id.val(invalidSamples[i]);

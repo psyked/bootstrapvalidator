@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-09-06 8:17:17 AM
+ * @version     v0.5.2-dev, built on 2014-09-06 8:59:12 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -3232,6 +3232,7 @@
             SI: 'Slovenia',
             SK: 'Slovakia',
             SM: 'San Marino',
+            TH: 'Thailand',
             ZA: 'South Africa'
         }
     });
@@ -3245,7 +3246,7 @@
         // Supported country codes
         COUNTRY_CODES: [
             'BA', 'BG', 'BR', 'CH', 'CL', 'CZ', 'DK', 'EE', 'ES', 'FI', 'HR', 'IE', 'IS', 'LT', 'LV', 'ME', 'MK', 'NL',
-            'RO', 'RS', 'SE', 'SI', 'SK', 'SM', 'ZA'
+            'RO', 'RS', 'SE', 'SI', 'SK', 'SM', 'TH', 'ZA'
         ],
 
         /**
@@ -3986,6 +3987,29 @@
          */
         _sm: function(value) {
             return /^\d{5}$/.test(value);
+        },
+
+        /**
+         * Validate Thailand citizen number
+         * Examples:
+         * - Valid: 7145620509547, 3688699975685, 2368719339716
+         * - Invalid: 1100800092310
+         *
+         * @see http://en.wikipedia.org/wiki/National_identification_number#Thailand
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _th: function(value) {
+            if (value.length !== 13) {
+                return false;
+            }
+
+            var sum = 0;
+            for (var i = 0; i < 12; i++) {
+                sum += parseInt(value.charAt(i), 10) * (13 - i);
+            }
+
+            return (11 - sum % 11) % 10 === parseInt(value.charAt(12), 10);
         },
 
         /**
@@ -4756,6 +4780,7 @@
             MA: 'Morocco',
             PK: 'Pakistan',
             RO: 'Romania',
+            TH: 'Thailand',
             US: 'USA'
         }
     });
@@ -4767,7 +4792,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['BR', 'CN', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'US'],
+        COUNTRY_CODES: ['BR', 'CN', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'TH', 'US'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -4862,7 +4887,12 @@
         		case 'RO':
         		    // All mobile network and land line
         		    isValid = (/^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|\-)?([0-9]{3}(\s|\.|\-|)){2}$/g).test(value);
-                    break;
+        		    break;
+        		    
+                case 'TH':
+        		    // http://regex101.com/r/vM5mZ4/2
+        		    isValid = (/^0\(?([6|8-9]{2})*-([0-9]{3})*-([0-9]{4})$/).test(value);
+        		    break;
 
                 case 'US':
                 /* falls through */

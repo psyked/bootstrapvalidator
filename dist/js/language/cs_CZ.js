@@ -175,6 +175,7 @@
                 SI: 'Slovinsko',
                 SK: 'Slovensko',
                 SM: 'San Marino',
+                TH: 'Thajsko',
                 ZA: 'Jižní Afriku'
             }
         },
@@ -237,6 +238,7 @@
                 MA: 'Maroko',
                 PK: 'Pákistán',
                 RO: 'Rumunsko',
+                TH: 'Thajsko',
                 US: 'Spojené Státy Americké'
             }
         },
