@@ -156,6 +156,7 @@
                 BR: 'Brezilya',
                 CH: 'İsviçre',
                 CL: 'Şili',
+                CN: 'Çin',
                 CZ: 'Çek',
                 DK: 'Danimarka',
                 EE: 'Estonya',
