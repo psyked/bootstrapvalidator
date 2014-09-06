@@ -14,7 +14,8 @@
             PK: 'Pakistan',
             RO: 'Romania',
             TH: 'Thailand',
-            US: 'USA'
+            US: 'USA',
+            VE: 'Venezuelan'
         }
     });
 
@@ -25,7 +26,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['BR', 'CN', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'TH', 'US'],
+        COUNTRY_CODES: ['BR', 'CN', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'TH', 'US', 'VE'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -126,6 +127,12 @@
         		    // http://regex101.com/r/vM5mZ4/2
         		    isValid = (/^0\(?([6|8-9]{2})*-([0-9]{3})*-([0-9]{4})$/).test(value);
         		    break;
+
+                case 'VE':
+                    // http://regex101.com/r/eM2yY0/6
+                    value   = $.trim(value);
+                    isValid = (/^0(?:2(?:12|4[0-9]|5[1-9]|6[0-9]|7[0-8]|8[1-35-8]|9[1-5]|3[45789])|4(?:1[246]|2[46]))\d{7}$/).test(value);
+                    break;
 
                 case 'US':
                 /* falls through */
