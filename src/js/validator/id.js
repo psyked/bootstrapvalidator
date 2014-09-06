@@ -493,7 +493,8 @@
                 for (var i=0; i<17; i++) {
                     sum += parseInt(value.charAt(i), 10) * weight[i];
                 }
-                correct_checksum = (12 - (sum % 11)) % 11;
+                var correct_checksum = (12 - (sum % 11)) % 11;
+                var provided_checksum;
                 if (value.charAt(18-1).toUpperCase() != 'X') {
                     provided_checksum = parseInt(value.charAt(18-1), 10);
                 } else { provided_checksum = 10; }
