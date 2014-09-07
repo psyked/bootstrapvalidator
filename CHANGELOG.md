@@ -13,6 +13,7 @@ __New Features__
 * [#761](https://github.com/nghuuphuoc/bootstrapvalidator/pull/761): Add Romania postal code validator, thanks to [@adrian-dks](https://github.com/adrian-dks)
 * [#785](https://github.com/nghuuphuoc/bootstrapvalidator/pull/785): Add Denmark phone number validator, thanks to [@emilchristensen](https://github.com/emilchristensen)
 * [#787](https://github.com/nghuuphuoc/bootstrapvalidator/pull/787): Add Thailand phone number and ID validator, thanks to [@emilchristensen](https://github.com/emilchristensen)
+* [#793](https://github.com/nghuuphuoc/bootstrapvalidator/pull/793): Add Chinese citizen ID validator, thanks to [@shamiao](https://github.com/shamiao)
 
 __Changes__
 * [#753](https://github.com/nghuuphuoc/bootstrapvalidator/issues/753): Change the default type of [remote](http://bootstrapvalidator.com/validators/remote/) validator to GET

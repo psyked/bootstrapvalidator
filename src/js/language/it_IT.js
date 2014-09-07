@@ -231,7 +231,7 @@
             country: 'Si prega di inserire un numero di telefono valido per %s',
             countries: {
                 BR: 'Brasile',
-                CN: 'Porcellana',
+                CN: 'Cina',
                 DK: 'Danimarca',
                 ES: 'Spagna',
                 FR: 'Francia',

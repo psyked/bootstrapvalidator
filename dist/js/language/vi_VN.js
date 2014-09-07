@@ -156,6 +156,7 @@
                 BR: 'Brazil',
                 CH: 'Thuỵ Sĩ',
                 CL: 'Chi Lê',
+                CN: 'Trung Quốc',
                 CZ: 'Séc',
                 DK: 'Đan Mạch',
                 EE: 'Estonia',
