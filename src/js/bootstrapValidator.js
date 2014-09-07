@@ -7,9 +7,8 @@
  * @license     MIT
  */
 
-// jquery warning
 if (typeof jQuery === 'undefined') {
-    throw new Error('BootstrapValidator\'s JavaScript requires jQuery')
+    throw new Error('BootstrapValidator\'s JavaScript requires jQuery');
 }
 
 (function($) {

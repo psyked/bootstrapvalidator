@@ -12,7 +12,7 @@ __New Features__
 * [#760](https://github.com/nghuuphuoc/bootstrapvalidator/pull/760): Add Romania phone number validator, thanks to [@adrian-dks](https://github.com/adrian-dks)
 * [#761](https://github.com/nghuuphuoc/bootstrapvalidator/pull/761): Add Romania postal code validator, thanks to [@adrian-dks](https://github.com/adrian-dks)
 * [#785](https://github.com/nghuuphuoc/bootstrapvalidator/pull/785): Add Denmark phone number validator, thanks to [@emilchristensen](https://github.com/emilchristensen)
-* [#787](https://github.com/nghuuphuoc/bootstrapvalidator/pull/787): Add Thailand phone number and ID validator, thanks to [@emilchristensen](https://github.com/emilchristensen)
+* [#787](https://github.com/nghuuphuoc/bootstrapvalidator/pull/787): Add Thailand phone number and ID validator, thanks to [@figgaro](https://github.com/figgaro)
 * [#793](https://github.com/nghuuphuoc/bootstrapvalidator/pull/793): Add Chinese citizen ID validator, thanks to [@shamiao](https://github.com/shamiao)
 
 __Changes__
@@ -28,6 +28,7 @@ __Improvements__
 * [#737](https://github.com/nghuuphuoc/bootstrapvalidator/issues/737): Support VAT number without prefixing by country code
 * [#754](https://github.com/nghuuphuoc/bootstrapvalidator/issues/754): Support latest Bootstrap when using tooltip/popover to show the message
 * [#783](https://github.com/nghuuphuoc/bootstrapvalidator/issues/783): Improve behaviour of the [different](http://bootstrapvalidator.com/validators/different/) validator
+* [#792](https://github.com/nghuuphuoc/bootstrapvalidator/pull/792): Add "BootstrapValidator's JavaScript requires jQuery" warning, thanks to [@Arkni](https://github.com/Arkni)
 
 __Bug Fixes__
 * [#611](https://github.com/nghuuphuoc/bootstrapvalidator/issues/611), [#703](https://github.com/nghuuphuoc/bootstrapvalidator/issues/703): Tabs get red even form is valid
@@ -48,8 +49,8 @@ __Language Packages__
 * [#727](https://github.com/nghuuphuoc/bootstrapvalidator/pull/727): Belgium (French) language package, thanks to [@neilime](https://github.com/neilime)
 * [#729](https://github.com/nghuuphuoc/bootstrapvalidator/pull/729): Persian (Farsi) language package, thanks to [@i0](https://github.com/i0)
 * [#779](https://github.com/nghuuphuoc/bootstrapvalidator/pull/779): Romanian language package, thanks to [@filipac](https://github.com/filipac)
-* [#788](https://github.com/nghuuphuoc/bootstrapvalidator/pull/788): Fully re-translated Simplified Chinese language package, thanks to [@shamiao](https://github.com/shamiao)
 * [#787](https://github.com/nghuuphuoc/bootstrapvalidator/pull/787): Thai language package, thanks to [@figgaro](https://github.com/figgaro)
+* [#788](https://github.com/nghuuphuoc/bootstrapvalidator/pull/788): Fully re-translated Simplified Chinese language package, thanks to [@shamiao](https://github.com/shamiao)
 
 ## v0.5.1 (2014-08-22)
 
