@@ -38,12 +38,14 @@
          * - name {String} [optional]: Override the field name for the request.
          * - message: The invalid message
          * - headers: Additional headers
-         * @returns {Boolean|Deferred}
+         * @returns {Deferred}
          */
         validate: function(validator, $field, options) {
-            var value = $field.val();
+            var value = $field.val(),
+                dfd   = new $.Deferred();
             if (value === '') {
-                return true;
+                dfd.resolve($field, 'remote', { valid: true });
+                return dfd;
             }
 
             var name    = $field.attr('data-bv-field'),
@@ -63,9 +65,6 @@
             }
 
             data[options.name || name] = value;
-
-            var dfd = new $.Deferred();
-
             function runCallback() {
                 var xhr = $.ajax({
                     type: type,
@@ -75,7 +74,8 @@
                     data: data
                 });
                 xhr.then(function(response) {
-                    dfd.resolve($field, 'remote', response.valid === true || response.valid === 'true', response.message ? response.message : null);
+                    response.valid = response.valid === true || response.valid === 'true';
+                    dfd.resolve($field, 'remote', response);
                 });
 
                 dfd.fail(function() {

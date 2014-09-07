@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-09-07 11:08:57 AM
+ * @version     v0.5.2-dev, built on 2014-09-07 4:52:22 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -319,18 +319,6 @@ if (typeof jQuery === 'undefined') {
                     if ('function' === typeof $.fn.bootstrapValidator.validators[validatorName].init) {
                         $.fn.bootstrapValidator.validators[validatorName].init(this, $field, this.options.fields[field].validators[validatorName]);
                     }
-
-                    // Prepare the validator events
-                    if (this.options.fields[field].validators[validatorName].onSuccess) {
-                        $field.on(this.options.events.validatorSuccess, function(e, data) {
-                             $.fn.bootstrapValidator.helpers.call(that.options.fields[field].validators[validatorName].onSuccess, [e, data]);
-                        });
-                    }
-                    if (this.options.fields[field].validators[validatorName].onError) {
-                        $field.on(this.options.events.validatorError, function(e, data) {
-                             $.fn.bootstrapValidator.helpers.call(that.options.fields[field].validators[validatorName].onError, [e, data]);
-                        });
-                    }
                 }
 
                 // Prepare the feedback icons
@@ -406,21 +394,32 @@ if (typeof jQuery === 'undefined') {
             }
 
             // Prepare the events
-            if (this.options.fields[field].onSuccess) {
-                fields.on(this.options.events.fieldSuccess, function(e, data) {
-                    $.fn.bootstrapValidator.helpers.call(that.options.fields[field].onSuccess, [e, data]);
+            fields
+                .on(this.options.events.fieldSuccess, function(e, data) {
+                    if (that.options.fields[data.field].onSuccess) {
+                        $.fn.bootstrapValidator.helpers.call(that.options.fields[data.field].onSuccess, [e, data]);
+                    }
+                })
+                .on(this.options.events.fieldError, function(e, data) {
+                    if (that.options.fields[data.field].onError) {
+                        $.fn.bootstrapValidator.helpers.call(that.options.fields[data.field].onError, [e, data]);
+                    }
+                })
+                .on(this.options.events.fieldStatus, function(e, data) {
+                    if (that.options.fields[data.field].onStatus) {
+                        $.fn.bootstrapValidator.helpers.call(that.options.fields[data.field].onStatus, [e, data]);
+                    }
+                })
+                .on(this.options.events.validatorError, function(e, data) {
+                    if (that.options.fields[data.field].validators[data.validator].onError) {
+                        $.fn.bootstrapValidator.helpers.call(that.options.fields[data.field].validators[data.validator].onError, [e, data]);
+                    }
+                })
+                .on(this.options.events.validatorSuccess, function(e, data) {
+                    if (that.options.fields[data.field].validators[data.validator].onSuccess) {
+                        $.fn.bootstrapValidator.helpers.call(that.options.fields[data.field].validators[data.validator].onSuccess, [e, data]);
+                    }
                 });
-            }
-            if (this.options.fields[field].onError) {
-                fields.on(this.options.events.fieldError, function(e, data) {
-                    $.fn.bootstrapValidator.helpers.call(that.options.fields[field].onError, [e, data]);
-                });
-            }
-            if (this.options.fields[field].onStatus) {
-                fields.on(this.options.events.fieldStatus, function(e, data) {
-                    $.fn.bootstrapValidator.helpers.call(that.options.fields[field].onStatus, [e, data]);
-                });
-            }
 
             // Set live mode
             events = $.map(trigger, function(item) {
@@ -667,7 +666,8 @@ if (typeof jQuery === 'undefined') {
                     bv: this,
                     field: field,
                     element: $field,
-                    validator: validatorName
+                    validator: validatorName,
+                    result: $field.data('bv.response.' + validatorName)
                 };
 
             // Trigger an event after given validator completes
@@ -839,25 +839,26 @@ if (typeof jQuery === 'undefined') {
                         this.updateStatus(updateAll ? field : $field, this.STATUS_VALIDATING, validatorName);
                         $field.data('bv.dfs.' + validatorName, validateResult);
 
-                        validateResult.done(function($f, v, isValid, message) {
+                        validateResult.done(function($f, v, response) {
                             // v is validator name
-                            $f.removeData('bv.dfs.' + v);
-                            if (message) {
-                                that.updateMessage($f, v, message);
+                            $f.removeData('bv.dfs.' + v).data('bv.response.' + v, response);
+                            if (response.message) {
+                                that.updateMessage($f, v, response.message);
                             }
 
-                            that.updateStatus(updateAll ? $f.attr('data-bv-field') : $f, isValid ? that.STATUS_VALID : that.STATUS_INVALID, v);
+                            that.updateStatus(updateAll ? $f.attr('data-bv-field') : $f, response.valid ? that.STATUS_VALID : that.STATUS_INVALID, v);
 
-                            if (isValid && that._submitIfValid === true) {
+                            if (response.valid && that._submitIfValid === true) {
                                 // If a remote validator returns true and the form is ready to submit, then do it
                                 that._submit();
-                            } else if (!isValid && !verbose) {
+                            } else if (!response.valid && !verbose) {
                                 stop = true;
                             }
                         });
                     }
                     // ... or object { valid: true/false, message: 'dynamic message' }
                     else if ('object' === typeof validateResult && validateResult.valid !== undefined && validateResult.message !== undefined) {
+                        $field.data('bv.response.' + validatorName, validateResult);
                         this.updateMessage(updateAll ? field : $field, validatorName, validateResult.message);
                         this.updateStatus(updateAll ? field : $field, validateResult.valid ? this.STATUS_VALID : this.STATUS_INVALID, validatorName);
                         if (!validateResult.valid && !verbose) {
@@ -866,6 +867,7 @@ if (typeof jQuery === 'undefined') {
                     }
                     // ... or a boolean value
                     else if ('boolean' === typeof validateResult) {
+                        $field.data('bv.response.' + validatorName, validateResult);
                         this.updateStatus(updateAll ? field : $field, validateResult ? this.STATUS_VALID : this.STATUS_INVALID, validatorName);
                         if (!validateResult && !verbose) {
                             break;
@@ -1615,7 +1617,9 @@ if (typeof jQuery === 'undefined') {
                         if ($field.data('bv.dfs.' + validator)) {
                             $field.data('bv.dfs.' + validator).reject();
                         }
-                        $field.removeData('bv.result.' + validator).removeData('bv.dfs.' + validator);
+                        $field.removeData('bv.result.' + validator)
+                              .removeData('bv.response.' + validator)
+                              .removeData('bv.dfs.' + validator);
 
                         // Destroy the validator
                         if ('function' === typeof $.fn.bootstrapValidator.validators[validator].destroy) {
@@ -2080,19 +2084,20 @@ if (typeof jQuery === 'undefined') {
          *          // $field is the field element
          *      }
          * - message: The invalid message
-         * @returns {Boolean|Deferred}
+         * @returns {Deferred}
          */
         validate: function(validator, $field, options) {
-            var value = $field.val();
+            var value  = $field.val(),
+                dfd    = new $.Deferred(),
+                result = { valid: true };
 
             if (options.callback) {
-                var dfd      = new $.Deferred(),
-                    response = $.fn.bootstrapValidator.helpers.call(options.callback, [value, validator, $field]);
-                dfd.resolve($field, 'callback', 'boolean' === typeof response ? response : response.valid, 'object' === typeof response && response.message ? response.message : null);
-                return dfd;
+                var response = $.fn.bootstrapValidator.helpers.call(options.callback, [value, validator, $field]);
+                result = ('boolean' === typeof response) ? { valid: response } :  response;
             }
 
-            return true;
+            dfd.resolve($field, 'callback', result);
+            return dfd;
         }
     };
 }(window.jQuery));
@@ -5575,12 +5580,14 @@ if (typeof jQuery === 'undefined') {
          * - name {String} [optional]: Override the field name for the request.
          * - message: The invalid message
          * - headers: Additional headers
-         * @returns {Boolean|Deferred}
+         * @returns {Deferred}
          */
         validate: function(validator, $field, options) {
-            var value = $field.val();
+            var value = $field.val(),
+                dfd   = new $.Deferred();
             if (value === '') {
-                return true;
+                dfd.resolve($field, 'remote', { valid: true });
+                return dfd;
             }
 
             var name    = $field.attr('data-bv-field'),
@@ -5600,9 +5607,6 @@ if (typeof jQuery === 'undefined') {
             }
 
             data[options.name || name] = value;
-
-            var dfd = new $.Deferred();
-
             function runCallback() {
                 var xhr = $.ajax({
                     type: type,
@@ -5612,7 +5616,8 @@ if (typeof jQuery === 'undefined') {
                     data: data
                 });
                 xhr.then(function(response) {
-                    dfd.resolve($field, 'remote', response.valid === true || response.valid === 'true', response.message ? response.message : null);
+                    response.valid = response.valid === true || response.valid === 'true';
+                    dfd.resolve($field, 'remote', response);
                 });
 
                 dfd.fail(function() {

@@ -27,6 +27,7 @@ __Improvements__
 * [#734](https://github.com/nghuuphuoc/bootstrapvalidator/pull/734): The [uri](http://bootstrapvalidator.com/validators/uri/) validator adds support for custom protocol, thanks to [@bcamarneiro](https://github.com/bcamarneiro)
 * [#737](https://github.com/nghuuphuoc/bootstrapvalidator/issues/737): Support VAT number without prefixing by country code
 * [#754](https://github.com/nghuuphuoc/bootstrapvalidator/issues/754): Support latest Bootstrap when using tooltip/popover to show the message
+* [#765](https://github.com/nghuuphuoc/bootstrapvalidator/issues/765): Reuse data returned by [callback](http://bootstrapvalidator.com/validators/callback/), [remote](http://bootstrapvalidator.com/validators/remote/), custom validators
 * [#783](https://github.com/nghuuphuoc/bootstrapvalidator/issues/783): Improve behaviour of the [different](http://bootstrapvalidator.com/validators/different/) validator
 * [#792](https://github.com/nghuuphuoc/bootstrapvalidator/pull/792): Add "BootstrapValidator's JavaScript requires jQuery" warning, thanks to [@Arkni](https://github.com/Arkni)
 
