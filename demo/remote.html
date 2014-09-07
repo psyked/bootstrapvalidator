@@ -116,6 +116,7 @@ $(document).ready(function() {
                         message: 'The username is required and can\'t be empty'
                     },
                     remote: {
+                        type: 'POST',
                         url: 'remote.php',
                         message: 'The username is not available',
                         delay: 1000
@@ -135,6 +136,7 @@ $(document).ready(function() {
                         message: 'The input is not a valid email address'
                     },
                     remote: {
+                        type: 'POST',
                         url: 'remote.php',
                         message: 'The email is not available',
                         delay: 2000

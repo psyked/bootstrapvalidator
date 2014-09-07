@@ -156,6 +156,7 @@
                 BR: 'Brasilien',
                 CH: 'Schweiz',
                 CL: 'Chile',
+                CN: 'Kina',
                 CZ: 'Tjeck',
                 DK: 'Danmark',
                 EE: 'Estland',
@@ -175,6 +176,7 @@
                 SI: 'Slovenien',
                 SK: 'Slovakien',
                 SM: 'San Marino',
+                TH: 'Thailand',
                 ZA: 'Sydafrika'
             }
         },
@@ -237,7 +239,9 @@
                 MA: 'Marocko',
                 PK: 'Pakistan',
                 RO: 'Rumänien',
-                US: 'USA'
+                TH: 'Thailand',
+                US: 'USA',
+                VE: 'Venezuela'
             }
         },
         regexp: {

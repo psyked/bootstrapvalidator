@@ -176,6 +176,7 @@
                 SI: 'Slovinsko',
                 SK: 'Slovensko',
                 SM: 'San Marino',
+                TH: 'Thajsko',
                 ZA: 'Jižní Afriku'
             }
         },
@@ -238,7 +239,9 @@
                 MA: 'Maroko',
                 PK: 'Pákistán',
                 RO: 'Rumunsko',
-                US: 'Spojené Státy Americké'
+                TH: 'Thajsko',
+                US: 'Spojené Státy Americké',
+                VE: 'Venezuelský'
             }
         },
         regexp: {

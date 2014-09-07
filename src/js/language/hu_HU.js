@@ -176,6 +176,7 @@
                 SI: 'szlovén',
                 SK: 'szlovák',
                 SM: 'San Marino beli',
+                TH: 'thaiföld',
                 ZA: 'dél afrikai'
             }
         },
@@ -238,7 +239,9 @@
                 MA: 'Marokkó',
                 PK: 'Pakisztán',
                 RO: 'Románia',
-                US: 'Egyesült Államok beli'
+                TH: 'thaiföld',
+                US: 'Egyesült Államok beli',
+                VE: 'venezuelai'
             }
         },
         regexp: {

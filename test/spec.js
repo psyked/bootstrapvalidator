@@ -235,8 +235,8 @@ describe('container tooltip/popover', function() {
         this.$firstName.val('First');
         this.$lastName.val('Last');
         this.bv.validate();
-        expect(this.$firstName.parent().find('i').data('bs.tooltip')).toBeUndefined();
-        expect(this.$lastName.parent().find('i').data('bs.popover')).toBeUndefined();
+        expect(this.$firstName.parent().find('i').data('bs.tooltip')).toBeDefined();
+        expect(this.$lastName.parent().find('i').data('bs.popover')).toBeDefined();
     });
 
     it('container programmatically', function() {
@@ -263,8 +263,8 @@ describe('container tooltip/popover', function() {
         this.$firstName.val('First');
         this.$lastName.val('Last');
         this.bv.validate();
-        expect(this.$firstName.parent().find('i').data('bs.tooltip')).toBeUndefined();
-        expect(this.$lastName.parent().find('i').data('bs.popover')).toBeUndefined();
+        expect(this.$firstName.parent().find('i').data('bs.tooltip')).toBeDefined();
+        expect(this.$lastName.parent().find('i').data('bs.popover')).toBeDefined();
     });
 });
 
@@ -3495,6 +3495,7 @@ describe('id', function() {
                         '<option value="BR">Brazil</option>',
                         '<option value="CH">Switzerland</option>',
                         '<option value="CL">Chile</option>',
+                        '<option value="CN">China</option>',
                         '<option value="CZ">Czech</option>',
                         '<option value="DK">Denmark</option>',
                         '<option value="EE">Estonia</option>',
@@ -3514,6 +3515,7 @@ describe('id', function() {
                         '<option value="SI">Slovenia</option>',
                         '<option value="SK">Slovakia</option>',
                         '<option value="SM">San Marino</option>',
+                        '<option value="TH">Thailand</option>',
                         '<option value="ZA">South Africa</option>',
                     '</select>',
                 '</div>',
@@ -3621,6 +3623,29 @@ describe('id', function() {
             this.$id.val(validSamples[i]);
             this.bv.validate();
             expect(this.bv.isValid()).toBeTruthy();
+        }
+    });
+
+    // #793
+    it('Chinese citizen identification number', function() {
+        this.bv.updateOption('id', 'id', 'country', 'CN');
+
+        // Valid samples
+        var validSamples = ['450202201409072332', '22011219930407001X', '110108601017023'];
+        for (var i in validSamples) {
+            this.bv.resetForm();
+            this.$id.val(validSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toBeTruthy();
+        }
+
+        // Invalid samples
+        var invalidSamples = ['999999199304070016', '220112190002290016', '220112199304070019', '999999601017023', '110108999999023'];
+        for (i in invalidSamples) {
+            this.bv.resetForm();
+            this.$id.val(invalidSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toEqual(false);
         }
     });
 
@@ -3928,6 +3953,28 @@ describe('id', function() {
 
         // Invalid samples
         var invalidSamples = ['8001015009287', '8001015009086'];
+        for (i in invalidSamples) {
+            this.bv.resetForm();
+            this.$id.val(invalidSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toEqual(false);
+        }
+    });
+
+    it('Thailand citizen number', function() {
+        this.bv.updateOption('id', 'id', 'country', 'TH');
+
+        // Valid samples
+        var validSamples = ['7145620509547', '3688699975685', '2368719339716'];
+        for (var i in validSamples) {
+            this.bv.resetForm();
+            this.$id.val(validSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toBeTruthy();
+        }
+
+        // Invalid samples
+        var invalidSamples = ['1100800092310'];
         for (i in invalidSamples) {
             this.bv.resetForm();
             this.$id.val(invalidSamples[i]);

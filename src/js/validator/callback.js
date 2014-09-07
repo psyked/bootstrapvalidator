@@ -22,19 +22,20 @@
          *          // $field is the field element
          *      }
          * - message: The invalid message
-         * @returns {Boolean|Deferred}
+         * @returns {Deferred}
          */
         validate: function(validator, $field, options) {
-            var value = $field.val();
+            var value  = $field.val(),
+                dfd    = new $.Deferred(),
+                result = { valid: true };
 
             if (options.callback) {
-                var dfd      = new $.Deferred(),
-                    response = $.fn.bootstrapValidator.helpers.call(options.callback, [value, validator, $field]);
-                dfd.resolve($field, 'callback', 'boolean' === typeof response ? response : response.valid, 'object' === typeof response && response.message ? response.message : null);
-                return dfd;
+                var response = $.fn.bootstrapValidator.helpers.call(options.callback, [value, validator, $field]);
+                result = ('boolean' === typeof response) ? { valid: response } :  response;
             }
 
-            return true;
+            dfd.resolve($field, 'callback', result);
+            return dfd;
         }
     };
 }(window.jQuery));

@@ -1,9 +1,7 @@
 (function ($) {
     /**
      * Simplified Chinese language package
-     * Retranslated by @shamiao, 
-     * and referenced previous traditional-to-simplified conversion by @tureki
-     * (it was just a conversion, not a proper translation, really. )
+     * Translated by @shamiao
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
@@ -178,6 +176,7 @@
                 SI: '斯洛文尼亚',
                 SK: '斯洛伐克',
                 SM: '圣马力诺',
+                TH: '泰国',
                 ZA: '南非'
             }
         },
@@ -240,7 +239,9 @@
                 MA: '摩洛哥',
                 PK: '巴基斯坦',
                 RO: '罗马尼亚',
-                US: '美国'
+                TH: '泰国',
+                US: '美国',
+                VE: '委内瑞拉'
             }
         },
         regexp: {

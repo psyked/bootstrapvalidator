@@ -2,11 +2,15 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-09-05 10:48:08 PM
+ * @version     v0.5.2-dev, built on 2014-09-07 4:54:40 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
  */
+if (typeof jQuery === 'undefined') {
+    throw new Error('BootstrapValidator\'s JavaScript requires jQuery');
+}
+
 (function($) {
     var BootstrapValidator = function(form, options) {
         this.$form   = $(form);
@@ -294,7 +298,7 @@
                 $field.off(events).on(events, function() {
                     that.updateStatus($(this), that.STATUS_NOT_VALIDATED);
                 });
-
+                
                 // Create help block elements for showing the error messages
                 $field.data('bv.messages', $message);
                 for (validatorName in this.options.fields[field].validators) {
@@ -315,18 +319,6 @@
                     if ('function' === typeof $.fn.bootstrapValidator.validators[validatorName].init) {
                         $.fn.bootstrapValidator.validators[validatorName].init(this, $field, this.options.fields[field].validators[validatorName]);
                     }
-
-                    // Prepare the validator events
-                    if (this.options.fields[field].validators[validatorName].onSuccess) {
-                        $field.on(this.options.events.validatorSuccess, function(e, data) {
-                             $.fn.bootstrapValidator.helpers.call(that.options.fields[field].validators[validatorName].onSuccess, [e, data]);
-                        });
-                    }
-                    if (this.options.fields[field].validators[validatorName].onError) {
-                        $field.on(this.options.events.validatorError, function(e, data) {
-                             $.fn.bootstrapValidator.helpers.call(that.options.fields[field].validators[validatorName].onError, [e, data]);
-                        });
-                    }
                 }
 
                 // Prepare the feedback icons
@@ -336,7 +328,9 @@
                     && this.options.feedbackIcons.validating && this.options.feedbackIcons.invalid && this.options.feedbackIcons.valid
                     && (!updateAll || i === total - 1))
                 {
-                    $parent.removeClass('has-success').removeClass('has-error').addClass('has-feedback');
+                    // $parent.removeClass('has-success').removeClass('has-error').addClass('has-feedback');
+                    // Keep error messages which are populated from back-end
+                    $parent.addClass('has-feedback');
                     var $icon = $('<i/>')
                                     .css('display', 'none')
                                     .addClass('form-control-feedback')
@@ -357,34 +351,75 @@
                     // The feedback icon does not render correctly if there is no label
                     // https://github.com/twbs/bootstrap/issues/12873
                     if ($parent.find('label').length === 0) {
-                        $icon.css('top', 0);
+                        $icon.addClass('bv-no-label');
                     }
                     // Fix feedback icons in input-group
                     if ($parent.find('.input-group').length !== 0) {
-                        $icon.css({
-                            'top': 0,
-                            'z-index': 100
-                        }).insertAfter($parent.find('.input-group').eq(0));
+                        $icon.addClass('bv-icon-input-group')
+                             .insertAfter($parent.find('.input-group').eq(0));
+                    }
+                    
+                    if (container) {
+                        $field
+                            // Show tooltip/popover message when field gets focus
+                            .off('focus.bv')
+                            .on('focus.bv', function() {
+                                switch (container) {
+                                    case 'tooltip':
+                                        $icon.tooltip('show');
+                                        break;
+                                    case 'popover':
+                                        $icon.popover('show');
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            })
+                            // and hide them when losing focus
+                            .off('blur.bv')
+                            .on('blur.bv', function() {
+                                switch (container) {
+                                    case 'tooltip':
+                                        $icon.tooltip('hide');
+                                        break;
+                                    case 'popover':
+                                        $icon.popover('hide');
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            });
                     }
                 }
             }
 
             // Prepare the events
-            if (this.options.fields[field].onSuccess) {
-                fields.on(this.options.events.fieldSuccess, function(e, data) {
-                    $.fn.bootstrapValidator.helpers.call(that.options.fields[field].onSuccess, [e, data]);
+            fields
+                .on(this.options.events.fieldSuccess, function(e, data) {
+                    if (that.options.fields[data.field].onSuccess) {
+                        $.fn.bootstrapValidator.helpers.call(that.options.fields[data.field].onSuccess, [e, data]);
+                    }
+                })
+                .on(this.options.events.fieldError, function(e, data) {
+                    if (that.options.fields[data.field].onError) {
+                        $.fn.bootstrapValidator.helpers.call(that.options.fields[data.field].onError, [e, data]);
+                    }
+                })
+                .on(this.options.events.fieldStatus, function(e, data) {
+                    if (that.options.fields[data.field].onStatus) {
+                        $.fn.bootstrapValidator.helpers.call(that.options.fields[data.field].onStatus, [e, data]);
+                    }
+                })
+                .on(this.options.events.validatorError, function(e, data) {
+                    if (that.options.fields[data.field].validators[data.validator].onError) {
+                        $.fn.bootstrapValidator.helpers.call(that.options.fields[data.field].validators[data.validator].onError, [e, data]);
+                    }
+                })
+                .on(this.options.events.validatorSuccess, function(e, data) {
+                    if (that.options.fields[data.field].validators[data.validator].onSuccess) {
+                        $.fn.bootstrapValidator.helpers.call(that.options.fields[data.field].validators[data.validator].onSuccess, [e, data]);
+                    }
                 });
-            }
-            if (this.options.fields[field].onError) {
-                fields.on(this.options.events.fieldError, function(e, data) {
-                    $.fn.bootstrapValidator.helpers.call(that.options.fields[field].onError, [e, data]);
-                });
-            }
-            if (this.options.fields[field].onStatus) {
-                fields.on(this.options.events.fieldStatus, function(e, data) {
-                    $.fn.bootstrapValidator.helpers.call(that.options.fields[field].onStatus, [e, data]);
-                });
-            }
 
             // Set live mode
             events = $.map(trigger, function(item) {
@@ -631,7 +666,8 @@
                     bv: this,
                     field: field,
                     element: $field,
-                    validator: validatorName
+                    validator: validatorName,
+                    result: $field.data('bv.response.' + validatorName)
                 };
 
             // Trigger an event after given validator completes
@@ -803,25 +839,26 @@
                         this.updateStatus(updateAll ? field : $field, this.STATUS_VALIDATING, validatorName);
                         $field.data('bv.dfs.' + validatorName, validateResult);
 
-                        validateResult.done(function($f, v, isValid, message) {
+                        validateResult.done(function($f, v, response) {
                             // v is validator name
-                            $f.removeData('bv.dfs.' + v);
-                            if (message) {
-                                that.updateMessage($f, v, message);
+                            $f.removeData('bv.dfs.' + v).data('bv.response.' + v, response);
+                            if (response.message) {
+                                that.updateMessage($f, v, response.message);
                             }
 
-                            that.updateStatus(updateAll ? $f.attr('data-bv-field') : $f, isValid ? that.STATUS_VALID : that.STATUS_INVALID, v);
+                            that.updateStatus(updateAll ? $f.attr('data-bv-field') : $f, response.valid ? that.STATUS_VALID : that.STATUS_INVALID, v);
 
-                            if (isValid && that._submitIfValid === true) {
+                            if (response.valid && that._submitIfValid === true) {
                                 // If a remote validator returns true and the form is ready to submit, then do it
                                 that._submit();
-                            } else if (!isValid && !verbose) {
+                            } else if (!response.valid && !verbose) {
                                 stop = true;
                             }
                         });
                     }
                     // ... or object { valid: true/false, message: 'dynamic message' }
                     else if ('object' === typeof validateResult && validateResult.valid !== undefined && validateResult.message !== undefined) {
+                        $field.data('bv.response.' + validatorName, validateResult);
                         this.updateMessage(updateAll ? field : $field, validatorName, validateResult.message);
                         this.updateStatus(updateAll ? field : $field, validateResult.valid ? this.STATUS_VALID : this.STATUS_INVALID, validatorName);
                         if (!validateResult.valid && !verbose) {
@@ -830,6 +867,7 @@
                     }
                     // ... or a boolean value
                     else if ('boolean' === typeof validateResult) {
+                        $field.data('bv.response.' + validatorName, validateResult);
                         this.updateStatus(updateAll ? field : $field, validateResult ? this.STATUS_VALID : this.STATUS_INVALID, validatorName);
                         if (!validateResult && !verbose) {
                             break;
@@ -1004,7 +1042,7 @@
                                     placement: 'top',
                                     title: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html()
                                 })
-                                : $icon.css('cursor', '').tooltip('destroy');
+                                : $icon.tooltip('hide');
                         break;
                     // ... or popover
                     case ($icon && 'popover' === container):
@@ -1016,7 +1054,7 @@
                                     placement: 'top',
                                     trigger: 'hover click'
                                 })
-                                : $icon.css('cursor', '').popover('destroy');
+                                : $icon.popover('hide');
                         break;
                     default:
                         (status === this.STATUS_INVALID) ? $errors.show() : $errors.hide();
@@ -1579,7 +1617,9 @@
                         if ($field.data('bv.dfs.' + validator)) {
                             $field.data('bv.dfs.' + validator).reject();
                         }
-                        $field.removeData('bv.result.' + validator).removeData('bv.dfs.' + validator);
+                        $field.removeData('bv.result.' + validator)
+                              .removeData('bv.response.' + validator)
+                              .removeData('bv.dfs.' + validator);
 
                         // Destroy the validator
                         if ('function' === typeof $.fn.bootstrapValidator.validators[validator].destroy) {
@@ -2044,19 +2084,20 @@
          *          // $field is the field element
          *      }
          * - message: The invalid message
-         * @returns {Boolean|Deferred}
+         * @returns {Deferred}
          */
         validate: function(validator, $field, options) {
-            var value = $field.val();
+            var value  = $field.val(),
+                dfd    = new $.Deferred(),
+                result = { valid: true };
 
             if (options.callback) {
-                var dfd      = new $.Deferred(),
-                    response = $.fn.bootstrapValidator.helpers.call(options.callback, [value, validator, $field]);
-                dfd.resolve($field, 'callback', 'boolean' === typeof response ? response : response.valid, 'object' === typeof response && response.message ? response.message : null);
-                return dfd;
+                var response = $.fn.bootstrapValidator.helpers.call(options.callback, [value, validator, $field]);
+                result = ('boolean' === typeof response) ? { valid: response } :  response;
             }
 
-            return true;
+            dfd.resolve($field, 'callback', result);
+            return dfd;
         }
     };
 }(window.jQuery));
@@ -3213,6 +3254,7 @@
             BR: 'Brazil',
             CH: 'Switzerland',
             CL: 'Chile',
+            CN: 'China',
             CZ: 'Czech',
             DK: 'Denmark',
             EE: 'Estonia',
@@ -3232,6 +3274,7 @@
             SI: 'Slovenia',
             SK: 'Slovakia',
             SM: 'San Marino',
+            TH: 'Thailand',
             ZA: 'South Africa'
         }
     });
@@ -3244,8 +3287,8 @@
 
         // Supported country codes
         COUNTRY_CODES: [
-            'BA', 'BG', 'BR', 'CH', 'CL', 'CZ', 'DK', 'EE', 'ES', 'FI', 'HR', 'IE', 'IS', 'LT', 'LV', 'ME', 'MK', 'NL',
-            'RO', 'RS', 'SE', 'SI', 'SK', 'SM', 'ZA'
+            'BA', 'BG', 'BR', 'CH', 'CL', 'CN', 'CZ', 'DK', 'EE', 'ES', 'FI', 'HR', 'IE', 'IS', 'LT', 'LV', 'ME', 'MK', 'NL',
+            'RO', 'RS', 'SE', 'SI', 'SK', 'SM', 'TH', 'ZA'
         ],
 
         /**
@@ -3518,6 +3561,542 @@
             return sum + '' === value.charAt(8).toUpperCase();
         },
 
+        /**
+         * Validate Chinese citizen identification number
+         *
+         * Rules:
+         * - For current 18-digit system (since 1st Oct 1999, defined by GB11643—1999 national standard):
+         *     - Digit 0-5: Must be a valid administrative division code of China PR.
+         *     - Digit 6-13: Must be a valid YYYYMMDD date of birth. A future date is tolerated.
+         *     - Digit 14-16: Order code, any integer.
+         *     - Digit 17: An ISO 7064:1983, MOD 11-2 checksum.
+         *       Both upper/lower case of X are tolerated.
+         * - For deprecated 15-digit system:
+         *     - Digit 0-5: Must be a valid administrative division code of China PR.
+         *     - Digit 6-11: Must be a valid YYMMDD date of birth, indicating the year of 19XX.
+         *     - Digit 12-14: Order code, any integer.
+         * Lists of valid administrative division codes of China PR can be seen here:
+         * <http://www.stats.gov.cn/tjsj/tjbz/xzqhdm/>
+         * Published and maintained by National Bureau of Statistics of China PR.
+         * NOTE: Current and deprecated codes MUST BOTH be considered valid.
+         * Many Chinese citizens born in once existed administrative divisions!
+         *
+         * @see http://en.wikipedia.org/wiki/Resident_Identity_Card#Identity_card_number
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _cn: function(value) {
+            // Basic format check (18 or 15 digits, considering X in checksum)
+            value = value.trim();
+            if (!/^\d{15}$/.test(value) && !/^\d{17}[\dXx]{1}$/.test(value)) {
+                return false;
+            }
+            
+            // Check China PR Administrative division code
+            var adminDivisionCodes = {
+                11: {
+                    0: [0],
+                    1: [[0, 9], [11, 17]],
+                    2: [0, [28, 29]]
+                },
+                12: {
+                    0: [0],
+                    1: [[0, 16]],
+                    2: [0, 21, 23, 25]
+                },
+                13: {
+                    0: [0],
+                    1: [[0, 5], [7, 8], 21, [23, 33], [81, 85]],
+                    2: [[0, 5], [7, 9], [23, 25], 27, [29, 30], 81, 83],
+                    3: [[0, 4], [21, 24]],
+                    4: [[0, 4], 6, 21, [23, 35], 81],
+                    5: [[0, 3], [21, 35], [81, 82]],
+                    6: [[0, 4], [21, 38], [81, 84]],
+                    7: [[0, 3], [5, 6], [21, 33]],
+                    8: [[0, 4], [21, 28]],
+                    9: [[0, 3], [21, 30], [81, 84]],
+                    10: [[0, 3], [22, 26], 28, [81, 82]],
+                    11: [[0, 2], [21, 28], [81, 82]]
+                },
+                14: {
+                    0: [0],
+                    1: [[0, 1], [5, 10], [21, 23], 81],
+                    2: [[0, 3], [11, 12], [21, 27]],
+                    3: [[0, 3], 11, [21, 22]],
+                    4: [[0, 2], 11, 21, [23, 31], 81],
+                    5: [[0, 2], [21, 22], [24, 25], 81],
+                    6: [[0, 3], [21, 24]],
+                    7: [[0, 2], [21, 29], 81],
+                    8: [[0, 2], [21, 30], [81, 82]],
+                    9: [[0, 2], [21, 32], 81],
+                    10: [[0, 2], [21, 34], [81, 82]],
+                    11: [[0, 2], [21, 30], [81, 82]],
+                    23: [[0, 3], [22, 23], [25, 30], [32, 33]]
+                },
+                15: {
+                    0: [0],
+                    1: [[0, 5], [21, 25]],
+                    2: [[0, 7], [21, 23]],
+                    3: [[0, 4]],
+                    4: [[0, 4], [21, 26], [28, 30]],
+                    5: [[0, 2], [21, 26], 81],
+                    6: [[0, 2], [21, 27]],
+                    7: [[0, 3], [21, 27], [81, 85]],
+                    8: [[0, 2], [21, 26]],
+                    9: [[0, 2], [21, 29], 81],
+                    22: [[0, 2], [21, 24]],
+                    25: [[0, 2], [22, 31]],
+                    26: [[0, 2], [24, 27], [29, 32], 34],
+                    28: [[0, 1], [22, 27]],
+                    29: [0, [21, 23]]
+                },
+                21: {
+                    0: [0],
+                    1: [[0, 6], [11, 14], [22, 24], 81],
+                    2: [[0, 4], [11, 13], 24, [81, 83]],
+                    3: [[0, 4], 11, 21, 23, 81],
+                    4: [[0, 4], 11, [21, 23]],
+                    5: [[0, 5], [21, 22]],
+                    6: [[0, 4], 24, [81, 82]],
+                    7: [[0, 3], 11, [26, 27], [81, 82]],
+                    8: [[0, 4], 11, [81, 82]],
+                    9: [[0, 5], 11, [21, 22]],
+                    10: [[0, 5], 11, 21, 81],
+                    11: [[0, 3], [21, 22]],
+                    12: [[0, 2], 4, 21, [23, 24], [81, 82]],
+                    13: [[0, 3], [21, 22], 24, [81, 82]],
+                    14: [[0, 4], [21, 22], 81]
+                },
+                22: {
+                    0: [0],
+                    1: [[0, 6], 12, 22, [81, 83]],
+                    2: [[0, 4], 11, 21, [81, 84]],
+                    3: [[0, 3], [22, 23], [81, 82]],
+                    4: [[0, 3], [21, 22]],
+                    5: [[0, 3], 21, [23, 24], [81, 82]],
+                    6: [[0, 2], [4, 5], [21, 23], 25, 81],
+                    7: [[0, 2], [21, 24], 81],
+                    8: [[0, 2], [21, 22], [81, 82]],
+                    24: [[0, 6], 24, 26]
+                },
+                23: {
+                    0: [0],
+                    1: [[0, 12], 21, [23, 29], [81, 84]],
+                    2: [[0, 8], 21, [23, 25], 27, [29, 31], 81],
+                    3: [[0, 7], 21, [81, 82]],
+                    4: [[0, 7], [21, 22]],
+                    5: [[0, 3], [5, 6], [21, 24]],
+                    6: [[0, 6], [21, 24]],
+                    7: [[0, 16], 22, 81],
+                    8: [[0, 5], 11, 22, 26, 28, 33, [81, 82]],
+                    9: [[0, 4], 21],
+                    10: [[0, 5], [24, 25], 81, [83, 85]],
+                    11: [[0, 2], 21, [23, 24], [81, 82]],
+                    12: [[0, 2], [21, 26], [81, 83]],
+                    27: [[0, 4], [21, 23]]
+                },
+                31: {
+                    0: [0],
+                    1: [[0, 1], [3, 10], [12, 20]],
+                    2: [0, 30]
+                },
+                32: {
+                    0: [0],
+                    1: [[0, 7], 11, [13, 18], [24, 25]],
+                    2: [[0, 6], 11, [81, 82]],
+                    3: [[0, 5], [11, 12], [21, 24], [81, 82]],
+                    4: [[0, 2], [4, 5], [11, 12], [81, 82]],
+                    5: [[0, 9], [81, 85]],
+                    6: [[0, 2], [11, 12], 21, 23, [81, 84]],
+                    7: [[0, 1], 3, [5, 6], [21, 24]],
+                    8: [[0, 4], 11, 26, [29, 31]],
+                    9: [[0, 3], [21, 25], 28, [81, 82]],
+                    10: [[0, 3], [11, 12], 23, 81, 84, 88],
+                    11: [[0, 2], [11, 12], [81, 83]],
+                    12: [[0, 4], [81, 84]],
+                    13: [[0, 2], 11, [21, 24]]
+                },
+                33: {
+                    0: [0],
+                    1: [[0, 6], [8, 10], 22, 27, [82, 83], 85],
+                    2: [[0, 1], [3, 6], [11, 12], [25, 26], [81, 83]],
+                    3: [[0, 4], 22, 24, [26, 29], [81, 82]],
+                    4: [[0, 2], 11, 21, 24, [81, 83]],
+                    5: [[0, 3], [21, 23]],
+                    6: [[0, 2], 21, 24, [81, 83]],
+                    7: [[0, 3], 23, [26, 27], [81, 84]],
+                    8: [[0, 3], 22, [24, 25], 81],
+                    9: [[0, 3], [21, 22]],
+                    10: [[0, 4], [21, 24], [81, 82]],
+                    11: [[0, 2], [21, 27], 81]
+                },
+                34: {
+                    0: [0],
+                    1: [[0, 4], 11, [21, 24], 81],
+                    2: [[0, 4], [7, 8], [21, 23], 25],
+                    3: [[0, 4], 11, [21, 23]],
+                    4: [[0, 6], 21],
+                    5: [[0, 4], 6, [21, 23]],
+                    6: [[0, 4], 21],
+                    7: [[0, 3], 11, 21],
+                    8: [[0, 3], 11, [22, 28], 81],
+                    10: [[0, 4], [21, 24]],
+                    11: [[0, 3], 22, [24, 26], [81, 82]],
+                    12: [[0, 4], [21, 22], [25, 26], 82],
+                    13: [[0, 2], [21, 24]],
+                    14: [[0, 2], [21, 24]],
+                    15: [[0, 3], [21, 25]],
+                    16: [[0, 2], [21, 23]],
+                    17: [[0, 2], [21, 23]],
+                    18: [[0, 2], [21, 25], 81]
+                },
+                35: {
+                    0: [0],
+                    1: [[0, 5], 11, [21, 25], 28, [81, 82]],
+                    2: [[0, 6], [11, 13]],
+                    3: [[0, 5], 22],
+                    4: [[0, 3], 21, [23, 30], 81],
+                    5: [[0, 5], 21, [24, 27], [81, 83]],
+                    6: [[0, 3], [22, 29], 81],
+                    7: [[0, 2], [21, 25], [81, 84]],
+                    8: [[0, 2], [21, 25], 81],
+                    9: [[0, 2], [21, 26], [81, 82]]
+                },
+                36: {
+                    0: [0],
+                    1: [[0, 5], 11, [21, 24]],
+                    2: [[0, 3], 22, 81],
+                    3: [[0, 2], 13, [21, 23]],
+                    4: [[0, 3], 21, [23, 30], [81, 82]],
+                    5: [[0, 2], 21],
+                    6: [[0, 2], 22, 81],
+                    7: [[0, 2], [21, 35], [81, 82]],
+                    8: [[0, 3], [21, 30], 81],
+                    9: [[0, 2], [21, 26], [81, 83]],
+                    10: [[0, 2], [21, 30]],
+                    11: [[0, 2], [21, 30], 81]
+                },
+                37: {
+                    0: [0],
+                    1: [[0, 5], [12, 13], [24, 26], 81],
+                    2: [[0, 3], 5, [11, 14], [81, 85]],
+                    3: [[0, 6], [21, 23]],
+                    4: [[0, 6], 81],
+                    5: [[0, 3], [21, 23]],
+                    6: [[0, 2], [11, 13], 34, [81, 87]],
+                    7: [[0, 5], [24, 25], [81, 86]],
+                    8: [[0, 2], 11, [26, 32], [81, 83]],
+                    9: [[0, 3], 11, 21, 23, [82, 83]],
+                    10: [[0, 2], [81, 83]],
+                    11: [[0, 3], [21, 22]],
+                    12: [[0, 3]],
+                    13: [[0, 2], [11, 12], [21, 29]],
+                    14: [[0, 2], [21, 28], [81, 82]],
+                    15: [[0, 2], [21, 26], 81],
+                    16: [[0, 2], [21, 26]],
+                    17: [[0, 2], [21, 28]]
+                },
+                41: {
+                    0: [0],
+                    1: [[0, 6], 8, 22, [81, 85]],
+                    2: [[0, 5], 11, [21, 25]],
+                    3: [[0, 7], 11, [22, 29], 81],
+                    4: [[0, 4], 11, [21, 23], 25, [81, 82]],
+                    5: [[0, 3], [5, 6], [22, 23], [26, 27], 81],
+                    6: [[0, 3], 11, [21, 22]],
+                    7: [[0, 4], 11, 21, [24, 28], [81, 82]],
+                    8: [[0, 4], 11, [21, 23], 25, [81, 83]],
+                    9: [[0, 2], [22, 23], [26, 28]],
+                    10: [[0, 2], [23, 25], [81, 82]],
+                    11: [[0, 4], [21, 23]],
+                    12: [[0, 2], [21, 22], 24, [81, 82]],
+                    13: [[0, 3], [21, 30], 81],
+                    14: [[0, 3], [21, 26], 81],
+                    15: [[0, 3], [21, 28]],
+                    16: [[0, 2], [21, 28], 81],
+                    17: [[0, 2], [21, 29]],
+                    90: [[0, 1]]
+                },
+                42: {
+                    0: [0],
+                    1: [[0, 7], [11, 17]],
+                    2: [[0, 5], 22, 81],
+                    3: [[0, 3], [21, 25], 81],
+                    5: [[0, 6], [25, 29], [81, 83]],
+                    6: [[0, 2], [6, 7], [24, 26], [82, 84]],
+                    7: [[0, 4]],
+                    8: [[0, 2], 4, [21, 22], 81],
+                    9: [[0, 2], [21, 23], [81, 82], 84],
+                    10: [[0, 3], [22, 24], 81, 83, 87],
+                    11: [[0, 2], [21, 27], [81, 82]],
+                    12: [[0, 2], [21, 24], 81],
+                    13: [[0, 3], 21, 81],
+                    28: [[0, 2], [22, 23], [25, 28]],
+                    90: [0, [4, 6], 21]
+                },
+                43: {
+                    0: [0],
+                    1: [[0, 5], [11, 12], [21, 22], 24, 81],
+                    2: [[0, 4], 11, 21, [23, 25], 81],
+                    3: [[0, 2], 4, 21, [81, 82]],
+                    4: [[0, 1], [5, 8], 12, [21, 24], 26, [81, 82]],
+                    5: [[0, 3], 11, [21, 25], [27, 29], 81],
+                    6: [[0, 3], 11, 21, [23, 24], 26, [81, 82]],
+                    7: [[0, 3], [21, 26], 81],
+                    8: [[0, 2], 11, [21, 22]],
+                    9: [[0, 3], [21, 23], 81],
+                    10: [[0, 3], [21, 28], 81],
+                    11: [[0, 3], [21, 29]],
+                    12: [[0, 2], [21, 30], 81],
+                    13: [[0, 2], [21, 22], [81, 82]],
+                    31: [[0, 1], [22, 27], 30]
+                },
+                44: {
+                    0: [0],
+                    1: [[0, 7], [11, 16], [83, 84]],
+                    2: [[0, 5], [21, 22], 24, 29, [32, 33], [81, 82]],
+                    3: [[0, 1], [3, 8]],
+                    4: [[0, 4]],
+                    5: [[0, 1], [6, 15], 23, [82, 83]],
+                    6: [[0, 1], [4, 8]],
+                    7: [[0, 1], [3, 5], 81, [83, 85]],
+                    8: [[0, 4], 11, 23, 25, [81, 83]],
+                    9: [[0, 3], 23, [81, 83]],
+                    12: [[0, 3], [23, 26], [83, 84]],
+                    13: [[0, 3], [22, 24], 81],
+                    14: [[0, 2], [21, 24], [26, 27], 81],
+                    15: [[0, 2], 21, 23, 81],
+                    16: [[0, 2], [21, 25]],
+                    17: [[0, 2], 21, 23, 81],
+                    18: [[0, 3], 21, 23, [25, 27], [81, 82]],
+                    19: [0],
+                    20: [0],
+                    51: [[0, 3], [21, 22]],
+                    52: [[0, 3], [21, 22], 24, 81],
+                    53: [[0, 2], [21, 23], 81]
+                },
+                45: {
+                    0: [0],
+                    1: [[0, 9], [21, 27]],
+                    2: [[0, 5], [21, 26]],
+                    3: [[0, 5], [11, 12], [21, 32]],
+                    4: [[0, 1], [3, 6], 11, [21, 23], 81],
+                    5: [[0, 3], 12, 21],
+                    6: [[0, 3], 21, 81],
+                    7: [[0, 3], [21, 22]],
+                    8: [[0, 4], 21, 81],
+                    9: [[0, 3], [21, 24], 81],
+                    10: [[0, 2], [21, 31]],
+                    11: [[0, 2], [21, 23]],
+                    12: [[0, 2], [21, 29], 81],
+                    13: [[0, 2], [21, 24], 81],
+                    14: [[0, 2], [21, 25], 81]
+                },
+                46: {
+                    0: [0],
+                    1: [[0, 1], [5, 8]],
+                    2: [[0, 1]],
+                    3: [0, [21, 23]],
+                    90: [[0, 3], [5, 7], [21, 39]]
+                },
+                50: {
+                    0: [0],
+                    1: [[0, 19]],
+                    2: [0, [22, 38], [40, 43]],
+                    3: [0, [81, 84]]
+                },
+                51: {
+                    0: [0],
+                    1: [[0, 1], [4, 8], [12, 15], [21, 24], 29, [31, 32], [81, 84]],
+                    3: [[0, 4], 11, [21, 22]],
+                    4: [[0, 3], 11, [21, 22]],
+                    5: [[0, 4], [21, 22], [24, 25]],
+                    6: [[0, 1], 3, 23, 26, [81, 83]],
+                    7: [[0, 1], [3, 4], [22, 27], 81],
+                    8: [[0, 2], [11, 12], [21, 24]],
+                    9: [[0, 4], [21, 23]],
+                    10: [[0, 2], 11, [24, 25], 28],
+                    11: [[0, 2], [11, 13], [23, 24], 26, 29, [32, 33], 81],
+                    13: [[0, 4], [21, 25], 81],
+                    14: [[0, 2], [21, 25]],
+                    15: [[0, 3], [21, 29]],
+                    16: [[0, 3], [21, 23], 81],
+                    17: [[0, 3], [21, 25], 81],
+                    18: [[0, 3], [21, 27]],
+                    19: [[0, 3], [21, 23]],
+                    20: [[0, 2], [21, 22], 81],
+                    32: [0, [21, 33]],
+                    33: [0, [21, 38]],
+                    34: [[0, 1], [22, 37]]
+                },
+                52: {
+                    0: [0],
+                    1: [[0, 3], [11, 15], [21, 23], 81],
+                    2: [[0, 1], 3, [21, 22]],
+                    3: [[0, 3], [21, 30], [81, 82]],
+                    4: [[0, 2], [21, 25]],
+                    5: [[0, 2], [21, 27]],
+                    6: [[0, 3], [21, 28]],
+                    22: [[0, 1], [22, 30]],
+                    23: [[0, 1], [22, 28]],
+                    24: [[0, 1], [22, 28]],
+                    26: [[0, 1], [22, 36]],
+                    27: [[0, 2], [22, 23], [25, 32]]
+                },
+                53: {
+                    0: [0],
+                    1: [[0, 3], [11, 14], [21, 22], [24, 29], 81],
+                    3: [[0, 2], [21, 26], 28, 81],
+                    4: [[0, 2], [21, 28]],
+                    5: [[0, 2], [21, 24]],
+                    6: [[0, 2], [21, 30]],
+                    7: [[0, 2], [21, 24]],
+                    8: [[0, 2], [21, 29]],
+                    9: [[0, 2], [21, 27]],
+                    23: [[0, 1], [22, 29], 31],
+                    25: [[0, 4], [22, 32]],
+                    26: [[0, 1], [21, 28]],
+                    27: [[0, 1], [22, 30]], 28: [[0, 1], [22, 23]],
+                    29: [[0, 1], [22, 32]],
+                    31: [0, [2, 3], [22, 24]],
+                    34: [0, [21, 23]],
+                    33: [0, 21, [23, 25]],
+                    35: [0, [21, 28]]
+                },
+                54: {
+                    0: [0],
+                    1: [[0, 2], [21, 27]],
+                    21: [0, [21, 29], [32, 33]],
+                    22: [0, [21, 29], [31, 33]],
+                    23: [[0, 1], [22, 38]],
+                    24: [0, [21, 31]],
+                    25: [0, [21, 27]],
+                    26: [0, [21, 27]]
+                },
+                61: {
+                    0: [0],
+                    1: [[0, 4], [11, 16], 22, [24, 26]],
+                    2: [[0, 4], 22],
+                    3: [[0, 4], [21, 24], [26, 31]],
+                    4: [[0, 4], [22, 31], 81],
+                    5: [[0, 2], [21, 28], [81, 82]],
+                    6: [[0, 2], [21, 32]],
+                    7: [[0, 2], [21, 30]],
+                    8: [[0, 2], [21, 31]],
+                    9: [[0, 2], [21, 29]],
+                    10: [[0, 2], [21, 26]]
+                },
+                62: {
+                    0: [0],
+                    1: [[0, 5], 11, [21, 23]],
+                    2: [[0, 1]],
+                    3: [[0, 2], 21],
+                    4: [[0, 3], [21, 23]],
+                    5: [[0, 3], [21, 25]],
+                    6: [[0, 2], [21, 23]],
+                    7: [[0, 2], [21, 25]],
+                    8: [[0, 2], [21, 26]],
+                    9: [[0, 2], [21, 24], [81, 82]],
+                    10: [[0, 2], [21, 27]],
+                    11: [[0, 2], [21, 26]],
+                    12: [[0, 2], [21, 28]],
+                    24: [0, 21, [24, 29]],
+                    26: [0, 21, [23, 30]],
+                    29: [[0, 1], [21, 27]],
+                    30: [[0, 1], [21, 27]]
+                },
+                63: {
+                    0: [0],
+                    1: [[0, 5], [21, 23]],
+                    2: [0, 2, [21, 25]],
+                    21: [0, [21, 23], [26, 28]],
+                    22: [0, [21, 24]],
+                    23: [0, [21, 24]],
+                    25: [0, [21, 25]],
+                    26: [0, [21, 26]],
+                    27: [[0, 1], [21, 26]],
+                    28: [[0, 2], [21, 23]]
+                },
+                64: {
+                    0: [0],
+                    1: [[0, 1], [4, 6], [21, 22], 81],
+                    2: [[0, 3], 5, [21, 23]],
+                    3: [[0, 3], [21, 24], 81],
+                    4: [[0, 2], [21, 25]],
+                    5: [[0, 2], [21, 22]]
+                },
+                65: {
+                    0: [0],
+                    1: [[0, 9], 21],
+                    2: [[0, 5]],
+                    21: [[0, 1], [22, 23]],
+                    22: [[0, 1], [22, 23]],
+                    23: [[0, 3], [23, 25], [27, 28]],
+                    28: [[0, 1], [22, 29]],
+                    29: [[0, 1], [22, 29]],
+                    30: [[0, 1], [22, 24]], 31: [[0, 1], [21, 31]],
+                    32: [[0, 1], [21, 27]],
+                    40: [0, [2, 3], [21, 28]],
+                    42: [[0, 2], 21, [23, 26]],
+                    43: [[0, 1], [21, 26]],
+                    90: [[0, 4]], 27: [[0, 2], [22, 23]]
+                },
+                71: { 0: [0] },
+                81: { 0: [0] },
+                82: { 0: [0] }
+            };
+            
+            var provincial  = parseInt(value.substr(0, 2), 10),
+                prefectural = parseInt(value.substr(2, 2), 10),
+                county      = parseInt(value.substr(4, 2), 10);
+            
+            if (!adminDivisionCodes[provincial] || !adminDivisionCodes[provincial][prefectural]) {
+                return false;
+            }
+            var inRange  = false,
+                rangeDef = adminDivisionCodes[provincial][prefectural];
+            for (var i = 0; i < rangeDef.length; i++) {
+                if (($.isArray(rangeDef[i]) && rangeDef[i][0] <= county && county <= rangeDef[i][1])
+                    || (!$.isArray(rangeDef[i]) && county === rangeDef[i]))
+                {
+                    inRange = true;
+                    break;
+                }
+            }
+
+            if (!inRange) {
+                return false;
+            }
+            
+            // Check date of birth
+            var dob;
+            if (value.length === 18) {
+                dob = value.substr(6, 8);
+            } else /* length == 15 */ { 
+                dob = '19' + value.substr(6, 6);
+            }
+            var year  = parseInt(dob.substr(0, 4), 10),
+                month = parseInt(dob.substr(4, 2), 10),
+                day   = parseInt(dob.substr(6, 2), 10);
+            if (!$.fn.bootstrapValidator.helpers.date(year, month, day)) {
+                return false;
+            }
+            
+            // Check checksum (18-digit system only)
+            if (value.length === 18) {
+                var sum    = 0,
+                    weight = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+                for (i = 0; i < 17; i++) {
+                    sum += parseInt(value.charAt(i), 10) * weight[i];
+                }
+                sum = (12 - (sum % 11)) % 11;
+                var checksum = (value.charAt(17).toUpperCase() !== 'X') ? parseInt(value.charAt(17), 10) : 10;
+                return checksum === sum;
+            }
+            
+            return true;
+        },
+        
         /**
          * Validate Czech national identification number (RC)
          * Examples:
@@ -3986,6 +4565,29 @@
          */
         _sm: function(value) {
             return /^\d{5}$/.test(value);
+        },
+
+        /**
+         * Validate Thailand citizen number
+         * Examples:
+         * - Valid: 7145620509547, 3688699975685, 2368719339716
+         * - Invalid: 1100800092310
+         *
+         * @see http://en.wikipedia.org/wiki/National_identification_number#Thailand
+         * @param {String} value The ID
+         * @returns {Boolean}
+         */
+        _th: function(value) {
+            if (value.length !== 13) {
+                return false;
+            }
+
+            var sum = 0;
+            for (var i = 0; i < 12; i++) {
+                sum += parseInt(value.charAt(i), 10) * (13 - i);
+            }
+
+            return (11 - sum % 11) % 10 === parseInt(value.charAt(12), 10);
         },
 
         /**
@@ -4756,7 +5358,9 @@
             MA: 'Morocco',
             PK: 'Pakistan',
             RO: 'Romania',
-            US: 'USA'
+            TH: 'Thailand',
+            US: 'USA',
+            VE: 'Venezuela'
         }
     });
 
@@ -4767,7 +5371,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['BR', 'CN', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'US'],
+        COUNTRY_CODES: ['BR', 'CN', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'TH', 'US', 'VE'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -4862,6 +5466,17 @@
         		case 'RO':
         		    // All mobile network and land line
         		    isValid = (/^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|\-)?([0-9]{3}(\s|\.|\-|)){2}$/g).test(value);
+        		    break;
+        		    
+                case 'TH':
+        		    // http://regex101.com/r/vM5mZ4/2
+        		    isValid = (/^0\(?([6|8-9]{2})*-([0-9]{3})*-([0-9]{4})$/).test(value);
+        		    break;
+
+                case 'VE':
+                    // http://regex101.com/r/eM2yY0/6
+                    value   = $.trim(value);
+                    isValid = (/^0(?:2(?:12|4[0-9]|5[1-9]|6[0-9]|7[0-8]|8[1-35-8]|9[1-5]|3[45789])|4(?:1[246]|2[46]))\d{7}$/).test(value);
                     break;
 
                 case 'US':
@@ -4965,12 +5580,14 @@
          * - name {String} [optional]: Override the field name for the request.
          * - message: The invalid message
          * - headers: Additional headers
-         * @returns {Boolean|Deferred}
+         * @returns {Deferred}
          */
         validate: function(validator, $field, options) {
-            var value = $field.val();
+            var value = $field.val(),
+                dfd   = new $.Deferred();
             if (value === '') {
-                return true;
+                dfd.resolve($field, 'remote', { valid: true });
+                return dfd;
             }
 
             var name    = $field.attr('data-bv-field'),
@@ -4990,9 +5607,6 @@
             }
 
             data[options.name || name] = value;
-
-            var dfd = new $.Deferred();
-
             function runCallback() {
                 var xhr = $.ajax({
                     type: type,
@@ -5002,7 +5616,8 @@
                     data: data
                 });
                 xhr.then(function(response) {
-                    dfd.resolve($field, 'remote', response.valid === true || response.valid === 'true', response.message ? response.message : null);
+                    response.valid = response.valid === true || response.valid === 'true';
+                    dfd.resolve($field, 'remote', response);
                 });
 
                 dfd.fail(function() {

@@ -156,6 +156,7 @@
                 BR: 'Brazil',
                 CH: 'Thuỵ Sĩ',
                 CL: 'Chi Lê',
+                CN: 'Trung Quốc',
                 CZ: 'Séc',
                 DK: 'Đan Mạch',
                 EE: 'Estonia',
@@ -175,6 +176,7 @@
                 SI: 'Slovenia',
                 SK: 'Slovakia',
                 SM: 'San Marino',
+                TH: 'Thái Lan',
                 ZA: 'Nam Phi'
             }
         },
@@ -237,7 +239,9 @@
                 MA: 'Maroc',
                 PK: 'Pakistan',
                 RO: 'Romania',
-                US: 'Mỹ'
+                TH: 'Thái Lan',
+                US: 'Mỹ',
+                VE: 'Venezuela'
             }
         },
         regexp: {

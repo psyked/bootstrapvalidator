@@ -176,6 +176,7 @@
                 SI: 'Slovenia',
                 SK: 'Slovacchia',
                 SM: 'San Marino',
+                TH: 'Thailandia',
                 ZA: 'Sudafrica'
             }
         },
@@ -230,7 +231,7 @@
             country: 'Si prega di inserire un numero di telefono valido per %s',
             countries: {
                 BR: 'Brasile',
-                CN: 'Porcellana',
+                CN: 'Cina',
                 DK: 'Danimarca',
                 ES: 'Spagna',
                 FR: 'Francia',
@@ -238,7 +239,9 @@
                 MA: 'Marocco',
                 PK: 'Pakistan',
                 RO: 'Romania',
-                US: 'Stati Uniti d\'America'
+                TH: 'Thailandia',
+                US: 'Stati Uniti d\'America',
+                VE: 'Venezuelano'
             }
         },
         regexp: {

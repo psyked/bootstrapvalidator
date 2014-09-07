@@ -176,6 +176,7 @@
                 SI: 'Słowenia',
                 SK: 'Słowacja',
                 SM: 'San Marino',
+                TH: 'Tajlandia',
                 ZA: 'Republika Południowej Afryki'
             }
         },
@@ -238,7 +239,9 @@
                 MA: 'Maroko',
                 PK: 'Pakistan',
                 RO: 'Rumunia',
-                US: 'USA'
+                TH: 'Tajlandia',
+                US: 'USA',
+                VE: 'Wenezuela'
             }
         },
         regexp: {
