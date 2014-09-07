@@ -156,6 +156,7 @@
                 BR: 'Brazilië',
                 CH: 'Zwitserland',
                 CL: 'Chili',
+                CN: 'China',
                 CZ: 'Tsjechische',
                 DK: 'Denemarken',
                 EE: 'Estland',
