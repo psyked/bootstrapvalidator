@@ -49,7 +49,7 @@
                 case (options.ipv4 && options.ipv6):
                 /* falls through */
                 default:
-                    valid   = ipv4Regex.test(value) && ipv6Regex.test(value);
+                    valid   = ipv4Regex.test(value) || ipv6Regex.test(value);
                     message = options.message || $.fn.bootstrapValidator.i18n.ip['default'];
                     break;
             }
