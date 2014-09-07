@@ -3,10 +3,10 @@ describe('ip', function() {
         $([
             '<form class="form-horizontal" id="ipForm">',
                 '<div class="form-group">',
-                    '<input type="text" name="ipv4" data-bv-ip data-bv-ipv6="false" />',
+                    '<input type="text" name="ipv4" data-bv-ip data-bv-ip-ipv6="false" />',
                 '</div>',
                 '<div class="form-group">',
-                    '<input type="text" name="ipv6" data-bv-ip data-bv-ipv4="false" />',
+                    '<input type="text" name="ipv6" data-bv-ip data-bv-ip-ipv4="false" />',
                 '</div>',
                 '<div class="form-group">',
                     '<input type="text" name="both" data-bv-ip />',
@@ -58,7 +58,7 @@ describe('ip', function() {
         expect(this.bv.isValid()).toEqual(false);
         
         this.bv.resetForm();
-        this.$ipv4.val('192.168. 224.0 1');        // internal space
+        this.$ipv4.val('192.168. 224.0');          // internal space
         this.bv.validate();
         expect(this.bv.isValid()).toEqual(false);
         
