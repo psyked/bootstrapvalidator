@@ -24,10 +24,10 @@ __Improvements__
 * [#557](https://github.com/nghuuphuoc/bootstrapvalidator/issues/557), [#569](https://github.com/nghuuphuoc/bootstrapvalidator/pull/569): The [container](http://bootstrapvalidator.com/settings/#form-container) option can be defined by a callback, thanks to [@mattrick](https://github.com/mattrick)
 * [#570](https://github.com/nghuuphuoc/bootstrapvalidator/issues/570): Use CSS classes instead of inline styling to fix icons with ```input-group```, thanks to [@dlcrush](https://github.com/dlcrush)
 * [#675](https://github.com/nghuuphuoc/bootstrapvalidator/pull/675): The [emailAddress](http://bootstrapvalidator.com/validators/emailAddress/) validator accepts multiple email addresses, thanks to [@kenny-evitt](https://github.com/kenny-evitt)
+* [#716](https://github.com/nghuuphuoc/bootstrapvalidator/issues/716), [#765](https://github.com/nghuuphuoc/bootstrapvalidator/issues/765): Reuse data returned by [callback](http://bootstrapvalidator.com/validators/callback/), [remote](http://bootstrapvalidator.com/validators/remote/), custom validators
 * [#734](https://github.com/nghuuphuoc/bootstrapvalidator/pull/734): The [uri](http://bootstrapvalidator.com/validators/uri/) validator adds support for custom protocol, thanks to [@bcamarneiro](https://github.com/bcamarneiro)
 * [#737](https://github.com/nghuuphuoc/bootstrapvalidator/issues/737): Support VAT number without prefixing by country code
 * [#754](https://github.com/nghuuphuoc/bootstrapvalidator/issues/754): Support latest Bootstrap when using tooltip/popover to show the message
-* [#765](https://github.com/nghuuphuoc/bootstrapvalidator/issues/765): Reuse data returned by [callback](http://bootstrapvalidator.com/validators/callback/), [remote](http://bootstrapvalidator.com/validators/remote/), custom validators
 * [#783](https://github.com/nghuuphuoc/bootstrapvalidator/issues/783): Improve behaviour of the [different](http://bootstrapvalidator.com/validators/different/) validator
 * [#792](https://github.com/nghuuphuoc/bootstrapvalidator/pull/792): Add "BootstrapValidator's JavaScript requires jQuery" warning, thanks to [@Arkni](https://github.com/Arkni)
 
