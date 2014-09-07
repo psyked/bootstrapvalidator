@@ -52,6 +52,7 @@ __Language Packages__
 * [#779](https://github.com/nghuuphuoc/bootstrapvalidator/pull/779): Romanian language package, thanks to [@filipac](https://github.com/filipac)
 * [#787](https://github.com/nghuuphuoc/bootstrapvalidator/pull/787): Thai language package, thanks to [@figgaro](https://github.com/figgaro)
 * [#788](https://github.com/nghuuphuoc/bootstrapvalidator/pull/788): Fully re-translated Simplified Chinese language package, thanks to [@shamiao](https://github.com/shamiao)
+* [#795](https://github.com/nghuuphuoc/bootstrapvalidator/pull/795): Re-translated traditional Chinese language package, thanks to [@tureki](https://github.com/tureki)
 
 ## v0.5.1 (2014-08-22)
 
