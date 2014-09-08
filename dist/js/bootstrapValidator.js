@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-09-07 11:19:45 PM
+ * @version     v0.5.2-dev, built on 2014-09-08 8:10:47 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -4831,7 +4831,7 @@ if (typeof jQuery === 'undefined') {
                 case (options.ipv4 && options.ipv6):
                 /* falls through */
                 default:
-                    valid   = ipv4Regex.test(value) && ipv6Regex.test(value);
+                    valid   = ipv4Regex.test(value) || ipv6Regex.test(value);
                     message = options.message || $.fn.bootstrapValidator.i18n.ip['default'];
                     break;
             }

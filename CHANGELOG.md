@@ -40,6 +40,7 @@ __Bug Fixes__
 * [#758](https://github.com/nghuuphuoc/bootstrapvalidator/issues/758): Using [notEmpty](http://bootstrapvalidator.com/validators/notEmpty/) validator with ```type="number"```
 * [#759](https://github.com/nghuuphuoc/bootstrapvalidator/issues/759), [#764](https://github.com/nghuuphuoc/bootstrapvalidator/pull/764): The tooltip/popover isn't shown if there is disabled validator.
 The tooltip/popover is shown automatically when the field gets the focus, thanks to [@leedorian](https://github.com/leedorian)
+* [#797](https://github.com/nghuuphuoc/bootstrapvalidator/issues/797), [#799](https://github.com/nghuuphuoc/bootstrapvalidator/pull/799): Can't validate ipv4 and ipv6 at the same time. Add ip validator test suite, thanks to [@Arkni](https://github.com/Arkni)
 
 __Document__
 * [#709](https://github.com/nghuuphuoc/bootstrapvalidator/issues/709), [#715](https://github.com/nghuuphuoc/bootstrapvalidator/pull/715): Add [Bootstrap Select](http://bootstrapvalidator.com/examples/bootstrap-select/) and [Select2](http://bootstrapvalidator.com/examples/select2/) examples, thanks to [@Arkni](https://github.com/Arkni)

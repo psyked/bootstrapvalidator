@@ -4187,7 +4187,6 @@ describe('ip', function() {
     });
 
 });
-
 describe('isbn', function() {
     beforeEach(function() {
         var html = [
