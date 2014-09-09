@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-09-09 8:55:16 AM
+ * @version     v0.5.2-dev, built on 2014-09-09 4:05:04 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -396,28 +396,33 @@ if (typeof jQuery === 'undefined') {
             // Prepare the events
             fields
                 .on(this.options.events.fieldSuccess, function(e, data) {
-                    if (that.options.fields[data.field].onSuccess) {
-                        $.fn.bootstrapValidator.helpers.call(that.options.fields[data.field].onSuccess, [e, data]);
+                    var onSuccess = that.getOptions(data.field, null, 'onSuccess');
+                    if (onSuccess) {
+                        $.fn.bootstrapValidator.helpers.call(onSuccess, [e, data]);
                     }
                 })
                 .on(this.options.events.fieldError, function(e, data) {
-                    if (that.options.fields[data.field].onError) {
-                        $.fn.bootstrapValidator.helpers.call(that.options.fields[data.field].onError, [e, data]);
+                    var onError = that.getOptions(data.field, null, 'onError');
+                    if (onError) {
+                        $.fn.bootstrapValidator.helpers.call(onError, [e, data]);
                     }
                 })
                 .on(this.options.events.fieldStatus, function(e, data) {
-                    if (that.options.fields[data.field].onStatus) {
-                        $.fn.bootstrapValidator.helpers.call(that.options.fields[data.field].onStatus, [e, data]);
+                    var onStatus = that.getOptions(data.field, null, 'onStatus');
+                    if (onStatus) {
+                        $.fn.bootstrapValidator.helpers.call(onStatus, [e, data]);
                     }
                 })
                 .on(this.options.events.validatorError, function(e, data) {
-                    if (that.options.fields[data.field].validators[data.validator].onError) {
-                        $.fn.bootstrapValidator.helpers.call(that.options.fields[data.field].validators[data.validator].onError, [e, data]);
+                    var onError = that.getOptions(data.field, data.validator, 'onError');
+                    if (onError) {
+                        $.fn.bootstrapValidator.helpers.call(onError, [e, data]);
                     }
                 })
                 .on(this.options.events.validatorSuccess, function(e, data) {
-                    if (that.options.fields[data.field].validators[data.validator].onSuccess) {
-                        $.fn.bootstrapValidator.helpers.call(that.options.fields[data.field].validators[data.validator].onSuccess, [e, data]);
+                    var onSuccess = that.getOptions(data.field, data.validator, 'onSuccess');
+                    if (onSuccess) {
+                        $.fn.bootstrapValidator.helpers.call(onSuccess, [e, data]);
                     }
                 });
 
@@ -735,6 +740,37 @@ if (typeof jQuery === 'undefined') {
 
             return this._cacheFields[field];
         },
+
+        /**
+         * Get the field options
+         *
+         * @param {String|jQuery} [field] The field name or field element. If it is not set, the method returns the form options
+         * @param {String} [validator] The name of validator. It null, the method returns form options
+         * @param {String} [option] The option name
+         * @return {String|Object}
+         */
+        getOptions: function(field, validator, option) {
+            if (!field) {
+                return this.options;
+            }
+            if ('object' === typeof field) {
+                field = field.attr('data-bv-field');
+            }
+            if (!this.options.fields[field]) {
+                return null;
+            }
+
+            var options = this.options.fields[field];
+            if (!validator) {
+                return option ? options[option] : options;
+            }
+            if (!options.validators || !options.validators[validator]) {
+                return null;
+            }
+
+            return option ? options.validators[validator][option] : options.validators[validator];
+        },
+
 
         /**
          * Disable/enable submit buttons
@@ -1260,36 +1296,6 @@ if (typeof jQuery === 'undefined') {
             });
 
             return messages;
-        },
-
-        /**
-         * Get the field options
-         *
-         * @param {String|jQuery} [field] The field name or field element. If it is not set, the method returns the form options
-         * @param {String} [validator] The name of validator. It null, the method returns form options
-         * @param {String} [option] The option name
-         * @return {String|Object}
-         */
-        getOptions: function(field, validator, option) {
-            if (!field) {
-                return this.options;
-            }
-            if ('object' === typeof field) {
-                field = field.attr('data-bv-field');
-            }
-            if (!this.options.fields[field]) {
-                return null;
-            }
-
-            var options = this.options.fields[field];
-            if (!validator) {
-                return options;
-            }
-            if (!options.validators || !options.validators[validator]) {
-                return null;
-            }
-
-            return option ? options.validators[validator][option] : options.validators[validator];
         },
 
         /**
