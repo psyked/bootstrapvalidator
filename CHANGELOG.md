@@ -14,6 +14,7 @@ __New Features__
 * [#785](https://github.com/nghuuphuoc/bootstrapvalidator/pull/785): Add Denmark phone number validator, thanks to [@emilchristensen](https://github.com/emilchristensen)
 * [#787](https://github.com/nghuuphuoc/bootstrapvalidator/pull/787): Add Thailand phone number and ID validator, thanks to [@figgaro](https://github.com/figgaro)
 * [#793](https://github.com/nghuuphuoc/bootstrapvalidator/pull/793), [#798](https://github.com/nghuuphuoc/bootstrapvalidator/pull/798): Add Chinese citizen ID validator, thanks to [@shamiao](https://github.com/shamiao)
+* [#802](https://github.com/nghuuphuoc/bootstrapvalidator/pull/802): Add Russia phone number validator, thanks to [@cylon-v](https://github.com/cylon-v)
 
 __Changes__
 * [#753](https://github.com/nghuuphuoc/bootstrapvalidator/issues/753): Change the default type of [remote](http://bootstrapvalidator.com/validators/remote/) validator to GET
@@ -54,6 +55,7 @@ __Language Packages__
 * [#787](https://github.com/nghuuphuoc/bootstrapvalidator/pull/787): Thai language package, thanks to [@figgaro](https://github.com/figgaro)
 * [#788](https://github.com/nghuuphuoc/bootstrapvalidator/pull/788): Fully re-translated Simplified Chinese language package, thanks to [@shamiao](https://github.com/shamiao)
 * [#795](https://github.com/nghuuphuoc/bootstrapvalidator/pull/795): Re-translated traditional Chinese language package, thanks to [@tureki](https://github.com/tureki)
+* [#802](https://github.com/nghuuphuoc/bootstrapvalidator/pull/802): Russian language package, thanks to [@cylon-v](https://github.com/cylon-v)
 
 ## v0.5.1 (2014-08-22)
 

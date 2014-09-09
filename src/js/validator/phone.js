@@ -124,10 +124,10 @@
         		    isValid = (/^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|\-)?([0-9]{3}(\s|\.|\-|)){2}$/g).test(value);
         		    break;
 
-            case 'RU':
-                // http://regex101.com/r/gW7yT5/5
-                isValid = (/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/g).test(value);
-                break;
+                case 'RU':
+                    // http://regex101.com/r/gW7yT5/5
+                    isValid = (/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/g).test(value);
+                    break;
 
                 case 'TH':
         		    // http://regex101.com/r/vM5mZ4/2

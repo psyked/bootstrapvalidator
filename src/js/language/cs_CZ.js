@@ -239,6 +239,7 @@
                 MA: 'Maroko',
                 PK: 'Pákistán',
                 RO: 'Rumunsko',
+                RU: 'Rusko',
                 TH: 'Thajsko',
                 US: 'Spojené Státy Americké',
                 VE: 'Venezuelský'

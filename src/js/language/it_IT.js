@@ -239,6 +239,7 @@
                 MA: 'Marocco',
                 PK: 'Pakistan',
                 RO: 'Romania',
+                RU: 'Russia',
                 TH: 'Thailandia',
                 US: 'Stati Uniti d\'America',
                 VE: 'Venezuelano'
