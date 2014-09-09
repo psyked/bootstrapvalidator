@@ -7,6 +7,7 @@
         html5Attributes: {
             extension: 'extension',
             maxsize: 'maxSize',
+            minsize: 'minSize',
             message: 'message',
             type: 'type'
         },
@@ -19,6 +20,7 @@
          * @param {Object} options Can consist of the following keys:
          * - extension: The allowed extensions, separated by a comma
          * - maxSize: The maximum size in bytes
+         * - minSize: the minimum size in bytes
          * - message: The invalid message
          * - type: The allowed MIME type, separated by a comma
          * @returns {Boolean}
@@ -39,7 +41,12 @@
                 var files = $field.get(0).files,
                     total = files.length;
                 for (var i = 0; i < total; i++) {
-                    // Check file size
+                    // Check the minSize
+                    if (options.minSize && files[i].size < parseInt(options.minSize, 10)) {
+                        return false;
+                    }
+                    
+                    // Check the maxSize
                     if (options.maxSize && files[i].size > parseInt(options.maxSize, 10)) {
                         return false;
                     }
