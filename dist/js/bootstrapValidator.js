@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-09-09 8:35:08 AM
+ * @version     v0.5.2-dev, built on 2014-09-09 8:55:16 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -2783,6 +2783,7 @@ if (typeof jQuery === 'undefined') {
         html5Attributes: {
             extension: 'extension',
             maxsize: 'maxSize',
+            minsize: 'minSize',
             message: 'message',
             type: 'type'
         },
@@ -2795,6 +2796,7 @@ if (typeof jQuery === 'undefined') {
          * @param {Object} options Can consist of the following keys:
          * - extension: The allowed extensions, separated by a comma
          * - maxSize: The maximum size in bytes
+         * - minSize: the minimum size in bytes
          * - message: The invalid message
          * - type: The allowed MIME type, separated by a comma
          * @returns {Boolean}
@@ -2815,7 +2817,12 @@ if (typeof jQuery === 'undefined') {
                 var files = $field.get(0).files,
                     total = files.length;
                 for (var i = 0; i < total; i++) {
-                    // Check file size
+                    // Check the minSize
+                    if (options.minSize && files[i].size < parseInt(options.minSize, 10)) {
+                        return false;
+                    }
+                    
+                    // Check the maxSize
                     if (options.maxSize && files[i].size > parseInt(options.maxSize, 10)) {
                         return false;
                     }
