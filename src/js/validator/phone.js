@@ -13,6 +13,7 @@
             MA: 'Morocco',
             PK: 'Pakistan',
             RO: 'Romania',
+            RU: 'Russia',
             TH: 'Thailand',
             US: 'USA',
             VE: 'Venezuela'
@@ -26,7 +27,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['BR', 'CN', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'TH', 'US', 'VE'],
+        COUNTRY_CODES: ['BR', 'CN', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'RU', 'TH', 'US', 'VE'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -111,18 +112,23 @@
                     value   = $.trim(value);
                     isValid = (/^(?:(?:(?:\+|00)212[\s]?(?:[\s]?\(0\)[\s]?)?)|0){1}(?:5[\s.-]?[2-3]|6[\s.-]?[13-9]){1}[0-9]{1}(?:[\s.-]?\d{2}){3}$/).test(value);
                     break;
-                
+
                 case 'PK':
                     // http://regex101.com/r/yH8aV9/2
                     value   = $.trim(value);
                     isValid = (/^0?3[0-9]{2}[0-9]{7}$/).test(value);
                     break;
-                    
+
         		case 'RO':
         		    // All mobile network and land line
         		    isValid = (/^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|\-)?([0-9]{3}(\s|\.|\-|)){2}$/g).test(value);
         		    break;
-        		    
+
+            case 'RU':
+                // http://regex101.com/r/gW7yT5/5
+                isValid = (/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/g).test(value);
+                break;
+
                 case 'TH':
         		    // http://regex101.com/r/vM5mZ4/2
         		    isValid = (/^0\(?([6|8-9]{2})*-([0-9]{3})*-([0-9]{4})$/).test(value);
