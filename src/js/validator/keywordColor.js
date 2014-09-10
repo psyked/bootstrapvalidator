@@ -5,7 +5,7 @@
 
     $.fn.bootstrapValidator.validators.keywordColor = {
         /**
-         * Return true if the input value is a valid hex color
+         * Return true if the input value is a valid keyword color
          *
          * @param {BootstrapValidator} validator The validator plugin instance
          * @param {jQuery} $field Field element
