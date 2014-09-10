@@ -14,14 +14,17 @@
         },
 
         enableByHtml5: function($field) {
+            var html5Validators = {};
             var maxLength = $field.attr('maxlength');
             if (maxLength) {
-                return {
-                    max: parseInt(maxLength, 10)
-                };
+                html5Validators.max = parseInt(maxLength, 10);
             }
 
-            return false;
+            var minLength = $field.attr('minlength');
+            if (minLength) {
+                html5Validators.min = parseInt(minLength, 10);
+            }
+            return !$.isEmptyObject(html5Validators) && html5Validators;
         },
 
         /**
