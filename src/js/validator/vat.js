@@ -1216,10 +1216,10 @@
          * @returns {Boolean}
          */
         _ru: function(value) {
-            if (/^RU([0-9]{9}|[0-9]{12})$/.test(value)) {
+            if (/^RU([0-9]{10}|[0-9]{12})$/.test(value)) {
                 value = value.substr(2);
             }
-            if (!/^([0-9]{9}|[0-9]{12})$/.test(value)) {
+            if (!/^([0-9]{10}|[0-9]{12})$/.test(value)) {
                 return false;
             }
 

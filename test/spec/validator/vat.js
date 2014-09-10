@@ -656,6 +656,28 @@ describe('vat', function() {
         }
     });
 
+    it('Russian VAT number', function() {
+        this.bv.updateOption('vat', 'vat', 'country', 'RU');
+
+        // Valid samples
+        var validSamples = ['RU7805145876', 'RU781300557475', '7805145876', '781300557475'];
+        for (var i in validSamples) {
+            this.bv.resetForm();
+            this.$vat.val(validSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toBeTruthy();
+        }
+
+        // Invalid samples
+        var invalidSamples = ['RU7805145877', 'RU781300557474', '7805145877', '781300557474'];
+        for (i in invalidSamples) {
+            this.bv.resetForm();
+            this.$vat.val(invalidSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toEqual(false);
+        }
+    });
+
     it('Swedish VAT number', function() {
         this.bv.updateOption('vat', 'vat', 'country', 'SE');
 
