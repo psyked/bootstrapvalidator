@@ -14,17 +14,17 @@
         },
 
         enableByHtml5: function($field) {
-            var html5Validators = {};
-            var maxLength = $field.attr('maxlength');
+            var options   = {},
+                maxLength = $field.attr('maxlength'),
+                minLength = $field.attr('minlength');
             if (maxLength) {
-                html5Validators.max = parseInt(maxLength, 10);
+                options.max = parseInt(maxLength, 10);
+            }
+            if (minLength) {
+                options.min = parseInt(minLength, 10);
             }
 
-            var minLength = $field.attr('minlength');
-            if (minLength) {
-                html5Validators.min = parseInt(minLength, 10);
-            }
-            return !$.isEmptyObject(html5Validators) && html5Validators;
+            return $.isEmptyObject(options) ? false : options;
         },
 
         /**
