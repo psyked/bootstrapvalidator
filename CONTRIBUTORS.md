@@ -66,6 +66,7 @@ I would like to give big thanks to the following contributors:
 * [@narutosanjiv](https://github.com/narutosanjiv)
 * [@nathanrosspowell](https://github.com/nathanrosspowell)
 * [@neilime](https://github.com/neilime)
+* [@oleg-voloshyn](https://github.com/oleg-voloshyn)
 * [@paquitodev](https://github.com/paquitodev)
 * [@patmoore](https://github.com/patmoore)
 * [@phillprice](https://github.com/phillprice)
