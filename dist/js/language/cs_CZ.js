@@ -343,6 +343,7 @@
                 MA: 'Maroko',
                 NL: 'Nizozemí',
                 RO: 'Rumunsko',
+                RU: 'Rusko',
                 SE: 'Švédsko',
                 SG: 'Singapur',
                 US: 'Spojené Státy Americké'

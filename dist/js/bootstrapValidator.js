@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-09-10 7:47:26 PM
+ * @version     v0.5.2-dev, built on 2014-09-11 8:04:50 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -5487,7 +5487,7 @@ if (typeof jQuery === 'undefined') {
 
                 case 'RU':
                     // http://regex101.com/r/gW7yT5/5
-                    isValid = (/^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/g).test(value);
+                    isValid = (/^((8|\+7|007)[\-\.\/ ]?)?([\(\/\.]?\d{3}[\)\/\.]?[\-\.\/ ]?)?[\d\-\.\/ ]{7,10}$/g).test(value);
                     break;
 
                 case 'TH':
@@ -5933,7 +5933,7 @@ if (typeof jQuery === 'undefined') {
             if (minLength) {
                 options.min = parseInt(minLength, 10);
             }
-            
+
             return $.isEmptyObject(options) ? false : options;
         },
 
@@ -7365,10 +7365,10 @@ if (typeof jQuery === 'undefined') {
          * @returns {Boolean}
          */
         _ru: function(value) {
-            if (/^RU([0-9]{9}|[0-9]{12})$/.test(value)) {
+            if (/^RU([0-9]{10}|[0-9]{12})$/.test(value)) {
                 value = value.substr(2);
             }
-            if (!/^([0-9]{9}|[0-9]{12})$/.test(value)) {
+            if (!/^([0-9]{10}|[0-9]{12})$/.test(value)) {
                 return false;
             }
 
@@ -7627,6 +7627,7 @@ if (typeof jQuery === 'undefined') {
             MA: 'Morocco',
             NL: 'Netherlands',
             RO: 'Romania',
+            RU: 'Russia',
             SE: 'Sweden',
             SG: 'Singapore',
             US: 'USA'
@@ -7639,7 +7640,7 @@ if (typeof jQuery === 'undefined') {
             country: 'country'
         },
 
-        COUNTRY_CODES: ['BR', 'CA', 'DK', 'GB', 'IT', 'MA', 'NL', 'RO', 'SE', 'SG', 'US'],
+        COUNTRY_CODES: ['BR', 'CA', 'DK', 'GB', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -7716,6 +7717,10 @@ if (typeof jQuery === 'undefined') {
                     
                 case 'RO':
                     isValid = /^(0[1-8]{1}|[1-9]{1}[0-5]{1})?[0-9]{4}$/i.test(value);
+                    break;
+
+                case 'RU':
+                    isValid = /^[0-9]{6}$/i.test(value);
                     break;
 
                 case 'SE':

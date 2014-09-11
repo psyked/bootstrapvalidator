@@ -343,6 +343,7 @@
                 MA: 'marokkó',
                 NL: 'holland',
                 RO: 'románia',
+                RU: 'orosz',
                 SE: 'svájci',
                 SG: 'singaporei',
                 US: 'Egyesült Államok beli'

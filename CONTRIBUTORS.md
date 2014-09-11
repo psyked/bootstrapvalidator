@@ -77,6 +77,7 @@ I would like to give big thanks to the following contributors:
 * [@shamiao](https://github.com/shamiao)
 * [@smeagol74](https://github.com/smeagol74)
 * [@stephengreentree](https://github.com/stephengreentree)
+* [@stepin](https://github.com/stepin)
 * [@talberti](https://github.com/talberti)
 * [@thisisclement](https://github.com/thisisclement)
 * [@tiagofontella](https://github.com/tiagofontella)

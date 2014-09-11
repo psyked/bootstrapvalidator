@@ -343,6 +343,7 @@
                 MA: 'Marocko',
                 NL: 'Nederländerna',
                 RO: 'Rumänien',
+                RU: 'Ryssland',
                 SE: 'Sverige',
                 SG: 'Singapore',
                 US: 'USA'

@@ -343,6 +343,7 @@
                 MA: 'Maroc',
                 NL: 'Hà Lan',
                 RO: 'Romania',
+                RU: 'Nga',
                 SE: 'Thuỵ Sĩ',
                 SG: 'Singapore',
                 US: 'Mỹ'

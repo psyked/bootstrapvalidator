@@ -343,6 +343,7 @@
                 MA: 'Marrocos',
                 NL: 'Holanda',
                 RO: 'Roménia',
+                RU: 'Rússia',
                 SE: 'Suécia',
                 SG: 'Cingapura',
                 US: 'EUA'

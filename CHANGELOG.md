@@ -14,7 +14,8 @@ __New Features__
 * [#785](https://github.com/nghuuphuoc/bootstrapvalidator/pull/785): Add Denmark phone number validator, thanks to [@emilchristensen](https://github.com/emilchristensen)
 * [#787](https://github.com/nghuuphuoc/bootstrapvalidator/pull/787): Add Thailand phone number and ID validator, thanks to [@figgaro](https://github.com/figgaro)
 * [#793](https://github.com/nghuuphuoc/bootstrapvalidator/pull/793), [#798](https://github.com/nghuuphuoc/bootstrapvalidator/pull/798): Add Chinese citizen ID validator, thanks to [@shamiao](https://github.com/shamiao)
-* [#802](https://github.com/nghuuphuoc/bootstrapvalidator/pull/802): Add Russia phone number validator, thanks to [@cylon-v](https://github.com/cylon-v)
+* [#802](https://github.com/nghuuphuoc/bootstrapvalidator/pull/802): Add Russia phone number validator, thanks to [@cylon-v](https://github.com/cylon-v). [#816](https://github.com/nghuuphuoc/bootstrapvalidator/pull/816): Improved by [@stepin](https://github.com/stepin)
+* [#816](https://github.com/nghuuphuoc/bootstrapvalidator/pull/816): Add Russian postal code validator, thanks to [@stepin](https://github.com/stepin)
 
 __Changes__
 * [#753](https://github.com/nghuuphuoc/bootstrapvalidator/issues/753): Change the default type of [remote](http://bootstrapvalidator.com/validators/remote/) validator to GET
@@ -45,6 +46,7 @@ __Bug Fixes__
 * [#759](https://github.com/nghuuphuoc/bootstrapvalidator/issues/759), [#764](https://github.com/nghuuphuoc/bootstrapvalidator/pull/764): The tooltip/popover isn't shown if there is disabled validator.
 The tooltip/popover is shown automatically when the field gets the focus, thanks to [@leedorian](https://github.com/leedorian)
 * [#797](https://github.com/nghuuphuoc/bootstrapvalidator/issues/797), [#799](https://github.com/nghuuphuoc/bootstrapvalidator/pull/799): Can't validate ipv4 and ipv6 at the same time. Add ip validator test suite, thanks to [@Arkni](https://github.com/Arkni)
+* [#816](https://github.com/nghuuphuoc/bootstrapvalidator/pull/816): Fix Russian [VAT](http://bootstrapvalidator.com/validators/vat/) number validator, thanks to [@stepin](https://github.com/stepin)
 
 __Document__
 * [#709](https://github.com/nghuuphuoc/bootstrapvalidator/issues/709), [#715](https://github.com/nghuuphuoc/bootstrapvalidator/pull/715): Add [Bootstrap Select](http://bootstrapvalidator.com/examples/bootstrap-select/) and [Select2](http://bootstrapvalidator.com/examples/select2/) examples, thanks to [@Arkni](https://github.com/Arkni)
@@ -58,7 +60,7 @@ __Language Packages__
 * [#787](https://github.com/nghuuphuoc/bootstrapvalidator/pull/787): Thai language package, thanks to [@figgaro](https://github.com/figgaro)
 * [#788](https://github.com/nghuuphuoc/bootstrapvalidator/pull/788): Fully re-translated Simplified Chinese language package, thanks to [@shamiao](https://github.com/shamiao)
 * [#795](https://github.com/nghuuphuoc/bootstrapvalidator/pull/795): Re-translated traditional Chinese language package, thanks to [@tureki](https://github.com/tureki)
-* [#802](https://github.com/nghuuphuoc/bootstrapvalidator/pull/802): Russian language package, thanks to [@cylon-v](https://github.com/cylon-v)
+* [#802](https://github.com/nghuuphuoc/bootstrapvalidator/pull/802): Russian language package, thanks to [@cylon-v](https://github.com/cylon-v). [#816](https://github.com/nghuuphuoc/bootstrapvalidator/pull/816): Improved by [@stepin](https://github.com/stepin)
 * [#806](https://github.com/nghuuphuoc/bootstrapvalidator/pull/806): Ukrainian language package, thanks to [@oleg-voloshyn](https://github.com/oleg-voloshyn)
 
 ## v0.5.1 (2014-08-22)
