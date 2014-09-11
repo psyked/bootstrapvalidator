@@ -207,6 +207,18 @@
             };
         },
 
+        /**
+         * Return a date object after parsing the date string
+         *
+         * @param {String} date   The date string to parse
+         * @param {String} format The date format
+         * The format can be:
+         *   - date: Consist of DD, MM, YYYY parts which are separated by the separator option
+         *   - date and time:
+         *     The time can consist of h, m, s parts which are separated by :
+         * @param {String} separator The separator used to separate the date, month, and year
+         * @returns {Date}
+         */
         parseDate: function(date, format, separator) {
             var year = 0, month = 0, day = 0, minutes = 0, hours = 0, seconds = 0,
                 sections    = date.split(' '),
