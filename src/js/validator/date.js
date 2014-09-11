@@ -57,7 +57,10 @@
                 time       = (sections.length > 1) ? sections[1] : null;
 
             if (formats.length !== sections.length) {
-                return false;
+                return {
+                    valid: false,
+                    message: options.message || $.fn.bootstrapValidator.i18n.date['default']
+                };
             }
 
             // Determine the separator
@@ -66,22 +69,31 @@
                 separator = (date.indexOf('/') !== -1) ? '/' : ((date.indexOf('-') !== -1) ? '-' : null);
             }
             if (separator === null || date.indexOf(separator) === -1) {
-                return false;
+                return {
+                    valid: false,
+                    message: options.message || $.fn.bootstrapValidator.i18n.date['default']
+                };
             }
 
             // Determine the date
             date       = date.split(separator);
             dateFormat = dateFormat.split(separator);
             if (date.length !== dateFormat.length) {
-                return false;
+                return {
+                    valid: false,
+                    message: options.message || $.fn.bootstrapValidator.i18n.date['default']
+                };
             }
 
             var year  = date[$.inArray('YYYY', dateFormat)],
                 month = date[$.inArray('MM', dateFormat)],
                 day   = date[$.inArray('DD', dateFormat)];
 
-            if (!year || !month || !day || year.length !== 4) {
-                return false;
+            if (!year || !month || !day) {
+                return {
+                    valid: false,
+                    message: options.message || $.fn.bootstrapValidator.i18n.date['default']
+                };
             }
 
             // Determine the time
@@ -91,7 +103,10 @@
                 time       = time.split(':');
 
                 if (timeFormat.length !== time.length) {
-                    return false;
+                    return {
+                        valid: false,
+                        message: options.message || $.fn.bootstrapValidator.i18n.date['default']
+                    };
                 }
 
                 hours   = time.length > 0 ? time[0] : null;
@@ -101,33 +116,51 @@
                 // Validate seconds
                 if (seconds) {
                     if (isNaN(seconds) || seconds.length > 2) {
-                        return false;
+                        return {
+                            valid: false,
+                            message: options.message || $.fn.bootstrapValidator.i18n.date['default']
+                        };
                     }
                     seconds = parseInt(seconds, 10);
                     if (seconds < 0 || seconds > 60) {
-                        return false;
+                        return {
+                            valid: false,
+                            message: options.message || $.fn.bootstrapValidator.i18n.date['default']
+                        };
                     }
                 }
 
                 // Validate hours
                 if (hours) {
                     if (isNaN(hours) || hours.length > 2) {
-                        return false;
+                        return {
+                            valid: false,
+                            message: options.message || $.fn.bootstrapValidator.i18n.date['default']
+                        };
                     }
                     hours = parseInt(hours, 10);
                     if (hours < 0 || hours >= 24 || (amOrPm && hours > 12)) {
-                        return false;
+                        return {
+                            valid: false,
+                            message: options.message || $.fn.bootstrapValidator.i18n.date['default']
+                        };
                     }
                 }
 
                 // Validate minutes
                 if (minutes) {
                     if (isNaN(minutes) || minutes.length > 2) {
-                        return false;
+                        return {
+                            valid: false,
+                            message: options.message || $.fn.bootstrapValidator.i18n.date['default']
+                        };
                     }
                     minutes = parseInt(minutes, 10);
                     if (minutes < 0 || minutes > 59) {
-                        return false;
+                        return {
+                            valid: false,
+                            message: options.message || $.fn.bootstrapValidator.i18n.date['default']
+                        };
                     }
                 }
             }
@@ -136,7 +169,7 @@
 
             // Validate day, month, and year
             valid   = $.fn.bootstrapValidator.helpers.date(year, month, day);
-            message = $.fn.bootstrapValidator.i18n.date['default'];
+            message = options.message || $.fn.bootstrapValidator.i18n.date['default'];
 
             // declare the date, min and max objects
             var date = null, min = null, max = null;
