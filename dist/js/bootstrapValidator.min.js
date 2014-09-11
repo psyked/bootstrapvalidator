@@ -17,6 +17,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @version     v0.5.3-dev, built on 2014-10-06 8:02:42 AM
 =======
  * @version     v0.5.2-dev, built on 2014-09-18 9:55:01 PM
@@ -63,6 +64,9 @@
 =======
  * @version     v0.5.2-dev, built on 2014-09-18 10:02:15 PM
 >>>>>>> Add validator and test suite for rgba() color validation
+=======
+ * @version     v0.5.2-dev, built on 2014-09-18 10:02:22 PM
+>>>>>>> Add validator and test suite for hsl() color validation
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
