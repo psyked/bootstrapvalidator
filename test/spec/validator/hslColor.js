@@ -3,7 +3,7 @@ describe('hslColor', function() {
     beforeEach(function() {
         var html = [
             '<div class="container">',
-                '<form class="form-horizontal" id="rbgColorForm">',
+                '<form class="form-horizontal" id="hslColorForm">',
                     '<div class="form-group">',
                         '<input type="text" name="hsl" data-bv-hslcolor />',
                     '</div>',
@@ -12,14 +12,14 @@ describe('hslColor', function() {
         ].join('\n');
 
         $(html).appendTo('body');
-        $('#rbgColorForm').bootstrapValidator();
+        $('#hslColorForm').bootstrapValidator();
 
-        this.bv          = $('#rbgColorForm').data('bootstrapValidator');
+        this.bv          = $('#hslColorForm').data('bootstrapValidator');
         this.$hslColor = this.bv.getFieldElements('hsl');
     });
 
     afterEach(function() {
-        $('#rbgColorForm').bootstrapValidator('destroy').parent().remove();
+        $('#hslColorForm').bootstrapValidator('destroy').parent().remove();
     });
 
     it('accept hsl()', function() {
@@ -111,5 +111,4 @@ describe('hslColor', function() {
         this.bv.validate();
         expect(this.bv.isValidField('hsl')).toEqual(false);
     });
-
 });

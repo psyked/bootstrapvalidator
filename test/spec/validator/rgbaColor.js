@@ -3,7 +3,7 @@ describe('rgbaColor', function() {
     beforeEach(function() {
         var html = [
             '<div class="container">',
-                '<form class="form-horizontal" id="rbgColorForm">',
+                '<form class="form-horizontal" id="rgbaColorForm">',
                     '<div class="form-group">',
                         '<input type="text" name="rgba" data-bv-rgbacolor />',
                     '</div>',
@@ -12,14 +12,14 @@ describe('rgbaColor', function() {
         ].join('\n');
 
         $(html).appendTo('body');
-        $('#rbgColorForm').bootstrapValidator();
+        $('#rgbaColorForm').bootstrapValidator();
 
-        this.bv          = $('#rbgColorForm').data('bootstrapValidator');
+        this.bv          = $('#rgbaColorForm').data('bootstrapValidator');
         this.$rgbaColor = this.bv.getFieldElements('rgba');
     });
 
     afterEach(function() {
-        $('#rbgColorForm').bootstrapValidator('destroy').parent().remove();
+        $('#rgbaColorForm').bootstrapValidator('destroy').parent().remove();
     });
 
     it('accept rgba()', function() {
