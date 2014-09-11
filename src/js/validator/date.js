@@ -1,12 +1,17 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.date = $.extend($.fn.bootstrapValidator.i18n.date || {}, {
-        'default': 'Please enter a valid date'
+        'default': 'Please enter a valid date',
+        min  : 'Please enter a date after %s',
+        max  : 'Please enter a date before %s',
+        range : 'Please enter a date in the range %s - %s'
     });
 
     $.fn.bootstrapValidator.validators.date = {
         html5Attributes: {
             message: 'message',
             format: 'format',
+            min: 'min',
+            max: 'max',
             separator: 'separator'
         },
 
@@ -17,6 +22,8 @@
          * @param {jQuery} $field Field element
          * @param {Object} options Can consist of the following keys:
          * - message: The invalid message
+         * - min: the minimum date
+         * - max: the maximum date
          * - separator: Use to separate the date, month, and year.
          * By default, it is /
          * - format: The date format. Default is MM/DD/YYYY
@@ -125,8 +132,67 @@
                 }
             }
 
+            var valid = false, message;
+
             // Validate day, month, and year
-            return $.fn.bootstrapValidator.helpers.date(year, month, day);
+            valid   = $.fn.bootstrapValidator.helpers.date(year, month, day);
+            message = $.fn.bootstrapValidator.i18n.date['default'];
+
+            // declare the date, min and max objects
+            var date = null, min = null, max = null;
+
+            if(options.min) {
+                min = this.parseDate(options.min, dateFormat, separator);
+            }
+
+            if(options.max) {
+                max = this.parseDate(options.max, dateFormat, separator);
+            }
+
+            var date = new Date(year, month, day, hours, minutes, seconds);
+
+            switch(true) {
+                case(options.min && !options.max && valid):
+                    valid   = date.getTime() >= min.getTime();
+                    message = options.message || $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.date.min, options.min);
+                    break;
+
+                case(options.max && !options.min && valid):
+                    valid   = date.getTime() <= max.getTime();
+                    message = options.message || $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.date.max, options.max);
+                    break;
+
+                case(options.max && options.min && valid):
+                    valid   = date.getTime() <= max.getTime() && date.getTime() >= min.getTime();
+                    message = options.message || $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.date.range, [options.min, options.max]);
+                    break;
+            }
+
+            return {
+                valid: valid,
+                message: message
+            };
+        },
+
+        parseDate: function(date, format, separator) {
+            var year = 0, month = 0, day = 0, minutes = 0, hours = 0, seconds = 0,
+                sections    = date.split(' '),
+                dateSection = sections[0],
+                timeSection = (sections.length > 1) ? sections[1] : null;
+
+            dateSection  = dateSection.split(separator);
+            year  = dateSection[$.inArray('YYYY', format)];
+            month = dateSection[$.inArray('MM', format)];
+            day   = dateSection[$.inArray('DD', format)];
+            if(timeSection) {
+                timeSection = timeSection.split(':');
+                hours       = timeSection.length > 0 ? timeSection[0] : null;
+                minutes     = timeSection.length > 1 ? timeSection[1] : null;
+                seconds     = timeSection.length > 2 ? timeSection[2] : null;
+            }
+
+            return new Date(year, month, day, hours, minutes, seconds);
         }
+
     };
 }(window.jQuery));
