@@ -30,7 +30,10 @@
             'default': 'Voer een geldig CVV-nummer in'
         },
         date: {
-            'default': 'Voer een geldige datum in'
+            'default': 'Voer een geldige datum in',
+            min: 'Voer een datum in die na %s ligt',
+            max: 'Voer een datum in die vóór %s ligt',
+            range: 'Voer een datum in die tussen %s en %s ligt'
         },
         different: {
             'default': 'Voer een andere waarde in'
