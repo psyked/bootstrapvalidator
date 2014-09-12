@@ -30,7 +30,10 @@
             'default': 'Vänligen mata in ett giltigt CVV-nummer'
         },
         date: {
-            'default': 'Vänligen mata in ett giltigt datum'
+            'default': 'Vänligen mata in ett giltigt datum',
+            min: 'Vänligen mata in ett datum efter %s',
+            max: 'Vänligen mata in ett datum före %s',
+            range: 'Vänligen mata in ett datum i intervallet %s - %s'
         },
         different: {
             'default': 'Vänligen mata in ett annat värde'
