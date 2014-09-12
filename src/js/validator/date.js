@@ -182,7 +182,7 @@
                 max = this.parseDate(options.max, dateFormat, separator);
             }
 
-            var date = new Date(year, month, day, hours, minutes, seconds);
+            date = new Date(year, month, day, hours, minutes, seconds);
 
             switch(true) {
                 case(options.min && !options.max && valid):
