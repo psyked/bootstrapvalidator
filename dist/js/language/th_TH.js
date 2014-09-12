@@ -1,7 +1,7 @@
 (function($) {
     /**
-     * Default English package. It's included in the dist, so you do NOT need to include it to your head tag
-     * The only reason I put it here is that you can clone it, and translate it into your language
+     * Thai language package
+     * Translated by @figgaro
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
