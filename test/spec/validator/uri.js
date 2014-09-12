@@ -1,5 +1,5 @@
 describe('uri', function() {
-    beforeEach(function () {
+    beforeEach(function() {
         $([
             '<form class="form-horizontal" id="uriForm">',
                 '<div id="msg"></div>',
@@ -15,7 +15,7 @@ describe('uri', function() {
         this.$uri = this.bv.getFieldElements('uri');
     });
 
-    afterEach(function () {
+    afterEach(function() {
         $('#uriForm').bootstrapValidator('destroy').remove();
     });
 

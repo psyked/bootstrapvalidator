@@ -34,6 +34,7 @@ __Improvements__
 * [#783](https://github.com/nghuuphuoc/bootstrapvalidator/issues/783): Improve behaviour of the [different](http://bootstrapvalidator.com/validators/different/) validator
 * [#792](https://github.com/nghuuphuoc/bootstrapvalidator/pull/792): Add "BootstrapValidator's JavaScript requires jQuery" warning, thanks to [@Arkni](https://github.com/Arkni)
 * [#803](https://github.com/nghuuphuoc/bootstrapvalidator/pull/803): Add ```minSize``` option for the [file](http://bootstrapvalidator.com/validators/file/) validator, thanks to [@Arkni](https://github.com/Arkni)
+* [#824](https://github.com/nghuuphuoc/bootstrapvalidator/issues/824): Add [phone](http://bootstrapvalidator.com/validators/phone/) number validator test suite
 
 __Bug Fixes__
 * [#611](https://github.com/nghuuphuoc/bootstrapvalidator/issues/611), [#703](https://github.com/nghuuphuoc/bootstrapvalidator/issues/703): Tabs get red even form is valid

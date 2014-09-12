@@ -1,5 +1,5 @@
 describe('id', function() {
-    beforeEach(function () {
+    beforeEach(function() {
         $([
             '<form class="form-horizontal" id="idForm">',
                 '<div class="form-group">',
@@ -49,7 +49,7 @@ describe('id', function() {
         this.$id      = this.bv.getFieldElements('id');
     });
 
-    afterEach(function () {
+    afterEach(function() {
         $('#idForm').bootstrapValidator('destroy').remove();
     });
 

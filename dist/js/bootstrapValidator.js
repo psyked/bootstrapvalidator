@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-09-11 8:04:50 AM
+ * @version     v0.5.2-dev, built on 2014-09-12 8:40:58 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -5482,6 +5482,7 @@ if (typeof jQuery === 'undefined') {
 
         		case 'RO':
         		    // All mobile network and land line
+                    // http://regexr.com/39fv1
         		    isValid = (/^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|\-)?([0-9]{3}(\s|\.|\-|)){2}$/g).test(value);
         		    break;
 

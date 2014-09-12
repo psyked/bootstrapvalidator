@@ -121,6 +121,7 @@
 
         		case 'RO':
         		    // All mobile network and land line
+                    // http://regexr.com/39fv1
         		    isValid = (/^(\+4|)?(07[0-8]{1}[0-9]{1}|02[0-9]{2}|03[0-9]{2}){1}?(\s|\.|\-)?([0-9]{3}(\s|\.|\-|)){2}$/g).test(value);
         		    break;
 
