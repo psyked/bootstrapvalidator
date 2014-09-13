@@ -48,6 +48,7 @@ __Bug Fixes__
 The tooltip/popover is shown automatically when the field gets the focus, thanks to [@leedorian](https://github.com/leedorian)
 * [#797](https://github.com/nghuuphuoc/bootstrapvalidator/issues/797), [#799](https://github.com/nghuuphuoc/bootstrapvalidator/pull/799): Can't validate ipv4 and ipv6 at the same time. Add ip validator test suite, thanks to [@Arkni](https://github.com/Arkni)
 * [#816](https://github.com/nghuuphuoc/bootstrapvalidator/pull/816): Fix Russian [VAT](http://bootstrapvalidator.com/validators/vat/) number validator, thanks to [@stepin](https://github.com/stepin)
+* [#832](https://github.com/nghuuphuoc/bootstrapvalidator/issues/832): The form won't be validated if the submit button contains a HTML tag
 
 __Document__
 * [#709](https://github.com/nghuuphuoc/bootstrapvalidator/issues/709), [#715](https://github.com/nghuuphuoc/bootstrapvalidator/pull/715): Add [Bootstrap Select](http://bootstrapvalidator.com/examples/bootstrap-select/) and [Select2](http://bootstrapvalidator.com/examples/select2/) examples, thanks to [@Arkni](https://github.com/Arkni)

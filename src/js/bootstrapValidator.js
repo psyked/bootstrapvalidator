@@ -131,9 +131,12 @@ if (typeof jQuery === 'undefined') {
                 .on('click.bv', '[type="submit"]', function(e) {
                     // #746: Check if the button click handler returns false
                     if (!e.isDefaultPrevented()) {
+                        var $target = $(e.target),
+                            // The button might contain HTML tag
+                            $button = $target.is('[type="submit"]') ? $target.eq(0) : $target.parent('[type="submit"]').eq(0);
+
                         // Don't perform validation when clicking on the submit button/input
                         // which aren't defined by the 'submitButtons' option
-                        var $button = $(e.target).eq(0);
                         if (that.options.submitButtons && !$button.is(that.options.submitButtons) && !$button.is(that.$hiddenButton)) {
                             that.$form.off('submit.bv').submit();
                         }
