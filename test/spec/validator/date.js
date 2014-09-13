@@ -1,3 +1,15 @@
+function getDate(value, validator, $field) {
+    return validator.getFieldElements('date').val();
+};
+
+TestSuite = $.extend({}, TestSuite, {
+    Date: {
+        getDate: function(value, validator, $field) {
+            return validator.getFieldElements('date').val();
+        }
+    }
+});
+
 describe('date', function() {
     beforeEach(function() {
         $([
@@ -572,5 +584,251 @@ describe('date', function() {
         this.$range.val('2015-05-15 22:00:01');
         this.bv.validate();
         expect(this.bv.isValidField('range')).toEqual(false);
+    });
+
+    // dynamic min option
+    it('dynamic min: name of field', function() {
+        this.$minDate.attr('data-bv-date-min', 'date');
+        this.bv.destroy();
+        this.bv = $('#dateForm').bootstrapValidator().data('bootstrapValidator');
+        this.bv.updateOption('minDate', 'date', 'format', 'YYYY/MM/DD');
+
+        this.$date.val('2014/09/08');
+        this.$minDate.val('2014/09/09');
+        this.bv.validate();
+        expect(this.bv.isValidField('minDate')).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$date.val('2014/09/08');
+        this.$minDate.val('2014/08/17');
+        this.bv.validate();
+        expect(this.bv.isValidField('minDate')).toBeFalsy();
+    });
+
+    it('dynamic min: callback declarative function', function() {
+        this.$minDate.attr('data-bv-date-min', 'getDate');
+        this.bv.destroy();
+        this.bv = $('#dateForm').bootstrapValidator().data('bootstrapValidator');
+        this.bv.updateOption('minDate', 'date', 'format', 'YYYY/MM/DD');
+
+        this.$date.val('2014/09/08');
+        this.$minDate.val('2014/09/09');
+        this.bv.validate();
+        expect(this.bv.isValidField('minDate')).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$date.val('2014/10/01');
+        this.$minDate.val('2014/08/17');
+        this.bv.validate();
+        expect(this.bv.isValidField('minDate')).toBeFalsy();
+    });
+
+    it('dynamic min: callback declarative function()', function() {
+        this.$minDate.attr('data-bv-date-min', 'getDate()');
+        this.bv.destroy();
+        this.bv = $('#dateForm').bootstrapValidator().data('bootstrapValidator');
+        this.bv.updateOption('minDate', 'date', 'format', 'YYYY/MM/DD');
+
+        this.$date.val('2014/09/08');
+        this.$minDate.val('2014/09/09');
+        this.bv.validate();
+        expect(this.bv.isValidField('minDate')).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$date.val('2014/10/01');
+        this.$minDate.val('2014/08/17');
+        this.bv.validate();
+        expect(this.bv.isValidField('minDate')).toBeFalsy();
+    });
+
+    it('dynamic min: callback declarative A.B.C', function() {
+        this.$minDate.attr('data-bv-date-min', 'TestSuite.Date.getDate');
+        this.bv.destroy();
+        this.bv = $('#dateForm').bootstrapValidator().data('bootstrapValidator');
+        this.bv.updateOption('minDate', 'date', 'format', 'YYYY/MM/DD');
+
+        this.$date.val('2014/09/08');
+        this.$minDate.val('2014/09/09');
+        this.bv.validate();
+        expect(this.bv.isValidField('minDate')).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$date.val('2014/10/01');
+        this.$minDate.val('2014/08/17');
+        this.bv.validate();
+        expect(this.bv.isValidField('minDate')).toBeFalsy();
+    });
+
+    it('dynamic min: callback declarative A.B.C()', function() {
+        this.$minDate.attr('data-bv-date-min', 'TestSuite.Date.getDate()');
+        this.bv.destroy();
+        this.bv = $('#dateForm').bootstrapValidator().data('bootstrapValidator');
+        this.bv.updateOption('minDate', 'date', 'format', 'YYYY/MM/DD');
+
+        this.$date.val('2014/09/08');
+        this.$minDate.val('2014/09/09');
+        this.bv.validate();
+        expect(this.bv.isValidField('minDate')).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$date.val('2014/10/01');
+        this.$minDate.val('2014/08/17');
+        this.bv.validate();
+        expect(this.bv.isValidField('minDate')).toBeFalsy();
+    });
+
+    it('dynamic min: callback programmatically', function() {
+        this.$minDate.removeAttr('data-bv-date-min');
+        this.bv.destroy();
+        this.bv = $('#dateForm')
+                        .bootstrapValidator({
+                            fields: {
+                                minDate: {
+                                    validators: {
+                                        date: {
+                                            min: function(value, validator, $field) {
+                                                return getDate(value, validator, $field);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                        .data('bootstrapValidator');
+        this.bv.updateOption('minDate', 'date', 'format', 'YYYY/MM/DD');
+
+        this.$date.val('2014/09/08');
+        this.$minDate.val('2014/09/09');
+        this.bv.validate();
+        expect(this.bv.isValidField('minDate')).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$date.val('2014/10/01');
+        this.$minDate.val('2014/08/17');
+        this.bv.validate();
+        expect(this.bv.isValidField('minDate')).toBeFalsy();
+    });
+
+    // dynamic max option
+    it('dynamic max: name of field', function() {
+        this.$maxDate.attr('data-bv-date-max', 'date');
+        this.bv.destroy();
+        this.bv = $('#dateForm').bootstrapValidator().data('bootstrapValidator');
+        this.bv.updateOption('maxDate', 'date', 'format', 'YYYY/MM/DD');
+
+        this.$date.val('2015/01/01');
+        this.$maxDate.val('2014/09/09');
+        this.bv.validate();
+        expect(this.bv.isValidField('maxDate')).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$date.val('2014/01/01');
+        this.$maxDate.val('2014/08/17');
+        this.bv.validate();
+        expect(this.bv.isValidField('maxDate')).toBeFalsy();
+    });
+
+    it('dynamic max: callback declarative function', function() {
+        this.$maxDate.attr('data-bv-date-max', 'getDate');
+        this.bv.destroy();
+        this.bv = $('#dateForm').bootstrapValidator().data('bootstrapValidator');
+        this.bv.updateOption('maxDate', 'date', 'format', 'YYYY/MM/DD');
+
+        this.$date.val('2015/01/01');
+        this.$maxDate.val('2014/09/09');
+        this.bv.validate();
+        expect(this.bv.isValidField('maxDate')).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$date.val('2014/01/01');
+        this.$maxDate.val('2014/08/17');
+        this.bv.validate();
+        expect(this.bv.isValidField('maxDate')).toBeFalsy();
+    });
+
+    it('dynamic max: callback declarative function()', function() {
+        this.$maxDate.attr('data-bv-date-max', 'getDate()');
+        this.bv.destroy();
+        this.bv = $('#dateForm').bootstrapValidator().data('bootstrapValidator');
+        this.bv.updateOption('maxDate', 'date', 'format', 'YYYY/MM/DD');
+
+        this.$date.val('2015/01/01');
+        this.$maxDate.val('2014/09/09');
+        this.bv.validate();
+        expect(this.bv.isValidField('maxDate')).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$date.val('2014/01/01');
+        this.$maxDate.val('2014/08/17');
+        this.bv.validate();
+        expect(this.bv.isValidField('maxDate')).toBeFalsy();
+    });
+
+    it('dynamic max: callback declarative A.B.C', function() {
+        this.$maxDate.attr('data-bv-date-max', 'TestSuite.Date.getDate');
+        this.bv.destroy();
+        this.bv = $('#dateForm').bootstrapValidator().data('bootstrapValidator');
+        this.bv.updateOption('maxDate', 'date', 'format', 'YYYY/MM/DD');
+
+        this.$date.val('2015/01/01');
+        this.$maxDate.val('2014/09/09');
+        this.bv.validate();
+        expect(this.bv.isValidField('maxDate')).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$date.val('2014/01/01');
+        this.$maxDate.val('2014/08/17');
+        this.bv.validate();
+        expect(this.bv.isValidField('maxDate')).toBeFalsy();
+    });
+
+    it('dynamic max: callback declarative A.B.C()', function() {
+        this.$maxDate.attr('data-bv-date-max', 'TestSuite.Date.getDate()');
+        this.bv.destroy();
+        this.bv = $('#dateForm').bootstrapValidator().data('bootstrapValidator');
+        this.bv.updateOption('maxDate', 'date', 'format', 'YYYY/MM/DD');
+
+        this.$date.val('2015/01/01');
+        this.$maxDate.val('2014/09/09');
+        this.bv.validate();
+        expect(this.bv.isValidField('maxDate')).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$date.val('2014/01/01');
+        this.$maxDate.val('2014/08/17');
+        this.bv.validate();
+        expect(this.bv.isValidField('maxDate')).toBeFalsy();
+    });
+
+    it('dynamic max: callback programmatically', function() {
+        this.$maxDate.removeAttr('data-bv-date-max');
+        this.bv.destroy();
+        this.bv = $('#dateForm')
+                        .bootstrapValidator({
+                            fields: {
+                                maxDate: {
+                                    validators: {
+                                        date: {
+                                            max: function(value, validator, $field) {
+                                                return getDate(value, validator, $field);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        })
+                        .data('bootstrapValidator');
+        this.bv.updateOption('maxDate', 'date', 'format', 'YYYY/MM/DD');
+
+        this.$date.val('2015/01/01');
+        this.$maxDate.val('2014/09/09');
+        this.bv.validate();
+        expect(this.bv.isValidField('maxDate')).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$date.val('2014/01/01');
+        this.$maxDate.val('2014/08/17');
+        this.bv.validate();
+        expect(this.bv.isValidField('maxDate')).toBeFalsy();
     });
 });
