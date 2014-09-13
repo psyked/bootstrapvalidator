@@ -172,32 +172,39 @@
             message = options.message || $.fn.bootstrapValidator.i18n.date['default'];
 
             // declare the date, min and max objects
-            var date = null, min = null, max = null;
+            var date = null, min = null, max = null,
+                minOption = options.min, maxOption = options.max;
 
-            if(options.min) {
-                min = this.parseDate(options.min, dateFormat, separator);
+            if(minOption) {
+                if(isNaN(Date.parse(minOption))) {
+                    minOption = validator.getDynamicOption($field, minOption);
+                }
+                min = this.parseDate(minOption, dateFormat, separator, validator, $field);
             }
 
-            if(options.max) {
-                max = this.parseDate(options.max, dateFormat, separator);
+            if(maxOption) {
+                if(isNaN(Date.parse(maxOption))) {
+                    maxOption = validator.getDynamicOption($field, maxOption);
+                }
+                max = this.parseDate(maxOption, dateFormat, separator, validator, $field);
             }
 
             date = new Date(year, month, day, hours, minutes, seconds);
 
             switch(true) {
-                case(options.min && !options.max && valid):
+                case(minOption && !maxOption && valid):
                     valid   = date.getTime() >= min.getTime();
-                    message = options.message || $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.date.min, options.min);
+                    message = options.message || $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.date.min, minOption);
                     break;
 
-                case(options.max && !options.min && valid):
+                case(maxOption && !minOption && valid):
                     valid   = date.getTime() <= max.getTime();
-                    message = options.message || $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.date.max, options.max);
+                    message = options.message || $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.date.max, maxOption);
                     break;
 
-                case(options.max && options.min && valid):
+                case(maxOption && minOption && valid):
                     valid   = date.getTime() <= max.getTime() && date.getTime() >= min.getTime();
-                    message = options.message || $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.date.range, [options.min, options.max]);
+                    message = options.message || $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.date.range, [minOption, maxOption]);
                     break;
             }
 
