@@ -239,6 +239,7 @@
                 MA: 'Maroko',
                 PK: 'Pákistán',
                 RO: 'Rumunsko',
+                RU: 'Rusko',
                 TH: 'Thajsko',
                 US: 'Spojené Státy Americké',
                 VE: 'Venezuelský'
@@ -342,6 +343,7 @@
                 MA: 'Maroko',
                 NL: 'Nizozemí',
                 RO: 'Rumunsko',
+                RU: 'Rusko',
                 SE: 'Švédsko',
                 SG: 'Singapur',
                 US: 'Spojené Státy Americké'

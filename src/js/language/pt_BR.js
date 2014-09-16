@@ -239,6 +239,7 @@
                 MA: 'Marrocos',
                 PK: 'Paquistão',
                 RO: 'Roménia',
+                RU: 'Rússia',
                 TH: 'Tailândia',
                 US: 'EUA',
                 VE: 'Venezuela'
@@ -342,6 +343,7 @@
                 MA: 'Marrocos',
                 NL: 'Holanda',
                 RO: 'Roménia',
+                RU: 'Rússia',
                 SE: 'Suécia',
                 SG: 'Cingapura',
                 US: 'EUA'

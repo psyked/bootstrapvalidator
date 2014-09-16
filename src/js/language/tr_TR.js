@@ -239,6 +239,7 @@
                 MA: 'Fas',
                 PK: 'Pakistan',
                 RO: 'Romanya',
+                RU: 'Rusya',
                 TH: 'Tayland',
                 US: 'Amerika',
                 VE: 'Venezüella'
@@ -342,6 +343,7 @@
                 MA: 'Fas',
                 NL: 'Hollanda',
                 RO: 'Romanya',
+                RU: 'Rusya',
                 SE: 'İsveç',
                 SG: 'Singapur',
                 US: 'Amerika Birleşik Devletleri'

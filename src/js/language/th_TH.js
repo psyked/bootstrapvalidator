@@ -1,7 +1,7 @@
 (function($) {
     /**
-     * Default English package. It's included in the dist, so you do NOT need to include it to your head tag
-     * The only reason I put it here is that you can clone it, and translate it into your language
+     * Thai language package
+     * Translated by @figgaro
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
@@ -239,6 +239,7 @@
                 MA: 'โมร็อกโก',
                 PK: 'ปากีสถาน',
                 RO: 'โรมาเนีย',
+                RU: 'รัสเซีย',
                 TH: 'ไทย',
                 US: 'สหรัฐอเมริกา',
                 VE: 'เวเนซูเอลา'
@@ -342,6 +343,7 @@
                 MA: 'โมร็อกโก',
                 NL: 'เนเธอร์แลนด์',
                 RO: 'โรมาเนีย',
+                RU: 'รัสเซีย',
                 SE: 'สวีเดน',
                 SG: 'สิงคโปร์',
                 US: 'สหรัฐอเมริกา'

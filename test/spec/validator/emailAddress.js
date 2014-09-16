@@ -15,7 +15,7 @@ describe('emailAddress', function() {
         this.$emailAddressOrAddresses = this.bv.getFieldElements('email-address-or-addresses');
     });
 
-    afterEach(function () {
+    afterEach(function() {
         $('#emailAddressForm').bootstrapValidator('destroy').remove();
     });
 

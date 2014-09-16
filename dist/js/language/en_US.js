@@ -239,6 +239,7 @@
                 MA: 'Morocco',
                 PK: 'Pakistan',
                 RO: 'Romania',
+                RU: 'Russia',
                 TH: 'Thailand',
                 US: 'USA',
                 VE: 'Venezuela'
@@ -342,6 +343,7 @@
                 MA: 'Morocco',
                 NL: 'Netherlands',
                 RO: 'Romania',
+                RU: 'Russia',
                 SE: 'Sweden',
                 SG: 'Singapore',
                 US: 'USA'

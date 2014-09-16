@@ -12,6 +12,7 @@
             MA: 'Morocco',
             NL: 'Netherlands',
             RO: 'Romania',
+            RU: 'Russia',
             SE: 'Sweden',
             SG: 'Singapore',
             US: 'USA'
@@ -24,7 +25,7 @@
             country: 'country'
         },
 
-        COUNTRY_CODES: ['BR', 'CA', 'DK', 'GB', 'IT', 'MA', 'NL', 'RO', 'SE', 'SG', 'US'],
+        COUNTRY_CODES: ['BR', 'CA', 'DK', 'GB', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -101,6 +102,10 @@
                     
                 case 'RO':
                     isValid = /^(0[1-8]{1}|[1-9]{1}[0-5]{1})?[0-9]{4}$/i.test(value);
+                    break;
+
+                case 'RU':
+                    isValid = /^[0-9]{6}$/i.test(value);
                     break;
 
                 case 'SE':

@@ -239,6 +239,7 @@
                 MA: 'Maroc',
                 PK: 'Pakistan',
                 RO: 'Romania',
+                RU: 'Nga',
                 TH: 'Thái Lan',
                 US: 'Mỹ',
                 VE: 'Venezuela'
@@ -342,6 +343,7 @@
                 MA: 'Maroc',
                 NL: 'Hà Lan',
                 RO: 'Romania',
+                RU: 'Nga',
                 SE: 'Thuỵ Sĩ',
                 SG: 'Singapore',
                 US: 'Mỹ'

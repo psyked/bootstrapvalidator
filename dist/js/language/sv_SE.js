@@ -239,6 +239,7 @@
                 MA: 'Marocko',
                 PK: 'Pakistan',
                 RO: 'Rumänien',
+                RU: 'Ryssland',
                 TH: 'Thailand',
                 US: 'USA',
                 VE: 'Venezuela'
@@ -342,6 +343,7 @@
                 MA: 'Marocko',
                 NL: 'Nederländerna',
                 RO: 'Rumänien',
+                RU: 'Ryssland',
                 SE: 'Sverige',
                 SG: 'Singapore',
                 US: 'USA'

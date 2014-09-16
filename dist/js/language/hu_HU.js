@@ -239,6 +239,7 @@
                 MA: 'Marokkó',
                 PK: 'Pakisztán',
                 RO: 'Románia',
+                RU: 'orosz',
                 TH: 'thaiföld',
                 US: 'Egyesült Államok beli',
                 VE: 'venezuelai'
@@ -342,6 +343,7 @@
                 MA: 'marokkó',
                 NL: 'holland',
                 RO: 'románia',
+                RU: 'orosz',
                 SE: 'svájci',
                 SG: 'singaporei',
                 US: 'Egyesült Államok beli'
