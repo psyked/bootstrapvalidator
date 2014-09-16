@@ -30,7 +30,10 @@
             'default': '请输入有效的CVV代码'
         },
         date: {
-            'default': '请输入有效的日期'
+            'default': '请输入有效的日期', 
+            min: '请输入 %s 或之后的日期',
+            max: '请输入 %s 或以前的日期',
+            range: '请输入 %s 和 %s 之间的日期'
         },
         different: {
             'default': '请输入不同的值'
