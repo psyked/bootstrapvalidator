@@ -30,7 +30,10 @@
             'default': 'Molimo da unesete ispravan CVV broj'
         },
         date: {
-            'default': 'Molimo da unesete ispravan datum'
+            'default': 'Molimo da unesete ispravan datum',
+            min: 'Molimo da unesete datum posle %s',
+            max: 'Molimo da unesete datum pre %s',
+            range: 'Molimo da unesete datum od %s do %s'
         },
         different: {
             'default': 'Molimo da unesete drugu vrednost'
