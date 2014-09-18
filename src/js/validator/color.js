@@ -27,15 +27,19 @@
             var useCustomTypes = (options.hasOwnProperty('type') && options.type instanceof Array);
             var types = useCustomTypes ? options.type : defaultTypes;
             var isValid = false;
-            var formatedMessage = $.fn.bootstrapValidator.helpers.format(options.message || (useCustomTypes ? $.fn.bootstrapValidator.i18n.color.type : $.fn.bootstrapValidator.i18n.color.default), types.join(", "));
+            var formatedMessage = $.fn.bootstrapValidator.helpers.format(
+                                        options.message || (useCustomTypes ? $.fn.bootstrapValidator.i18n.color.type : $.fn.bootstrapValidator.i18n.color.default),
+                                        types.join(", ")
+            );
 
             for (var i = 0; i < types.length; i++) {
                 type = types[i];
                 method = '_' + type.toLowerCase();
                 isValid = isValid || this[method](value);
+                if (isValid) return true;
             }
 
-            return isValid || {
+            return {
                 valid: false,
                 message: formatedMessage
             };
