@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-09-18 10:04:30 PM
+ * @version     v0.5.2-dev, built on 2014-09-18 10:04:40 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -2205,20 +2205,27 @@ if (typeof jQuery === 'undefined') {
                 return true;
             }
 
-            var method;
+            var method, type;
             var defaultTypes = ['hex', 'rgb', 'rgba', 'hsl', 'hsla', 'keyword'];
             var useCustomTypes = (options.hasOwnProperty('type') && options.type instanceof Array);
             var types = useCustomTypes ? options.type : defaultTypes;
             var isValid = false;
+            var formatedMessage = $.fn.bootstrapValidator.helpers.format(
+                                        options.message || (useCustomTypes ? $.fn.bootstrapValidator.i18n.color.type : $.fn.bootstrapValidator.i18n.color.default),
+                                        types.join(", ")
+            );
 
-            for (var i = 0; i<types.length; i++) {
-                var type = types[i];
-                message = useCustomTypes ? $.fn.bootstrapValidator.i18n.color.type : $.fn.bootstrapValidator.i18n.color.default;
-                method = ['_', type.toLowerCase()].join('');
+            for (var i = 0; i < types.length; i++) {
+                type = types[i];
+                method = '_' + type.toLowerCase();
                 isValid = isValid || this[method](value);
+                if (isValid) return true;
             }
 
-            return isValid || { valid: false, message: message };
+            return {
+                valid: false,
+                message: formatedMessage
+            };
         },
 
         _hex: function(value) {
