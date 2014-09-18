@@ -65,6 +65,7 @@ __Language Packages__
 * [#802](https://github.com/nghuuphuoc/bootstrapvalidator/pull/802): Russian language package, thanks to [@cylon-v](https://github.com/cylon-v). [#816](https://github.com/nghuuphuoc/bootstrapvalidator/pull/816): Improved by [@stepin](https://github.com/stepin)
 * [#806](https://github.com/nghuuphuoc/bootstrapvalidator/pull/806): Ukrainian language package, thanks to [@oleg-voloshyn](https://github.com/oleg-voloshyn)
 * [#840](https://github.com/nghuuphuoc/bootstrapvalidator/pull/840): Serbian language package, thanks to [@markocrni](https://github.com/markocrni)
+* [#856](https://github.com/nghuuphuoc/bootstrapvalidator/pull/856): Norwegian language package, thanks to [@trondulseth](https://github.com/trondulseth)
 
 ## v0.5.1 (2014-08-22)
 
