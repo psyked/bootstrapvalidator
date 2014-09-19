@@ -45,6 +45,17 @@ describe('lessThan', function() {
         expect(this.bv.isValid()).toEqual(false);
     });
 
+    it('value with coma separator', function() {
+        this.$age.val('120,2234');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$age.val('30,2234');
+        this.bv.validate();
+        expect(this.bv.isValid()).toBeTruthy();
+    });
+
     it('compare to value', function() {
         this.$age.val(120);
         this.bv.validate();
