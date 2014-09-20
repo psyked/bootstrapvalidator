@@ -53,6 +53,7 @@ The tooltip/popover is shown automatically when the field gets the focus, thanks
 __Document__
 * [#709](https://github.com/nghuuphuoc/bootstrapvalidator/issues/709), [#715](https://github.com/nghuuphuoc/bootstrapvalidator/pull/715): Add [Bootstrap Select](http://bootstrapvalidator.com/examples/bootstrap-select/) and [Select2](http://bootstrapvalidator.com/examples/select2/) examples, thanks to [@Arkni](https://github.com/Arkni)
 * [#855](https://github.com/nghuuphuoc/bootstrapvalidator/issues/855), [#858](https://github.com/nghuuphuoc/bootstrapvalidator/pull/858): Add [TinyMCE](http://bootstrapvalidator.com/examples/tinymce/) example, thanks to [@Arkni](https://github.com/Arkni)
+* [#859](https://github.com/nghuuphuoc/bootstrapvalidator/issues/859), [#862](https://github.com/nghuuphuoc/bootstrapvalidator/issues/862), [#865](https://github.com/nghuuphuoc/bootstrapvalidator/pull/865): Add [Changing tooltip/popover position](http://bootstrapvalidator.com/examples/tooltip-popover-position/) example, thanks to [@Arkni](https://github.com/Arkni)
 
 __Language Packages__
 * [#706](https://github.com/nghuuphuoc/bootstrapvalidator/pull/706): Japanese language package, thanks to [@tsuyoshifujii](https://github.com/tsuyoshifujii)
