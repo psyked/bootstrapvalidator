@@ -10,7 +10,7 @@
             BR: 'Brazil',
             CH: 'Switzerland',
             CY: 'Cyprus',
-            CZ: 'Czech',
+            CZ: 'Czech Republic',
             DE: 'Germany',
             DK: 'Denmark',
             EE: 'Estonia',

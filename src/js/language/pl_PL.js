@@ -157,7 +157,7 @@
                 CH: 'Szwajcaria',
                 CL: 'Chile',
                 CN: 'Chiny',
-                CZ: 'Czeska',
+                CZ: 'Czechy',
                 DK: 'Dania',
                 EE: 'Estonia',
                 ES: 'Hiszpania',
@@ -232,6 +232,7 @@
             countries: {
                 BR: 'Brazylia',
                 CN: 'Chiny',
+                CZ: 'Czechy',
                 DK: 'Dania',
                 ES: 'Hiszpania',
                 FR: 'Francja',
@@ -240,6 +241,7 @@
                 PK: 'Pakistan',
                 RO: 'Rumunia',
                 RU: 'Rosja',
+                SK: 'Słowacja',
                 TH: 'Tajlandia',
                 US: 'USA',
                 VE: 'Wenezuela'
@@ -294,7 +296,7 @@
                 BR: 'Brazylia',
                 CH: 'Szwajcaria',
                 CY: 'Cypr',
-                CZ: 'Czeska',
+                CZ: 'Czechy',
                 DE: 'Niemcy',
                 DK: 'Dania',
                 EE: 'Estonia',
@@ -337,6 +339,7 @@
             countries: {
                 BR: 'Brazylia',
                 CA: 'Kanada',
+                CZ: 'Czechy',
                 DK: 'Dania',
                 GB: 'Wielka Brytania',
                 IT: 'Włochy',
@@ -346,6 +349,7 @@
                 RU: 'Rosja',
                 SE: 'Szwecja',
                 SG: 'Singapur',
+                SK: 'Słowacja',
                 US: 'USA'
             }
         }

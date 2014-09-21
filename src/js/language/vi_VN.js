@@ -232,6 +232,7 @@
             countries: {
                 BR: 'Brazil',
                 CN: 'Trung Quốc',
+                CZ: 'Séc',
                 DK: 'Đan Mạch',
                 ES: 'Tây Ban Nha',
                 FR: 'Pháp',
@@ -240,6 +241,7 @@
                 PK: 'Pakistan',
                 RO: 'Romania',
                 RU: 'Nga',
+                SK: 'Slovakia',
                 TH: 'Thái Lan',
                 US: 'Mỹ',
                 VE: 'Venezuela'
@@ -337,6 +339,7 @@
             countries: {
                 BR: 'Brazil',
                 CA: 'Canada',
+                CZ: 'Séc',
                 DK: 'Đan Mạch',
                 GB: 'Vương quốc Anh',
                 IT: 'Ý',
@@ -346,6 +349,7 @@
                 RU: 'Nga',
                 SE: 'Thuỵ Sĩ',
                 SG: 'Singapore',
+                SK: 'Slovakia',
                 US: 'Mỹ'
             }
         }

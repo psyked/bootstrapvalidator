@@ -24,7 +24,7 @@
             CR: 'Costa Rica',
             CV: 'Cape Verde',
             CY: 'Cyprus',
-            CZ: 'Czech',
+            CZ: 'Czech Republic',
             DE: 'Germany',
             DK: 'Denmark',
             DO: 'Dominica',

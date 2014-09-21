@@ -24,10 +24,12 @@ describe('zipCode', function() {
                             '<option value="">Select a country</option>',
                             '<option value="US">United States</option>',
                             '<option value="CA">Canada</option>',
+                            '<option value="CZ">Czech Republic</option>',
                             '<option value="DK">Denmark</option>',
                             '<option value="IT">Italy</option>',
                             '<option value="NL">Netherlands</option>',
                             '<option value="SE">Sweden</option>',
+                            '<option value="SK">Slovakia</option>',
                             '<option value="GB">United Kingdom</option>',
                         '</select>',
                     '</div>',
@@ -54,17 +56,6 @@ describe('zipCode', function() {
 
     afterEach(function() {
         $('#zipCodeForm').bootstrapValidator('destroy').remove();
-    });
-
-    it('country code US', function() {
-        this.$zipCode.val('12345');
-        this.bv.validate();
-        expect(this.bv.isValid()).toBeTruthy();
-
-        this.bv.resetForm();
-        this.$zipCode.val('123');
-        this.bv.validate();
-        expect(this.bv.isValid()).toEqual(false);
     });
 
     it('country code updateOption()', function() {
@@ -201,5 +192,60 @@ describe('zipCode', function() {
         this.bv.validate();
         expect(this.bv.isValid()).toEqual(false);
         expect(this.bv.getMessages(this.$zipCode, 'zipCode')[0]).toEqual($.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.zipCode.countryNotSupported, 'NOT_SUPPORTED'));
+    });
+
+    it('US zipcode', function() {
+        this.$zipCode.val('12345');
+        this.bv.validate();
+        expect(this.bv.isValid()).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$zipCode.val('123');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+    });
+
+    it('Czech Republic postal code', function() {
+        this.bv.updateOption('zc', 'zipCode', 'country', 'CZ');
+
+        // Valid samples
+        var validSamples = ['12345', '123 45'];
+        for (var i in validSamples) {
+            this.bv.resetForm();
+            this.$zipCode.val(validSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toBeTruthy();
+        }
+
+        // Invalid samples
+        var invalidSamples = ['12 345', '123456', '1 2345', '1234 5', '12 3 45'];
+        for (i in invalidSamples) {
+            this.bv.resetForm();
+            this.$zipCode.val(invalidSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toEqual(false);
+        }
+    });
+
+    it('Slovakia postal code', function() {
+        this.bv.updateOption('zc', 'zipCode', 'country', 'SK');
+
+        // Valid samples
+        var validSamples = ['12345', '123 45'];
+        for (var i in validSamples) {
+            this.bv.resetForm();
+            this.$zipCode.val(validSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toBeTruthy();
+        }
+
+        // Invalid samples
+        var invalidSamples = ['12 345', '123456', '1 2345', '1234 5', '12 3 45'];
+        for (i in invalidSamples) {
+            this.bv.resetForm();
+            this.$zipCode.val(invalidSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toEqual(false);
+        }
     });
 });

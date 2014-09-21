@@ -85,7 +85,7 @@
                 CR: 'Costa Rica',
                 CV: 'Kap Verde',
                 CY: 'Zypern',
-                CZ: 'Tschechisch',
+                CZ: 'Tschechische',
                 DE: 'Deutschland',
                 DK: 'Dänemark',
                 DO: 'Dominica',
@@ -157,7 +157,7 @@
                 CH: 'Schweiz',
                 CL: 'Chile',
                 CN: 'China',
-                CZ: 'Tschechisch',
+                CZ: 'Tschechische',
                 DK: 'Dänemark',
                 EE: 'Estland',
                 ES: 'Spanien',
@@ -232,6 +232,7 @@
             countries: {
                 BR: 'Brasilien',
                 CN: 'China',
+                CZ: 'Tschechische',
                 DK: 'Dänemark',
                 ES: 'Spanien',
                 FR: 'Frankreich',
@@ -240,6 +241,7 @@
                 PK: 'Pakistan',
                 RO: 'Rumänien',
                 RU: 'Russland',
+                SK: 'Slowakei',
                 TH: 'Thailand',
                 US: 'Vereinigte Staaten von Amerika',
                 VE: 'Venezuela'
@@ -294,7 +296,7 @@
                 BR: 'Brasilien',
                 CH: 'Schweiz',
                 CY: 'Zypern',
-                CZ: 'Tschechisch',
+                CZ: 'Tschechische',
                 DE: 'Deutschland',
                 DK: 'Dänemark',
                 EE: 'Estland',
@@ -337,6 +339,7 @@
             countries: {
                 BR: 'Brasilien',
                 CA: 'Kanada',
+                CZ: 'Tschechische',
                 DK: 'Dänemark',
                 GB: 'Vereinigtes Königreich',
                 IT: 'Italien',
@@ -346,6 +349,7 @@
                 RU: 'Russland',
                 SE: 'Schweden',
                 SG: 'Singapur',
+                SK: 'Slowakei',
                 US: 'Vereinigte Staaten von Amerika'
             }
         }

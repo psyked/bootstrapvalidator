@@ -16,6 +16,7 @@ __New Features__
 * [#793](https://github.com/nghuuphuoc/bootstrapvalidator/pull/793), [#798](https://github.com/nghuuphuoc/bootstrapvalidator/pull/798): Add Chinese citizen ID validator, thanks to [@shamiao](https://github.com/shamiao)
 * [#802](https://github.com/nghuuphuoc/bootstrapvalidator/pull/802): Add Russia phone number validator, thanks to [@cylon-v](https://github.com/cylon-v). [#816](https://github.com/nghuuphuoc/bootstrapvalidator/pull/816): Improved by [@stepin](https://github.com/stepin)
 * [#816](https://github.com/nghuuphuoc/bootstrapvalidator/pull/816): Add Russian postal code validator, thanks to [@stepin](https://github.com/stepin)
+* [#867](https://github.com/nghuuphuoc/bootstrapvalidator/pull/867): Add Czech and Slovakia phone number and postal code validators, thanks to [@cuchac](https://github.com/cuchac)
 
 __Changes__
 * [#753](https://github.com/nghuuphuoc/bootstrapvalidator/issues/753): Change the default type of [remote](http://bootstrapvalidator.com/validators/remote/) validator to GET

@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-09-18 8:09:53 AM
+ * @version     v0.5.2-dev, built on 2014-09-21 11:09:58 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -3042,7 +3042,7 @@ if (typeof jQuery === 'undefined') {
             CR: 'Costa Rica',
             CV: 'Cape Verde',
             CY: 'Cyprus',
-            CZ: 'Czech',
+            CZ: 'Czech Republic',
             DE: 'Germany',
             DK: 'Denmark',
             DO: 'Dominica',
@@ -3274,7 +3274,7 @@ if (typeof jQuery === 'undefined') {
             CH: 'Switzerland',
             CL: 'Chile',
             CN: 'China',
-            CZ: 'Czech',
+            CZ: 'Czech Republic',
             DK: 'Denmark',
             EE: 'Estonia',
             ES: 'Spain',
@@ -5370,6 +5370,7 @@ if (typeof jQuery === 'undefined') {
         countries: {
             BR: 'Brazil',
             CN: 'China',
+            CZ: 'Czech Republic',
             DK: 'Denmark',
             ES: 'Spain',
             FR: 'France',
@@ -5378,6 +5379,7 @@ if (typeof jQuery === 'undefined') {
             PK: 'Pakistan',
             RO: 'Romania',
             RU: 'Russia',
+            SK: 'Slovakia',
             TH: 'Thailand',
             US: 'USA',
             VE: 'Venezuela'
@@ -5391,7 +5393,7 @@ if (typeof jQuery === 'undefined') {
         },
 
         // The supported countries
-        COUNTRY_CODES: ['BR', 'CN', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'RU', 'TH', 'US', 'VE'],
+        COUNTRY_CODES: ['BR', 'CN', 'CZ', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'RU', 'SK', 'TH', 'US', 'VE'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -5440,6 +5442,11 @@ if (typeof jQuery === 'undefined') {
                     // http://regexr.com/39dq4
                     value   = $.trim(value);
                     isValid = (/^((00|\+)?(86(?:-| )))?((\d{11})|(\d{3}[- ]{1}\d{4}[- ]{1}\d{4})|((\d{2,4}[- ]){1}(\d{7,8}|(\d{3,4}[- ]{1}\d{4}))([- ]{1}\d{1,4})?))$/).test(value);
+                    break;
+
+                case 'CZ':
+                    // Test: http://regexr.com/39hhl
+                    isValid = /^(((00)([- ]?)|\+)(420)([- ]?))?((\d{3})([- ]?)){2}(\d{3})$/.test(value);
                     break;
 
                 case 'DK':
@@ -5492,6 +5499,11 @@ if (typeof jQuery === 'undefined') {
                 case 'RU':
                     // http://regex101.com/r/gW7yT5/5
                     isValid = (/^((8|\+7|007)[\-\.\/ ]?)?([\(\/\.]?\d{3}[\)\/\.]?[\-\.\/ ]?)?[\d\-\.\/ ]{7,10}$/g).test(value);
+                    break;
+
+                case 'SK':
+                    // Test: http://regexr.com/39hhl
+                    isValid = /^(((00)([- ]?)|\+)(420)([- ]?))?((\d{3})([- ]?)){2}(\d{3})$/.test(value);
                     break;
 
                 case 'TH':
@@ -6163,7 +6175,7 @@ if (typeof jQuery === 'undefined') {
             BR: 'Brazil',
             CH: 'Switzerland',
             CY: 'Cyprus',
-            CZ: 'Czech',
+            CZ: 'Czech Republic',
             DE: 'Germany',
             DK: 'Denmark',
             EE: 'Estonia',
@@ -7625,6 +7637,7 @@ if (typeof jQuery === 'undefined') {
         countries: {
             BR: 'Brazil',
             CA: 'Canada',
+            CZ: 'Czech Republic',
             DK: 'Denmark',
             GB: 'United Kingdom',
             IT: 'Italy',
@@ -7634,6 +7647,7 @@ if (typeof jQuery === 'undefined') {
             RU: 'Russia',
             SE: 'Sweden',
             SG: 'Singapore',
+            SK: 'Slovakia',
             US: 'USA'
         }
     });
@@ -7644,7 +7658,7 @@ if (typeof jQuery === 'undefined') {
             country: 'country'
         },
 
-        COUNTRY_CODES: ['BR', 'CA', 'DK', 'GB', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'US'],
+        COUNTRY_CODES: ['BR', 'CA', 'CZ', 'DK', 'GB', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -7696,6 +7710,11 @@ if (typeof jQuery === 'undefined') {
                     isValid = /^(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|W|X|Y|Z){1}\s?[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|W|X|Y|Z){1}[0-9]{1}$/i.test(value);
                     break;
 
+                case 'CZ':
+                    // Test: http://regexr.com/39hhr
+                    isValid = /^(\d{3})([ ]?)(\d{2})$/.test(value);
+                    break;
+
                 case 'DK':
                     isValid = /^(DK(-|\s)?)?\d{4}$/i.test(value);
                     break;
@@ -7734,7 +7753,12 @@ if (typeof jQuery === 'undefined') {
                 case 'SG':
                     isValid = /^([0][1-9]|[1-6][0-9]|[7]([0-3]|[5-9])|[8][0-2])(\d{4})$/i.test(value);
                     break;                
-                
+
+                case 'SK':
+                    // Test: http://regexr.com/39hhr
+                    isValid = /^(\d{3})([ ]?)(\d{2})$/.test(value);
+                    break;
+
                 case 'US':
                 /* falls through */
                 default:

@@ -232,6 +232,7 @@
             countries: {
                 BR: 'Brazila',
                 CN: 'Kine',
+                CZ: 'Češke',
                 DK: 'Danske',
                 ES: 'Španije',
                 FR: 'Francuske',
@@ -240,6 +241,7 @@
                 PK: 'Pakistana',
                 RO: 'Rumunije',
                 RU: 'Rusije',
+                SK: 'Slovačke',
                 TH: 'Tajlanda',
                 US: 'Amerike',
                 VE: 'Venecuele'
@@ -337,6 +339,7 @@
             countries: {
                 BR: 'Brazila',
                 CA: 'Kanade',
+                CZ: 'Češke',
                 DK: 'Danske',
                 GB: 'Engleske',
                 IT: 'Italije',
@@ -346,6 +349,7 @@
                 RU: 'Rusije',
                 SE: 'Švedske',
                 SG: 'Singapura',
+                SK: 'Slovačke',
                 US: 'Amerike'
             }
         }

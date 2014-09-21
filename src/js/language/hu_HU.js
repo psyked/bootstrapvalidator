@@ -232,6 +232,7 @@
             countries: {
                 BR: 'brazil',
                 CN: 'kína',
+                CZ: 'cseh',
                 DK: 'dán',
                 ES: 'spanyol',
                 FR: 'francia',
@@ -240,6 +241,7 @@
                 PK: 'Pakisztán',
                 RO: 'Románia',
                 RU: 'orosz',
+                SK: 'szlovák',
                 TH: 'thaiföld',
                 US: 'Egyesült Államok beli',
                 VE: 'venezuelai'
@@ -337,6 +339,7 @@
             countries: {
                 BR: 'brazil',
                 CA: 'kanadai',
+                CZ: 'cseh',
                 DK: 'dán',
                 GB: 'Egyesült Királyság beli',
                 IT: 'olasz',
@@ -346,6 +349,7 @@
                 RU: 'orosz',
                 SE: 'svájci',
                 SG: 'singaporei',
+                SK: 'szlovák',
                 US: 'Egyesült Államok beli'
             }
         }

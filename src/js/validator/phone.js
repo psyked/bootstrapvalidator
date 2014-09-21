@@ -139,7 +139,7 @@
 
                 case 'SK':
                     // Test: http://regexr.com/39hhl
-                    isValid = /^(((00)([- ]?)|\+)(421)([- ]?))?((\d{3})([- ]?)){2}(\d{3})$/.test(value);
+                    isValid = /^(((00)([- ]?)|\+)(420)([- ]?))?((\d{3})([- ]?)){2}(\d{3})$/.test(value);
                     break;
 
                 case 'TH':

@@ -10,7 +10,7 @@
             CH: 'Switzerland',
             CL: 'Chile',
             CN: 'China',
-            CZ: 'Czech',
+            CZ: 'Czech Republic',
             DK: 'Denmark',
             EE: 'Estonia',
             ES: 'Spain',
