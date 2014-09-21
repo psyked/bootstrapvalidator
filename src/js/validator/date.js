@@ -179,14 +179,14 @@
                 if(isNaN(Date.parse(minOption))) {
                     minOption = validator.getDynamicOption($field, minOption);
                 }
-                min = this.parseDate(minOption, dateFormat, separator, validator, $field);
+                min = this.parseDate(minOption, dateFormat, separator);
             }
 
             if(maxOption) {
                 if(isNaN(Date.parse(maxOption))) {
                     maxOption = validator.getDynamicOption($field, maxOption);
                 }
-                max = this.parseDate(maxOption, dateFormat, separator, validator, $field);
+                max = this.parseDate(maxOption, dateFormat, separator);
             }
 
             date = new Date(year, month, day, hours, minutes, seconds);
