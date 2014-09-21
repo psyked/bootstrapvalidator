@@ -32,7 +32,7 @@
         date: {
             'default': 'Silahkan isi tanggal yang benar',
             min: 'Silahkan isi tanggal setelah tanggal %s',
-            max: 'Silahkan isi tanggal setelah tanggal %s',
+            max: 'Silahkan isi tanggal sebelum tanggal %s',
             range: 'Silahkan isi tanggal antara %s - %s'
         },
         different: {
