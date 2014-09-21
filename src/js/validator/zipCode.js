@@ -6,6 +6,7 @@
         countries: {
             BR: 'Brazil',
             CA: 'Canada',
+            CZ: 'Czech Republic',
             DK: 'Denmark',
             GB: 'United Kingdom',
             IT: 'Italy',
@@ -15,6 +16,7 @@
             RU: 'Russia',
             SE: 'Sweden',
             SG: 'Singapore',
+            SK: 'Slovakia',
             US: 'USA'
         }
     });
@@ -25,7 +27,7 @@
             country: 'country'
         },
 
-        COUNTRY_CODES: ['BR', 'CA', 'DK', 'GB', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'US'],
+        COUNTRY_CODES: ['BR', 'CA', 'CZ', 'DK', 'GB', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -77,6 +79,11 @@
                     isValid = /^(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|W|X|Y|Z){1}\s?[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|W|X|Y|Z){1}[0-9]{1}$/i.test(value);
                     break;
 
+                case 'CZ':
+                    // Test: http://regexr.com/39hhr
+                    isValid = /^(\d{3})([ ]?)(\d{2})$/.test(value);
+                    break;
+
                 case 'DK':
                     isValid = /^(DK(-|\s)?)?\d{4}$/i.test(value);
                     break;
@@ -115,7 +122,12 @@
                 case 'SG':
                     isValid = /^([0][1-9]|[1-6][0-9]|[7]([0-3]|[5-9])|[8][0-2])(\d{4})$/i.test(value);
                     break;                
-                
+
+                case 'SK':
+                    // Test: http://regexr.com/39hhr
+                    isValid = /^(\d{3})([ ]?)(\d{2})$/.test(value);
+                    break;
+
                 case 'US':
                 /* falls through */
                 default:
