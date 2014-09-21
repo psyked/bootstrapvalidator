@@ -24,6 +24,7 @@ I would like to give big thanks to the following contributors:
 * [@dlucazeau](https://github.com/dlucazeau)
 * [@dokterpasta](https://github.com/dokterpasta)
 * [@easonhan007](https://github.com/easonhan007)
+* [@egig](https://github.com/egig)
 * [@emilchristensen](https://github.com/emilchristensen)
 * [@ericnakagawa](https://github.com/ericnakagawa)
 * [@etorres](https://github.com/etorres)

@@ -69,6 +69,7 @@ __Language Packages__
 * [#806](https://github.com/nghuuphuoc/bootstrapvalidator/pull/806): Ukrainian language package, thanks to [@oleg-voloshyn](https://github.com/oleg-voloshyn)
 * [#840](https://github.com/nghuuphuoc/bootstrapvalidator/pull/840): Serbian language package, thanks to [@markocrni](https://github.com/markocrni)
 * [#856](https://github.com/nghuuphuoc/bootstrapvalidator/pull/856): Norwegian language package, thanks to [@trondulseth](https://github.com/trondulseth)
+* [#868](https://github.com/nghuuphuoc/bootstrapvalidator/pull/868): Indonesian language package, thanks to [@egig](https://github.com/egig)
 
 ## v0.5.1 (2014-08-22)
 
