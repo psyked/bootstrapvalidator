@@ -30,7 +30,10 @@
             'default': 'Te rog introdu un numar CVV valid'
         },
         date: {
-            'default': 'Te rog introdu o data valida'
+            'default': 'Te rog introdu o data valida',
+            min: 'Te rog sa introduci o data dupa %s',
+            max: 'Te rog sa introduci o data inainte de %s',
+            range: 'Te rog sa introduci o data in intervalul %s - %s'
         },
         different: {
             'default': 'Te rog sa introduci o valoare diferita'
