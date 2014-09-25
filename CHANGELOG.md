@@ -1,6 +1,6 @@
 # Change Log
 
-## v0.5.2 (not released yet)
+## v0.5.2 (2014-09-25)
 
 __New Features__
 * [#480](https://github.com/nghuuphuoc/bootstrapvalidator/pull/480): Add ```verbose``` option, thanks to [@mbezhanov](https://github.com/mbezhanov)
