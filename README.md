@@ -1,8 +1,10 @@
 # BootstrapValidator - [v0.5.1](http://bootstrapvalidator.com/getting-started/#download)
 
-[http://bootstrapvalidator.com](http://bootstrapvalidator.com) - The best jQuery plugin to validate form fields. Designed to use with [Bootstrap 3](http://getbootstrap.com)
+[http://bootstrapvalidator.com](http://bootstrapvalidator.com) - The best jQuery plugin to validate form fields. Designed to use with [Bootstrap 3](http://getbootstrap.com).
 
-![Screenshot](screenshots/screenshot.png)
+__Required__: [jQuery](http://jquery.com/) and [Bootstrap 3](http://getbootstrap.com/)
+
+![Screenshot](screenshots/demo.gif)
 
 ## [Help the project](https://pledgie.com/campaigns/24885)
 
@@ -18,15 +20,12 @@ http://bootstrapvalidator.com/examples/
 
 There are also many examples located in the [demo](demo) directory.
 
+In order to run the [demo]
+
 ## Features
 
 See [official website](http://bootstrapvalidator.com) for the full list of features
 
-## Required
-
-* [jQuery](http://jquery.com/)
-* [Bootstrap 3](http://getbootstrap.com/)
- 
 ## Download
 
 Latest version: [v0.5.1](http://bootstrapvalidator.com/getting-started/#download), released on 2014-08-22.
@@ -36,7 +35,7 @@ For older versions, look at the [Releases](https://github.com/nghuuphuoc/bootstr
 ## Documentation
 
 * [Official website](http://bootstrapvalidator.com)
-* [Official website source](https://github.com/nghuuphuoc/bootstrapvalidator/tree/gh-pages)
+* [Official website source](https://github.com/nghuuphuoc/bootstrapvalidator/tree/docs)
 
 ## Release History
 
