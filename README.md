@@ -34,9 +34,8 @@ See [official website](http://bootstrapvalidator.com) for the full list of featu
 
 ## Download
 
-Latest version: [v0.5.2](http://bootstrapvalidator.com/getting-started/#download), released on 2014-09-25.
-* Latest version: [v0.5.1](http://bootstrapvalidator.com/getting-started/#download), released on 2014-08-22.
-* For older versions, look at the [Releases](https://github.com/nghuuphuoc/bootstrapvalidator/releases) page.
+* Latest version: [v0.5.2](http://bootstrapvalidator.com/getting-started/#download), released on 2014-09-25
+* For older versions, look at the [Releases](https://github.com/nghuuphuoc/bootstrapvalidator/releases) page
 * Release History: Look at the [Change Log](CHANGELOG.md)
 
 ## Documentation
