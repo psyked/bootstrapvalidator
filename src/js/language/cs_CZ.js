@@ -88,6 +88,7 @@
                 CZ: 'Českou republiku',
                 DE: 'Německo',
                 DK: 'Dánsko',
+                DM: 'Dominika',
                 DO: 'Dominikánskou republiku',
                 DZ: 'Alžírsko',
                 EE: 'Estonsko',
