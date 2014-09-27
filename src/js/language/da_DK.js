@@ -30,7 +30,10 @@
             'default': 'Udfyld venligst dette felt med et gyldigt CVV-nummer'
         },
         date: {
-            'default': 'Udfyld venligst dette felt med en gyldig dato'
+            'default': 'Udfyld venligst dette felt med en gyldig dato',
+            min: 'Angiv venligst en dato efter %s',
+            max: 'Angiv venligst en dato før %s',
+            range: 'Angiv venligst en dato mellem %s - %s'
         },
         different: {
             'default': 'Udfyld venligst dette felt med en anden værdi'
