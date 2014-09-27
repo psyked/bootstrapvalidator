@@ -44,7 +44,7 @@
          *      - A callback function that returns the number
          *
          * - message: The invalid message
-         * - utf8bytes: Evaluate string length in UTF-8 bytes, default to false (no changes to existing scripts)
+         * - utf8bytes: Evaluate string length in UTF-8 bytes, default to false
          * @returns {Object}
          */
         validate: function(validator, $field, options) {

@@ -62,7 +62,7 @@ describe('stringLength', function() {
         $('#stringLengthForm').bootstrapValidator('destroy').remove();
     });
 
-    it('Valid Max Lengths', function() {
+    it('Valid max lengths', function() {
         this.$textCharMaxLength.val('123456789♥');
         this.$textareaCharMaxLength.val('123456789♥');
         this.$textUTF8BytesMaxLength.val('1234567♥');
@@ -71,7 +71,7 @@ describe('stringLength', function() {
         expect(this.bv.isValid()).toBeTruthy();
     });
 
-    it('Valid Min Lengths', function() {
+    it('Valid min lengths', function() {
         this.$textCharMinLength.val('1234♥');
         this.$textareaCharMinLength.val('1234♥');
         this.$textUTF8BytesMinLength.val('12♥');
@@ -80,7 +80,7 @@ describe('stringLength', function() {
         expect(this.bv.isValid()).toBeTruthy();
     });
 
-    it('Valid Min and Max Lengths', function() {
+    it('Valid min and max lengths', function() {
         this.$textCharMinMaxLength.val('1234♥');
         this.$textareaCharMinMaxLength.val('1234♥');
         this.$textUTF8BytesMinMaxLength.val('12♥');
@@ -97,7 +97,7 @@ describe('stringLength', function() {
         expect(this.bv.isValid()).toBeTruthy();
     });
 
-    it('Invalid Max Lengths', function() {
+    it('Invalid max lengths', function() {
         this.$textCharMaxLength.val('1234567890♥');           // 11 chars when max is 10
         this.bv.validate();
         expect(this.bv.isValid()).toEqual(false);
@@ -118,7 +118,7 @@ describe('stringLength', function() {
         expect(this.bv.isValid()).toEqual(false);
     });
 
-    it('Invalid Min Lengths', function() {
+    it('Invalid min lengths', function() {
         this.$textCharMinLength.val('123♥');                  // 4 chars when min is 5
         this.bv.validate();
         expect(this.bv.isValid()).toEqual(false);
@@ -139,7 +139,7 @@ describe('stringLength', function() {
         expect(this.bv.isValid()).toEqual(false);
     });
 
-    it('Invalid Min and Max Lengths', function() {
+    it('Invalid min and max lengths', function() {
         this.$textCharMinMaxLength.val('123♥');               // 4 chars when min is 5 and max is 10
         this.bv.validate();
         expect(this.bv.isValid()).toEqual(false);
@@ -179,5 +179,4 @@ describe('stringLength', function() {
         this.bv.validate();
         expect(this.bv.isValid()).toEqual(false);
     });
-
 });

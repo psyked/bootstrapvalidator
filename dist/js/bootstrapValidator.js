@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.3-dev, built on 2014-09-27 8:17:54 PM
+ * @version     v0.5.3-dev, built on 2014-09-27 8:24:59 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -6082,7 +6082,6 @@ if (typeof jQuery === 'undefined') {
          * @param {Object} options Consists of following keys:
          * - min
          * - max
-         * - utf8Bytes
          * At least one of two keys is required
          * The min, max keys define the number which the field value compares to. min, max can be
          *      - A number
@@ -6091,7 +6090,7 @@ if (typeof jQuery === 'undefined') {
          *      - A callback function that returns the number
          *
          * - message: The invalid message
-         * - utf8bytes: Evaluate string length in UTF-8 bytes, default to false (no changes to existing scripts)
+         * - utf8bytes: Evaluate string length in UTF-8 bytes, default to false
          * @returns {Object}
          */
         validate: function(validator, $field, options) {
