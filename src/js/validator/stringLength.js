@@ -36,7 +36,6 @@
          * @param {Object} options Consists of following keys:
          * - min
          * - max
-         * - utf8Bytes
          * At least one of two keys is required
          * The min, max keys define the number which the field value compares to. min, max can be
          *      - A number
