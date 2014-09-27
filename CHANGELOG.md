@@ -25,6 +25,7 @@ __Language Packages__
 * [#880](https://github.com/nghuuphuoc/bootstrapvalidator/pull/880): Updated Belgium (Dutch) language package, thanks to [@dokterpasta](https://github.com/dokterpasta)
 * [#881](https://github.com/nghuuphuoc/bootstrapvalidator/pull/881): Updated Italian language package, thanks to [@maramazza](https://github.com/maramazza)
 * [#882](https://github.com/nghuuphuoc/bootstrapvalidator/pull/882): Updated Spanish language package, thanks to [@vadail](https://github.com/vadail)
+* [#900](https://github.com/nghuuphuoc/bootstrapvalidator/pull/900): Updated Persian (Farsi) language package, thanks to [@i0](https://github.com/i0)
 
 ## v0.5.2 (2014-09-25)
 
