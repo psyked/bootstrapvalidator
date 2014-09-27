@@ -30,7 +30,10 @@
             'default': 'Por favor introduce un número CVV válido'
         },
         date: {
-            'default': 'Por favor introduce una fecha válida'
+            'default': 'Por favor introduce una fecha válida',
+            min: 'Por favor introduce una fecha posterior al %s',
+            max: 'Por favor introduce una fecha previa al %s',
+            range: 'Por favor introduce una fecha entre el %s y el %s'
         },
         different: {
             'default': 'Por favor introduce un valor distinto'
