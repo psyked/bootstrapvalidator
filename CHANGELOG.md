@@ -6,6 +6,10 @@ __New Features__
 
 * [#807](https://github.com/nghuuphuoc/bootstrapvalidator/issues/807), [#821](https://github.com/nghuuphuoc/bootstrapvalidator/pull/821): Add ```min```, ```max``` options for the [date](http://bootstrapvalidator.com/validators/date/) validator, thanks to [@Arkni](https://github.com/Arkni)
 
+__Language Packages__
+
+* [#827](https://github.com/nghuuphuoc/bootstrapvalidator/pull/827): Updated Dutch language package, thanks to [@JvanderHeide](https://github.com/JvanderHeide)
+
 ## v0.5.2 (2014-09-25)
 
 __New Features__
