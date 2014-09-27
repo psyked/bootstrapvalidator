@@ -30,7 +30,10 @@
             'default': 'Geef een geldig CVV nummer'
         },
         date: {
-            'default': 'Geef een geldige datum'
+            'default': 'Geef een geldige datum',
+            min: 'Geef een datum na %s',
+            max: 'Geef een datum voor %s',
+            range: 'Geef een datum tussen %s en %s'
         },
         different: {
             'default': 'Geef een andere waarde '
