@@ -30,7 +30,10 @@
             'default': 'Vui lòng nhập số CVV hợp lệ'
         },
         date: {
-            'default': 'Vui lòng nhập ngày hợp lệ'
+            'default': 'Vui lòng nhập ngày hợp lệ',
+            min: 'Vui lòng nhập ngày sau %s',
+            max: 'Vui lòng nhập ngày trước %s',
+            range: 'Vui lòng nhập ngày trong khoảng %s - %s'
         },
         different: {
             'default': 'Vui lòng nhập một giá trị khác'
