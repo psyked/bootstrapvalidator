@@ -30,7 +30,10 @@
             'default': '請輸入有效的CVV(信用卡檢查碼)代碼'
         },
         date: {
-            'default': '請輸入有效的日期'
+            'default': '請輸入有效的日期',
+            min  : '請輸入 %s 或之後的日期',
+            max  : '請輸入 %s 或以前的日期',
+            range : '請輸入 %s 至 %s 之間的日期'
         },
         different: {
             'default': '請輸入不同的值'
