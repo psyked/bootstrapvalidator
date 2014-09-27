@@ -1,7 +1,7 @@
 (function($) {
     /**
      * French language package
-     * Translated by @dlucazeau
+     * Translated by @dlucazeau. Updated by @neilime
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
@@ -30,7 +30,10 @@
             'default': 'Veuillez fournir un code CVV valide'
         },
         date: {
-            'default': 'Veuillez fournir une date valide'
+            'default': 'Veuillez fournir une date valide',
+            'min': 'Veuillez fournir une date supérieure à %s',
+            'max': 'Veuillez fournir une date inférieure à %s',
+            'range': 'Veuillez fournir une date comprise entre %s et %s'
         },
         different: {
             'default': 'Veuillez fournir une valeur différente'
