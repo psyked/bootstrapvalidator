@@ -30,7 +30,10 @@
             'default': 'Please enter a valid CVV number'
         },
         date: {
-            'default': 'Please enter a valid date'
+            'default': 'Please enter a valid date',
+            min: 'Please enter a date after %s',
+            max: 'Please enter a date before %s',
+            range: 'Please enter a date in the range %s - %s'
         },
         different: {
             'default': 'Please enter a different value'

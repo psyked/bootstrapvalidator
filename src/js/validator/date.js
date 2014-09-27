@@ -1,9 +1,9 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.date = $.extend($.fn.bootstrapValidator.i18n.date || {}, {
         'default': 'Please enter a valid date',
-        min  : 'Please enter a date after %s',
-        max  : 'Please enter a date before %s',
-        range : 'Please enter a date in the range %s - %s'
+        min: 'Please enter a date after %s',
+        max: 'Please enter a date before %s',
+        range: 'Please enter a date in the range %s - %s'
     });
 
     $.fn.bootstrapValidator.validators.date = {
@@ -33,7 +33,7 @@
          * ii) date and time:
          * The time can consist of h, m, s parts which are separated by :
          * ii) date, time and A (indicating AM or PM)
-         * @returns {Boolean}
+         * @returns {Boolean|Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -165,46 +165,49 @@
                 }
             }
 
-            var valid = false, message;
-
             // Validate day, month, and year
-            valid   = $.fn.bootstrapValidator.helpers.date(year, month, day);
-            message = options.message || $.fn.bootstrapValidator.i18n.date['default'];
+            var valid   = $.fn.bootstrapValidator.helpers.date(year, month, day),
+                message = options.message || $.fn.bootstrapValidator.i18n.date['default'];
 
             // declare the date, min and max objects
-            var date = null, min = null, max = null,
-                minOption = options.min, maxOption = options.max;
+            var min       = null,
+                max       = null,
+                minOption = options.min,
+                maxOption = options.max;
 
-            if(minOption) {
-                if(isNaN(Date.parse(minOption))) {
+            if (minOption) {
+                if (isNaN(Date.parse(minOption))) {
                     minOption = validator.getDynamicOption($field, minOption);
                 }
-                min = this.parseDate(minOption, dateFormat, separator);
+                min = this._parseDate(minOption, dateFormat, separator);
             }
 
-            if(maxOption) {
-                if(isNaN(Date.parse(maxOption))) {
+            if (maxOption) {
+                if (isNaN(Date.parse(maxOption))) {
                     maxOption = validator.getDynamicOption($field, maxOption);
                 }
-                max = this.parseDate(maxOption, dateFormat, separator);
+                max = this._parseDate(maxOption, dateFormat, separator);
             }
 
             date = new Date(year, month, day, hours, minutes, seconds);
 
-            switch(true) {
-                case(minOption && !maxOption && valid):
+            switch (true) {
+                case (minOption && !maxOption && valid):
                     valid   = date.getTime() >= min.getTime();
                     message = options.message || $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.date.min, minOption);
                     break;
 
-                case(maxOption && !minOption && valid):
+                case (maxOption && !minOption && valid):
                     valid   = date.getTime() <= max.getTime();
                     message = options.message || $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.date.max, maxOption);
                     break;
 
-                case(maxOption && minOption && valid):
+                case (maxOption && minOption && valid):
                     valid   = date.getTime() <= max.getTime() && date.getTime() >= min.getTime();
                     message = options.message || $.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.date.range, [minOption, maxOption]);
+                    break;
+
+                default:
                     break;
             }
 
@@ -226,17 +229,17 @@
          * @param {String} separator The separator used to separate the date, month, and year
          * @returns {Date}
          */
-        parseDate: function(date, format, separator) {
-            var year = 0, month = 0, day = 0, minutes = 0, hours = 0, seconds = 0,
+        _parseDate: function(date, format, separator) {
+            var minutes     = 0, hours = 0, seconds = 0,
                 sections    = date.split(' '),
                 dateSection = sections[0],
                 timeSection = (sections.length > 1) ? sections[1] : null;
 
-            dateSection  = dateSection.split(separator);
-            year  = dateSection[$.inArray('YYYY', format)];
-            month = dateSection[$.inArray('MM', format)];
-            day   = dateSection[$.inArray('DD', format)];
-            if(timeSection) {
+            dateSection = dateSection.split(separator);
+            var year  = dateSection[$.inArray('YYYY', format)],
+                month = dateSection[$.inArray('MM', format)],
+                day   = dateSection[$.inArray('DD', format)];
+            if (timeSection) {
                 timeSection = timeSection.split(':');
                 hours       = timeSection.length > 0 ? timeSection[0] : null;
                 minutes     = timeSection.length > 1 ? timeSection[1] : null;
@@ -245,6 +248,5 @@
 
             return new Date(year, month, day, hours, minutes, seconds);
         }
-
     };
 }(window.jQuery));

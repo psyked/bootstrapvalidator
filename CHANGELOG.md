@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.5.3 (not released yet)
+
+__New Features__
+
+* [#807](https://github.com/nghuuphuoc/bootstrapvalidator/issues/807), [#821](https://github.com/nghuuphuoc/bootstrapvalidator/pull/821): Add ```min```, ```max``` options for the [date](http://bootstrapvalidator.com/validators/date/) validator, thanks to [@Arkni](https://github.com/Arkni)
+
 ## v0.5.2 (2014-09-25)
 
 __New Features__
