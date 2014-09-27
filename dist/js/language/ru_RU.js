@@ -1,7 +1,7 @@
 (function($) {
     /**
      * Russian language package
-     * Translated by @cylon-v. Improved by @stepin
+     * Translated by @cylon-v. Improved by @stepin, @oleg-voloshyn
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
@@ -30,7 +30,10 @@
             'default': 'Пожалуйста, введите правильный номер CVV'
         },
         date: {
-            'default': 'Пожалуйста, введите правильную дату'
+            'default': 'Пожалуйста, введите правильную дату',
+            min: 'Пожалуйста, введите дату после %s',
+            max: 'Пожалуйста, введите дату перед %s',
+            range: 'Пожалуйста, введите дату в диапазоне %s - %s'
         },
         different: {
             'default': 'Пожалуйста, введите другое значение'
