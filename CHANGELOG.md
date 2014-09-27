@@ -21,6 +21,7 @@ __Language Packages__
 * [#870](https://github.com/nghuuphuoc/bootstrapvalidator/pull/870): Updated Traditional Chinese language package, thanks to [@tureki](https://github.com/tureki)
 * [#871](https://github.com/nghuuphuoc/bootstrapvalidator/pull/871): Updated Czech language package, thanks to [@cuchac](https://github.com/cuchac)
 * [#872](https://github.com/nghuuphuoc/bootstrapvalidator/pull/872): Updated Indonesian language package, thanks to [@egig](https://github.com/egig)
+* [#879](https://github.com/nghuuphuoc/bootstrapvalidator/pull/879): Updated Romanian language package, thanks to [@filipac](https://github.com/filipac)
 
 ## v0.5.2 (2014-09-25)
 
