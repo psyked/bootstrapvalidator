@@ -30,7 +30,10 @@
             'default': 'Prosím zadejte správné CVV číslo'
         },
         date: {
-            'default': 'Prosím zadejte správný datum'
+            'default': 'Prosím zadejte správné datum',
+            min: 'Prosím zadejte datum před %s',
+            max: 'Prosím zadejte datum po %s',
+            range: 'Prosím zadejte datum v rozmezí %s až %s'
         },
         different: {
             'default': 'Prosím zadejte jinou hodnotu'
@@ -181,7 +184,7 @@
             }
         },
         identical: {
-            'default': 'Prosím zadejte stejné číslo'
+            'default': 'Prosím zadejte stejnou hodnotu'
         },
         imei: {
             'default': 'Prosím zadejte správné IMEI číslo'
