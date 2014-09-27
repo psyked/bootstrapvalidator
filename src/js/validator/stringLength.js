@@ -47,8 +47,6 @@
          * - message: The invalid message
          * - utf8bytes: Evaluate string length in UTF-8 bytes, default to false (no changes to existing scripts)
          * @returns {Object}
-         * 
-         * Credit to http://stackoverflow.com/a/23329386 (http://github.com/lovasoa) for UTF-8 byte length code
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -58,17 +56,23 @@
 
             var min        = $.isNumeric(options.min) ? options.min : validator.getDynamicOption($field, options.min),
                 max        = $.isNumeric(options.max) ? options.max : validator.getDynamicOption($field, options.max),
-                utf8length = function(str) {
+                // Credit to http://stackoverflow.com/a/23329386 (@lovasoa) for UTF-8 byte length code
+                utf8Length = function(str) {
                                  var s = str.length;
-                                 for (var i=str.length-1; i>=0; i--) {
+                                 for (var i = str.length - 1; i >= 0; i--) {
                                      var code = str.charCodeAt(i);
-                                     if (code > 0x7f && code <= 0x7ff) s++;
-                                     else if (code > 0x7ff && code <= 0xffff) s+=2;
-                                     if (code >= 0xDC00 && code <= 0xDFFF) i--;
+                                     if (code > 0x7f && code <= 0x7ff) {
+                                         s++;
+                                     } else if (code > 0x7ff && code <= 0xffff) {
+                                         s += 2;
+                                     }
+                                     if (code >= 0xDC00 && code <= 0xDFFF) {
+                                         i--;
+                                     }
                                  }
                                  return s;
-                             }(value),
-                length     = (options.utf8Bytes ? utf8length : value.length),
+                             },
+                length     = options.utf8Bytes ? utf8Length(value) : value.length,
                 isValid    = true,
                 message    = options.message || $.fn.bootstrapValidator.i18n.stringLength['default'];
 

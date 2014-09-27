@@ -83,6 +83,7 @@ I would like to give big thanks to the following contributors:
 * [@stepin](https://github.com/stepin)
 * [@talberti](https://github.com/talberti)
 * [@thisisclement](https://github.com/thisisclement)
+* [@thx2001r](https://github.com/thx2001r)
 * [@tiagofontella](https://github.com/tiagofontella)
 * [@tomByrer](https://github.com/tomByrer)
 * [@trondulseth](https://github.com/trondulseth)

@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.3-dev, built on 2014-09-27 8:06:39 PM
+ * @version     v0.5.3-dev, built on 2014-09-27 8:17:54 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -6056,7 +6056,8 @@ if (typeof jQuery === 'undefined') {
         html5Attributes: {
             message: 'message',
             min: 'min',
-            max: 'max'
+            max: 'max',
+            utf8bytes: 'utf8Bytes'
         },
 
         enableByHtml5: function($field) {
@@ -6081,6 +6082,7 @@ if (typeof jQuery === 'undefined') {
          * @param {Object} options Consists of following keys:
          * - min
          * - max
+         * - utf8Bytes
          * At least one of two keys is required
          * The min, max keys define the number which the field value compares to. min, max can be
          *      - A number
@@ -6089,6 +6091,7 @@ if (typeof jQuery === 'undefined') {
          *      - A callback function that returns the number
          *
          * - message: The invalid message
+         * - utf8bytes: Evaluate string length in UTF-8 bytes, default to false (no changes to existing scripts)
          * @returns {Object}
          */
         validate: function(validator, $field, options) {
@@ -6097,11 +6100,27 @@ if (typeof jQuery === 'undefined') {
                 return true;
             }
 
-            var min     = $.isNumeric(options.min) ? options.min : validator.getDynamicOption($field, options.min),
-                max     = $.isNumeric(options.max) ? options.max : validator.getDynamicOption($field, options.max),
-                length  = value.length,
-                isValid = true,
-                message = options.message || $.fn.bootstrapValidator.i18n.stringLength['default'];
+            var min        = $.isNumeric(options.min) ? options.min : validator.getDynamicOption($field, options.min),
+                max        = $.isNumeric(options.max) ? options.max : validator.getDynamicOption($field, options.max),
+                // Credit to http://stackoverflow.com/a/23329386 (@lovasoa) for UTF-8 byte length code
+                utf8Length = function(str) {
+                                 var s = str.length;
+                                 for (var i = str.length - 1; i >= 0; i--) {
+                                     var code = str.charCodeAt(i);
+                                     if (code > 0x7f && code <= 0x7ff) {
+                                         s++;
+                                     } else if (code > 0x7ff && code <= 0xffff) {
+                                         s += 2;
+                                     }
+                                     if (code >= 0xDC00 && code <= 0xDFFF) {
+                                         i--;
+                                     }
+                                 }
+                                 return s;
+                             },
+                length     = options.utf8Bytes ? utf8Length(value) : value.length,
+                isValid    = true,
+                message    = options.message || $.fn.bootstrapValidator.i18n.stringLength['default'];
 
             if ((min && length < parseInt(min, 10)) || (max && length > parseInt(max, 10))) {
                 isValid = false;
