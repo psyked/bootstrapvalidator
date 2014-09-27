@@ -19,6 +19,7 @@ __Language Packages__
 * [#850](https://github.com/nghuuphuoc/bootstrapvalidator/issues/850), [#851](https://github.com/nghuuphuoc/bootstrapvalidator/pull/851): Updated Danish language package, thanks to [@Djarnis](https://github.com/Djarnis)
 * [#869](https://github.com/nghuuphuoc/bootstrapvalidator/pull/869): Updated Polish language package, thanks to [@grzesiek](https://github.com/grzesiek)
 * [#870](https://github.com/nghuuphuoc/bootstrapvalidator/pull/870): Updated Traditional Chinese language package, thanks to [@tureki](https://github.com/tureki)
+* [#871](https://github.com/nghuuphuoc/bootstrapvalidator/pull/871): Updated Czech language package, thanks to [@cuchac](https://github.com/cuchac)
 
 ## v0.5.2 (2014-09-25)
 
