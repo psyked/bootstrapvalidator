@@ -9,6 +9,7 @@ __New Features__
 __Language Packages__
 
 * [#827](https://github.com/nghuuphuoc/bootstrapvalidator/pull/827): Updated Dutch language package, thanks to [@JvanderHeide](https://github.com/JvanderHeide)
+* [#829](https://github.com/nghuuphuoc/bootstrapvalidator/pull/829): Updated Swedish language package, thanks to [@ulsa](https://github.com/ulsa)
 
 ## v0.5.2 (2014-09-25)
 
