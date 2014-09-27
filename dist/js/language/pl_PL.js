@@ -30,7 +30,10 @@
             'default': 'Wprowadź poprawny numer CVV'
         },
         date: {
-            'default': 'Wprowadź poprawną datę'
+            'default': 'Wprowadź poprawną datę',
+            min: 'Wprowadź datę po %s',
+            max: 'Wprowadź datę przed  %s',
+            range: 'Wprowadź datę pomiędzy %s i %s'
         },
         different: {
             'default': 'Wprowadź inną wartość'
