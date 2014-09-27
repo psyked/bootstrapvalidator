@@ -11,6 +11,7 @@ __Language Packages__
 * [#827](https://github.com/nghuuphuoc/bootstrapvalidator/pull/827): Updated Dutch language package, thanks to [@JvanderHeide](https://github.com/JvanderHeide)
 * [#829](https://github.com/nghuuphuoc/bootstrapvalidator/pull/829): Updated Swedish language package, thanks to [@ulsa](https://github.com/ulsa)
 * [#834](https://github.com/nghuuphuoc/bootstrapvalidator/pull/834): Updated Ukrainian and Russian language packages, thanks to [@oleg-voloshyn](https://github.com/oleg-voloshyn)
+* [#835](https://github.com/nghuuphuoc/bootstrapvalidator/pull/835): Updated Belgium (French) language package, thanks to [@neilime](https://github.com/neilime)
 
 ## v0.5.2 (2014-09-25)
 
