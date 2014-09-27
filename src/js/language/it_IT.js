@@ -5,7 +5,7 @@
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
-            'default': 'Please enter a valid base 64 encoded'
+            'default': 'Si prega di inserire un valore codificato in Base 64'
         },
         between: {
             'default': 'Si prega di inserire un valore tra %s e %s',
@@ -30,7 +30,10 @@
             'default': 'Si prega di inserire un numero CVV valido'
         },
         date: {
-            'default': 'Si prega di inserire una data valida'
+            'default': 'Si prega di inserire una data valida',
+            min: 'Si prega di inserire una data successiva al %s',
+            max: 'Si prega di inserire una data antecedente il %s',
+            range: 'Si prega di inserire una data compresa tra %s - %s'
         },
         different: {
             'default': 'Si prega di inserire un valore differente'
