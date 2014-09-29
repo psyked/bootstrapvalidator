@@ -30,7 +30,10 @@
             'default': 'Kérlek, hogy érvényes CVV számot ajd meg'
         },
         date: {
-            'default': 'Kérlek, hogy érvényes dátumot ajd meg'
+            'default': 'Kérlek, hogy érvényes dátumot ajd meg',
+            min: 'Kérlek, hogy %s -nál későbbi dátumot adj meg',
+            max: 'Kérlek, hogy %s -nál korábbi dátumot adj meg',
+            range: 'Kérlek, hogy %s - %s között adj meg dátumot'
         },
         different: {
             'default': 'Kérlek, hogy egy másik értéket adj meg'
