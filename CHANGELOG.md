@@ -3,12 +3,13 @@
 ## v0.5.3 (not released yet)
 
 __New Features__
-
 * [#807](https://github.com/nghuuphuoc/bootstrapvalidator/issues/807), [#821](https://github.com/nghuuphuoc/bootstrapvalidator/pull/821): Add ```min```, ```max``` options for the [date](http://bootstrapvalidator.com/validators/date/) validator, thanks to [@Arkni](https://github.com/Arkni)
 * [#844](https://github.com/nghuuphuoc/bootstrapvalidator/pull/844), [#874](https://github.com/nghuuphuoc/bootstrapvalidator/pull/874): The [stringLength](http://bootstrapvalidator.com/validators/stringLength/) validator adds option to evaluate length in UTF-8 bytes, thanks to [@thx2001r](https://github.com/thx2001r)
 
-__Language Packages__
+__Document__
+* [#848](https://github.com/nghuuphuoc/bootstrapvalidator/pull/848): Updated the [stringLength](http://bootstrapvalidator.com/validators/stringLength) document, thanks to [@Relequestual](https://github.com/Relequestual)
 
+__Language Packages__
 * [#827](https://github.com/nghuuphuoc/bootstrapvalidator/pull/827): Updated Dutch language package, thanks to [@JvanderHeide](https://github.com/JvanderHeide)
 * [#829](https://github.com/nghuuphuoc/bootstrapvalidator/pull/829): Updated Swedish language package, thanks to [@ulsa](https://github.com/ulsa)
 * [#834](https://github.com/nghuuphuoc/bootstrapvalidator/pull/834): Updated Ukrainian and Russian language packages, thanks to [@oleg-voloshyn](https://github.com/oleg-voloshyn)
