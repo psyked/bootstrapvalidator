@@ -30,7 +30,10 @@
             'default': 'Lütfen geçerli bir CCV numarası giriniz'
         },
         date: {
-            'default': 'Lütfen geçerli bir tarih giriniz'
+            'default': 'Lütfen geçerli bir tarih giriniz',
+            min: 'Lütfen %s tarihinden sonra bir tarih giriniz',
+            max: 'Lütfen %s tarihinden önce bir tarih giriniz',
+            range: 'Lütfen %s - %s aralığında bir tarih giriniz'
         },
         different: {
             'default': 'Lütfen farklı bir değer giriniz'
