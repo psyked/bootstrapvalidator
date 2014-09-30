@@ -29,6 +29,7 @@ __Language Packages__
 * [#882](https://github.com/nghuuphuoc/bootstrapvalidator/pull/882): Updated Spanish language package, thanks to [@vadail](https://github.com/vadail)
 * [#900](https://github.com/nghuuphuoc/bootstrapvalidator/pull/900): Updated Persian (Farsi) language package, thanks to [@i0](https://github.com/i0)
 * [#910](https://github.com/nghuuphuoc/bootstrapvalidator/pull/910): Updated Greek language package, thanks to [@pRieStaKos](https://github.com/pRieStaKos)
+* [#913](https://github.com/nghuuphuoc/bootstrapvalidator/pull/913): Updated Thai language package, thanks to [@figgaro](https://github.com/figgaro)
 
 ## v0.5.2 (2014-09-25)
 
