@@ -18,7 +18,7 @@
             'default': 'Por favor insira um valor válido',
             less: 'Por favor escolha %s opções no mínimo',
             more: 'Por favor escolha %s opções no máximo',
-            between: 'Por favor escolha %s a %s opções'
+            between: 'Por favor escolha de %s a %s opções'
         },
         creditCard: {
             'default': 'Por favor insira um número de cartão de crédito válido'
@@ -30,7 +30,10 @@
             'default': 'Por favor insira um número CVV válido'
         },
         date: {
-            'default': 'Por favor insira uma data válida'
+            'default': 'Por favor insira uma data válida',
+            min: 'Por favor insira uma data posterior a %s',
+            max: 'Por favor insira uma data anterior a %s',
+            range: 'Por favor insira uma data entre %s e %s'
         },
         different: {
             'default': 'Por favor insira valores diferentes'
@@ -147,7 +150,7 @@
             }
         },
         id: {
-            'default': 'Por favor insir aum código de identificação válido',
+            'default': 'Por favor insira um código de identificação válido',
             countryNotSupported: 'O código do país %s não é suportado',
             country: 'Por favor insira um número de indentificação válido em %s',
             countries: {
