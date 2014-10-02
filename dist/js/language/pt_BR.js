@@ -147,7 +147,7 @@
             }
         },
         id: {
-            'default': 'Por favor insir aum código de identificação válido',
+            'default': 'Por favor insira um código de identificação válido',
             countryNotSupported: 'O código do país %s não é suportado',
             country: 'Por favor insira um número de indentificação válido em %s',
             countries: {
