@@ -8,6 +8,7 @@ __New Features__
 
 __Document__
 * [#848](https://github.com/nghuuphuoc/bootstrapvalidator/pull/848): Updated the [stringLength](http://bootstrapvalidator.com/validators/stringLength) document, thanks to [@Relequestual](https://github.com/Relequestual)
+* [#920](https://github.com/nghuuphuoc/bootstrapvalidator/issues/920), [#929](https://github.com/nghuuphuoc/bootstrapvalidator/issues/929): Update the [Changing the tooltip, popover's position](http://bootstrapvalidator.com/examples/tooltip-popover-position/) example, thanks to [@Arkni](https://github.com/Arkni)
 
 __Language Packages__
 * [#827](https://github.com/nghuuphuoc/bootstrapvalidator/pull/827): Updated Dutch language package, thanks to [@JvanderHeide](https://github.com/JvanderHeide)
