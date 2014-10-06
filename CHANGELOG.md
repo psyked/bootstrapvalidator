@@ -30,6 +30,7 @@ __Language Packages__
 * [#882](https://github.com/nghuuphuoc/bootstrapvalidator/pull/882): Updated Spanish language package, thanks to [@vadail](https://github.com/vadail)
 * [#891](https://github.com/nghuuphuoc/bootstrapvalidator/pull/891): Updated Portuguese (Brazil) language package, thanks to [@dgmike](https://github.com/dgmike)
 * [#900](https://github.com/nghuuphuoc/bootstrapvalidator/pull/900): Updated Persian (Farsi) language package, thanks to [@i0](https://github.com/i0)
+* [#903](https://github.com/nghuuphuoc/bootstrapvalidator/pull/903): Updated Hungarian language package, thanks to [@blackfyre](https://github.com/blackfyre)
 * [#910](https://github.com/nghuuphuoc/bootstrapvalidator/pull/910): Updated Greek language package, thanks to [@pRieStaKos](https://github.com/pRieStaKos)
 * [#913](https://github.com/nghuuphuoc/bootstrapvalidator/pull/913): Updated Thai language package, thanks to [@figgaro](https://github.com/figgaro)
 * [#915](https://github.com/nghuuphuoc/bootstrapvalidator/pull/915): Updated Turkish language package, thanks to [@CeRBeR666](https://github.com/CeRBeR666)
