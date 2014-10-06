@@ -1,9 +1,16 @@
 (function($) {
     $.fn.bootstrapValidator.i18n.color = $.extend($.fn.bootstrapValidator.i18n.color || {}, {
-        'default': 'Please enter a valid color',
-        'type': 'Please enter a valid %s color'
+           'default': 'Please enter a valid color',
+           'type': 'Please enter a valid %s color',
+           'defaultTypes': {
+               hex: 'hex',
+               rgb: 'rgb',
+               rgba: 'rgba',
+               hsl: 'hsl',
+               hsla: 'hsla',
+               keyword: 'keyword'
+           }
     });
-
     $.fn.bootstrapValidator.validators.color = {
 
         /**
@@ -27,17 +34,21 @@
             var useCustomTypes = (options.hasOwnProperty('type') && options.type instanceof Array);
             var types = useCustomTypes ? options.type : defaultTypes;
             var isValid = false;
-            var formatedMessage = $.fn.bootstrapValidator.helpers.format(
-                                        options.message || (useCustomTypes ? $.fn.bootstrapValidator.i18n.color.type : $.fn.bootstrapValidator.i18n.color.default),
-                                        types.join(", ")
-            );
+            var usedTypes = [];
 
             for (var i = 0; i < types.length; i++) {
                 type = types[i];
+                usedTypes.push($.fn.bootstrapValidator.i18n.color.defaultTypes[type]);
+
                 method = '_' + type.toLowerCase();
                 isValid = isValid || this[method](value);
                 if (isValid) return true;
             }
+
+            var formatedMessage = $.fn.bootstrapValidator.helpers.format(
+                                    options.message || (useCustomTypes ? $.fn.bootstrapValidator.i18n.color.type : $.fn.bootstrapValidator.i18n.color.default),
+                                    usedTypes.join(", ")
+            );
 
             return {
                 valid: false,
