@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.3-dev, built on 2014-10-06 1:47:31 PM
+ * @version     v0.5.3-dev, built on 2014-10-06 1:56:16 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -2217,11 +2217,11 @@ if (typeof jQuery === 'undefined') {
             var useCustomTypes = (options.hasOwnProperty('type') && options.type instanceof Array);
             var types = useCustomTypes ? options.type : defaultTypes;
             var isValid = false;
-            var usedTypes = [];
+            var usedI18nTypes = [];
 
             for (var i = 0; i < types.length; i++) {
                 type = types[i];
-                usedTypes.push($.fn.bootstrapValidator.i18n.color.defaultTypes[type]);
+                usedI18nTypes.push($.fn.bootstrapValidator.i18n.color.defaultTypes[type]);
 
                 method = '_' + type.toLowerCase();
                 isValid = isValid || this[method](value);
@@ -2230,7 +2230,7 @@ if (typeof jQuery === 'undefined') {
 
             var formatedMessage = $.fn.bootstrapValidator.helpers.format(
                                     options.message || (useCustomTypes ? $.fn.bootstrapValidator.i18n.color.type : $.fn.bootstrapValidator.i18n.color.default),
-                                    usedTypes.join(", ")
+                                    usedI18nTypes.join(", ")
             );
 
             return {
