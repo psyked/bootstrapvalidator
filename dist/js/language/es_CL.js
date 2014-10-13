@@ -30,7 +30,10 @@
             'default': 'Por favor ingrese un número CVV válido'
         },
         date: {
-            'default': 'Por favor ingrese una fecha válida'
+            'default': 'Por favor ingrese una fecha válida',
+            min: 'Por favor ingrese una fecha posterior a %s',
+            max: 'Por favor ingrese una fecha anterior a %s',
+            range: 'Por favor ingrese una fecha en el rango %s - %s'
         },
         different: {
             'default': 'Por favor ingrese un valor distinto'
@@ -346,7 +349,7 @@
                 MA: 'Marruecos',
                 NL: 'Países Bajos',
                 RO: 'Rumanía',
-                RU: 'Rusa',
+                RU: 'Rusia',
                 SE: 'Suecia',
                 SG: 'Singapur',
                 SK: 'Eslovaquia',
