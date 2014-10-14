@@ -32,6 +32,9 @@
         },
         date: {
             'default': 'Ju lutem vendosni një datë të saktë'
+                  min: 'Ju lutem vendosni një datë pas %s',
+                  max: 'Ju lutem vendosni një datë para %s',
+                range: 'Ju lutem vendosni një datë midis %s - %s'
         },
         different: {
             'default': 'Ju lutem vendosni një vlerë tjetër'
