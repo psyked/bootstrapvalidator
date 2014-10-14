@@ -1,7 +1,7 @@
 (function($) {
     /**
      * Albanian language package
-     * Translated by @desaretiuss
+     * Translated by @Desaretiuss
      * 
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
