@@ -1,8 +1,7 @@
 (function($) {
     /**
      * Albanian language package
-     * Translated by @Desaretiuss
-     * 
+     * Translated by @desaretiuss
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
@@ -31,10 +30,10 @@
             'default': 'Ju lutem vendosni një numër CVV të vlefshëm'
         },
         date: {
-            'default': 'Ju lutem vendosni një datë të saktë'
-                  min: 'Ju lutem vendosni një datë pas %s',
-                  max: 'Ju lutem vendosni një datë para %s',
-                range: 'Ju lutem vendosni një datë midis %s - %s'
+            'default': 'Ju lutem vendosni një datë të saktë',
+            min: 'Ju lutem vendosni një datë pas %s',
+            max: 'Ju lutem vendosni një datë para %s',
+            range: 'Ju lutem vendosni një datë midis %s - %s'
         },
         different: {
             'default': 'Ju lutem vendosni një vlerë tjetër'

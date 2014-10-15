@@ -36,6 +36,7 @@ __Language Packages__
 * [#915](https://github.com/nghuuphuoc/bootstrapvalidator/pull/915): Update Turkish language package, thanks to [@CeRBeR666](https://github.com/CeRBeR666)
 * [#961](https://github.com/nghuuphuoc/bootstrapvalidator/pull/961): Update Chilean Spanish language package, thanks to [@marceloampuerop6](https://github.com/marceloampuerop6)
 * [#967](https://github.com/nghuuphuoc/bootstrapvalidator/pull/967): Add Hebrew language package, thanks to [@yakidahan](https://github.com/yakidahan)
+* [#974](https://github.com/nghuuphuoc/bootstrapvalidator/pull/974): Add Albanian language package, thanks to [@desaretiuss](https://github.com/desaretiuss)
 
 ## v0.5.2 (2014-09-25)
 

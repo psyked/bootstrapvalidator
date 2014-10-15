@@ -32,9 +32,13 @@ You also can run the ```demo``` locally by:
 
 See [official website](http://bootstrapvalidator.com) for the full list of features
 
+## Support
+
+[Submit an issue](https://github.com/nghuuphuoc/bootstrapvalidator/issues) or ask for [commercial support](mailto: phuoc@huuphuoc.me?subject=Commercial support for BootstrapValidator)
+
 ## Download
 
-* Latest version: [v0.5.2](http://bootstrapvalidator.com/getting-started/#download), released on 2014-09-25
+* Latest version: [v0.5.2](http://bootstrapvalidator.com/getting-started/), released on 2014-09-25
 * For older versions, look at the [Releases](https://github.com/nghuuphuoc/bootstrapvalidator/releases) page
 * Release History: Look at the [Change Log](CHANGELOG.md)
 
