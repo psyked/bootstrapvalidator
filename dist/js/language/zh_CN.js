@@ -20,6 +20,9 @@
             more: '最多只能选中 %s 个选项',
             between: '请选择 %s 至 %s 个选项'
         },
+        color: {
+            'default': '请输入有效的颜色值'
+        },
         creditCard: {
             'default': '请输入有效的信用卡号码'
         },

@@ -20,6 +20,9 @@
             more: '最多選擇 %s 個選項',
             between: '請選擇 %s 至 %s 個選項'
         },
+        color: {
+            'default': '請輸入有效的元色碼'
+        },
         creditCard: {
             'default': '請輸入有效的信用卡號碼'
         },

@@ -20,6 +20,9 @@
             more: 'Silahkan pilih pilihan %s pada maksimum',
             between: 'Silahkan pilih pilihan %s - %s'
         },
+        color: {
+            'default': 'Silahkan isi karakter warna yang valid'
+        },
         creditCard: {
             'default': 'Silahkan isi nomor kartu kredit yang valid'
         },

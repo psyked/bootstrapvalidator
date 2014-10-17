@@ -20,6 +20,9 @@
             more: 'Wybierz maksymalnie %s opcji',
             between: 'Wybierz przynajmniej %s i maksymalnie %s opcji'
         },
+        color: {
+            'default': 'Wprowadź poprawny kolor w formacie'
+        },
         creditCard: {
             'default': 'Wprowadź poprawny numer karty kredytowej'
         },

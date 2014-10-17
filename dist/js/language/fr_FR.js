@@ -20,6 +20,9 @@
             more: 'Veuillez choisir au maximum %s options',
             between: 'Veuillez choisir de %s à %s options'
         },
+        color: {
+            'default': 'Veuillez fournir une couleur valide'
+        },
         creditCard: {
             'default': 'Veuillez fournir un numéro de carte de crédit valide'
         },
@@ -61,7 +64,7 @@
             'default': 'Veuillez fournir un nombre hexadécimal valide'
         },
         hexColor: {
-            'default': 'Veuillez fournir une couleur hexadécimale valide1'
+            'default': 'Veuillez fournir une couleur hexadécimale valide'
         },
         iban: {
             'default': 'Veuillez fournir un code IBAN valide',

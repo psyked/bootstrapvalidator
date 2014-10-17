@@ -20,6 +20,9 @@
             more: 'Please choose %s options at maximum',
             between: 'Please choose %s - %s options'
         },
+        color: {
+            'default': 'Please enter a valid color'
+        },
         creditCard: {
             'default': 'Please enter a valid credit card number'
         },

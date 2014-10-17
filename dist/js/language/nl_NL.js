@@ -20,6 +20,9 @@
             more: 'Kies maximaal %s opties',
             between: 'Kies tussen de %s - %s opties'
         },
+        color: {
+            'default': 'Voer een geldige kleurcode in'
+        },
         creditCard: {
             'default': 'Voer een geldig creditcardnummer in'
         },

@@ -33,7 +33,10 @@
             'default': 'Bitte gültige CVV Nummer eingeben'
         },
         date: {
-            'default': 'Bitte gültiges Datum eingeben'
+            'default': 'Bitte gültiges Datum eingeben',
+            min: 'Bitte gültiges Datum nach %s',
+            max: 'Bitte gültiges Datum vor %s',
+            range: 'Bitte gültiges Datum im zwischen %s - %s'
         },
         different: {
             'default': 'Bitte anderen Wert eingeben'
