@@ -20,6 +20,9 @@
             more: 'Por favor escolha %s opções no máximo',
             between: 'Por favor escolha de %s a %s opções'
         },
+        color: {
+            'default': 'Por favor insira uma cor válida'
+        },
         creditCard: {
             'default': 'Por favor insira um número de cartão de crédito válido'
         },

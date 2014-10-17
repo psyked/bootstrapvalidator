@@ -20,6 +20,9 @@
             more: 'Vælg venligst højst %s valgmuligheder',
             between: 'Vælg venligst %s - %s valgmuligheder'
         },
+        color: {
+            'default': 'Udfyld venligst dette felt med en gyldig farve'
+        },
         creditCard: {
             'default': 'Udfyld venligst dette felt med et gyldigt kreditkort-nummer'
         },

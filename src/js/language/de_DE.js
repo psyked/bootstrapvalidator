@@ -20,6 +20,9 @@
             more: 'Bitte maximal %s Werte eingeben',
             between: 'Zwischen %s - %s Werten wählen'
         },
+        color: {
+            'default': 'Bitte gültige Farbe eingeben'
+        },
         creditCard: {
             'default': 'Bitte gültige Kreditkartennr. eingeben'
         },

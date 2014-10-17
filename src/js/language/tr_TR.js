@@ -20,6 +20,9 @@
             more: 'Lütfen maksimum %s kadar değer giriniz',
             between: 'Lütfen %s - %s arası seçiniz'
         },
+        color: {
+            'default': 'Lütfen geçerli bir codu giriniz'
+        },
         creditCard: {
             'default': 'Lütfen geçerli bir kredi kartı numarası giriniz'
         },

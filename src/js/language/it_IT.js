@@ -20,6 +20,9 @@
             more: 'Si prega di scegliere al massimo l\'opzione %s',
             between: 'Si prega di scegliere l\'opzione tra %s e %s'
         },
+        color: {
+            'default': 'Si prega di inserire un colore valido'
+        },
         creditCard: {
             'default': 'Si prega di inserire un numero di carta di credito valido'
         },

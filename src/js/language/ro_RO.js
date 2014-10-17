@@ -20,6 +20,9 @@
             more: 'Te rog alege maxim %s optiuni',
             between: 'Te rog alege %s - %s optiuni'
         },
+        color: {
+            'default': 'Te rog sa introduci o culoare valida'
+        },
         creditCard: {
             'default': 'Te rog introdu un numar de card valid'
         },

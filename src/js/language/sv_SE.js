@@ -20,6 +20,9 @@
             more: 'Vänligen välj max %s alternativ',
             between: 'Vänligen välj %s - %s alternativ'
         },
+        color: {
+            'default': 'Vänligen mata in en giltig färg'
+        },
         creditCard: {
             'default': 'Vänligen mata in ett giltigt kredikortsnummer'
         },

@@ -20,6 +20,9 @@
             more: 'Molimo da odaberete maksimalno %s opciju(a)',
             between: 'Molimo odaberite %s - %s opcije(a)'
         },
+        color: {
+            'default': 'Molimo da unesete ispravnu boju'
+        },
         creditCard: {
             'default': 'Molimo da unesete ispravan broj kreditne kartice'
         },

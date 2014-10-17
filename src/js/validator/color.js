@@ -87,8 +87,8 @@
                 isValid = false;
 
             for (var i = 0; i < types.length; i++) {
-                type   = types[i];
-                method = '_' + type.toLowerCase();
+                type    = types[i];
+                method  = '_' + type.toLowerCase();
                 isValid = isValid || this[method](value);
                 if (isValid) {
                     return true;
