@@ -2230,46 +2230,34 @@ describe('callback', function() {
 });
 
 describe('color', function() {
-
     beforeEach(function() {
         $([
-            '<div class="container">',
-                '<form class="form-horizontal" id="colorForm">',
-                    '<div class="form-group">',
-                        '<input type="text" class="form-control" name="color" />',
-                    '</div>',
-                    '<div class="form-group">',
-                        '<input type="text" class="form-control" name="colorMultiple" />',
-                    '</div>',
-                    '<div class="form-group">',
-                        '<input type="text" class="form-control" name="colorHex" />',
-                    '</div>',
-                    '<div class="form-group">',
-                        '<input type="text" class="form-control" name="colorRgb" />',
-                    '</div>',
-                    '<div class="form-group">',
-                        '<input type="text" class="form-control" name="colorRgba" />',
-                    '</div>',
-                    '<div class="form-group">',
-                        '<input type="text" class="form-control" name="colorHsl" />',
-                    '</div>',
-                    '<div class="form-group">',
-                        '<input type="text" class="form-control" name="colorHsla" />',
-                    '</div>',
-                    '<div class="form-group">',
-                        '<input type="text" class="form-control" name="colorKeyword" />',
-                    '</div>',
-                    '<div class="form-group">',
-                        '<input type="text" class="form-control" name="colorCustomMessage" />',
-                    '</div>',
-                    '<div class="form-group">',
-                        '<input type="text" class="form-control" name="colorSingleCustomMessage" />',
-                    '</div>',
-                    '<div class="form-group">',
-                        '<input type="text" class="form-control" name="colorMultipleCustomMessage" />',
-                    '</div>',
-                '</form>',
-            '</div>'
+            '<form class="form-horizontal" id="colorForm">',
+                '<div class="form-group">',
+                    '<input type="text" class="form-control" name="color" />',
+                '</div>',
+                '<div class="form-group">',
+                    '<input type="text" class="form-control" name="colorMultiple" />',
+                '</div>',
+                '<div class="form-group">',
+                    '<input type="text" class="form-control" name="colorHex" />',
+                '</div>',
+                '<div class="form-group">',
+                    '<input type="text" class="form-control" name="colorRgb" />',
+                '</div>',
+                '<div class="form-group">',
+                    '<input type="text" class="form-control" name="colorRgba" />',
+                '</div>',
+                '<div class="form-group">',
+                    '<input type="text" class="form-control" name="colorHsl" />',
+                '</div>',
+                '<div class="form-group">',
+                    '<input type="text" class="form-control" name="colorHsla" />',
+                '</div>',
+                '<div class="form-group">',
+                    '<input type="text" class="form-control" name="colorKeyword" />',
+                '</div>',
+            '</form>'
         ].join('\n')).appendTo('body');
 
         $('#colorForm').bootstrapValidator({
@@ -2283,104 +2271,72 @@ describe('color', function() {
                     validators: {
                         color: {
                             type: [
-                                "hex",
-                                "rgb"
+                                'hex',
+                                'rgb'
                             ]
-                        }
-                    }
-                },
-                colorMultipleCustomMessage: {
-                    validators: {
-                        color: {
-                            type: [
-                                "hex",
-                                "rgb"
-                            ],
-                            message: "This is a custom validation message for %s"
-                        }
-                    }
-                },
-                colorSingleCustomMessage: {
-                    validators: {
-                        color: {
-                            type: ["rgb"],
-                            message: "This is a custom validation message for %s"
-                        }
-                    }
-                },
-                colorCustomMessage: {
-                    validators: {
-                        color: {
-                            message: "This is a custom validation message for all colors"
                         }
                     }
                 },
                 colorHex: {
                     validators: {
                         color: {
-                            type: ["hex"]
+                            type: ['hex']
                         }
                     }
                 },
                 colorRgb: {
                     validators: {
                         color: {
-                            type: ["rgb"]
+                            type: ['rgb']
                         }
                     }
                 },
                 colorRgba: {
                     validators: {
                         color: {
-                            type: ["rgba"]
+                            type: ['rgba']
                         }
                     }
                 },
                 colorHsl: {
                     validators: {
                         color: {
-                            type: ["hsl"]
+                            type: ['hsl']
                         }
                     }
                 },
                 colorHsla: {
                     validators: {
                         color: {
-                            type: ["hsla"]
+                            type: ['hsla']
                         }
                     }
                 },
                 colorKeyword: {
                     validators: {
                         color: {
-                            type: ["keyword"]
+                            type: ['keyword']
                         }
                     }
                 }
             }
         });
 
-        this.bv = $('#colorForm').data('bootstrapValidator');
-        this.$color = this.bv.getFieldElements('color');
+        this.bv             = $('#colorForm').data('bootstrapValidator');
+        this.$color         = this.bv.getFieldElements('color');
         this.$colorMultiple = this.bv.getFieldElements('colorMultiple');
-        this.$colorHex = this.bv.getFieldElements('colorHex');
-        this.$colorRgb = this.bv.getFieldElements('colorRgb');
-        this.$colorRgba = this.bv.getFieldElements('colorRgba');
-        this.$colorHsl = this.bv.getFieldElements('colorHsl');
-        this.$colorHsla = this.bv.getFieldElements('colorHsla');
-        this.$colorKeyword = this.bv.getFieldElements('colorKeyword');
-        this.$colorMultipleCustomMessage = this.bv.getFieldElements('colorMultipleCustomMessage');
-        this.$colorSingleCustomMessage = this.bv.getFieldElements('colorSingleCustomMessage');
-        this.$colorCustomMessage = this.bv.getFieldElements('colorCustomMessage');
+        this.$colorHex      = this.bv.getFieldElements('colorHex');
+        this.$colorRgb      = this.bv.getFieldElements('colorRgb');
+        this.$colorRgba     = this.bv.getFieldElements('colorRgba');
+        this.$colorHsl      = this.bv.getFieldElements('colorHsl');
+        this.$colorHsla     = this.bv.getFieldElements('colorHsla');
+        this.$colorKeyword  = this.bv.getFieldElements('colorKeyword');
     });
 
     afterEach(function() {
-        $('#colorForm').bootstrapValidator('destroy').parent().remove();
+        $('#colorForm').bootstrapValidator('destroy').remove();
     });
 
-
-
-/* First run all color tests in the in color field*/
     // Start hsla() tests
     it('Run hsla() test suite on hsla only field', function() {
         this.$colorHsla.val('hsla(120,50%,50%,1)');
@@ -2513,7 +2469,6 @@ describe('color', function() {
         expect(this.bv.isValidField('colorHsla')).toEqual(false);
     });
 
-
     // Start hsl() tests
     it('Run hsl() test suite on hsl only field', function() {
         this.$colorHsl.val('hsl(120,50%,50%)');
@@ -2617,7 +2572,6 @@ describe('color', function() {
         this.bv.validate();
         expect(this.bv.isValidField('colorKeyword')).toEqual(false);
     });
-
 
     // Start rgba() test
     it('Run rgba() test suite on rgba only field', function() {
@@ -2843,12 +2797,13 @@ describe('color', function() {
         expect(this.bv.isValidField('colorRgb')).toEqual(false);
     });
 
-/* Run individual tests */
+    /* Run individual tests */
     it('Individual field keyword: accept keyword', function() {
         this.$colorKeyword.val('blue');
         this.bv.validate();
         expect(this.bv.isValidField('colorKeyword')).toBeTruthy();
     });
+
     it('Individual field keyword: reject rgb', function() {
         this.$colorKeyword.val('rgb(255,255,255)');
         this.bv.validate();
@@ -2860,6 +2815,7 @@ describe('color', function() {
         this.bv.validate();
         expect(this.bv.isValidField('colorHex')).toBeTruthy();
     });
+
     it('Individual field hex: accept 3 char hex', function() {
         this.$colorHex.val('#00F');
         this.bv.validate();
@@ -2876,6 +2832,7 @@ describe('color', function() {
         this.bv.validate();
         expect(this.bv.isValidField('colorRgb')).toBeTruthy();
     });
+
     it('Individual field rgb(): reject hex', function() {
         this.$colorRgb.val('#0000FF');
         this.bv.validate();
@@ -2887,6 +2844,7 @@ describe('color', function() {
         this.bv.validate();
         expect(this.bv.isValidField('colorRgba')).toBeTruthy();
     });
+
     it('Individual field rgba(): reject rgb()', function() {
         this.$colorRgba.val('rgb(255,255,255)');
         this.bv.validate();
@@ -2898,6 +2856,7 @@ describe('color', function() {
         this.bv.validate();
         expect(this.bv.isValidField('colorHsl')).toBeTruthy();
     });
+
     it('Individual field hsl(): reject rgba()', function() {
         this.$colorHsl.val('rgba(255,255,255,1)');
         this.bv.validate();
@@ -2909,50 +2868,19 @@ describe('color', function() {
         this.bv.validate();
         expect(this.bv.isValidField('colorHsla')).toBeTruthy();
     });
+
     it('Individual field hsla(): reject hsl()', function() {
         this.$colorHsla.val('hsl(120,50%,50%)');
         this.bv.validate();
         expect(this.bv.isValidField('colorHsla')).toEqual(false);
     });
 
-/* Run validation message tests */
+    /* Run validation message tests */
     it('Validation message tests', function() {
         this.$color.val('notacolor');
         this.bv.validate();
         expect(this.bv.isValidField('color')).toEqual(false);
         expect(this.bv.getMessages(this.$color, 'color')[0]).toEqual($.fn.bootstrapValidator.i18n.color.default);
-
-        this.bv.resetForm();
-        this.$colorCustomMessage.val('notacolor');
-        this.bv.validate();
-        expect(this.bv.isValidField('colorCustomMessage')).toEqual(false);
-        expect(this.bv.getMessages(this.$colorCustomMessage, 'color')[0]).toEqual("This is a custom validation message for all colors");
-
-        this.bv.resetForm();
-        this.$colorMultiple.val('notacolor');
-        this.bv.validate();
-        expect(this.bv.isValidField('colorMultiple')).toEqual(false);
-        expect(this.bv.getMessages(this.$colorMultiple, 'color')[0]).toEqual($.fn.bootstrapValidator.helpers.format( $.fn.bootstrapValidator.i18n.color.type , "hex, rgb"));
-
-        this.bv.resetForm();
-        this.$colorMultipleCustomMessage.val('notacolor');
-        this.bv.validate();
-        expect(this.bv.isValidField('colorMultipleCustomMessage')).toEqual(false);
-        expect(this.bv.getMessages(this.$colorMultipleCustomMessage, 'color')[0]).toEqual($.fn.bootstrapValidator.helpers.format( "This is a custom validation message for %s" , "hex, rgb"));
-
-        this.bv.resetForm();
-        this.$colorRgb.val('notacolor');
-        this.bv.validate();
-        expect(this.bv.isValidField('colorRgb')).toEqual(false);
-        expect(this.bv.getMessages(this.$colorRgb, 'color')[0]).toEqual($.fn.bootstrapValidator.helpers.format( $.fn.bootstrapValidator.i18n.color.type , "rgb"));
-
-        this.bv.resetForm();
-        this.$colorSingleCustomMessage.val('notacolor');
-        this.bv.validate();
-        expect(this.bv.isValidField('colorSingleCustomMessage')).toEqual(false);
-        expect(this.bv.getMessages(this.$colorSingleCustomMessage, 'color')[0]).toEqual($.fn.bootstrapValidator.helpers.format( "This is a custom validation message for %s" , "rgb"));
-
-
     });
 });
 

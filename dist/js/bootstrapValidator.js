@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.3-dev, built on 2014-10-17 11:05:39 AM
+ * @version     v0.5.3-dev, built on 2014-10-17 11:46:00 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -2183,18 +2183,66 @@ if (typeof jQuery === 'undefined') {
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.color = $.extend($.fn.bootstrapValidator.i18n.color || {}, {
-           'default': 'Please enter a valid color',
-           'type': 'Please enter a valid %s color',
-           'defaultTypes': {
-               hex: 'hex',
-               rgb: 'rgb',
-               rgba: 'rgba',
-               hsl: 'hsl',
-               hsla: 'hsla',
-               keyword: 'keyword'
-           }
+        'default': 'Please enter a valid color'
     });
+
     $.fn.bootstrapValidator.validators.color = {
+        SUPPORTED_TYPES: [
+            'hex', 'rgb', 'rgba', 'hsl', 'hsla', 'keyword'
+        ],
+
+        KEYWORD_COLORS: [
+            // Colors start with A
+            'aliceblue', 'antiquewhite', 'aqua', 'aquamarine', 'azure',
+            // B
+            'beige', 'bisque', 'black', 'blanchedalmond', 'blue', 'blueviolet', 'brown', 'burlywood',
+            // C
+            'cadetblue', 'chartreuse', 'chocolate', 'coral', 'cornflowerblue', 'cornsilk', 'crimson', 'cyan',
+            // D
+            'darkblue', 'darkcyan', 'darkgoldenrod', 'darkgray', 'darkgreen', 'darkgrey', 'darkkhaki', 'darkmagenta',
+            'darkolivegreen', 'darkorange', 'darkorchid', 'darkred', 'darksalmon', 'darkseagreen', 'darkslateblue',
+            'darkslategray', 'darkslategrey', 'darkturquoise', 'darkviolet', 'deeppink', 'deepskyblue', 'dimgray',
+            'dimgrey', 'dodgerblue',
+            // F
+            'firebrick', 'floralwhite', 'forestgreen', 'fuchsia',
+            // G
+            'gainsboro', 'ghostwhite', 'gold', 'goldenrod', 'gray', 'green', 'greenyellow', 'grey',
+            // H
+            'honeydew', 'hotpink',
+            // I
+            'indianred', 'indigo', 'ivory',
+            // K
+            'khaki',
+            // L
+            'lavender', 'lavenderblush', 'lawngreen', 'lemonchiffon', 'lightblue', 'lightcoral', 'lightcyan',
+            'lightgoldenrodyellow', 'lightgray', 'lightgreen', 'lightgrey', 'lightpink', 'lightsalmon', 'lightseagreen',
+            'lightskyblue', 'lightslategray', 'lightslategrey', 'lightsteelblue', 'lightyellow', 'lime', 'limegreen',
+            'linen',
+            // M
+            'magenta', 'maroon', 'mediumaquamarine', 'mediumblue', 'mediumorchid', 'mediumpurple', 'mediumseagreen',
+            'mediumslateblue', 'mediumspringgreen', 'mediumturquoise', 'mediumvioletred', 'midnightblue', 'mintcream',
+            'mistyrose', 'moccasin',
+            // N
+            'navajowhite', 'navy',
+            // O
+            'oldlace', 'olive', 'olivedrab', 'orange', 'orangered', 'orchid',
+            // P
+            'palegoldenrod', 'palegreen', 'paleturquoise', 'palevioletred', 'papayawhip', 'peachpuff', 'peru', 'pink',
+            'plum', 'powderblue', 'purple',
+            // R
+            'red', 'rosybrown', 'royalblue',
+            // S
+            'saddlebrown', 'salmon', 'sandybrown', 'seagreen', 'seashell', 'sienna', 'silver', 'skyblue', 'slateblue',
+            'slategray', 'slategrey', 'snow', 'springgreen', 'steelblue',
+            // T
+            'tan', 'teal', 'thistle', 'tomato', 'transparent', 'turquoise',
+            // V
+            'violet',
+            // W
+            'wheat', 'white', 'whitesmoke',
+            // Y
+            'yellow', 'yellowgreen'
+        ],
 
         /**
          * Return true if the input value is a valid color
@@ -2203,8 +2251,8 @@ if (typeof jQuery === 'undefined') {
          * @param {jQuery} $field Field element
          * @param {Object} options Can consist of the following keys:
          * - message: The invalid message
-         * - type: The Array of valid color types
-         * @returns {Boolean|Object}
+         * - type: The array of valid color types
+         * @returns {Boolean}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
@@ -2212,31 +2260,25 @@ if (typeof jQuery === 'undefined') {
                 return true;
             }
 
-            var method, type;
-            var defaultTypes = ['hex', 'rgb', 'rgba', 'hsl', 'hsla', 'keyword'];
-            var useCustomTypes = (options.hasOwnProperty('type') && options.type instanceof Array);
-            var types = useCustomTypes ? options.type : defaultTypes;
-            var isValid = false;
-            var usedI18nTypes = [];
-
-            for (var i = 0; i < types.length; i++) {
-                type = types[i];
-                usedI18nTypes.push($.fn.bootstrapValidator.i18n.color.defaultTypes[type]);
-
-                method = '_' + type.toLowerCase();
-                isValid = isValid || this[method](value);
-                if (isValid) return true;
+            var types = options.type || this.SUPPORTED_TYPES;
+            if (!$.isArray(types)) {
+                types = types.replace(/s/g, '').split(',');
             }
 
-            var formatedMessage = $.fn.bootstrapValidator.helpers.format(
-                                    options.message || (useCustomTypes ? $.fn.bootstrapValidator.i18n.color.type : $.fn.bootstrapValidator.i18n.color.default),
-                                    usedI18nTypes.join(", ")
-            );
+            var method,
+                type,
+                isValid = false;
 
-            return {
-                valid: false,
-                message: formatedMessage
-            };
+            for (var i = 0; i < types.length; i++) {
+                type   = types[i];
+                method = '_' + type.toLowerCase();
+                isValid = isValid || this[method](value);
+                if (isValid) {
+                    return true;
+                }
+            }
+
+            return false;
         },
 
         _hex: function(value) {
@@ -2252,19 +2294,18 @@ if (typeof jQuery === 'undefined') {
         },
 
         _keyword: function(value) {
-            var colorKeywords = ["transparent", "aliceblue","antiquewhite","aqua","aquamarine","azure","beige","bisque","black","blanchedalmond","blue","blueviolet","brown","burlywood","cadetblue","chartreuse","chocolate","coral","cornflowerblue","cornsilk","crimson","cyan","darkblue","darkcyan","darkgoldenrod","darkgray","darkgreen","darkgrey","darkkhaki","darkmagenta","darkolivegreen","darkorange","darkorchid","darkred","darksalmon","darkseagreen","darkslateblue","darkslategray","darkslategrey","darkturquoise","darkviolet","deeppink","deepskyblue","dimgray","dimgrey","dodgerblue","firebrick","floralwhite","forestgreen","fuchsia","gainsboro","ghostwhite","gold","goldenrod","gray","green","greenyellow","grey","honeydew","hotpink","indianred","indigo","ivory","khaki","lavender","lavenderblush","lawngreen","lemonchiffon","lightblue","lightcoral","lightcyan","lightgoldenrodyellow","lightgray","lightgreen","lightgrey","lightpink","lightsalmon","lightseagreen","lightskyblue","lightslategray","lightslategrey","lightsteelblue","lightyellow","lime","limegreen","linen","magenta","maroon","mediumaquamarine","mediumblue","mediumorchid","mediumpurple","mediumseagreen","mediumslateblue","mediumspringgreen","mediumturquoise","mediumvioletred","midnightblue","mintcream","mistyrose","moccasin","navajowhite","navy","oldlace","olive","olivedrab","orange","orangered","orchid","palegoldenrod","palegreen","paleturquoise","palevioletred","papayawhip","peachpuff","peru","pink","plum","powderblue","purple","red","rosybrown","royalblue","saddlebrown","salmon","sandybrown","seagreen","seashell","sienna","silver","skyblue","slateblue","slategray","slategrey","snow","springgreen","steelblue","tan","teal","thistle","tomato","turquoise","violet","wheat","white","whitesmoke","yellow","yellowgreen"];
-            return $.inArray(value, colorKeywords) >= 0;
+            return $.inArray(value, this.KEYWORD_COLORS) >= 0;
         },
 
         _rgb: function(value) {
-            var regexInteger = /^rgb\((\s*(\b([01]?\d{1,2}|2[0-4]\d|25[0-5])\b)\s*,){2}(\s*(\b([01]?\d{1,2}|2[0-4]\d|25[0-5])\b)\s*)\)$/;
-            var regexPercent = /^rgb\((\s*(\b(0?\d{1,2}|100)\b%)\s*,){2}(\s*(\b(0?\d{1,2}|100)\b%)\s*)\)$/;
+            var regexInteger = /^rgb\((\s*(\b([01]?\d{1,2}|2[0-4]\d|25[0-5])\b)\s*,){2}(\s*(\b([01]?\d{1,2}|2[0-4]\d|25[0-5])\b)\s*)\)$/,
+                regexPercent = /^rgb\((\s*(\b(0?\d{1,2}|100)\b%)\s*,){2}(\s*(\b(0?\d{1,2}|100)\b%)\s*)\)$/;
             return regexInteger.test(value) || regexPercent.test(value);
         },
 
         _rgba: function(value) {
-            var regexInteger = /^rgba\((\s*(\b([01]?\d{1,2}|2[0-4]\d|25[0-5])\b)\s*,){3}(\s*(0?(\.\d+)?|1(\.0+)?)\s*)\)$/;
-            var regexPercent = /^rgba\((\s*(\b(0?\d{1,2}|100)\b%)\s*,){3}(\s*(0?(\.\d+)?|1(\.0+)?)\s*)\)$/;
+            var regexInteger = /^rgba\((\s*(\b([01]?\d{1,2}|2[0-4]\d|25[0-5])\b)\s*,){3}(\s*(0?(\.\d+)?|1(\.0+)?)\s*)\)$/,
+                regexPercent = /^rgba\((\s*(\b(0?\d{1,2}|100)\b%)\s*,){3}(\s*(0?(\.\d+)?|1(\.0+)?)\s*)\)$/;
             return regexInteger.test(value) || regexPercent.test(value);
         }
     };
