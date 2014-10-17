@@ -4,6 +4,7 @@
 
 __New Features__
 * [#807](https://github.com/nghuuphuoc/bootstrapvalidator/issues/807), [#821](https://github.com/nghuuphuoc/bootstrapvalidator/pull/821): Add ```min```, ```max``` options for the [date](http://bootstrapvalidator.com/validators/date/) validator, thanks to [@Arkni](https://github.com/Arkni)
+* [#822](https://github.com/nghuuphuoc/bootstrapvalidator/pull/822): Add color validator, thanks to [@emilchristensen](https://github.com/emilchristensen)
 * [#844](https://github.com/nghuuphuoc/bootstrapvalidator/pull/844), [#874](https://github.com/nghuuphuoc/bootstrapvalidator/pull/874): The [stringLength](http://bootstrapvalidator.com/validators/stringLength/) validator adds option to evaluate length in UTF-8 bytes, thanks to [@thx2001r](https://github.com/thx2001r)
 
 __Document__
