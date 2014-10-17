@@ -88,9 +88,16 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">Hex color</label>
+                                <label class="col-lg-3 control-label">Hex, RGB, HSL, Keyword color</label>
                                 <div class="col-lg-3">
                                     <input type="text" class="form-control" name="color" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">All colors</label>
+                                <div class="col-lg-3">
+                                    <input type="text" class="form-control" name="colorAll" />
                                 </div>
                             </div>
 
@@ -219,9 +226,15 @@ $(document).ready(function() {
             },
             color: {
                 validators: {
-                    hexColor: {
-                        message: 'The input is not a valid hex color'
+                    color: {
+                        type: ['hex', 'rgb', 'hsl', 'keyword'],
+                        message: 'Must be a valid %s color'
                     }
+                }
+            },
+            colorAll: {
+                validators: {
+                    color: { }
                 }
             },
             zipCode: {
