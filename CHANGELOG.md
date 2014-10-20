@@ -9,6 +9,7 @@ __New Features__
 
 __Bug Fixes__
 * [#933](https://github.com/nghuuphuoc/bootstrapvalidator/issues/933), [#959](https://github.com/nghuuphuoc/bootstrapvalidator/issues/959): Tooltip/popover isn't destroyed when the field is valid
+* [#991](https://github.com/nghuuphuoc/bootstrapvalidator/issues/991): The field is validated only one time when setting ```trigger: 'blur'```, ```container: 'tooltip'```
 
 __Document__
 * [#848](https://github.com/nghuuphuoc/bootstrapvalidator/pull/848): Update the [stringLength](http://bootstrapvalidator.com/validators/stringLength) document, thanks to [@Relequestual](https://github.com/Relequestual)

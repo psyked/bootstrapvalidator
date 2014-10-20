@@ -199,4 +199,76 @@ describe('container tooltip/popover', function() {
         expect(this.$firstName.parent().find('i').data('bs.tooltip')).toBeUndefined();
         expect(this.$lastName.parent().find('i').data('bs.popover')).toBeUndefined();
     });
+
+    // #991: Validate once when setting trigger: blur, container: tooltip
+    it('trigger: blur, container: tooltip', function() {
+        $('#containerForm').bootstrapValidator({
+            container: 'tooltip',
+            trigger: 'blur',
+            fields: {
+                firstName: {
+                    validators: {
+                        stringLength: {
+                            min: 5,
+                            message: 'The first name must be more than 5 characters'
+                        },
+                        notEmpty: {
+                            message: 'The first name is required'
+                        },
+                        regexp: {
+                            regexp: /^[a-z]+$/i,
+                            message: 'The first name must consist of a-z, A-Z characters only'
+                        }
+                    }
+                },
+                lastName: {
+                    validators: {
+                        stringLength: {
+                            min: 5,
+                            message: 'The last name must be more than 5 characters'
+                        },
+                        notEmpty: {
+                            message: 'The last name is required'
+                        },
+                        regexp: {
+                            regexp: /^[a-z]+$/i,
+                            message: 'The last name must consist of a-z, A-Z characters only'
+                        }
+                    }
+                }
+            }
+        });
+
+        this.bv         = $('#containerForm').data('bootstrapValidator');
+        this.$firstName = this.bv.getFieldElements('firstName');
+        this.$lastName  = this.bv.getFieldElements('lastName');
+
+        this.$firstName.val('').trigger('blur');
+        this.bv.validate();
+        expect(this.$firstName.parent().find('i').data('bs.tooltip')).toBeDefined();
+        expect(this.$firstName.parent().find('i').data('bs.tooltip').type).toEqual('tooltip');
+        expect(this.$firstName.parent().find('i').data('bs.tooltip').getTitle()).toEqual('The first name is required');
+
+        this.bv.resetForm();
+        this.$firstName.val('@not#valid');
+        this.$lastName.val('').focus();
+        this.bv.validate();
+        expect(this.$firstName.parent().find('i').data('bs.tooltip')).toBeDefined();
+        expect(this.$firstName.parent().find('i').data('bs.tooltip').type).toEqual('tooltip');
+        expect(this.$firstName.parent().find('i').data('bs.tooltip').getTitle()).toEqual('The first name must consist of a-z, A-Z characters only');
+
+        this.bv.resetForm();
+        this.$firstName.val('Phuo');
+        this.$lastName.val('').focus();
+        this.bv.validate();
+        expect(this.$firstName.parent().find('i').data('bs.tooltip')).toBeDefined();
+        expect(this.$firstName.parent().find('i').data('bs.tooltip').type).toEqual('tooltip');
+        expect(this.$firstName.parent().find('i').data('bs.tooltip').getTitle()).toEqual('The first name must be more than 5 characters');
+
+        this.bv.resetForm();
+        this.$firstName.val('Phuoc');
+        this.$lastName.val('').focus();
+        this.bv.validate();
+        expect(this.$firstName.parent().find('i').data('bs.tooltip')).toBeUndefined();
+    });
 });
