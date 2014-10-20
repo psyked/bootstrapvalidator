@@ -7,6 +7,9 @@ __New Features__
 * [#822](https://github.com/nghuuphuoc/bootstrapvalidator/pull/822): Add color validator, thanks to [@emilchristensen](https://github.com/emilchristensen)
 * [#844](https://github.com/nghuuphuoc/bootstrapvalidator/pull/844), [#874](https://github.com/nghuuphuoc/bootstrapvalidator/pull/874): The [stringLength](http://bootstrapvalidator.com/validators/stringLength/) validator adds option to evaluate length in UTF-8 bytes, thanks to [@thx2001r](https://github.com/thx2001r)
 
+__Bug Fixes__
+* [#933](https://github.com/nghuuphuoc/bootstrapvalidator/issues/933), [#959](https://github.com/nghuuphuoc/bootstrapvalidator/issues/959): Tooltip/popover isn't destroyed when the field is valid
+
 __Document__
 * [#848](https://github.com/nghuuphuoc/bootstrapvalidator/pull/848): Update the [stringLength](http://bootstrapvalidator.com/validators/stringLength) document, thanks to [@Relequestual](https://github.com/Relequestual)
 * [#912](https://github.com/nghuuphuoc/bootstrapvalidator/issues/912): Add [Using language package](http://bootstrapvalidator.com/examples/using-language-package/) example

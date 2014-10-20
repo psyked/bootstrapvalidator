@@ -1084,7 +1084,7 @@ if (typeof jQuery === 'undefined') {
                                     placement: 'top',
                                     title: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html()
                                 })
-                                : $icon.tooltip('hide');
+                                : $icon.css('cursor', '').tooltip('destroy');
                         break;
                     // ... or popover
                     case ($icon && 'popover' === container):
@@ -1096,7 +1096,7 @@ if (typeof jQuery === 'undefined') {
                                     placement: 'top',
                                     trigger: 'hover click'
                                 })
-                                : $icon.popover('hide');
+                                : $icon.css('cursor', '').popover('destroy');
                         break;
                     default:
                         (status === this.STATUS_INVALID) ? $errors.show() : $errors.hide();

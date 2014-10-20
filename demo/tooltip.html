@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BootstrapValidator demo</title>
+
+    <link rel="stylesheet" href="../vendor/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="../dist/css/bootstrapValidator.css"/>
+
+    <script type="text/javascript" src="../vendor/jquery/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../dist/js/bootstrapValidator.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <section>
+                <div class="col-sm-8 col-sm-offset-2">
+                    <div class="page-header">
+                        <h2>Tooltip container</h2>
+                    </div>
+
+                    <form id="defaultForm" method="post" class="form-horizontal" action="target.php">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Full name</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="firstName" placeholder="First name" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-9 col-sm-offset-3">
+                                <button type="submit" class="btn btn-primary">Sign up</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#defaultForm').bootstrapValidator({
+        container: 'tooltip',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            firstName: {
+                validators: {
+                    stringLength: {
+                        enabled: false,
+                        min: 4,
+                        message: 'The first name must be more than 5 characters'
+                    },
+                    notEmpty: {
+                        message: 'The first name is required'
+                    },
+                    regexp: {
+                        enabled: true,
+                        regexp: /^[a-z]+$/i,
+                        message: 'The first name must consist of a-z, A-Z characters only'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>
+</body>
+</html>
