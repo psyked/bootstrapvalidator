@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.3-dev, built on 2014-10-20 3:51:09 PM
+ * @version     v0.5.3-dev, built on 2014-10-20 4:14:15 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -3261,7 +3261,12 @@ if (typeof jQuery === 'undefined') {
             if (value === '') {
                 return true;
             }
-            return /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(value);
+
+            return ('color' === $field.attr('type'))
+                        // Only accept 6 hex character values due to the HTML 5 spec
+                        // See http://www.w3.org/TR/html-markup/input.color.html#input.color.attrs.value
+                        ? /^#[0-9A-F]{6}$/i.test(value)
+                        : /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(value);
         }
     };
 }(window.jQuery));

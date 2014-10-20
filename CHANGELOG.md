@@ -8,6 +8,9 @@ __New Features__
 * [#844](https://github.com/nghuuphuoc/bootstrapvalidator/pull/844), [#874](https://github.com/nghuuphuoc/bootstrapvalidator/pull/874): The [stringLength](http://bootstrapvalidator.com/validators/stringLength/) validator adds option to evaluate length in UTF-8 bytes, thanks to [@thx2001r](https://github.com/thx2001r)
 * [#960](https://github.com/nghuuphuoc/bootstrapvalidator/issues/960): Add ```trim``` option for the [stringLength](http://bootstrapvalidator.com/validators/stringLength/) validator
 
+__Improvements__
+* [#823](https://github.com/nghuuphuoc/bootstrapvalidator/issues/823): The [hexColor](http://bootstrapvalidator.com/validators/hexColor/) validator only accepts 6 hex character values when using HTML 5 ```type='color'``` attribute
+
 __Bug Fixes__
 * [#933](https://github.com/nghuuphuoc/bootstrapvalidator/issues/933), [#959](https://github.com/nghuuphuoc/bootstrapvalidator/issues/959): Tooltip/popover isn't destroyed when the field is valid
 * [#991](https://github.com/nghuuphuoc/bootstrapvalidator/issues/991): The field is validated only one time when setting ```trigger: 'blur'```, ```container: 'tooltip'```
