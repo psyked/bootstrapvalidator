@@ -1081,7 +1081,7 @@ if (typeof jQuery === 'undefined') {
                                 ? $icon.css('cursor', 'pointer').tooltip('destroy').tooltip({
                                     container: 'body',
                                     html: true,
-                                    placement: 'top',
+                                    placement: 'auto top',
                                     title: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html()
                                 })
                                 : $icon.css('cursor', '').tooltip('destroy');
@@ -1093,7 +1093,7 @@ if (typeof jQuery === 'undefined') {
                                     container: 'body',
                                     content: $allErrors.filter('[data-bv-result="' + that.STATUS_INVALID + '"]').eq(0).html(),
                                     html: true,
-                                    placement: 'top',
+                                    placement: 'auto top',
                                     trigger: 'hover click'
                                 })
                                 : $icon.css('cursor', '').popover('destroy');
