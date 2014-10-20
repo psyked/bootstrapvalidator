@@ -368,8 +368,8 @@ if (typeof jQuery === 'undefined') {
                     if (container) {
                         $field
                             // Show tooltip/popover message when field gets focus
-                            .off('focus.bv')
-                            .on('focus.bv', function() {
+                            .off('focus.container.bv')
+                            .on('focus.container.bv', function() {
                                 switch (container) {
                                     case 'tooltip':
                                         $icon.tooltip('show');
@@ -382,8 +382,8 @@ if (typeof jQuery === 'undefined') {
                                 }
                             })
                             // and hide them when losing focus
-                            .off('blur.bv')
-                            .on('blur.bv', function() {
+                            .off('blur.container.bv')
+                            .on('blur.container.bv', function() {
                                 switch (container) {
                                     case 'tooltip':
                                         $icon.tooltip('hide');

@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.3-dev, built on 2014-10-20 2:17:51 PM
+ * @version     v0.5.3-dev, built on 2014-10-20 3:33:28 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -368,8 +368,8 @@ if (typeof jQuery === 'undefined') {
                     if (container) {
                         $field
                             // Show tooltip/popover message when field gets focus
-                            .off('focus.bv')
-                            .on('focus.bv', function() {
+                            .off('focus.container.bv')
+                            .on('focus.container.bv', function() {
                                 switch (container) {
                                     case 'tooltip':
                                         $icon.tooltip('show');
@@ -382,8 +382,8 @@ if (typeof jQuery === 'undefined') {
                                 }
                             })
                             // and hide them when losing focus
-                            .off('blur.bv')
-                            .on('blur.bv', function() {
+                            .off('blur.container.bv')
+                            .on('blur.container.bv', function() {
                                 switch (container) {
                                     case 'tooltip':
                                         $icon.tooltip('hide');
