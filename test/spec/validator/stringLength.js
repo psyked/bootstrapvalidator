@@ -179,4 +179,42 @@ describe('stringLength', function() {
         this.bv.validate();
         expect(this.bv.isValid()).toEqual(false);
     });
+
+    it('trim option', function() {
+        this.bv.updateOption('textCharMaxLength', 'stringLength', 'trim', false);
+        this.$textCharMaxLength.val('');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(true);
+
+        this.bv.resetForm();
+        this.$textCharMaxLength.val('           ');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$textCharMaxLength.val('1234567890   ');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.updateOption('textCharMaxLength', 'stringLength', 'trim', true);
+        this.bv.resetForm();
+        this.$textCharMaxLength.val('   ');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(true);
+
+        this.bv.resetForm();
+        this.$textCharMaxLength.val('                ');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(true);
+
+        this.bv.resetForm();
+        this.$textCharMaxLength.val('  0123456789   ');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(true);
+
+        this.bv.resetForm();
+        this.$textCharMaxLength.val('  01234567890  ');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+    });
 });

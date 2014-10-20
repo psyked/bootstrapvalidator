@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.3-dev, built on 2014-10-20 3:33:28 PM
+ * @version     v0.5.3-dev, built on 2014-10-20 3:51:09 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -6186,6 +6186,7 @@ if (typeof jQuery === 'undefined') {
             message: 'message',
             min: 'min',
             max: 'max',
+            trim: 'trim',
             utf8bytes: 'utf8Bytes'
         },
 
@@ -6219,11 +6220,16 @@ if (typeof jQuery === 'undefined') {
          *      - A callback function that returns the number
          *
          * - message: The invalid message
+         * - trim: Indicate the length will be calculated after trimming the value or not. It is false, by default
          * - utf8bytes: Evaluate string length in UTF-8 bytes, default to false
          * @returns {Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
+            if (options.trim === true || options.trim === 'true') {
+                value = $.trim(value);
+            }
+
             if (value === '') {
                 return true;
             }

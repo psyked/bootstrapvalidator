@@ -11,6 +11,7 @@
             message: 'message',
             min: 'min',
             max: 'max',
+            trim: 'trim',
             utf8bytes: 'utf8Bytes'
         },
 
@@ -44,11 +45,16 @@
          *      - A callback function that returns the number
          *
          * - message: The invalid message
+         * - trim: Indicate the length will be calculated after trimming the value or not. It is false, by default
          * - utf8bytes: Evaluate string length in UTF-8 bytes, default to false
          * @returns {Object}
          */
         validate: function(validator, $field, options) {
             var value = $field.val();
+            if (options.trim === true || options.trim === 'true') {
+                value = $.trim(value);
+            }
+
             if (value === '') {
                 return true;
             }
