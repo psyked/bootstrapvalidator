@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.3-dev, built on 2014-10-20 4:14:15 PM
+ * @version     v0.5.3-dev, built on 2014-10-20 3:21:10 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -3043,8 +3043,12 @@ if (typeof jQuery === 'undefined') {
     $.fn.bootstrapValidator.validators.file = {
         html5Attributes: {
             extension: 'extension',
+            maxfiles: 'maxFiles',
+            minfiles: 'minFiles',
             maxsize: 'maxSize',
             minsize: 'minSize',
+            maxtotalsize: 'maxTotalSize',
+            mintotalsize: 'minTotalSize',
             message: 'message',
             type: 'type'
         },
@@ -3056,8 +3060,12 @@ if (typeof jQuery === 'undefined') {
          * @param {jQuery} $field Field element
          * @param {Object} options Can consist of the following keys:
          * - extension: The allowed extensions, separated by a comma
+         * - maxFiles: The maximum number of files
+         * - minFiles: The minimum number of files
          * - maxSize: The maximum size in bytes
-         * - minSize: the minimum size in bytes
+         * - minSize: The minimum size in bytes
+         * - maxTotalSize: The maximum size in bytes for all files
+         * - minTotalSize: The minimum size in bytes for all files
          * - message: The invalid message
          * - type: The allowed MIME type, separated by a comma
          * @returns {Boolean}
@@ -3076,15 +3084,34 @@ if (typeof jQuery === 'undefined') {
             if (html5) {
                 // Get FileList instance
                 var files = $field.get(0).files,
-                    total = files.length;
+                    total = files.length,
+                    totalSize = 0;
+
+                // Check the maxFiles
+                if (options.maxFiles && total > parseInt(options.maxFiles, 10)) {
+                  return false;
+                }
+
+                // Check the minFiles
+                if (options.minFiles && total < parseInt(options.minFiles, 10)) {
+                  return false;
+                }
+
                 for (var i = 0; i < total; i++) {
+                    totalSize += files[i].size;
+
                     // Check the minSize
                     if (options.minSize && files[i].size < parseInt(options.minSize, 10)) {
                         return false;
                     }
-                    
+
                     // Check the maxSize
                     if (options.maxSize && files[i].size > parseInt(options.maxSize, 10)) {
+                        return false;
+                    }
+
+                    // Check the maxTotalSize
+                    if (options.maxTotalSize && totalSize > parseInt(options.maxTotalSize, 10)) {
                         return false;
                     }
 
@@ -3098,6 +3125,11 @@ if (typeof jQuery === 'undefined') {
                     if (files[i].type && types && $.inArray(files[i].type.toLowerCase(), types) === -1) {
                         return false;
                     }
+                }
+
+                // Check the minTotalSize
+                if (options.minTotalSize && totalSize < parseInt(options.minTotalSize, 10)) {
+                    return false;
                 }
             } else {
                 // Check file extension
