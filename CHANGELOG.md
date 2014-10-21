@@ -7,6 +7,7 @@ __New Features__
 * [#822](https://github.com/nghuuphuoc/bootstrapvalidator/pull/822): Add color validator, thanks to [@emilchristensen](https://github.com/emilchristensen)
 * [#844](https://github.com/nghuuphuoc/bootstrapvalidator/pull/844), [#874](https://github.com/nghuuphuoc/bootstrapvalidator/pull/874): The [stringLength](http://bootstrapvalidator.com/validators/stringLength/) validator adds option to evaluate length in UTF-8 bytes, thanks to [@thx2001r](https://github.com/thx2001r)
 * [#960](https://github.com/nghuuphuoc/bootstrapvalidator/issues/960): Add ```trim``` option for the [stringLength](http://bootstrapvalidator.com/validators/stringLength/) validator
+* [#1001](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1001): Add ```minFiles```, ```maxFiles```, ```minTotalSize```, ```maxTotalSize``` options for the [file](http://bootstrapvalidator.com/validators/file/) validator, thanks to [@morrizon](https://github.com/morrizon)
 
 __Improvements__
 * [#823](https://github.com/nghuuphuoc/bootstrapvalidator/issues/823): The [hexColor](http://bootstrapvalidator.com/validators/hexColor/) validator only accepts 6 hex character values when using HTML 5 ```type='color'``` attribute

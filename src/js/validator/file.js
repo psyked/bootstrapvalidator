@@ -46,52 +46,32 @@
 
             if (html5) {
                 // Get FileList instance
-                var files = $field.get(0).files,
-                    total = files.length,
+                var files     = $field.get(0).files,
+                    total     = files.length,
                     totalSize = 0;
 
-                // Check the maxFiles
-                if (options.maxFiles && total > parseInt(options.maxFiles, 10)) {
-                  return false;
-                }
-
-                // Check the minFiles
-                if (options.minFiles && total < parseInt(options.minFiles, 10)) {
-                  return false;
+                if ((options.maxFiles && total > parseInt(options.maxFiles, 10))        // Check the maxFiles
+                    || (options.minFiles && total < parseInt(options.minFiles, 10)))    // Check the minFiles
+                {
+                    return false;
                 }
 
                 for (var i = 0; i < total; i++) {
                     totalSize += files[i].size;
+                    ext        = files[i].name.substr(files[i].name.lastIndexOf('.') + 1);
 
-                    // Check the minSize
-                    if (options.minSize && files[i].size < parseInt(options.minSize, 10)) {
-                        return false;
-                    }
-
-                    // Check the maxSize
-                    if (options.maxSize && files[i].size > parseInt(options.maxSize, 10)) {
-                        return false;
-                    }
-
-                    // Check the maxTotalSize
-                    if (options.maxTotalSize && totalSize > parseInt(options.maxTotalSize, 10)) {
-                        return false;
-                    }
-
-                    // Check file extension
-                    ext = files[i].name.substr(files[i].name.lastIndexOf('.') + 1);
-                    if (extensions && $.inArray(ext.toLowerCase(), extensions) === -1) {
-                        return false;
-                    }
-
-                    // Check file type
-                    if (files[i].type && types && $.inArray(files[i].type.toLowerCase(), types) === -1) {
+                    if ((options.minSize && files[i].size < parseInt(options.minSize, 10))                      // Check the minSize
+                        || (options.maxSize && files[i].size > parseInt(options.maxSize, 10))                   // Check the maxSize
+                        || (extensions && $.inArray(ext.toLowerCase(), extensions) === -1)                      // Check file extension
+                        || (files[i].type && types && $.inArray(files[i].type.toLowerCase(), types) === -1))    // Check file type
+                    {
                         return false;
                     }
                 }
 
-                // Check the minTotalSize
-                if (options.minTotalSize && totalSize < parseInt(options.minTotalSize, 10)) {
+                if ((options.maxTotalSize && totalSize > parseInt(options.maxTotalSize, 10))        // Check the maxTotalSize
+                    || (options.minTotalSize && totalSize < parseInt(options.minTotalSize, 10)))    // Check the minTotalSize
+                {
                     return false;
                 }
             } else {
