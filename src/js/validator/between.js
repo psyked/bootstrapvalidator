@@ -47,7 +47,8 @@
             if (value === '') {
                 return true;
             }
-			value = value.replace(',','.');
+
+			value = value.replace(',', '.');
             if (!$.isNumeric(value)) {
                 return false;
             }

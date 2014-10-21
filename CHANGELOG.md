@@ -11,6 +11,7 @@ __New Features__
 __Improvements__
 * [#823](https://github.com/nghuuphuoc/bootstrapvalidator/issues/823): The [hexColor](http://bootstrapvalidator.com/validators/hexColor/) validator only accepts 6 hex character values when using HTML 5 ```type='color'``` attribute
 * [#864](https://github.com/nghuuphuoc/bootstrapvalidator/pull/864): Coma separator handling in [greaterThan](http://bootstrapvalidator.com/validators/greaterThan/), [lessThan](http://bootstrapvalidator.com/validators/lessThan/) validators, thanks to [@mgibas](https://github.com/mgibas)
+* [#999](https://github.com/nghuuphuoc/bootstrapvalidator/pull/999): Replace ',' with '.' to validate decimal numbers correct, thanks to [@johanronn77](https://github.com/johanronn77)
 * [#1002](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1002): Put tooltip/popover on bottom if there is not enough space on top, thanks to [@jazzzz](https://github.com/jazzzz)
 
 __Bug Fixes__
