@@ -65,6 +65,7 @@ I would like to give big thanks to the following contributors:
 * [@MartinDevillers](https://github.com/MartinDevillers)
 * [@mattrick](https://github.com/mattrick)
 * [@mbezhanov](https://github.com/mbezhanov)
+* [@mgibas](https://github.com/mgibas)
 * [@mike1e](https://github.com/mike1e)
 * [@mraiur](https://github.com/mraiur)
 * [@MrC0mm0n](https://github.com/MrC0mm0n)
