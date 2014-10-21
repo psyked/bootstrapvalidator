@@ -29,12 +29,17 @@
                 return true;
             }
 
-            if (value === compareWith.val()) {
-                validator.updateStatus(options.field, validator.STATUS_VALID, 'identical');
+            var compareValue = compareWith.val();
+            if (compareValue === '') {
                 return true;
-            } else {
-                return false;
             }
+
+            if (value === compareValue) {
+                validator.updateStatus(compareWith, validator.STATUS_VALID, 'identical');
+                return true;
+            }
+
+            return false;
         }
     };
 }(window.jQuery));
