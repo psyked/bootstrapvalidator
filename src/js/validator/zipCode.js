@@ -90,9 +90,9 @@
                     break;
                     
                 // http://www.eircode.ie/docs/default-source/Common/prepare-your-business-for-eircode---published-v2.pdf?sfvrsn=2
-                // page 8
+                // Test: http://refiddle.com/1kpl
                 case 'EI':
-                    isValid = /^(D6W|[ACDEFHKNPRTVWXY]\d{2})(-|\s)?[0-9ACDEFHKNPRTVWXY]{4}$/i.test(value);
+                    isValid = /^(D6W|[ACDEFHKNPRTVWXY]\d{2})\s[0-9ACDEFHKNPRTVWXY]{4}$/.test(value);
                     break;
 
                 case 'GB':
