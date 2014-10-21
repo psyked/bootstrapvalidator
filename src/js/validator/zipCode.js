@@ -8,6 +8,7 @@
             CA: 'Canada',
             CZ: 'Czech Republic',
             DK: 'Denmark',
+            EI: 'Ireland',
             GB: 'United Kingdom',
             IT: 'Italy',
             MA: 'Morocco',
@@ -27,7 +28,7 @@
             country: 'country'
         },
 
-        COUNTRY_CODES: ['BR', 'CA', 'CZ', 'DK', 'GB', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
+        COUNTRY_CODES: ['BR', 'CA', 'CZ', 'DK', 'EI', 'GB', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -86,6 +87,12 @@
 
                 case 'DK':
                     isValid = /^(DK(-|\s)?)?\d{4}$/i.test(value);
+                    break;
+                    
+                // http://www.eircode.ie/docs/default-source/Common/prepare-your-business-for-eircode---published-v2.pdf?sfvrsn=2
+                // page 8
+                case 'EI':
+                    isValid = /^(D6W|[ACDEFHKNPRTVWXY]\d{2})(-|\s)?[0-9ACDEFHKNPRTVWXY]{4}$/i.test(value);
                     break;
 
                 case 'GB':
