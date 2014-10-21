@@ -56,6 +56,17 @@ describe('greaterThan', function() {
         expect(this.bv.isValid()).toBeTruthy();
     });
 
+    it('value with coma separator', function() {
+        this.$age.val('10,4');
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+
+        this.bv.resetForm();
+        this.$age.val('18,678');
+        this.bv.validate();
+        expect(this.bv.isValid()).toBeTruthy();
+    });
+
     it('compare to other field', function() {
         this.$age.attr('data-bv-greaterthan-value', 'minAge');
         this.bv.destroy();
