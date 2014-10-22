@@ -8,6 +8,7 @@
             CA: 'Canada',
             CZ: 'Czech Republic',
             DK: 'Denmark',
+            FR: 'France',
             GB: 'United Kingdom',
             IT: 'Italy',
             MA: 'Morocco',
@@ -27,7 +28,7 @@
             country: 'country'
         },
 
-        COUNTRY_CODES: ['BR', 'CA', 'CZ', 'DK', 'GB', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
+        COUNTRY_CODES: ['BR', 'CA', 'CZ', 'DK', 'FR', 'GB', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -86,6 +87,11 @@
 
                 case 'DK':
                     isValid = /^(DK(-|\s)?)?\d{4}$/i.test(value);
+                    break;
+
+                // http://en.wikipedia.org/wiki/Postal_codes_in_France
+                case 'FR':
+                    isValid = /^[0-9]{5}$/i.test(value);
                     break;
 
                 case 'GB':
