@@ -9,6 +9,7 @@ __New Features__
 * [#960](https://github.com/nghuuphuoc/bootstrapvalidator/issues/960): Add ```trim``` option for the [stringLength](http://bootstrapvalidator.com/validators/stringLength/) validator
 * [#1001](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1001): Add ```minFiles```, ```maxFiles```, ```minTotalSize```, ```maxTotalSize``` options for the [file](http://bootstrapvalidator.com/validators/file/) validator, thanks to [@morrizon](https://github.com/morrizon)
 * [#1008](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1008): Add France [postal code](http://bootstrapvalidator.com/validators/zipCode/) validator, thanks to [@jazzzz](https://github.com/jazzzz)
+* [#1010](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1010): Add Ireland [postal code](http://bootstrapvalidator.com/validators/zipCode/) validator, thanks to [@zmira](https://github.com/zmira)
 
 __Improvements__
 * [#823](https://github.com/nghuuphuoc/bootstrapvalidator/issues/823): The [hexColor](http://bootstrapvalidator.com/validators/hexColor/) validator only accepts 6 hex character values when using HTML 5 ```type='color'``` attribute

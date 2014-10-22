@@ -349,6 +349,7 @@
                 DK: 'Dániában',
                 FR: 'Franciaországban',
                 GB: 'az Egyesült Királyságban',
+                IE: 'Írországban',
                 IT: 'Olaszországban',
                 MA: 'Marokkóban',
                 NL: 'Hollandiában',

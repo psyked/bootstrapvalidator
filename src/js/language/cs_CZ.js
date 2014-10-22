@@ -349,6 +349,7 @@
                 DK: 'Dánsko',
                 FR: 'Francie',
                 GB: 'Velkou Británii',
+                IE: 'Irsko',
                 IT: 'Itálie',
                 MA: 'Maroko',
                 NL: 'Nizozemí',

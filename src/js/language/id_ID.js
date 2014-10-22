@@ -349,6 +349,7 @@
                 DK: 'Denmark',
                 FR: 'Francis',
                 GB: 'Inggris',
+                IE: 'Irlandia',
                 IT: 'Italia',
                 MA: 'Maroko',
                 NL: 'Belanda',

@@ -101,4 +101,5 @@ I would like to give big thanks to the following contributors:
 * [@vadail](https://github.com/vadail)
 * [@vaz](https://github.com/vaz)
 * [@yakidahan](https://github.com/yakidahan)
+* [@zmira](https://github.com/zmira)
 * ... might be you! Let's [fork](https://github.com/nghuuphuoc/bootstrapvalidator/fork) and pull a request!

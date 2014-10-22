@@ -349,6 +349,7 @@
                 DK: 'Danske',
                 FR: 'Francuske',
                 GB: 'Engleske',
+                IE: 'Irske',
                 IT: 'Italije',
                 MA: 'Maroka',
                 NL: 'Holandije',

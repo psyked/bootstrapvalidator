@@ -349,6 +349,7 @@
                 DK: 'Đan Mạch',
                 FR: 'Pháp',
                 GB: 'Vương quốc Anh',
+                IE: 'Ireland',
                 IT: 'Ý',
                 MA: 'Maroc',
                 NL: 'Hà Lan',
