@@ -347,6 +347,7 @@
                 CA: 'Canada',
                 CZ: 'Séc',
                 DK: 'Đan Mạch',
+                FR: 'Pháp',
                 GB: 'Vương quốc Anh',
                 IT: 'Ý',
                 MA: 'Maroc',

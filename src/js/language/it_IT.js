@@ -347,6 +347,7 @@
                 CA: 'Canada',
                 CZ: 'Republica Ceca',
                 DK: 'Danimarca',
+                FR: 'Francia',
                 GB: 'Regno Unito',
                 IT: 'Italia',
                 MA: 'Marocco',

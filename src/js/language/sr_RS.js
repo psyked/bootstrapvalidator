@@ -347,6 +347,7 @@
                 CA: 'Kanade',
                 CZ: 'Češke',
                 DK: 'Danske',
+                FR: 'Francuske',
                 GB: 'Engleske',
                 IT: 'Italije',
                 MA: 'Maroka',

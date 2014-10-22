@@ -347,6 +347,7 @@
                 CA: 'Kanadában',
                 CZ: 'Csehországban',
                 DK: 'Dániában',
+                FR: 'Franciaországban',
                 GB: 'az Egyesült Királyságban',
                 IT: 'Olaszországban',
                 MA: 'Marokkóban',

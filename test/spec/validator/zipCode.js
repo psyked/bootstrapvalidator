@@ -22,16 +22,16 @@ describe('zipCode', function() {
                     '<div class="col-md-2">',
                         '<select class="form-control" name="country">',
                             '<option value="">Select a country</option>',
-                            '<option value="US">United States</option>',
                             '<option value="CA">Canada</option>',
                             '<option value="CZ">Czech Republic</option>',
                             '<option value="DK">Denmark</option>',
+                            '<option value="FR">France</option>',
+                            '<option value="GB">United Kingdom</option>',
                             '<option value="IT">Italy</option>',
                             '<option value="NL">Netherlands</option>',
                             '<option value="SE">Sweden</option>',
                             '<option value="SK">Slovakia</option>',
-                            '<option value="GB">United Kingdom</option>',
-                            '<option value="FR">France</option>',
+                            '<option value="US">United States</option>',
                         '</select>',
                     '</div>',
                 '</div>',
@@ -271,5 +271,4 @@ describe('zipCode', function() {
             expect(this.bv.isValid()).toEqual(false);
         }
     });
-
 });
