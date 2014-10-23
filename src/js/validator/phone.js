@@ -7,6 +7,7 @@
             BR: 'Brazil',
             CN: 'China',
             CZ: 'Czech Republic',
+            DE: 'Germany',
             DK: 'Denmark',
             ES: 'Spain',
             FR: 'France',
@@ -29,7 +30,7 @@
         },
 
         // The supported countries
-        COUNTRY_CODES: ['BR', 'CN', 'CZ', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'RU', 'SK', 'TH', 'US', 'VE'],
+        COUNTRY_CODES: ['BR', 'CN', 'CZ', 'DE', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'RU', 'SK', 'TH', 'US', 'VE'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -83,6 +84,12 @@
                 case 'CZ':
                     // Test: http://regexr.com/39hhl
                     isValid = /^(((00)([- ]?)|\+)(420)([- ]?))?((\d{3})([- ]?)){2}(\d{3})$/.test(value);
+                    break;
+
+                case 'DE':
+                    // Test: http://regexr.com/39pkg
+                    value   = $.trim(value);
+                    isValid = (/^(((((((00|\+)49[ \-/]?)|0)[1-9][0-9]{1,4})[ \-/]?)|((((00|\+)49\()|\(0)[1-9][0-9]{1,4}\)[ \-/]?))[0-9]{1,7}([ \-/]?[0-9]{1,5})?)$/).test(value);
                     break;
 
                 case 'DK':
