@@ -30,7 +30,7 @@ describe('zipCode', function() {
                             '<option value="IE">Ireland</option>',
                             '<option value="IT">Italy</option>',
                             '<option value="NL">Netherlands</option>',
-                            '<option value="NL">Portugal</option>',
+                            '<option value="PT">Portugal</option>',
                             '<option value="SE">Sweden</option>',
                             '<option value="SK">Slovakia</option>',
                             '<option value="US">United States</option>',
