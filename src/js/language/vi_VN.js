@@ -88,7 +88,6 @@
                 CZ: 'Séc',
                 DE: 'Đức',
                 DK: 'Đan Mạch',
-                DM: 'Dominica',
                 DO: 'Dominican',
                 DZ: 'Algeria',
                 EE: 'Estonia',
