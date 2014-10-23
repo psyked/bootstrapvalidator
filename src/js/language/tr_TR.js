@@ -88,7 +88,6 @@
                 CZ: 'Çek Cumhuriyeti',
                 DE: 'Almanya',
                 DK: 'Danimarka',
-                DM: 'Dominika',
                 DO: 'Dominik Cumhuriyeti',
                 DZ: 'Cezayir',
                 EE: 'Estonya',

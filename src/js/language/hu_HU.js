@@ -88,7 +88,6 @@
                 CZ: 'cseh',
                 DE: 'Német',
                 DK: 'dán',
-                DM: 'Dominika',
                 DO: 'Dominikai Köztársaság beli',
                 DZ: 'algériai',
                 EE: 'észtországi',

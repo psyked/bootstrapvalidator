@@ -88,7 +88,6 @@
                 CZ: 'Češke',
                 DE: 'Nemačke',
                 DK: 'Danske',
-                DM: 'Dominica',
                 DO: 'Dominike',
                 DZ: 'Alžira',
                 EE: 'Estonije',
