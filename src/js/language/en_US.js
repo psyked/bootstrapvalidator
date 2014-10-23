@@ -88,7 +88,6 @@
                 CZ: 'Czech Republic',
                 DE: 'Germany',
                 DK: 'Denmark',
-                DM: 'Dominica',
                 DO: 'Dominican Republic',
                 DZ: 'Algeria',
                 EE: 'Estonia',
