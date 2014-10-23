@@ -8,6 +8,8 @@ __New Features__
 * [#844](https://github.com/nghuuphuoc/bootstrapvalidator/pull/844), [#874](https://github.com/nghuuphuoc/bootstrapvalidator/pull/874): The [stringLength](http://bootstrapvalidator.com/validators/stringLength/) validator adds option to evaluate length in UTF-8 bytes, thanks to [@thx2001r](https://github.com/thx2001r)
 * [#960](https://github.com/nghuuphuoc/bootstrapvalidator/issues/960): Add ```trim``` option for the [stringLength](http://bootstrapvalidator.com/validators/stringLength/) validator
 * [#1001](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1001): Add ```minFiles```, ```maxFiles```, ```minTotalSize```, ```maxTotalSize``` options for the [file](http://bootstrapvalidator.com/validators/file/) validator, thanks to [@morrizon](https://github.com/morrizon)
+* [#1008](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1008): Add France [postal code](http://bootstrapvalidator.com/validators/zipCode/) validator, thanks to [@jazzzz](https://github.com/jazzzz)
+* [#1010](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1010): Add Ireland [postal code](http://bootstrapvalidator.com/validators/zipCode/) validator, thanks to [@zmira](https://github.com/zmira)
 
 __Improvements__
 * [#823](https://github.com/nghuuphuoc/bootstrapvalidator/issues/823): The [hexColor](http://bootstrapvalidator.com/validators/hexColor/) validator only accepts 6 hex character values when using HTML 5 ```type='color'``` attribute
@@ -27,6 +29,8 @@ __Document__
 * [#920](https://github.com/nghuuphuoc/bootstrapvalidator/issues/920), [#929](https://github.com/nghuuphuoc/bootstrapvalidator/pull/929), [#936](https://github.com/nghuuphuoc/bootstrapvalidator/pull/936): Update the [Changing the tooltip, popover's position](http://bootstrapvalidator.com/examples/tooltip-popover-position/) example, thanks to [@Arkni](https://github.com/Arkni)
 * [#938](https://github.com/nghuuphuoc/bootstrapvalidator/issues/938): Add [time](http://bootstrapvalidator.com/validators/regexp/#html-5-example) validator example
 * [#979](https://github.com/nghuuphuoc/bootstrapvalidator/issues/979): Add [Rails usage](http://bootstrapvalidator.com/validators/stringLength/#using-with-rails-form) for stringLength validator
+* [#1006](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1006): Fix the order of parameters for enableFieldValidators() method, thanks to [@mchrapka](https://github.com/mchrapka)
+* [#1009](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1009): Fixed mixed data/delay in remote doc, thanks to [@jazzzz](https://github.com/jazzzz)
 
 __Language Packages__
 * [#827](https://github.com/nghuuphuoc/bootstrapvalidator/pull/827): Update Dutch language package, thanks to [@JvanderHeide](https://github.com/JvanderHeide)

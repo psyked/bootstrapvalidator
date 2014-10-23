@@ -8,8 +8,9 @@
             CA: 'Canada',
             CZ: 'Czech Republic',
             DK: 'Denmark',
-            EI: 'Ireland',
+            FR: 'France',
             GB: 'United Kingdom',
+            IE: 'Ireland',
             IT: 'Italy',
             MA: 'Morocco',
             NL: 'Netherlands',
@@ -28,7 +29,7 @@
             country: 'country'
         },
 
-        COUNTRY_CODES: ['BR', 'CA', 'CZ', 'DK', 'EI', 'GB', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
+        COUNTRY_CODES: ['BR', 'CA', 'CZ', 'DK', 'FR', 'GB', 'IE', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -89,14 +90,19 @@
                     isValid = /^(DK(-|\s)?)?\d{4}$/i.test(value);
                     break;
                     
-                // http://www.eircode.ie/docs/default-source/Common/prepare-your-business-for-eircode---published-v2.pdf?sfvrsn=2
-                // Test: http://refiddle.com/1kpl
-                case 'EI':
-                    isValid = /^(D6W|[ACDEFHKNPRTVWXY]\d{2})\s[0-9ACDEFHKNPRTVWXY]{4}$/.test(value);
+                // http://en.wikipedia.org/wiki/Postal_codes_in_France
+                case 'FR':
+                    isValid = /^[0-9]{5}$/i.test(value);
                     break;
 
                 case 'GB':
                     isValid = this._gb(value);
+                    break;
+                
+                // http://www.eircode.ie/docs/default-source/Common/prepare-your-business-for-eircode---published-v2.pdf?sfvrsn=2
+                // Test: http://refiddle.com/1kpl
+                case 'IE':
+                    isValid = /^(D6W|[ACDEFHKNPRTVWXY]\d{2})\s[0-9ACDEFHKNPRTVWXY]{4}$/.test(value);
                     break;
 
                 // http://en.wikipedia.org/wiki/List_of_postal_codes_in_Italy

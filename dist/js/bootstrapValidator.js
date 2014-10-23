@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.3-dev, built on 2014-10-21 3:55:22 PM
+ * @version     v0.5.3-dev, built on 2014-10-22 8:50:18 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -7940,7 +7940,9 @@ if (typeof jQuery === 'undefined') {
             CA: 'Canada',
             CZ: 'Czech Republic',
             DK: 'Denmark',
+            FR: 'France',
             GB: 'United Kingdom',
+            IE: 'Ireland',
             IT: 'Italy',
             MA: 'Morocco',
             NL: 'Netherlands',
@@ -7959,7 +7961,7 @@ if (typeof jQuery === 'undefined') {
             country: 'country'
         },
 
-        COUNTRY_CODES: ['BR', 'CA', 'CZ', 'DK', 'GB', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
+        COUNTRY_CODES: ['BR', 'CA', 'CZ', 'DK', 'FR', 'GB', 'IE', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -8019,9 +8021,20 @@ if (typeof jQuery === 'undefined') {
                 case 'DK':
                     isValid = /^(DK(-|\s)?)?\d{4}$/i.test(value);
                     break;
+                    
+                // http://en.wikipedia.org/wiki/Postal_codes_in_France
+                case 'FR':
+                    isValid = /^[0-9]{5}$/i.test(value);
+                    break;
 
                 case 'GB':
                     isValid = this._gb(value);
+                    break;
+                
+                // http://www.eircode.ie/docs/default-source/Common/prepare-your-business-for-eircode---published-v2.pdf?sfvrsn=2
+                // Test: http://refiddle.com/1kpl
+                case 'IE':
+                    isValid = /^(D6W|[ACDEFHKNPRTVWXY]\d{2})\s[0-9ACDEFHKNPRTVWXY]{4}$/.test(value);
                     break;
 
                 // http://en.wikipedia.org/wiki/List_of_postal_codes_in_Italy

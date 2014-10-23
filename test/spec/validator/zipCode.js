@@ -22,16 +22,17 @@ describe('zipCode', function() {
                     '<div class="col-md-2">',
                         '<select class="form-control" name="country">',
                             '<option value="">Select a country</option>',
-                            '<option value="US">United States</option>',
                             '<option value="CA">Canada</option>',
                             '<option value="CZ">Czech Republic</option>',
                             '<option value="DK">Denmark</option>',
+                            '<option value="FR">France</option>',
+                            '<option value="GB">United Kingdom</option>',
+                            '<option value="IE">Ireland</option>',
                             '<option value="IT">Italy</option>',
                             '<option value="NL">Netherlands</option>',
                             '<option value="SE">Sweden</option>',
                             '<option value="SK">Slovakia</option>',
-                            '<option value="GB">United Kingdom</option>',
-                            '<option value="IE">Ireland</option>',
+                            '<option value="US">United States</option>',
                         '</select>',
                     '</div>',
                 '</div>',
@@ -242,6 +243,28 @@ describe('zipCode', function() {
 
         // Invalid samples
         var invalidSamples = ['12 345', '123456', '1 2345', '1234 5', '12 3 45'];
+        for (i in invalidSamples) {
+            this.bv.resetForm();
+            this.$zipCode.val(invalidSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toEqual(false);
+        }
+    });
+
+    it('France postal code', function() {
+        this.bv.updateOption('zc', 'zipCode', 'country', 'FR');
+
+        // Valid samples
+        var validSamples = ['12340', '01230', '75116'];
+        for (var i in validSamples) {
+            this.bv.resetForm();
+            this.$zipCode.val(validSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toBeTruthy();
+        }
+
+        // Invalid samples
+        var invalidSamples = ['123 45', '12 345', '123456', '1 2345', '1234 5', '12 3 45', '1234A'];
         for (i in invalidSamples) {
             this.bv.resetForm();
             this.$zipCode.val(invalidSamples[i]);
