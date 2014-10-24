@@ -94,7 +94,7 @@
                 CZ: 'Çek Cumhuriyeti',
                 DE: 'Almanya',
                 DK: 'Danimarka',
-                DO: 'Dominika',
+                DO: 'Dominik Cumhuriyeti',
                 DZ: 'Cezayir',
                 EE: 'Estonya',
                 ES: 'İspanya',

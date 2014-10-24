@@ -94,7 +94,7 @@
                 CZ: 'Tjekkiet',
                 DE: 'Tyskland',
                 DK: 'Danmark',
-                DO: 'Dominica',
+                DO: 'Den Dominikanske Republik',
                 DZ: 'Algeriet',
                 EE: 'Estland',
                 ES: 'Spanien',

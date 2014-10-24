@@ -27,7 +27,7 @@
             CZ: 'Czech Republic',
             DE: 'Germany',
             DK: 'Denmark',
-            DO: 'Dominica',
+            DO: 'Dominican Republic',
             DZ: 'Algeria',
             EE: 'Estonia',
             ES: 'Spain',
