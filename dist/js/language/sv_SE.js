@@ -355,6 +355,7 @@
                 IT: 'Italien',
                 MA: 'Marocko',
                 NL: 'Nederländerna',
+                PT: 'Portugal',
                 RO: 'Rumänien',
                 RU: 'Ryssland',
                 SE: 'Sverige',

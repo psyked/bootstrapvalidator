@@ -355,6 +355,7 @@
                 IT: 'İtalya',
                 MA: 'Fas',
                 NL: 'Hollanda',
+                PT: 'Portekiz',
                 RO: 'Romanya',
                 RU: 'Rusya',
                 SE: 'İsveç',

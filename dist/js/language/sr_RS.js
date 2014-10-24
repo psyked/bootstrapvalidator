@@ -355,6 +355,7 @@
                 IT: 'Italije',
                 MA: 'Maroka',
                 NL: 'Holandije',
+                PT: 'Portugala',
                 RO: 'Rumunije',
                 RU: 'Rusije',
                 SE: 'Švedske',

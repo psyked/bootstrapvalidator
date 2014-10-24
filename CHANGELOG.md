@@ -11,6 +11,7 @@ __New Features__
 * [#1008](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1008): Add France [postal code](http://bootstrapvalidator.com/validators/zipCode/) validator, thanks to [@jazzzz](https://github.com/jazzzz)
 * [#1010](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1010): Add Ireland [postal code](http://bootstrapvalidator.com/validators/zipCode/) validator, thanks to [@zmira](https://github.com/zmira)
 * [#1018](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1018): Add German [phone number](http://bootstrapvalidator.com/validators/phone/) and [postal code](http://bootstrapvalidator.com/validators/zipCode/) validators, thanks to [@jhadenfeldt](https://github.com/jhadenfeldt)
+* [#1022](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1022): Add Portugal [postal code](http://bootstrapvalidator.com/validators/zipCode/) validator, thanks to [@zmira](https://github.com/zmira)
 
 __Improvements__
 * [#823](https://github.com/nghuuphuoc/bootstrapvalidator/issues/823): The [hexColor](http://bootstrapvalidator.com/validators/hexColor/) validator only accepts 6 hex character values when using HTML 5 ```type='color'``` attribute

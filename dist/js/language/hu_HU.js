@@ -355,6 +355,7 @@
                 IT: 'Olaszországban',
                 MA: 'Marokkóban',
                 NL: 'Hollandiában',
+                PT: 'Portugáliában',
                 RO: 'Romániában',
                 RU: 'Oroszországban',
                 SE: 'Svájcban',

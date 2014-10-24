@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.3-dev, built on 2014-10-24 11:14:06 AM
+ * @version     v0.5.3-dev, built on 2014-10-24 11:29:27 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -7954,6 +7954,7 @@ if (typeof jQuery === 'undefined') {
             IT: 'Italy',
             MA: 'Morocco',
             NL: 'Netherlands',
+            PT: 'Portugal',
             RO: 'Romania',
             RU: 'Russia',
             SE: 'Sweden',
@@ -7969,7 +7970,7 @@ if (typeof jQuery === 'undefined') {
             country: 'country'
         },
 
-        COUNTRY_CODES: ['BR', 'CA', 'CZ', 'DE', 'DK', 'FR', 'GB', 'IE', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
+        COUNTRY_CODES: ['BR', 'CA', 'CZ', 'DE', 'DK', 'FR', 'GB', 'IE', 'IT', 'MA', 'NL', 'PT', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -8062,6 +8063,11 @@ if (typeof jQuery === 'undefined') {
                 // http://en.wikipedia.org/wiki/Postal_codes_in_the_Netherlands
                 case 'NL':
                     isValid = /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i.test(value);
+                    break;
+                
+                // Test: http://refiddle.com/1l2t
+                case 'PT':
+                    isValid = /^[1-9]\d{3}-\d{3}$/.test(value);
                     break;
                     
                 case 'RO':

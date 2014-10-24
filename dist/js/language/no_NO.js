@@ -355,6 +355,7 @@
                 IT: 'Italia',
                 MA: 'Marokko',
                 NL: 'Nederland',
+                PT: 'Portugal',
                 RO: 'Romania',
                 RU: 'Russland',
                 SE: 'Sverige',

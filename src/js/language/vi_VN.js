@@ -355,6 +355,7 @@
                 IT: 'Ý',
                 MA: 'Maroc',
                 NL: 'Hà Lan',
+                PT: 'Bồ Đào Nha',
                 RO: 'Romania',
                 RU: 'Nga',
                 SE: 'Thuỵ Sĩ',

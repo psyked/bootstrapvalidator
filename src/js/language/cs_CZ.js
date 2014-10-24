@@ -355,6 +355,7 @@
                 IT: 'Itálie',
                 MA: 'Maroko',
                 NL: 'Nizozemí',
+                PT: 'Portugalsko',
                 RO: 'Rumunsko',
                 RU: 'Rusko',
                 SE: 'Švédsko',

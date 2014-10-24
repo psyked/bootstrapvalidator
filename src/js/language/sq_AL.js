@@ -355,6 +355,7 @@
                 IT: 'Itali',
                 MA: 'Marok',
                 NL: 'Hollandë',
+                PT: 'Portugali',
                 RO: 'Rumani',
                 RU: 'Rusi',
                 SE: 'Suedi',
