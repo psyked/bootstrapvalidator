@@ -43,6 +43,7 @@ I would like to give big thanks to the following contributors:
 * [@iplus](https://github.com/iplus)
 * [@jazzzz](https://github.com/jazzzz)
 * [@jcnmulio](https://github.com/jcnmulio)
+* [@jhadenfeldt](https://github.com/jhadenfeldt)
 * [@jjshoe](https://github.com/jjshoe)
 * [@johanronn77](https://github.com/johanronn77)
 * [@jswale](https://github.com/jswale)

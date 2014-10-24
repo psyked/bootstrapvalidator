@@ -6081,6 +6081,7 @@ describe('phone', function() {
                         '<option value="BR">Brazil</option>',
                         '<option value="CN">China</option>',
                         '<option value="CZ">Czech Republic</option>',
+                        '<option value="DE">Gemany</option>',
                         '<option value="DK">Denmark</option>',
                         '<option value="ES">Spain</option>',
                         '<option value="FR">France</option>',
@@ -6247,6 +6248,19 @@ describe('phone', function() {
             this.$phone.val(invalidSamples[i]);
             this.bv.validate();
             expect(this.bv.isValid()).toEqual(false);
+        }
+    });
+
+    it('Germany phone number', function() {
+        this.bv.updateOption('phone', 'phone', 'country', 'DE');
+
+        // Valid samples
+        var validSamples = ['+49(89)123456', '089-1234567', '0891234567', '0049-89-123456', '089 123456-78'];
+        for (var i in validSamples) {
+            this.bv.resetForm();
+            this.$phone.val(validSamples[i]);
+            this.bv.validate();
+            expect(this.bv.isValid()).toBeTruthy();
         }
     });
 
