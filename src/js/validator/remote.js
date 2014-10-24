@@ -9,6 +9,7 @@
             name: 'name',
             type: 'type',
             url: 'url',
+            data: 'data',
             delay: 'delay'
         },
 
@@ -57,6 +58,11 @@
             // Support dynamic data
             if ('function' === typeof data) {
                 data = data.call(this, validator);
+            }
+
+            // Parse string data from HTML5 attribute
+            if ('string' === typeof data) {
+                data = JSON.parse(data);
             }
 
             // Support dynamic url
