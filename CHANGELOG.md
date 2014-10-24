@@ -20,6 +20,7 @@ __Improvements__
 * [#999](https://github.com/nghuuphuoc/bootstrapvalidator/pull/999): Replace ',' with '.' to validate decimal numbers correct, thanks to [@johanronn77](https://github.com/johanronn77)
 * [#1002](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1002): Put tooltip/popover on bottom if there is not enough space on top, thanks to [@jazzzz](https://github.com/jazzzz)
 * [#1015](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1015): The [remote](http://bootstrapvalidator.com/validators/remote/) validator allows to set ```data``` options via HTML attributes, thanks to [@jazzzz](https://github.com/jazzzz)
+* [#1017](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1017): Enable validator when setting ```data-bv-validatorname="data-bv-validatorname"```, thanks to [@jazzzz](https://github.com/jazzzz)
 
 __Bug Fixes__
 * [#933](https://github.com/nghuuphuoc/bootstrapvalidator/issues/933), [#959](https://github.com/nghuuphuoc/bootstrapvalidator/issues/959): Tooltip/popover isn't destroyed when the field is valid
