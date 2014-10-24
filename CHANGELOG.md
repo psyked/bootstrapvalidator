@@ -52,6 +52,7 @@ __Language Packages__
 * [#881](https://github.com/nghuuphuoc/bootstrapvalidator/pull/881): Update Italian language package, thanks to [@maramazza](https://github.com/maramazza)
 * [#882](https://github.com/nghuuphuoc/bootstrapvalidator/pull/882): Update Spanish language package, thanks to [@vadail](https://github.com/vadail)
 * [#891](https://github.com/nghuuphuoc/bootstrapvalidator/pull/891): Update Portuguese (Brazil) language package, thanks to [@dgmike](https://github.com/dgmike)
+* [#893](https://github.com/nghuuphuoc/bootstrapvalidator/pull/893): Fix country name of Dominican Republic, thanks to [@sventech](https://github.com/sventech)
 * [#900](https://github.com/nghuuphuoc/bootstrapvalidator/pull/900): Update Persian (Farsi) language package, thanks to [@i0](https://github.com/i0)
 * [#903](https://github.com/nghuuphuoc/bootstrapvalidator/pull/903): Update Hungarian language package, thanks to [@blackfyre](https://github.com/blackfyre)
 * [#910](https://github.com/nghuuphuoc/bootstrapvalidator/pull/910): Update Greek language package, thanks to [@pRieStaKos](https://github.com/pRieStaKos)

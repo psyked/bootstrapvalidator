@@ -89,6 +89,7 @@ I would like to give big thanks to the following contributors:
 * [@smeagol74](https://github.com/smeagol74)
 * [@stephengreentree](https://github.com/stephengreentree)
 * [@stepin](https://github.com/stepin)
+* [@sventech](https://github.com/sventech)
 * [@talberti](https://github.com/talberti)
 * [@thisisclement](https://github.com/thisisclement)
 * [@thx2001r](https://github.com/thx2001r)
