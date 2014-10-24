@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.3-dev, built on 2014-10-22 8:50:18 AM
+ * @version     v0.5.3-dev, built on 2014-10-23 5:10:16 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -5648,6 +5648,7 @@ if (typeof jQuery === 'undefined') {
             BR: 'Brazil',
             CN: 'China',
             CZ: 'Czech Republic',
+            DE: 'Germany',
             DK: 'Denmark',
             ES: 'Spain',
             FR: 'France',
@@ -5670,7 +5671,7 @@ if (typeof jQuery === 'undefined') {
         },
 
         // The supported countries
-        COUNTRY_CODES: ['BR', 'CN', 'CZ', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'RU', 'SK', 'TH', 'US', 'VE'],
+        COUNTRY_CODES: ['BR', 'CN', 'CZ', 'DE', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'RU', 'SK', 'TH', 'US', 'VE'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -5724,6 +5725,12 @@ if (typeof jQuery === 'undefined') {
                 case 'CZ':
                     // Test: http://regexr.com/39hhl
                     isValid = /^(((00)([- ]?)|\+)(420)([- ]?))?((\d{3})([- ]?)){2}(\d{3})$/.test(value);
+                    break;
+
+                case 'DE':
+                    // Test: http://regexr.com/39pkg
+                    value   = $.trim(value);
+                    isValid = (/^(((((((00|\+)49[ \-/]?)|0)[1-9][0-9]{1,4})[ \-/]?)|((((00|\+)49\()|\(0)[1-9][0-9]{1,4}\)[ \-/]?))[0-9]{1,7}([ \-/]?[0-9]{1,5})?)$/).test(value);
                     break;
 
                 case 'DK':
@@ -7939,6 +7946,7 @@ if (typeof jQuery === 'undefined') {
             BR: 'Brazil',
             CA: 'Canada',
             CZ: 'Czech Republic',
+            DE: 'Germany',
             DK: 'Denmark',
             FR: 'France',
             GB: 'United Kingdom',
@@ -7961,7 +7969,7 @@ if (typeof jQuery === 'undefined') {
             country: 'country'
         },
 
-        COUNTRY_CODES: ['BR', 'CA', 'CZ', 'DK', 'FR', 'GB', 'IE', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
+        COUNTRY_CODES: ['BR', 'CA', 'CZ', 'DE', 'DK', 'FR', 'GB', 'IE', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -8016,6 +8024,10 @@ if (typeof jQuery === 'undefined') {
                 case 'CZ':
                     // Test: http://regexr.com/39hhr
                     isValid = /^(\d{3})([ ]?)(\d{2})$/.test(value);
+                    break;
+
+                case 'DE':
+                    isValid = /^([01245678][0-9]{4})$/.test(value);
                     break;
 
                 case 'DK':

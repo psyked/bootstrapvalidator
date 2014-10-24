@@ -7,6 +7,7 @@
             BR: 'Brazil',
             CA: 'Canada',
             CZ: 'Czech Republic',
+            DE: 'Germany',
             DK: 'Denmark',
             FR: 'France',
             GB: 'United Kingdom',
@@ -29,7 +30,7 @@
             country: 'country'
         },
 
-        COUNTRY_CODES: ['BR', 'CA', 'CZ', 'DK', 'FR', 'GB', 'IE', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
+        COUNTRY_CODES: ['BR', 'CA', 'CZ', 'DE', 'DK', 'FR', 'GB', 'IE', 'IT', 'MA', 'NL', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -84,6 +85,10 @@
                 case 'CZ':
                     // Test: http://regexr.com/39hhr
                     isValid = /^(\d{3})([ ]?)(\d{2})$/.test(value);
+                    break;
+
+                case 'DE':
+                    isValid = /^([01245678][0-9]{4})$/.test(value);
                     break;
 
                 case 'DK':
