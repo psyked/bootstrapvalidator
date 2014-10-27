@@ -34,7 +34,7 @@ __Document__
 * [#938](https://github.com/nghuuphuoc/bootstrapvalidator/issues/938): Add [time](http://bootstrapvalidator.com/validators/regexp/#html-5-example) validator example
 * [#979](https://github.com/nghuuphuoc/bootstrapvalidator/issues/979): Add [Rails usage](http://bootstrapvalidator.com/validators/stringLength/#using-with-rails-form) for stringLength validator
 * [#1006](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1006): Fix the order of parameters for enableFieldValidators() method, thanks to [@mchrapka](https://github.com/mchrapka)
-* [#1009](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1009): Fixed mixed data/delay in remote doc, thanks to [@jazzzz](https://github.com/jazzzz)
+* [#1009](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1009): Fix mixed data/delay in remote doc, thanks to [@jazzzz](https://github.com/jazzzz)
 
 __Language Packages__
 * [#827](https://github.com/nghuuphuoc/bootstrapvalidator/pull/827): Update Dutch language package, thanks to [@JvanderHeide](https://github.com/JvanderHeide)
@@ -64,6 +64,7 @@ __Language Packages__
 * [#961](https://github.com/nghuuphuoc/bootstrapvalidator/pull/961): Update Chilean Spanish language package, thanks to [@marceloampuerop6](https://github.com/marceloampuerop6)
 * [#967](https://github.com/nghuuphuoc/bootstrapvalidator/pull/967): Add Hebrew language package, thanks to [@yakidahan](https://github.com/yakidahan)
 * [#974](https://github.com/nghuuphuoc/bootstrapvalidator/pull/974): Add Albanian language package, thanks to [@desaretiuss](https://github.com/desaretiuss)
+* [#1025](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1025): Fix French emailAddress message, thanks to [@jazzzz](https://github.com/jazzzz)
 
 ## v0.5.2 (2014-09-25)
 

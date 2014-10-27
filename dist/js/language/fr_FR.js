@@ -1,7 +1,7 @@
 (function($) {
     /**
      * French language package
-     * Translated by @dlucazeau. Updated by @neilime
+     * Translated by @dlucazeau. Updated by @neilime, @jazzzz
      */
     $.fn.bootstrapValidator.i18n = $.extend(true, $.fn.bootstrapValidator.i18n, {
         base64: {
@@ -48,7 +48,7 @@
             'default': 'Veuillez fournir un code-barre EAN valide'
         },
         emailAddress: {
-            'default': 'Veuillez fournir une adresse mail valide'
+            'default': 'Veuillez fournir une adresse e-mail valide'
         },
         file: {
             'default': 'Veuillez choisir un fichier valide'
