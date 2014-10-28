@@ -17,6 +17,9 @@ describe('api', function() {
                 '<div class="form-group">',
                     '<input type="text" name="email" data-bv-notempty data-bv-emailaddress />',
                 '</div>',
+                '<div class="form-group">',
+                    '<input type="text" name="note"/>',
+                '</div>',
             '</form>'
         ].join('\n')).appendTo('body');
 
@@ -24,6 +27,7 @@ describe('api', function() {
 
         this.bv     = $('#apiForm').data('bootstrapValidator');
         this.$email = this.bv.getFieldElements('email');
+        this.$note  = $('#apiForm').find('input[name="note"]');
     });
 
     afterEach(function() {
@@ -62,6 +66,23 @@ describe('api', function() {
         expect(this.bv.getOptions('username', 'stringLength')).toBeDefined();
         expect(this.bv.getOptions('username', 'stringLength', 'min')).toEqual('8');
         expect(this.bv.getOptions('username', 'stringlength', 'max')).toBeNull();
+    });
+
+    // #1014
+    it('isValidField()', function() {
+        this.$email.val('email@domain.com');
+        this.bv.validate();
+        expect(this.bv.isValidField(this.$note)).toBeTruthy();
+        expect(this.bv.isValidField(this.$email)).toBeTruthy();
+    });
+
+    // #1014
+    it('validateField()', function() {
+        this.$email.val('email@domain.com');
+        this.bv.validateField(this.$email);
+        this.bv.validateField(this.$note);
+        expect(this.bv.isValidField(this.$email)).toBeTruthy();
+        expect(this.bv.isValidField(this.$note)).toBeTruthy();
     });
 });
 

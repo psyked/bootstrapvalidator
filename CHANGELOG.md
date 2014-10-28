@@ -25,6 +25,7 @@ __Improvements__
 __Bug Fixes__
 * [#933](https://github.com/nghuuphuoc/bootstrapvalidator/issues/933), [#959](https://github.com/nghuuphuoc/bootstrapvalidator/issues/959): Tooltip/popover isn't destroyed when the field is valid
 * [#991](https://github.com/nghuuphuoc/bootstrapvalidator/issues/991): The field is validated only one time when setting ```trigger: 'blur'```, ```container: 'tooltip'```
+* [#1014](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1014): Fix [isValidField()](http://bootstrapvalidator.com/api/#is-valid-field) and [validateField()](http://bootstrapvalidator.com/api/#validate-field) methods for fields without validators, thanks to [@jazzzz](https://github.com/jazzzz)
 
 __Document__
 * [#848](https://github.com/nghuuphuoc/bootstrapvalidator/pull/848): Update the [stringLength](http://bootstrapvalidator.com/validators/stringLength) document, thanks to [@Relequestual](https://github.com/Relequestual)

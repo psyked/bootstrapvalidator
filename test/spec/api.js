@@ -68,6 +68,7 @@ describe('api', function() {
         expect(this.bv.getOptions('username', 'stringlength', 'max')).toBeNull();
     });
 
+    // #1014
     it('isValidField()', function() {
         this.$email.val('email@domain.com');
         this.bv.validate();
@@ -75,6 +76,7 @@ describe('api', function() {
         expect(this.bv.isValidField(this.$email)).toBeTruthy();
     });
 
+    // #1014
     it('validateField()', function() {
         this.$email.val('email@domain.com');
         this.bv.validateField(this.$email);
