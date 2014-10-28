@@ -33,8 +33,9 @@ __Document__
 * [#920](https://github.com/nghuuphuoc/bootstrapvalidator/issues/920), [#929](https://github.com/nghuuphuoc/bootstrapvalidator/pull/929), [#936](https://github.com/nghuuphuoc/bootstrapvalidator/pull/936): Update the [Changing the tooltip, popover's position](http://bootstrapvalidator.com/examples/tooltip-popover-position/) example, thanks to [@Arkni](https://github.com/Arkni)
 * [#938](https://github.com/nghuuphuoc/bootstrapvalidator/issues/938): Add [time](http://bootstrapvalidator.com/validators/regexp/#html-5-example) validator example
 * [#979](https://github.com/nghuuphuoc/bootstrapvalidator/issues/979): Add [Rails usage](http://bootstrapvalidator.com/validators/stringLength/#using-with-rails-form) for stringLength validator
-* [#1006](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1006): Fix the order of parameters for enableFieldValidators() method, thanks to [@mchrapka](https://github.com/mchrapka)
-* [#1009](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1009): Fix mixed data/delay in remote doc, thanks to [@jazzzz](https://github.com/jazzzz)
+* [#1006](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1006): Fix the order of [parameters](http://bootstrapvalidator.com/settings/#validator-enabled) for [enableFieldValidators()](http://bootstrapvalidator.com/api/#enable-field-validators) method, thanks to [@mchrapka](https://github.com/mchrapka)
+* [#1009](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1009): Fix mixed data/delay in [remote](http://bootstrapvalidator.com/validators/remote/) doc, thanks to [@jazzzz](https://github.com/jazzzz)
+* [#1038](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1038): Fix [Changing tooltip, popover's position](http://bootstrapvalidator.com/examples/changing-tooltip-position/) example link, thanks to @Arkni
 
 __Language Packages__
 * [#827](https://github.com/nghuuphuoc/bootstrapvalidator/pull/827): Update Dutch language package, thanks to [@JvanderHeide](https://github.com/JvanderHeide)
