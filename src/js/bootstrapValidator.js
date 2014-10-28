@@ -839,7 +839,7 @@ if (typeof jQuery === 'undefined') {
                     break;
             }
 
-            if (fields.length === 0 || (this.options.fields[field] && this.options.fields[field].enabled === false)) {
+            if (fields.length === 0 || !this.options.fields[field] || this.options.fields[field].enabled === false) {
                 return this;
             }
 
@@ -1154,7 +1154,7 @@ if (typeof jQuery === 'undefined') {
                 default:
                     break;
             }
-            if (fields.length === 0 || this.options.fields[field] === null || this.options.fields[field].enabled === false) {
+            if (fields.length === 0 || !this.options.fields[field] || this.options.fields[field].enabled === false) {
                 return true;
             }
 
