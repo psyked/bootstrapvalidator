@@ -48,7 +48,7 @@
             'default': 'Veuillez fournir un code-barre EAN valide'
         },
         emailAddress: {
-            'default': 'Veuillez fournir une adresse mail valide'
+            'default': 'Veuillez fournir une adresse e-mail valide'
         },
         file: {
             'default': 'Veuillez choisir un fichier valide'
