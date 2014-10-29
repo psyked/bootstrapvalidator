@@ -1,3 +1,5 @@
+var originalDefaultOptions = $.fn.bootstrapValidator.DEFAULT_OPTIONS;
+
 TestSuite = $.extend({}, TestSuite, {
     Event: {
         onEmailValid: function(e, data) {
@@ -530,6 +532,7 @@ describe('event form trigger with events changed', function() {
 
     afterEach(function() {
         $('#eventForm2').bootstrapValidator('destroy').remove();
+        $.fn.bootstrapValidator.DEFAULT_OPTIONS = originalDefaultOptions;
     });
 
     it('triggers bv.form.success', function() {
@@ -603,6 +606,7 @@ describe('event field trigger with events changed', function() {
 
     afterEach(function() {
         $('#eventForm4').bootstrapValidator('destroy').remove();
+        $.fn.bootstrapValidator.DEFAULT_OPTIONS = originalDefaultOptions;
     });
 
     it('triggers success.field.bv', function() {
