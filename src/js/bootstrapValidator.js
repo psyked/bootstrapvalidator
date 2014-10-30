@@ -450,7 +450,7 @@ if (typeof jQuery === 'undefined') {
                 /* falls through */
                 default:
                     fields.off(events).on(events, function(e) {
-                        // ignore bogus input events on IE
+                        // #1040: The input with placeholder is auto validated on IE 10, 11
                         if ('input' === e.type && document.activeElement !== this) {
                             return;
                         }

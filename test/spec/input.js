@@ -1,13 +1,4 @@
 describe('input', function() {
-    // Override the options
-    $.extend($.fn.bootstrapValidator.DEFAULT_OPTIONS, {
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        }
-    });
-
     beforeEach(function(done) {
         $([
             '<form class="form-horizontal" id="inputForm">',
@@ -18,7 +9,7 @@ describe('input', function() {
                     '<input type="text" name="input1" data-bv-notempty placeholder="Text" />',
                 '</div>',
                 '<div class="form-group">',
-                    '<input type="text" name="input2" data-bv-notempty placeholder="Café" />',
+                    '<input type="text" name="input2" data-bv-notempty placeholder="Text" />',
                 '</div>',
             '</form>'
         ].join('\n')).appendTo('body');
@@ -36,8 +27,8 @@ describe('input', function() {
         $('#inputForm').bootstrapValidator('destroy').remove();
     });
 
-    // #1040
-    it('fields should not be validated on init', function() {
+    // #1040, #1041
+    it('Fields should not be validated on init', function() {
         expect(this.bv.getMessages(this.$text)).toEqual([]);
         expect(this.bv.getMessages(this.$input1)).toEqual([]);
         expect(this.bv.getMessages(this.$input2)).toEqual([]);
