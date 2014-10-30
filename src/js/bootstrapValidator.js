@@ -449,7 +449,11 @@ if (typeof jQuery === 'undefined') {
                 case 'enabled':
                 /* falls through */
                 default:
-                    fields.off(events).on(events, function() {
+                    fields.off(events).on(events, function(e) {
+                        // ignore bogus input events on IE
+                        if ('input' === e.type && document.activeElement !== this) {
+                            return;
+                        }
                         if (that._exceedThreshold($(this))) {
                             that.validateField($(this));
                         }
