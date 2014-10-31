@@ -368,6 +368,14 @@ if (typeof jQuery === 'undefined') {
                         $icon.addClass('bv-icon-input-group')
                              .insertAfter($parent.find('.input-group').eq(0));
                     }
+
+                    // Store the icon as a data of field element
+                    if (!updateAll) {
+                        $field.data('bv.icon', $icon);
+                    } else if (i === total - 1) {
+                        // All fields with the same name have the same icon
+                        fields.data('bv.icon', $icon);
+                    }
                     
                     if (container) {
                         $field
@@ -376,10 +384,10 @@ if (typeof jQuery === 'undefined') {
                             .on('focus.container.bv', function() {
                                 switch (container) {
                                     case 'tooltip':
-                                        $icon.tooltip('show');
+                                        $(this).data('bv.icon').tooltip('show');
                                         break;
                                     case 'popover':
-                                        $icon.popover('show');
+                                        $(this).data('bv.icon').popover('show');
                                         break;
                                     default:
                                         break;
@@ -390,10 +398,10 @@ if (typeof jQuery === 'undefined') {
                             .on('blur.container.bv', function() {
                                 switch (container) {
                                     case 'tooltip':
-                                        $icon.tooltip('hide');
+                                        $(this).data('bv.icon').tooltip('hide');
                                         break;
                                     case 'popover':
-                                        $icon.popover('hide');
+                                        $(this).data('bv.icon').popover('hide');
                                         break;
                                     default:
                                         break;
@@ -998,7 +1006,7 @@ if (typeof jQuery === 'undefined') {
                     $message     = $field.data('bv.messages'),
                     $allErrors   = $message.find('.help-block[data-bv-validator][data-bv-for="' + field + '"]'),
                     $errors      = validatorName ? $allErrors.filter('[data-bv-validator="' + validatorName + '"]') : $allErrors,
-                    $icon        = $parent.find('.form-control-feedback[data-bv-icon-for="' + field + '"]'),
+                    $icon        = $field.data('bv.icon'),
                     container    = ('function' === typeof (this.options.fields[field].container || this.options.container)) ? (this.options.fields[field].container || this.options.container).call(this, $field, this) : (this.options.fields[field].container || this.options.container),
                     isValidField = null;
 
@@ -1617,7 +1625,7 @@ if (typeof jQuery === 'undefined') {
                         .removeAttr('data-bv-field');
 
                     // Remove feedback icons, tooltip/popover container
-                    $icon = $field.parents(group).find('i[data-bv-icon-for="' + field + '"]');
+                    $icon = $field.data('bv.icon');
                     if ($icon) {
                         var container = ('function' === typeof (this.options.fields[field].container || this.options.container)) ? (this.options.fields[field].container || this.options.container).call(this, $field, this) : (this.options.fields[field].container || this.options.container);
                         switch (container) {
@@ -1632,6 +1640,7 @@ if (typeof jQuery === 'undefined') {
                                 break;
                         }
                     }
+                    $field.removeData('bv.icon');
 
                     for (validator in this.options.fields[field].validators) {
                         if ($field.data('bv.dfs.' + validator)) {

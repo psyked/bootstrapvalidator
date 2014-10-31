@@ -13,7 +13,6 @@
 <body>
 <div class="container">
     <div class="row">
-        <!-- form: -->
         <section>
             <div class="col-lg-8 col-lg-offset-2">
                 <div class="page-header">
@@ -108,58 +107,43 @@
                 </form>
             </div>
         </section>
-        <!-- :form -->
     </div>
 </div>
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $('#defaultForm')
-            .bootstrapValidator({
-                message: 'This value is not valid',
-                feedbackIcons: {
-                    valid: 'glyphicon glyphicon-ok',
-                    invalid: 'glyphicon glyphicon-remove',
-                    validating: 'glyphicon glyphicon-refresh'
-                },
-                fields: {
-                    gender: {
-                        validators: {
-                            notEmpty: {
-                                message: 'The gender is required'
-                            }
-                        }
-                    },
-                    'browsers[]': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Please specify at least one browser you use daily for development'
-                            }
-                        }
-                    },
-                    'editors[]': {
-                        validators: {
-                            notEmpty: {
-                                message: 'The editor names are required'
-                            }
-                        }
+$(document).ready(function() {
+    $('#defaultForm').bootstrapValidator({
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        container: 'tooltip',
+        fields: {
+            gender: {
+                validators: {
+                    notEmpty: {
+                        message: 'The gender is required'
                     }
                 }
-            })
-            .on('error.field.bv', function(e, data) {
-                console.log('error.field.bv -->', data);
-            })
-            .on('status.field.bv', function(e, data) {
-                console.log('status.field.bv -->', data);
-
-                var $form = $(e.target);
-                // I don't want to add has-success class to valid field container
-                data.element.parents('.form-group').removeClass('has-success');
-
-                // I want to enable the submit button all the time
-                $form.data('bootstrapValidator').disableSubmitButtons(false);
-            });
+            },
+            'browsers[]': {
+                validators: {
+                    notEmpty: {
+                        message: 'Please specify at least one browser you use daily for development'
+                    }
+                }
+            },
+            'editors[]': {
+                validators: {
+                    notEmpty: {
+                        message: 'The editor names are required'
+                    }
+                }
+            }
+        }
     });
+});
 </script>
 </body>
 </html>
