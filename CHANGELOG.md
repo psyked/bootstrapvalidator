@@ -17,7 +17,7 @@ __Improvements__
 * [#823](https://github.com/nghuuphuoc/bootstrapvalidator/issues/823): The [hexColor](http://bootstrapvalidator.com/validators/hexColor/) validator only accepts 6 hex character values when using HTML 5 ```type='color'``` attribute
 * [#854](https://github.com/nghuuphuoc/bootstrapvalidator/issues/854), [#914](https://github.com/nghuuphuoc/bootstrapvalidator/issues/914): Improve behaviour of the [identical](http://bootstrapvalidator.com/validators/identical/) validator
 * [#864](https://github.com/nghuuphuoc/bootstrapvalidator/pull/864): Coma separator handling in [greaterThan](http://bootstrapvalidator.com/validators/greaterThan/), [lessThan](http://bootstrapvalidator.com/validators/lessThan/) validators, thanks to [@mgibas](https://github.com/mgibas)
-* [#999](https://github.com/nghuuphuoc/bootstrapvalidator/pull/999): Replace ',' with '.' to validate decimal numbers correct, thanks to [@johanronn77](https://github.com/johanronn77)
+* [#999](https://github.com/nghuuphuoc/bootstrapvalidator/pull/999), [#1048](https://github.com/nghuuphuoc/bootstrapvalidator/issues/1048): Replace ',' with '.' to validate decimal numbers correct, thanks to [@johanronn77](https://github.com/johanronn77)
 * [#1002](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1002): Put tooltip/popover on bottom if there is not enough space on top, thanks to [@jazzzz](https://github.com/jazzzz)
 * [#1015](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1015): The [remote](http://bootstrapvalidator.com/validators/remote/) validator allows to set ```data``` options via HTML attributes, thanks to [@jazzzz](https://github.com/jazzzz)
 * [#1017](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1017): Enable validator when setting ```data-bv-validatorname="data-bv-validatorname"```, thanks to [@jazzzz](https://github.com/jazzzz)
@@ -37,7 +37,7 @@ __Document__
 * [#979](https://github.com/nghuuphuoc/bootstrapvalidator/issues/979): Add [Rails usage](http://bootstrapvalidator.com/validators/stringLength/#using-with-rails-form) for stringLength validator
 * [#1006](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1006): Fix the order of [parameters](http://bootstrapvalidator.com/settings/#validator-enabled) for [enableFieldValidators()](http://bootstrapvalidator.com/api/#enable-field-validators) method, thanks to [@mchrapka](https://github.com/mchrapka)
 * [#1009](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1009): Fix mixed data/delay in [remote](http://bootstrapvalidator.com/validators/remote/) doc, thanks to [@jazzzz](https://github.com/jazzzz)
-* [#1038](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1038): Fix [Changing tooltip, popover's position](http://bootstrapvalidator.com/examples/changing-tooltip-position/) example link, thanks to @Arkni
+* [#1038](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1038): Fix [Changing tooltip, popover's position](http://bootstrapvalidator.com/examples/changing-tooltip-position/) example link, thanks to [@Arkni](https://github.com/Arkni)
 
 __Language Packages__
 * [#827](https://github.com/nghuuphuoc/bootstrapvalidator/pull/827): Update Dutch language package, thanks to [@JvanderHeide](https://github.com/JvanderHeide)
@@ -68,6 +68,7 @@ __Language Packages__
 * [#967](https://github.com/nghuuphuoc/bootstrapvalidator/pull/967): Add Hebrew language package, thanks to [@yakidahan](https://github.com/yakidahan)
 * [#974](https://github.com/nghuuphuoc/bootstrapvalidator/pull/974): Add Albanian language package, thanks to [@desaretiuss](https://github.com/desaretiuss)
 * [#1025](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1025): Fix French emailAddress message, thanks to [@jazzzz](https://github.com/jazzzz)
+* [#1051](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1051): Add Portuguese language package, thanks to [@rtbfreitas](https://github.com/rtbfreitas)
 
 ## v0.5.2 (2014-09-25)
 

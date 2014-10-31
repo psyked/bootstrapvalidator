@@ -84,6 +84,7 @@ I would like to give big thanks to the following contributors:
 * [@q-state](https://github.com/q-state)
 * [@Relequestual](https://github.com/Relequestual)
 * [@roryprimrose](https://github.com/roryprimrose)
+* [@rtbfreitas](https://github.com/rtbfreitas)
 * [@ryan2049](https://github.com/ryan2049)
 * [@shamiao](https://github.com/shamiao)
 * [@smeagol74](https://github.com/smeagol74)
