@@ -56,7 +56,7 @@ describe('greaterThan', function() {
         expect(this.bv.isValid()).toBeTruthy();
     });
 
-    it('value with coma separator', function() {
+    it('value with comma separator', function() {
         this.$age.val('10,4');
         this.bv.validate();
         expect(this.bv.isValid()).toEqual(false);
@@ -68,9 +68,7 @@ describe('greaterThan', function() {
     });
 
     it('compare to other field', function() {
-        this.$age.attr('data-bv-greaterthan-value', 'minAge');
-        this.bv.destroy();
-        this.bv = $('#greaterThanForm').bootstrapValidator().data('bootstrapValidator');
+        this.bv.updateOption('age', 'greaterThan', 'value', 'minAge');
 
         this.$minAge.val(10);
         this.$age.val(20);
@@ -85,10 +83,24 @@ describe('greaterThan', function() {
         expect(this.bv.getMessages('age', 'greaterThan')[0]).toEqual($.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.greaterThan['default'], this.$minAge.val()));
     });
 
+    // #1048
+    it('compare to other field that value has comma', function() {
+        this.bv.updateOption('age', 'greaterThan', 'value', 'minAge');
+        this.$minAge.val('10,5');
+        this.$age.val(20);
+        this.bv.validate();
+        expect(this.bv.isValid()).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$minAge.val('20,5');
+        this.$age.val(10);
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+        expect(this.bv.getMessages('age', 'greaterThan')[0]).toEqual($.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.greaterThan['default'], this.$minAge.val()));
+    });
+
     it('compare to return value of a function', function() {
-        this.$age.attr('data-bv-greaterthan-value', 'greaterThanCompare');
-        this.bv.destroy();
-        this.bv = $('#greaterThanForm').bootstrapValidator().data('bootstrapValidator');
+        this.bv.updateOption('age', 'greaterThan', 'value', 'greaterThanCompare');
 
         this.$minAge.val(20);
         this.$age.val(18);
@@ -106,9 +118,7 @@ describe('greaterThan', function() {
     });
 
     it('compare to return value of a namespace function', function() {
-        this.$age.attr('data-bv-greaterthan-value', 'TestSuite.greaterThan.compareTo');
-        this.bv.destroy();
-        this.bv = $('#greaterThanForm').bootstrapValidator().data('bootstrapValidator');
+        this.bv.updateOption('age', 'greaterThan', 'value', 'TestSuite.greaterThan.compareTo');
 
         this.$minAge.val(20);
         this.$age.val(18);

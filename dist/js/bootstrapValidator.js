@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.3-dev, built on 2014-10-31 2:46:30 PM
+ * @version     v0.5.3-dev, built on 2014-11-01 5:18:27 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -2042,23 +2042,30 @@ if (typeof jQuery === 'undefined') {
                 return true;
             }
 
-			value = value.replace(',', '.');
+			value = this._format(value);
             if (!$.isNumeric(value)) {
                 return false;
             }
 
-            var min = $.isNumeric(options.min) ? options.min : validator.getDynamicOption($field, options.min),
-                max = $.isNumeric(options.max) ? options.max : validator.getDynamicOption($field, options.max);
+            var min      = $.isNumeric(options.min) ? options.min : validator.getDynamicOption($field, options.min),
+                max      = $.isNumeric(options.max) ? options.max : validator.getDynamicOption($field, options.max),
+                minValue = this._format(min),
+                maxValue = this._format(max);
+
             value = parseFloat(value);
 			return (options.inclusive === true || options.inclusive === undefined)
                     ? {
-                        valid: value >= min && value <= max,
+                        valid: value >= minValue && value <= maxValue,
                         message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.between['default'], [min, max])
                     }
                     : {
-                        valid: value > min  && value <  max,
+                        valid: value > minValue  && value <  maxValue,
                         message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.between.notInclusive, [min, max])
                     };
+        },
+
+        _format: function(value) {
+            return (value + '').replace(',', '.');
         }
     };
 }(window.jQuery));
@@ -3189,22 +3196,28 @@ if (typeof jQuery === 'undefined') {
                 return true;
             }
             
-            value = value.replace(',', '.');
+            value = this._format(value);
             if (!$.isNumeric(value)) {
                 return false;
             }
 
-            var compareTo = $.isNumeric(options.value) ? options.value : validator.getDynamicOption($field, options.value);
+            var compareTo      = $.isNumeric(options.value) ? options.value : validator.getDynamicOption($field, options.value),
+                compareToValue = this._format(compareTo);
+
             value = parseFloat(value);
 			return (options.inclusive === true || options.inclusive === undefined)
                     ? {
-                        valid: value >= compareTo,
+                        valid: value >= compareToValue,
                         message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.greaterThan['default'], compareTo)
                     }
                     : {
-                        valid: value > compareTo,
+                        valid: value > compareToValue,
                         message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.greaterThan.notInclusive, compareTo)
                     };
+        },
+
+        _format: function(value) {
+            return (value + '').replace(',', '.');
         }
     };
 }(window.jQuery));
@@ -5450,22 +5463,28 @@ if (typeof jQuery === 'undefined') {
                 return true;
             }
             
-			value = value.replace(',', '.');
+			value = this._format(value);
             if (!$.isNumeric(value)) {
                 return false;
             }
 
-            var compareTo = $.isNumeric(options.value) ? options.value : validator.getDynamicOption($field, options.value);
+            var compareTo      = $.isNumeric(options.value) ? options.value : validator.getDynamicOption($field, options.value),
+                compareToValue = this._format(compareTo);
+
             value = parseFloat(value);
             return (options.inclusive === true || options.inclusive === undefined)
                     ? {
-                        valid: value <= compareTo,
+                        valid: value <= compareToValue,
                         message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.lessThan['default'], compareTo)
                     }
                     : {
-                        valid: value < compareTo,
+                        valid: value < compareToValue,
                         message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.lessThan.notInclusive, compareTo)
                     };
+        },
+
+        _format: function(value) {
+            return (value + '').replace(',', '.');
         }
     };
 }(window.jQuery));

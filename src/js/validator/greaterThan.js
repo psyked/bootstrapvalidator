@@ -45,22 +45,28 @@
                 return true;
             }
             
-            value = value.replace(',', '.');
+            value = this._format(value);
             if (!$.isNumeric(value)) {
                 return false;
             }
 
-            var compareTo = $.isNumeric(options.value) ? options.value : validator.getDynamicOption($field, options.value);
+            var compareTo      = $.isNumeric(options.value) ? options.value : validator.getDynamicOption($field, options.value),
+                compareToValue = this._format(compareTo);
+
             value = parseFloat(value);
 			return (options.inclusive === true || options.inclusive === undefined)
                     ? {
-                        valid: value >= compareTo,
+                        valid: value >= compareToValue,
                         message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.greaterThan['default'], compareTo)
                     }
                     : {
-                        valid: value > compareTo,
+                        valid: value > compareToValue,
                         message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.greaterThan.notInclusive, compareTo)
                     };
+        },
+
+        _format: function(value) {
+            return (value + '').replace(',', '.');
         }
     };
 }(window.jQuery));

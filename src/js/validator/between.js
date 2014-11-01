@@ -48,23 +48,30 @@
                 return true;
             }
 
-			value = value.replace(',', '.');
+			value = this._format(value);
             if (!$.isNumeric(value)) {
                 return false;
             }
 
-            var min = $.isNumeric(options.min) ? options.min : validator.getDynamicOption($field, options.min),
-                max = $.isNumeric(options.max) ? options.max : validator.getDynamicOption($field, options.max);
+            var min      = $.isNumeric(options.min) ? options.min : validator.getDynamicOption($field, options.min),
+                max      = $.isNumeric(options.max) ? options.max : validator.getDynamicOption($field, options.max),
+                minValue = this._format(min),
+                maxValue = this._format(max);
+
             value = parseFloat(value);
 			return (options.inclusive === true || options.inclusive === undefined)
                     ? {
-                        valid: value >= min && value <= max,
+                        valid: value >= minValue && value <= maxValue,
                         message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.between['default'], [min, max])
                     }
                     : {
-                        valid: value > min  && value <  max,
+                        valid: value > minValue  && value <  maxValue,
                         message: $.fn.bootstrapValidator.helpers.format(options.message || $.fn.bootstrapValidator.i18n.between.notInclusive, [min, max])
                     };
+        },
+
+        _format: function(value) {
+            return (value + '').replace(',', '.');
         }
     };
 }(window.jQuery));

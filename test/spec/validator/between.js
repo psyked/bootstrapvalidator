@@ -79,10 +79,8 @@ describe('between', function() {
     });
 
     it('compare to other field', function() {
-        this.$age.attr('data-bv-between-min', 'minAge')
-                 .attr('data-bv-between-max', 'maxAge');
-        this.bv.destroy();
-        this.bv = $('#betweenForm').bootstrapValidator().data('bootstrapValidator');
+        this.bv.updateOption('age', 'between', 'min', 'minAge');
+        this.bv.updateOption('age', 'between', 'max', 'maxAge');
 
         this.$minAge.val(2);
         this.$maxAge.val(10);
@@ -99,11 +97,29 @@ describe('between', function() {
         expect(this.bv.getMessages('age', 'between')[0]).toEqual($.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.between['default'], [this.$minAge.val(), this.$maxAge.val()]));
     });
 
+    // #1048
+    it('compare to other field that value has comma', function() {
+        this.bv.updateOption('age', 'between', 'min', 'minAge');
+        this.bv.updateOption('age', 'between', 'max', 'maxAge');
+
+        this.$minAge.val('2,5');
+        this.$maxAge.val('10,5');
+        this.$age.val(5);
+        this.bv.validate();
+        expect(this.bv.isValid()).toBeTruthy();
+
+        this.bv.resetForm();
+        this.$minAge.val('20,5');
+        this.$maxAge.val('40,5');
+        this.$age.val(50);
+        this.bv.validate();
+        expect(this.bv.isValid()).toEqual(false);
+        expect(this.bv.getMessages('age', 'between')[0]).toEqual($.fn.bootstrapValidator.helpers.format($.fn.bootstrapValidator.i18n.between['default'], [this.$minAge.val(), this.$maxAge.val()]));
+    });
+
     it('compare to return value of a function', function() {
-        this.$age.attr('data-bv-between-min', 'betweenCompareMin')
-                 .attr('data-bv-between-max', 'betweenCompareMax');
-        this.bv.destroy();
-        this.bv = $('#betweenForm').bootstrapValidator().data('bootstrapValidator');
+        this.bv.updateOption('age', 'between', 'min', 'betweenCompareMin');
+        this.bv.updateOption('age', 'between', 'max', 'betweenCompareMax');
 
         this.$minAge.val(20);
         this.$maxAge.val(30);
@@ -125,10 +141,8 @@ describe('between', function() {
     });
 
     it('compare to return value of a namespace function', function() {
-        this.$age.attr('data-bv-between-min', 'TestSuite.between.compareToMin')
-                 .attr('data-bv-between-max', 'TestSuite.between.compareToMax');
-        this.bv.destroy();
-        this.bv = $('#betweenForm').bootstrapValidator().data('bootstrapValidator');
+        this.bv.updateOption('age', 'between', 'min', 'TestSuite.between.compareToMin');
+        this.bv.updateOption('age', 'between', 'max', 'TestSuite.between.compareToMax');
 
         this.$minAge.val(20);
         this.$maxAge.val(30);
