@@ -743,6 +743,25 @@ if (typeof jQuery === 'undefined') {
             }
         },
 
+        _isVerboseField: function(field)
+        {
+            if (this.options.fields[field].verbose === 'true' || this.options.fields[field].verbose === true)
+            {
+                return true;
+            }
+            else if (this.options.fields[field].verbose === 'false' || this.options.fields[field].verbose === false)
+            {
+                return false;
+            }
+
+            return this._isVerbose();
+        },
+
+        _isVerbose: function()
+        {
+            return this.options.verbose === 'true' || this.options.verbose === true;
+        },
+
         // ---
         // Public methods
         // ---
@@ -860,7 +879,7 @@ if (typeof jQuery === 'undefined') {
                 total      = ('radio' === type || 'checkbox' === type) ? 1 : fields.length,
                 updateAll  = ('radio' === type || 'checkbox' === type),
                 validators = this.options.fields[field].validators,
-                verbose    = this.options.fields[field].verbose === 'true' || this.options.fields[field].verbose === true || this.options.verbose === 'true' || this.options.verbose === true,
+                verbose    = this._isVerboseField(field),
                 validatorName,
                 validateResult;
 
