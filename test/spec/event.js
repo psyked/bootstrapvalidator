@@ -483,6 +483,8 @@ describe('event field trigger with default events', function() {
 });
 
 describe('event form trigger with events changed', function() {
+    var defaultOptions = $.fn.bootstrapValidator.DEFAULT_OPTIONS;
+
     beforeEach(function() {
         $.fn.bootstrapValidator.DEFAULT_OPTIONS = $.extend({}, $.fn.bootstrapValidator.DEFAULT_OPTIONS, {
             events: {
@@ -529,6 +531,7 @@ describe('event form trigger with events changed', function() {
     });
 
     afterEach(function() {
+        $.fn.bootstrapValidator.DEFAULT_OPTIONS = defaultOptions;
         $('#eventForm2').bootstrapValidator('destroy').remove();
     });
 
@@ -556,7 +559,9 @@ describe('event form trigger with events changed', function() {
 });
 
 describe('event field trigger with events changed', function() {
-    beforeEach(function () {
+    var defaultOptions = $.fn.bootstrapValidator.DEFAULT_OPTIONS;
+
+    beforeEach(function() {
         $.fn.bootstrapValidator.DEFAULT_OPTIONS = $.extend({}, $.fn.bootstrapValidator.DEFAULT_OPTIONS, {
             events: {
                 formInit: 'init.form.bv',
@@ -602,6 +607,7 @@ describe('event field trigger with events changed', function() {
     });
 
     afterEach(function() {
+        $.fn.bootstrapValidator.DEFAULT_OPTIONS = defaultOptions;
         $('#eventForm4').bootstrapValidator('destroy').remove();
     });
 

@@ -27,6 +27,8 @@ __Bug Fixes__
 * [#1014](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1014): Fix [isValidField()](http://bootstrapvalidator.com/api/#is-valid-field) and [validateField()](http://bootstrapvalidator.com/api/#validate-field) methods for fields without validators, thanks to [@jazzzz](https://github.com/jazzzz)
 * [#1040](https://github.com/nghuuphuoc/bootstrapvalidator/issues/1040), [#1041](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1041): Fix the issue where input with placeholder is auto validated on IE 10, 11, thanks to [@jazzzz](https://github.com/jazzzz)
 * [#1050](https://github.com/nghuuphuoc/bootstrapvalidator/issues/1050): Fix the issue when using multiple fields with same name, the tooltip of the last element is always shown
+* [#1055](https://github.com/nghuuphuoc/bootstrapvalidator/issues/1055), [#1063](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1063): The [error.field.bv](http://bootstrapvalidator.com/settings/#event-field) event isn't triggered if verbose is set to false, thanks to [@shineability](https://github.com/shineability)
+* [#1057](https://github.com/nghuuphuoc/bootstrapvalidator/issues/1057), [#1063](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1063): The [verbose](http://bootstrapvalidator.com/settings/#field-verbose) option for field doesn't override the form level, thanks to [@shineability](https://github.com/shineability)
 
 __Document__
 * [#848](https://github.com/nghuuphuoc/bootstrapvalidator/pull/848): Update the [stringLength](http://bootstrapvalidator.com/validators/stringLength) document, thanks to [@Relequestual](https://github.com/Relequestual)

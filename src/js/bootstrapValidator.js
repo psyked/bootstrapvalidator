@@ -743,22 +743,20 @@ if (typeof jQuery === 'undefined') {
             }
         },
 
+        /**
+         * Check whether or not a field is verbose
+         *
+         * @param {String} field The field name
+         * @returns {Boolean}
+         */
         _isVerboseField: function(field)
         {
-            if (this.options.fields[field].verbose === 'true' || this.options.fields[field].verbose === true)
-            {
+            if (this.options.fields[field].verbose === 'true' || this.options.fields[field].verbose === true) {
                 return true;
             }
-            else if (this.options.fields[field].verbose === 'false' || this.options.fields[field].verbose === false)
-            {
+            if (this.options.fields[field].verbose === 'false' || this.options.fields[field].verbose === false) {
                 return false;
             }
-
-            return this._isVerbose();
-        },
-
-        _isVerbose: function()
-        {
             return this.options.verbose === 'true' || this.options.verbose === true;
         },
 

@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.3-dev, built on 2014-11-02 4:33:10 PM
+ * @version     v0.5.3-dev, built on 2014-11-03 12:34:21 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -735,12 +735,29 @@ if (typeof jQuery === 'undefined') {
                 $field.trigger($.Event(this.options.events.fieldSuccess), data);
             }
             // If all validators are completed and there is at least one validator which doesn't pass
-            else if (counter[this.STATUS_NOT_VALIDATED] === 0 && counter[this.STATUS_VALIDATING] === 0 && counter[this.STATUS_INVALID] > 0) {
+            else if ((counter[this.STATUS_NOT_VALIDATED] === 0 || !this._isVerboseField(field)) && counter[this.STATUS_VALIDATING] === 0 && counter[this.STATUS_INVALID] > 0) {
                 // Add to the list of invalid fields
                 this.$invalidFields = this.$invalidFields.add($field);
 
                 $field.trigger($.Event(this.options.events.fieldError), data);
             }
+        },
+
+        /**
+         * Check whether or not a field is verbose
+         *
+         * @param {String} field The field name
+         * @returns {Boolean}
+         */
+        _isVerboseField: function(field)
+        {
+            if (this.options.fields[field].verbose === 'true' || this.options.fields[field].verbose === true) {
+                return true;
+            }
+            if (this.options.fields[field].verbose === 'false' || this.options.fields[field].verbose === false) {
+                return false;
+            }
+            return this.options.verbose === 'true' || this.options.verbose === true;
         },
 
         // ---
@@ -860,7 +877,7 @@ if (typeof jQuery === 'undefined') {
                 total      = ('radio' === type || 'checkbox' === type) ? 1 : fields.length,
                 updateAll  = ('radio' === type || 'checkbox' === type),
                 validators = this.options.fields[field].validators,
-                verbose    = this.options.fields[field].verbose === 'true' || this.options.fields[field].verbose === true || this.options.verbose === 'true' || this.options.verbose === true,
+                verbose    = this._isVerboseField(field),
                 validatorName,
                 validateResult;
 

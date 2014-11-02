@@ -87,6 +87,7 @@ I would like to give big thanks to the following contributors:
 * [@rtbfreitas](https://github.com/rtbfreitas)
 * [@ryan2049](https://github.com/ryan2049)
 * [@shamiao](https://github.com/shamiao)
+* [@shineability](https://github.com/shineability)
 * [@smeagol74](https://github.com/smeagol74)
 * [@stephengreentree](https://github.com/stephengreentree)
 * [@stepin](https://github.com/stepin)
