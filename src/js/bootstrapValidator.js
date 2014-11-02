@@ -735,12 +735,31 @@ if (typeof jQuery === 'undefined') {
                 $field.trigger($.Event(this.options.events.fieldSuccess), data);
             }
             // If all validators are completed and there is at least one validator which doesn't pass
-            else if (counter[this.STATUS_NOT_VALIDATED] === 0 && counter[this.STATUS_VALIDATING] === 0 && counter[this.STATUS_INVALID] > 0) {
+            else if ((counter[this.STATUS_NOT_VALIDATED] === 0 || !this._isVerboseField(field)) && counter[this.STATUS_VALIDATING] === 0 && counter[this.STATUS_INVALID] > 0) {
                 // Add to the list of invalid fields
                 this.$invalidFields = this.$invalidFields.add($field);
 
                 $field.trigger($.Event(this.options.events.fieldError), data);
             }
+        },
+
+        _isVerboseField: function(field)
+        {
+            if (this.options.fields[field].verbose === 'true' || this.options.fields[field].verbose === true)
+            {
+                return true;
+            }
+            else if (this.options.fields[field].verbose === 'false' || this.options.fields[field].verbose === false)
+            {
+                return false;
+            }
+
+            return this._isVerbose();
+        },
+
+        _isVerbose: function()
+        {
+            return this.options.verbose === 'true' || this.options.verbose === true;
         },
 
         // ---
@@ -860,7 +879,7 @@ if (typeof jQuery === 'undefined') {
                 total      = ('radio' === type || 'checkbox' === type) ? 1 : fields.length,
                 updateAll  = ('radio' === type || 'checkbox' === type),
                 validators = this.options.fields[field].validators,
-                verbose    = this.options.fields[field].verbose === 'true' || this.options.fields[field].verbose === true || this.options.verbose === 'true' || this.options.verbose === true,
+                verbose    = this._isVerboseField(field),
                 validatorName,
                 validateResult;
 
