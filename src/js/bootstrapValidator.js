@@ -839,11 +839,13 @@ if (typeof jQuery === 'undefined') {
             }
             this.disableSubmitButtons(true);
 
+            this._submitIfValid = false;
             for (var field in this.options.fields) {
                 this.validateField(field);
             }
 
             this._submit();
+            this._submitIfValid = true;
 
             return this;
         },
