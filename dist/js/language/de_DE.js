@@ -344,10 +344,8 @@
             countryNotSupported: 'Der Ländercode %s wird nicht unterstützt',
             country: 'Bitte gültigen Postleitzahl für %s eingeben',
             countries: {
-                AT: 'Österreich',
                 BR: 'Brasilien',
                 CA: 'Kanada',
-                CH: 'Schweiz',
                 CZ: 'Tschechische',
                 DE: 'Deutschland',
                 DK: 'Dänemark',

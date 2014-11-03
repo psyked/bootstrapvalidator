@@ -8236,7 +8236,7 @@ describe('zipCode', function() {
             expect(this.bv.isValid()).toEqual(false);
         }
     });
-
+    
     it('Eircode (Ireland postal code)', function() {
         this.bv.updateOption('zc', 'zipCode', 'country', 'IE');
 
@@ -8258,7 +8258,7 @@ describe('zipCode', function() {
             expect(this.bv.isValid()).toEqual(false);
         }
     });
-
+    
     it('Portugal postal code', function() {
         this.bv.updateOption('zc', 'zipCode', 'country', 'PT');
 
@@ -8273,72 +8273,6 @@ describe('zipCode', function() {
 
         // Invalid samples
         var invalidSamples = ['0123-456', '1234456', '1234-ABC', '1234 456'];
-        for (i in invalidSamples) {
-            this.bv.resetForm();
-            this.$zipCode.val(invalidSamples[i]);
-            this.bv.validate();
-            expect(this.bv.isValid()).toEqual(false);
-        }
-    });
-
-    it('Austria postal code', function() {
-        this.bv.updateOption('zc', 'zipCode', 'country', 'AT');
-
-        // Valid samples
-        var validSamples = ['6020', '1010', '4853'];
-        for (var i in validSamples) {
-            this.bv.resetForm();
-            this.$zipCode.val(validSamples[i]);
-            this.bv.validate();
-            expect(this.bv.isValid()).toBeTruthy();
-        }
-
-        // Invalid samples
-        var invalidSamples = ['0020', '12345', '102', '12AB', 'AT 6020 XY'];
-        for (i in invalidSamples) {
-            this.bv.resetForm();
-            this.$zipCode.val(invalidSamples[i]);
-            this.bv.validate();
-            expect(this.bv.isValid()).toEqual(false);
-        }
-    });
-
-    it('Germany postal code', function() {
-        this.bv.updateOption('zc', 'zipCode', 'country', 'DE');
-
-        // Valid samples
-        var validSamples = ['52238', '01001', '09107'];
-        for (var i in validSamples) {
-            this.bv.resetForm();
-            this.$zipCode.val(validSamples[i]);
-            this.bv.validate();
-            expect(this.bv.isValid()).toBeTruthy();
-        }
-
-        // Invalid samples
-        var invalidSamples = ['01000', '99999', '102', 'ABCDE', 'DE 52240 XY'];
-        for (i in invalidSamples) {
-            this.bv.resetForm();
-            this.$zipCode.val(invalidSamples[i]);
-            this.bv.validate();
-            expect(this.bv.isValid()).toEqual(false);
-        }
-    });
-
-    it('Switzerland postal code', function() {
-        this.bv.updateOption('zc', 'zipCode', 'country', 'CH');
-
-        // Valid samples
-        var validSamples = [ '8280', '8090', '8238', '9490'];
-        for (var i in validSamples) {
-            this.bv.resetForm();
-            this.$zipCode.val(validSamples[i]);
-            this.bv.validate();
-            expect(this.bv.isValid()).toBeTruthy();
-        }
-
-        // Invalid samples
-        var invalidSamples = ['0123', '99999', '102', 'ABCD', 'CH-5224 XY'];
         for (i in invalidSamples) {
             this.bv.resetForm();
             this.$zipCode.val(invalidSamples[i]);
