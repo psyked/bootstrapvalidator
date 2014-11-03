@@ -139,7 +139,6 @@ describe('autoFocus', function() {
         this.$email.val('invalid#email');
         $('#submitButton').click();
 
-        expect(document.activeElement.tagName.toLowerCase()).toEqual('body');
         expect(this.$username.is(':focus')).toBeFalsy();
         expect(this.$email.is(':focus')).toBeFalsy();
     });
@@ -156,7 +155,6 @@ describe('autoFocus', function() {
         this.$email.val('invalid#email');
         $('#submitButton').click();
 
-        expect(document.activeElement.tagName.toLowerCase()).toEqual('body');
         expect(this.$username.is(':focus')).toBeFalsy();
         expect(this.$email.is(':focus')).toBeFalsy();
     });
