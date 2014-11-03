@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.3-dev, built on 2014-11-03 3:09:43 PM
+ * @version     v0.5.3-dev, built on 2014-11-03 12:37:06 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -8006,8 +8006,10 @@ if (typeof jQuery === 'undefined') {
         countryNotSupported: 'The country code %s is not supported',
         country: 'Please enter a valid postal code in %s',
         countries: {
+            AT: 'Austria',
             BR: 'Brazil',
             CA: 'Canada',
+            CH: 'Switzerland',
             CZ: 'Czech Republic',
             DE: 'Germany',
             DK: 'Denmark',
@@ -8033,7 +8035,7 @@ if (typeof jQuery === 'undefined') {
             country: 'country'
         },
 
-        COUNTRY_CODES: ['BR', 'CA', 'CZ', 'DE', 'DK', 'FR', 'GB', 'IE', 'IT', 'MA', 'NL', 'PT', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
+        COUNTRY_CODES: [ 'AT', 'BR', 'CA', 'CH', 'CZ', 'DE', 'DK', 'FR', 'GB', 'IE', 'IT', 'MA', 'NL', 'PT', 'RO', 'RU', 'SE', 'SG', 'SK', 'US'],
 
         /**
          * Return true if and only if the input value is a valid country zip code
@@ -8077,6 +8079,11 @@ if (typeof jQuery === 'undefined') {
             var isValid = false;
             country = country.toUpperCase();
             switch (country) {
+                // http://en.wikipedia.org/wiki/List_of_postal_codes_in_Austria
+                case 'AT':
+                    isValid = /^([1-9]{1})(\d{3})$/.test(value);
+                    break;
+
                 case 'BR':
                     isValid = /^(\d{2})([\.]?)(\d{3})([\-]?)(\d{3})$/.test(value);
                     break;
@@ -8085,19 +8092,24 @@ if (typeof jQuery === 'undefined') {
                     isValid = /^(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|X|Y){1}[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|W|X|Y|Z){1}\s?[0-9]{1}(?:A|B|C|E|G|H|J|K|L|M|N|P|R|S|T|V|W|X|Y|Z){1}[0-9]{1}$/i.test(value);
                     break;
 
+                case 'CH':
+                    isValid = /^([1-9]{1})(\d{3})$/.test(value);
+                    break;
+
                 case 'CZ':
                     // Test: http://regexr.com/39hhr
                     isValid = /^(\d{3})([ ]?)(\d{2})$/.test(value);
                     break;
 
+                // http://stackoverflow.com/questions/7926687/regular-expression-german-zip-codes
                 case 'DE':
-                    isValid = /^([01245678][0-9]{4})$/.test(value);
+                    isValid = /^(?!01000|99999)(0[1-9]\d{3}|[1-9]\d{4})$/.test(value);
                     break;
 
                 case 'DK':
                     isValid = /^(DK(-|\s)?)?\d{4}$/i.test(value);
                     break;
-                    
+
                 // http://en.wikipedia.org/wiki/Postal_codes_in_France
                 case 'FR':
                     isValid = /^[0-9]{5}$/i.test(value);
@@ -8106,7 +8118,7 @@ if (typeof jQuery === 'undefined') {
                 case 'GB':
                     isValid = this._gb(value);
                     break;
-                
+
                 // http://www.eircode.ie/docs/default-source/Common/prepare-your-business-for-eircode---published-v2.pdf?sfvrsn=2
                 // Test: http://refiddle.com/1kpl
                 case 'IE':
@@ -8127,12 +8139,12 @@ if (typeof jQuery === 'undefined') {
                 case 'NL':
                     isValid = /^[1-9][0-9]{3} ?(?!sa|sd|ss)[a-z]{2}$/i.test(value);
                     break;
-                
+
                 // Test: http://refiddle.com/1l2t
                 case 'PT':
                     isValid = /^[1-9]\d{3}-\d{3}$/.test(value);
                     break;
-                    
+
                 case 'RO':
                     isValid = /^(0[1-8]{1}|[1-9]{1}[0-5]{1})?[0-9]{4}$/i.test(value);
                     break;
@@ -8147,7 +8159,7 @@ if (typeof jQuery === 'undefined') {
 
                 case 'SG':
                     isValid = /^([0][1-9]|[1-6][0-9]|[7]([0-3]|[5-9])|[8][0-2])(\d{4})$/i.test(value);
-                    break;                
+                    break;
 
                 case 'SK':
                     // Test: http://regexr.com/39hhr
