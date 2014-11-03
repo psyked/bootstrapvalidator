@@ -22,6 +22,7 @@ __Improvements__
 * [#1017](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1017): Enable validator when setting ```data-bv-validatorname="data-bv-validatorname"```, thanks to [@jazzzz](https://github.com/jazzzz)
 
 __Bug Fixes__
+* [#343](https://github.com/nghuuphuoc/bootstrapvalidator/issues/343), [#481](https://github.com/nghuuphuoc/bootstrapvalidator/issues/481), [#1045](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1045): Fix double submit with defered validators, thanks to [@jazzzz](https://github.com/jazzzz)
 * [#933](https://github.com/nghuuphuoc/bootstrapvalidator/issues/933), [#959](https://github.com/nghuuphuoc/bootstrapvalidator/issues/959), [#1047](https://github.com/nghuuphuoc/bootstrapvalidator/issues/1047): Tooltip/popover isn't destroyed when the field is valid
 * [#991](https://github.com/nghuuphuoc/bootstrapvalidator/issues/991): The field is validated only one time when setting ```trigger: 'blur'```, ```container: 'tooltip'```
 * [#1014](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1014): Fix [isValidField()](http://bootstrapvalidator.com/api/#is-valid-field) and [validateField()](http://bootstrapvalidator.com/api/#validate-field) methods for fields without validators, thanks to [@jazzzz](https://github.com/jazzzz)

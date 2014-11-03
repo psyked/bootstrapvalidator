@@ -749,8 +749,7 @@ if (typeof jQuery === 'undefined') {
          * @param {String} field The field name
          * @returns {Boolean}
          */
-        _isVerboseField: function(field)
-        {
+        _isVerboseField: function(field) {
             if (this.options.fields[field].verbose === 'true' || this.options.fields[field].verbose === true) {
                 return true;
             }
@@ -809,7 +808,6 @@ if (typeof jQuery === 'undefined') {
 
             return option ? options.validators[validator][option] : options.validators[validator];
         },
-
 
         /**
          * Disable/enable submit buttons
@@ -1007,6 +1005,7 @@ if (typeof jQuery === 'undefined') {
 
             if (status === this.STATUS_NOT_VALIDATED) {
                 // Reset the flag
+                // To prevent the form from doing submit when a deferred validator returns true while typing
                 this._submitIfValid = false;
             }
 

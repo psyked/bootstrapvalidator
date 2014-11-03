@@ -1,4 +1,4 @@
-var originalDefaultOptions = $.fn.bootstrapValidator.DEFAULT_OPTIONS;
+var defaultOptions = $.fn.bootstrapValidator.DEFAULT_OPTIONS;
 
 TestSuite = $.extend({}, TestSuite, {
     Event: {
@@ -485,8 +485,6 @@ describe('event field trigger with default events', function() {
 });
 
 describe('event form trigger with events changed', function() {
-    var defaultOptions = $.fn.bootstrapValidator.DEFAULT_OPTIONS;
-
     beforeEach(function() {
         $.fn.bootstrapValidator.DEFAULT_OPTIONS = $.extend({}, $.fn.bootstrapValidator.DEFAULT_OPTIONS, {
             events: {
@@ -533,9 +531,8 @@ describe('event form trigger with events changed', function() {
     });
 
     afterEach(function() {
-        $.fn.bootstrapValidator.DEFAULT_OPTIONS = defaultOptions;
         $('#eventForm2').bootstrapValidator('destroy').remove();
-        $.fn.bootstrapValidator.DEFAULT_OPTIONS = originalDefaultOptions;
+        $.fn.bootstrapValidator.DEFAULT_OPTIONS = defaultOptions;
     });
 
     it('triggers bv.form.success', function() {
@@ -562,8 +559,6 @@ describe('event form trigger with events changed', function() {
 });
 
 describe('event field trigger with events changed', function() {
-    var defaultOptions = $.fn.bootstrapValidator.DEFAULT_OPTIONS;
-
     beforeEach(function() {
         $.fn.bootstrapValidator.DEFAULT_OPTIONS = $.extend({}, $.fn.bootstrapValidator.DEFAULT_OPTIONS, {
             events: {
@@ -610,9 +605,8 @@ describe('event field trigger with events changed', function() {
     });
 
     afterEach(function() {
-        $.fn.bootstrapValidator.DEFAULT_OPTIONS = defaultOptions;
         $('#eventForm4').bootstrapValidator('destroy').remove();
-        $.fn.bootstrapValidator.DEFAULT_OPTIONS = originalDefaultOptions;
+        $.fn.bootstrapValidator.DEFAULT_OPTIONS = defaultOptions;
     });
 
     it('triggers success.field.bv', function() {

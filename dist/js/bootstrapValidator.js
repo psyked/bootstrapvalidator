@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.3-dev, built on 2014-11-03 12:34:21 AM
+ * @version     v0.5.3-dev, built on 2014-11-03 10:35:05 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -749,8 +749,7 @@ if (typeof jQuery === 'undefined') {
          * @param {String} field The field name
          * @returns {Boolean}
          */
-        _isVerboseField: function(field)
-        {
+        _isVerboseField: function(field) {
             if (this.options.fields[field].verbose === 'true' || this.options.fields[field].verbose === true) {
                 return true;
             }
@@ -810,7 +809,6 @@ if (typeof jQuery === 'undefined') {
             return option ? options.validators[validator][option] : options.validators[validator];
         },
 
-
         /**
          * Disable/enable submit buttons
          *
@@ -839,11 +837,13 @@ if (typeof jQuery === 'undefined') {
             }
             this.disableSubmitButtons(true);
 
+            this._submitIfValid = false;
             for (var field in this.options.fields) {
                 this.validateField(field);
             }
 
             this._submit();
+            this._submitIfValid = true;
 
             return this;
         },
@@ -1005,6 +1005,7 @@ if (typeof jQuery === 'undefined') {
 
             if (status === this.STATUS_NOT_VALIDATED) {
                 // Reset the flag
+                // To prevent the form from doing submit when a deferred validator returns true while typing
                 this._submitIfValid = false;
             }
 

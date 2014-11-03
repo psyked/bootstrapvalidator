@@ -1,19 +1,9 @@
 describe('submit', function() {
-
-    var submitted;
-
-    // Override the options
-    $.extend($.fn.bootstrapValidator.DEFAULT_OPTIONS, {
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        }
-    });
+    var submitted, originalTimeout;
 
     $.fn.bootstrapValidator.validators.fake_remote = {
         validate: function(validator, $field, options) {
-            var dfd   = new $.Deferred();
+            var dfd = new $.Deferred();
             setTimeout(function() {
                 dfd.resolve($field, 'fake_remote', { valid: options.valid });
             }, 0);
@@ -31,23 +21,28 @@ describe('submit', function() {
             '</form>'
         ].join('\n')).appendTo('body');
 
-        this.$form     = $('#submitForm');
-        this.$form.bootstrapValidator()
+        this.$form = $('#submitForm');
+        this.$form
+            .bootstrapValidator()
             .on('success.form.bv', function(e) {
                 e.preventDefault();
                 ++submitted;
+            })
+            .submit(function(e) {
+                e.preventDefault();
             });
-        this.$form.submit(function(e) {
-            e.preventDefault();
-        });
             
         submitted      = 0;
         this.bv        = this.$form.data('bootstrapValidator');
         this.$username = this.bv.getFieldElements('username');
+
+        originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
     });
 
     afterEach(function() {
         $('#submitForm').bootstrapValidator('destroy').remove();
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
     });
 
     // #481
@@ -58,14 +53,14 @@ describe('submit', function() {
             done();
         }, 0);
     });
-    
+
     // #481
     it('with callback returning true', function(done) {
         this.bv.addField('username', {
             validators: {
                 callback: {
                     message: 'Please enter an username',
-                    callback: function (value, validator, $field) {
+                    callback: function(value, validator, $field) {
                         return true;
                     }
                 }
@@ -79,30 +74,12 @@ describe('submit', function() {
     });
 
     // #481
-    it('with fake remote returning true', function(done) {
-        this.bv.addField('username', {
-            validators: {
-                fake_remote: {
-                    message: 'Please enter an username',
-                    valid: true
-                }
-            }
-        });
-        $('#sendButton').click();
-        setTimeout(function() {
-            expect(submitted).toBe(1);
-            done();
-        }, 100);
-    });
-
-
-    // #481
     it('with callback returning false', function(done) {
         this.bv.addField('username', {
             validators: {
                 callback: {
                     message: 'Please enter an username',
-                    callback: function (value, validator, $field) {
+                    callback: function(value, validator, $field) {
                         return false;
                     }
                 }
@@ -116,11 +93,62 @@ describe('submit', function() {
     });
 
     // #481
+    it('with remote returning true', function(done) {
+        this.bv.addField('username', {
+            validators: {
+                remote: {
+                    url: 'http://echo.jsontest.com/valid/true',
+                    message: 'The username is not available'
+                }
+            }
+        });
+        $('#sendButton').click();
+        setTimeout(function() {
+            expect(submitted).toBe(1);
+            done();
+        }, 3000);
+    });
+
+    // #481
+    it('with remote returning false', function(done) {
+        this.bv.addField('username', {
+            validators: {
+                remote: {
+                    url: 'http://echo.jsontest.com/valid/false',
+                    message: 'The username is not available'
+                }
+            }
+        });
+        $('#sendButton').click();
+        setTimeout(function() {
+            expect(submitted).toBe(0);
+            done();
+        }, 3000);
+    });
+
+    // #481
+    it('with fake remote returning true', function(done) {
+        this.bv.addField('username', {
+            validators: {
+                fake_remote: {
+                    message: 'The username is not available',
+                    valid: true
+                }
+            }
+        });
+        $('#sendButton').click();
+        setTimeout(function() {
+            expect(submitted).toBe(1);
+            done();
+        }, 100);
+    });
+
+    // #481
     it('with fake remote returning false', function(done) {
         this.bv.addField('username', {
             validators: {
                 fake_remote: {
-                    message: 'Please enter an username',
+                    message: 'The username is not available',
                     valid: false
                 }
             }
@@ -131,5 +159,4 @@ describe('submit', function() {
             done();
         }, 100);
     });
-
 });
