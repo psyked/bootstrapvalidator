@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.3-dev, built on 2014-11-03 10:35:05 AM
+ * @version     v0.5.3-dev, built on 2014-11-03 3:09:43 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -58,6 +58,7 @@ if (typeof jQuery === 'undefined') {
         _init: function() {
             var that    = this,
                 options = {
+                    autoFocus:      this.$form.attr('data-bv-autofocus'),
                     container:      this.$form.attr('data-bv-container'),
                     events: {
                         formInit:         this.$form.attr('data-bv-events-form-init'),
@@ -214,6 +215,7 @@ if (typeof jQuery === 'undefined') {
             }
 
             var opts = {
+                    autoFocus:     $field.attr('data-bv-autofocus'),
                     container:     $field.attr('data-bv-container'),
                     excluded:      $field.attr('data-bv-excluded'),
                     feedbackIcons: $field.attr('data-bv-feedbackicons'),
@@ -457,11 +459,7 @@ if (typeof jQuery === 'undefined') {
                 case 'enabled':
                 /* falls through */
                 default:
-                    fields.off(events).on(events, function(e) {
-                        // #1040: The input with placeholder is auto validated on IE 10, 11
-                        if ('input' === e.type && document.activeElement !== this) {
-                            return;
-                        }
+                    fields.off(events).on(events, function() {
                         if (that._exceedThreshold($(this))) {
                             that.validateField($(this));
                         }
@@ -650,16 +648,21 @@ if (typeof jQuery === 'undefined') {
                 }
             }
 
-            var $invalidField = this.$invalidFields.eq(0);
-            if ($invalidField) {
-                // Activate the tab containing the invalid field if exists
-                var $tabPane = $invalidField.parents('.tab-pane'), tabId;
-                if ($tabPane && (tabId = $tabPane.attr('id'))) {
-                    $('a[href="#' + tabId + '"][data-toggle="tab"]').tab('show');
-                }
+            // Determined the first invalid field which will be focused on automatically
+            for (var i = 0; i < this.$invalidFields.length; i++) {
+                var $field    = this.$invalidFields.eq(i),
+                    autoFocus = this._isOptionEnabled($field.attr('data-bv-field'), 'autoFocus');
+                if (autoFocus) {
+                    // Activate the tab containing the field if exists
+                    var $tabPane = $field.parents('.tab-pane'), tabId;
+                    if ($tabPane && (tabId = $tabPane.attr('id'))) {
+                        $('a[href="#' + tabId + '"][data-toggle="tab"]').tab('show');
+                    }
 
-                // Focus to the first invalid field
-                $invalidField.focus();
+                    // Focus the field
+                    $field.focus();
+                    break;
+                }
             }
         },
 
@@ -735,7 +738,7 @@ if (typeof jQuery === 'undefined') {
                 $field.trigger($.Event(this.options.events.fieldSuccess), data);
             }
             // If all validators are completed and there is at least one validator which doesn't pass
-            else if ((counter[this.STATUS_NOT_VALIDATED] === 0 || !this._isVerboseField(field)) && counter[this.STATUS_VALIDATING] === 0 && counter[this.STATUS_INVALID] > 0) {
+            else if ((counter[this.STATUS_NOT_VALIDATED] === 0 || !this._isOptionEnabled(field, 'verbose')) && counter[this.STATUS_VALIDATING] === 0 && counter[this.STATUS_INVALID] > 0) {
                 // Add to the list of invalid fields
                 this.$invalidFields = this.$invalidFields.add($field);
 
@@ -744,19 +747,20 @@ if (typeof jQuery === 'undefined') {
         },
 
         /**
-         * Check whether or not a field is verbose
+         * Check whether or not a field option is enabled
          *
          * @param {String} field The field name
+         * @param {String} option The option name, "verbose", "autoFocus", for example
          * @returns {Boolean}
          */
-        _isVerboseField: function(field) {
-            if (this.options.fields[field].verbose === 'true' || this.options.fields[field].verbose === true) {
+        _isOptionEnabled: function(field, option) {
+            if (this.options.fields[field] && (this.options.fields[field][option] === 'true' || this.options.fields[field][option] === true)) {
                 return true;
             }
-            if (this.options.fields[field].verbose === 'false' || this.options.fields[field].verbose === false) {
+            if (this.options.fields[field] && (this.options.fields[field][option] === 'false' || this.options.fields[field][option] === false)) {
                 return false;
             }
-            return this.options.verbose === 'true' || this.options.verbose === true;
+            return this.options[option] === 'true' || this.options[option] === true;
         },
 
         // ---
@@ -789,7 +793,7 @@ if (typeof jQuery === 'undefined') {
          */
         getOptions: function(field, validator, option) {
             if (!field) {
-                return this.options;
+                return option ? this.options[option] : this.options;
             }
             if ('object' === typeof field) {
                 field = field.attr('data-bv-field');
@@ -877,7 +881,7 @@ if (typeof jQuery === 'undefined') {
                 total      = ('radio' === type || 'checkbox' === type) ? 1 : fields.length,
                 updateAll  = ('radio' === type || 'checkbox' === type),
                 validators = this.options.fields[field].validators,
-                verbose    = this._isVerboseField(field),
+                verbose    = this._isOptionEnabled(field, 'verbose'),
                 validatorName,
                 validateResult;
 
@@ -1709,17 +1713,10 @@ if (typeof jQuery === 'undefined') {
     };
 
     // The default options
+    // Sorted in alphabetical order
     $.fn.bootstrapValidator.DEFAULT_OPTIONS = {
-        // The form CSS class
-        elementClass: 'bv-form',
-
-        // Default invalid message
-        message: 'This value is not valid',
-
-        // The CSS selector for indicating the element consists the field
-        // By default, each field is placed inside the <div class="form-group"></div>
-        // You should adjust this option if your form group consists of many fields which not all of them need to be validated
-        group: '.form-group',
+        // The first invalid field will be focused automatically
+        autoFocus: true,
 
         //The error messages container. It can be:
         // - 'tooltip' if you want to use Bootstrap tooltip to show error messages
@@ -1729,8 +1726,24 @@ if (typeof jQuery === 'undefined') {
         // You also can define the message container for particular field
         container: null,
 
-        // The field will not be live validated if its length is less than this number of characters
-        threshold: null,
+        // The form CSS class
+        elementClass: 'bv-form',
+
+        // Use custom event name to avoid window.onerror being invoked by jQuery
+        // See https://github.com/nghuuphuoc/bootstrapvalidator/issues/630
+        events: {
+            formInit: 'init.form.bv',
+            formError: 'error.form.bv',
+            formSuccess: 'success.form.bv',
+            fieldAdded: 'added.field.bv',
+            fieldRemoved: 'removed.field.bv',
+            fieldInit: 'init.field.bv',
+            fieldError: 'error.field.bv',
+            fieldSuccess: 'success.field.bv',
+            fieldStatus: 'status.field.bv',
+            validatorError: 'error.validator.bv',
+            validatorSuccess: 'success.validator.bv'
+        },
 
         // Indicate fields which won't be validated
         // By default, the plugin will not validate the following kind of fields:
@@ -1781,9 +1794,13 @@ if (typeof jQuery === 'undefined') {
             validating: null
         },
 
-        // The submit buttons selector
-        // These buttons will be disabled to prevent the valid form from multiple submissions
-        submitButtons: '[type="submit"]',
+        // Map the field name with validator rules
+        fields: null,
+
+        // The CSS selector for indicating the element consists the field
+        // By default, each field is placed inside the <div class="form-group"></div>
+        // You should adjust this option if your form group consists of many fields which not all of them need to be validated
+        group: '.form-group',
 
         // Live validating option
         // Can be one of 3 values:
@@ -1792,25 +1809,16 @@ if (typeof jQuery === 'undefined') {
         // - submitted: The live validating is enabled after the form is submitted
         live: 'enabled',
 
-        // Map the field name with validator rules
-        fields: null,
+        // Default invalid message
+        message: 'This value is not valid',
 
-        // Use custom event name to avoid window.onerror being invoked by jQuery
-        // See https://github.com/nghuuphuoc/bootstrapvalidator/issues/630
-        events: {
-            formInit: 'init.form.bv',
-            formError: 'error.form.bv',
-            formSuccess: 'success.form.bv',
-            fieldAdded: 'added.field.bv',
-            fieldRemoved: 'removed.field.bv',
-            fieldInit: 'init.field.bv',
-            fieldError: 'error.field.bv',
-            fieldSuccess: 'success.field.bv',
-            fieldStatus: 'status.field.bv',
-            validatorError: 'error.validator.bv',
-            validatorSuccess: 'success.validator.bv'
-        },
-        
+        // The submit buttons selector
+        // These buttons will be disabled to prevent the valid form from multiple submissions
+        submitButtons: '[type="submit"]',
+
+        // The field will not be live validated if its length is less than this number of characters
+        threshold: null,
+
         // Whether to be verbose when validating a field or not.
         // Possible values:
         // - true:  when a field has multiple validators, all of them will be checked, and respectively - if errors occur in

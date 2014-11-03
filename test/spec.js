@@ -86,6 +86,99 @@ describe('api', function() {
     });
 });
 
+describe('autoFocus', function() {
+    beforeEach(function() {
+        $([
+            '<form class="form-horizontal" id="autoFocusForm">',
+                '<div class="form-group">',
+                    '<input type="text" name="username" required />',
+                '</div>',
+                '<div class="form-group">',
+                    '<input type="text" name="email" required data-bv-emailaddress />',
+                '</div>',
+                '<div class="form-group">',
+                    '<button type="submit" id="submitButton">Submit</button>',
+                '</div>',
+            '</form>'
+        ].join('')).appendTo('body');
+
+        this.bv        = $('#autoFocusForm')
+                            .bootstrapValidator()
+                            .submit(function(e) {
+                                e.preventDefault();
+                            })
+                            .data('bootstrapValidator');
+        this.$username = this.bv.getFieldElements('username');
+        this.$email    = this.bv.getFieldElements('email');
+    });
+
+    afterEach(function() {
+        $('#autoFocusForm').bootstrapValidator('destroy').remove();
+    });
+
+    it('default option (autoFocus=true)', function() {
+        $('#submitButton').click();
+        expect(this.$username.is(':focus')).toBeTruthy();
+        expect($(document.activeElement).attr('name')).toEqual('username');
+
+        this.bv.resetForm();
+        this.$username.val('user_name');
+        this.$email.val('');
+        $('#submitButton').click();
+        expect(this.$email.is(':focus')).toBeTruthy();
+        expect($(document.activeElement).attr('name')).toEqual('email');
+    });
+
+    it('set autoFocus=false for form', function() {
+        $('#autoFocusForm')
+                .bootstrapValidator('destroy')
+                .bootstrapValidator({
+                    autoFocus: false
+                });
+        this.$username.val('');
+        this.$email.val('invalid#email');
+        $('#submitButton').click();
+
+        expect(document.activeElement.tagName.toLowerCase()).toEqual('body');
+        expect(this.$username.is(':focus')).toBeFalsy();
+        expect(this.$email.is(':focus')).toBeFalsy();
+    });
+
+    it('set autoFocus=false for all fields', function() {
+        this.bv
+            .addField('username', {
+                autoFocus: false
+            })
+            .addField('email', {
+                autoFocus: false
+            });
+        this.$username.val('user_name');
+        this.$email.val('invalid#email');
+        $('#submitButton').click();
+
+        expect(document.activeElement.tagName.toLowerCase()).toEqual('body');
+        expect(this.$username.is(':focus')).toBeFalsy();
+        expect(this.$email.is(':focus')).toBeFalsy();
+    });
+
+    it('set different autoFocus value for fields', function() {
+        this.bv
+            .addField('username', {
+                autoFocus: false
+            })
+            .addField('email', {
+                autoFocus: true
+            });
+        this.$username.val('');
+        this.$email.val('invalid_email');
+        $('#submitButton').click();
+
+        expect(this.$username.is(':focus')).toBeFalsy();
+        expect(this.$email.is(':focus')).toBeTruthy();
+        expect($(document.activeElement).attr('name')).toEqual('email');
+    });
+});
+
 describe('container form option', function() {
     beforeEach(function() {
         $([
@@ -538,8 +631,6 @@ describe('enable validators', function() {
         expect($.inArray('The full name can only consist of alphabetical, number, and space', messages)).toEqual(-1);
     });
 });
-
-var defaultOptions = $.fn.bootstrapValidator.DEFAULT_OPTIONS;
 
 TestSuite = $.extend({}, TestSuite, {
     Event: {
@@ -1026,6 +1117,8 @@ describe('event field trigger with default events', function() {
 });
 
 describe('event form trigger with events changed', function() {
+    var defaultOptions = $.fn.bootstrapValidator.DEFAULT_OPTIONS;
+
     beforeEach(function() {
         $.fn.bootstrapValidator.DEFAULT_OPTIONS = $.extend({}, $.fn.bootstrapValidator.DEFAULT_OPTIONS, {
             events: {
@@ -1100,6 +1193,8 @@ describe('event form trigger with events changed', function() {
 });
 
 describe('event field trigger with events changed', function() {
+    var defaultOptions = $.fn.bootstrapValidator.DEFAULT_OPTIONS;
+
     beforeEach(function() {
         $.fn.bootstrapValidator.DEFAULT_OPTIONS = $.extend({}, $.fn.bootstrapValidator.DEFAULT_OPTIONS, {
             events: {
@@ -1855,43 +1950,6 @@ describe('i18n', function() {
         this.$program.prop('checked', 'checked');
         this.bv.validate();
         expect(this.bv.getMessages('programs[]', 'choice')[0]).toEqual(format(i18n.choice.between, [2, 4]));
-    });
-});
-
-describe('input', function() {
-    beforeEach(function(done) {
-        $([
-            '<form class="form-horizontal" id="inputForm">',
-                '<div class="form-group">',
-                    '<textarea name="text" data-bv-notempty placeholder="Text" />',
-                '</div>',
-                '<div class="form-group">',
-                    '<input type="text" name="input1" data-bv-notempty placeholder="Text" />',
-                '</div>',
-                '<div class="form-group">',
-                    '<input type="text" name="input2" data-bv-notempty placeholder="Text" />',
-                '</div>',
-            '</form>'
-        ].join('\n')).appendTo('body');
-
-        $('#inputForm').bootstrapValidator();
-
-        this.bv      = $('#inputForm').data('bootstrapValidator');
-        this.$text   = this.bv.getFieldElements('text');
-        this.$input1 = this.bv.getFieldElements('input1');
-        this.$input2 = this.bv.getFieldElements('input2');
-        setTimeout(done, 0);
-    });
-
-    afterEach(function() {
-        $('#inputForm').bootstrapValidator('destroy').remove();
-    });
-
-    // #1040, #1041
-    it('Fields should not be validated on init', function() {
-        expect(this.bv.getMessages(this.$text)).toEqual([]);
-        expect(this.bv.getMessages(this.$input1)).toEqual([]);
-        expect(this.bv.getMessages(this.$input2)).toEqual([]);
     });
 });
 
