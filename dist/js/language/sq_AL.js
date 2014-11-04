@@ -344,8 +344,10 @@
             countryNotSupported: 'Kodi i shtetit %s nuk është i mundësuar',
             country: 'Ju lutem vendosni një kod postar të vlefshëm në %s',
             countries: {
+                AT: 'Austri',
                 BR: 'Brazil',
                 CA: 'Kanada',
+                CH: 'Zvicër',
                 CZ: 'Republika Çeke',
                 DE: 'Gjermani',
                 DK: 'Danimarkë',

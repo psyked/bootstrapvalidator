@@ -344,8 +344,10 @@
             countryNotSupported: 'Landskoden %s stöds inte',
             country: 'Vänligen mata in ett giltigt postnummer i %s',
             countries: {
+                AT: 'Österrike',
                 BR: 'Brasilien',
                 CA: 'Kanada',
+                CH: 'Schweiz',
                 CZ: 'Tjeckien',
                 DE: 'Tyskland',
                 DK: 'Danmark',

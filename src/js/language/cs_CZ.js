@@ -344,8 +344,10 @@
             countryNotSupported: '%s není podporované',
             country: 'Prosím zadejte správné PSČ pro %s',
             countries: {
+                AT: 'Rakousko',
                 BR: 'Brazílie',
                 CA: 'Kanada',
+                CH: 'Švýcarsko',
                 CZ: 'Českou Republiku',
                 DE: 'Německo',
                 DK: 'Dánsko',

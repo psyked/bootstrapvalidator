@@ -344,8 +344,10 @@
             countryNotSupported: 'Kode negara %s belum didukung',
             country: 'Silahkan isi kode pos yang valid di %s',
             countries: {
+                AT: 'Austria',
                 BR: 'Brazil',
                 CA: 'Kanada',
+                CH: 'Switzerland',
                 CZ: 'Czech',
                 DE: 'Jerman',
                 DK: 'Denmark',

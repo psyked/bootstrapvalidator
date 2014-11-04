@@ -344,8 +344,10 @@
             countryNotSupported: '%s - nem támogatott ország',
             country: 'Kérlek, hogy %s érvényes irányítószámot adj meg',
             countries: {
+                AT: 'Ausztriában',
                 BR: 'Brazíliában',
                 CA: 'Kanadában',
+                CH: 'Svájcban',
                 CZ: 'Csehországban',
                 DE: 'Németországban',
                 DK: 'Dániában',

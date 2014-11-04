@@ -344,8 +344,10 @@
             countryNotSupported: '不支援 %s 國家',
             country: '請輸入有效的 %s 國家的郵政編碼',
             countries: {
+                AT: '奧地利',
                 BR: '巴西',
                 CA: '加拿大',
+                CH: '瑞士',
                 CZ: '捷克共和國',
                 DE: '德國',
                 DK: '丹麥',

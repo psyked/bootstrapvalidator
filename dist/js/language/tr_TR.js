@@ -344,8 +344,10 @@
             countryNotSupported: '%s ülke kodu desteklenmemektedir',
             country: 'Lütfen geçerli bir posta kodu giriniz içinde %s',
             countries: {
+                AT: 'Avustralya',
                 BR: 'Brezilya',
                 CA: 'Kanada',
+                CH: 'İsviçre',
                 CZ: 'Çek Cumhuriyeti',
                 DE: 'Almanya',
                 DK: 'Danimarka',

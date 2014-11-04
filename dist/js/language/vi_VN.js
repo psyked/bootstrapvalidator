@@ -344,8 +344,10 @@
             countryNotSupported: 'Mã quốc gia %s không được hỗ trợ',
             country: 'Vui lòng nhập mã bưu điện hợp lệ của %s',
             countries: {
+                AT: 'Áo',
                 BR: 'Brazil',
                 CA: 'Canada',
+                CH: 'Thuỵ Sĩ',
                 CZ: 'Séc',
                 DE: 'Đức',
                 DK: 'Đan Mạch',

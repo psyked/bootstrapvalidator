@@ -344,8 +344,10 @@
             countryNotSupported: 'De land code %s wordt niet ondersteund',
             country: 'Voer een geldige postcode in uit %s',
             countries: {
+                AT: 'Oostenrijk',
                 BR: 'Brazilië',
                 CA: 'Canada',
+                CH: 'Zwitserland',
                 CZ: 'Tsjechische Republiek',
                 DE: 'Duitsland',
                 DK: 'Denemarken',

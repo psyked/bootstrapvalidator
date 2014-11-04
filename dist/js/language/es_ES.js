@@ -344,8 +344,10 @@
             countryNotSupported: 'El código del país %s no está soportado',
             country: 'Por favor introduce un código postal válido en %s',
             countries: {
+                AT: 'Austria',
                 BR: 'Brasil',
                 CA: 'Canadá',
+                CH: 'Suiza',
                 CZ: 'República Checa',
                 DE: 'Alemania',
                 DK: 'Dinamarca',

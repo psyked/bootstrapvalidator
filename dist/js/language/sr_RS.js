@@ -344,8 +344,10 @@
             countryNotSupported: 'Kod %s nije podržan',
             country: 'Molimo da unesete ispravan poštanski broj %s',
             countries: {
+                AT: 'Austrije',
                 BR: 'Brazila',
                 CA: 'Kanade',
+                CH: 'Švajcarske',
                 CZ: 'Češke',
                 DE: 'Nemačke',
                 DK: 'Danske',

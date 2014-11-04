@@ -344,8 +344,10 @@
             countryNotSupported: 'Tara %s nu este acceptata',
             country: 'Te rog sa introduci un cod postal valid din %s',
             countries: {
+                AT: 'Austria',
                 BR: 'Brazilia',
                 CA: 'Canada',
+                CH: 'Elvetia',
                 CZ: 'Republica Cehia',
                 DE: 'Germania',
                 DK: 'Danemarca',

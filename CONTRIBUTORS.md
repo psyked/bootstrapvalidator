@@ -94,6 +94,7 @@ I would like to give big thanks to the following contributors:
 * [@sventech](https://github.com/sventech)
 * [@talberti](https://github.com/talberti)
 * [@thisisclement](https://github.com/thisisclement)
+* [@thomaslhotta](https://github.com/thomaslhotta)
 * [@thx2001r](https://github.com/thx2001r)
 * [@tiagofontella](https://github.com/tiagofontella)
 * [@tomByrer](https://github.com/tomByrer)
