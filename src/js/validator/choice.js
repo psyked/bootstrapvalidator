@@ -65,4 +65,4 @@
             return { valid: isValid, message: message };
         }
     };
-}(jQuery));
+}(window.jQuery));

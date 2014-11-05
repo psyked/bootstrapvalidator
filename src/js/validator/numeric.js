@@ -40,4 +40,4 @@
             return !isNaN(parseFloat(value)) && isFinite(value);
         }
     };
-}(jQuery));
+}(window.jQuery));

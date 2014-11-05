@@ -37,4 +37,4 @@
             return sum + '' === value.charAt(length - 1);
         }
     };
-}(jQuery));
+}(window.jQuery));

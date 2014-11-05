@@ -4,7 +4,8 @@
  *
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
- * @license     MIT
+ * @license     Commercial: http://bootstrapvalidator.com/license/
+ *              Non-commercial: http://creativecommons.org/licenses/by-nc-nd/3.0/
  */
 
 if (typeof jQuery === 'undefined') {
@@ -16,7 +17,7 @@ if (typeof jQuery === 'undefined') {
     if ((+version[0] < 2 && +version[1] < 9) || (+version[0] === 1 && +version[1] === 9 && +version[2] < 1)) {
         throw new Error('BootstrapValidator requires jQuery version 1.9.1 or higher');
     }
-}(jQuery));
+}(window.jQuery));
 
 (function($) {
     var BootstrapValidator = function(form, options) {
@@ -1999,4 +2000,4 @@ if (typeof jQuery === 'undefined') {
             return (check === 1);
         }
     };
-}(jQuery));
+}(window.jQuery));

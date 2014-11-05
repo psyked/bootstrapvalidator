@@ -69,4 +69,4 @@
             return (value + '').replace(',', '.');
         }
     };
-}(jQuery));
+}(window.jQuery));

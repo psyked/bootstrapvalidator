@@ -25,4 +25,4 @@
             return $.fn.bootstrapValidator.helpers.luhn(value);
 		}
 	};
-}(jQuery));
+}(window.jQuery));

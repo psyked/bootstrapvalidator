@@ -1,5 +1,9 @@
 # Contributors
 
+Contributions are welcome! 
+
+Please notice that your code may be used as part of a commercial product if the pull request is merged.
+
 I would like to give big thanks to the following contributors:
 
 * [@abuzer](https://github.com/abuzer)
@@ -107,4 +111,4 @@ I would like to give big thanks to the following contributors:
 * [@vaz](https://github.com/vaz)
 * [@yakidahan](https://github.com/yakidahan)
 * [@zmira](https://github.com/zmira)
-* ... might be you! Let's [fork](https://github.com/nghuuphuoc/bootstrapvalidator/fork) and pull a request!
+* ... might be you! Let's [fork](https://github.com/nghuuphuoc/bootstrapvalidator/fork) and make a pull request.

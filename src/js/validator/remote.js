@@ -105,4 +105,4 @@
             }
         }
     };
-}(jQuery));
+}(window.jQuery));

@@ -45,4 +45,4 @@
             return isValid;
         }
     };
-}(jQuery));
+}(window.jQuery));

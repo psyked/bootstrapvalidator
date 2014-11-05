@@ -21,4 +21,4 @@
             return /^\d+$/.test(value);
         }
     };
-}(jQuery));
+}(window.jQuery));

@@ -46,4 +46,4 @@
             return (reminder + '') === value.charAt(8);
         }
     };
-}(jQuery));
+}(window.jQuery));

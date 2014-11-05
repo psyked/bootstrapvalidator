@@ -100,4 +100,4 @@
             return false;
         }
     };
-}(jQuery));
+}(window.jQuery));

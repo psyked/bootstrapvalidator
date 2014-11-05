@@ -1,6 +1,6 @@
 {
     "name": "bootstrapValidator",
-    "version": "0.5.3-dev",
+    "version": "0.5.3",
     "description": "The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3",
     "keywords": ["jQuery", "plugin", "validate", "validator", "form", "Bootstrap"],
     "author": {
@@ -13,7 +13,7 @@
         "url": "https://github.com/nghuuphuoc/bootstrapvalidator/issues",
         "email": "phuoc@huuphuoc.me"
     },
-    "license": "MIT",
+    "license": "Commercial and non-commercial",
     "main": "./dist/js/bootstrapValidator.js",
     "repository": {
         "type": "git",

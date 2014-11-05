@@ -1,6 +1,6 @@
 {
     "name": "bootstrapValidator",
-    "version": "0.5.3-dev",
+    "version": "0.5.3",
     "title": "BootstrapValidator",
     "author": {
         "name": "Nguyen Huu Phuoc",
@@ -9,12 +9,16 @@
     },
     "licenses": [
         {
-            "type": "MIT",
-            "url": "http://opensource.org/licenses/mit-license.html"
+            "type": "Commercial",
+            "url": "http://bootstrapvalidator.com/license/"
+        },
+        {
+            "type": "Non-commercial",
+            "url": "http://creativecommons.org/licenses/by-nc-nd/3.0/"
         }
     ],
     "dependencies": {
-        "jquery": ">= 1.9.0",
+        "jquery": ">= 1.9.1",
         "bootstrap": ">= 3.0.0"
     },
     "description": "The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3",

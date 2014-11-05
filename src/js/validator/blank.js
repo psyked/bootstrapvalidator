@@ -26,4 +26,4 @@
             return true;
         }
     };
-}(jQuery));
+}(window.jQuery));

@@ -34,4 +34,4 @@
             return $.fn.bootstrapValidator.helpers.mod37And36(value);
         }
     };
-}(jQuery));
+}(window.jQuery));

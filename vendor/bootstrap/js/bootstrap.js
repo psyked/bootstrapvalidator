@@ -13,7 +13,7 @@ if (typeof jQuery === 'undefined') {
   if ((version[0] < 2 && version[1] < 9) || (version[0] == 1 && version[1] == 9 && version[2] < 1)) {
     throw new Error('Bootstrap\'s JavaScript requires jQuery version 1.9.1 or higher')
   }
-}(jQuery);
+}(window.jQuery);
 
 /* ========================================================================
  * Bootstrap: transition.js v3.3.0
@@ -73,7 +73,7 @@ if (typeof jQuery === 'undefined') {
     }
   })
 
-}(jQuery);
+}(window.jQuery);
 
 /* ========================================================================
  * Bootstrap: alert.js v3.3.0
@@ -168,7 +168,7 @@ if (typeof jQuery === 'undefined') {
 
   $(document).on('click.bs.alert.data-api', dismiss, Alert.prototype.close)
 
-}(jQuery);
+}(window.jQuery);
 
 /* ========================================================================
  * Bootstrap: button.js v3.3.0
@@ -285,7 +285,7 @@ if (typeof jQuery === 'undefined') {
       $(e.target).closest('.btn').toggleClass('focus', e.type == 'focus')
     })
 
-}(jQuery);
+}(window.jQuery);
 
 /* ========================================================================
  * Bootstrap: carousel.js v3.3.0
@@ -525,7 +525,7 @@ if (typeof jQuery === 'undefined') {
     })
   })
 
-}(jQuery);
+}(window.jQuery);
 
 /* ========================================================================
  * Bootstrap: collapse.js v3.3.0
@@ -737,7 +737,7 @@ if (typeof jQuery === 'undefined') {
     Plugin.call($target, option)
   })
 
-}(jQuery);
+}(window.jQuery);
 
 /* ========================================================================
  * Bootstrap: dropdown.js v3.3.0
@@ -899,7 +899,7 @@ if (typeof jQuery === 'undefined') {
     .on('keydown.bs.dropdown.data-api', '[role="menu"]', Dropdown.prototype.keydown)
     .on('keydown.bs.dropdown.data-api', '[role="listbox"]', Dropdown.prototype.keydown)
 
-}(jQuery);
+}(window.jQuery);
 
 /* ========================================================================
  * Bootstrap: modal.js v3.3.0
@@ -1181,7 +1181,7 @@ if (typeof jQuery === 'undefined') {
     Plugin.call($target, option, this)
   })
 
-}(jQuery);
+}(window.jQuery);
 
 /* ========================================================================
  * Bootstrap: tooltip.js v3.3.0
@@ -1660,7 +1660,7 @@ if (typeof jQuery === 'undefined') {
     return this
   }
 
-}(jQuery);
+}(window.jQuery);
 
 /* ========================================================================
  * Bootstrap: popover.js v3.3.0
@@ -1780,7 +1780,7 @@ if (typeof jQuery === 'undefined') {
     return this
   }
 
-}(jQuery);
+}(window.jQuery);
 
 /* ========================================================================
  * Bootstrap: scrollspy.js v3.3.0
@@ -1956,7 +1956,7 @@ if (typeof jQuery === 'undefined') {
     })
   })
 
-}(jQuery);
+}(window.jQuery);
 
 /* ========================================================================
  * Bootstrap: tab.js v3.3.0
@@ -2110,7 +2110,7 @@ if (typeof jQuery === 'undefined') {
     .on('click.bs.tab.data-api', '[data-toggle="tab"]', clickHandler)
     .on('click.bs.tab.data-api', '[data-toggle="pill"]', clickHandler)
 
-}(jQuery);
+}(window.jQuery);
 
 /* ========================================================================
  * Bootstrap: affix.js v3.3.0
@@ -2273,4 +2273,4 @@ if (typeof jQuery === 'undefined') {
     })
   })
 
-}(jQuery);
+}(window.jQuery);

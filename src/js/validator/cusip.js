@@ -52,4 +52,4 @@
             return sum === converted[length - 1];
         }
     };
-}(jQuery));
+}(window.jQuery));
