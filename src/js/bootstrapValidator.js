@@ -8,8 +8,15 @@
  */
 
 if (typeof jQuery === 'undefined') {
-    throw new Error('BootstrapValidator\'s JavaScript requires jQuery');
+    throw new Error('BootstrapValidator requires jQuery');
 }
+
+(function($) {
+    var version = $.fn.jquery.split(' ')[0].split('.');
+    if ((+version[0] < 2 && +version[1] < 9) || (+version[0] === 1 && +version[1] === 9 && +version[2] < 1)) {
+        throw new Error('BootstrapValidator requires jQuery version 1.9.1 or higher');
+    }
+}(window.jQuery));
 
 (function($) {
     var BootstrapValidator = function(form, options) {

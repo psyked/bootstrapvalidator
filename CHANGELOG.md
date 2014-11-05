@@ -22,6 +22,7 @@ __Improvements__
 * [#1002](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1002): Put tooltip/popover on bottom if there is not enough space on top, thanks to [@jazzzz](https://github.com/jazzzz)
 * [#1015](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1015): The [remote](http://bootstrapvalidator.com/validators/remote/) validator allows to set ```data``` options via HTML attributes, thanks to [@jazzzz](https://github.com/jazzzz)
 * [#1017](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1017): Enable validator when setting ```data-bv-validatorname="data-bv-validatorname"```, thanks to [@jazzzz](https://github.com/jazzzz)
+* [#1026](https://github.com/nghuuphuoc/bootstrapvalidator/issues/1026): Requires jQuery 1.9.1 or higher
 
 __Bug Fixes__
 * [#343](https://github.com/nghuuphuoc/bootstrapvalidator/issues/343), [#481](https://github.com/nghuuphuoc/bootstrapvalidator/issues/481), [#1045](https://github.com/nghuuphuoc/bootstrapvalidator/pull/1045): Fix double submit with defered validators, thanks to [@jazzzz](https://github.com/jazzzz)
