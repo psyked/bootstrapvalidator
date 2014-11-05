@@ -16,7 +16,7 @@
         "dist/css/bootstrapValidator.css",
         "dist/js/bootstrapValidator.js"
     ],
-    "license": "Commercial and non-commercial",
+    "license": "http://bootstrapvalidator.com/license/",
     "keywords": ["jQuery", "plugin", "validate", "validator", "form", "Bootstrap"],
     "authors": [
         { "name": "Nguyen Huu Phuoc", "email": "phuoc@huuphuoc.me"," homepage": "https://twitter.com/nghuuphuoc" }

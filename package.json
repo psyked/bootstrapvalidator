@@ -13,7 +13,7 @@
         "url": "https://github.com/nghuuphuoc/bootstrapvalidator/issues",
         "email": "phuoc@huuphuoc.me"
     },
-    "license": "Commercial and non-commercial",
+    "license": "http://bootstrapvalidator.com/license/",
     "main": "./dist/js/bootstrapValidator.js",
     "repository": {
         "type": "git",

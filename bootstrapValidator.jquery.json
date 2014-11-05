@@ -9,12 +9,7 @@
     },
     "licenses": [
         {
-            "type": "Commercial",
             "url": "http://bootstrapvalidator.com/license/"
-        },
-        {
-            "type": "Non-commercial",
-            "url": "http://creativecommons.org/licenses/by-nc-nd/3.0/"
         }
     ],
     "dependencies": {
