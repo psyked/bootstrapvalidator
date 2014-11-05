@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.3, built on 2014-11-05 6:25:15 PM
+ * @version     v0.5.3, built on 2014-11-05 6:25:49 PM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     Commercial: http://bootstrapvalidator.com/license/
@@ -17,7 +17,7 @@ if (typeof jQuery === 'undefined') {
     if ((+version[0] < 2 && +version[1] < 9) || (+version[0] === 1 && +version[1] === 9 && +version[2] < 1)) {
         throw new Error('BootstrapValidator requires jQuery version 1.9.1 or higher');
     }
-}(jQuery));
+}(window.jQuery));
 
 (function($) {
     var BootstrapValidator = function(form, options) {
@@ -2000,7 +2000,7 @@ if (typeof jQuery === 'undefined') {
             return (check === 1);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.base64 = $.extend($.fn.bootstrapValidator.i18n.base64 || {}, {
         'default': 'Please enter a valid base 64 encoded'
@@ -2025,7 +2025,7 @@ if (typeof jQuery === 'undefined') {
             return /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$/.test(value);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.between = $.extend($.fn.bootstrapValidator.i18n.between || {}, {
         'default': 'Please enter a value between %s and %s',
@@ -2102,7 +2102,7 @@ if (typeof jQuery === 'undefined') {
             return (value + '').replace(',', '.');
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.validators.blank = {
         /**
@@ -2131,7 +2131,7 @@ if (typeof jQuery === 'undefined') {
             return true;
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.callback = $.extend($.fn.bootstrapValidator.i18n.callback || {}, {
         'default': 'Please enter a valid value'
@@ -2172,7 +2172,7 @@ if (typeof jQuery === 'undefined') {
             return dfd;
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.choice = $.extend($.fn.bootstrapValidator.i18n.choice || {}, {
         'default': 'Please enter a valid value',
@@ -2240,7 +2240,7 @@ if (typeof jQuery === 'undefined') {
             return { valid: isValid, message: message };
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.color = $.extend($.fn.bootstrapValidator.i18n.color || {}, {
         'default': 'Please enter a valid color'
@@ -2369,7 +2369,7 @@ if (typeof jQuery === 'undefined') {
             return regexInteger.test(value) || regexPercent.test(value);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.creditCard = $.extend($.fn.bootstrapValidator.i18n.creditCard || {}, {
         'default': 'Please enter a valid credit card number'
@@ -2472,7 +2472,7 @@ if (typeof jQuery === 'undefined') {
             return false;
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.cusip = $.extend($.fn.bootstrapValidator.i18n.cusip || {}, {
         'default': 'Please enter a valid CUSIP number'
@@ -2527,7 +2527,7 @@ if (typeof jQuery === 'undefined') {
             return sum === converted[length - 1];
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.cvv = $.extend($.fn.bootstrapValidator.i18n.cvv || {}, {
         'default': 'Please enter a valid CVV number'
@@ -2643,7 +2643,7 @@ if (typeof jQuery === 'undefined') {
                         : (('AMERICAN_EXPRESS' === creditCardType) ? (value.length === 4) : (value.length === 3));
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.date = $.extend($.fn.bootstrapValidator.i18n.date || {}, {
         'default': 'Please enter a valid date',
@@ -2895,7 +2895,7 @@ if (typeof jQuery === 'undefined') {
             return new Date(year, month, day, hours, minutes, seconds);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.different = $.extend($.fn.bootstrapValidator.i18n.different || {}, {
         'default': 'Please enter a different value'
@@ -2943,7 +2943,7 @@ if (typeof jQuery === 'undefined') {
             return isValid;
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.digits = $.extend($.fn.bootstrapValidator.i18n.digits || {}, {
         'default': 'Please enter only digits'
@@ -2967,7 +2967,7 @@ if (typeof jQuery === 'undefined') {
             return /^\d+$/.test(value);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.ean = $.extend($.fn.bootstrapValidator.i18n.ean || {}, {
         'default': 'Please enter a valid EAN number'
@@ -3007,7 +3007,7 @@ if (typeof jQuery === 'undefined') {
             return (sum + '' === value.charAt(length - 1));
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.emailAddress = $.extend($.fn.bootstrapValidator.i18n.emailAddress || {}, {
         'default': 'Please enter a valid email address'
@@ -3094,7 +3094,7 @@ if (typeof jQuery === 'undefined') {
             return emailAddressArray;
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.file = $.extend($.fn.bootstrapValidator.i18n.file || {}, {
         'default': 'Please choose a valid file'
@@ -3182,7 +3182,7 @@ if (typeof jQuery === 'undefined') {
             return true;
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.greaterThan = $.extend($.fn.bootstrapValidator.i18n.greaterThan || {}, {
         'default': 'Please enter a value greater than or equal to %s',
@@ -3254,7 +3254,7 @@ if (typeof jQuery === 'undefined') {
             return (value + '').replace(',', '.');
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.grid = $.extend($.fn.bootstrapValidator.i18n.grid || {}, {
         'default': 'Please enter a valid GRId number'
@@ -3291,7 +3291,7 @@ if (typeof jQuery === 'undefined') {
             return $.fn.bootstrapValidator.helpers.mod37And36(value);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.hex = $.extend($.fn.bootstrapValidator.i18n.hex || {}, {
         'default': 'Please enter a valid hexadecimal number'
@@ -3316,7 +3316,7 @@ if (typeof jQuery === 'undefined') {
             return /^[0-9a-fA-F]+$/.test(value);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.hexColor = $.extend($.fn.bootstrapValidator.i18n.hexColor || {}, {
         'default': 'Please enter a valid hex color'
@@ -3349,7 +3349,7 @@ if (typeof jQuery === 'undefined') {
                         : /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(value);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.iban = $.extend($.fn.bootstrapValidator.i18n.iban || {}, {
         'default': 'Please enter a valid IBAN number',
@@ -3595,7 +3595,7 @@ if (typeof jQuery === 'undefined') {
             };
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.id = $.extend($.fn.bootstrapValidator.i18n.id || {}, {
         'default': 'Please enter a valid identification number',
@@ -4971,7 +4971,7 @@ if (typeof jQuery === 'undefined') {
             return $.fn.bootstrapValidator.helpers.luhn(value);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.identical = $.extend($.fn.bootstrapValidator.i18n.identical || {}, {
         'default': 'Please enter the same value'
@@ -5011,7 +5011,7 @@ if (typeof jQuery === 'undefined') {
             }
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.imei = $.extend($.fn.bootstrapValidator.i18n.imei || {}, {
         'default': 'Please enter a valid IMEI number'
@@ -5055,7 +5055,7 @@ if (typeof jQuery === 'undefined') {
             }
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.imo = $.extend($.fn.bootstrapValidator.i18n.imo || {}, {
         'default': 'Please enter a valid IMO number'
@@ -5100,7 +5100,7 @@ if (typeof jQuery === 'undefined') {
             return sum % 10 === parseInt(digits.charAt(6), 10);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.integer = $.extend($.fn.bootstrapValidator.i18n.integer || {}, {
         'default': 'Please enter a valid number'
@@ -5132,7 +5132,7 @@ if (typeof jQuery === 'undefined') {
             return /^(?:-?(?:0|[1-9][0-9]*))$/.test(value);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.ip = $.extend($.fn.bootstrapValidator.i18n.ip || {}, {
         'default': 'Please enter a valid IP address',
@@ -5195,7 +5195,7 @@ if (typeof jQuery === 'undefined') {
             };
         }
     };
-}(jQuery));;(function($) {
+}(window.jQuery));;(function($) {
     $.fn.bootstrapValidator.i18n.isbn = $.extend($.fn.bootstrapValidator.i18n.isbn || {}, {
         'default': 'Please enter a valid ISBN number'
     });
@@ -5280,7 +5280,7 @@ if (typeof jQuery === 'undefined') {
             }
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.isin = $.extend($.fn.bootstrapValidator.i18n.isin || {}, {
         'default': 'Please enter a valid ISIN number'
@@ -5339,7 +5339,7 @@ if (typeof jQuery === 'undefined') {
             return sum + '' === value.charAt(length - 1);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.ismn = $.extend($.fn.bootstrapValidator.i18n.ismn || {}, {
         'default': 'Please enter a valid ISMN number'
@@ -5398,7 +5398,7 @@ if (typeof jQuery === 'undefined') {
             return (sum + '' === value.charAt(length - 1));
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.issn = $.extend($.fn.bootstrapValidator.i18n.issn || {}, {
         'default': 'Please enter a valid ISSN number'
@@ -5444,7 +5444,7 @@ if (typeof jQuery === 'undefined') {
             return (sum % 11 === 0);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.lessThan = $.extend($.fn.bootstrapValidator.i18n.lessThan || {}, {
         'default': 'Please enter a value less than or equal to %s',
@@ -5516,7 +5516,7 @@ if (typeof jQuery === 'undefined') {
             return (value + '').replace(',', '.');
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.mac = $.extend($.fn.bootstrapValidator.i18n.mac || {}, {
         'default': 'Please enter a valid MAC address'
@@ -5541,7 +5541,7 @@ if (typeof jQuery === 'undefined') {
             return /^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/.test(value);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.meid = $.extend($.fn.bootstrapValidator.i18n.meid || {}, {
         'default': 'Please enter a valid MEID number'
@@ -5624,7 +5624,7 @@ if (typeof jQuery === 'undefined') {
             }
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.notEmpty = $.extend($.fn.bootstrapValidator.i18n.notEmpty || {}, {
         'default': 'Please enter a value'
@@ -5660,7 +5660,7 @@ if (typeof jQuery === 'undefined') {
             return $.trim($field.val()) !== '';
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.numeric = $.extend($.fn.bootstrapValidator.i18n.numeric || {}, {
         'default': 'Please enter a valid float number'
@@ -5703,7 +5703,7 @@ if (typeof jQuery === 'undefined') {
             return !isNaN(parseFloat(value)) && isFinite(value);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.phone = $.extend($.fn.bootstrapValidator.i18n.phone || {}, {
         'default': 'Please enter a valid phone number',
@@ -5884,7 +5884,7 @@ if (typeof jQuery === 'undefined') {
             };
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.regexp = $.extend($.fn.bootstrapValidator.i18n.regexp || {}, {
         'default': 'Please enter a value matching the pattern'
@@ -5926,7 +5926,7 @@ if (typeof jQuery === 'undefined') {
             return regexp.test(value);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.remote = $.extend($.fn.bootstrapValidator.i18n.remote || {}, {
         'default': 'Please enter a valid value'
@@ -6034,7 +6034,7 @@ if (typeof jQuery === 'undefined') {
             }
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.rtn = $.extend($.fn.bootstrapValidator.i18n.rtn || {}, {
         'default': 'Please enter a valid RTN number'
@@ -6072,7 +6072,7 @@ if (typeof jQuery === 'undefined') {
             return (sum !== 0 && sum % 10 === 0);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.sedol = $.extend($.fn.bootstrapValidator.i18n.sedol || {}, {
         'default': 'Please enter a valid SEDOL number'
@@ -6112,7 +6112,7 @@ if (typeof jQuery === 'undefined') {
             return sum + '' === value.charAt(length - 1);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.siren = $.extend($.fn.bootstrapValidator.i18n.siren || {}, {
         'default': 'Please enter a valid SIREN number'
@@ -6140,7 +6140,7 @@ if (typeof jQuery === 'undefined') {
             return $.fn.bootstrapValidator.helpers.luhn(value);
 		}
 	};
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.siret = $.extend($.fn.bootstrapValidator.i18n.siret || {}, {
         'default': 'Please enter a valid SIRET number'
@@ -6178,7 +6178,7 @@ if (typeof jQuery === 'undefined') {
 			return (sum % 10 === 0);
 		}
 	};
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.step = $.extend($.fn.bootstrapValidator.i18n.step || {}, {
         'default': 'Please enter a valid step of %s'
@@ -6242,7 +6242,7 @@ if (typeof jQuery === 'undefined') {
             };
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.stringCase = $.extend($.fn.bootstrapValidator.i18n.stringCase || {}, {
         'default': 'Please enter only lowercase characters',
@@ -6278,7 +6278,7 @@ if (typeof jQuery === 'undefined') {
             };
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.stringLength = $.extend($.fn.bootstrapValidator.i18n.stringLength || {}, {
         'default': 'Please enter a value with valid length',
@@ -6386,7 +6386,7 @@ if (typeof jQuery === 'undefined') {
             return { valid: isValid, message: message };
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.uri = $.extend($.fn.bootstrapValidator.i18n.uri || {}, {
         'default': 'Please enter a valid URI'
@@ -6495,7 +6495,7 @@ if (typeof jQuery === 'undefined') {
             return urlExp.test(value);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.uuid = $.extend($.fn.bootstrapValidator.i18n.uuid || {}, {
         'default': 'Please enter a valid UUID number',
@@ -6541,7 +6541,7 @@ if (typeof jQuery === 'undefined') {
             };
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.vat = $.extend($.fn.bootstrapValidator.i18n.vat || {}, {
         'default': 'Please enter a valid VAT number',
@@ -7958,7 +7958,7 @@ if (typeof jQuery === 'undefined') {
             return /^4[0-9]{9}$/.test(value);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.vin = $.extend($.fn.bootstrapValidator.i18n.vin || {}, {
         'default': 'Please enter a valid VIN number'
@@ -8007,7 +8007,7 @@ if (typeof jQuery === 'undefined') {
             return (reminder + '') === value.charAt(8);
         }
     };
-}(jQuery));
+}(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.zipCode = $.extend($.fn.bootstrapValidator.i18n.zipCode || {}, {
         'default': 'Please enter a valid postal code',
@@ -8228,4 +8228,4 @@ if (typeof jQuery === 'undefined') {
             return false;
         }
     };
-}(jQuery));
+}(window.jQuery));
