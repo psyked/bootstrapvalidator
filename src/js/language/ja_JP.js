@@ -367,4 +367,4 @@
             }
         }
     });
-}(window.jQuery));
+}(jQuery));

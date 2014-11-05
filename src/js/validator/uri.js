@@ -106,4 +106,4 @@
             return urlExp.test(value);
         }
     };
-}(window.jQuery));
+}(jQuery));

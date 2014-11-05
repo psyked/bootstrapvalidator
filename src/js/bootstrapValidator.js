@@ -16,7 +16,7 @@ if (typeof jQuery === 'undefined') {
     if ((+version[0] < 2 && +version[1] < 9) || (+version[0] === 1 && +version[1] === 9 && +version[2] < 1)) {
         throw new Error('BootstrapValidator requires jQuery version 1.9.1 or higher');
     }
-}(window.jQuery));
+}(jQuery));
 
 (function($) {
     var BootstrapValidator = function(form, options) {
@@ -1999,4 +1999,4 @@ if (typeof jQuery === 'undefined') {
             return (check === 1);
         }
     };
-}(window.jQuery));
+}(jQuery));

@@ -85,4 +85,4 @@
             return true;
         }
     };
-}(window.jQuery));
+}(jQuery));

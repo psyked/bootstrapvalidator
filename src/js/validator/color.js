@@ -126,4 +126,4 @@
             return regexInteger.test(value) || regexPercent.test(value);
         }
     };
-}(window.jQuery));
+}(jQuery));

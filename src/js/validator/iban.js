@@ -243,4 +243,4 @@
             };
         }
     };
-}(window.jQuery));
+}(jQuery));

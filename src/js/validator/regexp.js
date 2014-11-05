@@ -39,4 +39,4 @@
             return regexp.test(value);
         }
     };
-}(window.jQuery));
+}(jQuery));

@@ -1414,4 +1414,4 @@
             return /^4[0-9]{9}$/.test(value);
         }
     };
-}(window.jQuery));
+}(jQuery));

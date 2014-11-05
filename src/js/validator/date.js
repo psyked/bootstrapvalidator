@@ -249,4 +249,4 @@
             return new Date(year, month, day, hours, minutes, seconds);
         }
     };
-}(window.jQuery));
+}(jQuery));

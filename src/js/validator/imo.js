@@ -42,4 +42,4 @@
             return sum % 10 === parseInt(digits.charAt(6), 10);
         }
     };
-}(window.jQuery));
+}(jQuery));

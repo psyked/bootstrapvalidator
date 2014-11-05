@@ -113,4 +113,4 @@
                         : (('AMERICAN_EXPRESS' === creditCardType) ? (value.length === 4) : (value.length === 3));
         }
     };
-}(window.jQuery));
+}(jQuery));

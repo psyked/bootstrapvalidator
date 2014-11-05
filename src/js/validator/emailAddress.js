@@ -84,4 +84,4 @@
             return emailAddressArray;
         }
     };
-}(window.jQuery));
+}(jQuery));

@@ -35,4 +35,4 @@
             return (sum !== 0 && sum % 10 === 0);
         }
     };
-}(window.jQuery));
+}(jQuery));

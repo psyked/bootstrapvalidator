@@ -74,4 +74,4 @@
             return (value + '').replace(',', '.');
         }
     };
-}(window.jQuery));
+}(jQuery));
