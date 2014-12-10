@@ -854,7 +854,9 @@ if (typeof jQuery === 'undefined') {
                 this.validateField(field);
             }
 
-            this._submit();
+            if (this.$submitButton) {
+                this._submit();
+            }
             this._submitIfValid = true;
 
             return this;
@@ -935,7 +937,7 @@ if (typeof jQuery === 'undefined') {
 
                             that.updateStatus(updateAll ? $f.attr('data-bv-field') : $f, response.valid ? that.STATUS_VALID : that.STATUS_INVALID, v);
 
-                            if (response.valid && that._submitIfValid === true) {
+                            if (response.valid && that._submitIfValid === true && that.$submitButton) {
                                 // If a remote validator returns true and the form is ready to submit, then do it
                                 that._submit();
                             } else if (!response.valid && !verbose) {
