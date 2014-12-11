@@ -863,6 +863,28 @@ if (typeof jQuery === 'undefined') {
         },
 
         /**
+         * Submit the form
+         *
+         * @returns {BootstrapValidator}
+         */
+        submit: function() {
+            if (!this.options.fields) {
+                return this;
+            }
+            this.disableSubmitButtons(true);
+
+            this._submitIfValid = false;
+            for (var field in this.options.fields) {
+                this.validateField(field);
+            }
+
+            this._submit();
+            this._submitIfValid = true;
+
+            return this;
+        },
+
+        /**
          * Validate given field
          *
          * @param {String|jQuery} field The field name or field element
